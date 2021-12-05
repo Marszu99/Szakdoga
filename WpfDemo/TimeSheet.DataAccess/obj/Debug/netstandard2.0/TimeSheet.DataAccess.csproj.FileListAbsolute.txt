@@ -1,0 +1,13 @@
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\bin\Debug\netstandard2.0\TimeSheet.Model.dll
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\obj\Debug\netstandard2.0\TimeSheet.DataAccess.AssemblyInfoInputs.cache
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\obj\Debug\netstandard2.0\TimeSheet.DataAccess.AssemblyInfo.cs
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\bin\Debug\netstandard2.0\TimeSheet.DataAccess.deps.json
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\bin\Debug\netstandard2.0\TimeSheet.DataAccess.dll
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\bin\Debug\netstandard2.0\TimeSheet.DataAccess.pdb
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\bin\Debug\netstandard2.0\TimeSheet.Model.pdb
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\obj\Debug\netstandard2.0\TimeSheet.DataAccess.csproj.CoreCompileInputs.cache
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\obj\Debug\netstandard2.0\TimeSheet.DataAccess.csproj.CopyComplete
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\obj\Debug\netstandard2.0\TimeSheet.DataAccess.dll
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\obj\Debug\netstandard2.0\TimeSheet.DataAccess.pdb
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\obj\Debug\netstandard2.0\TimeSheet.DataAccess.csproj.AssemblyReference.cache
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.DataAccess\obj\Debug\netstandard2.0\TimeSheet.DataAccess.GeneratedMSBuildEditorConfig.editorconfig

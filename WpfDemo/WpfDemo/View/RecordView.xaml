@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="WpfDemo.View.RecordView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfDemo.View"
+             mc:Ignorable="d" 
+             Height="600" Width="600" Background="DarkGray"
+             Name="RecordViewUserControl">
+
+    <Grid Margin="0 0 0 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="0.9*"></ColumnDefinition>
+            <ColumnDefinition  Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition  Width="0.5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Text="Task" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   Margin="0 0 15 0" FontSize="30"/>
+        <TextBlock Text="Date" Grid.Column="0" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   Margin="0 0 15 0" FontSize="30"/>
+        <TextBlock Text="Duration" Grid.Column="0" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   Margin="0 0 15 0" FontSize="30"/>
+        <TextBlock Text="Comment" Grid.Column="0" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   Margin="0 0 15 0" FontSize="30"/>
+
+        <ComboBox x:Name="CreateRecordTask" ItemsSource="{Binding SelectedRecord.ActiveTasks, UpdateSourceTrigger=PropertyChanged}" Padding="2" Grid.Column="1" Grid.Row="0"
+                   Height="38" FontSize="26" HorizontalContentAlignment="Stretch" IsEnabled="{Binding SelectedRecord.IsTaskEnabled}"
+                   SelectedItem="{Binding SelectedRecord.Task}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <DatePicker x:Name="CreateRecordDate" SelectedDate="{Binding SelectedRecord.Date, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short" Grid.Column="1" 
+                    Grid.Row="1" HorizontalAlignment="Left" Height="41" FontSize="26"
+                    ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Date]}">
+        </DatePicker>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+            <TextBox x:Name="CreateRecordDuration" Text="{Binding SelectedRecord.DurationFormat, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Background="#eee" Width="100" Height="36"
+                     FontSize="26" Margin="0 0 0 0" HorizontalContentAlignment="Right" BorderThickness="1" BorderBrush="Black"
+                     ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[DurationFormat]}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <Button x:Name="DurationAddButtton" Command="{Binding SelectedRecord.DurationAddCommand}" Width="35" Height="35" FontSize="24" FontWeight="Bold" Content="+" Margin="10 0 0 0" BorderThickness="1" BorderBrush="Black">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="DurationReduceButtton" Command="{Binding SelectedRecord.DurationReduceCommand}" Width="35" Height="35" FontSize="24" FontWeight="Bold" Content="-" Margin="5 0 0 0" BorderThickness="1" BorderBrush="Black">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+
+        <TextBox x:Name="CreateRecordComment" Text="{Binding SelectedRecord.Comment, UpdateSourceTrigger=PropertyChanged}" Background="#eee" Grid.Column="1" Grid.Row="3" Margin="0 0 1 0"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" BorderThickness="1" BorderBrush="Black">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <Button x:Name="CreateRecordButton" Command="{Binding SelectedRecord.SaveCommand}" Content="Save" Grid.Column="1" Grid.Row="4" Height="45" Width="70"
+                Margin="0, 0, 160, 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+    </Grid>
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding SelectedRecord.SaveCommand}"/>
+    </UserControl.InputBindings>
+
+</UserControl>

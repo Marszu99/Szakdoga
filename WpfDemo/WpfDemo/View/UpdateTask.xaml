@@ -1,0 +1,101 @@
+﻿<Window x:Class="WpfDemo.View.UpdateTask"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfDemo.View"
+        mc:Ignorable="d"
+        Title="UpdateTask" Height="500" Width="550" Background="DarkGray"
+        WindowStartupLocation="Manual" Left="650" Top="100">
+    <!-- ResizeMode="NoResize"-->
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.9*"></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="0.75*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Text="User" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Margin="0" FontSize="26"/>
+        <TextBlock Text="Title" Grid.Row="1" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Margin="0" FontSize="26"/>
+        <TextBlock Text="Description" Grid.Row="2" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Margin="0" FontSize="26"/>
+        <TextBlock Text="Deadline" Grid.Row="3" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Margin="0" FontSize="26"/>
+        <TextBlock Text="Status" Grid.Row="4" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Margin="0" FontSize="26"/>
+
+
+        <TextBox Grid.Row="0" Grid.Column="1" Background="#eee" Text="{Binding CurrentTask.User_Username, UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Center" Margin="0" HorizontalAlignment="Left" FontSize="22" Width="200" IsReadOnly="True" BorderThickness="1" BorderBrush="Black">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+
+        <TextBox x:Name="UpdateTaskTitle" Grid.Row="1" Grid.Column="1" Text="{Binding CurrentTask.Title, UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Center" Margin="0" HorizontalAlignment="Left" FontSize="22" Width="200" Background="#eee" IsReadOnly="True" BorderThickness="1" BorderBrush="Black">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <TextBox x:Name="UpdateTaskDescription" Background="#eee" Grid.Column="1" Grid.Row="2" Text="{Binding CurrentTask.Description, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 1 0"
+                 HorizontalAlignment="Stretch" Height="120" FontSize="22" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" BorderThickness="1" BorderBrush="Black">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <DatePicker x:Name="UpdateTaskDeadline" Grid.Column="1" Grid.Row="3" SelectedDate="{Binding CurrentTask.Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedDateFormat="Short" HorizontalAlignment="Left" Height="35" FontSize="22" Margin="0 0 0 0"
+                    ToolTipService.ToolTip="{Binding CurrentTask.ErrorCollection[Deadline]}"/>
+
+        <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="4"
+                  Width="150" Height="36" FontSize="22" HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                  SelectedValue="{Binding Status}" SelectedValuePath="Key" DisplayMemberPath="Value">
+        </ComboBox>
+
+        <Button x:Name="UpdateTaskButton" Command="{Binding UpdateTaskCommand}" Content="Save" Grid.Column="1" Grid.Row="5" Height="50" Width="75" Margin="0 0 180 0" FontSize="22"
+                BorderThickness="1" BorderBrush="Black">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="BackToListButton" Command="{Binding ExitWindowCommand}" Content="Back" Grid.Column="1" Grid.Row="5" Height="50" Width="75" Margin="40 0 0 0" FontSize="22" BorderThickness="1" BorderBrush="Black">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        
+    </Grid>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding UpdateTaskCommand}"/>
+        <KeyBinding Key="Esc" Command="{Binding ExitWindowCommand}"/>
+    </Window.InputBindings>
+    
+</Window>

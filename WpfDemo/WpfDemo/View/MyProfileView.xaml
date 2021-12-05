@@ -1,0 +1,252 @@
+﻿<Window x:Class="WpfDemo.View.MyProfileView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfDemo.View" xmlns:components="clr-namespace:WpfDemo.Components"
+        mc:Ignorable="d"
+        Title="MyProfil" Width="1550" Height="870" Background="DarkGray" 
+        WindowStartupLocation="Manual" ResizeMode="NoResize"
+        Left="-8" Top="0">
+
+    <Grid Margin="5 0 5 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Text="My Profile" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 40 280 0" Width="250" Height="65"/>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical" Width="180" HorizontalAlignment="Left" Margin="20 100 0 200">
+            <TextBlock Text="Username:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="Password:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="FirstName:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="LastName:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="Email:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="Telephone:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical" Width="550" HorizontalAlignment="Right" Margin="0 100 0 200">
+            <TextBox Text="{Binding CurrentLoggedUser.Username, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 40 100 0" FontSize="34"
+                     Background="DarkGray" IsReadOnly="True">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <components:BindablePasswordBox x:Name="MyProfilePassword" Password="{Binding CurrentLoggedUser.Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Left" 
+                                            VerticalAlignment="Center" Margin="0 38 100 0" FontSize="34" Background="DarkGray" IsEnabled="False" BorderBrush="DarkGray"
+                                            ToolTipService.ToolTip="{Binding ErrorCollection[CurrentLoggedUser.Password]}">
+                <components:BindablePasswordBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </components:BindablePasswordBox.Resources>
+                <components:BindablePasswordBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
+                </components:BindablePasswordBox.InputBindings>
+            </components:BindablePasswordBox>
+
+            <TextBox x:Name="MyProfileFirstName" Text="{Binding CurrentLoggedUser.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+                     FontSize="34" Background="DarkGray" IsReadOnly="True"
+                     ToolTipService.ToolTip="{Binding ErrorCollection[CurrentLoggedUser.FirstName]}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <TextBox x:Name="MyProfileLastName" Text="{Binding CurrentLoggedUser.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+                     FontSize="34" Background="DarkGray" IsReadOnly="True"
+                     ToolTipService.ToolTip="{Binding ErrorCollection[CurrentLoggedUser.LastName]}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>                   
+                </TextBox.Resources>
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <TextBox x:Name="MyProfileEmail" Text="{Binding CurrentLoggedUser.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+                     FontSize="34" Background="DarkGray" IsReadOnly="True"
+                     ToolTipService.ToolTip="{Binding ErrorCollection[CurrentLoggedUser.Email]}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <TextBox x:Name="MyProfileTelephone" Text="{Binding CurrentLoggedUser.Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+                     FontSize="34" Background="DarkGray" IsReadOnly="True"
+                     ToolTipService.ToolTip="{Binding ErrorCollection[CurrentLoggedUser.Telephone]}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+        </StackPanel>
+
+        
+        <Button Grid.Column="0" Content="Change" x:Name="ChangeUserValuesButton" Command="{Binding ChangeUserValuesCommand}" Height="40" Width="85" FontSize="22" 
+                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 300 150" Padding="3" BorderThickness="1" BorderBrush="Black">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        
+        <Button Grid.Column="0" Content="Save" x:Name="SaveChangedUserValuesButton" Command="{Binding SaveChangedUserValuesCommand}" Height="40" Width="80" FontSize="22" 
+                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 425 150" Padding="3" Visibility="Hidden" BorderThickness="1" BorderBrush="Black">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        
+        <Button Grid.Column="0" Content="Cancel" x:Name="CancelChangeUserValuesButton" Command="{Binding CancelChangeUserValuesCommand}" Height="40" Width="80" FontSize="22" 
+                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 200 150" Padding="3" Visibility="Hidden" BorderThickness="1" BorderBrush="Black">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="ToDo Tasks" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 30 0 0" Width="200" Height="40"/>
+
+            <DataGrid  x:Name="UserToDoTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyToDoTaskList}" Margin="0 70 0 20" HorizontalAlignment="Left" Width="700" AutoGenerateColumns="False" ColumnWidth="*"
+                              Background="LightGray" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1">
+
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="#eee"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" Value="Gray"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Background" Value="Gray"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                    </Style>
+                </DataGrid.CellStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="120">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline}" Width="225">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+
+            <TextBlock Grid.Row="1" Text="Done Tasks" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 10 0 0" Width="200" Height="40"/>
+
+            <DataGrid  x:Name="UserDoneTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyDoneTaskList}" Margin="0 50 0 20" HorizontalAlignment="Left" Width="700" AutoGenerateColumns="False" ColumnWidth="*"
+                              Background="#eee" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1" Grid.Row="1">
+
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="LightGray"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" Value="Gray"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Background" Value="Gray"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                    </Style>
+                </DataGrid.CellStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="120">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline}" Width="225">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="FontWeight" Value="Medium" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+
+</Window>

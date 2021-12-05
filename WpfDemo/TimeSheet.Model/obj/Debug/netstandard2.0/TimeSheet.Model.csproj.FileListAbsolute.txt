@@ -1,0 +1,10 @@
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.Model\bin\Debug\netstandard2.0\TimeSheet.Model.deps.json
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.Model\bin\Debug\netstandard2.0\TimeSheet.Model.dll
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.Model\bin\Debug\netstandard2.0\TimeSheet.Model.pdb
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.Model\obj\Debug\netstandard2.0\TimeSheet.Model.AssemblyInfoInputs.cache
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.Model\obj\Debug\netstandard2.0\TimeSheet.Model.AssemblyInfo.cs
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.Model\obj\Debug\netstandard2.0\TimeSheet.Model.csproj.CoreCompileInputs.cache
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.Model\obj\Debug\netstandard2.0\TimeSheet.Model.dll
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.Model\obj\Debug\netstandard2.0\TimeSheet.Model.pdb
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.Model\obj\Debug\netstandard2.0\TimeSheet.Model.csproj.AssemblyReference.cache
+C:\Marci\Egyetem\BLB-Soft\WpfDemo\TimeSheet.Model\obj\Debug\netstandard2.0\TimeSheet.Model.GeneratedMSBuildEditorConfig.editorconfig

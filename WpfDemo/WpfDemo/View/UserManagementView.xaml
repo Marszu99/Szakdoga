@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="WpfDemo.View.UserManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfDemo.View"
+             mc:Ignorable="d" 
+             Background="DarkGray"
+             d:DesignWidth="1550" d:DesignHeight="690">
+    
+    <Grid  Width="1550">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="910"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0 5 0 5">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="NewUserButton" Command="{Binding CreateUserCommand}" Content="New" Grid.Column="0" Grid.Row="0" Width="60" Margin="10 0 0 0" FontSize="17"
+                                        Padding="0" BorderThickness="1" BorderBrush="Black">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button x:Name="RefreshListUsersButton" Command="{Binding RefreshUserListCommand}" Content="Refresh" Grid.Column="0" Grid.Row="0" Width="65"
+                                        Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <TextBlock Text="Search:" Margin="530 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                <TextBox x:Name="UserSearchingText" Margin="5 0 0 0" Background="#eee" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
+                         Width="165" FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </StackPanel>
+        </Grid>
+        <local:ListUsersView x:Name="ListUsersContent" Grid.Row="1" Margin="10 0 0 0"/>
+        <local:UserView Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding SelectedUserVisibility}"/>
+    </Grid>
+    
+</UserControl>
