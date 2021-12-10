@@ -6,16 +6,13 @@
         xmlns:local="clr-namespace:WpfDemo.View" 
         xmlns:components="clr-namespace:WpfDemo.Components"
         mc:Ignorable="d"
-        Name="updateUser" Height="600" Width="600" Background="DarkGray">
+        Name="updateUser" Height="300" Width="600" Background="DarkGray">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+ 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.9*"></ColumnDefinition>
@@ -26,7 +23,9 @@
 
         <TextBlock Grid.Row="0" Text="Username" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="1" Text="Password" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="1" Text="Email" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   Margin="0" FontSize="30"/>
+        <!-- <TextBlock Grid.Row="1" Text="Password" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
         <TextBlock Grid.Row="2" Text="FirstName" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
@@ -35,7 +34,7 @@
         <TextBlock Grid.Row="4" Text="Email" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
         <TextBlock Grid.Row="5" Text="Telephone" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0" FontSize="30"/>
+                   Margin="0" FontSize="30"/>-->
 
 
         <TextBox x:Name="UserUsername" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" BorderThickness="1" BorderBrush="Black"
@@ -85,6 +84,7 @@
             </TextBox.Resources>
         </TextBox>
 
+        <!--
         <components:BindablePasswordBox x:Name="UserPassword" Password="{Binding SelectedUser.Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                         Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" Background="#eee"
                                         ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[Password]}">
@@ -98,10 +98,6 @@
         <TextBox x:Name="UserFirstName" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" Background="#eee" BorderThickness="1" BorderBrush="Black"
                  FontSize="26" Text="{Binding SelectedUser.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                  ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[FirstName]}">
-            <!-- <ToolTipService.ToolTip>
-                <ToolTip Content="{Binding SelectedUser.ErrorCollection[FirstName]}" 
-                 HorizontalOffset="10" VerticalOffset="10" Width="200" Height="40" FontSize="22"/>
-                </ToolTipService.ToolTip>-->
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -117,9 +113,9 @@
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
-        </TextBox>
+        </TextBox>-->
 
-        <TextBox x:Name="UserEmail" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
+        <TextBox x:Name="UserEmail" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
                  Text="{Binding SelectedUser.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
                  ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[Email]}">
             <TextBox.Resources>
@@ -129,6 +125,7 @@
             </TextBox.Resources>
         </TextBox>
 
+        <!--
         <TextBox x:Name="UserTelephone" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
                  Text="{Binding SelectedUser.Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
                  ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[Telephone]}">
@@ -137,7 +134,7 @@
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
-        </TextBox>
+        </TextBox>-->
 
         <Button x:Name="SaveUserButton" 
                 Command="{Binding SelectedUser.SaveCommand}"

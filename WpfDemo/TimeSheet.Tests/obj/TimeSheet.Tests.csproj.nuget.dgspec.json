@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Tests\\TimeSheet.Tests.csproj": {}
+    "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Tests\\TimeSheet.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.DataAccess\\TimeSheet.DataAccess.csproj": {
+    "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.DataAccess\\TimeSheet.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.DataAccess\\TimeSheet.DataAccess.csproj",
+        "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.DataAccess\\TimeSheet.DataAccess.csproj",
         "projectName": "TimeSheet.DataAccess",
-        "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.DataAccess\\TimeSheet.DataAccess.csproj",
+        "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.DataAccess\\TimeSheet.DataAccess.csproj",
         "packagesPath": "C:\\Users\\Marci\\.nuget\\packages\\",
-        "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.DataAccess\\obj\\",
+        "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Marci\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj": {
-                "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj"
+              "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj": {
+                "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj"
               }
             }
           }
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj": {
+    "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj",
+        "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj",
         "projectName": "TimeSheet.Model.Extension",
-        "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj",
+        "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj",
         "packagesPath": "C:\\Users\\Marci\\.nuget\\packages\\",
-        "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model.Extension\\obj\\",
+        "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model.Extension\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Marci\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -93,11 +93,11 @@
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.DataAccess\\TimeSheet.DataAccess.csproj": {
-                "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.DataAccess\\TimeSheet.DataAccess.csproj"
+              "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.DataAccess\\TimeSheet.DataAccess.csproj": {
+                "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.DataAccess\\TimeSheet.DataAccess.csproj"
               },
-              "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj": {
-                "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj"
+              "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj": {
+                "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj"
               }
             }
           }
@@ -133,14 +133,14 @@
         }
       }
     },
-    "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj": {
+    "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj",
+        "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj",
         "projectName": "TimeSheet.Model",
-        "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj",
+        "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj",
         "packagesPath": "C:\\Users\\Marci\\.nuget\\packages\\",
-        "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\obj\\",
+        "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Marci\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -190,14 +190,14 @@
         }
       }
     },
-    "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Tests\\TimeSheet.Tests.csproj": {
+    "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Tests\\TimeSheet.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Tests\\TimeSheet.Tests.csproj",
+        "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Tests\\TimeSheet.Tests.csproj",
         "projectName": "TimeSheet.Tests",
-        "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Tests\\TimeSheet.Tests.csproj",
+        "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Tests\\TimeSheet.Tests.csproj",
         "packagesPath": "C:\\Users\\Marci\\.nuget\\packages\\",
-        "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Tests\\obj\\",
+        "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Marci\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -214,8 +214,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj": {
-                "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj"
+              "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj": {
+                "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj"
               }
             }
           }

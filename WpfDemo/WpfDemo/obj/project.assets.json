@@ -1337,11 +1337,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\WpfDemo\\WpfDemo.csproj",
+      "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\WpfDemo\\WpfDemo.csproj",
       "projectName": "WpfDemo",
-      "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\WpfDemo\\WpfDemo.csproj",
+      "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\WpfDemo\\WpfDemo.csproj",
       "packagesPath": "C:\\Users\\Marci\\.nuget\\packages\\",
-      "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\WpfDemo\\obj\\",
+      "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\WpfDemo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Marci\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1358,11 +1358,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Logic\\TimeSheet.Logic.csproj": {
-              "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Logic\\TimeSheet.Logic.csproj"
+            "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Logic\\TimeSheet.Logic.csproj": {
+              "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Logic\\TimeSheet.Logic.csproj"
             },
-            "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj": {
-              "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj"
+            "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj": {
+              "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj"
             }
           }
         }

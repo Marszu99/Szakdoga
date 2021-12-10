@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data.SqlClient;
-using System.Linq;
+﻿using System.Data.SqlClient;
 using System.Windows;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
@@ -76,7 +74,6 @@ namespace WpfDemo.ViewModel
                 {
                     LoggedUser = new UserRepository(new UserLogic()).GetUserByUsername(_username);
                     _view.Content = new TabcontrolView();
-                    MessageBox.Show("Random password test: " + RandomPassword(10));
                 }
                 else
                 {
@@ -105,13 +102,6 @@ namespace WpfDemo.ViewModel
         public void Refresh()
         {
             _view.LoginUserErrorMessage.Text = "";
-        }
-
-        public static string RandomPassword(int length)
-        {
-            Random random = new Random();
-            const string chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789";
-            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

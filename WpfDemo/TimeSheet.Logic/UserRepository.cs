@@ -15,7 +15,7 @@ namespace TimeSheet.Logic
             _userLogic = userLogic;
         }
 
-        public int RegisterUser(User user, string password2, string email2, string companyName2)
+        public int RegisterAdmin(User user, string password2, string email2, string companyName2)
         {
             if (UserValidationHelper.ValidateUserName(user.Username) != null)
             {
@@ -67,10 +67,10 @@ namespace TimeSheet.Logic
                 throw new UserValidationException(UserValidationHelper.ValidateTelephone(user.Telephone));
             }
 
-            return _userLogic.RegisterUser(user, password2, email2, companyName2);
+            return _userLogic.RegisterAdmin(user, password2, email2, companyName2);
         }
 
-        public int CreateUser(User user)
+        public int CreateUser(User user, string createdUserRandomPassword)
         {
             if (UserValidationHelper.ValidateUserName(user.Username) != null)
             {
@@ -85,36 +85,11 @@ namespace TimeSheet.Logic
                 }
             }
 
-            if (UserValidationHelper.ValidatePassword(user.Password) != null)
-            {
-                throw new UserValidationException(UserValidationHelper.ValidatePassword(user.Password));
-            }
-
-
-            if (UserValidationHelper.ValidateFirstName(user.FirstName) != null)
-            {
-                throw new UserValidationException(UserValidationHelper.ValidateFirstName(user.FirstName));
-            }
-
-
-            if (UserValidationHelper.ValidateLastName(user.LastName) != null)
-            {
-                throw new UserValidationException(UserValidationHelper.ValidateLastName(user.LastName));
-            }
-
-
             if (UserValidationHelper.ValidateEmail(user.Email) != null)
             {
                 throw new UserValidationException(UserValidationHelper.ValidateEmail(user.Email));
             }
-
-
-            if (UserValidationHelper.ValidateTelephone(user.Telephone) != null)
-            {
-                throw new UserValidationException(UserValidationHelper.ValidateTelephone(user.Telephone));
-            }
-
-            return _userLogic.CreateUser(user);
+            return _userLogic.CreateUser(user, createdUserRandomPassword);
         }
 
         public List<User> GetAllUsers()
@@ -178,6 +153,11 @@ namespace TimeSheet.Logic
         public User GetUserByUsername(string username)
         {
             return _userLogic.GetUserByUsername(username);
+        }
+
+        public User GetAdmin()
+        {
+            return _userLogic.GetAdmin();
         }
     }
 

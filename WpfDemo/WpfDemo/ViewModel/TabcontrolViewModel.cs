@@ -1,5 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Windows;
+using TimeSheet.DataAccess;
+using TimeSheet.Logic;
 using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 
@@ -20,6 +22,13 @@ namespace WpfDemo.ViewModel
                 LoginViewModel.LoggedUser.Username = value;
                 OnPropertyChanged(nameof(LoggedUsername));
             }*/
+        }
+        public string CompanyName
+        {
+            get
+            {
+                return new CompanyRepository(new CompanyLogic()).GetCompany().CompanyName;
+            }
         }
 
 

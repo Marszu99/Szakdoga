@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Z8vi3Qz5F9tXyf/Eh6IOqitwd7N1X6/MaWZXdMYH2QjFETPRL+XvrJSangaVmoZCYi67M9+E7Qw1JL70neckXA==",
+  "dgSpecHash": "Bu1CaBVyZkI+/Qnjlg9DR5v7560N51gjr6CHw7h7VFW/yrPUeipd5UfzP2PYXn78SK1WGVZu1aWTJtwf6IzsJA==",
   "success": true,
-  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj",
+  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Marci\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"

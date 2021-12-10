@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Net.Mail;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using TimeSheet.DataAccess;
@@ -149,7 +153,7 @@ namespace WpfDemo.ViewModel
                         result = UserValidationHelper.ValidateUserName(_user.Username);
                         break;
 
-                    case nameof(Password):
+                   /* case nameof(Password):
                         result = UserValidationHelper.ValidatePassword(_user.Password);
                         break;
 
@@ -159,15 +163,15 @@ namespace WpfDemo.ViewModel
 
                     case nameof(LastName):
                         result = UserValidationHelper.ValidateLastName(_user.LastName);
-                        break;
+                        break;*/
 
                     case nameof(Email):
                         result = UserValidationHelper.ValidateEmail(_user.Email);
                         break;
 
-                    case nameof(Telephone):
+                    /*case nameof(Telephone):
                         result = UserValidationHelper.ValidateTelephone(_user.Telephone);
-                        break;
+                        break;*/
                 }
 
                 if (ErrorCollection.ContainsKey(propertyName))
@@ -197,8 +201,7 @@ namespace WpfDemo.ViewModel
 
         private bool CanSave(object arg)
         {
-            return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName) &&
-                   !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Telephone) && _isChanged == true ;
+            return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Email) && _isChanged == true;
         }
 
         private void Save(object obj)
@@ -232,15 +235,43 @@ namespace WpfDemo.ViewModel
 
         private void CreateUser()
         {
-            this._user.IdUser = new UserRepository(new UserLogic()).CreateUser(this._user);
-            MessageBox.Show("User has been created succesfully!", "User created", MessageBoxButton.OK, MessageBoxImage.Information);
+            string createdUserRandomPassword = RandomPassword(10);
+            this._user.IdUser = new UserRepository(new UserLogic()).CreateUser(this._user, createdUserRandomPassword);
+            MessageBox.Show("User has been created succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            SendEmail(createdUserRandomPassword);
             RefreshValues();
+        }
+        private void SendEmail(string createdUserRandomPassword)
+        {
+            SmtpClient client = new SmtpClient();
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            //client.Timeout = 10;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential("wpfszakdoga@gmail.com", "Marszu99");
+            string EmailSubject = "Registration";
+            string EmailMessage = "Welcome to Worktime Registry!\n\n" +
+                                  "Your profile's data:" +
+                                  "\n\t\t\t\t\t\t\t\tUsername: " + this.Username +
+                                  "\n\t\t\t\t\t\t\t\tPassword: " + createdUserRandomPassword;
+            MailMessage mm = new MailMessage("wpfszakdoga@gmail.com", this.Email, EmailSubject, EmailMessage);
+            mm.BodyEncoding = UTF8Encoding.UTF8;
+            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            client.Send(mm);
+        }
+        public static string RandomPassword(int length)
+        {
+            Random random = new Random();
+            const string chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         private void UpdateUser()
         {
             new UserRepository(new UserLogic()).UpdateUser(this._user);
-            MessageBox.Show("User has been updated succesfully!", "Update user", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("User has been updated succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
         }
 

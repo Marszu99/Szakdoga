@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MbvojOv6zggHHaOQsKbnpim2/w5lQSnE230uV6A7064p14pRXrkL8nOw1V8xui5vQNZ8vI3oCUBKEHYmeh8mTw==",
+  "dgSpecHash": "6lDJrF/RpFpZYzLzPanTCT9zs9ACH6NxiSmNcq4BOugGR71/ddGK4BEqDYc8CZW07bOhj5qxAL7xJH77RpgqgA==",
   "success": true,
-  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\WpfDemo\\WpfDemo.csproj",
+  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\WpfDemo\\WpfDemo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Marci\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",

@@ -246,12 +246,12 @@ namespace WpfDemo.ViewModel
             _user = user;
             _view = view;
 
-            RegisterUserCommand = new RelayCommand(RegisterUser, CanExecuteRegister);
+            RegisterAdminCommand = new RelayCommand(RegisterAdmin, CanExecuteRegister);
             BackToLoginCommand = new RelayCommand(BackToLogin, CanExecute);
         }
 
 
-        public RelayCommand RegisterUserCommand { get; private set; }
+        public RelayCommand RegisterAdminCommand { get; private set; }
         public RelayCommand BackToLoginCommand { get; private set; }
 
         private bool CanExecuteRegister(object arg)
@@ -261,12 +261,12 @@ namespace WpfDemo.ViewModel
                    !string.IsNullOrEmpty(CompanyName) && !string.IsNullOrEmpty(CompanyName2);
         }       
 
-        private void RegisterUser(object arg)
+        private void RegisterAdmin(object arg)
         {
             try
             {
-                new UserRepository(new UserLogic()).RegisterUser(_user, _password2, _email2, _companyName2);
-                MessageBox.Show("User has been created succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                new UserRepository(new UserLogic()).RegisterAdmin(_user, _password2, _email2, _companyName2);
+                MessageBox.Show("Admin has been registrated succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 SendEmail();
                 //ExpanderMessage.Text = "User has been created succesfully!";
                 LoginViewModel.LoggedUser = new UserRepository(new UserLogic()).GetUserByUsername(this.Username);

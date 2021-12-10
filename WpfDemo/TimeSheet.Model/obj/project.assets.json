@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj",
+      "projectUniqueName": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj",
       "projectName": "TimeSheet.Model",
-      "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj",
+      "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\TimeSheet.Model.csproj",
       "packagesPath": "C:\\Users\\Marci\\.nuget\\packages\\",
-      "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model\\obj\\",
+      "outputPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Marci\\AppData\\Roaming\\NuGet\\NuGet.Config",

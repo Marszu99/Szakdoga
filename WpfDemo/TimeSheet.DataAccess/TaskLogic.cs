@@ -14,7 +14,7 @@ namespace TimeSheet.DataAccess
             {
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.CreateTaskForUser", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.CreateTaskForUser", connection);
 
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.Parameters.Add(new MySqlParameter("@title", MySqlDbType.VarChar));
@@ -41,7 +41,7 @@ namespace TimeSheet.DataAccess
                 DataTable dt = new DataTable();
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.GetAllTasks", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetAllTasks", connection);
                 myCmd.CommandType = CommandType.StoredProcedure;
 
 
@@ -77,7 +77,7 @@ namespace TimeSheet.DataAccess
                 DataTable dt = new DataTable();
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.GetUserTasks", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetUserTasks", connection);
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.Parameters.Add(new MySqlParameter("@userid", MySqlDbType.Int32));
                 myCmd.Parameters["@userid"].Value = id;
@@ -114,7 +114,7 @@ namespace TimeSheet.DataAccess
                 DataTable dt = new DataTable();
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.GetAllActiveTasks", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetAllActiveTasks", connection);
                 myCmd.CommandType = CommandType.StoredProcedure;
 
                 MySqlDataReader sdr = myCmd.ExecuteReader();
@@ -149,7 +149,7 @@ namespace TimeSheet.DataAccess
                 DataTable dt = new DataTable();
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.GetAllActiveTasksFromUser", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetAllActiveTasksFromUser", connection);
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.Parameters.Add(new MySqlParameter("@userid", MySqlDbType.Int32));
                 myCmd.Parameters["@userid"].Value = id;
@@ -186,7 +186,7 @@ namespace TimeSheet.DataAccess
                 DataTable dt = new DataTable();
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.GetAllDoneTasksFromUser", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetAllDoneTasksFromUser", connection);
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.Parameters.Add(new MySqlParameter("@userid", MySqlDbType.Int32));
                 myCmd.Parameters["@userid"].Value = id;
@@ -218,7 +218,7 @@ namespace TimeSheet.DataAccess
             {
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.UpdateTask", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.UpdateTask", connection);
 
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.Parameters.Add(new MySqlParameter("@id", MySqlDbType.Int32));
@@ -245,7 +245,7 @@ namespace TimeSheet.DataAccess
             {
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.DeleteTask", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.DeleteTask", connection);
                 myCmd.Parameters.Add(new MySqlParameter("@id", MySqlDbType.Int32));
                 myCmd.Parameters["@id"].Value = taskid;
                 myCmd.CommandType = CommandType.StoredProcedure;

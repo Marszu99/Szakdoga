@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RgP+Oa7+WmWwuG4PGXuXsM9puBx8wm0Ym1c/xaQUrBV8Jie2B6bQuGm6yRRNCXha3hUdnqq4v4LXSc3eQrUNqQ==",
+  "dgSpecHash": "OwRSLXh5vdyVbbWCn6PmMMu6Rag+6L881AKmffGdK9KNu7JF+HFs2MKJ4QF5LO3QIFLEOiaXUjlwGrQCNvNtbg==",
   "success": true,
-  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Tests\\TimeSheet.Tests.csproj",
+  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Tests\\TimeSheet.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Marci\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",

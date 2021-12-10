@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "q9ia3zRKf5e0uYDhm7Rs+dYGWXTl6Hn41Udsa4Af/FkcF/+iPbfMf6dZEMW2dOJgMM0PPFTn7DlgLPcVWF+7Dw==",
+  "dgSpecHash": "R36ZwctPppNsLPagnSiXcaKhx044PJvzWZOkiPtIBHMRCGsjW3SH6DWqiTI3C5x/SfdyILLR1pmnhxRgRhJ4hA==",
   "success": true,
-  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Logic\\TimeSheet.Logic.csproj",
+  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Logic\\TimeSheet.Logic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Marci\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\google.protobuf\\3.14.0\\google.protobuf.3.14.0.nupkg.sha512",

@@ -2,19 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using TimeSheet.Model;
 
 namespace TimeSheet.DataAccess
 {
     public class UserLogic : IUserLogic
     {
-        public int RegisterUser(User user, string password2, string email2, string companyName2)
+        public int RegisterAdmin(User user, string password2, string email2, string companyName2)
         {
             using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
             {
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.CreateUser", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.RegisterAdmin", connection);
 
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.Parameters.Add(new MySqlParameter("@Username", MySqlDbType.VarChar));
@@ -23,6 +24,7 @@ namespace TimeSheet.DataAccess
                 myCmd.Parameters.Add(new MySqlParameter("@LastName", MySqlDbType.VarChar));
                 myCmd.Parameters.Add(new MySqlParameter("@Email", MySqlDbType.VarChar));
                 myCmd.Parameters.Add(new MySqlParameter("@Telephone", MySqlDbType.VarChar));
+                myCmd.Parameters.Add(new MySqlParameter("@companyName", MySqlDbType.VarChar));
 
                 myCmd.Parameters["@Username"].Value = user.Username;
                 myCmd.Parameters["@Password"].Value = user.Password;
@@ -30,37 +32,36 @@ namespace TimeSheet.DataAccess
                 myCmd.Parameters["@LastName"].Value = user.LastName;
                 myCmd.Parameters["@Email"].Value = user.Email;
                 myCmd.Parameters["@Telephone"].Value = user.Telephone;
+                myCmd.Parameters["@companyName"].Value = companyName2;
 
                 return Convert.ToInt32(myCmd.ExecuteScalar());
             }
         }
 
-        public int CreateUser(User user)
+        public int CreateUser(User user, string createdUserRandomPassword)
         {
             using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
             {
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.CreateUser", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.CreateUser", connection);
 
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.Parameters.Add(new MySqlParameter("@Username", MySqlDbType.VarChar));
                 myCmd.Parameters.Add(new MySqlParameter("@Password", MySqlDbType.VarChar));
-                myCmd.Parameters.Add(new MySqlParameter("@FirstName", MySqlDbType.VarChar));
-                myCmd.Parameters.Add(new MySqlParameter("@LastName", MySqlDbType.VarChar));
                 myCmd.Parameters.Add(new MySqlParameter("@Email", MySqlDbType.VarChar));
-                myCmd.Parameters.Add(new MySqlParameter("@Telephone", MySqlDbType.VarChar));
+                myCmd.Parameters.Add(new MySqlParameter("@companyID", MySqlDbType.Int32));
 
                 myCmd.Parameters["@Username"].Value = user.Username;
-                myCmd.Parameters["@Password"].Value = user.Password;
-                myCmd.Parameters["@FirstName"].Value = user.FirstName;
-                myCmd.Parameters["@LastName"].Value = user.LastName;
+                myCmd.Parameters["@Password"].Value = createdUserRandomPassword;
                 myCmd.Parameters["@Email"].Value = user.Email;
-                myCmd.Parameters["@Telephone"].Value = user.Telephone;
+                myCmd.Parameters["@companyID"].Value = new CompanyLogic().GetCompany().IdCompany;
+
 
                 return Convert.ToInt32(myCmd.ExecuteScalar());
             }
         }
+       
 
         public List<User> GetAllUsers()
         {
@@ -71,7 +72,7 @@ namespace TimeSheet.DataAccess
                 DataTable dt = new DataTable();
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.GetAllUsers", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetAllUsers", connection);
                 myCmd.CommandType = CommandType.StoredProcedure;
                 MySqlDataReader sdr = myCmd.ExecuteReader();
 
@@ -101,7 +102,7 @@ namespace TimeSheet.DataAccess
             {              
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.UpdateUser", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.UpdateUser", connection);
 
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.Parameters.Add(new MySqlParameter("@id", MySqlDbType.Int32));
@@ -126,11 +127,9 @@ namespace TimeSheet.DataAccess
         {
             using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
             {
-                //int id = (myDataGrid.SelectedItem as User).IdUser;
-
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.DeleteUser", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.DeleteUser", connection);
                 myCmd.Parameters.Add(new MySqlParameter("@id", MySqlDbType.Int32));
                 myCmd.Parameters["@id"].Value = id;
                 myCmd.CommandType = CommandType.StoredProcedure;
@@ -146,7 +145,7 @@ namespace TimeSheet.DataAccess
                 DataTable dt = new DataTable();
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.GetAllUsers", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetAllUsers", connection);
                 myCmd.CommandType = CommandType.StoredProcedure;
                 MySqlDataReader sdr = myCmd.ExecuteReader();
 
@@ -172,9 +171,40 @@ namespace TimeSheet.DataAccess
                 DataTable dt = new DataTable();
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.GetUserByUsername", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetUserByUsername", connection);
                 myCmd.Parameters.Add(new MySqlParameter("@username", MySqlDbType.VarChar));
                 myCmd.Parameters["@username"].Value = username;
+                myCmd.CommandType = CommandType.StoredProcedure;
+                myCmd.ExecuteNonQuery();
+
+                MySqlDataReader sdr = myCmd.ExecuteReader();
+
+                dt.Load(sdr);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    user.IdUser = int.Parse(dr["IdUser"].ToString());
+                    user.Username = dr["UserName"].ToString();
+                    user.Password = dr["Password"].ToString();
+                    user.FirstName = dr["FirstName"].ToString();
+                    user.LastName = dr["LastName"].ToString();
+                    user.Email = dr["Email"].ToString();
+                    user.Telephone = dr["Telephone"].ToString();
+                }
+
+                return user;
+            }
+        }
+
+        public User GetAdmin()
+        {
+            using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
+            {
+                User user = new User();
+                DataTable dt = new DataTable();
+                connection.Open();
+
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetAdmin", connection);
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.ExecuteNonQuery();
 

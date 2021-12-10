@@ -4,7 +4,7 @@ namespace TimeSheet.DataAccess
 {
     public static class DBHelper
     {
-        private const string ConnectionStringKey = "demofeladatDB";
+        private const string ConnectionStringKey = "szakdogaDB";
 
         public static string GetConnectionString()
         {

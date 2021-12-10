@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KkEpepO/EDo/p6ibhjkA5j42+jstnUjVNQlTLVgXhCKqXs50aBfXoCSPYDJpgIHW3mGHytd8wF+VuRW32dMlQw==",
+  "dgSpecHash": "Qpn1VBrd/IBvNaDW+DermFzVt3lOBWTsagai5fhNH8QP1A8M4e+bEQilJ4DyamxW3KWKMtD/oyx+PD3pchkSNw==",
   "success": true,
-  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj",
+  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Model.Extension\\TimeSheet.Model.Extension.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Marci\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\google.protobuf\\3.14.0\\google.protobuf.3.14.0.nupkg.sha512",

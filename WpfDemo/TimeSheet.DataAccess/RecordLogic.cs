@@ -14,7 +14,7 @@ namespace TimeSheet.DataAccess
             {
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.CreateRecord", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.CreateRecord", connection);
 
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.Parameters.Add(new MySqlParameter("@date", MySqlDbType.Date));
@@ -44,7 +44,7 @@ namespace TimeSheet.DataAccess
                 DataTable dt = new DataTable();
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.GetAllRecords", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetAllRecords", connection);
                 myCmd.CommandType = CommandType.StoredProcedure;
 
 
@@ -81,7 +81,7 @@ namespace TimeSheet.DataAccess
                 DataTable dt = new DataTable();
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.GetUserRecords", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetUserRecords", connection);
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.Parameters.Add(new MySqlParameter("@userid", MySqlDbType.Int32));
                 myCmd.Parameters["@userid"].Value = userid;
@@ -123,7 +123,7 @@ namespace TimeSheet.DataAccess
             {
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.DeleteRecord", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.DeleteRecord", connection);
                 myCmd.Parameters.Add(new MySqlParameter("@id", MySqlDbType.Int32));
                 myCmd.Parameters["@id"].Value = recordid;
                 myCmd.CommandType = CommandType.StoredProcedure;
@@ -137,7 +137,7 @@ namespace TimeSheet.DataAccess
             {
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("demofeladat.UpdateRecord", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.UpdateRecord", connection);
 
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.Parameters.Add(new MySqlParameter("@id", MySqlDbType.Int32));

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TimeSheet.Model
+﻿namespace TimeSheet.Model
 {
     public class User
     {
@@ -13,7 +9,5 @@ namespace TimeSheet.Model
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
-       // public Command ACommand { get; set; }
-
     }
 }

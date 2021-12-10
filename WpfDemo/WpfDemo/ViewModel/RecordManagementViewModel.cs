@@ -20,30 +20,6 @@ namespace WpfDemo.ViewModel
         public ObservableCollection<Task> TaskList { get; } = new ObservableCollection<Task>();
         public ObservableCollection<RecordViewModel> RecordList { get; } = new ObservableCollection<RecordViewModel>();
 
-        private RecordProperties _comboboxItem;
-        public RecordProperties RecordProperty
-        {
-            get
-            {
-                return _comboboxItem;
-            }
-            set
-            {
-                _comboboxItem = value;
-                OnPropertyChanged(nameof(RecordProperty));
-            }
-        }
-
-        public Dictionary<RecordProperties, string> RecordPropertys
-        {
-            get
-            {
-                return Enum.GetValues(typeof(RecordProperties)).Cast<RecordProperties>()
-                .ToDictionary<RecordProperties, RecordProperties, string>(
-                item => item,
-                item => item.ToString());
-            }
-        }
 
         private string _searchValue;
         public string SearchValue

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using WpfDemo.ViewModel;
 
 namespace WpfDemo.View
 {
@@ -10,7 +11,8 @@ namespace WpfDemo.View
         public MainView()
         {
             InitializeComponent();
-            MainWindow.Content = new LoginView();
+            this.DataContext = new MainViewModel(this);
+            //MainWindow.Content = new LoginView();
         }
     }
 }
