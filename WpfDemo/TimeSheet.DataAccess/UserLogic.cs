@@ -9,7 +9,7 @@ namespace TimeSheet.DataAccess
 {
     public class UserLogic : IUserLogic
     {
-        public int RegisterAdmin(User user, string password2, string email2, string companyName2)
+        public int RegisterAdmin(User user, string password2, string email2,string companyName, string companyName2)
         {
             using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
             {
@@ -32,7 +32,7 @@ namespace TimeSheet.DataAccess
                 myCmd.Parameters["@LastName"].Value = user.LastName;
                 myCmd.Parameters["@Email"].Value = user.Email;
                 myCmd.Parameters["@Telephone"].Value = user.Telephone;
-                myCmd.Parameters["@companyName"].Value = companyName2;
+                myCmd.Parameters["@companyName"].Value = companyName;
 
                 return Convert.ToInt32(myCmd.ExecuteScalar());
             }

@@ -15,7 +15,7 @@ namespace TimeSheet.Logic
             _userLogic = userLogic;
         }
 
-        public int RegisterAdmin(User user, string password2, string email2, string companyName2)
+        public int RegisterAdmin(User user, string password2, string email2,string companyName, string companyName2)
         {
             if (UserValidationHelper.ValidateUserName(user.Username) != null)
             {
@@ -45,12 +45,10 @@ namespace TimeSheet.Logic
                 throw new UserValidationException(UserValidationHelper.ValidateFirstName(user.FirstName));
             }
 
-
             if (UserValidationHelper.ValidateLastName(user.LastName) != null)
             {
                 throw new UserValidationException(UserValidationHelper.ValidateLastName(user.LastName));
             }
-
 
             if (UserValidationHelper.ValidateEmail(user.Email) != null)
             {
@@ -67,7 +65,17 @@ namespace TimeSheet.Logic
                 throw new UserValidationException(UserValidationHelper.ValidateTelephone(user.Telephone));
             }
 
-            return _userLogic.RegisterAdmin(user, password2, email2, companyName2);
+            if (UserValidationHelper.ValidateCompanyName(companyName) != null)
+            {
+                throw new UserValidationException(UserValidationHelper.ValidateCompanyName(companyName));
+            }
+
+            if (UserValidationHelper.ValidateCompanyName2(companyName, companyName2) != null)
+            {
+                throw new UserValidationException(UserValidationHelper.ValidateCompanyName2(companyName, companyName2));
+            }
+
+            return _userLogic.RegisterAdmin(user, password2, email2, companyName, companyName2);
         }
 
         public int CreateUser(User user, string createdUserRandomPassword)

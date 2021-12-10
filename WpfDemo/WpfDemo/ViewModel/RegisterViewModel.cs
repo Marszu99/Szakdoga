@@ -265,7 +265,7 @@ namespace WpfDemo.ViewModel
         {
             try
             {
-                new UserRepository(new UserLogic()).RegisterAdmin(_user, _password2, _email2, _companyName2);
+                new UserRepository(new UserLogic()).RegisterAdmin(_user, _password2, _email2, _companyName, _companyName2);
                 MessageBox.Show("Admin has been registrated succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 SendEmail();
                 //ExpanderMessage.Text = "User has been created succesfully!";

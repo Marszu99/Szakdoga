@@ -17,6 +17,8 @@ namespace TimeSheet.Model.Extension
         private const int MaximumEmailLength = 100;
         private const int MinimumTelephoneLength = 11;
         private const int MaximumTelephoneLength = 13;
+        private const int MinimumCompanyNameLength = 10;
+        private const int MaximumCompanyNameLength = 60;
 
         public static string ValidateUserName(string username)
         {
@@ -177,6 +179,10 @@ namespace TimeSheet.Model.Extension
             if (string.IsNullOrWhiteSpace(companyName))
             {
                 result = "Company's name is empty!";
+            }
+            else if (companyName.Length < MinimumCompanyNameLength || companyName.Length > MaximumCompanyNameLength)
+            {
+                result = "Company's name have to reach minimum 10 characters and also can't be more than 60!";
             }
 
             return result;
