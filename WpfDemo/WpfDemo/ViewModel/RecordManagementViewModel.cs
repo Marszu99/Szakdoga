@@ -21,19 +21,6 @@ namespace WpfDemo.ViewModel
         public ObservableCollection<RecordViewModel> RecordList { get; } = new ObservableCollection<RecordViewModel>();
 
 
-        private string _searchValue;
-        public string SearchValue
-        {
-            get { return _searchValue; }
-            set
-            {
-                _searchValue = value;
-                OnPropertyChanged(nameof(SearchValue));
-                SortingByCheckBox(_searchValue);
-            }
-        }
-
-
         private RecordViewModel _selectedRecord;
         public RecordViewModel SelectedRecord
         {
@@ -46,6 +33,34 @@ namespace WpfDemo.ViewModel
             }
         }
 
+
+        private string _searchValue;
+        public string SearchValue
+        {
+            get { return _searchValue; }
+            set
+            {
+                _searchValue = value;
+                OnPropertyChanged(nameof(SearchValue));
+                SortingByCheckBox(_searchValue);
+            }
+        }
+
+        public Visibility RecordCheckBoxAndTextVisibility
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility ListRecordsUserVisibility// Miert nem latja???
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
 
         public Visibility SelectedRecordVisibility
         {

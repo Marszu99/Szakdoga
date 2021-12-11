@@ -169,7 +169,7 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="120">
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="175">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
@@ -223,7 +223,7 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="120">
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="175">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />

@@ -190,6 +190,7 @@ namespace TimeSheet.DataAccess
                     user.LastName = dr["LastName"].ToString();
                     user.Email = dr["Email"].ToString();
                     user.Telephone = dr["Telephone"].ToString();
+                    user.Status = int.Parse(dr["Status"].ToString());
                 }
 
                 return user;
@@ -221,6 +222,7 @@ namespace TimeSheet.DataAccess
                     user.LastName = dr["LastName"].ToString();
                     user.Email = dr["Email"].ToString();
                     user.Telephone = dr["Telephone"].ToString();
+                    user.Status = int.Parse(dr["Status"].ToString());
                 }
 
                 return user;

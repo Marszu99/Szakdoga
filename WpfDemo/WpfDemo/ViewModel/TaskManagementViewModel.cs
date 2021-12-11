@@ -20,6 +20,19 @@ namespace WpfDemo.ViewModel
         public ObservableCollection<TaskViewModel> TaskList { get; } = new ObservableCollection<TaskViewModel>();
 
 
+        private TaskViewModel _selectedTask;
+        public TaskViewModel SelectedTask
+        {
+            get { return _selectedTask; }
+            set
+            {
+                _selectedTask = value;
+                OnPropertyChanged(nameof(SelectedTask));
+                OnPropertyChanged(nameof(SelectedTaskVisibility));
+            }
+        }
+
+
         private string _searchValue;
         public string SearchValue
         {
@@ -33,18 +46,29 @@ namespace WpfDemo.ViewModel
         }
 
 
-        private TaskViewModel _selectedTask;
-        public TaskViewModel SelectedTask
+        public string SearchTextMargin
         {
-            get { return _selectedTask; }
-            set
+            get
             {
-                _selectedTask = value;
-                OnPropertyChanged(nameof(SelectedTask));
-                OnPropertyChanged(nameof(SelectedTaskVisibility));
+                return LoginViewModel.LoggedUser.Status == 0 ? "468.7 0 0 0" : "290 0 0 0";
             }
         }
 
+        public Visibility NewTaskButtonVisibility
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public Visibility TaskCheckBoxAndTextVisibility
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
 
         public Visibility SelectedTaskVisibility
         {

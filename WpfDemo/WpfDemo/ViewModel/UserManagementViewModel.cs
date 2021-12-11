@@ -18,6 +18,19 @@ namespace WpfDemo.ViewModel
         public ObservableCollection<UserViewModel> UserList { get; } = new ObservableCollection<UserViewModel>();
 
 
+        private UserViewModel _selectedUser;
+        public UserViewModel SelectedUser
+        {
+            get { return _selectedUser; }
+            set
+            {
+                _selectedUser = value;
+                OnPropertyChanged(nameof(SelectedUser));
+                OnPropertyChanged(nameof(SelectedUserVisibility));
+            }
+        }
+
+
         private string _searchValue;
         public string SearchValue
         {
@@ -39,17 +52,19 @@ namespace WpfDemo.ViewModel
             }
         }
 
-
-        private UserViewModel _selectedUser;
-
-        public UserViewModel SelectedUser
+        public string SearchTextMargin
         {
-            get { return _selectedUser; }
-            set
+            get
             {
-                _selectedUser = value;
-                OnPropertyChanged(nameof(SelectedUser));
-                OnPropertyChanged(nameof(SelectedUserVisibility));
+                return LoginViewModel.LoggedUser.Status == 0 ? "13 0 0 0" : "530 0 0 0"; // 675 a 13 helyett?
+            }
+        }
+
+        public Visibility UserManagementButtonsVisibility
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 

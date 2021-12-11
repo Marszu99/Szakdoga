@@ -10,7 +10,6 @@ namespace WpfDemo.View
         public ListRecordsView()
         {
             InitializeComponent();
-            //DataContext = new ListRecordsViewModel(new Record());
         }
     }
 }
