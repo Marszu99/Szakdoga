@@ -165,7 +165,7 @@ namespace WpfDemo.ViewModel
 
         private bool CanDeleteUser(object arg)
         {
-            return _selectedUser != null && SelectedUser.Username != LoginViewModel.LoggedUser.Username; ;
+            return _selectedUser != null && SelectedUser.Username != LoginViewModel.LoggedUser.Username && LoginViewModel.LoggedUser.Status != 0;
         }
         private bool CanShowUserProfil(object arg)
         {

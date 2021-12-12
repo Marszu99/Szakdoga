@@ -69,7 +69,8 @@
 
         <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="4"
                   Width="150" Height="38" FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left"
-                  SelectedValue="{Binding SelectedTask.Status}" SelectedValuePath="Key" DisplayMemberPath="Value">
+                  SelectedValue="{Binding SelectedTask.Status}" SelectedValuePath="Key" DisplayMemberPath="Value"
+                  ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Status]}">
         </ComboBox>
 
         <Button x:Name="CreateTaskForUserButton" Command="{Binding SelectedTask.SaveCommand}" Content="Save" Grid.Column="1" Grid.Row="5" Height="45" Width="70"

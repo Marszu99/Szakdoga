@@ -68,6 +68,11 @@ namespace TimeSheet.Logic
                 throw new TaskValidationException(TaskValidationHelper.ValidateDeadline(task.Deadline));
             }
 
+            if (TaskValidationHelper.ValidateStatus(task.Status, task.IdTask) != null)
+            {
+                throw new TaskValidationException(TaskValidationHelper.ValidateStatus(task.Status, task.IdTask));
+            }
+
             _tasklogic.UpdateTask(task, taskid, userid);
         }
 

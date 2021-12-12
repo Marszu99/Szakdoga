@@ -27,7 +27,7 @@ CREATE TABLE `company` (
   `CompanyName` varchar(60) NOT NULL,
   `StatusDelete` tinyint DEFAULT '1',
   PRIMARY KEY (`idCompany`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'dd',0),(2,'Mar',0),(3,'BLB-Soft',0),(4,'Tradelda Kft.',1);
+INSERT INTO `company` VALUES (1,'dd',0),(2,'Mar',0),(3,'BLB-Soft',0),(4,'Tradelda Kft.',0),(5,'trad dddddd',0),(6,'Tradelda Kft.',1);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,10 +113,10 @@ CREATE TABLE `record` (
   `Task_idTask` int NOT NULL,
   PRIMARY KEY (`idRecord`,`User_idUser`,`Task_idTask`),
   KEY `fk_Record_Task1_idx` (`Task_idTask`),
-  KEY `fk_Record_User10_idx` (`User_idUser`),
-  CONSTRAINT `fk_Record_Task10` FOREIGN KEY (`Task_idTask`) REFERENCES `task` (`idTask`),
-  CONSTRAINT `fk_Record_User10` FOREIGN KEY (`User_idUser`) REFERENCES `mydb`.`user` (`idUser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_Record_User1_idx` (`User_idUser`) /*!80000 INVISIBLE */,
+  CONSTRAINT `fk_Record_Task1` FOREIGN KEY (`Task_idTask`) REFERENCES `task` (`idTask`),
+  CONSTRAINT `fk_Record_User1` FOREIGN KEY (`User_idUser`) REFERENCES `user` (`idUser`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +125,7 @@ CREATE TABLE `record` (
 
 LOCK TABLES `record` WRITE;
 /*!40000 ALTER TABLE `record` DISABLE KEYS */;
+INSERT INTO `record` VALUES (4,'2021-12-11','Regisztacio',250,1,9,2),(5,'2021-12-11','Teszt',230,1,10,3);
 /*!40000 ALTER TABLE `record` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,8 +167,8 @@ CREATE TABLE `task` (
   `User_idUser` int NOT NULL,
   PRIMARY KEY (`idTask`,`User_idUser`),
   KEY `fk_Task_User1_idx` (`User_idUser`),
-  CONSTRAINT `fk_Task_User10` FOREIGN KEY (`User_idUser`) REFERENCES `user` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_Task_User1` FOREIGN KEY (`User_idUser`) REFERENCES `user` (`idUser`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,7 +177,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (1,'ddd',NULL,'2021-12-10','Created',0,'2021-12-09',1);
+INSERT INTO `task` VALUES (1,'ddd',NULL,'2021-12-10','Created',0,'2021-12-09',1),(2,'Programozas',NULL,'2021-12-24','Created',1,'2021-12-11',9),(3,'Teszteles','','2021-12-30','InProgress',1,'2021-12-11',10),(4,'Design','','2022-01-06','Created',1,'2021-12-11',10),(5,'DB','','2021-12-31','Created',1,'2021-12-11',9),(6,'Git','','2021-12-30','Created',1,'2021-12-11',10);
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +222,7 @@ CREATE TABLE `user` (
   KEY `fk_User_Company1_idx` (`StatusDelete`),
   KEY `fk_User_Company1_idx1` (`Company_idCompany`),
   CONSTRAINT `fk_User_Company1` FOREIGN KEY (`Company_idCompany`) REFERENCES `company` (`idCompany`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,7 +231,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'asd','asd','asd','asd','asd','76876',1,0,1),(2,'Marszi99','Password','Cseh','Marci','csehmarcell@yahoo.com','06898776778',1,0,2),(3,'Marszi','Password','Marci','Cseh','csehmarcell@yahoo.com','06876876378',1,0,3),(4,'Marszu99','Password','Marcell','Cseh','csehmarcell@yahoo.com','06987394827',1,1,4),(5,'CsehHedvig','nfq3XGTxXP',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,1,4),(6,'CsehMarci','Ht7TpfQDkr',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,1,4);
+INSERT INTO `user` VALUES (1,'asd','asd','asd','asd','asd','76876',1,0,1),(2,'Marszi99','Password','Cseh','Marci','csehmarcell@yahoo.com','06898776778',1,0,2),(3,'Marszi','Password','Marci','Cseh','csehmarcell@yahoo.com','06876876378',1,0,3),(4,'Marszu99','Password','Marcell','Cseh','csehmarcell@yahoo.com','06987394827',1,0,4),(5,'CsehHedvig','nfq3XGTxXP',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,4),(6,'CsehMarci','Ht7TpfQDkr',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,4),(7,'csehlaszlo','lacko12','aaaa','aaaa','csehmarcell@yahoo.com','36302988033',1,0,5),(8,'KovacsGeza','ObPZ0BmJoK',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,5),(9,'Marszu99','Password','Cseh','Marcell','csehmarcell@yahoo.com','06987987776',1,1,6),(10,'Username','Password','Cseh','Laszlo','csehmarcell@yahoo.com','069898787766',0,1,6);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -441,6 +442,9 @@ BEGIN
 	END IF;
     IF deleteCompany = 1 THEN 
 		UPDATE company SET company.StatusDelete = 0;
+        UPDATE user SET user.StatusDelete = 0;
+        UPDATE task SET task.StatusDelete = 0;
+        UPDATE record SET record.StatusDelete = 0;
     END IF;
 END ;;
 DELIMITER ;
@@ -613,6 +617,25 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetCompany`()
 BEGIN
 SELECT * FROM companyview;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GetTaskRecords` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetTaskRecords`(IN taskid INT)
+BEGIN
+SELECT * FROM recordview WHERE recordview.Task_idTask = taskid;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -897,4 +920,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-10  0:00:59
+-- Dump completed on 2021-12-12 11:47:01

@@ -117,6 +117,45 @@ namespace TimeSheet.DataAccess
             }
         }
 
+        public List<Record> GetTaskRecords(int taskid)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
+            {
+                List<Record> records = new List<Record>();
+
+                DataTable dt = new DataTable();
+                connection.Open();
+
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetTaskRecords", connection);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                myCmd.Parameters.Add(new MySqlParameter("@taskid", MySqlDbType.Int32));
+                myCmd.Parameters["@taskid"].Value = taskid;
+
+                MySqlDataReader sdr = myCmd.ExecuteReader();
+
+                dt.Load(sdr);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Record record = new Record();
+                    record.IdRecord = int.Parse(dr["idRecord"].ToString());
+                    record.Date = DateTime.Parse(dr["Date"].ToString());
+                    record.Comment = dr["Comment"].ToString();
+                    record.Duration = int.Parse(dr["Duration"].ToString());
+                    //record.DurationFormatUserProfile = TimeSpan.FromMinutes(record.Duration).ToString("hh':'mm"); //UserPorfile miatt
+                    record.User_idUser = int.Parse(dr["User_idUser"].ToString());
+                    record.User_Username = dr["Username"].ToString();
+                    record.Task_idTask = int.Parse(dr["Task_idTask"].ToString());
+                    record.Task_Title = dr["Task_Title"].ToString();
+                    record.Task_Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Task_Status"].ToString());
+
+                    records.Add(record);
+                }
+
+                return records;
+            }
+        }
+
         public void DeleteRecord(int recordid)
         {
             using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))

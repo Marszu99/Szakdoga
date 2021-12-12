@@ -8,6 +8,7 @@ namespace TimeSheet.DataAccess
         int CreateRecord(Record record, int userid, int taskid);
         List<Record> GetAllRecords();
         List<Record> GetUserRecords(int userid);
+        List<Record> GetTaskRecords(int taskid);
         void UpdateRecord(Record record,int recordid, int taskid, int userid);
         void DeleteRecord(int recordid);
     }

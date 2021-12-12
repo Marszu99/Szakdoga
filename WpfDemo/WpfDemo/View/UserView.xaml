@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfDemo.View" 
         xmlns:components="clr-namespace:WpfDemo.Components"
         mc:Ignorable="d"
-        Name="updateUser" Height="300" Width="600" Background="DarkGray">
+        Name="updateUser" Height="300" Width="650" Background="DarkGray">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -15,9 +15,9 @@
  
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.9*"></ColumnDefinition>
+            <ColumnDefinition Width="0.7*"></ColumnDefinition>
             <ColumnDefinition Width="1.5*"></ColumnDefinition>
-            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition Width="0.4*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
 
@@ -37,9 +37,8 @@
                    Margin="0" FontSize="30"/>-->
 
 
-        <TextBox x:Name="UserUsername" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" BorderThickness="1" BorderBrush="Black"
-                 Text="{Binding SelectedUser.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" IsReadOnly="{Binding SelectedUser.IsUserNameReadOnly}"
-                 >
+        <TextBox x:Name="UserUsername" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="26" Margin="15" BorderThickness="1" BorderBrush="Black"
+                 Text="{Binding SelectedUser.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" IsReadOnly="{Binding SelectedUser.IsUserNameReadOnly}">
             <!--ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[Username]}"-->
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -138,7 +137,7 @@
 
         <Button x:Name="SaveUserButton" 
                 Command="{Binding SelectedUser.SaveCommand}"
-                Content="Save" Grid.Column="1" Grid.Row="6" Height="45" Width="70" Margin="0 0 0 0" FontSize="26" HorizontalAlignment="Left"
+                Content="Save" Grid.Column="1" Grid.Row="6" Height="45" Width="70" Margin="100 0 0 0" FontSize="26" HorizontalAlignment="Left"
                 BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

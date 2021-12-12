@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using TimeSheet.DataAccess;
 
 namespace TimeSheet.Model.Extension
 {
@@ -33,6 +35,23 @@ namespace TimeSheet.Model.Extension
             else if (deadline <= DateTime.Today)
             {
                 result = "Deadline has to be atleast more than 24 hours away from the current time!";
+            }
+
+            return result;
+        }
+
+        public static string ValidateStatus(TaskStatus status, int taskid)
+        {
+            string result = null;
+            List<Record> recordList = new RecordLogic().GetTaskRecords(taskid);
+
+            if (status == TaskStatus.Done && recordList.Count == 0)
+            {
+                result = "Status cannot be Done when there is no recods for the task!";
+            }
+            else if (status == TaskStatus.Created && recordList.Count != 0)
+            {
+                result = "Status cannot be Created when there is recods for the task!";
             }
 
             return result;

@@ -255,7 +255,7 @@ namespace WpfDemo.ViewModel
 
         private bool CanDeleteTask(object arg)
         {
-            return _selectedTask != null;
+            return _selectedTask != null && LoginViewModel.LoggedUser.Status != 0;
         }
 
         private void DeleteTask(object obj)
