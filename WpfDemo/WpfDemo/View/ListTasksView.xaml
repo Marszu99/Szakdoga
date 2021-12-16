@@ -21,7 +21,8 @@
                           ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20">
 
                     <DataGrid.InputBindings>
-                        <KeyBinding Key="Delete"  Command="{Binding DeleteCommand}"/>
+                        <KeyBinding Key="Delete" Command="{Binding DeleteCommand}"/>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding HasReadCommand}"/>
                     </DataGrid.InputBindings>
 
                     <DataGrid.ContextMenu>
@@ -32,6 +33,8 @@
 
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
+                            <Setter Property="ToolTip" Value="{Binding NotificationText}"/>
+                            <Setter Property="ToolTip.Background" Value="red"/>
                             <Setter Property="Background" Value="#eee"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="true">
@@ -60,7 +63,7 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="User" Binding="{Binding User.Username}" Width="170" FontSize="20">
+                        <DataGridTextColumn Header="User" Binding="{Binding User.Username}" Width="170" FontSize="20" Visibility="{Binding ListTasksUserVisibility}">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />

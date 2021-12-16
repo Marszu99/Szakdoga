@@ -44,7 +44,7 @@
         </ComboBox>
 
         <TextBox x:Name="CreateTaskTitle" Background="#eee" Grid.Column="1" Grid.Row="1" Text="{Binding SelectedTask.Title, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                  Height="36" FontSize="26" HorizontalAlignment="Stretch" Margin="0 0 0 0" BorderThickness="1" BorderBrush="Black"
+                 Height="36" FontSize="26" HorizontalAlignment="Stretch" Margin="0 0 0 0" BorderThickness="1" BorderBrush="Black"
                  ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Title]}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">

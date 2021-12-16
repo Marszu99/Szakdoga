@@ -69,7 +69,7 @@ CREATE TABLE `notification` (
   PRIMARY KEY (`idNotification`,`Task_idTask`),
   KEY `fk_Notification_Task1_idx` (`Task_idTask`),
   CONSTRAINT `fk_Notification_Task1` FOREIGN KEY (`Task_idTask`) REFERENCES `task` (`idTask`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,6 +78,7 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
+INSERT INTO `notification` VALUES (1,'asd',0,1,1),(2,'asd',0,0,2),(3,'Updated task!',1,1,6);
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +178,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (1,'ddd',NULL,'2021-12-10','Created',0,'2021-12-09',1),(2,'Programozas',NULL,'2021-12-24','Created',1,'2021-12-11',9),(3,'Teszteles','','2021-12-30','InProgress',1,'2021-12-11',10),(4,'Design','','2022-01-06','Created',1,'2021-12-11',10),(5,'DB','','2021-12-31','Created',1,'2021-12-11',9),(6,'Git','','2021-12-30','Created',1,'2021-12-11',10);
+INSERT INTO `task` VALUES (1,'ddd',NULL,'2021-12-10','Created',0,'2021-12-09',1),(2,'Programozas',NULL,'2021-12-24','Created',1,'2021-12-11',9),(3,'Teszteles','','2021-12-30','InProgress',1,'2021-12-11',10),(4,'Design','','2022-01-06','Created',1,'2021-12-11',10),(5,'DB','','2021-12-31','Created',1,'2021-12-11',9),(6,'Git','','2021-12-31','Created',1,'2021-12-11',10);
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,7 +276,7 @@ SET character_set_client = @saved_cs_client;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateNotificationForTask`(IN message TEXT, IN taskid INT )
 BEGIN
-INSERT INTO notifaction (Message,Task_idTask) VALUES (message,taskid);
+INSERT INTO notification (Message,Task_idTask) VALUES (message,taskid);
 SELECT last_insert_id();
 END ;;
 DELIMITER ;
@@ -338,25 +339,6 @@ IN email VARCHAR(100), IN companyID INT)
 BEGIN
 INSERT INTO user(Username,Password,Email,Status,Company_idCompany) VALUES(username,password,email,'0',companyID);
 SELECT last_insert_id();
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `DeleteNotifaction` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteNotifaction`(IN id INT)
-BEGIN
-	UPDATE notification SET StatusDelete = 0 WHERE notification.idNotification = id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -623,6 +605,25 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GetTaskNotifications` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetTaskNotifications`(IN taskid INT)
+BEGIN
+SELECT * FROM notificationview WHERE notificationview.Task_idTask = taskid && notificationview.ReadFlag = "1";
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `GetTaskRecords` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -718,7 +719,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `HasSeenNotification` */;
+/*!50003 DROP PROCEDURE IF EXISTS `HasReadNotification` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -728,9 +729,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `HasSeenNotification`(IN id INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `HasReadNotification`(IN id INT)
 BEGIN
-	UPDATE notification SET ReadFlag = 0 WHERE notification.idNotification = id;
+	UPDATE notification SET ReadFlag = 0 WHERE notification.Task_idTask = id;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -920,4 +921,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-12 11:47:01
+-- Dump completed on 2021-12-16 22:55:32

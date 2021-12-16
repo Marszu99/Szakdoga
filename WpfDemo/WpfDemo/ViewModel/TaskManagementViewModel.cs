@@ -83,7 +83,7 @@ namespace WpfDemo.ViewModel
         public RelayCommand RefreshTaskListCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
-
+        public RelayCommand HasReadCommand { get; private set; }
 
 
         public TaskManagementViewModel(TaskManagementView view)
@@ -97,6 +97,7 @@ namespace WpfDemo.ViewModel
             RefreshTaskListCommand = new RelayCommand(RefreshTaskList, CanExecuteRefresh);
             SortingByCheckBoxCommand = new RelayCommand(SortingByCheckBox, CanExecuteSort);
             DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
+            HasReadCommand = new RelayCommand(HasRead, IsTaskClicked);
         }
 
 
@@ -267,7 +268,7 @@ namespace WpfDemo.ViewModel
                 {
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
                     MessageBox.Show("Task has been deleted succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    
                     LoadTasks();
                     SortingByCheckBox(obj);
                 }
@@ -276,6 +277,16 @@ namespace WpfDemo.ViewModel
                     MessageBox.Show("Server error!");
                 }
             }
+        }
+
+        private bool IsTaskClicked(object arg)
+        {
+            return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotifications(SelectedTask.IdTask) != null;//new NotificationRepository(new NotificationLogic()).GetTaskNotifications(SelectedTask.IdTask).Count != 0;
+        }
+
+        private void HasRead(object obj)
+        {
+            new NotificationRepository(new NotificationLogic()).HasReadNotification(SelectedTask.IdTask);
         }
     }
 }

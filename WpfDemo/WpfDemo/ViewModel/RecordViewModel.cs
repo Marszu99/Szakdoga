@@ -207,7 +207,15 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        
+        public Visibility ListRecordsUserVisibility// Miert nem latja???
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }
 

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfDemo.View" 
         xmlns:components="clr-namespace:WpfDemo.Components"
         mc:Ignorable="d"
-        Name="updateUser" Height="300" Width="650" Background="DarkGray">
+        Name="updateUser" Height="200" Width="650" Background="DarkGray">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>

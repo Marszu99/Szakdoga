@@ -47,8 +47,8 @@
             <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" FontSize="26" Content="Tasks" Margin="0 0 0 -5" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
             <Label Grid.Row="0" Grid.Column="1" FontWeight="Bold" FontSize="26" Content="Records" Margin="180 0 0 -5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-            <Button Grid.Row="0" Grid.Column="1" x:Name="AddTaskToUserTaskButton" Command="{Binding ShowAddTaskCommand}" Content="Add Task" Margin="65 0 0 0" Height="30" 
-                    Width="75" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" FontSize="14" BorderThickness="1" BorderBrush="Black">
+            <Button Grid.Row="0" Grid.Column="1" x:Name="AddTaskToUserTaskButton" Command="{Binding ShowAddTaskCommand}" Content="Add Task" Margin="65 0 0 0" Height="30" Width="75"
+                    HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" FontSize="14" BorderThickness="1" BorderBrush="Black" Visibility="{Binding AddTaskButtonVisibility}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

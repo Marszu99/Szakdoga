@@ -14,6 +14,7 @@ namespace TimeSheet.Logic
         {
             _recordlogic = recordlogic;
         }
+
         public int CreateRecord(Record record, int userid, int taskid)
         {
             if (RecordValidationHelper.ValidateDate(record.Date, record.Task.CreationDate) != null)

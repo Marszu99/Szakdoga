@@ -19,9 +19,9 @@
             
             <Border HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="DimGray" Background="DimGray" BorderThickness="2" Height="55">
                 <!--maradjon??-->
-                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 0" Width="1550">
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10" Width="1550">
                     <Button x:Name="PreviousTabButton" Click="PreviousTabButton_Click" FontFamily="Marlett" Content="3" Grid.Column="0" Grid.Row="0" Width="50" Height="28" 
-                        Margin="5 0 0 5" FontSize="30" BorderThickness="1" BorderBrush="Black">
+                        Margin="5 0 0 0" FontSize="30" BorderThickness="1" BorderBrush="Black">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="4"/>
@@ -29,7 +29,7 @@
                         </Button.Resources>
                     </Button>
                     
-                    <Button x:Name="NextTabButton" Click="NextTabButton_Click" FontFamily="Marlett" Content="4" Grid.Column="0" Grid.Row="0" Width="50" Height="28" Margin="0 0 0 5"
+                    <Button x:Name="NextTabButton" Click="NextTabButton_Click" FontFamily="Marlett" Content="4" Grid.Column="0" Grid.Row="0" Width="50" Height="28" Margin="0 0 0 0"
                         FontSize="30" BorderThickness="1" BorderBrush="Black">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">

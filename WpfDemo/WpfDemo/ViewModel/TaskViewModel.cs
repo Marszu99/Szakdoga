@@ -180,6 +180,29 @@ namespace WpfDemo.ViewModel
         }
 
 
+        private string _notificationText;
+        public string NotificationText
+        {
+            get
+            {               
+                return new NotificationRepository(new NotificationLogic()).GetTaskNotifications(this._task.IdTask);
+            }
+            set
+            {
+                _notificationText = value;
+                OnPropertyChanged(NotificationText);
+            }
+        }
+
+        public Visibility ListTasksUserVisibility// Miert nem latja???
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }
 
@@ -224,14 +247,12 @@ namespace WpfDemo.ViewModel
 
         public ICommand SaveCommand { get; }
 
-
         public TaskViewModel(Task task)
         {
             _task = task;
 
             SaveCommand = new RelayCommand(Save, CanSave);
-        }
-
+        }       
 
         private bool CanSave(object arg)
         {
@@ -273,6 +294,7 @@ namespace WpfDemo.ViewModel
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
             MessageBox.Show("Task has been created succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             RefreshValues();
+            new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("New task!", this._task.IdTask);
         }
 
 
@@ -281,6 +303,7 @@ namespace WpfDemo.ViewModel
             new TaskRepository(new TaskLogic()).UpdateTask(this._task, this._task.IdTask, this._task.User_idUser);
             MessageBox.Show("Task has been updated succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
+            new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Updated task!", this._task.IdTask);
         }
 
 

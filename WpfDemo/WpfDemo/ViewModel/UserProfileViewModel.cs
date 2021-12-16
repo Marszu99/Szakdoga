@@ -49,6 +49,14 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(SelectedTask));
             }
         }
+        
+        public Visibility AddTaskButtonVisibility
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
 
 
         public RelayCommand DeleteCommand { get; private set; }
@@ -102,7 +110,7 @@ namespace WpfDemo.ViewModel
 
         private bool CanDeleteTask(object arg)
         {
-            return _selectedTask != null;
+            return _selectedTask != null && LoginViewModel.LoggedUser.Status != 0;
         }
         private bool CanShowAddTask(object arg)
         {
@@ -110,7 +118,7 @@ namespace WpfDemo.ViewModel
         }
         private bool CanShowUpdateTask(object arg)
         {
-            return _selectedTask != null;
+            return _selectedTask != null && LoginViewModel.LoggedUser.Status != 0;
         }
 
         private void DeleteTask(object obj)
