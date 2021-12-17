@@ -86,13 +86,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public bool IsTaskViewDeadlineReadOnly
+        public bool IsRecordViewDeadlineHitTestVisible
         {
             get
             {
-                return LoginViewModel.LoggedUser.Status == 0;
+                return LoginViewModel.LoggedUser.Status == 1;
             }
         }
+
 
         public RelayCommand CreateTaskCommand { get; private set; }
         public RelayCommand RefreshTaskListCommand { get; private set; }

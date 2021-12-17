@@ -185,7 +185,7 @@ namespace WpfDemo.ViewModel
             { 
                 return LoginViewModel.LoggedUser.Status == 0;
             }
-        }      
+        }
 
 
         private string _notificationText;
@@ -210,7 +210,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility ListTasksUserVisibility// Miert nem latja???
+        public Visibility ListTasksUserVisibility// Miert nem jo???
         {
             get
             {
@@ -268,7 +268,7 @@ namespace WpfDemo.ViewModel
             _task = task;
 
             SaveCommand = new RelayCommand(Save, CanSave);
-        }       
+        }
 
         private bool CanSave(object arg)
         {

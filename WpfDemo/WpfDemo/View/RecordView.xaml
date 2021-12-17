@@ -43,13 +43,13 @@
         </ComboBox>
 
         <DatePicker x:Name="CreateRecordDate" SelectedDate="{Binding SelectedRecord.Date, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short" Grid.Column="1" 
-                    Grid.Row="1" HorizontalAlignment="Left" Height="41" FontSize="26"
+                    Grid.Row="1" HorizontalAlignment="Left" Height="41" FontSize="26" IsHitTestVisible="{Binding IsRecordViewDateHitTestVisible}"
                     ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Date]}">
-            <DatePicker.Resources>
+            <!--<DatePicker.Resources>
                 <Style TargetType="DatePickerTextBox">
                     <Setter Property="IsReadOnly" Value="{Binding IsRecordViewValuesReadOnly}"/>
                 </Style>
-            </DatePicker.Resources>
+            </DatePicker.Resources>-->
         </DatePicker>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">

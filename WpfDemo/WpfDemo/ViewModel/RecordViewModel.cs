@@ -207,19 +207,11 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility ListRecordsUserVisibility// Miert nem jo???
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
-
         /*public bool IsRecordViewValuesReadOnly
         {
             get
             {
-                return LoginViewModel.LoggedUser.Username != _record.User_Username;
+                return _record != null && _record.User_Username != LoginViewModel.LoggedUser.Username;
             }
         }
 
@@ -227,10 +219,18 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return LoginViewModel.LoggedUser.Username != _record.User_Username ? Visibility.Hidden : Visibility.Visible;
+                return _record != null && _record.User_Username != LoginViewModel.LoggedUser.Username ? Visibility.Hidden : Visibility.Visible;
             }
         }*/
 
+        public Visibility ListRecordsUserVisibility// Miert nem jo???
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+       
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }

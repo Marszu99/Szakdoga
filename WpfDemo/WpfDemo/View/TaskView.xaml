@@ -63,13 +63,8 @@
         </TextBox>
 
         <DatePicker x:Name="CreateTaskDeadline" Grid.Column="1" Grid.Row="3" SelectedDate="{Binding SelectedTask.Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedDateFormat="Short" Height="41" HorizontalAlignment="Left" FontSize="26" Margin="0 0 0 0"
+                    SelectedDateFormat="Short" Height="41" HorizontalAlignment="Left" FontSize="26" Margin="0 0 0 0" IsHitTestVisible="{Binding IsRecordViewDeadlineHitTestVisible}"
                     ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Deadline]}">
-            <DatePicker.Resources>
-                <Style TargetType="DatePickerTextBox">
-                    <Setter Property="IsReadOnly" Value="{Binding IsTaskViewDeadlineReadOnly}"/>
-                </Style>
-            </DatePicker.Resources>
         </DatePicker>
 
         <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="4"

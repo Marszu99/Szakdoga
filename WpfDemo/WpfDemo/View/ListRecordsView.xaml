@@ -31,10 +31,6 @@
                         </ContextMenu>
                     </DataGrid.ContextMenu>
 
-                    <!--<UserControl.InputBindings>
-                        <MouseBinding MouseAction="MouseLeftButtonUp" Command="{Binding ShowUpdateRecordCommand}"/>
-                    </UserControl.InputBindings>-->
-
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
                             <Setter Property="Background" Value="#eee"/>
