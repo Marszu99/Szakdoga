@@ -66,9 +66,8 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                //return SelectedRecord == null ? Visibility.Hidden : Visibility.Visible; //eredeti
-                //return ((SelectedRecord != null && SelectedRecord.User_Username == LoginViewModel.LoggedUser.Username) || SelectedRecord.IdRecord == 0) ? Visibility.Visible : Visibility.Hidden;
-                if (SelectedRecord == null)
+                return SelectedRecord == null ? Visibility.Hidden : Visibility.Visible; //eredeti
+                /*if (SelectedRecord == null)
                 {
                     return Visibility.Hidden;
                 }
@@ -82,7 +81,23 @@ namespace WpfDemo.ViewModel
                     {
                         return Visibility.Hidden;
                     }
-                }
+                }*/
+            }
+        }
+
+        public bool IsRecordViewValuesReadOnly
+        {
+            get 
+            { 
+                return LoginViewModel.LoggedUser.Username != SelectedRecord.User_Username; 
+            }
+        }
+
+        public Visibility RecordViewButtonsVisibility
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Username != SelectedRecord.User_Username ? Visibility.Hidden : Visibility.Visible;
             }
         }
 
@@ -172,61 +187,67 @@ namespace WpfDemo.ViewModel
         }
         private void SortingByCheckBox(object obj)
         {
-            if (String.IsNullOrWhiteSpace(_searchValue))
+            try
             {
-                if (_view.ShowingMyRecordsCheckBox.IsChecked == true)
+                if (String.IsNullOrWhiteSpace(_searchValue))
                 {
-                    RecordList.Clear();
-
-                    var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser);
-                    records.ForEach(record =>
+                    if (_view.ShowingMyRecordsCheckBox.IsChecked == true)
                     {
-                        var recordViewModel = new RecordViewModel(record, TaskList.ToList());
-                        recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
-                        RecordList.Add(recordViewModel);
-                    });
+                        RecordList.Clear();
+
+                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser);
+                        records.ForEach(record =>
+                        {
+                            var recordViewModel = new RecordViewModel(record, TaskList.ToList());
+                            recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
+                            RecordList.Add(recordViewModel);
+                        });
+                    }
+                    else
+                    {
+                        RecordList.Clear();
+
+                        var records = new RecordRepository(new RecordLogic()).GetAllRecords();
+                        records.ForEach(record =>
+                        {
+                            var recordViewModel = new RecordViewModel(record, TaskList.ToList());
+                            recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
+                            RecordList.Add(recordViewModel);
+                        });
+                    }
                 }
                 else
                 {
-                    RecordList.Clear();
-
-                    var records = new RecordRepository(new RecordLogic()).GetAllRecords();
-                    records.ForEach(record =>
+                    if (_view.ShowingMyRecordsCheckBox.IsChecked == true)
                     {
-                        var recordViewModel = new RecordViewModel(record, TaskList.ToList());
-                        recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
-                        RecordList.Add(recordViewModel);
-                    });
+                        RecordList.Clear();
+
+                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record => record.Task_Title.Contains(_searchValue) || record.User_Username.Contains(_searchValue) || record.Date.ToShortDateString().Contains(_searchValue) || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) || record.Task_Status.ToString().Contains(_searchValue)).ToList();
+                        records.ForEach(record =>
+                        {
+                            var recordViewModel = new RecordViewModel(record, TaskList.ToList());
+                            recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
+                            RecordList.Add(recordViewModel);
+                        });
+                    }
+                    else
+                    {
+                        RecordList.Clear();
+
+                        var records = new RecordRepository(new RecordLogic()).GetAllRecords().Where(record => record.Task_Title.Contains(_searchValue) || record.User_Username.Contains(_searchValue) || record.Date.ToShortDateString().Contains(_searchValue) || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) || record.Task_Status.ToString().Contains(_searchValue)).ToList();
+                        records.ForEach(record =>
+                        {
+                            var recordViewModel = new RecordViewModel(record, TaskList.ToList());
+                            recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
+                            RecordList.Add(recordViewModel);
+                        });
+                    }
                 }
             }
-            else
+            catch (SqlException)
             {
-                if (_view.ShowingMyRecordsCheckBox.IsChecked == true)
-                {
-                    RecordList.Clear();
-
-                    var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record => record.Task_Title.Contains(_searchValue) || record.User_Username.Contains(_searchValue) || record.Date.ToShortDateString().Contains(_searchValue) || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) || record.Task_Status.ToString().Contains(_searchValue)).ToList();
-                    records.ForEach(record =>
-                    {
-                        var recordViewModel = new RecordViewModel(record, TaskList.ToList());
-                        recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
-                        RecordList.Add(recordViewModel);
-                    });
-                }             
-                else
-                {
-                    RecordList.Clear();
-
-                    var records = new RecordRepository(new RecordLogic()).GetAllRecords().Where(record => record.Task_Title.Contains(_searchValue) || record.User_Username.Contains(_searchValue) || record.Date.ToShortDateString().Contains(_searchValue) || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) || record.Task_Status.ToString().Contains(_searchValue)).ToList();
-                    records.ForEach(record =>
-                    {
-                        var recordViewModel = new RecordViewModel(record, TaskList.ToList());
-                        recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
-                        RecordList.Add(recordViewModel);
-                    });
-                }
+                MessageBox.Show("Server error!");
             }
-
         }
 
 

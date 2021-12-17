@@ -78,6 +78,21 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public string TaskViewUserRowHeight
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 1 ? "*" : "0";
+            }
+        }
+
+        public bool IsTaskViewDeadlineReadOnly
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0;
+            }
+        }
 
         public RelayCommand CreateTaskCommand { get; private set; }
         public RelayCommand RefreshTaskListCommand { get; private set; }
@@ -150,107 +165,113 @@ namespace WpfDemo.ViewModel
         }
         private void SortingByCheckBox(object obj)
         {
-            if (String.IsNullOrWhiteSpace(_searchValue))
+            try
             {
-                if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == false)
+                if (String.IsNullOrWhiteSpace(_searchValue))
                 {
-                    TaskList.Clear();
-
-                    var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser);
-
-                    tasks.ForEach(task =>
+                    if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == false)
                     {
-                        var taskViewModel = new TaskViewModel(task);
-                        taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
-                        TaskList.Add(taskViewModel);
-                    });
-                }
-                else if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == true)
-                {
-                    TaskList.Clear();
+                        TaskList.Clear();
 
-                    var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser);
+                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser);
 
-                    tasks.ForEach(task =>
+                        tasks.ForEach(task =>
+                        {
+                            var taskViewModel = new TaskViewModel(task);
+                            taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                            TaskList.Add(taskViewModel);
+                        });
+                    }
+                    else if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == true)
                     {
-                        var taskViewModel = new TaskViewModel(task);
-                        taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
-                        TaskList.Add(taskViewModel);
-                    });
-                }
-                else if (_view.ShowingMyTasksCheckBox.IsChecked == false && _view.ShowingActiveTasksCheckBox.IsChecked == true)
-                {
-                    TaskList.Clear();
+                        TaskList.Clear();
 
-                    var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks();
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser);
 
-                    tasks.ForEach(task =>
+                        tasks.ForEach(task =>
+                        {
+                            var taskViewModel = new TaskViewModel(task);
+                            taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                            TaskList.Add(taskViewModel);
+                        });
+                    }
+                    else if (_view.ShowingMyTasksCheckBox.IsChecked == false && _view.ShowingActiveTasksCheckBox.IsChecked == true)
                     {
-                        var taskViewModel = new TaskViewModel(task);
-                        taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
-                        TaskList.Add(taskViewModel);
-                    });
+                        TaskList.Clear();
+
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks();
+
+                        tasks.ForEach(task =>
+                        {
+                            var taskViewModel = new TaskViewModel(task);
+                            taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                            TaskList.Add(taskViewModel);
+                        });
+                    }
+                    else
+                    {
+                        LoadTasks();
+                    }
                 }
                 else
                 {
-                    LoadTasks();
+                    if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == false)
+                    {
+                        TaskList.Clear();
+
+                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser).Where(task => task.Title.Contains(_searchValue) || LoginViewModel.LoggedUser.Username.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
+
+                        tasks.ForEach(task =>
+                        {
+                            var taskViewModel = new TaskViewModel(task);
+                            taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                            TaskList.Add(taskViewModel);
+                        });
+                    }
+                    else if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == true)
+                    {
+                        TaskList.Clear();
+
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser).Where(task => task.Title.Contains(_searchValue) || LoginViewModel.LoggedUser.Username.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
+
+                        tasks.ForEach(task =>
+                        {
+                            var taskViewModel = new TaskViewModel(task);
+                            taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                            TaskList.Add(taskViewModel);
+                        });
+                    }
+                    else if (_view.ShowingMyTasksCheckBox.IsChecked == false && _view.ShowingActiveTasksCheckBox.IsChecked == true)
+                    {
+                        TaskList.Clear();
+
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks().Where(task => task.Title.Contains(_searchValue) || task.User_Username.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
+
+                        tasks.ForEach(task =>
+                        {
+                            var taskViewModel = new TaskViewModel(task);
+                            taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                            TaskList.Add(taskViewModel);
+                        });
+                    }
+                    else
+                    {
+                        TaskList.Clear();
+
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task => task.Title.Contains(_searchValue) || task.User_Username.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
+                        tasks.ForEach(task =>
+                        {
+                            var taskViewModel = new TaskViewModel(task);
+                            taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                            TaskList.Add(taskViewModel);
+                        });
+                    }
                 }
             }
-            else
+            catch (SqlException)
             {
-                if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == false)
-                {
-                    TaskList.Clear();
-
-                    var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser).Where(task => task.Title.Contains(_searchValue) || LoginViewModel.LoggedUser.Username.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
-
-                    tasks.ForEach(task =>
-                    {
-                        var taskViewModel = new TaskViewModel(task);
-                        taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
-                        TaskList.Add(taskViewModel);
-                    });
-                }
-                else if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == true)
-                {
-                    TaskList.Clear();
-
-                    var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser).Where(task => task.Title.Contains(_searchValue) || LoginViewModel.LoggedUser.Username.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
-
-                    tasks.ForEach(task =>
-                    {
-                        var taskViewModel = new TaskViewModel(task);
-                        taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
-                        TaskList.Add(taskViewModel);
-                    });
-                }
-                else if (_view.ShowingMyTasksCheckBox.IsChecked == false && _view.ShowingActiveTasksCheckBox.IsChecked == true)
-                {
-                    TaskList.Clear();
-
-                    var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks().Where(task => task.Title.Contains(_searchValue) || task.User_Username.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
-
-                    tasks.ForEach(task =>
-                    {
-                        var taskViewModel = new TaskViewModel(task);
-                        taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
-                        TaskList.Add(taskViewModel);
-                    });
-                }
-                else
-                {
-                    TaskList.Clear();
-
-                    var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task => task.Title.Contains(_searchValue) || task.User_Username.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
-                    tasks.ForEach(task =>
-                    {
-                        var taskViewModel = new TaskViewModel(task);
-                        taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
-                        TaskList.Add(taskViewModel);
-                    });
-                }
+                MessageBox.Show("Server error!");
             }
-
         }
 
 
@@ -286,7 +307,17 @@ namespace WpfDemo.ViewModel
 
         private void HasRead(object obj)
         {
-            new NotificationRepository(new NotificationLogic()).HasReadNotification(SelectedTask.IdTask);
+            try
+            {
+                new NotificationRepository(new NotificationLogic()).HasReadNotification(SelectedTask.IdTask);
+
+                LoadTasks();
+                SortingByCheckBox(obj);
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Server error!");
+            }
         }
     }
 }

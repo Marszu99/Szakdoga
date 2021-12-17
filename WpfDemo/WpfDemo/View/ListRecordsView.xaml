@@ -68,7 +68,7 @@
                         <DataGridTextColumn Header="User" Binding="{Binding User_Username}" Width="150" FontSize="19" Visibility="{Binding ListRecordsUserVisibility}">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
-                                    <Setter Property="FontWeight" Value="Medium" />
+                                    <Setter Property="FontWeight" Value="Medium"/>
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>

@@ -34,8 +34,7 @@
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
                             <Setter Property="ToolTip" Value="{Binding NotificationText}"/>
-                            <Setter Property="ToolTip.Background" Value="red"/>
-                            <Setter Property="Background" Value="#eee"/>
+                            <Setter Property="Background" Value="{Binding ListTasksBackground}"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="true">
                                     <Setter Property="Background" Value="Gray"/>

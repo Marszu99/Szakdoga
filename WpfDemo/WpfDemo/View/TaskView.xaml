@@ -9,17 +9,17 @@
 
     <Grid Margin="0 0 0 0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.9*"></ColumnDefinition>
-            <ColumnDefinition Width="1.5*"></ColumnDefinition>
-            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition Width="0.9*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="{Binding TaskViewUserRowHeight}"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.75*"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="User" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
@@ -44,7 +44,7 @@
         </ComboBox>
 
         <TextBox x:Name="CreateTaskTitle" Background="#eee" Grid.Column="1" Grid.Row="1" Text="{Binding SelectedTask.Title, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                 Height="36" FontSize="26" HorizontalAlignment="Stretch" Margin="0 0 0 0" BorderThickness="1" BorderBrush="Black"
+                 Height="36" FontSize="26" HorizontalAlignment="Stretch" Margin="0 0 0 0" BorderThickness="1" BorderBrush="Black" IsReadOnly="{Binding SelectedTask.IsTaskViewValuesReadOnly}"
                  ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Title]}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -53,7 +53,7 @@
             </TextBox.Resources>
         </TextBox>
 
-        <TextBox x:Name="CreateTaskDescription" Background="#eee" Grid.Column="1" Grid.Row="2" Text="{Binding SelectedTask.Description, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 1 0"
+        <TextBox x:Name="CreateTaskDescription" Background="#eee" Grid.Column="1" Grid.Row="2" Text="{Binding SelectedTask.Description, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 1 0" IsReadOnly="{Binding SelectedTask.IsTaskViewValuesReadOnly}"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" BorderThickness="1" BorderBrush="Black">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -65,10 +65,15 @@
         <DatePicker x:Name="CreateTaskDeadline" Grid.Column="1" Grid.Row="3" SelectedDate="{Binding SelectedTask.Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                     SelectedDateFormat="Short" Height="41" HorizontalAlignment="Left" FontSize="26" Margin="0 0 0 0"
                     ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Deadline]}">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="IsReadOnly" Value="{Binding IsTaskViewDeadlineReadOnly}"/>
+                </Style>
+            </DatePicker.Resources>
         </DatePicker>
 
         <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="4"
-                  Width="150" Height="38" FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                  Width="150" Height="39" FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                   SelectedValue="{Binding SelectedTask.Status}" SelectedValuePath="Key" DisplayMemberPath="Value"
                   ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Status]}">
         </ComboBox>

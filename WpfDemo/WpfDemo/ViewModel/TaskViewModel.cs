@@ -171,13 +171,21 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public bool IsUserEnabled
+        public bool IsUserEnabled // ez igy kene TaskViewUsersRowHeight mellett?
         {
             get
             {
                 return _task.IdTask == 0;
             }
         }
+
+        public bool IsTaskViewValuesReadOnly
+        {
+            get
+            { 
+                return LoginViewModel.LoggedUser.Status == 0;
+            }
+        }      
 
 
         private string _notificationText;
@@ -191,6 +199,14 @@ namespace WpfDemo.ViewModel
             {
                 _notificationText = value;
                 OnPropertyChanged(NotificationText);
+            }
+        }
+
+        public string ListTasksBackground
+        {
+            get
+            {
+                return new NotificationRepository(new NotificationLogic()).GetTaskNotifications(this._task.IdTask) != null ? "DarkOrange" : "#eee";
             }
         }
 

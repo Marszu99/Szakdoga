@@ -45,11 +45,16 @@
         <DatePicker x:Name="CreateRecordDate" SelectedDate="{Binding SelectedRecord.Date, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short" Grid.Column="1" 
                     Grid.Row="1" HorizontalAlignment="Left" Height="41" FontSize="26"
                     ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Date]}">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="IsReadOnly" Value="{Binding IsRecordViewValuesReadOnly}"/>
+                </Style>
+            </DatePicker.Resources>
         </DatePicker>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
             <TextBox x:Name="CreateRecordDuration" Text="{Binding SelectedRecord.DurationFormat, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Background="#eee" Width="100" Height="36"
-                     FontSize="26" Margin="0 0 0 0" HorizontalContentAlignment="Right" BorderThickness="1" BorderBrush="Black"
+                     FontSize="26" Margin="0 0 0 0" HorizontalContentAlignment="Right" BorderThickness="1" BorderBrush="Black" IsReadOnly="{Binding IsRecordViewValuesReadOnly}"
                      ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[DurationFormat]}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -58,7 +63,8 @@
                 </TextBox.Resources>
             </TextBox>
 
-            <Button x:Name="DurationAddButtton" Command="{Binding SelectedRecord.DurationAddCommand}" Width="35" Height="35" FontSize="24" FontWeight="Bold" Content="+" Margin="10 0 0 0" BorderThickness="1" BorderBrush="Black">
+            <Button x:Name="DurationAddButtton" Command="{Binding SelectedRecord.DurationAddCommand}" Width="35" Height="35" FontSize="24" FontWeight="Bold" Content="+" Margin="10 0 0 0" 
+                    BorderThickness="1" BorderBrush="Black" Visibility="{Binding RecordViewButtonsVisibility}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -66,7 +72,8 @@
                 </Button.Resources>
             </Button>
 
-            <Button x:Name="DurationReduceButtton" Command="{Binding SelectedRecord.DurationReduceCommand}" Width="35" Height="35" FontSize="24" FontWeight="Bold" Content="-" Margin="5 0 0 0" BorderThickness="1" BorderBrush="Black">
+            <Button x:Name="DurationReduceButtton" Command="{Binding SelectedRecord.DurationReduceCommand}" Width="35" Height="35" FontSize="24" FontWeight="Bold" Content="-" Margin="5 0 0 0" 
+                    BorderThickness="1" BorderBrush="Black" Visibility="{Binding RecordViewButtonsVisibility}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -75,7 +82,7 @@
             </Button>
         </StackPanel>
 
-        <TextBox x:Name="CreateRecordComment" Text="{Binding SelectedRecord.Comment, UpdateSourceTrigger=PropertyChanged}" Background="#eee" Grid.Column="1" Grid.Row="3" Margin="0 0 1 0"
+        <TextBox x:Name="CreateRecordComment" Text="{Binding SelectedRecord.Comment, UpdateSourceTrigger=PropertyChanged}" Background="#eee" Grid.Column="1" Grid.Row="3" Margin="0 0 1 0" IsReadOnly="{Binding IsRecordViewValuesReadOnly}"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" BorderThickness="1" BorderBrush="Black">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -85,7 +92,7 @@
         </TextBox>
 
         <Button x:Name="CreateRecordButton" Command="{Binding SelectedRecord.SaveCommand}" Content="Save" Grid.Column="1" Grid.Row="4" Height="45" Width="70"
-                Margin="0, 0, 160, 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
+                Margin="0, 0, 160, 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black" Visibility="{Binding RecordViewButtonsVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
