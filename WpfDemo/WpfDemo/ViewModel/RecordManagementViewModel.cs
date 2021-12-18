@@ -91,8 +91,8 @@ namespace WpfDemo.ViewModel
         public bool IsRecordViewValuesReadOnly
         {
             get 
-            { 
-                return SelectedRecord != null && SelectedRecord.User_Username != LoginViewModel.LoggedUser.Username ? true : false; 
+            {
+                return SelectedRecord != null && SelectedRecord.IdRecord != 0 && SelectedRecord.User_Username != LoginViewModel.LoggedUser.Username ? true : false;
             }
         }
 
@@ -100,7 +100,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return SelectedRecord != null && SelectedRecord.User_Username != LoginViewModel.LoggedUser.Username ? false : true;
+                return SelectedRecord != null && SelectedRecord.IdRecord != 0 && SelectedRecord.User_Username != LoginViewModel.LoggedUser.Username ? false : true;
             }
         }
 
@@ -108,7 +108,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return SelectedRecord != null &&  SelectedRecord.User_Username != LoginViewModel.LoggedUser.Username ? Visibility.Hidden : Visibility.Visible;
+                return SelectedRecord != null && SelectedRecord.IdRecord != 0 && SelectedRecord.User_Username != LoginViewModel.LoggedUser.Username ? Visibility.Hidden : Visibility.Visible;
             }
         }
 
