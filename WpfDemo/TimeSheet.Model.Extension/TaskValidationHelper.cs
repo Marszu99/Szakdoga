@@ -8,6 +8,18 @@ namespace TimeSheet.Model.Extension
     {
         private const int MaximumTitleLength = 45;
 
+        public static string ValidateUser(User user)
+        {
+            string result = null;
+
+            if (user == null)
+            {
+                result = "Need to choose a User for the task!";
+            }
+
+            return result;
+        }
+
         public static string ValidateTitle(string title)
         {
             string result = null;

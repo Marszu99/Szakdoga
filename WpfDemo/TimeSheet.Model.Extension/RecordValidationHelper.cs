@@ -4,6 +4,18 @@ namespace TimeSheet.Model.Extension
 {
     public static class RecordValidationHelper
     {
+        public static string ValidateTask(Task task)
+        {
+            string result = null;
+
+            if (task == null)
+            {
+                result = "Need to choose a Task for the record!";
+            }
+
+            return result;
+        }
+
         public static string ValidateDate(DateTime? date, DateTime? TaskCreationDate)
         {
             string result = null;

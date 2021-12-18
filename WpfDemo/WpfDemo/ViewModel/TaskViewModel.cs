@@ -230,6 +230,10 @@ namespace WpfDemo.ViewModel
 
                 switch (propertyName)
                 {
+                    case nameof(User):
+                        result = TaskValidationHelper.ValidateUser(_task.User);
+                        break;
+
                     case nameof(Title):
                         result = TaskValidationHelper.ValidateTitle(_task.Title);
                         break;

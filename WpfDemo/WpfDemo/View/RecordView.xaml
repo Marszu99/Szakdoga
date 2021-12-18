@@ -34,7 +34,7 @@
 
         <ComboBox x:Name="CreateRecordTask" ItemsSource="{Binding SelectedRecord.ActiveTasks, UpdateSourceTrigger=PropertyChanged}" Padding="2" Grid.Column="1" Grid.Row="0"
                    Height="38" FontSize="26" HorizontalContentAlignment="Stretch" IsEnabled="{Binding SelectedRecord.IsTaskEnabled}"
-                   SelectedItem="{Binding SelectedRecord.Task}">
+                   SelectedItem="{Binding SelectedRecord.Task, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Task]}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Title}"/>

@@ -243,6 +243,10 @@ namespace WpfDemo.ViewModel
 
                 switch (propertyName)
                 {
+                    case nameof(Task):
+                        result = RecordValidationHelper.ValidateTask(_record.Task);
+                        break;
+
                     case nameof(Date):
                         result = RecordValidationHelper.ValidateDate(_record.Date, _record.Task == null ? DateTime.MinValue : _record.Task.CreationDate);
                         break;
