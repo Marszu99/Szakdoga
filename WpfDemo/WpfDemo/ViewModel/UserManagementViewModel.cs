@@ -27,6 +27,11 @@ namespace WpfDemo.ViewModel
                 _selectedUser = value;
                 OnPropertyChanged(nameof(SelectedUser));
                 OnPropertyChanged(nameof(SelectedUserVisibility));
+                OnPropertyChanged(nameof(UserViewHeight));
+                OnPropertyChanged(nameof(UserViewSaveButtonVisibility));
+                OnPropertyChanged(nameof(UserViewRowHeight));
+                OnPropertyChanged(nameof(UserViewEmailGridRow));
+                OnPropertyChanged(nameof(UserViewFirstNameGridRow));
             }
         }
 
@@ -60,6 +65,47 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public string UserViewHeight
+        {
+            get
+            {
+                return SelectedUser != null && SelectedUser.IdUser != 0 ? "600" : "200";
+            }
+        }
+
+        public string UserViewRowHeight
+        {
+            get
+            {
+                return SelectedUser != null && SelectedUser.IdUser != 0 ? "*" : "0";
+            }
+        }
+
+        public string UserViewEmailGridRow
+        {
+            get
+            {
+                return SelectedUser != null && SelectedUser.IdUser != 0 ? "3" : "1";
+            }
+        }
+
+        public string UserViewFirstNameGridRow
+        {
+            get
+            {
+                return SelectedUser != null && SelectedUser.IdUser != 0 ? "1" : "3";
+            }
+        }
+
+        public Visibility UserViewSaveButtonVisibility
+        {
+            get
+            {
+                return SelectedUser != null && SelectedUser.IdUser != 0 ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+
         public Visibility UserManagementButtonsVisibility
         {
             get
@@ -72,8 +118,8 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                //return _selectedUser == null ? Visibility.Hidden : Visibility.Visible;
-                if (SelectedUser == null)
+                return _selectedUser == null ? Visibility.Hidden : Visibility.Visible;
+                /*if (SelectedUser == null)
                 {
                     return Visibility.Hidden;
                 }
@@ -87,7 +133,7 @@ namespace WpfDemo.ViewModel
                     {
                         return Visibility.Hidden;
                     }
-                }
+                }*/
             }
         }
 

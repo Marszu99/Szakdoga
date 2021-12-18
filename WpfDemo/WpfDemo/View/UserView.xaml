@@ -6,39 +6,37 @@
         xmlns:local="clr-namespace:WpfDemo.View" 
         xmlns:components="clr-namespace:WpfDemo.Components"
         mc:Ignorable="d"
-        Name="updateUser" Height="200" Width="650" Background="DarkGray">
+        Name="updateUser" Height="{Binding UserViewHeight}" Width="600" Background="DarkGray">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
- 
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="{Binding UserViewRowHeight}"/>
+            <RowDefinition Height="{Binding UserViewRowHeight}"/>
+            <RowDefinition Height="{Binding UserViewRowHeight}"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.7*"></ColumnDefinition>
-            <ColumnDefinition Width="1.5*"></ColumnDefinition>
-            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
 
 
         <TextBlock Grid.Row="0" Text="Username" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="1" Text="Email" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="{Binding UserViewFirstNameGridRow}" Text="FirstName" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <!-- <TextBlock Grid.Row="1" Text="Password" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="2" Text="LastName" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="2" Text="FirstName" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="{Binding UserViewEmailGridRow}" Text="Email" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="3" Text="LastName" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="4" Text="Telephone" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="4" Text="Email" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="5" Text="Telephone" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0" FontSize="30"/>-->
 
 
         <TextBox x:Name="UserUsername" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="26" Margin="15" BorderThickness="1" BorderBrush="Black"
-                 Text="{Binding SelectedUser.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" IsReadOnly="{Binding SelectedUser.IsUserNameReadOnly}">
+                 Text="{Binding SelectedUser.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" IsReadOnly="{Binding SelectedUser.IsUserViewValuesReadOnly}">
             <!--ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[Username]}"-->
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -83,20 +81,8 @@
             </TextBox.Resources>
         </TextBox>
 
-        <!--
-        <components:BindablePasswordBox x:Name="UserPassword" Password="{Binding SelectedUser.Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                        Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" Background="#eee"
-                                        ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[Password]}">
-            <components:BindablePasswordBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </components:BindablePasswordBox.Resources>
-        </components:BindablePasswordBox>
-
-        <TextBox x:Name="UserFirstName" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                 FontSize="26" Text="{Binding SelectedUser.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
-                 ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[FirstName]}">
+        <TextBox x:Name="UserFirstName" Grid.Row="{Binding UserViewFirstNameGridRow}" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" Background="#eee" BorderThickness="1" BorderBrush="Black"
+                 FontSize="26" Text="{Binding SelectedUser.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -104,18 +90,17 @@
             </TextBox.Resources>
         </TextBox>
 
-        <TextBox x:Name="UserLastName" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
-                 Text="{Binding SelectedUser.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                 ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[LastName]}">
+        <TextBox x:Name="UserLastName" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
+                 Text="{Binding SelectedUser.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black" IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
-        </TextBox>-->
+        </TextBox>
 
-        <TextBox x:Name="UserEmail" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
-                 Text="{Binding SelectedUser.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
+        <TextBox x:Name="UserEmail" Grid.Row="{Binding UserViewEmailGridRow}" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
+                 Text="{Binding SelectedUser.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black" IsReadOnly="{Binding SelectedUser.IsUserViewValuesReadOnly}"
                  ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[Email]}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -124,21 +109,19 @@
             </TextBox.Resources>
         </TextBox>
 
-        <!--
-        <TextBox x:Name="UserTelephone" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
-                 Text="{Binding SelectedUser.Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                 ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[Telephone]}">
+        <TextBox x:Name="UserTelephone" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
+                 Text="{Binding SelectedUser.Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black" IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
-        </TextBox>-->
+        </TextBox>
 
         <Button x:Name="SaveUserButton" 
                 Command="{Binding SelectedUser.SaveCommand}"
                 Content="Save" Grid.Column="1" Grid.Row="6" Height="45" Width="70" Margin="100 0 0 0" FontSize="26" HorizontalAlignment="Left"
-                BorderThickness="1" BorderBrush="Black">
+                BorderThickness="1" BorderBrush="Black" Visibility="{Binding UserViewSaveButtonVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>

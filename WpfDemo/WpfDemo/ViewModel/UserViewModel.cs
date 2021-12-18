@@ -129,7 +129,7 @@ namespace WpfDemo.ViewModel
             }*/
         }
 
-        public bool IsUserNameReadOnly
+        public bool IsUserViewValuesReadOnly
         {
             get
             {
