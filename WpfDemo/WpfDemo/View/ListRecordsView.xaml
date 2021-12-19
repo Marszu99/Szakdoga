@@ -13,6 +13,8 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
+        <FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
+        <!--ListRecordsViewUserVisibility-hez kell-->
         
         <Grid Grid.Row="1">
             <DockPanel>
@@ -21,7 +23,6 @@
                           ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="19"><!--MouseLeftButtonUp="{Binding ShowUpdateRecordCommand}">-->
 
                     <DataGrid.InputBindings><!--ehhez kell a IsSynchronizedWithCurrentItem="True"-->
-                        <!-- <MouseBinding MouseAction="LeftClick" Command="{Binding ShowUpdateRecordCommand}"/>--><!-- CommandParameter="{Binding ListRecordsViewModel/}" MouseAction="LeftDoubleClick"-->
                         <KeyBinding Key="Delete"  Command="{Binding DeleteCommand}"/>
                     </DataGrid.InputBindings>
 
@@ -54,14 +55,14 @@
                     </DataGrid.CellStyle>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Task" Binding="{Binding Task.Title}" Width="150" FontSize="19">
+                        <DataGridTextColumn Header="Task" Binding="{Binding Task.Title}" Width="175" FontSize="19">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="User" Binding="{Binding User_Username}" Width="150" FontSize="19" Visibility="{Binding ListRecordsUserVisibility}">
+                        <DataGridTextColumn Header="User" Binding="{Binding User_Username}" Width="150" FontSize="19" Visibility="{Binding DataContext.ListRecordsViewUserVisibility, Source={x:Reference frameworkElement}}">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium"/>

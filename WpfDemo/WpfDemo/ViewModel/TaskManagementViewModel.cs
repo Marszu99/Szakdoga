@@ -78,6 +78,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility ListTasksViewUserVisibility
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
         public string TaskViewUserRowHeight
         {
             get
@@ -106,8 +114,7 @@ namespace WpfDemo.ViewModel
         {
             _view = view;
             LoadUsers();
-            LoadTasks();
-            SortingByCheckBox(view);
+            RefreshTaskList(view);
 
             CreateTaskCommand = new RelayCommand(CreateTask, CanExecuteShow);
             RefreshTaskListCommand = new RelayCommand(RefreshTaskList, CanExecuteRefresh);
@@ -123,6 +130,7 @@ namespace WpfDemo.ViewModel
         }
         private void CreateTask(object obj)
         {
+            RefreshTaskList(obj);
             LoadUsers();
             SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) });
         }
@@ -290,9 +298,8 @@ namespace WpfDemo.ViewModel
                 {
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
                     MessageBox.Show("Task has been deleted succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    
-                    LoadTasks();
-                    SortingByCheckBox(obj);
+
+                    RefreshTaskList(obj);
                 }
                 catch (SqlException)
                 {
@@ -312,8 +319,7 @@ namespace WpfDemo.ViewModel
             {
                 new NotificationRepository(new NotificationLogic()).HasReadNotification(SelectedTask.IdTask);
 
-                LoadTasks();
-                SortingByCheckBox(obj);
+                RefreshTaskList(obj);
             }
             catch (SqlException)
             {

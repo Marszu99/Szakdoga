@@ -13,7 +13,10 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-
+        
+        <FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
+        <!--ListTasksViewUserVisibility-hez kell-->
+        
         <Grid Grid.Row="1">
             <DockPanel>
                 <DataGrid x:Name="ListTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" Width="900" HorizontalAlignment="Left"
@@ -62,7 +65,7 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="User" Binding="{Binding User.Username}" Width="170" FontSize="20" Visibility="{Binding ListTasksUserVisibility}">
+                        <DataGridTextColumn Header="User" Binding="{Binding User.Username}" Width="170" FontSize="20" Visibility="{Binding DataContext.ListTasksViewUserVisibility, Source={x:Reference frameworkElement}}">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />

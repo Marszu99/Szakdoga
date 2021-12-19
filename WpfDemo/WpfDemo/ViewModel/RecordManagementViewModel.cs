@@ -57,7 +57,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility ListRecordsUserVisibility// Miert nem latja???
+        public Visibility ListRecordsViewUserVisibility
         {
             get
             {
@@ -137,8 +137,7 @@ namespace WpfDemo.ViewModel
             _view = view;
 
             LoadTasks();
-            LoadRecords();
-            SortingByCheckBox(view);
+            RefreshRecordList(view);
 
             CreateRecordCommand = new RelayCommand(CreateRecord, CanExecuteShow);
             RefreshRecordListCommand = new RelayCommand(RefreshRecordList, CanExecuteRefresh);
@@ -153,6 +152,7 @@ namespace WpfDemo.ViewModel
         }
         private void CreateRecord(object obj)
         {
+            RefreshRecordList(obj);
             LoadTasks();
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
                 TaskList
@@ -277,8 +277,7 @@ namespace WpfDemo.ViewModel
                     new RecordRepository(new RecordLogic()).DeleteRecord(SelectedRecord.IdRecord);
                     MessageBox.Show("Record has been deleted succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    LoadRecords();
-                    SortingByCheckBox(obj);
+                    RefreshRecordList(obj);
                 }
                 catch (SqlException)
                 {

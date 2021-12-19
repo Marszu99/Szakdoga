@@ -210,14 +210,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility ListTasksUserVisibility// Miert nem jo???
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Hidden : Visibility.Visible;
-            }
-        }
-
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }
