@@ -65,13 +65,14 @@
             </TextBox.Resources>
         </TextBox>
 
-        <DatePicker x:Name="UpdateTaskDeadline" Grid.Column="1" Grid.Row="3" SelectedDate="{Binding CurrentTask.Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+        <DatePicker x:Name="UpdateTaskDeadline" Grid.Column="1" Grid.Row="3" SelectedDate="{Binding Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                     SelectedDateFormat="Short" HorizontalAlignment="Left" Height="35" FontSize="22" Margin="0 0 0 0"
-                    ToolTipService.ToolTip="{Binding CurrentTask.ErrorCollection[Deadline]}"/>
+                    ToolTipService.ToolTip="{Binding ErrorCollection[Deadline]}"/>
 
         <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="4"
                   Width="150" Height="36" FontSize="22" HorizontalAlignment="Left" HorizontalContentAlignment="Left"
-                  SelectedValue="{Binding Status}" SelectedValuePath="Key" DisplayMemberPath="Value">
+                  SelectedValue="{Binding Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Key" DisplayMemberPath="Value"
+                  ToolTipService.ToolTip="{Binding ErrorCollection[Status]}">
         </ComboBox>
 
         <Button x:Name="UpdateTaskButton" Command="{Binding UpdateTaskCommand}" Content="Save" Grid.Column="1" Grid.Row="5" Height="50" Width="75" Margin="0 0 180 0" FontSize="22"

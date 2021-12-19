@@ -18,6 +18,7 @@ namespace WpfDemo.ViewModel
 
         private User _user;
         private MyProfileView _view;
+        private bool _isChanged = false;
 
 
         public User CurrentLoggedUser
@@ -33,6 +34,77 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        // IDataErrorInfo miatt csinaltam pluszba a Password,FirstName,stb..
+        public string Password
+        {
+            get
+            {
+                return _user.Password;
+            }
+            set
+            {
+                _user.Password = value;
+                OnPropertyChanged(nameof(Password));
+                _isChanged = true;
+            }
+        }
+
+        public string FirstName
+        {
+            get
+            {
+                return _user.FirstName;
+            }
+            set
+            {
+                _user.FirstName = value;
+                OnPropertyChanged(nameof(FirstName));
+                _isChanged = true;
+            }
+        }
+
+        public string LastName
+        {
+            get
+            {
+                return CurrentLoggedUser.LastName;
+            }
+            set
+            {
+                CurrentLoggedUser.LastName = value;
+                OnPropertyChanged(nameof(LastName));
+                _isChanged = true;
+            }
+        }
+
+        public string Email
+        {
+            get
+            {
+                return _user.Email;
+            }
+            set
+            {
+                _user.Email = value;
+                OnPropertyChanged(nameof(Email));
+                _isChanged = true;
+            }
+        }
+
+        public string Telephone
+        {
+            get
+            {
+                return CurrentLoggedUser.Telephone;
+            }
+            set
+            {
+                CurrentLoggedUser.Telephone = value;
+                OnPropertyChanged(nameof(Telephone));
+                _isChanged = true;
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }
@@ -45,23 +117,23 @@ namespace WpfDemo.ViewModel
 
                 switch (propertyName)
                 {
-                    case nameof(CurrentLoggedUser.Password):
+                    case nameof(Password):
                         result = UserValidationHelper.ValidatePassword(_user.Password);
                         break;
 
-                    case nameof(CurrentLoggedUser.FirstName):
+                    case nameof(FirstName):
                         result = UserValidationHelper.ValidateFirstName(_user.FirstName);
                         break;
 
-                    case nameof(CurrentLoggedUser.LastName):
+                    case nameof(LastName):
                         result = UserValidationHelper.ValidateLastName(_user.LastName);
                         break;
 
-                    case nameof(CurrentLoggedUser.Email):
+                    case nameof(Email):
                         result = UserValidationHelper.ValidateEmail(_user.Email);
                         break;
 
-                    case nameof(CurrentLoggedUser.Telephone):
+                    case nameof(Telephone):
                         result = UserValidationHelper.ValidateTelephone(_user.Telephone);
                         break;
                 }
@@ -103,7 +175,7 @@ namespace WpfDemo.ViewModel
         private bool CanExecuteSave(object arg)
         {
            return !string.IsNullOrEmpty(CurrentLoggedUser.Password) && !string.IsNullOrEmpty(CurrentLoggedUser.FirstName) && !string.IsNullOrEmpty(CurrentLoggedUser.LastName) &&
-                  !string.IsNullOrEmpty(CurrentLoggedUser.Email) && !string.IsNullOrEmpty(CurrentLoggedUser.Telephone);
+                  !string.IsNullOrEmpty(CurrentLoggedUser.Email) && !string.IsNullOrEmpty(CurrentLoggedUser.Telephone) && _isChanged == true;
         }
         private bool CanExecuteCancel(object arg)
         {
@@ -149,17 +221,7 @@ namespace WpfDemo.ViewModel
             {
                 new UserRepository(new UserLogic()).UpdateUser(CurrentLoggedUser);
                 MessageBox.Show("User has been updated succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show("Server error!");
-            }
-            catch (UserValidationException)
-            {
 
-            }
-            finally
-            {
                 // _view.MyProfilePassword.IsReadOnly = true;
                 _view.MyProfilePassword.IsEnabled = false;
 
@@ -193,6 +255,14 @@ namespace WpfDemo.ViewModel
                 _view.ChangeUserValuesButton.Visibility = Visibility.Visible;
                 _view.SaveChangedUserValuesButton.Visibility = Visibility.Hidden;
                 _view.CancelChangeUserValuesButton.Visibility = Visibility.Hidden;
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Server error!");
+            }
+            catch (UserValidationException)
+            {
+
             }
         }
 

@@ -86,6 +86,10 @@ namespace WpfDemo.ViewModel
                         result = TaskValidationHelper.ValidateDeadline(_task.Deadline);
                         break;
 
+                    case nameof(Status):
+                        result = TaskValidationHelper.ValidateStatus(_task.Status, _task.IdTask);
+                        break;
+
                     default: // ez kell???
                         break;
                 }

@@ -39,9 +39,9 @@
                 </TextBox.InputBindings>
             </TextBox>
 
-            <components:BindablePasswordBox x:Name="MyProfilePassword" Password="{Binding CurrentLoggedUser.Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Left" 
+            <components:BindablePasswordBox x:Name="MyProfilePassword" Password="{Binding Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Left" 
                                             VerticalAlignment="Center" Margin="0 38 100 0" FontSize="34" Background="DarkGray" IsEnabled="False" BorderBrush="DarkGray"
-                                            ToolTipService.ToolTip="{Binding ErrorCollection[CurrentLoggedUser.Password]}">
+                                            ToolTipService.ToolTip="{Binding ErrorCollection[Password]}">
                 <components:BindablePasswordBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -52,9 +52,9 @@
                 </components:BindablePasswordBox.InputBindings>
             </components:BindablePasswordBox>
 
-            <TextBox x:Name="MyProfileFirstName" Text="{Binding CurrentLoggedUser.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+            <TextBox x:Name="MyProfileFirstName" Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
                      FontSize="34" Background="DarkGray" IsReadOnly="True"
-                     ToolTipService.ToolTip="{Binding ErrorCollection[CurrentLoggedUser.FirstName]}">
+                     ToolTipService.ToolTip="{Binding ErrorCollection[FirstName]}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -65,9 +65,9 @@
                 </TextBox.InputBindings>
             </TextBox>
 
-            <TextBox x:Name="MyProfileLastName" Text="{Binding CurrentLoggedUser.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+            <TextBox x:Name="MyProfileLastName" Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
                      FontSize="34" Background="DarkGray" IsReadOnly="True"
-                     ToolTipService.ToolTip="{Binding ErrorCollection[CurrentLoggedUser.LastName]}">
+                     ToolTipService.ToolTip="{Binding ErrorCollection[LastName]}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -78,9 +78,9 @@
                 </TextBox.InputBindings>
             </TextBox>
 
-            <TextBox x:Name="MyProfileEmail" Text="{Binding CurrentLoggedUser.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+            <TextBox x:Name="MyProfileEmail" Text="{Binding Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
                      FontSize="34" Background="DarkGray" IsReadOnly="True"
-                     ToolTipService.ToolTip="{Binding ErrorCollection[CurrentLoggedUser.Email]}">
+                     ToolTipService.ToolTip="{Binding ErrorCollection[Email]}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -91,9 +91,9 @@
                 </TextBox.InputBindings>
             </TextBox>
 
-            <TextBox x:Name="MyProfileTelephone" Text="{Binding CurrentLoggedUser.Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+            <TextBox x:Name="MyProfileTelephone" Text="{Binding Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
                      FontSize="34" Background="DarkGray" IsReadOnly="True"
-                     ToolTipService.ToolTip="{Binding ErrorCollection[CurrentLoggedUser.Telephone]}">
+                     ToolTipService.ToolTip="{Binding ErrorCollection[Telephone]}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

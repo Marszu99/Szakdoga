@@ -193,7 +193,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {               
-                return new NotificationRepository(new NotificationLogic()).GetTaskNotifications(this._task.IdTask);
+                return _task.User_Username == LoginViewModel.LoggedUser.Username ? new NotificationRepository(new NotificationLogic()).GetTaskNotifications(this._task.IdTask) : null;
             }
             set
             {
@@ -206,7 +206,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return new NotificationRepository(new NotificationLogic()).GetTaskNotifications(this._task.IdTask) != null ? "DarkOrange" : "#eee";
+                return _task.User_Username == LoginViewModel.LoggedUser.Username && new NotificationRepository(new NotificationLogic()).GetTaskNotifications(this._task.IdTask) != null ? "DarkOrange" : "#eee";
             }
         }
 
