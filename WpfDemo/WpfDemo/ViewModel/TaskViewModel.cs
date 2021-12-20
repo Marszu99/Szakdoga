@@ -188,18 +188,18 @@ namespace WpfDemo.ViewModel
         }
 
 
-        private string _notificationText;
+        //private string _notificationText;
         public string NotificationText
         {
             get
-            {               
+            {
                 return _task.User_Username == LoginViewModel.LoggedUser.Username ? new NotificationRepository(new NotificationLogic()).GetTaskNotifications(this._task.IdTask) : null;
             }
-            set
+            /*set
             {
                 _notificationText = value;
                 OnPropertyChanged(NotificationText);
-            }
+            }*/
         }
 
         public string ListTasksBackground
