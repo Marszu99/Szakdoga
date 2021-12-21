@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "OwRSLXh5vdyVbbWCn6PmMMu6Rag+6L881AKmffGdK9KNu7JF+HFs2MKJ4QF5LO3QIFLEOiaXUjlwGrQCNvNtbg==",
+  "dgSpecHash": "votLiRmDVsMdjwYmY0PL/aZ4CFg0JJMb12SMvRJHOYKsTW5FFj91uVMP8ZtBJgNTFGQuwWNWl/I+sx8WiPmTIQ==",
   "success": true,
   "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Tests\\TimeSheet.Tests.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\Marci\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
+    "C:\\Users\\Marci\\.nuget\\packages\\libphonenumber-csharp\\8.12.38\\libphonenumber-csharp.8.12.38.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\microsoft.codecoverage\\16.9.4\\microsoft.codecoverage.16.9.4.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\microsoft.dotnet.internalabstractions\\1.0.0\\microsoft.dotnet.internalabstractions.1.0.0.nupkg.sha512",
@@ -31,6 +32,7 @@
     "C:\\Users\\Marci\\.nuget\\packages\\system.appcontext\\4.1.0\\system.appcontext.4.1.0.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
+    "C:\\Users\\Marci\\.nuget\\packages\\system.collections.immutable\\1.7.1\\system.collections.immutable.1.7.1.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\system.collections.nongeneric\\4.3.0\\system.collections.nongeneric.4.3.0.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\system.collections.specialized\\4.3.0\\system.collections.specialized.4.3.0.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\system.componentmodel\\4.3.0\\system.componentmodel.4.3.0.nupkg.sha512",

@@ -126,6 +126,7 @@ namespace WpfDemo.ViewModel
             {
                 _record.Task = value;
                 OnPropertyChanged(nameof(Task));
+                _isChanged = true;
             }
         }
 
@@ -357,6 +358,8 @@ namespace WpfDemo.ViewModel
             this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._record.Task.User_idUser, this._record.Task.IdTask); 
             MessageBox.Show("Record has been created succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             RefreshValues();
+            //RecordManagementViewModel._isNewAdded = true;
+            //OnPropertyChanged(nameof(RecordManagementViewModel._isNewAdded));
         }
 
         private void UpdateRecord()
@@ -366,7 +369,7 @@ namespace WpfDemo.ViewModel
             _isChanged = false;
         }
 
-        private void RefreshValues() // ez igy okes?
+        private void RefreshValues()
         {
             this.IdRecord = 0;
             this.Task = null;

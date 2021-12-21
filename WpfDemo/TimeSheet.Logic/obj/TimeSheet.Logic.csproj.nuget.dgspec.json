@@ -184,6 +184,10 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "libphonenumber-csharp": {
+              "target": "Package",
+              "version": "[8.12.38, )"
             }
           },
           "imports": [

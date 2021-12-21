@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using PhoneNumbers;
+using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace TimeSheet.Model.Extension
@@ -156,17 +158,27 @@ namespace TimeSheet.Model.Extension
         {
             string result = null;
 
+            string telephoneNumber = null;
+            foreach (char telephoneCharacter in telephone)
+            {
+                if (Char.IsDigit(telephoneCharacter))
+                {
+                    telephoneNumber += telephoneCharacter;
+                }
+            }
+
             if (string.IsNullOrWhiteSpace(telephone))
             {
                 result = "Telephone is empty!";
             }
-            else if (telephone.Length < MinimumTelephoneLength || telephone.Length > MaximumTelephoneLength)
+
+            else if (telephoneNumber.Length < MinimumTelephoneLength || telephoneNumber.Length > MaximumTelephoneLength)
             {
                 result = "Telephone number needs to be greater than 10 and less than 14!";
             }
-            else if (!telephone.ToCharArray().All(char.IsDigit))// lehet rossz mert elfogadna igy barmilyen kombinaciot pl: 999999999999
+            else if (!PhoneNumberUtil.IsViablePhoneNumber(telephone))//jo ez vagy specifikaljak magyar telefonszamokra mert igy elfogana a 999999999999-et?
             {
-                result = "Telephone can only contain numbers!";
+                result = "Invalid telephone number!";
             }
 
             return result;

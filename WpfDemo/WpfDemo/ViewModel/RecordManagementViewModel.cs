@@ -15,6 +15,7 @@ namespace WpfDemo.ViewModel
     public class RecordManagementViewModel : ViewModelBase
     {
         private RecordManagementView _view;
+        //public static bool _isNewAdded = false; Nem mukodik
 
         public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>();
         public ObservableCollection<Task> TaskList { get; } = new ObservableCollection<Task>();
@@ -138,6 +139,12 @@ namespace WpfDemo.ViewModel
 
             LoadTasks();
             RefreshRecordList(view);
+
+            /*if(_isNewAdded == true)
+            {
+                RefreshRecordList(view);
+                _isNewAdded = false;
+            }*/
 
             CreateRecordCommand = new RelayCommand(CreateRecord, CanExecuteShow);
             RefreshRecordListCommand = new RelayCommand(RefreshRecordList, CanExecuteRefresh);

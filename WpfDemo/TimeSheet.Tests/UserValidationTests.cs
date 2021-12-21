@@ -348,7 +348,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateTelephone(telephone);
 
-            Assert.That(result, Is.EqualTo("Telephone can only contain numbers!"));
+            Assert.That(result, Is.EqualTo("Invalid telephone number!"));
         }
 
         [Test]

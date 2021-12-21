@@ -73,6 +73,18 @@
           "lib/netstandard2.0/K4os.Hash.xxHash.dll": {}
         }
       },
+      "libphonenumber-csharp/8.12.38": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections.Immutable": "1.7.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/PhoneNumbers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/PhoneNumbers.dll": {}
+        }
+      },
       "Microsoft.NETCore.Platforms/3.1.0": {
         "type": "package",
         "compile": {
@@ -198,6 +210,15 @@
         },
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
+        }
+      },
+      "System.Collections.Immutable/1.7.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {}
         }
       },
       "System.Configuration.ConfigurationManager/4.4.1": {
@@ -432,7 +453,8 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "TimeSheet.DataAccess": "1.0.0",
-          "TimeSheet.Model": "1.0.0"
+          "TimeSheet.Model": "1.0.0",
+          "libphonenumber-csharp": "8.12.38"
         },
         "compile": {
           "bin/placeholder/TimeSheet.Model.Extension.dll": {}
@@ -562,6 +584,29 @@
         "lib/netstandard1.6/K4os.Hash.xxHash.xml",
         "lib/netstandard2.0/K4os.Hash.xxHash.dll",
         "lib/netstandard2.0/K4os.Hash.xxHash.xml"
+      ]
+    },
+    "libphonenumber-csharp/8.12.38": {
+      "sha512": "PjUPJXQeYHYnefRZZvkhAR4WUSmNX1rXecAsOfW80zCy0QY47wcW6GeLmIOgJAEQhVPMeoaQSoyKdt3FxQANAw==",
+      "type": "package",
+      "path": "libphonenumber-csharp/8.12.38",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/PhoneNumbers.dll",
+        "lib/net35/PhoneNumbers.xml",
+        "lib/net40/PhoneNumbers.dll",
+        "lib/net40/PhoneNumbers.xml",
+        "lib/net46/PhoneNumbers.dll",
+        "lib/net46/PhoneNumbers.xml",
+        "lib/netstandard1.3/PhoneNumbers.dll",
+        "lib/netstandard1.3/PhoneNumbers.xml",
+        "lib/netstandard2.0/PhoneNumbers.dll",
+        "lib/netstandard2.0/PhoneNumbers.xml",
+        "lib/portable-net45+win8+wp8+wpa81/PhoneNumbers.dll",
+        "lib/portable-net45+win8+wp8+wpa81/PhoneNumbers.xml",
+        "libphonenumber-csharp.8.12.38.nupkg.sha512",
+        "libphonenumber-csharp.nuspec"
       ]
     },
     "Microsoft.NETCore.Platforms/3.1.0": {
@@ -809,6 +854,32 @@
         "ref/uap10.0.16299/_._",
         "system.buffers.4.5.1.nupkg.sha512",
         "system.buffers.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Collections.Immutable/1.7.1": {
+      "sha512": "B43Zsz5EfMwyEbnObwRxW5u85fzJma3lrDeGcSAV1qkhSRTNY5uXAByTn9h9ddNdhM+4/YoLc/CI43umjwIl9Q==",
+      "type": "package",
+      "path": "system.collections.immutable/1.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Collections.Immutable.dll",
+        "lib/net461/System.Collections.Immutable.xml",
+        "lib/netstandard1.0/System.Collections.Immutable.dll",
+        "lib/netstandard1.0/System.Collections.Immutable.xml",
+        "lib/netstandard1.3/System.Collections.Immutable.dll",
+        "lib/netstandard1.3/System.Collections.Immutable.xml",
+        "lib/netstandard2.0/System.Collections.Immutable.dll",
+        "lib/netstandard2.0/System.Collections.Immutable.xml",
+        "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll",
+        "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.xml",
+        "system.collections.immutable.1.7.1.nupkg.sha512",
+        "system.collections.immutable.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
