@@ -97,6 +97,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility ListUsersViewContextMenuVisibility // Delete Header Visibility
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
         public Visibility UserViewSaveButtonVisibility
         {
             get

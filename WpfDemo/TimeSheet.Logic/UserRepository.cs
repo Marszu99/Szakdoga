@@ -22,14 +22,6 @@ namespace TimeSheet.Logic
                 throw new UserValidationException(UserValidationHelper.ValidateUserName(user.Username));
             }
 
-            foreach (User _user in GetAllUsers())
-            {
-                if (user.Username == _user.Username)
-                {
-                    throw new UserValidationException(user.Username + " already exists!");
-                }
-            }
-
             if (UserValidationHelper.ValidatePassword(user.Password) != null)
             {
                 throw new UserValidationException(UserValidationHelper.ValidatePassword(user.Password));

@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using TimeSheet.DataAccess;
 
 namespace TimeSheet.Model.Extension
 {
@@ -37,6 +38,14 @@ namespace TimeSheet.Model.Extension
             else if (username.Contains(" "))
             {
                 result = "Username needs to be one word!";
+            }
+
+            foreach (User _user in new UserLogic().GetAllUsers())
+            {
+                if (username == _user.Username)
+                {
+                    result = username + " already exists!";
+                }
             }
 
             return result;

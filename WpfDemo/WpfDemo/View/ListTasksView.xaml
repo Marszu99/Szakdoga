@@ -29,7 +29,7 @@
                     </DataGrid.InputBindings>
 
                     <DataGrid.ContextMenu>
-                        <ContextMenu>
+                        <ContextMenu Visibility="{Binding ListTasksViewContextMenuVisibility}">
                             <MenuItem Header="Delete" Command="{Binding DeleteCommand}"/>
                         </ContextMenu>
                     </DataGrid.ContextMenu>

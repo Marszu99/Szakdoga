@@ -126,7 +126,10 @@ namespace WpfDemo.ViewModel
             {
                 _record.Task = value;
                 OnPropertyChanged(nameof(Task));
-                _isChanged = true;
+                if (_record.IdRecord == 0)  // kell ez mert kulonbon update eseten a Save gomb nem lennne disabled-d
+                {
+                    _isChanged = true;
+                }
             }
         }
 
