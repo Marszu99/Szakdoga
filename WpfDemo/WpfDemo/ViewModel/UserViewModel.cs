@@ -201,7 +201,7 @@ namespace WpfDemo.ViewModel
 
         private bool CanSave(object arg)
         {
-            return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Email) && _isChanged == true;
+            return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Email) && _isChanged;
         }
 
         private void Save(object obj)
@@ -216,6 +216,7 @@ namespace WpfDemo.ViewModel
                 {
                     UpdateUser();
                 }
+                UserManagementViewModel.RefreshUserListCommand.Execute(obj);
             }
             catch (SqlException)
             {

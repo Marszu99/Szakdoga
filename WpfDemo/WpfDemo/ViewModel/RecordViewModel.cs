@@ -226,14 +226,6 @@ namespace WpfDemo.ViewModel
                 return _record != null && _record.User_Username != LoginViewModel.LoggedUser.Username ? Visibility.Hidden : Visibility.Visible;
             }
         }*/
-
-        public Visibility ListRecordsUserVisibility// Miert nem jo???
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
        
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
@@ -325,7 +317,7 @@ namespace WpfDemo.ViewModel
 
         private bool CanSave(object arg)
         {
-            return Task != null && !string.IsNullOrEmpty(Duration.ToString()) && !string.IsNullOrEmpty(Date.ToString()) && _isChanged == true;
+            return Task != null && !string.IsNullOrEmpty(Duration.ToString()) && !string.IsNullOrEmpty(Date.ToString()) && _isChanged;
         }
 
         private void Save(object obj)
@@ -340,6 +332,7 @@ namespace WpfDemo.ViewModel
                 {
                     UpdateRecord();
                 }
+                RecordManagementViewModel.RefreshRecordListCommand.Execute(obj);  // ez igy jo????
             }
             catch (SqlException)
             {
@@ -361,8 +354,6 @@ namespace WpfDemo.ViewModel
             this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._record.Task.User_idUser, this._record.Task.IdTask); 
             MessageBox.Show("Record has been created succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             RefreshValues();
-            //RecordManagementViewModel._isNewAdded = true;
-            //OnPropertyChanged(nameof(RecordManagementViewModel._isNewAdded));
         }
 
         private void UpdateRecord()

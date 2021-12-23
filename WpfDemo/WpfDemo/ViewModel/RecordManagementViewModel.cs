@@ -15,7 +15,6 @@ namespace WpfDemo.ViewModel
     public class RecordManagementViewModel : ViewModelBase
     {
         private RecordManagementView _view;
-        //public static bool _isNewAdded = false; Nem mukodik
 
         public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>();
         public ObservableCollection<Task> TaskList { get; } = new ObservableCollection<Task>();
@@ -34,6 +33,7 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(IsRecordViewValuesReadOnly));
                 OnPropertyChanged(nameof(IsRecordViewDateHitTestVisible));
                 OnPropertyChanged(nameof(RecordViewButtonsVisibility));
+                OnPropertyChanged(nameof(ListRecordsViewContextMenuVisibility));
             }
         }
 
@@ -113,6 +113,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility ListRecordsViewContextMenuVisibility // Delete Header Visibility
+        {
+            get
+            {
+                return SelectedRecord.User_Username != LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
 
         public Dictionary<TaskStatus, string> TaskStatuses
         {
@@ -128,7 +136,7 @@ namespace WpfDemo.ViewModel
 
 
         public RelayCommand CreateRecordCommand { get; private set; }
-        public RelayCommand RefreshRecordListCommand { get; private set; }
+        public static RelayCommand RefreshRecordListCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
 
@@ -139,12 +147,6 @@ namespace WpfDemo.ViewModel
 
             LoadTasks();
             RefreshRecordList(view);
-
-            /*if(_isNewAdded == true)
-            {
-                RefreshRecordList(view);
-                _isNewAdded = false;
-            }*/
 
             CreateRecordCommand = new RelayCommand(CreateRecord, CanExecuteShow);
             RefreshRecordListCommand = new RelayCommand(RefreshRecordList, CanExecuteRefresh);
@@ -181,21 +183,37 @@ namespace WpfDemo.ViewModel
         {
             RecordList.Clear();
 
-            var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser);
-            records.ForEach(record =>
+            try
             {
-                var recordViewModel = new RecordViewModel(record, TaskList.ToList());
-                recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
-                RecordList.Add(recordViewModel);
-            });
+                var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser);
+                records.ForEach(record =>
+                {
+                    var recordViewModel = new RecordViewModel(record, TaskList.ToList());
+                    recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
+                    RecordList.Add(recordViewModel);
+                });
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Server errror!");
+            }
+
+
         }
 
         public void LoadTasks()
         {
             TaskList.Clear();
 
-            var tasks = new TaskRepository(new TaskLogic()).GetAllTasks();
-            tasks.ForEach(task => TaskList.Add(task));
+            try
+            {
+                var tasks = new TaskRepository(new TaskLogic()).GetAllTasks();
+                tasks.ForEach(task => TaskList.Add(task));
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Server errror!");
+            }
         }
 
 

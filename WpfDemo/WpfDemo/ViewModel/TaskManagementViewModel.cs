@@ -112,7 +112,7 @@ namespace WpfDemo.ViewModel
 
 
         public RelayCommand CreateTaskCommand { get; private set; }
-        public RelayCommand RefreshTaskListCommand { get; private set; }
+        public static RelayCommand RefreshTaskListCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand HasReadCommand { get; private set; }
@@ -157,22 +157,37 @@ namespace WpfDemo.ViewModel
         {
             TaskList.Clear();
 
-            var tasks = new TaskRepository(new TaskLogic()).GetAllTasks();
-
-            tasks.ForEach(task =>
+            try
             {
-                var taskViewModel = new TaskViewModel(task);
-                taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
-                TaskList.Add(taskViewModel);
-            });
+                var tasks = new TaskRepository(new TaskLogic()).GetAllTasks();
+
+                tasks.ForEach(task =>
+                {
+                    var taskViewModel = new TaskViewModel(task);
+                    taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                    TaskList.Add(taskViewModel);
+                });
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Server errror!");
+            }
+            
         }
 
         public void LoadUsers()
         {
             UserList.Clear();
 
-            var users = new UserRepository(new UserLogic()).GetAllUsers();
-            users.ForEach(user => UserList.Add(user));
+            try
+            {
+                var users = new UserRepository(new UserLogic()).GetAllUsers();
+                users.ForEach(user => UserList.Add(user));
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Server errror!");
+            }
         }
 
 

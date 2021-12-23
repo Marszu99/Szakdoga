@@ -51,8 +51,17 @@ namespace WpfDemo.ViewModel
                 else
                 {
                     UserList.Clear();
-                    var users = new UserRepository(new UserLogic()).GetAllUsers().Where(user => user.Username.Contains(_searchValue) || user.FirstName.Contains(_searchValue) || user.LastName.Contains(_searchValue)).ToList();
-                    users.ForEach(user => UserList.Add(new UserViewModel(user)));
+
+                    try
+                    {
+                        var users = new UserRepository(new UserLogic()).GetAllUsers().Where(user => user.Username.Contains(_searchValue) || user.FirstName.Contains(_searchValue) || user.LastName.Contains(_searchValue)).ToList();
+                        users.ForEach(user => UserList.Add(new UserViewModel(user)));
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show("Server error!");
+                    }
+                    
                 }
             }
         }
@@ -148,7 +157,7 @@ namespace WpfDemo.ViewModel
         public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand ShowUserProfilCommand { get; private set; }
         public RelayCommand CreateUserCommand { get; private set; }
-        public RelayCommand RefreshUserListCommand { get; private set; }
+        public static RelayCommand RefreshUserListCommand { get; private set; }
 
         public UserManagementViewModel(UserManagementView view)
         {
@@ -187,8 +196,16 @@ namespace WpfDemo.ViewModel
         {
             UserList.Clear();
 
-            var users = new UserRepository(new UserLogic()).GetAllUsers();
-            users.ForEach(user => UserList.Add(new UserViewModel(user)));
+            try
+            {
+                var users = new UserRepository(new UserLogic()).GetAllUsers();
+                users.ForEach(user => UserList.Add(new UserViewModel(user)));
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Server error!");
+            }
+
         }
 
         private void DeleteUser(object obj)

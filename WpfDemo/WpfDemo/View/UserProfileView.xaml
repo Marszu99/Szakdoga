@@ -67,7 +67,7 @@
             </Grid.ColumnDefinitions>
 
             <DataGrid  x:Name="UserTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" HorizontalAlignment="Left" Width="650" AutoGenerateColumns="False" ColumnWidth="*"
-                          Background="#eee" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                          Background="LightGray" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
                           ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="0" Grid.ColumnSpan="2">
 
                 <DataGrid.InputBindings>
@@ -136,7 +136,7 @@
             </DataGrid>
 
 
-            <DataGrid  x:Name="UserRecordsDataGrid" x:FieldModifier="public" ItemsSource="{Binding RecordList}" AutoGenerateColumns="False" Background="#eee" 
+            <DataGrid  x:Name="UserRecordsDataGrid" x:FieldModifier="public" ItemsSource="{Binding RecordList}" AutoGenerateColumns="False" Background="LightGray" 
                        ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                        Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" Grid.Column="2" FontSize="20" Grid.ColumnSpan="2" Margin="72,0,0,0">
 

@@ -42,7 +42,7 @@
             </Border>
 
             <TextBlock Text="Worktime Registry" Margin="0 0 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="33" FontWeight="Bold" FontStyle="Italic"/>
-            
+
             <TextBlock Grid.Row="0" Text="{Binding CompanyName}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="38" Margin="1060 0 0 0" FontSize="33" FontFamily="Times New Roman" Foreground="Black" Padding="0 0 0 0"/>
 
 
