@@ -316,11 +316,8 @@ namespace WpfDemo.ViewModel
         {
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
             MessageBox.Show("Task has been created succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            RefreshValues();
-            TaskManagementViewModel.RefreshTaskListCommand.Execute(this); // ez igy jo????
-
             new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("New task!", this._task.IdTask);
+            RefreshValues();
         }
 
 
