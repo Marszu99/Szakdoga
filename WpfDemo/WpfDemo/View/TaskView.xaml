@@ -14,7 +14,7 @@
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="{Binding TaskViewUserRowHeight}"/>
+            <RowDefinition Height="{Binding SelectedTask.TaskViewUserRowHeight}"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
@@ -63,7 +63,7 @@
         </TextBox>
 
         <DatePicker x:Name="CreateTaskDeadline" Grid.Column="1" Grid.Row="3" SelectedDate="{Binding SelectedTask.Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedDateFormat="Short" Height="41" HorizontalAlignment="Left" FontSize="26" Margin="0 0 0 0" IsHitTestVisible="{Binding IsRecordViewDeadlineHitTestVisible}"
+                    SelectedDateFormat="Short" Height="41" HorizontalAlignment="Left" FontSize="26" Margin="0 0 0 0" IsHitTestVisible="{Binding SelectedTask.IsTaskViewDeadlineHitTestVisible}"
                     ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Deadline]}">
         </DatePicker>
 

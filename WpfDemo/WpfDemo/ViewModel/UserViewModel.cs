@@ -137,6 +137,54 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public bool IsUserViewValuesEnabled // mikor a fonok ujat csinalni tudjon tab-bal lepegetni Username es Email kozott
+        {
+            get
+            {
+                return _user.IdUser != 0;
+            }
+        }
+
+        public string UserViewHeight
+        {
+            get
+            {
+                return _user != null && _user.IdUser != 0 ? "600" : "200";
+            }
+        }
+
+        public string UserViewRowHeight
+        {
+            get
+            {
+                return _user != null && _user.IdUser != 0 ? "*" : "0";
+            }
+        }
+
+        public string UserViewEmailGridRow
+        {
+            get
+            {
+                return _user != null && _user.IdUser != 0 ? "3" : "1";
+            }
+        }
+
+        public string UserViewFirstNameGridRow
+        {
+            get
+            {
+                return _user != null && _user.IdUser != 0 ? "1" : "3";
+            }
+        }
+
+        public Visibility UserViewSaveButtonVisibility
+        {
+            get
+            {
+                return _user != null && _user.IdUser != 0 ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }

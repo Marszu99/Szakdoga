@@ -94,22 +94,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string TaskViewUserRowHeight
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 1 ? "*" : "0";
-            }
-        }
-
-        public bool IsRecordViewDeadlineHitTestVisible
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 1;
-            }
-        }
-
 
         public RelayCommand CreateTaskCommand { get; private set; }
         public static RelayCommand RefreshTaskListCommand { get; private set; }

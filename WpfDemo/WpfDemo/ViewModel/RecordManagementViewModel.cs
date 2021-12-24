@@ -30,9 +30,6 @@ namespace WpfDemo.ViewModel
                 _selectedRecord = value;
                 OnPropertyChanged(nameof(SelectedRecord));
                 OnPropertyChanged(nameof(SelectedRecordVisibility));
-                OnPropertyChanged(nameof(IsRecordViewValuesReadOnly));
-                OnPropertyChanged(nameof(IsRecordViewDateHitTestVisible));
-                OnPropertyChanged(nameof(RecordViewButtonsVisibility));
                 OnPropertyChanged(nameof(ListRecordsViewContextMenuVisibility));
             }
         }
@@ -86,30 +83,6 @@ namespace WpfDemo.ViewModel
                         return Visibility.Hidden;
                     }
                 }*/
-            }
-        }
-
-        public bool IsRecordViewValuesReadOnly
-        {
-            get 
-            {
-                return SelectedRecord != null && SelectedRecord.IdRecord != 0 && SelectedRecord.User_Username != LoginViewModel.LoggedUser.Username ? true : false;
-            }
-        }
-
-        public bool IsRecordViewDateHitTestVisible
-        {
-            get
-            {
-                return SelectedRecord != null && SelectedRecord.IdRecord != 0 && SelectedRecord.User_Username != LoginViewModel.LoggedUser.Username ? false : true;
-            }
-        }
-
-        public Visibility RecordViewButtonsVisibility
-        {
-            get
-            {
-                return SelectedRecord != null && SelectedRecord.IdRecord != 0 && SelectedRecord.User_Username != LoginViewModel.LoggedUser.Username ? Visibility.Hidden : Visibility.Visible;
             }
         }
 

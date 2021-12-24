@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:WpfDemo.View" 
         xmlns:components="clr-namespace:WpfDemo.Components"
         mc:Ignorable="d"
-        Name="updateUser" Height="{Binding UserViewHeight}" Width="600" Background="DarkGray">
+        Name="updateUser" Height="{Binding SelectedUser.UserViewHeight}" Width="600" Background="DarkGray">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="{Binding UserViewRowHeight}"/>
-            <RowDefinition Height="{Binding UserViewRowHeight}"/>
-            <RowDefinition Height="{Binding UserViewRowHeight}"/>
+            <RowDefinition Height="{Binding SelectedUser.UserViewRowHeight}"/>
+            <RowDefinition Height="{Binding SelectedUser.UserViewRowHeight}"/>
+            <RowDefinition Height="{Binding SelectedUser.UserViewRowHeight}"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -25,11 +25,11 @@
 
         <TextBlock Grid.Row="0" Text="Username" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="{Binding UserViewFirstNameGridRow}" Text="FirstName" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="{Binding SelectedUser.UserViewFirstNameGridRow}" Text="FirstName" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
         <TextBlock Grid.Row="2" Text="LastName" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="{Binding UserViewEmailGridRow}" Text="Email" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="{Binding SelectedUser.UserViewEmailGridRow}" Text="Email" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
         <TextBlock Grid.Row="4" Text="Telephone" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
@@ -81,8 +81,8 @@
             </TextBox.Resources>
         </TextBox>
 
-        <TextBox x:Name="UserFirstName" Grid.Row="{Binding UserViewFirstNameGridRow}" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                 FontSize="26" Text="{Binding SelectedUser.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True">
+        <TextBox x:Name="UserFirstName" Grid.Row="{Binding SelectedUser.UserViewFirstNameGridRow}" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" Background="#eee" BorderThickness="1" BorderBrush="Black"
+                 Text="{Binding SelectedUser.FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" IsEnabled="{Binding SelectedUser.IsUserViewValuesEnabled}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -90,8 +90,8 @@
             </TextBox.Resources>
         </TextBox>
 
-        <TextBox x:Name="UserLastName" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
-                 Text="{Binding SelectedUser.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black" IsReadOnly="True">
+        <TextBox x:Name="UserLastName" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" Background="#eee" BorderThickness="1" BorderBrush="Black"
+                 Text="{Binding SelectedUser.LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" IsEnabled="{Binding SelectedUser.IsUserViewValuesEnabled}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -99,8 +99,8 @@
             </TextBox.Resources>
         </TextBox>
 
-        <TextBox x:Name="UserEmail" Grid.Row="{Binding UserViewEmailGridRow}" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
-                 Text="{Binding SelectedUser.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black" IsReadOnly="{Binding SelectedUser.IsUserViewValuesReadOnly}"
+        <TextBox x:Name="UserEmail" Grid.Row="{Binding SelectedUser.UserViewEmailGridRow}" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" Background="#eee" BorderThickness="1" BorderBrush="Black"
+                 Text="{Binding SelectedUser.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding SelectedUser.IsUserViewValuesReadOnly}"
                  ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[Email]}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -109,8 +109,8 @@
             </TextBox.Resources>
         </TextBox>
 
-        <TextBox x:Name="UserTelephone" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" 
-                 Text="{Binding SelectedUser.Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black" IsReadOnly="True">
+        <TextBox x:Name="UserTelephone" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="15" HorizontalAlignment="Stretch" FontSize="26" Background="#eee" BorderThickness="1" BorderBrush="Black"
+                 Text="{Binding SelectedUser.Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" IsEnabled="{Binding SelectedUser.IsUserViewValuesEnabled}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -121,7 +121,7 @@
         <Button x:Name="SaveUserButton" 
                 Command="{Binding SelectedUser.SaveCommand}"
                 Content="Save" Grid.Column="1" Grid.Row="6" Height="45" Width="70" Margin="100 0 0 0" FontSize="26" HorizontalAlignment="Left"
-                BorderThickness="1" BorderBrush="Black" Visibility="{Binding UserViewSaveButtonVisibility}">
+                BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedUser.UserViewSaveButtonVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>

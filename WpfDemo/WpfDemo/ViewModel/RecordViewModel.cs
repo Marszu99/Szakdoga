@@ -211,11 +211,19 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        /*public bool IsRecordViewValuesReadOnly
+        public bool IsRecordViewValuesReadOnly
         {
             get
             {
-                return _record != null && _record.User_Username != LoginViewModel.LoggedUser.Username;
+                return _record != null && _record.IdRecord != 0 && _record.User_Username != LoginViewModel.LoggedUser.Username ? true : false;
+            }
+        }
+
+        public bool IsRecordViewDateHitTestVisible
+        {
+            get
+            {
+                return _record != null && _record.IdRecord != 0 && _record.User_Username != LoginViewModel.LoggedUser.Username ? false : true;
             }
         }
 
@@ -223,10 +231,10 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _record != null && _record.User_Username != LoginViewModel.LoggedUser.Username ? Visibility.Hidden : Visibility.Visible;
+                return _record != null && _record.IdRecord != 0 && _record.User_Username != LoginViewModel.LoggedUser.Username ? Visibility.Hidden : Visibility.Visible;
             }
-        }*/
-       
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }

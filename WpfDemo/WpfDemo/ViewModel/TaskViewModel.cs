@@ -181,11 +181,19 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public bool IsUserEnabled // ez igy kene TaskViewUsersRowHeight mellett?
+        public bool IsUserEnabled // ez igy kene TaskViewUserRowHeight mellett?
         {
             get
             {
                 return _task.IdTask == 0;
+            }
+        }
+
+        public string TaskViewUserRowHeight
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 1 ? "*" : "0";
             }
         }
 
@@ -194,6 +202,14 @@ namespace WpfDemo.ViewModel
             get
             { 
                 return LoginViewModel.LoggedUser.Status == 0;
+            }
+        }
+
+        public bool IsTaskViewDeadlineHitTestVisible
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 1;
             }
         }
 
