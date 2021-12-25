@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
@@ -14,6 +15,24 @@ namespace WpfDemo.ViewModel
     {
         private User _user;
         private Task _selectedTask;
+
+        private ObservableCollection<Record> _recordList = new ObservableCollection<Record>();
+        private ObservableCollection<Task> _taskList = new ObservableCollection<Task>();
+
+        public ObservableCollection<Record> RecordList
+        {
+            get
+            {
+                return _recordList;
+            }
+        }
+        public ObservableCollection<Task> TaskList
+        {
+            get
+            {
+                return _taskList;
+            }
+        }
 
         /*private UserProfileTaskViewModel _selectedTask;
         public UserProfileTaskViewModel SelectedTask
@@ -39,6 +58,20 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        private int _currentUserIdUser;
+        public int CuttentUserIdUser
+        {
+            get
+            {
+                return _currentUserIdUser;
+            }
+            set
+            {
+                _currentUserIdUser = value;
+                OnPropertyChanged(nameof(CuttentUserIdUser));
+            }
+        }
+
 
         public Task SelectedTask
         {
@@ -49,7 +82,67 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(SelectedTask));
             }
         }
-        
+
+        private string _searchTaskListValue;
+        public string SearchTaskListValue
+        {
+            get { return _searchTaskListValue; }
+            set
+            {
+                _searchTaskListValue = value;
+                OnPropertyChanged(nameof(SearchTaskListValue));
+                if (String.IsNullOrWhiteSpace(_searchTaskListValue))
+                {
+                    LoadTasks(CuttentUserIdUser);
+                }
+                else
+                {
+                    _taskList.Clear();
+
+                    try
+                    {
+                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CuttentUserIdUser).Where(task => task.Title.Contains(_searchTaskListValue) || task.Description.Contains(_searchTaskListValue) || task.Deadline.ToShortDateString().Contains(_searchTaskListValue) || task.Status.ToString().Contains(_searchTaskListValue)).ToList();
+                        tasks.ForEach(task => _taskList.Add(task));
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show("Server error!");
+                    }
+
+                }
+            }
+        }
+
+        private string _searchRecordListValue;
+        public string SearchRecordListValue
+        {
+            get { return _searchRecordListValue; }
+            set
+            {
+                _searchRecordListValue = value;
+                OnPropertyChanged(nameof(SearchRecordListValue));
+                if (String.IsNullOrWhiteSpace(_searchRecordListValue))
+                {
+                    LoadRecords(CuttentUserIdUser);
+                }
+                else
+                {
+                    _recordList.Clear();
+
+                    try
+                    {
+                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(CuttentUserIdUser).Where(record => record.Task_Title.Contains(_searchRecordListValue) || record.User_Username.Contains(_searchRecordListValue) || record.Date.ToShortDateString().Contains(_searchRecordListValue) || record.Comment.Contains(_searchRecordListValue) || record.Duration.ToString().Contains(_searchRecordListValue) || record.Task_Status.ToString().Contains(_searchRecordListValue)).ToList();
+                        records.ForEach(record => _recordList.Add(record));
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show("Server error!");
+                    }
+
+                }
+            }
+        }
+
         public Visibility AddTaskButtonVisibility
         {
             get
@@ -66,6 +159,7 @@ namespace WpfDemo.ViewModel
 
         public UserProfileViewModel(int userid)
         {
+            _currentUserIdUser = userid;
             LoadTasks(userid);
             LoadRecords(userid); 
             
@@ -161,25 +255,6 @@ namespace WpfDemo.ViewModel
         }
 
 
-
-        private ObservableCollection<Record> _recordList = new ObservableCollection<Record>();
-        private ObservableCollection<Task> _taskList = new ObservableCollection<Task>();
-
-        public ObservableCollection<Record> RecordList
-        {
-            get
-            {
-                return _recordList;
-            }
-        }
-        public ObservableCollection<Task> TaskList
-        {
-            get
-            {
-                return _taskList;
-            }
-        }
-
         void LoadRecords(int userid)
         {
             _recordList.Clear();
@@ -191,7 +266,7 @@ namespace WpfDemo.ViewModel
         {
             _taskList.Clear();
 
-            var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid); //CurrentUser.IdUser
+            var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
             tasks.ForEach(task => _taskList.Add(task));
         }
     }

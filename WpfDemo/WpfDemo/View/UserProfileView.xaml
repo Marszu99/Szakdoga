@@ -11,8 +11,9 @@
 
     <Grid Margin="10 0 10 5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.5*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -43,22 +44,44 @@
                    Margin="95 0 0 106" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
             <Label x:Name="telephoneLabel" Grid.Row="0" Grid.Column="1" FontSize="28" Content="{Binding CurrentUser.Telephone, UpdateSourceTrigger=PropertyChanged}"
                    Margin="165 0 0 105" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
+        </Grid>
+        
+        <Grid Grid.Row="1">
 
-            <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" FontSize="26" Content="Tasks" Margin="0 0 0 -5" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-            <Label Grid.Row="0" Grid.Column="1" FontWeight="Bold" FontSize="26" Content="Records" Margin="180 0 0 -5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="Tasks" Margin="0 0 0 -5" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="Records" Margin="180 0 0 -5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
-            <Button Grid.Row="0" Grid.Column="1" x:Name="AddTaskToUserTaskButton" Command="{Binding ShowAddTaskCommand}" Content="Add Task" Margin="65 0 0 0" Height="30" Width="75"
-                    HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" FontSize="14" BorderThickness="1" BorderBrush="Black" Visibility="{Binding AddTaskButtonVisibility}">
-                <Button.Resources>
+            <TextBlock Text="Search:" Grid.Row="1" Margin="0 0 622 1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20"/>
+            <TextBox x:Name="TaskSearchingText" Grid.Row="1" Margin="0 0 385 1" Background="#eee" Text="{Binding SearchTaskListValue, UpdateSourceTrigger=PropertyChanged}"
+                         Width="165" FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
+                <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
                     </Style>
-                </Button.Resources>
-            </Button>
+                </TextBox.Resources>
+            </TextBox>
+
+            <TextBlock Text="Search:" Grid.Row="1" Margin="0 0 170 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="20"/>
+            <TextBox x:Name="RecordSearchingText" Grid.Row="1" Margin="0 0 0 1" Background="#eee" Text="{Binding SearchRecordListValue, UpdateSourceTrigger=PropertyChanged}"
+                         Width="165" FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Right" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
         </Grid>
 
+        <Button Grid.Row="2" x:Name="AddTaskToUserTaskButton" Command="{Binding ShowAddTaskCommand}" Content="Add Task" Margin="0 0 140 0" Height="30" Width="75"
+                    HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="14" BorderThickness="1" BorderBrush="Black" Visibility="{Binding AddTaskButtonVisibility}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="622*"></ColumnDefinition>
                 <ColumnDefinition Width="107*"/>
@@ -104,7 +127,7 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="120">
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="150">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
@@ -118,7 +141,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline}" Width="225">
+                    <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="105">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
@@ -163,7 +186,7 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Task" Binding="{Binding Task_Title}" Width="120">
+                    <DataGridTextColumn Header="Task" Binding="{Binding Task_Title}" Width="150">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>
@@ -177,7 +200,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="225">
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='yyyy.MM.dd'}" Width="105">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>
