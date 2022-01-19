@@ -9,7 +9,7 @@ namespace TimeSheet.DataAccess
         int CreateUser(User user, string createdUserRandomPassword);
         List<User> GetAllUsers();
         void UpdateUser(User user);
-        void DeleteUser(int id);
+        void DeleteUser(int id, int status);
         bool IsValidLogin(string username, string password);
         User GetUserByUsername(string username);
         User GetAdmin();

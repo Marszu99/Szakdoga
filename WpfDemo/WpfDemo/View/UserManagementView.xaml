@@ -20,7 +20,7 @@
 
         <Grid Grid.Row="0" Margin="0 5 0 5">
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="NewUserButton" Command="{Binding CreateUserCommand}" Content="New" Grid.Column="0" Grid.Row="0" Width="60" Margin="10 0 0 0" FontSize="17"
+                <Button x:Name="NewUserButton" Command="{Binding CreateUserCommand}" Content="{Binding NewString}" Grid.Column="0" Grid.Row="0" Width="60" Margin="10 0 0 0" FontSize="17"
                                         Padding="0" BorderThickness="1" BorderBrush="Black" Visibility="{Binding UserManagementButtonsVisibility}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -29,7 +29,7 @@
                     </Button.Resources>
                 </Button>
 
-                <Button x:Name="RefreshListUsersButton" Command="{Binding RefreshUserListCommand}" Content="Refresh" Grid.Column="0" Grid.Row="0" Width="65"
+                <Button x:Name="RefreshListUsersButton" Command="{Binding RefreshUserListCommand}" Content="{Binding RefreshString}" Grid.Column="0" Grid.Row="0" Width="65"
                         Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black" Visibility="{Binding UserManagementButtonsVisibility}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">

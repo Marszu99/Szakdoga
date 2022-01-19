@@ -169,7 +169,7 @@ namespace WpfDemo.ViewModel
             {
                 try
                 {
-                    new UserRepository(new UserLogic()).DeleteUser(SelectedUser.IdUser);
+                    new UserRepository(new UserLogic()).DeleteUser(SelectedUser.IdUser, SelectedUser.Status);
                     MessageBox.Show("User has been deleted succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     LoadUsers();
@@ -195,6 +195,29 @@ namespace WpfDemo.ViewModel
         private bool CanShowUserProfil(object arg)
         {
             return _selectedUser != null;
+        }
+
+
+        public string NewString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("New");
+            }
+        }
+        public string RefreshString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Refresh");
+            }
+        }
+        public string SearchString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Search");
+            }
         }
     }
 }

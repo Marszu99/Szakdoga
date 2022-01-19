@@ -380,5 +380,57 @@ namespace WpfDemo.ViewModel
             this.Comment = "";
             this.Task_Status = 0;
         }
+
+
+        public string TaskString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Task");
+            }
+        }
+        public string UserString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("User");
+            }
+        }
+        public string DateString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Date");
+            }
+        }
+        public string CommentString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Comment");
+            }
+        }
+        public string DurationString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Duration");
+            }
+        }
+        public string StatusString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Status");
+            }
+        }
+        public string SaveString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Save");
+            }
+        }
+
     }
 }

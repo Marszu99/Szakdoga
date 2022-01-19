@@ -58,21 +58,21 @@
                     </DataGrid.CellStyle>
                     
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="*" FontSize="24">
+                        <DataGridTextColumn Header="{Binding UsernameString}" Binding="{Binding Username}" Width="*" FontSize="24">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}" Width="*" FontSize="24">
+                        <DataGridTextColumn Header="{Binding FirstNameString}" Binding="{Binding FirstName}" Width="*" FontSize="24">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="LastName" Binding="{Binding LastName}" Width="*" FontSize="24">
+                        <DataGridTextColumn Header="{Binding LastNameString}" Binding="{Binding LastName}" Width="*" FontSize="24">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />

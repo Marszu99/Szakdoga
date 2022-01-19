@@ -20,7 +20,7 @@
 
         <Grid Grid.Row="0" Margin="0 5 0 5">
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="NewRecordButton" Command="{Binding CreateRecordCommand}" Content="New" Grid.Column="0" Grid.Row="0" Width="60" Margin="10 0 0 0"
+                <Button x:Name="NewRecordButton" Command="{Binding CreateRecordCommand}" Content="{Binding NewString}" Grid.Column="0" Grid.Row="0" Width="60" Margin="10 0 0 0"
                                         FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -29,7 +29,7 @@
                     </Button.Resources>
                 </Button>
 
-                <Button x:Name="RefreshListRecordsButton" Command="{Binding RefreshRecordListCommand}" Content="Refresh" Grid.Column="0" Grid.Row="0" Width="65"
+                <Button x:Name="RefreshListRecordsButton" Command="{Binding RefreshRecordListCommand}" Content="{Binding RefreshString}" Grid.Column="0" Grid.Row="0" Width="65"
                                         Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -38,7 +38,7 @@
                     </Button.Resources>
                 </Button>
 
-                <TextBlock Text="My Records" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" Visibility="{Binding RecordCheckBoxAndTextVisibility}"/>
+                <TextBlock Text="{Binding MyRecordsString}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" Visibility="{Binding RecordCheckBoxAndTextVisibility}"/>
                 <CheckBox x:Name="ShowingMyRecordsCheckBox" Command="{Binding SortingByCheckBoxCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
                           Width="14" Height="14" IsChecked="True" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" BorderBrush="Black" Visibility="{Binding RecordCheckBoxAndTextVisibility}">
                     <CheckBox.LayoutTransform>

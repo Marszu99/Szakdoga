@@ -283,5 +283,34 @@ namespace WpfDemo.ViewModel
                 }
             }
         }
+
+        public string NewString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("New");
+            }
+        }
+        public string RefreshString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Refresh");
+            }
+        }
+        public string MyRecordsString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("MyRecords");
+            }
+        }
+        public string SearchString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Search");
+            }
+        }
     }
 }

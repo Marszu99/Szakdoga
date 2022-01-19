@@ -338,6 +338,113 @@ namespace WpfDemo.ViewModel
             var tasks = new TaskRepository(new TaskLogic()).GetAllDoneTasksFromUser(LoginViewModel.LoggedUser.IdUser);
             tasks.ForEach(task => _mydonetaskList.Add(task));
         }
+
+
+        public string UsernameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Username");
+            }
+        }
+        public string PasswordString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Password");
+            }
+        }
+        public string FirstNameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("FirstName");
+            }
+        }
+        public string LastNameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("LastName");
+            }
+        }
+        public string EmailString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Email");
+            }
+        }
+        public string TelephoneString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Telephone");
+            }
+        }
+        public string MyProfileString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("MyProfile");
+            }
+        }
+        public string ChangeString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Change");
+            }
+        }
+        public string SaveString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Save");
+            }
+        }
+        public string CancelString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Cancel");
+            }
+        }
+        public string ToDoTasksString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("ToDoTasks");
+            }
+        }
+        public string TitleString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Title");
+            }
+        }
+        public string DescriptionString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Description");
+            }
+        }
+        public string DeadlineString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Deadline");
+            }
+        }
+        public string DoneTasksString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("DoneTasks");
+            }
+        }
     }
 }
 

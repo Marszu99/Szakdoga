@@ -75,15 +75,15 @@
                     </Style>
                 </TabControl.Resources>
 
-                <TabItem Header="Record" x:Name="RecordTabItem">
+                <TabItem Header="{Binding RecordString}" x:Name="RecordTabItem">
                     <local:RecordManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
 
-                <TabItem Header="Task" x:Name="TaskTabItem">
+                <TabItem Header="{Binding TaskString}" x:Name="TaskTabItem">
                     <local:TaskManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
 
-                <TabItem Header="User" x:Name="UserTabItem">
+                <TabItem Header="{Binding UserString}" x:Name="UserTabItem">
                     <local:UserManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
             </TabControl>
@@ -110,7 +110,7 @@
                 </Border>
             </StackPanel>
 
-            <Button Grid.Row="1" x:Name="LogoutButton" Command="{Binding LogoutCommand}" Content="Logout" HorizontalAlignment="Right" VerticalAlignment="Top" Height="38" Width="90"
+            <Button Grid.Row="1" x:Name="LogoutButton" Command="{Binding LogoutCommand}" Content="{Binding LogoutString}" HorizontalAlignment="Right" VerticalAlignment="Top" Height="38" Width="90"
                     FontSize="24" Margin="0 0 15 0" Padding="1.5" BorderThickness="1" BorderBrush="Black">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">

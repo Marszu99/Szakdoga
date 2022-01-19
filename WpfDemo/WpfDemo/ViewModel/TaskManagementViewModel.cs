@@ -333,5 +333,42 @@ namespace WpfDemo.ViewModel
                 MessageBox.Show("Server error!");
             }
         }
+
+
+        public string NewString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("New");
+            }
+        }
+        public string RefreshString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Refresh");
+            }
+        }
+        public string MyTasksString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("MyTasks");
+            }
+        }
+        public string ActiveTasksString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("ActiveTasks");
+            }
+        }
+        public string SearchString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Search");
+            }
+        }
     }
 }

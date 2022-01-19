@@ -116,6 +116,19 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public int Status
+        {
+            get
+            {
+                return _user.Status;
+            }
+            set
+            {
+                _user.IdUser = value;
+                OnPropertyChanged(nameof(Status));
+            }
+        }
+
         public User User // UserProfile miatt
         {
             get
@@ -334,6 +347,50 @@ namespace WpfDemo.ViewModel
             this.LastName = "";
             this.Email = "";
             this.Telephone = "";
+        }
+
+
+        public string UsernameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Username");
+            }
+        }
+        public string FirstNameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("FirstName");
+            }
+        }
+        public string LastNameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("LastName");
+            }
+        }
+        public string EmailString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Email");
+            }
+        }
+        public string TelephoneString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Telephone");
+            }
+        }
+        public string SaveString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Save");
+            }
         }
     }
 }

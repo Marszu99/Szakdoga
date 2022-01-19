@@ -11,6 +11,7 @@ namespace WpfDemo.ViewModel
     {
         private TabcontrolView _view;
 
+
         public string LoggedUserUsername
         {
             get
@@ -72,6 +73,36 @@ namespace WpfDemo.ViewModel
             catch (SqlException)
             {
                 MessageBox.Show("Server error!");
+            }
+        }
+
+
+        public string LogoutString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Logout");
+            }
+        }
+        public string RecordString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Record");
+            }
+        }
+        public string TaskString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Task");
+            }
+        }
+        public string UserString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("User");
             }
         }
     }

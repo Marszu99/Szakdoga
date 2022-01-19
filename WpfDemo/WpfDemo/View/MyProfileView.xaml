@@ -15,7 +15,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0" Text="My Profile" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 40 280 0" Width="250" Height="65"/>
+        <TextBlock Grid.Column="0" Text="{Binding MyProfileString}" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 40 280 0" Width="250" Height="65"/>
 
         <StackPanel Grid.Column="0" Orientation="Vertical" Width="180" HorizontalAlignment="Left" Margin="20 100 0 200">
             <TextBlock Text="Username:" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
@@ -105,8 +105,8 @@
             </TextBox>
         </StackPanel>
 
-        
-        <Button Grid.Column="0" Content="Change" x:Name="ChangeUserValuesButton" Command="{Binding ChangeUserValuesCommand}" Height="40" Width="85" FontSize="22" 
+
+        <Button Grid.Column="0" Content="{Binding ChangeString}" x:Name="ChangeUserValuesButton" Command="{Binding ChangeUserValuesCommand}" Height="40" Width="85" FontSize="22" 
                 HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 300 150" Padding="3" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -114,8 +114,8 @@
                 </Style>
             </Button.Resources>
         </Button>
-        
-        <Button Grid.Column="0" Content="Save" x:Name="SaveChangedUserValuesButton" Command="{Binding SaveChangedUserValuesCommand}" Height="40" Width="80" FontSize="22" 
+
+        <Button Grid.Column="0" Content="{Binding SaveString}" x:Name="SaveChangedUserValuesButton" Command="{Binding SaveChangedUserValuesCommand}" Height="40" Width="80" FontSize="22" 
                 HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 425 150" Padding="3" Visibility="Hidden" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -123,8 +123,8 @@
                 </Style>
             </Button.Resources>
         </Button>
-        
-        <Button Grid.Column="0" Content="Cancel" x:Name="CancelChangeUserValuesButton" Command="{Binding CancelChangeUserValuesCommand}" Height="40" Width="80" FontSize="22" 
+
+        <Button Grid.Column="0" Content="{Binding CancelString}" x:Name="CancelChangeUserValuesButton" Command="{Binding CancelChangeUserValuesCommand}" Height="40" Width="80" FontSize="22" 
                 HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 200 150" Padding="3" Visibility="Hidden" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -140,7 +140,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="ToDo Tasks" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 30 0 0" Width="200" Height="40"/>
+            <TextBlock Text="{Binding ToDoTasksString}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 30 0 0" Width="200" Height="40"/>
 
             <DataGrid  x:Name="UserToDoTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyToDoTaskList}" Margin="0 70 0 20" HorizontalAlignment="Left" Width="700" AutoGenerateColumns="False" ColumnWidth="*"
                               Background="LightGray" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
@@ -169,21 +169,21 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="175">
+                    <DataGridTextColumn Header="{Binding TitleString}" Binding="{Binding Title}" Width="175">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*">
+                    <DataGridTextColumn Header="{Binding DescriptionString}" Binding="{Binding Description}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline}" Width="225">
+                    <DataGridTextColumn Header="{Binding DeadlineString}" Binding="{Binding Deadline}" Width="225">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
@@ -194,7 +194,7 @@
             </DataGrid>
 
 
-            <TextBlock Grid.Row="1" Text="Done Tasks" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 10 0 0" Width="200" Height="40"/>
+            <TextBlock Grid.Row="1" Text="{Binding DoneTasksString}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 10 0 0" Width="200" Height="40"/>
 
             <DataGrid  x:Name="UserDoneTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyDoneTaskList}" Margin="0 50 0 20" HorizontalAlignment="Left" Width="700" AutoGenerateColumns="False" ColumnWidth="*"
                               Background="LightGray" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
@@ -223,21 +223,21 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="175">
+                    <DataGridTextColumn Header="{Binding TitleString}" Binding="{Binding Title}" Width="175">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*">
+                    <DataGridTextColumn Header="{Binding DescriptionString}" Binding="{Binding Description}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline}" Width="225">
+                    <DataGridTextColumn Header="{Binding DeadlineString}" Binding="{Binding Deadline}" Width="225">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />

@@ -88,6 +88,7 @@ namespace TimeSheet.DataAccess
                     user.LastName = dr["LastName"].ToString();
                     user.Email = dr["Email"].ToString();
                     user.Telephone = dr["Telephone"].ToString();
+                    user.Status = int.Parse(dr["Status"].ToString());
 
                     users.Add(user);
                 }
@@ -123,7 +124,7 @@ namespace TimeSheet.DataAccess
             }
         }
 
-        public void DeleteUser(int id)
+        public void DeleteUser(int id, int status)
         {
             using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
             {
@@ -132,6 +133,8 @@ namespace TimeSheet.DataAccess
                 MySqlCommand myCmd = new MySqlCommand("szakdoga.DeleteUser", connection);
                 myCmd.Parameters.Add(new MySqlParameter("@id", MySqlDbType.Int32));
                 myCmd.Parameters["@id"].Value = id;
+                myCmd.Parameters.Add(new MySqlParameter("@status", MySqlDbType.Int32));
+                myCmd.Parameters["@status"].Value = status;
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.ExecuteNonQuery();
             }

@@ -131,9 +131,9 @@ namespace TimeSheet.Logic
             _userLogic.UpdateUser(user);
         }
 
-        public void DeleteUser(int id)
+        public void DeleteUser(int id, int status)
         {
-            _userLogic.DeleteUser(id);
+            _userLogic.DeleteUser(id, status);
         }
 
         public bool IsValidLogin(string username, string password)

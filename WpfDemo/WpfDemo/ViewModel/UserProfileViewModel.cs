@@ -269,5 +269,119 @@ namespace WpfDemo.ViewModel
             var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
             tasks.ForEach(task => _taskList.Add(task));
         }
+
+
+        public string UsernameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Username");
+            }
+        }
+        public string FirstNameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("FirstName");
+            }
+        }
+        public string LastNameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("LastName");
+            }
+        }
+        public string EmailString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Email");
+            }
+        }
+        public string TelephoneString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Telephone");
+            }
+        }
+        public string TasksString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Tasks");
+            }
+        }
+        public string TitleString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Title");
+            }
+        }
+        public string DescriptionString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Description");
+            }
+        }
+        public string DeadlineString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Deadline");
+            }
+        }
+        public string StatusString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Status");
+            }
+        }
+        public string ReordsString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Records");
+            }
+        }
+        public string TaskString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Tasks");
+            }
+        }
+        public string DateString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Date");
+            }
+        }
+        public string CommentString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Comment");
+            }
+        }
+        public string DurationString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Duration");
+            }
+        }
+        public string SearchString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Search");
+            }
+        }
     }
 }

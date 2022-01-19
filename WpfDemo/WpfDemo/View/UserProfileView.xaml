@@ -18,9 +18,9 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Username:" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" 
@@ -48,8 +48,8 @@
         
         <Grid Grid.Row="1">
 
-            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="Tasks" Margin="0 0 0 -5" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="Records" Margin="180 0 0 -5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{Binding TasksString}" Margin="0 0 0 -5" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{Binding RecordsString}" Margin="180 0 0 -5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
             <TextBlock Text="Search:" Grid.Row="1" Margin="0 0 622 1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20"/>
             <TextBox x:Name="TaskSearchingText" Grid.Row="1" Margin="0 0 385 1" Background="#eee" Text="{Binding SearchTaskListValue, UpdateSourceTrigger=PropertyChanged}"
@@ -83,10 +83,10 @@
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="622*"></ColumnDefinition>
+                <ColumnDefinition Width="622*"/>
                 <ColumnDefinition Width="107*"/>
-                <ColumnDefinition Width="73*"></ColumnDefinition>
-                <ColumnDefinition Width="729*"></ColumnDefinition>
+                <ColumnDefinition Width="73*"/>
+                <ColumnDefinition Width="729*"/>
             </Grid.ColumnDefinitions>
 
             <DataGrid  x:Name="UserTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" HorizontalAlignment="Left" Width="650" AutoGenerateColumns="False" ColumnWidth="*"
@@ -127,28 +127,28 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="150">
+                    <DataGridTextColumn Header="{Binding TitleString}" Binding="{Binding Title}" Width="150">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*">
+                    <DataGridTextColumn Header="{Binding DescriptionString}" Binding="{Binding Description}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="105">
+                    <DataGridTextColumn Header="{Binding DeadlineString}" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="105">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="110">
+                    <DataGridTextColumn Header="{Binding StatusString}" Binding="{Binding Status}" Width="110">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
@@ -186,35 +186,35 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Task" Binding="{Binding Task_Title}" Width="150">
+                    <DataGridTextColumn Header="{Binding TaskString}" Binding="{Binding Task_Title}" Width="150">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Task_Status}" Width="110">
+                    <DataGridTextColumn Header="{Binding StatusString}" Binding="{Binding Task_Status}" Width="110">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='yyyy.MM.dd'}" Width="105">
+                    <DataGridTextColumn Header="{Binding DateString}" Binding="{Binding Date, StringFormat='yyyy.MM.dd'}" Width="105">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" Width="*">
+                    <DataGridTextColumn Header="{Binding CommentString}" Binding="{Binding Comment}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding DurationFormatUserProfile}" Width="Auto">
+                    <DataGridTextColumn Header="{Binding DurationString}" Binding="{Binding DurationFormatUserProfile}" Width="Auto">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>
