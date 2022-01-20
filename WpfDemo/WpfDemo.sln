@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSheet.DataAccess", "Tim
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSheet.Model.Extension", "TimeSheet.Model.Extension\TimeSheet.Model.Extension.csproj", "{D523FA5E-3D90-439C-8C29-2EF09055A9C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheet.Tests", "TimeSheet.Tests\TimeSheet.Tests.csproj", "{9308DFF7-6077-45B1-BD32-BAFA0E5D3EFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeSheet.Tests", "TimeSheet.Tests\TimeSheet.Tests.csproj", "{9308DFF7-6077-45B1-BD32-BAFA0E5D3EFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheet.Resource", "TimeSheet.Resource\TimeSheet.Resource.csproj", "{A49471C1-4F36-4B2A-8665-CE52235E5BF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{9308DFF7-6077-45B1-BD32-BAFA0E5D3EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9308DFF7-6077-45B1-BD32-BAFA0E5D3EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9308DFF7-6077-45B1-BD32-BAFA0E5D3EFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A49471C1-4F36-4B2A-8665-CE52235E5BF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A49471C1-4F36-4B2A-8665-CE52235E5BF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A49471C1-4F36-4B2A-8665-CE52235E5BF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A49471C1-4F36-4B2A-8665-CE52235E5BF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

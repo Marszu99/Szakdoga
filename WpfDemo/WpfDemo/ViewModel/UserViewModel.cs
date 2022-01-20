@@ -11,6 +11,7 @@ using TimeSheet.DataAccess;
 using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Model.Extension;
+using TimeSheet.Resource;
 using WpfDemo.ViewModel.Command;
 
 namespace WpfDemo.ViewModel

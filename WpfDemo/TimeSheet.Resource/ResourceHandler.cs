@@ -1,6 +1,8 @@
-﻿using WpfDemo.Components;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace WpfDemo
+namespace TimeSheet.Resource
 {
     public static class ResourceHandler
     {

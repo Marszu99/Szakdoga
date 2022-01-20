@@ -138,11 +138,38 @@
   <data name="Company" xml:space="preserve">
     <value>Company</value>
   </data>
+  <data name="CompanyName2DoesntMatch" xml:space="preserve">
+    <value>Company2 doesn't match with Company!</value>
+  </data>
+  <data name="CompanyName2IsEmpty" xml:space="preserve">
+    <value>Company2's name is empty!</value>
+  </data>
+  <data name="CompanyNameIsEmpty" xml:space="preserve">
+    <value>Company's name is empty!</value>
+  </data>
+  <data name="CompanyNameWrongLength" xml:space="preserve">
+    <value>Company's name have to reach minimum 10 characters and also can't be more than 60!</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="DateCantBeInFuture" xml:space="preserve">
+    <value>Record's date can't be in the future!</value>
+  </data>
+  <data name="DateCantBePastTheTaskCreationDate" xml:space="preserve">
+    <value>Record's date can't be earlier than the date when the task was created!</value>
+  </data>
+  <data name="DateIsEmpty" xml:space="preserve">
+    <value>Date is empty!</value>
+  </data>
   <data name="Deadline" xml:space="preserve">
     <value>Deadline</value>
+  </data>
+  <data name="DeadlineIsEmpty" xml:space="preserve">
+    <value>Deadline is empty!</value>
+  </data>
+  <data name="DeadlineMoreThan24Hours" xml:space="preserve">
+    <value>Deadline has to be atleast more than 24 hours away from the current time!</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
@@ -153,11 +180,41 @@
   <data name="Duration" xml:space="preserve">
     <value>Duration</value>
   </data>
+  <data name="DurationCantBeHigher12Hours" xml:space="preserve">
+    <value>Duration can't be higher than 12 hours!</value>
+  </data>
+  <data name="DurationCantBeLowerZero" xml:space="preserve">
+    <value>Duration can't be lower than 0!</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="Email2DoesntMatch" xml:space="preserve">
+    <value>Email2 doesn't match with Email!</value>
+  </data>
+  <data name="Email2IsEmpty" xml:space="preserve">
+    <value>Email2 is empty!</value>
+  </data>
+  <data name="EmailIsEmpty" xml:space="preserve">
+    <value>Email is empty!</value>
+  </data>
+  <data name="EmailIsInvalid" xml:space="preserve">
+    <value>Invalid email!</value>
+  </data>
+  <data name="EmailWrongLength" xml:space="preserve">
+    <value>Email have to reach minimum 11 characters and also can't be more than 100!</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>FirstName</value>
+  </data>
+  <data name="FirstNameIsEmpty" xml:space="preserve">
+    <value>FirstName is empty!</value>
+  </data>
+  <data name="FirstNameNoNumbers" xml:space="preserve">
+    <value>FirstName needs to be one word that contains only letters of the alphabet!</value>
+  </data>
+  <data name="FirstNameWrongLength" xml:space="preserve">
+    <value>FirstName have to reach minimum 3 characters and also can't be more than 45!</value>
   </data>
   <data name="Information" xml:space="preserve">
     <value>Information</value>
@@ -167,6 +224,15 @@
   </data>
   <data name="LastName" xml:space="preserve">
     <value>LastName</value>
+  </data>
+  <data name="LastNameIsEmpty" xml:space="preserve">
+    <value>LastName is empty!</value>
+  </data>
+  <data name="LastNameNoNumbers" xml:space="preserve">
+    <value>LastName needs to be one word that contains only letters of the alphabet!</value>
+  </data>
+  <data name="LastNameWrongLength" xml:space="preserve">
+    <value>LastName have to reach minimum 3 characters and also can't be more than 45!</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -189,11 +255,32 @@
   <data name="MyTasks" xml:space="preserve">
     <value>My Tasks</value>
   </data>
+  <data name="NeedToChooseTaskForRecord" xml:space="preserve">
+    <value>Need to choose a Task for the record!</value>
+  </data>
+  <data name="NeedToChooseUserForTask" xml:space="preserve">
+    <value>Need to choose a User for the task!</value>
+  </data>
   <data name="New" xml:space="preserve">
     <value>New</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Password2DoesntMatch" xml:space="preserve">
+    <value>Password2 doesn't match with Password!</value>
+  </data>
+  <data name="Password2IsEmpty" xml:space="preserve">
+    <value>Password2 is empty!</value>
+  </data>
+  <data name="PasswordIsEmpty" xml:space="preserve">
+    <value>Password is empty!</value>
+  </data>
+  <data name="PasswordOneWord" xml:space="preserve">
+    <value>Password needs to be one word!</value>
+  </data>
+  <data name="PasswordWrongLength" xml:space="preserve">
+    <value>Password have to reach minimum 6 characters and also can't be more than 45!</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
@@ -237,6 +324,12 @@
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="StatusCannotBeCreatedWithRecords" xml:space="preserve">
+    <value>Status cannot be Created when there is recods for the task!</value>
+  </data>
+  <data name="StatusCannotBeDoneWithNoRecords" xml:space="preserve">
+    <value>Status cannot be Done when there is no recods for the task!</value>
+  </data>
   <data name="Task" xml:space="preserve">
     <value>Task</value>
   </data>
@@ -261,8 +354,23 @@
   <data name="Telephone" xml:space="preserve">
     <value>Telephone</value>
   </data>
+  <data name="TelephoneIsEmpty" xml:space="preserve">
+    <value>Telephone is empty!</value>
+  </data>
+  <data name="TelephoneIsInvalid" xml:space="preserve">
+    <value>Invalid telephone number!</value>
+  </data>
+  <data name="TelephoneWrongLength" xml:space="preserve">
+    <value>Telephone number needs to be greater than 10 and less than 14!</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="TitleIsEmpty" xml:space="preserve">
+    <value>Title is empty!</value>
+  </data>
+  <data name="TitleWrongLength" xml:space="preserve">
+    <value>Title can't be more than 45 characters!</value>
   </data>
   <data name="ToDoTasks" xml:space="preserve">
     <value>ToDo Tasks</value>
@@ -284,6 +392,18 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="UsernameAlreadyExists" xml:space="preserve">
+    <value> already exists!</value>
+  </data>
+  <data name="UsernameIsEmpty" xml:space="preserve">
+    <value>Username is empty!</value>
+  </data>
+  <data name="UsernameOneWord" xml:space="preserve">
+    <value>Username needs to be one word!</value>
+  </data>
+  <data name="UsernameWrongLength" xml:space="preserve">
+    <value>Username have to reach minimum 6 characters and also can't be more than 45!</value>
   </data>
   <data name="UserUpdatedMessage" xml:space="preserve">
     <value>User has been updated succesfully!</value>

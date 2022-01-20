@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfDemo.Components {
+namespace TimeSheet.Resource {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace WpfDemo.Components {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WpfDemo.Components.ResourceHU", typeof(ResourceHU).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TimeSheet.Resource.ResourceHU", typeof(ResourceHU).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -124,6 +124,42 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A két cég név nem egyezik egymással!.
+        /// </summary>
+        internal static string CompanyName2DoesntMatch {
+            get {
+                return ResourceManager.GetString("CompanyName2DoesntMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cég nevét megerősítő mező üres!.
+        /// </summary>
+        internal static string CompanyName2IsEmpty {
+            get {
+                return ResourceManager.GetString("CompanyName2IsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cég nevének mezője üres!.
+        /// </summary>
+        internal static string CompanyNameIsEmpty {
+            get {
+                return ResourceManager.GetString("CompanyNameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cég neve legalább 10 és legfeljebb 60 karakter lehet!.
+        /// </summary>
+        internal static string CompanyNameWrongLength {
+            get {
+                return ResourceManager.GetString("CompanyNameWrongLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dátum.
         /// </summary>
         internal static string Date {
@@ -133,11 +169,56 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dátum nem lehet későbbi a mai napnál!.
+        /// </summary>
+        internal static string DateCantBeInFuture {
+            get {
+                return ResourceManager.GetString("DateCantBeInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dátum nem lehet a feladat létrehozásának dátumánál korább!.
+        /// </summary>
+        internal static string DateCantBePastTheTaskCreationDate {
+            get {
+                return ResourceManager.GetString("DateCantBePastTheTaskCreationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dátum mezeje üres!.
+        /// </summary>
+        internal static string DateIsEmpty {
+            get {
+                return ResourceManager.GetString("DateIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Határidő.
         /// </summary>
         internal static string Deadline {
             get {
                 return ResourceManager.GetString("Deadline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Határidő mezeje üres!.
+        /// </summary>
+        internal static string DeadlineIsEmpty {
+            get {
+                return ResourceManager.GetString("DeadlineIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A határidőnek legalább 24 órával később kell lennie mint a jelenlegi idő!.
+        /// </summary>
+        internal static string DeadlineMoreThan24Hours {
+            get {
+                return ResourceManager.GetString("DeadlineMoreThan24Hours", resourceCulture);
             }
         }
         
@@ -169,6 +250,24 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Időtartam nem lehet több 12 óránál!.
+        /// </summary>
+        internal static string DurationCantBeHigher12Hours {
+            get {
+                return ResourceManager.GetString("DurationCantBeHigher12Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Időtartam nem lehet kisebb 0-nál!.
+        /// </summary>
+        internal static string DurationCantBeLowerZero {
+            get {
+                return ResourceManager.GetString("DurationCantBeLowerZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         internal static string Email {
@@ -178,11 +277,83 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A két email nem egyezik egymással!.
+        /// </summary>
+        internal static string Email2DoesntMatch {
+            get {
+                return ResourceManager.GetString("Email2DoesntMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Emailt megerősítő mező üres!.
+        /// </summary>
+        internal static string Email2IsEmpty {
+            get {
+                return ResourceManager.GetString("Email2IsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email mezeje üres!.
+        /// </summary>
+        internal static string EmailIsEmpty {
+            get {
+                return ResourceManager.GetString("EmailIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Helytelen email!.
+        /// </summary>
+        internal static string EmailIsInvalid {
+            get {
+                return ResourceManager.GetString("EmailIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email legalább 11 és legfeljebb 100 karakter lehet!.
+        /// </summary>
+        internal static string EmailWrongLength {
+            get {
+                return ResourceManager.GetString("EmailWrongLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Keresztnév.
         /// </summary>
         internal static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keresztnév mezeje üres!.
+        /// </summary>
+        internal static string FirstNameIsEmpty {
+            get {
+                return ResourceManager.GetString("FirstNameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keresztnév nem tartalmazhat betűkön kívül más karaktereket!.
+        /// </summary>
+        internal static string FirstNameNoNumbers {
+            get {
+                return ResourceManager.GetString("FirstNameNoNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keresztnév legalább 3 és legfeljebb 45 karakter lehet!.
+        /// </summary>
+        internal static string FirstNameWrongLength {
+            get {
+                return ResourceManager.GetString("FirstNameWrongLength", resourceCulture);
             }
         }
         
@@ -210,6 +381,33 @@ namespace WpfDemo.Components {
         internal static string LastName {
             get {
                 return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vezetéknév mezeje üres!.
+        /// </summary>
+        internal static string LastNameIsEmpty {
+            get {
+                return ResourceManager.GetString("LastNameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vezetéknév nem tartalmazhat betűkön kívül más karaktereket!.
+        /// </summary>
+        internal static string LastNameNoNumbers {
+            get {
+                return ResourceManager.GetString("LastNameNoNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vezetéknév legalább 3 és legfeljebb 45 karakter lehet!.
+        /// </summary>
+        internal static string LastNameWrongLength {
+            get {
+                return ResourceManager.GetString("LastNameWrongLength", resourceCulture);
             }
         }
         
@@ -277,6 +475,24 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kell választani egy feladatot a rögzítéshez!.
+        /// </summary>
+        internal static string NeedToChooseTaskForRecord {
+            get {
+                return ResourceManager.GetString("NeedToChooseTaskForRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kell választani egy felhasználot a feladathoz!.
+        /// </summary>
+        internal static string NeedToChooseUserForTask {
+            get {
+                return ResourceManager.GetString("NeedToChooseUserForTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Új.
         /// </summary>
         internal static string New {
@@ -291,6 +507,51 @@ namespace WpfDemo.Components {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A két jelszó nem egyezik egymással!.
+        /// </summary>
+        internal static string Password2DoesntMatch {
+            get {
+                return ResourceManager.GetString("Password2DoesntMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jelszót megerősítő mező üres!.
+        /// </summary>
+        internal static string Password2IsEmpty {
+            get {
+                return ResourceManager.GetString("Password2IsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jelszó mezeje üres!.
+        /// </summary>
+        internal static string PasswordIsEmpty {
+            get {
+                return ResourceManager.GetString("PasswordIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jelszónak egy szónak kell lennie!.
+        /// </summary>
+        internal static string PasswordOneWord {
+            get {
+                return ResourceManager.GetString("PasswordOneWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jelszó legalább 6 és legfeljebb 45 karakter lehet!.
+        /// </summary>
+        internal static string PasswordWrongLength {
+            get {
+                return ResourceManager.GetString("PasswordWrongLength", resourceCulture);
             }
         }
         
@@ -421,6 +682,24 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Státusz nem lehet &quot;Created&quot;, ha vannak a feladathoz rögzítések!.
+        /// </summary>
+        internal static string StatusCannotBeCreatedWithRecords {
+            get {
+                return ResourceManager.GetString("StatusCannotBeCreatedWithRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Státusz nem lehet &quot;Done&quot;, ha nincs a feladathoz rögzítés!.
+        /// </summary>
+        internal static string StatusCannotBeDoneWithNoRecords {
+            get {
+                return ResourceManager.GetString("StatusCannotBeDoneWithNoRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feladat.
         /// </summary>
         internal static string Task {
@@ -484,11 +763,38 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Telefon.
+        ///   Looks up a localized string similar to Telefonszám.
         /// </summary>
         internal static string Telephone {
             get {
                 return ResourceManager.GetString("Telephone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefonszám mezeje üres!.
+        /// </summary>
+        internal static string TelephoneIsEmpty {
+            get {
+                return ResourceManager.GetString("TelephoneIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Helytelen telefonszám.
+        /// </summary>
+        internal static string TelephoneIsInvalid {
+            get {
+                return ResourceManager.GetString("TelephoneIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefonszám legalább 11 és legfeljebb 13 számot tartalmazhat!.
+        /// </summary>
+        internal static string TelephoneWrongLength {
+            get {
+                return ResourceManager.GetString("TelephoneWrongLength", resourceCulture);
             }
         }
         
@@ -498,6 +804,24 @@ namespace WpfDemo.Components {
         internal static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cím mezeje üres!.
+        /// </summary>
+        internal static string TitleIsEmpty {
+            get {
+                return ResourceManager.GetString("TitleIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cím nem lehet 45 karakternél hosszabb!.
+        /// </summary>
+        internal static string TitleWrongLength {
+            get {
+                return ResourceManager.GetString("TitleWrongLength", resourceCulture);
             }
         }
         
@@ -561,6 +885,42 @@ namespace WpfDemo.Components {
         internal static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  már létezeik!.
+        /// </summary>
+        internal static string UsernameAlreadyExists {
+            get {
+                return ResourceManager.GetString("UsernameAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Felhasználónév mezeje üres!.
+        /// </summary>
+        internal static string UsernameIsEmpty {
+            get {
+                return ResourceManager.GetString("UsernameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Felhasználónévnek egy szónak kell lennie!.
+        /// </summary>
+        internal static string UsernameOneWord {
+            get {
+                return ResourceManager.GetString("UsernameOneWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Felhasználónév legalább 6 és legfeljebb 45 karakter lehet!.
+        /// </summary>
+        internal static string UsernameWrongLength {
+            get {
+                return ResourceManager.GetString("UsernameWrongLength", resourceCulture);
             }
         }
         

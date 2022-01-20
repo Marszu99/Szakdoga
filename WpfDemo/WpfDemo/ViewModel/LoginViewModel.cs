@@ -3,6 +3,7 @@ using System.Windows;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
 using TimeSheet.Model;
+using TimeSheet.Resource;
 using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 

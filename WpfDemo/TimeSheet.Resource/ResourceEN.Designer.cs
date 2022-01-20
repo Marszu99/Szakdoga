@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfDemo.Components {
+namespace TimeSheet.Resource {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace WpfDemo.Components {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WpfDemo.Components.ResourceEN", typeof(ResourceEN).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TimeSheet.Resource.ResourceEN", typeof(ResourceEN).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -124,6 +124,42 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company2 doesn&apos;t match with Company!.
+        /// </summary>
+        internal static string CompanyName2DoesntMatch {
+            get {
+                return ResourceManager.GetString("CompanyName2DoesntMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company2&apos;s name is empty!.
+        /// </summary>
+        internal static string CompanyName2IsEmpty {
+            get {
+                return ResourceManager.GetString("CompanyName2IsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company&apos;s name is empty!.
+        /// </summary>
+        internal static string CompanyNameIsEmpty {
+            get {
+                return ResourceManager.GetString("CompanyNameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company&apos;s name have to reach minimum 10 characters and also can&apos;t be more than 60!.
+        /// </summary>
+        internal static string CompanyNameWrongLength {
+            get {
+                return ResourceManager.GetString("CompanyNameWrongLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         internal static string Date {
@@ -133,11 +169,56 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Record&apos;s date can&apos;t be in the future!.
+        /// </summary>
+        internal static string DateCantBeInFuture {
+            get {
+                return ResourceManager.GetString("DateCantBeInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record&apos;s date can&apos;t be earlier than the date when the task was created!.
+        /// </summary>
+        internal static string DateCantBePastTheTaskCreationDate {
+            get {
+                return ResourceManager.GetString("DateCantBePastTheTaskCreationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date is empty!.
+        /// </summary>
+        internal static string DateIsEmpty {
+            get {
+                return ResourceManager.GetString("DateIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deadline.
         /// </summary>
         internal static string Deadline {
             get {
                 return ResourceManager.GetString("Deadline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deadline is empty!.
+        /// </summary>
+        internal static string DeadlineIsEmpty {
+            get {
+                return ResourceManager.GetString("DeadlineIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deadline has to be atleast more than 24 hours away from the current time!.
+        /// </summary>
+        internal static string DeadlineMoreThan24Hours {
+            get {
+                return ResourceManager.GetString("DeadlineMoreThan24Hours", resourceCulture);
             }
         }
         
@@ -169,6 +250,24 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duration can&apos;t be higher than 12 hours!.
+        /// </summary>
+        internal static string DurationCantBeHigher12Hours {
+            get {
+                return ResourceManager.GetString("DurationCantBeHigher12Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration can&apos;t be lower than 0!.
+        /// </summary>
+        internal static string DurationCantBeLowerZero {
+            get {
+                return ResourceManager.GetString("DurationCantBeLowerZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         internal static string Email {
@@ -178,11 +277,83 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email2 doesn&apos;t match with Email!.
+        /// </summary>
+        internal static string Email2DoesntMatch {
+            get {
+                return ResourceManager.GetString("Email2DoesntMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email2 is empty!.
+        /// </summary>
+        internal static string Email2IsEmpty {
+            get {
+                return ResourceManager.GetString("Email2IsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email is empty!.
+        /// </summary>
+        internal static string EmailIsEmpty {
+            get {
+                return ResourceManager.GetString("EmailIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid email!.
+        /// </summary>
+        internal static string EmailIsInvalid {
+            get {
+                return ResourceManager.GetString("EmailIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email have to reach minimum 11 characters and also can&apos;t be more than 100!.
+        /// </summary>
+        internal static string EmailWrongLength {
+            get {
+                return ResourceManager.GetString("EmailWrongLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to FirstName.
         /// </summary>
         internal static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FirstName is empty!.
+        /// </summary>
+        internal static string FirstNameIsEmpty {
+            get {
+                return ResourceManager.GetString("FirstNameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FirstName needs to be one word that contains only letters of the alphabet!.
+        /// </summary>
+        internal static string FirstNameNoNumbers {
+            get {
+                return ResourceManager.GetString("FirstNameNoNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FirstName have to reach minimum 3 characters and also can&apos;t be more than 45!.
+        /// </summary>
+        internal static string FirstNameWrongLength {
+            get {
+                return ResourceManager.GetString("FirstNameWrongLength", resourceCulture);
             }
         }
         
@@ -210,6 +381,33 @@ namespace WpfDemo.Components {
         internal static string LastName {
             get {
                 return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LastName is empty!.
+        /// </summary>
+        internal static string LastNameIsEmpty {
+            get {
+                return ResourceManager.GetString("LastNameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LastName needs to be one word that contains only letters of the alphabet!.
+        /// </summary>
+        internal static string LastNameNoNumbers {
+            get {
+                return ResourceManager.GetString("LastNameNoNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LastName have to reach minimum 3 characters and also can&apos;t be more than 45!.
+        /// </summary>
+        internal static string LastNameWrongLength {
+            get {
+                return ResourceManager.GetString("LastNameWrongLength", resourceCulture);
             }
         }
         
@@ -277,6 +475,24 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Need to choose a Task for the record!.
+        /// </summary>
+        internal static string NeedToChooseTaskForRecord {
+            get {
+                return ResourceManager.GetString("NeedToChooseTaskForRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Need to choose a User for the task!.
+        /// </summary>
+        internal static string NeedToChooseUserForTask {
+            get {
+                return ResourceManager.GetString("NeedToChooseUserForTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         internal static string New {
@@ -291,6 +507,51 @@ namespace WpfDemo.Components {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password2 doesn&apos;t match with Password!.
+        /// </summary>
+        internal static string Password2DoesntMatch {
+            get {
+                return ResourceManager.GetString("Password2DoesntMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password2 is empty!.
+        /// </summary>
+        internal static string Password2IsEmpty {
+            get {
+                return ResourceManager.GetString("Password2IsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is empty!.
+        /// </summary>
+        internal static string PasswordIsEmpty {
+            get {
+                return ResourceManager.GetString("PasswordIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password needs to be one word!.
+        /// </summary>
+        internal static string PasswordOneWord {
+            get {
+                return ResourceManager.GetString("PasswordOneWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password have to reach minimum 6 characters and also can&apos;t be more than 45!.
+        /// </summary>
+        internal static string PasswordWrongLength {
+            get {
+                return ResourceManager.GetString("PasswordWrongLength", resourceCulture);
             }
         }
         
@@ -421,6 +682,24 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status cannot be Created when there is recods for the task!.
+        /// </summary>
+        internal static string StatusCannotBeCreatedWithRecords {
+            get {
+                return ResourceManager.GetString("StatusCannotBeCreatedWithRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status cannot be Done when there is no recods for the task!.
+        /// </summary>
+        internal static string StatusCannotBeDoneWithNoRecords {
+            get {
+                return ResourceManager.GetString("StatusCannotBeDoneWithNoRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task.
         /// </summary>
         internal static string Task {
@@ -493,11 +772,56 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Telephone is empty!.
+        /// </summary>
+        internal static string TelephoneIsEmpty {
+            get {
+                return ResourceManager.GetString("TelephoneIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid telephone number!.
+        /// </summary>
+        internal static string TelephoneIsInvalid {
+            get {
+                return ResourceManager.GetString("TelephoneIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telephone number needs to be greater than 10 and less than 14!.
+        /// </summary>
+        internal static string TelephoneWrongLength {
+            get {
+                return ResourceManager.GetString("TelephoneWrongLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         internal static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title is empty!.
+        /// </summary>
+        internal static string TitleIsEmpty {
+            get {
+                return ResourceManager.GetString("TitleIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title can&apos;t be more than 45 characters!.
+        /// </summary>
+        internal static string TitleWrongLength {
+            get {
+                return ResourceManager.GetString("TitleWrongLength", resourceCulture);
             }
         }
         
@@ -561,6 +885,42 @@ namespace WpfDemo.Components {
         internal static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  already exists!.
+        /// </summary>
+        internal static string UsernameAlreadyExists {
+            get {
+                return ResourceManager.GetString("UsernameAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username is empty!.
+        /// </summary>
+        internal static string UsernameIsEmpty {
+            get {
+                return ResourceManager.GetString("UsernameIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username needs to be one word!.
+        /// </summary>
+        internal static string UsernameOneWord {
+            get {
+                return ResourceManager.GetString("UsernameOneWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username have to reach minimum 6 characters and also can&apos;t be more than 45!.
+        /// </summary>
+        internal static string UsernameWrongLength {
+            get {
+                return ResourceManager.GetString("UsernameWrongLength", resourceCulture);
             }
         }
         

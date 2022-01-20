@@ -20,30 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TimeSheet.Logic\TimeSheet.Logic.csproj" />
     <ProjectReference Include="..\TimeSheet.Model\TimeSheet.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Components\ResourceEN.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceEN.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Components\ResourceHU.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceHU.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Components\ResourceEN.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceEN.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Components\ResourceHU.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceHU.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <ProjectReference Include="..\TimeSheet.Resource\TimeSheet.Resource.csproj" />
   </ItemGroup>
 
 </Project>

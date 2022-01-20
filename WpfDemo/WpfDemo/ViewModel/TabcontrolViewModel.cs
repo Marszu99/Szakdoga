@@ -2,6 +2,7 @@
 using System.Windows;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
+using TimeSheet.Resource;
 using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 

@@ -8,6 +8,7 @@ using TimeSheet.DataAccess;
 using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Model.Extension;
+using TimeSheet.Resource;
 using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 

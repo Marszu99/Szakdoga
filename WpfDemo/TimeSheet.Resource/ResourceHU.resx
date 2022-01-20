@@ -138,11 +138,38 @@
   <data name="Company" xml:space="preserve">
     <value>Cég</value>
   </data>
+  <data name="CompanyName2DoesntMatch" xml:space="preserve">
+    <value>A két cég név nem egyezik egymással!</value>
+  </data>
+  <data name="CompanyName2IsEmpty" xml:space="preserve">
+    <value>Cég nevét megerősítő mező üres!</value>
+  </data>
+  <data name="CompanyNameIsEmpty" xml:space="preserve">
+    <value>Cég nevének mezője üres!</value>
+  </data>
+  <data name="CompanyNameWrongLength" xml:space="preserve">
+    <value>Cég neve legalább 10 és legfeljebb 60 karakter lehet!</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Dátum</value>
   </data>
+  <data name="DateCantBeInFuture" xml:space="preserve">
+    <value>Dátum nem lehet későbbi a mai napnál!</value>
+  </data>
+  <data name="DateCantBePastTheTaskCreationDate" xml:space="preserve">
+    <value>Dátum nem lehet a feladat létrehozásának dátumánál korább!</value>
+  </data>
+  <data name="DateIsEmpty" xml:space="preserve">
+    <value>Dátum mezeje üres!</value>
+  </data>
   <data name="Deadline" xml:space="preserve">
     <value>Határidő</value>
+  </data>
+  <data name="DeadlineIsEmpty" xml:space="preserve">
+    <value>Határidő mezeje üres!</value>
+  </data>
+  <data name="DeadlineMoreThan24Hours" xml:space="preserve">
+    <value>A határidőnek legalább 24 órával később kell lennie mint a jelenlegi idő!</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Leírás</value>
@@ -153,11 +180,41 @@
   <data name="Duration" xml:space="preserve">
     <value>Időtartam</value>
   </data>
+  <data name="DurationCantBeHigher12Hours" xml:space="preserve">
+    <value>Időtartam nem lehet több 12 óránál!</value>
+  </data>
+  <data name="DurationCantBeLowerZero" xml:space="preserve">
+    <value>Időtartam nem lehet kisebb 0-nál!</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="Email2DoesntMatch" xml:space="preserve">
+    <value>A két email nem egyezik egymással!</value>
+  </data>
+  <data name="Email2IsEmpty" xml:space="preserve">
+    <value>Emailt megerősítő mező üres!</value>
+  </data>
+  <data name="EmailIsEmpty" xml:space="preserve">
+    <value>Email mezeje üres!</value>
+  </data>
+  <data name="EmailIsInvalid" xml:space="preserve">
+    <value>Helytelen email!</value>
+  </data>
+  <data name="EmailWrongLength" xml:space="preserve">
+    <value>Email legalább 11 és legfeljebb 100 karakter lehet!</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>Keresztnév</value>
+  </data>
+  <data name="FirstNameIsEmpty" xml:space="preserve">
+    <value>Keresztnév mezeje üres!</value>
+  </data>
+  <data name="FirstNameNoNumbers" xml:space="preserve">
+    <value>Keresztnév nem tartalmazhat betűkön kívül más karaktereket!</value>
+  </data>
+  <data name="FirstNameWrongLength" xml:space="preserve">
+    <value>Keresztnév legalább 3 és legfeljebb 45 karakter lehet!</value>
   </data>
   <data name="Information" xml:space="preserve">
     <value>Információ</value>
@@ -167,6 +224,15 @@
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Vezetéknév</value>
+  </data>
+  <data name="LastNameIsEmpty" xml:space="preserve">
+    <value>Vezetéknév mezeje üres!</value>
+  </data>
+  <data name="LastNameNoNumbers" xml:space="preserve">
+    <value>Vezetéknév nem tartalmazhat betűkön kívül más karaktereket!</value>
+  </data>
+  <data name="LastNameWrongLength" xml:space="preserve">
+    <value>Vezetéknév legalább 3 és legfeljebb 45 karakter lehet!</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Bejelentkezés</value>
@@ -189,11 +255,32 @@
   <data name="MyTasks" xml:space="preserve">
     <value>Feladataim</value>
   </data>
+  <data name="NeedToChooseTaskForRecord" xml:space="preserve">
+    <value>Kell választani egy feladatot a rögzítéshez!</value>
+  </data>
+  <data name="NeedToChooseUserForTask" xml:space="preserve">
+    <value>Kell választani egy felhasználot a feladathoz!</value>
+  </data>
   <data name="New" xml:space="preserve">
     <value>Új</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Jelszó</value>
+  </data>
+  <data name="Password2DoesntMatch" xml:space="preserve">
+    <value>A két jelszó nem egyezik egymással!</value>
+  </data>
+  <data name="Password2IsEmpty" xml:space="preserve">
+    <value>Jelszót megerősítő mező üres!</value>
+  </data>
+  <data name="PasswordIsEmpty" xml:space="preserve">
+    <value>Jelszó mezeje üres!</value>
+  </data>
+  <data name="PasswordOneWord" xml:space="preserve">
+    <value>Jelszónak egy szónak kell lennie!</value>
+  </data>
+  <data name="PasswordWrongLength" xml:space="preserve">
+    <value>Jelszó legalább 6 és legfeljebb 45 karakter lehet!</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profil</value>
@@ -237,6 +324,12 @@
   <data name="Status" xml:space="preserve">
     <value>Státusz</value>
   </data>
+  <data name="StatusCannotBeCreatedWithRecords" xml:space="preserve">
+    <value>Státusz nem lehet "Created", ha vannak a feladathoz rögzítések!</value>
+  </data>
+  <data name="StatusCannotBeDoneWithNoRecords" xml:space="preserve">
+    <value>Státusz nem lehet "Done", ha nincs a feladathoz rögzítés!</value>
+  </data>
   <data name="Task" xml:space="preserve">
     <value>Feladat</value>
   </data>
@@ -259,10 +352,25 @@
     <value>Feladat sikeresn módosítva!</value>
   </data>
   <data name="Telephone" xml:space="preserve">
-    <value>Telefon</value>
+    <value>Telefonszám</value>
+  </data>
+  <data name="TelephoneIsEmpty" xml:space="preserve">
+    <value>Telefonszám mezeje üres!</value>
+  </data>
+  <data name="TelephoneIsInvalid" xml:space="preserve">
+    <value>Helytelen telefonszám</value>
+  </data>
+  <data name="TelephoneWrongLength" xml:space="preserve">
+    <value>Telefonszám legalább 11 és legfeljebb 13 számot tartalmazhat!</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Cím</value>
+  </data>
+  <data name="TitleIsEmpty" xml:space="preserve">
+    <value>Cím mezeje üres!</value>
+  </data>
+  <data name="TitleWrongLength" xml:space="preserve">
+    <value>Cím nem lehet 45 karakternél hosszabb!</value>
   </data>
   <data name="ToDoTasks" xml:space="preserve">
     <value>Elvégzendő feladatok</value>
@@ -284,6 +392,18 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Felhasználónév</value>
+  </data>
+  <data name="UsernameAlreadyExists" xml:space="preserve">
+    <value> már létezeik!</value>
+  </data>
+  <data name="UsernameIsEmpty" xml:space="preserve">
+    <value>Felhasználónév mezeje üres!</value>
+  </data>
+  <data name="UsernameOneWord" xml:space="preserve">
+    <value>Felhasználónévnek egy szónak kell lennie!</value>
+  </data>
+  <data name="UsernameWrongLength" xml:space="preserve">
+    <value>Felhasználónév legalább 6 és legfeljebb 45 karakter lehet!</value>
   </data>
   <data name="UserUpdatedMessage" xml:space="preserve">
     <value>Felhasználó sikeresen módosítva!</value>
