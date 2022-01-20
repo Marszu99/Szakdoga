@@ -344,7 +344,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show("Server error!");
+                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
             }
             catch (RecordValidationException)
             {
@@ -360,14 +360,14 @@ namespace WpfDemo.ViewModel
         private void CreateRecord()
         {
             this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._record.Task.User_idUser, this._record.Task.IdTask); 
-            MessageBox.Show("Record has been created succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(ResourceHandler.GetResourceString("RecordCreatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
             RefreshValues();
         }
 
         private void UpdateRecord()
         {
             new RecordRepository(new RecordLogic()).UpdateRecord(this._record, this._record.IdRecord, this._record.User_idUser, this._record.Task.IdTask);
-            MessageBox.Show("Record has been updated succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(ResourceHandler.GetResourceString("RecordUpdatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
         }
 

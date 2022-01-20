@@ -54,7 +54,7 @@ namespace WpfDemo.ViewModel
                     }
                     catch (SqlException)
                     {
-                        MessageBox.Show("Server error!");
+                        MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
                     }
                     
                 }
@@ -157,26 +157,26 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show("Server error!");
+                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
             }
 
         }
 
         private void DeleteUser(object obj)
         {
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to delete " + SelectedUser.Username + " user?", "Warning!", System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show(ResourceHandler.GetResourceString("UserDeleteQuestion1") + SelectedUser.Username + ResourceHandler.GetResourceString("UserDeleteQuestion2"), ResourceHandler.GetResourceString("Warning"), System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 try
                 {
                     new UserRepository(new UserLogic()).DeleteUser(SelectedUser.IdUser, SelectedUser.Status);
-                    MessageBox.Show("User has been deleted succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(ResourceHandler.GetResourceString("UserDeletedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
 
                     LoadUsers();
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Server error!");
+                    MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
                 }
             }
         }
@@ -217,6 +217,27 @@ namespace WpfDemo.ViewModel
             get
             {
                 return ResourceHandler.GetResourceString("Search");
+            }
+        }
+        public string UsernameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Username");
+            }
+        }
+        public string FirstNameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("FirstName");
+            }
+        }
+        public string LastNameString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("LastName");
             }
         }
     }

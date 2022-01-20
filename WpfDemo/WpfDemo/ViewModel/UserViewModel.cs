@@ -281,7 +281,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show("Server error!");
+                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
             }
             catch (UserValidationException)
             {
@@ -299,7 +299,7 @@ namespace WpfDemo.ViewModel
         {
             string createdUserRandomPassword = RandomPassword(10);
             this._user.IdUser = new UserRepository(new UserLogic()).CreateUser(this._user, createdUserRandomPassword);
-            MessageBox.Show("User has been created succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(ResourceHandler.GetResourceString("UserCreatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
             SendEmail(createdUserRandomPassword);
             RefreshValues();
         }
@@ -333,7 +333,7 @@ namespace WpfDemo.ViewModel
         private void UpdateUser()
         {
             new UserRepository(new UserLogic()).UpdateUser(this._user);
-            MessageBox.Show("User has been updated succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(ResourceHandler.GetResourceString("UserUpdatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
         }
 

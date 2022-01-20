@@ -33,35 +33,35 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public RelayCommand LogoutCommand { get; private set; }
         public RelayCommand ShowMyProfileCommand { get; private set; }
+        public RelayCommand ChangeLanguageCommand { get; private set; }
+        public RelayCommand LogoutCommand { get; private set; }
+
 
         public TabcontrolViewModel(TabcontrolView view)
         {
             _view = view;
 
-            LogoutCommand = new RelayCommand(Logout, CanExecuteLogout);
             ShowMyProfileCommand = new RelayCommand(ShowMyProfile, CanShowMyProfile);
+            ChangeLanguageCommand = new RelayCommand(ChangeLanguage, CanChangeLanguage);
+            LogoutCommand = new RelayCommand(Logout, CanExecuteLogout);
+
         }
 
-
-        private bool CanExecuteLogout(object arg)
-        {
-            return true;
-        }
+        
         private bool CanShowMyProfile(object arg)
         {
             return true;
         }
-
-        private void Logout(object obj)
+        private bool CanChangeLanguage(object arg)
         {
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to logout?", "Logout", System.Windows.MessageBoxButton.YesNo);
-            if (messageBoxResult == MessageBoxResult.Yes)
-            {
-                _view.TabcontrolWindowContent.Content = new LoginView();
-            }
+            return true;
         }
+        private bool CanExecuteLogout(object arg)
+        {
+            return true;
+        }
+
         private void ShowMyProfile(object obj)
         {
             try
@@ -72,11 +72,45 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show("Server error!");
+                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+            }
+        }
+        private void ChangeLanguage(object obj)
+        {
+            if (ResourceHandler.isEnglish == true)
+            {
+                ResourceHandler.isEnglish = false;
+                _view.TabcontrolWindowContent.Content = new TabcontrolView();
+            }
+            else
+            {
+                ResourceHandler.isEnglish = true;
+                _view.TabcontrolWindowContent.Content = new TabcontrolView();
+            }
+        }
+        private void Logout(object obj)
+        {
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show(ResourceHandler.GetResourceString("LogoutMessage"), ResourceHandler.GetResourceString("Logout"), System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                _view.TabcontrolWindowContent.Content = new LoginView();
             }
         }
 
-
+        public string ProfileString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Profile");
+            }
+        }
+        public string LanuageString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Language");
+            }
+        }
         public string LogoutString
         {
             get

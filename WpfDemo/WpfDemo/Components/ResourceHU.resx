@@ -159,14 +159,26 @@
   <data name="FirstName" xml:space="preserve">
     <value>Keresztnév</value>
   </data>
+  <data name="Information" xml:space="preserve">
+    <value>Információ</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Nyelv</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Vezetéknév</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Bejelentkezés</value>
   </data>
+  <data name="LoginErrorMessage" xml:space="preserve">
+    <value>Helytelen a felhasználónév vagy a jelszó!</value>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>Kijelentkezés</value>
+  </data>
+  <data name="LogoutMessage" xml:space="preserve">
+    <value>Biztos, hogy ki akar jelentkezni?</value>
   </data>
   <data name="MyProfile" xml:space="preserve">
     <value>Profilom</value>
@@ -183,11 +195,26 @@
   <data name="Password" xml:space="preserve">
     <value>Jelszó</value>
   </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
   <data name="Record" xml:space="preserve">
     <value>Rögzítés</value>
   </data>
+  <data name="RecordCreatedMessage" xml:space="preserve">
+    <value>Sikeres rögzítés!</value>
+  </data>
+  <data name="RecordDeletedMessage" xml:space="preserve">
+    <value>Rögzítés sikeresen törölve!</value>
+  </data>
+  <data name="RecordDeleteQuestion" xml:space="preserve">
+    <value>Biztos törölni akarja ezt a rögzítés?</value>
+  </data>
   <data name="Records" xml:space="preserve">
     <value>Rögzítések</value>
+  </data>
+  <data name="RecordUpdatedMessage" xml:space="preserve">
+    <value>Rögzítés sikeresen módosítva!</value>
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>Frissít</value>
@@ -204,14 +231,32 @@
   <data name="Search" xml:space="preserve">
     <value>Keresés</value>
   </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>Szerver hiba!</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>Státusz</value>
   </data>
   <data name="Task" xml:space="preserve">
     <value>Feladat</value>
   </data>
+  <data name="TaskCreatedMessage" xml:space="preserve">
+    <value>Feladat sikeresen létrehozva!</value>
+  </data>
+  <data name="TaskDeletedMessage" xml:space="preserve">
+    <value>Feladat sikeresen törölve!</value>
+  </data>
+  <data name="TaskDeleteQuestion1" xml:space="preserve">
+    <value>Biztos, hogy törölni akarja </value>
+  </data>
+  <data name="TaskDeleteQuestion2" xml:space="preserve">
+    <value> feladatot?</value>
+  </data>
   <data name="Tasks" xml:space="preserve">
     <value>Feladatok</value>
+  </data>
+  <data name="TaskUpdatedMessage" xml:space="preserve">
+    <value>Feladat sikeresn módosítva!</value>
   </data>
   <data name="Telephone" xml:space="preserve">
     <value>Telefon</value>
@@ -225,7 +270,25 @@
   <data name="User" xml:space="preserve">
     <value>Felhasználó</value>
   </data>
+  <data name="UserCreatedMessage" xml:space="preserve">
+    <value>Felhasználó sikeresen létrehozva!</value>
+  </data>
+  <data name="UserDeletedMessage" xml:space="preserve">
+    <value>Felhasználó sikeresen törölve!</value>
+  </data>
+  <data name="UserDeleteQuestion1" xml:space="preserve">
+    <value>Biztos, hogy törölni akarja </value>
+  </data>
+  <data name="UserDeleteQuestion2" xml:space="preserve">
+    <value> felhasználót?</value>
+  </data>
   <data name="Username" xml:space="preserve">
     <value>Felhasználónév</value>
+  </data>
+  <data name="UserUpdatedMessage" xml:space="preserve">
+    <value>Felhasználó sikeresen módosítva!</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Figyelmeztetés!</value>
   </data>
 </root>

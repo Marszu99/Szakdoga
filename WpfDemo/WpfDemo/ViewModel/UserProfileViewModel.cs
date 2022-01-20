@@ -106,7 +106,7 @@ namespace WpfDemo.ViewModel
                     }
                     catch (SqlException)
                     {
-                        MessageBox.Show("Server error!");
+                        MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
                     }
 
                 }
@@ -136,7 +136,7 @@ namespace WpfDemo.ViewModel
                     }
                     catch (SqlException)
                     {
-                        MessageBox.Show("Server error!");
+                        MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
                     }
 
                 }
@@ -217,19 +217,19 @@ namespace WpfDemo.ViewModel
 
         private void DeleteTask(object obj)
         {
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to delete " + SelectedTask.Title + " task?", "Warning!", System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show(ResourceHandler.GetResourceString("TaskDeleteQuestion1") + SelectedTask.Title + ResourceHandler.GetResourceString("TaskDeleteQuestion2"), ResourceHandler.GetResourceString("Warning"), System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 try
                 {
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
-                    MessageBox.Show("Task has been deleted succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(ResourceHandler.GetResourceString("TaskDeletedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
 
                     LoadTasks(SelectedTask.User_idUser);
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Server error!");
+                    MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
                 }
             }
         }
@@ -341,7 +341,7 @@ namespace WpfDemo.ViewModel
                 return ResourceHandler.GetResourceString("Status");
             }
         }
-        public string ReordsString
+        public string RecordsString
         {
             get
             {

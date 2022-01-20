@@ -187,6 +187,24 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        internal static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LastName.
         /// </summary>
         internal static string LastName {
@@ -205,11 +223,29 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid username or password!.
+        /// </summary>
+        internal static string LoginErrorMessage {
+            get {
+                return ResourceManager.GetString("LoginErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logout.
         /// </summary>
         internal static string Logout {
             get {
                 return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to logout?.
+        /// </summary>
+        internal static string LogoutMessage {
+            get {
+                return ResourceManager.GetString("LogoutMessage", resourceCulture);
             }
         }
         
@@ -259,6 +295,15 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        internal static string Profile {
+            get {
+                return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Record.
         /// </summary>
         internal static string Record {
@@ -268,11 +313,47 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Record has been created succesfully!.
+        /// </summary>
+        internal static string RecordCreatedMessage {
+            get {
+                return ResourceManager.GetString("RecordCreatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record has been deleted succesfully!.
+        /// </summary>
+        internal static string RecordDeletedMessage {
+            get {
+                return ResourceManager.GetString("RecordDeletedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this record?.
+        /// </summary>
+        internal static string RecordDeleteQuestion {
+            get {
+                return ResourceManager.GetString("RecordDeleteQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Records.
         /// </summary>
         internal static string Records {
             get {
                 return ResourceManager.GetString("Records", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record has been updated succesfully!.
+        /// </summary>
+        internal static string RecordUpdatedMessage {
+            get {
+                return ResourceManager.GetString("RecordUpdatedMessage", resourceCulture);
             }
         }
         
@@ -322,6 +403,15 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server error!.
+        /// </summary>
+        internal static string ServerError {
+            get {
+                return ResourceManager.GetString("ServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         internal static string Status {
@@ -340,11 +430,56 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Task has been created succesfully!.
+        /// </summary>
+        internal static string TaskCreatedMessage {
+            get {
+                return ResourceManager.GetString("TaskCreatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task has been deleted succesfully!.
+        /// </summary>
+        internal static string TaskDeletedMessage {
+            get {
+                return ResourceManager.GetString("TaskDeletedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete .
+        /// </summary>
+        internal static string TaskDeleteQuestion1 {
+            get {
+                return ResourceManager.GetString("TaskDeleteQuestion1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  task?.
+        /// </summary>
+        internal static string TaskDeleteQuestion2 {
+            get {
+                return ResourceManager.GetString("TaskDeleteQuestion2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tasks.
         /// </summary>
         internal static string Tasks {
             get {
                 return ResourceManager.GetString("Tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task has been updated succesfully!.
+        /// </summary>
+        internal static string TaskUpdatedMessage {
+            get {
+                return ResourceManager.GetString("TaskUpdatedMessage", resourceCulture);
             }
         }
         
@@ -385,11 +520,65 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User has been created succesfully!.
+        /// </summary>
+        internal static string UserCreatedMessage {
+            get {
+                return ResourceManager.GetString("UserCreatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User has been deleted succesfully!.
+        /// </summary>
+        internal static string UserDeletedMessage {
+            get {
+                return ResourceManager.GetString("UserDeletedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete .
+        /// </summary>
+        internal static string UserDeleteQuestion1 {
+            get {
+                return ResourceManager.GetString("UserDeleteQuestion1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  user?.
+        /// </summary>
+        internal static string UserDeleteQuestion2 {
+            get {
+                return ResourceManager.GetString("UserDeleteQuestion2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         internal static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User has been updated succesfully!.
+        /// </summary>
+        internal static string UserUpdatedMessage {
+            get {
+                return ResourceManager.GetString("UserUpdatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning!.
+        /// </summary>
+        internal static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
     }

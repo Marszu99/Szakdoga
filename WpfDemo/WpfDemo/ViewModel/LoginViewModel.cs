@@ -82,11 +82,11 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show("Server error!");
+                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
             }
             catch (LoginUserException)
             {
-                _view.LoginUserErrorMessage.Text = "Invalid username or password!";
+                _view.LoginUserErrorMessage.Text = ResourceHandler.GetResourceString("LoginErrorMessage");
             }
             catch (LoginException ex)
             {

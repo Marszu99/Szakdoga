@@ -15,7 +15,7 @@
 
         
         <FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
-        <!--ListTasksViewUserVisibility-hez kell-->
+        <!--ListTasksViewUserVisibility-hez es ResourceStringekhez kell-->
         
         <Grid Grid.Row="1">
             <DockPanel>
@@ -58,35 +58,35 @@
                     </DataGrid.CellStyle>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="{Binding TitleString}" Binding="{Binding Title}" Width="175" FontSize="20">
+                        <DataGridTextColumn Header="{Binding DataContext.TitleString, Source={x:Reference frameworkElement}}" Binding="{Binding Title}" Width="175" FontSize="20">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{Binding UserString}" Binding="{Binding User.Username}" Width="170" FontSize="20" Visibility="{Binding DataContext.ListTasksViewUserVisibility, Source={x:Reference frameworkElement}}">
+                        <DataGridTextColumn Header="{Binding DataContext.UserString, Source={x:Reference frameworkElement}}" Binding="{Binding User.Username}" Width="170" FontSize="20" Visibility="{Binding DataContext.ListTasksViewUserVisibility, Source={x:Reference frameworkElement}}">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{Binding DescritpionString}" Binding="{Binding Description}" Width="*" FontSize="20">
+                        <DataGridTextColumn Header="{Binding DataContext.DescriptionString, Source={x:Reference frameworkElement}}" Binding="{Binding Description}" Width="*" FontSize="20">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{Binding DeadlineString}" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="108" FontSize="20">
+                        <DataGridTextColumn Header="{Binding DataContext.DeadlineString, Source={x:Reference frameworkElement}}" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="108" FontSize="20">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{Binding StatusString}" Binding="{Binding Status}" Width="105" FontSize="20">
+                        <DataGridTextColumn Header="{Binding DataContext.StatusString, Source={x:Reference frameworkElement}}" Binding="{Binding Status}" Width="105" FontSize="20">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />

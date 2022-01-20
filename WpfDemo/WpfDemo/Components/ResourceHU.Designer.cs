@@ -187,6 +187,24 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Információ.
+        /// </summary>
+        internal static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nyelv.
+        /// </summary>
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vezetéknév.
         /// </summary>
         internal static string LastName {
@@ -205,11 +223,29 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Helytelen a felhasználónév vagy a jelszó!.
+        /// </summary>
+        internal static string LoginErrorMessage {
+            get {
+                return ResourceManager.GetString("LoginErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kijelentkezés.
         /// </summary>
         internal static string Logout {
             get {
                 return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Biztos, hogy ki akar jelentkezni?.
+        /// </summary>
+        internal static string LogoutMessage {
+            get {
+                return ResourceManager.GetString("LogoutMessage", resourceCulture);
             }
         }
         
@@ -259,6 +295,15 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profil.
+        /// </summary>
+        internal static string Profile {
+            get {
+                return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rögzítés.
         /// </summary>
         internal static string Record {
@@ -268,11 +313,47 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sikeres rögzítés!.
+        /// </summary>
+        internal static string RecordCreatedMessage {
+            get {
+                return ResourceManager.GetString("RecordCreatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rögzítés sikeresen törölve!.
+        /// </summary>
+        internal static string RecordDeletedMessage {
+            get {
+                return ResourceManager.GetString("RecordDeletedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Biztos törölni akarja ezt a rögzítés?.
+        /// </summary>
+        internal static string RecordDeleteQuestion {
+            get {
+                return ResourceManager.GetString("RecordDeleteQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rögzítések.
         /// </summary>
         internal static string Records {
             get {
                 return ResourceManager.GetString("Records", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rögzítés sikeresen módosítva!.
+        /// </summary>
+        internal static string RecordUpdatedMessage {
+            get {
+                return ResourceManager.GetString("RecordUpdatedMessage", resourceCulture);
             }
         }
         
@@ -322,6 +403,15 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Szerver hiba!.
+        /// </summary>
+        internal static string ServerError {
+            get {
+                return ResourceManager.GetString("ServerError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Státusz.
         /// </summary>
         internal static string Status {
@@ -340,11 +430,56 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Feladat sikeresen létrehozva!.
+        /// </summary>
+        internal static string TaskCreatedMessage {
+            get {
+                return ResourceManager.GetString("TaskCreatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feladat sikeresen törölve!.
+        /// </summary>
+        internal static string TaskDeletedMessage {
+            get {
+                return ResourceManager.GetString("TaskDeletedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Biztos, hogy törölni akarja .
+        /// </summary>
+        internal static string TaskDeleteQuestion1 {
+            get {
+                return ResourceManager.GetString("TaskDeleteQuestion1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  feladatot?.
+        /// </summary>
+        internal static string TaskDeleteQuestion2 {
+            get {
+                return ResourceManager.GetString("TaskDeleteQuestion2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Feladatok.
         /// </summary>
         internal static string Tasks {
             get {
                 return ResourceManager.GetString("Tasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feladat sikeresn módosítva!.
+        /// </summary>
+        internal static string TaskUpdatedMessage {
+            get {
+                return ResourceManager.GetString("TaskUpdatedMessage", resourceCulture);
             }
         }
         
@@ -385,11 +520,65 @@ namespace WpfDemo.Components {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Felhasználó sikeresen létrehozva!.
+        /// </summary>
+        internal static string UserCreatedMessage {
+            get {
+                return ResourceManager.GetString("UserCreatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Felhasználó sikeresen törölve!.
+        /// </summary>
+        internal static string UserDeletedMessage {
+            get {
+                return ResourceManager.GetString("UserDeletedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Biztos, hogy törölni akarja .
+        /// </summary>
+        internal static string UserDeleteQuestion1 {
+            get {
+                return ResourceManager.GetString("UserDeleteQuestion1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  felhasználót?.
+        /// </summary>
+        internal static string UserDeleteQuestion2 {
+            get {
+                return ResourceManager.GetString("UserDeleteQuestion2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Felhasználónév.
         /// </summary>
         internal static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Felhasználó sikeresen módosítva!.
+        /// </summary>
+        internal static string UserUpdatedMessage {
+            get {
+                return ResourceManager.GetString("UserUpdatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Figyelmeztetés!.
+        /// </summary>
+        internal static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
     }

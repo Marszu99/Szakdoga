@@ -220,7 +220,7 @@ namespace WpfDemo.ViewModel
             try
             {
                 new UserRepository(new UserLogic()).UpdateUser(CurrentLoggedUser);
-                MessageBox.Show("User has been updated succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(ResourceHandler.GetResourceString("UserUpdatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
 
                 // _view.MyProfilePassword.IsReadOnly = true;
                 _view.MyProfilePassword.IsEnabled = false;

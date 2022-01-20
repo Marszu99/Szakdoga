@@ -23,15 +23,15 @@
         </Grid.ColumnDefinitions>
 
 
-        <TextBlock Grid.Row="0" Text="{Binding UsernameString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="0" Text="{Binding SelectedUser.UsernameString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="{Binding SelectedUser.UserViewFirstNameGridRow}" Text="{Binding FirstNameString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="{Binding SelectedUser.UserViewFirstNameGridRow}" Text="{Binding SelectedUser.FirstNameString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="2" Text="{Binding LastNameString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="2" Text="{Binding SelectedUser.LastNameString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="{Binding SelectedUser.UserViewEmailGridRow}" Text="{Binding EmailString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="{Binding SelectedUser.UserViewEmailGridRow}" Text="{Binding SelectedUser.EmailString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="4" Text="{Binding TelephoneString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="4" Text="{Binding SelectedUser.TelephoneString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
 
 
@@ -120,7 +120,7 @@
 
         <Button x:Name="SaveUserButton" 
                 Command="{Binding SelectedUser.SaveCommand}"
-                Content="{Binding SaveString}" Grid.Column="1" Grid.Row="6" Height="45" Width="70" Margin="100 0 0 0" FontSize="26" HorizontalAlignment="Left"
+                Content="{Binding SelectedUser.SaveString}" Grid.Column="1" Grid.Row="6" Height="45" Width="70" Margin="100 0 0 0" FontSize="26" HorizontalAlignment="Left"
                 BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedUser.UserViewSaveButtonVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

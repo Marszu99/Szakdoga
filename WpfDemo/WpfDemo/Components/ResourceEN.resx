@@ -159,14 +159,26 @@
   <data name="FirstName" xml:space="preserve">
     <value>FirstName</value>
   </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>LastName</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="LoginErrorMessage" xml:space="preserve">
+    <value>Invalid username or password!</value>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
+  </data>
+  <data name="LogoutMessage" xml:space="preserve">
+    <value>Are you sure you want to logout?</value>
   </data>
   <data name="MyProfile" xml:space="preserve">
     <value>My Profile</value>
@@ -183,11 +195,26 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
   <data name="Record" xml:space="preserve">
     <value>Record</value>
   </data>
+  <data name="RecordCreatedMessage" xml:space="preserve">
+    <value>Record has been created succesfully!</value>
+  </data>
+  <data name="RecordDeletedMessage" xml:space="preserve">
+    <value>Record has been deleted succesfully!</value>
+  </data>
+  <data name="RecordDeleteQuestion" xml:space="preserve">
+    <value>Are you sure you want to delete this record?</value>
+  </data>
   <data name="Records" xml:space="preserve">
     <value>Records</value>
+  </data>
+  <data name="RecordUpdatedMessage" xml:space="preserve">
+    <value>Record has been updated succesfully!</value>
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>Refresh</value>
@@ -204,14 +231,32 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>Server error!</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
   <data name="Task" xml:space="preserve">
     <value>Task</value>
   </data>
+  <data name="TaskCreatedMessage" xml:space="preserve">
+    <value>Task has been created succesfully!</value>
+  </data>
+  <data name="TaskDeletedMessage" xml:space="preserve">
+    <value>Task has been deleted succesfully!</value>
+  </data>
+  <data name="TaskDeleteQuestion1" xml:space="preserve">
+    <value>Are you sure you want to delete </value>
+  </data>
+  <data name="TaskDeleteQuestion2" xml:space="preserve">
+    <value> task?</value>
+  </data>
   <data name="Tasks" xml:space="preserve">
     <value>Tasks</value>
+  </data>
+  <data name="TaskUpdatedMessage" xml:space="preserve">
+    <value>Task has been updated succesfully!</value>
   </data>
   <data name="Telephone" xml:space="preserve">
     <value>Telephone</value>
@@ -225,7 +270,25 @@
   <data name="User" xml:space="preserve">
     <value>User</value>
   </data>
+  <data name="UserCreatedMessage" xml:space="preserve">
+    <value>User has been created succesfully!</value>
+  </data>
+  <data name="UserDeletedMessage" xml:space="preserve">
+    <value>User has been deleted succesfully!</value>
+  </data>
+  <data name="UserDeleteQuestion1" xml:space="preserve">
+    <value>Are you sure you want to delete </value>
+  </data>
+  <data name="UserDeleteQuestion2" xml:space="preserve">
+    <value> user?</value>
+  </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="UserUpdatedMessage" xml:space="preserve">
+    <value>User has been updated succesfully!</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning!</value>
   </data>
 </root>

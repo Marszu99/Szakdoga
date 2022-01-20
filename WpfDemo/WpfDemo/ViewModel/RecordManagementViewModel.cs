@@ -185,7 +185,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show("Server errror!");
+                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
             }
         }
 
@@ -255,7 +255,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show("Server error!");
+                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
             }
         }
 
@@ -267,19 +267,19 @@ namespace WpfDemo.ViewModel
 
         private void DeleteRecord(object obj)
         {
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to delete this record?", "Warning!", System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show(ResourceHandler.GetResourceString("RecordDeleteQuestion"), ResourceHandler.GetResourceString("Warning"), System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 try
                 {
                     new RecordRepository(new RecordLogic()).DeleteRecord(SelectedRecord.IdRecord);
-                    MessageBox.Show("Record has been deleted succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(ResourceHandler.GetResourceString("RecordDeletedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
 
                     RefreshRecordList(obj);
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show("Server error!");
+                    MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
                 }
             }
         }
@@ -310,6 +310,48 @@ namespace WpfDemo.ViewModel
             get
             {
                 return ResourceHandler.GetResourceString("Search");
+            }
+        }
+        public string TaskString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Task");
+            }
+        }
+        public string UserString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("User");
+            }
+        }
+        public string DateString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Date");
+            }
+        }
+        public string CommentString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Comment");
+            }
+        }
+        public string DurationString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Duration");
+            }
+        }
+        public string StatusString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Status");
             }
         }
     }

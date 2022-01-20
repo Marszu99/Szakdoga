@@ -13,9 +13,11 @@
     </UserControl.Resources>-->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
+        <!--ResourceStringekhez kell-->
 
         <Grid Grid.Row="1">
             <DockPanel>
@@ -58,21 +60,21 @@
                     </DataGrid.CellStyle>
                     
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="{Binding UsernameString}" Binding="{Binding Username}" Width="*" FontSize="24">
+                        <DataGridTextColumn Header="{Binding DataContext.UsernameString, Source={x:Reference frameworkElement}}" Binding="{Binding Username}" Width="*" FontSize="24">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{Binding FirstNameString}" Binding="{Binding FirstName}" Width="*" FontSize="24">
+                        <DataGridTextColumn Header="{Binding DataContext.FirstNameString, Source={x:Reference frameworkElement}}" Binding="{Binding FirstName}" Width="*" FontSize="24">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{Binding LastNameString}" Binding="{Binding LastName}" Width="*" FontSize="24">
+                        <DataGridTextColumn Header="{Binding DataContext.LastNameString, Source={x:Reference frameworkElement}}" Binding="{Binding LastName}" Width="*" FontSize="24">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
