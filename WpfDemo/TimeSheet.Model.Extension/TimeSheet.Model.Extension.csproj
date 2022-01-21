@@ -11,6 +11,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\TimeSheet.DataAccess\TimeSheet.DataAccess.csproj" />
 		<ProjectReference Include="..\TimeSheet.Model\TimeSheet.Model.csproj" />
+		<ProjectReference Include="..\TimeSheet.Resource\TimeSheet.Resource.csproj" />
 	</ItemGroup>
 	
 </Project>

@@ -1,8 +1,0 @@
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netcoreapp3.1\TimeSheet.Resource.csproj.AssemblyReference.cache
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netcoreapp3.1\TimeSheet.Resource.ResourceEN.resources
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netcoreapp3.1\TimeSheet.Resource.ResourceHU.resources
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netcoreapp3.1\TimeSheet.Resource.csproj.GenerateResource.cache
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netcoreapp3.1\TimeSheet.Resource.GeneratedMSBuildEditorConfig.editorconfig
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netcoreapp3.1\TimeSheet.Resource.AssemblyInfoInputs.cache
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netcoreapp3.1\TimeSheet.Resource.AssemblyInfo.cs
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netcoreapp3.1\TimeSheet.Resource.csproj.CoreCompileInputs.cache

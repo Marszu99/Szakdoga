@@ -13,7 +13,9 @@
           "MySqlConnector": "1.3.11",
           "System.Data.SqlClient": "4.8.2",
           "TimeSheet.Logic": "1.0.0",
-          "TimeSheet.Model": "1.0.0"
+          "TimeSheet.Model": "1.0.0",
+          "TimeSheet.Resource": "1.0.0",
+          "TimeSheet.Resources": "1.0.0"
         },
         "runtime": {
           "WpfDemo.dll": {}
@@ -278,10 +280,16 @@
         "dependencies": {
           "TimeSheet.DataAccess": "1.0.0",
           "TimeSheet.Model": "1.0.0",
+          "TimeSheet.Resource": "1.0.0",
           "libphonenumber-csharp": "8.12.38"
         },
         "runtime": {
           "TimeSheet.Model.Extension.dll": {}
+        }
+      },
+      "TimeSheet.Resource/1.0.0": {
+        "runtime": {
+          "TimeSheet.Resource.dll": {}
         }
       }
     }
@@ -518,6 +526,11 @@
       "sha512": ""
     },
     "TimeSheet.Model.Extension/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TimeSheet.Resource/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

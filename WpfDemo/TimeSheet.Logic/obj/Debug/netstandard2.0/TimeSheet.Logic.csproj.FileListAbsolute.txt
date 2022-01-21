@@ -32,3 +32,5 @@ C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Logic\obj\Debug\ne
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Logic\obj\Debug\netstandard2.0\TimeSheet.Logic.csproj.CopyComplete
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Logic\obj\Debug\netstandard2.0\TimeSheet.Logic.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Logic\obj\Debug\netstandard2.0\TimeSheet.Logic.pdb
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Logic\bin\Debug\netstandard2.0\TimeSheet.Resource.dll
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Logic\bin\Debug\netstandard2.0\TimeSheet.Resource.pdb

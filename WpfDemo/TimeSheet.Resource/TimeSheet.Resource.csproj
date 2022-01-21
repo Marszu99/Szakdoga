@@ -1,31 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="ResourceEN.Designer.cs">
-      <DependentUpon>ResourceEN.resx</DependentUpon>
+    <Compile Update="ResourceENG.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceENG.resx</DependentUpon>
     </Compile>
-    <Compile Update="ResourceHU.Designer.cs">
-      <DependentUpon>ResourceHU.resx</DependentUpon>
+    <Compile Update="ResourceHUN.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceHUN.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="ResourceEN.resx">
-      <LastGenOutput>ResourceEN.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="ResourceENG.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceENG.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="ResourceHU.resx">
-      <LastGenOutput>ResourceHU.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="ResourceHUN.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceHUN.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

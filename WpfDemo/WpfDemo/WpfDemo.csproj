@@ -21,6 +21,7 @@
     <ProjectReference Include="..\TimeSheet.Logic\TimeSheet.Logic.csproj" />
     <ProjectReference Include="..\TimeSheet.Model\TimeSheet.Model.csproj" />
     <ProjectReference Include="..\TimeSheet.Resource\TimeSheet.Resource.csproj" />
+    <ProjectReference Include="..\TimeSheet.Resource\TimeSheet.Resourcesss.csproj" />
   </ItemGroup>
 
 </Project>

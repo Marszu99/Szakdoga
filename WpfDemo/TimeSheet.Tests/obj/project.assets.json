@@ -1570,6 +1570,7 @@
         "dependencies": {
           "TimeSheet.DataAccess": "1.0.0",
           "TimeSheet.Model": "1.0.0",
+          "TimeSheet.Resource": "1.0.0",
           "libphonenumber-csharp": "8.12.38"
         },
         "compile": {
@@ -1577,6 +1578,16 @@
         },
         "runtime": {
           "bin/placeholder/TimeSheet.Model.Extension.dll": {}
+        }
+      },
+      "TimeSheet.Resource/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/TimeSheet.Resource.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TimeSheet.Resource.dll": {}
         }
       }
     }
@@ -5869,6 +5880,11 @@
       "type": "project",
       "path": "../TimeSheet.Model.Extension/TimeSheet.Model.Extension.csproj",
       "msbuildProject": "../TimeSheet.Model.Extension/TimeSheet.Model.Extension.csproj"
+    },
+    "TimeSheet.Resource/1.0.0": {
+      "type": "project",
+      "path": "../TimeSheet.Resource/TimeSheet.Resource.csproj",
+      "msbuildProject": "../TimeSheet.Resource/TimeSheet.Resource.csproj"
     }
   },
   "projectFileDependencyGroups": {

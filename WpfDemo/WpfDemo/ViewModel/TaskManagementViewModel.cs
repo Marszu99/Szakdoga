@@ -51,7 +51,14 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return LoginViewModel.LoggedUser.Status == 0 ? "468.7 0 0 0" : "290 0 0 0";
+                if (ResourceHandler.isEnglish)
+                {
+                    return LoginViewModel.LoggedUser.Status == 0 ? "468.7 0 0 0" : "290 0 0 0";
+                }
+                else
+                {
+                    return LoginViewModel.LoggedUser.Status == 0 ? "438 0 0 0" : "250 0 0 0";
+                }
             }
         }
 

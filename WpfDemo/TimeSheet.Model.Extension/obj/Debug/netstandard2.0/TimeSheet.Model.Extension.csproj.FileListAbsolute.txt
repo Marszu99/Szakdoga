@@ -28,3 +28,5 @@ C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\ob
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\obj\Debug\netstandard2.0\TimeSheet.Model.Extension.csproj.CopyComplete
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\obj\Debug\netstandard2.0\TimeSheet.Model.Extension.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\obj\Debug\netstandard2.0\TimeSheet.Model.Extension.pdb
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\TimeSheet.Resource.dll
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\TimeSheet.Resource.pdb

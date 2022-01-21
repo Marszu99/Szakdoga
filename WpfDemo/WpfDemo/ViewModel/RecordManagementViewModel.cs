@@ -48,6 +48,21 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public string SearchTextMargin
+        {
+            get
+            {
+                if (ResourceHandler.isEnglish)
+                {
+                    return "400 0 0 0";
+                }
+                else
+                {
+                    return "389 0 0 0";
+                }
+            }
+        }
+
         public Visibility RecordCheckBoxAndTextVisibility
         {
             get

@@ -12,6 +12,7 @@
           "NETStandard.Library": "2.0.3",
           "TimeSheet.DataAccess": "1.0.0",
           "TimeSheet.Model": "1.0.0",
+          "TimeSheet.Resource": "1.0.0",
           "libphonenumber-csharp": "8.12.38"
         },
         "runtime": {
@@ -234,6 +235,11 @@
         "runtime": {
           "TimeSheet.Model.dll": {}
         }
+      },
+      "TimeSheet.Resource/1.0.0": {
+        "runtime": {
+          "TimeSheet.Resource.dll": {}
+        }
       }
     }
   },
@@ -389,6 +395,11 @@
       "sha512": ""
     },
     "TimeSheet.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TimeSheet.Resource/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

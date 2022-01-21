@@ -166,6 +166,5 @@ C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\WpfDemo.g.resources
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\bin\Debug\netcoreapp3.1\PhoneNumbers.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\WpfDemo.Components.ResourceEN.resources
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\WpfDemo.Components.ResourceHU.resources
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\WpfDemo.csproj.GenerateResource.cache
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\bin\Debug\netcoreapp3.1\TimeSheet.Resource.dll
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\bin\Debug\netcoreapp3.1\TimeSheet.Resource.pdb

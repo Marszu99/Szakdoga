@@ -1,4 +1,5 @@
 ﻿using System;
+using TimeSheet.Resource;
 
 namespace TimeSheet.Model.Extension
 {
@@ -10,7 +11,7 @@ namespace TimeSheet.Model.Extension
 
             if (task == null)
             {
-                result = "Need to choose a Task for the record!";//ResourceHandler.GetResourceString("NeedToChooseTaskForRecord");
+                result = ResourceHandler.GetResourceString("NeedToChooseTaskForRecord");
             }
 
             return result;
@@ -22,15 +23,15 @@ namespace TimeSheet.Model.Extension
 
             if (date == null)
             {
-                result = "Date is empty!";//ResourceHandler.GetResourceString("DateIsEmpty");
+                result = ResourceHandler.GetResourceString("DateIsEmpty");
             }
             else if (date > DateTime.Today)
             {
-                result = "Record's date can't be in the future!";//ResourceHandler.GetResourceString("DateCantBeInFuture");
+                result = ResourceHandler.GetResourceString("DateCantBeInFuture");
             }
             else if (date < TaskCreationDate)
             {
-                result = "Record's date can't be earlier than the date when the task was created!";//ResourceHandler.GetResourceString("DateCantBePastTheTaskCreationDate");
+                result = ResourceHandler.GetResourceString("DateCantBePastTheTaskCreationDate");
             }
 
             return result;
@@ -42,11 +43,11 @@ namespace TimeSheet.Model.Extension
 
             if (duration < 0)
             {
-                result = "Duration can't be lower than 0!";//ResourceHandler.GetResourceString("DurationCantBeLowerZero");
+                result = ResourceHandler.GetResourceString("DurationCantBeLowerZero");
             }
             else if (duration > 720)
             {
-                result = "Duration can't be higher than 12 hours!";//ResourceHandler.GetResourceString("DurationCantBeHigher12Hours");
+                result = ResourceHandler.GetResourceString("DurationCantBeHigher12Hours");
             }
 
             return result;

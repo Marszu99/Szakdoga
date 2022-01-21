@@ -8,11 +8,11 @@
         {
             if (isEnglish)
             {
-                return ResourceEN.ResourceManager.GetString(key);
+                return ResourceENG.ResourceManager.GetString(key);
             }
             else
             {
-                return ResourceHU.ResourceManager.GetString(key);
+                return ResourceHUN.ResourceManager.GetString(key);
             }
         }
     }

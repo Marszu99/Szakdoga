@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TimeSheet.DataAccess;
+using TimeSheet.Resource;
 
 namespace TimeSheet.Model.Extension
 {
@@ -14,7 +15,7 @@ namespace TimeSheet.Model.Extension
 
             if (user == null)
             {
-                result = "Need to choose a User for the task!";//ResourceHandler.GetResourceString("NeedToChooseUserForTask");
+                result = ResourceHandler.GetResourceString("NeedToChooseUserForTask");
             }
 
             return result;
@@ -26,11 +27,11 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(title))
             {
-                result = "Title is empty!";//ResourceHandler.GetResourceString("TitleIsEmpty");
+                result = ResourceHandler.GetResourceString("TitleIsEmpty");
             }
             else if (title.Length > MaximumTitleLength)
             {
-                result = "Title can't be more than 45 characters!";//ResourceHandler.GetResourceString("TitleWrongLength");
+                result = ResourceHandler.GetResourceString("TitleWrongLength");
             }
 
             return result;
@@ -42,11 +43,11 @@ namespace TimeSheet.Model.Extension
 
             if (deadline == null)
             {
-                result = "Deadline is empty!";//ResourceHandler.GetResourceString("DeadlineIsEmpty");
+                result = ResourceHandler.GetResourceString("DeadlineIsEmpty");
             }
             else if (deadline <= DateTime.Today)
             {
-                result = "Deadline has to be atleast more than 24 hours away from the current time!";//ResourceHandler.GetResourceString("DeadlineMoreThan24Hours");
+                result = ResourceHandler.GetResourceString("DeadlineMoreThan24Hours");
             }
 
             return result;
@@ -59,11 +60,11 @@ namespace TimeSheet.Model.Extension
 
             if (status == TaskStatus.Done && recordList.Count == 0)
             {
-                result = "Status cannot be Done when there is no recods for the task!";//ResourceHandler.GetResourceString("StatusCannotBeDoneWithNoRecords");
+                result = ResourceHandler.GetResourceString("StatusCannotBeDoneWithNoRecords");
             }
             else if (status == TaskStatus.Created && recordList.Count != 0)
             {
-                result = "Status cannot be Created when there is recods for the task!";//ResourceHandler.GetResourceString("StatusCannotBeCreatedWithRecords");
+                result = ResourceHandler.GetResourceString("StatusCannotBeCreatedWithRecords");
             }
 
             return result;
