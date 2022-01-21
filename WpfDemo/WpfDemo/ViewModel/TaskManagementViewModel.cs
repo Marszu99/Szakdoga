@@ -57,7 +57,7 @@ namespace WpfDemo.ViewModel
                 }
                 else
                 {
-                    return LoginViewModel.LoggedUser.Status == 0 ? "438 0 0 0" : "250 0 0 0";
+                    return LoginViewModel.LoggedUser.Status == 0 ? "438 0 0 0" : "243 0 0 0";
                 }
             }
         }

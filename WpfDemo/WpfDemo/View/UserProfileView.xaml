@@ -23,33 +23,47 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="{Binding UsernameString, StringFormat='{}{0}:'}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" 
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding UsernameString, StringFormat='{}{0}:'}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" 
                        Margin="10 20 0 0" FontSize="30"/>
-            <TextBlock Text="{Binding FirstNameString, StringFormat='{}{0}:'}" Grid.Row="0" FontWeight="Bold"  Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                       Margin="10 20 0 0" FontSize="30"/>
-            <TextBlock Text="{Binding LastNameString, StringFormat='{}{0}:'}" Grid.Row="0" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                       Margin="10 20 0 0" FontSize="30"/>
-            <TextBlock Text="{Binding EmailString, StringFormat='{}{0}:'}" Grid.Row="0" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-                       Margin="10 0 0 110" FontSize="30"/>
-            <TextBlock Text="{Binding TelephoneString, StringFormat='{}{0}:'}" Grid.Row="0" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-                       Margin="10 0 0 110" FontSize="30"/>
+                <Label x:Name="userNameLabel" Grid.Row="0" Grid.Column="0" FontSize="28" Content="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}"
+                       Margin="0 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
 
-            <Label x:Name="userNameLabel" Grid.Row="0" Grid.Column="0" FontSize="28" Content="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}"
-                   Margin="160 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="firstNameLabel" Grid.Row="0" Grid.Column="1" FontSize="28" Content="{Binding CurrentUser.FirstName, UpdateSourceTrigger=PropertyChanged}"
-                   Margin="165 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="lastNameLabel" Grid.Row="0" Grid.Column="2" FontSize="28" Content="{Binding CurrentUser.LastName, UpdateSourceTrigger=PropertyChanged}"
-                   Margin="160 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name="emailLabel" Grid.Row="0" Grid.Column="0" FontSize="28" Content="{Binding CurrentUser.Email, UpdateSourceTrigger=PropertyChanged}"
-                   Margin="95 0 0 106" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
-            <Label x:Name="telephoneLabel" Grid.Row="0" Grid.Column="1" FontSize="28" Content="{Binding CurrentUser.Telephone, UpdateSourceTrigger=PropertyChanged}"
-                   Margin="165 0 0 105" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <TextBlock Text="{Binding FirstNameString, StringFormat='{}{0}:'}" Grid.Row="0" FontWeight="Bold"  Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                       Margin="10 20 0 0" FontSize="30"/>
+                <Label x:Name="firstNameLabel" Grid.Row="0" Grid.Column="1" FontSize="28" Content="{Binding CurrentUser.FirstName, UpdateSourceTrigger=PropertyChanged}"
+                       Margin="0 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                <TextBlock Text="{Binding LastNameString, StringFormat='{}{0}:'}" Grid.Row="0" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                       Margin="0 20 0 0" FontSize="30"/>
+                <Label x:Name="lastNameLabel" Grid.Row="0" Grid.Column="2" FontSize="28" Content="{Binding CurrentUser.LastName, UpdateSourceTrigger=PropertyChanged}"
+                       Margin="0 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <TextBlock Text="{Binding EmailString, StringFormat='{}{0}:'}" Grid.Row="0" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                       Margin="10 0 0 110" FontSize="30"/>
+                <Label x:Name="emailLabel" Grid.Row="0" Grid.Column="0" FontSize="28" Content="{Binding CurrentUser.Email, UpdateSourceTrigger=PropertyChanged}"
+                       Margin="0 0 0 106" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <TextBlock Text="{Binding TelephoneString, StringFormat='{}{0}:'}" Grid.Row="0" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                       Margin="10 0 0 110" FontSize="30"/>
+                <Label x:Name="telephoneLabel" Grid.Row="0" Grid.Column="1" FontSize="28" Content="{Binding CurrentUser.Telephone, UpdateSourceTrigger=PropertyChanged}"
+                       Margin="0 0 0 105" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
+            </StackPanel>
+
         </Grid>
         
         <Grid Grid.Row="1">
 
             <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{Binding TasksString}" Margin="0 0 0 -5" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{Binding RecordsString}" Margin="180 0 0 -5" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{Binding RecordsString}" Margin="795 0 0 -5" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
 
             <TextBlock Text="{Binding SearchString, StringFormat='{}{0}:'}" Grid.Row="1" Margin="0 0 622 1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20"/>
             <TextBox x:Name="TaskSearchingText" Grid.Row="1" Margin="0 0 385 1" Background="#eee" Text="{Binding SearchTaskListValue, UpdateSourceTrigger=PropertyChanged}"
