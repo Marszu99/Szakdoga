@@ -15,9 +15,9 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0" Text="{Binding MyProfileString}" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 40 280 0" Width="250" Height="65"/>
+        <TextBlock Grid.Column="0" Text="{Binding MyProfileString}" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="100 40 280 0" Width="250" Height="65"/>
 
-        <StackPanel Grid.Column="0" Orientation="Vertical" Width="180" HorizontalAlignment="Left" Margin="20 100 0 200">
+        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="250" Margin="20 100 0 200">
             <TextBlock Text="{Binding UsernameString, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
             <TextBlock Text="{Binding PasswordString, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
             <TextBlock Text="{Binding FirstNameString, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
@@ -26,8 +26,8 @@
             <TextBlock Text="{Binding TelephoneString, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="0" Orientation="Vertical" Width="550" HorizontalAlignment="Right" Margin="0 100 0 200">
-            <TextBox Text="{Binding CurrentLoggedUser.Username, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 40 100 0" FontSize="34"
+        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="420" Margin="280 100 0 200">
+            <TextBox Text="{Binding CurrentLoggedUser.Username, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"
                      Background="DarkGray" IsReadOnly="True">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -40,7 +40,7 @@
             </TextBox>
 
             <components:BindablePasswordBox x:Name="MyProfilePassword" Password="{Binding Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Left" 
-                                            VerticalAlignment="Center" Margin="0 38 100 0" FontSize="34" Background="DarkGray" IsEnabled="False" BorderBrush="DarkGray"
+                                            VerticalAlignment="Center" Margin="0 38 0 0" FontSize="34" Background="DarkGray" IsEnabled="False" BorderBrush="DarkGray"
                                             ToolTipService.ToolTip="{Binding ErrorCollection[Password]}">
                 <components:BindablePasswordBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -52,7 +52,7 @@
                 </components:BindablePasswordBox.InputBindings>
             </components:BindablePasswordBox>
 
-            <TextBox x:Name="MyProfileFirstName" Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+            <TextBox x:Name="MyProfileFirstName" Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 0 0"
                      FontSize="34" Background="DarkGray" IsReadOnly="True"
                      ToolTipService.ToolTip="{Binding ErrorCollection[FirstName]}">
                 <TextBox.Resources>
@@ -65,7 +65,7 @@
                 </TextBox.InputBindings>
             </TextBox>
 
-            <TextBox x:Name="MyProfileLastName" Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+            <TextBox x:Name="MyProfileLastName" Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 0 0"
                      FontSize="34" Background="DarkGray" IsReadOnly="True"
                      ToolTipService.ToolTip="{Binding ErrorCollection[LastName]}">
                 <TextBox.Resources>
@@ -78,7 +78,7 @@
                 </TextBox.InputBindings>
             </TextBox>
 
-            <TextBox x:Name="MyProfileEmail" Text="{Binding Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+            <TextBox x:Name="MyProfileEmail" Text="{Binding Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 0 0"
                      FontSize="34" Background="DarkGray" IsReadOnly="True"
                      ToolTipService.ToolTip="{Binding ErrorCollection[Email]}">
                 <TextBox.Resources>
@@ -91,7 +91,7 @@
                 </TextBox.InputBindings>
             </TextBox>
 
-            <TextBox x:Name="MyProfileTelephone" Text="{Binding Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 100 0"
+            <TextBox x:Name="MyProfileTelephone" Text="{Binding Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 0 0"
                      FontSize="34" Background="DarkGray" IsReadOnly="True"
                      ToolTipService.ToolTip="{Binding ErrorCollection[Telephone]}">
                 <TextBox.Resources>
@@ -106,8 +106,8 @@
         </StackPanel>
 
 
-        <Button Grid.Column="0" Content="{Binding ChangeString}" x:Name="ChangeUserValuesButton" Command="{Binding ChangeUserValuesCommand}" Height="40" Width="85" FontSize="22" 
-                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 300 150" Padding="3" BorderThickness="1" BorderBrush="Black">
+        <Button Grid.Column="0" Content="{Binding ChangeString}" x:Name="ChangeUserValuesButton" Command="{Binding ChangeUserValuesCommand}" Height="40" FontSize="22" 
+                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 300 150" Padding="4" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -115,8 +115,8 @@
             </Button.Resources>
         </Button>
 
-        <Button Grid.Column="0" Content="{Binding SaveString}" x:Name="SaveChangedUserValuesButton" Command="{Binding SaveChangedUserValuesCommand}" Height="40" Width="80" FontSize="22" 
-                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 425 150" Padding="3" Visibility="Hidden" BorderThickness="1" BorderBrush="Black">
+        <Button Grid.Column="0" Content="{Binding SaveString}" x:Name="SaveChangedUserValuesButton" Command="{Binding SaveChangedUserValuesCommand}" Height="40" FontSize="22" 
+                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 425 150" Padding="5" Visibility="Hidden" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -124,8 +124,8 @@
             </Button.Resources>
         </Button>
 
-        <Button Grid.Column="0" Content="{Binding CancelString}" x:Name="CancelChangeUserValuesButton" Command="{Binding CancelChangeUserValuesCommand}" Height="40" Width="80" FontSize="22" 
-                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 200 150" Padding="3" Visibility="Hidden" BorderThickness="1" BorderBrush="Black">
+        <Button Grid.Column="0" Content="{Binding CancelString}" x:Name="CancelChangeUserValuesButton" Command="{Binding CancelChangeUserValuesCommand}" Height="40" FontSize="22" 
+                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 200 150" Padding="4" Visibility="Hidden" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -143,7 +143,7 @@
             <FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
             <!--ResourceStringekhez kell-->
             
-            <TextBlock Text="{Binding ToDoTasksString}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 30 0 0" Width="200" Height="40"/>
+            <TextBlock Text="{Binding ToDoTasksString}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 30 0 0" Height="40"/>
 
             <DataGrid  x:Name="UserToDoTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyToDoTaskList}" Margin="0 70 0 20" HorizontalAlignment="Left" Width="700" AutoGenerateColumns="False" ColumnWidth="*"
                               Background="LightGray" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
@@ -197,7 +197,7 @@
             </DataGrid>
 
 
-            <TextBlock Grid.Row="1" Text="{Binding DoneTasksString}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 10 0 0" Width="200" Height="40"/>
+            <TextBlock Grid.Row="1" Text="{Binding DoneTasksString}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 10 0 0" Height="40"/>
 
             <DataGrid  x:Name="UserDoneTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyDoneTaskList}" Margin="0 50 0 20" HorizontalAlignment="Left" Width="700" AutoGenerateColumns="False" ColumnWidth="*"
                               Background="LightGray" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 

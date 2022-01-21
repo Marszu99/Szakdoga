@@ -2,8 +2,8 @@
 {
     public enum TaskStatus
     {
-        Created,
-        InProgress,
-        Done
+        Created,    //ResourceHandler.GetResourceString("Created");
+        InProgress, //ResourceHandler.GetResourceString("InProgress");
+        Done        //ResourceHandler.GetResourceString("Done");
     }
 }

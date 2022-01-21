@@ -325,10 +325,10 @@
     <value>Status</value>
   </data>
   <data name="StatusCannotBeCreatedWithRecords" xml:space="preserve">
-    <value>Status cannot be Created when there is recods for the task!</value>
+    <value>Status cannot be "Created" when there is recods for the task!</value>
   </data>
   <data name="StatusCannotBeDoneWithNoRecords" xml:space="preserve">
-    <value>Status cannot be Done when there is no recods for the task!</value>
+    <value>Status cannot be "Done" when there is no recods for the task!</value>
   </data>
   <data name="Task" xml:space="preserve">
     <value>Task</value>

@@ -48,7 +48,7 @@
                      <Hyperlink x:Name="RegisterButton" Command="{Binding ShowRegisterCommand}" FontSize="35" FontStyle="Normal" Foreground="Blue">Register</Hyperlink>
                 </TextBlock>-->
 
-            <Button Grid.Row="1" Grid.Column="1" x:Name="LoginButton" Command="{Binding LoginCommand}" Content="{Binding LoginString}" Height="65" Width="120" FontSize="40" Margin="20 0 0 75" Padding="5"
+            <Button Grid.Row="1" Grid.Column="1" x:Name="LoginButton" Command="{Binding LoginCommand}" Content="{Binding LoginString}" Height="65" FontSize="40" Margin="20 0 0 75" Padding="5"
                     HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">

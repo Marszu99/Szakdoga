@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TimeSheet.Resource
+﻿namespace TimeSheet.Resource
 {
     public static class ResourceHandler
     {
-        public static bool isEnglish = true;
+        public static bool isEnglish;
 
         public static string GetResourceString(string key)
         {
-            if (isEnglish == true)
+            if (isEnglish)
             {
                 return ResourceEN.ResourceManager.GetString(key);
             }

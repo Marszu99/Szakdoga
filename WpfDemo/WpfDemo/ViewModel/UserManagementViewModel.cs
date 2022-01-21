@@ -66,7 +66,16 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return LoginViewModel.LoggedUser.Status == 0 ? "13 0 0 0" : "530 0 0 0"; // 675 a 13 helyett?
+                if (ResourceHandler.isEnglish)
+                {
+                    MessageBox.Show("asd");
+                    return LoginViewModel.LoggedUser.Status == 0 ? "13 0 0 0" : "530 0 0 0"; // 675 a 13 helyett?
+                }
+                else
+                {
+                    return LoginViewModel.LoggedUser.Status == 0 ? "13 0 0 0" : "100 0 0 0"; // 675 a 13 helyett?
+                    MessageBox.Show("sad");
+                }
             }
         }
 

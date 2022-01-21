@@ -682,7 +682,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Status cannot be Created when there is recods for the task!.
+        ///   Looks up a localized string similar to Status cannot be &quot;Created&quot; when there is recods for the task!.
         /// </summary>
         internal static string StatusCannotBeCreatedWithRecords {
             get {
@@ -691,7 +691,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Status cannot be Done when there is no recods for the task!.
+        ///   Looks up a localized string similar to Status cannot be &quot;Done&quot; when there is no recods for the task!.
         /// </summary>
         internal static string StatusCannotBeDoneWithNoRecords {
             get {

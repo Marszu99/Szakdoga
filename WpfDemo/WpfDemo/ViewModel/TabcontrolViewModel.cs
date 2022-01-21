@@ -78,7 +78,7 @@ namespace WpfDemo.ViewModel
         }
         private void ChangeLanguage(object obj)
         {
-            if (ResourceHandler.isEnglish == true)
+            if (ResourceHandler.isEnglish)
             {
                 ResourceHandler.isEnglish = false;
                 _view.TabcontrolWindowContent.Content = new TabcontrolView();
