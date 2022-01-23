@@ -14,8 +14,7 @@
           "System.Data.SqlClient": "4.8.2",
           "TimeSheet.Logic": "1.0.0",
           "TimeSheet.Model": "1.0.0",
-          "TimeSheet.Resource": "1.0.0",
-          "TimeSheet.Resources": "1.0.0"
+          "TimeSheet.Resource": "1.0.0"
         },
         "runtime": {
           "WpfDemo.dll": {}

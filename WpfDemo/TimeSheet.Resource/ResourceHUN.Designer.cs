@@ -781,7 +781,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Helytelen telefonszám.
+        ///   Looks up a localized string similar to Helytelen telefonszám!.
         /// </summary>
         internal static string TelephoneIsInvalid {
             get {

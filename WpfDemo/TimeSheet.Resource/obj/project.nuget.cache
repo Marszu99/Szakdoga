@@ -1,15 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Uc4mk7zg2LYUD6gNhISEYBz2RbITkxXdPZfFAZtxUYeQZ/HCUSbzdXXyvUJcX4q5Y8CDsRnQlleLJCSSU8PJxg==",
+  "dgSpecHash": "zGEu6UrRZwICq6BjjgOMFsF21a5ibw3KQLXpI40TmEzh+soLsAydYHhfw3+PeH7hCXOvsP/KDAehjIhjNIDgVw==",
   "success": true,
-  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Resource\\TimeSheet.Resourcesss.csproj",
+  "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Resource\\TimeSheet.Resource.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Marci\\.nuget\\packages\\microsoft.netcore.app\\2.0.0\\microsoft.netcore.app.2.0.0.nupkg.sha512",
-    "C:\\Users\\Marci\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.0.0\\microsoft.netcore.dotnetapphost.2.0.0.nupkg.sha512",
-    "C:\\Users\\Marci\\.nuget\\packages\\microsoft.netcore.dotnethostpolicy\\2.0.0\\microsoft.netcore.dotnethostpolicy.2.0.0.nupkg.sha512",
-    "C:\\Users\\Marci\\.nuget\\packages\\microsoft.netcore.dotnethostresolver\\2.0.0\\microsoft.netcore.dotnethostresolver.2.0.0.nupkg.sha512",
-    "C:\\Users\\Marci\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
-    "C:\\Users\\Marci\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512"
+    "C:\\Users\\Marci\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Marci\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }

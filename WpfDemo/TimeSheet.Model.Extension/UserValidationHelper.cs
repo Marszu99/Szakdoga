@@ -182,11 +182,15 @@ namespace TimeSheet.Model.Extension
                 result = ResourceHandler.GetResourceString("TelephoneIsEmpty");
             }
 
-            else if (telephoneNumber.Length < MinimumTelephoneLength || telephoneNumber.Length > MaximumTelephoneLength)
+            else if (telephoneNumber.Length < MinimumTelephoneLength || telephoneNumber.Length > MaximumTelephoneLength) // kell-e ez ha a Regex-es a telefon hosszat is megoldja?
             {
-                result = ResourceHandler.GetResourceString("TelephoneWrongLength");
+                result = ResourceHandler.GetResourceString("TelephoneWrongLength");             
             }
-            else if (!PhoneNumberUtil.IsViablePhoneNumber(telephone))//jo ez vagy specifikaljak magyar telefonszamokra mert igy elfogana a 999999999999-et?
+            /*else if (!PhoneNumberUtil.IsViablePhoneNumber(telephone)) //jo ez vagy specifikaljak magyar telefonszamokra mert igy elfogana a 999999999999-et?
+            {
+                result = ResourceHandler.GetResourceString("TelephoneIsInvalid");
+            }*/
+            else if (!Regex.IsMatch(telephone, @"^((?:\+?3|0)6)(?:-|\()?(\d{1,2})(?:-|\))?(\d{3})-?(\d{3,4})$"))    // magyar telefonszamra specifikalt
             {
                 result = ResourceHandler.GetResourceString("TelephoneIsInvalid");
             }

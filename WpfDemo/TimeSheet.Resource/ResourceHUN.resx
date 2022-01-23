@@ -358,7 +358,7 @@
     <value>Telefonszám mezeje üres!</value>
   </data>
   <data name="TelephoneIsInvalid" xml:space="preserve">
-    <value>Helytelen telefonszám</value>
+    <value>Helytelen telefonszám!</value>
   </data>
   <data name="TelephoneWrongLength" xml:space="preserve">
     <value>Telefonszám legalább 11 és legfeljebb 13 számot tartalmazhat!</value>

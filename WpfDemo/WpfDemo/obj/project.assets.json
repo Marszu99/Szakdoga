@@ -473,16 +473,6 @@
         "runtime": {
           "bin/placeholder/TimeSheet.Resource.dll": {}
         }
-      },
-      "TimeSheet.Resources/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.0",
-        "compile": {
-          "bin/placeholder/TimeSheet.Resources.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/TimeSheet.Resources.dll": {}
-        }
       }
     }
   },
@@ -1416,11 +1406,6 @@
       "type": "project",
       "path": "../TimeSheet.Resource/TimeSheet.Resource.csproj",
       "msbuildProject": "../TimeSheet.Resource/TimeSheet.Resource.csproj"
-    },
-    "TimeSheet.Resources/1.0.0": {
-      "type": "project",
-      "path": "../TimeSheet.Resource/TimeSheet.Resourcesss.csproj",
-      "msbuildProject": "../TimeSheet.Resource/TimeSheet.Resourcesss.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1431,8 +1416,7 @@
       "System.Data.SqlClient >= 4.8.2",
       "TimeSheet.Logic >= 1.0.0",
       "TimeSheet.Model >= 1.0.0",
-      "TimeSheet.Resource >= 1.0.0",
-      "TimeSheet.Resources >= 1.0.0"
+      "TimeSheet.Resource >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1470,9 +1454,6 @@
             },
             "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Resource\\TimeSheet.Resource.csproj": {
               "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Resource\\TimeSheet.Resource.csproj"
-            },
-            "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Resource\\TimeSheet.Resourcesss.csproj": {
-              "projectPath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\TimeSheet.Resource\\TimeSheet.Resourcesss.csproj"
             }
           }
         }
