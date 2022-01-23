@@ -86,7 +86,8 @@
             </TextBox>
         </Grid>
 
-        <Button Grid.Row="2" x:Name="AddTaskToUserTaskButton" Command="{Binding ShowAddTaskCommand}" Content="Add Task" Margin="0 0 140 0" Height="30" Width="75"
+        <!--ShowTaskCommand,ShowAddTaskCommand-->
+        <Button Grid.Row="2" x:Name="AddTaskToUserTaskButton" Command="{Binding ShowTaskCommand}" Content="Add Task" Margin="0 0 140 0" Height="30" Width="75"
                     HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="14" BorderThickness="1" BorderBrush="Black" Visibility="{Binding AddTaskButtonVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -111,7 +112,8 @@
                           ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="0" Grid.ColumnSpan="2">
 
                 <DataGrid.InputBindings>
-                    <MouseBinding MouseAction="LeftClick" Command="{Binding ShowUpdateTaskCommand}"/>
+                    <!--ShowTaskCommand,ShowUpdateTaskCommand-->
+                    <MouseBinding MouseAction="LeftClick" Command="{Binding ShowTaskCommand}"/>
                     <KeyBinding Key="Delete"  Command="{Binding DeleteCommand}"/>
                 </DataGrid.InputBindings>
 

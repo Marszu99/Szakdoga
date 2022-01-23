@@ -91,7 +91,7 @@ namespace WpfDemo.ViewModel
         }
         private void Logout(object obj)
         {
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show(ResourceHandler.GetResourceString("LogoutMessage"), ResourceHandler.GetResourceString("Logout"), System.Windows.MessageBoxButton.YesNo);
+            MessageBoxResult messageBoxResult = MessageBox.Show(ResourceHandler.GetResourceString("LogoutMessage"), ResourceHandler.GetResourceString("Logout"), System.Windows.MessageBoxButton.YesNo);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 _view.TabcontrolWindowContent.Content = new LoginView();

@@ -10,17 +10,17 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.9*"></ColumnDefinition>
-            <ColumnDefinition Width="1.5*"></ColumnDefinition>
-            <ColumnDefinition Width="0.75*"></ColumnDefinition>
+            <ColumnDefinition Width="0.9*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="0.75*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="User" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -35,7 +35,7 @@
                    Margin="0" FontSize="26"/>
 
 
-        <TextBox x:Name="AddTaskUser" Background="#eee" Grid.Column="1" Grid.Row="0" Text="{Binding User_Username, UpdateSourceTrigger=PropertyChanged}" 
+        <TextBox x:Name="AddTaskUser" Background="#eee" Grid.Column="1" Grid.Row="0" Text="{Binding CurrentTask.User_Username, UpdateSourceTrigger=PropertyChanged}" 
                  Width="200" Height="30" FontSize="22" HorizontalContentAlignment="Left" Margin="0 0 50 0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -45,9 +45,9 @@
         </TextBox>
 
 
-        <TextBox x:Name="AddTaskTitle" Background="#eee" Grid.Column="1" Grid.Row="1" Text="{Binding Title, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+        <TextBox x:Name="AddTaskTitle" Background="#eee" Grid.Column="1" Grid.Row="1" Text="{Binding CurrentTask.Title, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                  Width="200" Height="30" FontSize="22" HorizontalContentAlignment="Left" Margin="0 0 50 0" BorderThickness="1" BorderBrush="Black"
-                 ToolTipService.ToolTip="{Binding ErrorCollection[Title]}">
+                 ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Title]}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -55,7 +55,7 @@
             </TextBox.Resources>
         </TextBox>
 
-        <TextBox x:Name="AddTaskDescription" Background="#eee" Grid.Column="1" Grid.Row="2" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 1 0"
+        <TextBox x:Name="AddTaskDescription" Background="#eee" Grid.Column="1" Grid.Row="2" Text="{Binding CurrentTask.Description, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 1 0"
                  HorizontalAlignment="Stretch" Height="120" FontSize="22" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" BorderThickness="1" BorderBrush="Black">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -64,17 +64,17 @@
             </TextBox.Resources>
         </TextBox>
 
-        <DatePicker x:Name="AddTaskDeadline" Grid.Column="1" Grid.Row="3" SelectedDate="{Binding Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+        <DatePicker x:Name="AddTaskDeadline" Grid.Column="1" Grid.Row="3" SelectedDate="{Binding CurrentTask.Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                     SelectedDateFormat="Short" Height="35" HorizontalAlignment="Left" FontSize="22" Margin="0 0 0 0"
-                    ToolTipService.ToolTip="{Binding ErrorCollection[Deadline]}">
+                    ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Deadline]}">
         </DatePicker>
 
-        <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="4"
+        <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding CurrentTask.TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="4"
                   Width="150" Height="36" FontSize="22" HorizontalAlignment="Left" HorizontalContentAlignment="Left"
-                  SelectedValue="{Binding Status}" SelectedValuePath="Key" DisplayMemberPath="Value">
+                  SelectedValue="{Binding SelectedTask.Status}" SelectedValuePath="Key" DisplayMemberPath="Value">
         </ComboBox>
 
-        <Button x:Name="AddTaskToUserButton" Command="{Binding AddTaskToUserCommand}" Content="Add" Grid.Column="1" Grid.Row="5" Height="45" Width="60"
+        <Button x:Name="SaveTaskToUserButton" Command="{Binding SaveCommand}" Content="Save" Grid.Column="1" Grid.Row="5" Height="45" Width="60"
                 Margin="0 0 100 0" Padding="3" FontSize="22" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -95,7 +95,7 @@
     </Grid>
 
     <Window.InputBindings>
-        <KeyBinding Key="Enter" Command="{Binding AddTaskToUserCommand}"/>
+        <KeyBinding Key="Enter" Command="{Binding SaveCommand}"/>
         <KeyBinding Key="Esc" Command="{Binding ExitWindowCommand}"/>
     </Window.InputBindings>
 

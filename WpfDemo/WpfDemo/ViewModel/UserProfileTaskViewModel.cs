@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Model.Extension;
+using TimeSheet.Resource;
 using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 
@@ -18,8 +20,11 @@ namespace WpfDemo.ViewModel
         private Task _task;
         private UserProfileTaskView _view;
         private bool _isChanged = false;
+        private bool _isTitleChanged = false;
+        private bool _isDescriptionChanged = false;
+        private bool _isDeadlineChanged = false;
 
-        public Task Task
+        public Task CurrentTask
         {
             get
             {
@@ -28,7 +33,7 @@ namespace WpfDemo.ViewModel
             set
             {
                 _task = value;
-                OnPropertyChanged(nameof(Task));
+                OnPropertyChanged(nameof(CurrentTask));
             }
         }
 
@@ -56,6 +61,7 @@ namespace WpfDemo.ViewModel
                 _task.Title = value;
                 OnPropertyChanged(nameof(Title));
                 _isChanged = true;
+                _isTitleChanged = true;
             }
         }
         public string Description
@@ -69,6 +75,7 @@ namespace WpfDemo.ViewModel
                 _task.Description = value;
                 OnPropertyChanged(nameof(Description));
                 _isChanged = true;
+                _isDescriptionChanged = true;
             }
         }
 
@@ -83,6 +90,7 @@ namespace WpfDemo.ViewModel
                 _task.Deadline = value;
                 OnPropertyChanged(nameof(Deadline));
                 _isChanged = true;
+                _isDeadlineChanged = true;
             }
         }
 
@@ -138,6 +146,19 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public DateTime CreationDate
+        {
+            get
+            {
+                return _task.CreationDate;
+            }
+            set
+            {
+                _task.CreationDate = value;
+                OnPropertyChanged(nameof(CreationDate));
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }
@@ -176,16 +197,15 @@ namespace WpfDemo.ViewModel
             }
         }
 
-
-        public RelayCommand AddTaskToUserCommand { get; private set; }
+        public ICommand SaveCommand { get; }
         public RelayCommand ExitWindowCommand { get; private set; }
 
-        public UserProfileTaskViewModel(Task task)
+        public UserProfileTaskViewModel(Task task, UserProfileTaskView view)
         {
             _task = task;
-           // _view = view;
+            _view = view;
 
-            AddTaskToUserCommand = new RelayCommand(AddTaskToUser, CanExecuteAdd);
+            SaveCommand = new RelayCommand(Save, CanSave);
             ExitWindowCommand = new RelayCommand(ExitWindow, CanExecuteExit);
         }
 
@@ -200,27 +220,12 @@ namespace WpfDemo.ViewModel
         }
 
 
-        private bool CanExecuteAdd(object arg)
+        private bool CanSave(object arg)
         {
-            return !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Deadline.ToString()) && _isChanged == true;
+            return !string.IsNullOrEmpty(CurrentTask.Title) && !string.IsNullOrEmpty(CurrentTask.Deadline.ToString()) && _isChanged;
         }
 
-        /*private void AddTaskToUser(object obj)
-        {
-            try
-            {
-                new TaskRepository(new TaskLogic()).CreateTask(_task, _task.User_idUser);
-                MessageBox.Show("Task has been created for user succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                Refresh();
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show("Server error!");
-            }
-        }*/
-
-
-        private void AddTaskToUser(object obj)
+        private void Save(object obj)
         {
             try
             {
@@ -235,7 +240,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show("Server error!");
+                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
             }
             catch (TaskValidationException)
             {
@@ -253,19 +258,59 @@ namespace WpfDemo.ViewModel
         private void CreateTask()
         {
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
-            MessageBox.Show("Task has been created succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-            Refresh();
+            MessageBox.Show(ResourceHandler.GetResourceString("TaskCreatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+
+            if (this._task.User.Status != 1)
+            {
+                new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("New task!", this._task.IdTask);
+            }
+            RefreshValues();
         }
 
 
         private void UpdateTask()
         {
             new TaskRepository(new TaskLogic()).UpdateTask(this._task, this._task.IdTask, this._task.User_idUser);
-            MessageBox.Show("Task has been updated succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(ResourceHandler.GetResourceString("TaskUpdatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
+
+            if (this._task.User.Status != 1)
+            {
+                if (_isTitleChanged && !_isDescriptionChanged && !_isDeadlineChanged)
+                {
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title has changed!", this._task.IdTask);
+                }
+                else if (!_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
+                {
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description has changed!", this._task.IdTask);
+                }
+                else if (!_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
+                {
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Deadline has changed!", this._task.IdTask);
+                }
+                else if (_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
+                {
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description has changed!", this._task.IdTask);
+                }
+                else if (!_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
+                {
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description and Deadline has changed!", this._task.IdTask);
+                }
+                else if (_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
+                {
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Deadline has changed!", this._task.IdTask);
+                }
+                else if (_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
+                {
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description and Deadline has changed!", this._task.IdTask);
+                }
+                _isTitleChanged = false;
+                _isDescriptionChanged = false;
+                _isDeadlineChanged = false;
+            }
         }
 
-        public void Refresh()
+        public void RefreshValues()
         {
             this.IdTask = 0;
             this.Title = "";

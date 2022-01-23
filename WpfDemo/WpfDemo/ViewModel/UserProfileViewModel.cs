@@ -60,7 +60,7 @@ namespace WpfDemo.ViewModel
         }
 
         private int _currentUserIdUser;
-        public int CuttentUserIdUser
+        public int CurrentUserIdUser
         {
             get
             {
@@ -69,7 +69,7 @@ namespace WpfDemo.ViewModel
             set
             {
                 _currentUserIdUser = value;
-                OnPropertyChanged(nameof(CuttentUserIdUser));
+                OnPropertyChanged(nameof(CurrentUserIdUser));
             }
         }
 
@@ -84,6 +84,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
+
         private string _searchTaskListValue;
         public string SearchTaskListValue
         {
@@ -94,7 +95,7 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(SearchTaskListValue));
                 if (String.IsNullOrWhiteSpace(_searchTaskListValue))
                 {
-                    LoadTasks(CuttentUserIdUser);
+                    LoadTasks(CurrentUserIdUser);
                 }
                 else
                 {
@@ -102,7 +103,7 @@ namespace WpfDemo.ViewModel
 
                     try
                     {
-                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CuttentUserIdUser).Where(task => task.Title.Contains(_searchTaskListValue) || task.Description.Contains(_searchTaskListValue) || task.Deadline.ToShortDateString().Contains(_searchTaskListValue) || task.Status.ToString().Contains(_searchTaskListValue)).ToList();
+                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CurrentUserIdUser).Where(task => task.Title.Contains(_searchTaskListValue) || task.Description.Contains(_searchTaskListValue) || task.Deadline.ToShortDateString().Contains(_searchTaskListValue) || task.Status.ToString().Contains(_searchTaskListValue)).ToList();
                         tasks.ForEach(task => _taskList.Add(task));
                     }
                     catch (SqlException)
@@ -124,7 +125,7 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(SearchRecordListValue));
                 if (String.IsNullOrWhiteSpace(_searchRecordListValue))
                 {
-                    LoadRecords(CuttentUserIdUser);
+                    LoadRecords(CurrentUserIdUser);
                 }
                 else
                 {
@@ -132,7 +133,7 @@ namespace WpfDemo.ViewModel
 
                     try
                     {
-                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(CuttentUserIdUser).Where(record => record.Task_Title.Contains(_searchRecordListValue) || record.User_Username.Contains(_searchRecordListValue) || record.Date.ToShortDateString().Contains(_searchRecordListValue) || record.Comment.Contains(_searchRecordListValue) || record.Duration.ToString().Contains(_searchRecordListValue) || record.Task_Status.ToString().Contains(_searchRecordListValue)).ToList();
+                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUserIdUser).Where(record => record.Task_Title.Contains(_searchRecordListValue) || record.User_Username.Contains(_searchRecordListValue) || record.Date.ToShortDateString().Contains(_searchRecordListValue) || record.Comment.Contains(_searchRecordListValue) || record.Duration.ToString().Contains(_searchRecordListValue) || record.Task_Status.ToString().Contains(_searchRecordListValue)).ToList();
                         records.ForEach(record => _recordList.Add(record));
                     }
                     catch (SqlException)
@@ -162,42 +163,43 @@ namespace WpfDemo.ViewModel
         {
             _currentUserIdUser = userid;
             LoadTasks(userid);
-            LoadRecords(userid); 
+            LoadRecords(userid);
             
             DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
-            ShowTaskCommand = new RelayCommand(ShowTask, CanShowTask);
+            ShowTaskCommand = new RelayCommand(ShowTask, CanShowTask);  // nem joooo!!!
             ShowAddTaskCommand = new RelayCommand(ShowAddTask, CanShowAddTask);
             ShowUpdateTaskCommand = new RelayCommand(ShowUpdateTask, CanShowUpdateTask);
         }
 
         private bool CanShowTask(object arg)
         {
-            return true;
+            return LoginViewModel.LoggedUser.Status != 0;
         }
 
         private void ShowTask(object obj) // nem joooo!!!
         {
             if(_selectedTask == null)
             {
-                UserProfileTaskView Ipagee = new UserProfileTaskView();
-                //SelectedTask = new UserProfileTaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) });
-                (Ipagee.DataContext as UserProfileTaskViewModel).Task.User_idUser = CurrentUser.IdUser;
-                (Ipagee.DataContext as UserProfileTaskViewModel).Task.User_Username = CurrentUser.Username;
-                Ipagee.ShowDialog();
+                UserProfileTaskView Ipage = new UserProfileTaskView();
+                (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.User_idUser = CurrentUser.IdUser;
+                (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.User_Username = CurrentUser.Username;
+                (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.Deadline = DateTime.Today.AddDays(1);
+                Ipage.ShowDialog();
             }
             else
             {
-                UserProfileTaskView Ipagee = new UserProfileTaskView();
-                //SelectedTask = new UserProfileTaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) });
-                //(Ipage.DataContext as UserProfileTaskViewModel).CurrentTask = SelectedTask;
-                (Ipagee.DataContext as UserProfileTaskViewModel).Task.Title = SelectedTask.Title;
-                (Ipagee.DataContext as UserProfileTaskViewModel).Description = SelectedTask.Description;
-                (Ipagee.DataContext as UserProfileTaskViewModel).Deadline = SelectedTask.Deadline;
-                (Ipagee.DataContext as UserProfileTaskViewModel).Status = SelectedTask.Status;
-                (Ipagee.DataContext as UserProfileTaskViewModel).User_idUser = CurrentUser.IdUser;
-                (Ipagee.DataContext as UserProfileTaskViewModel).User_Username = CurrentUser.Username;
-
-                Ipagee.ShowDialog();
+                UserProfileTaskView Ipage = new UserProfileTaskView();
+                (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask = SelectedTask;
+                (Ipage.DataContext as UpdateTaskViewModel).CurrentTask.User_idUser = CurrentUser.IdUser;
+                (Ipage.DataContext as UpdateTaskViewModel).CurrentTask.User_Username = CurrentUser.Username;
+                /*(Ipage.DataContext as UserProfileTaskViewModel).IdTask = SelectedTask.IdTask;
+                (Ipage.DataContext as UserProfileTaskViewModel).Title = SelectedTask.Title;
+                (Ipage.DataContext as UserProfileTaskViewModel).Description = SelectedTask.Description;
+                (Ipage.DataContext as UserProfileTaskViewModel).Deadline = SelectedTask.Deadline;
+                (Ipage.DataContext as UserProfileTaskViewModel).Status = SelectedTask.Status;
+                (Ipage.DataContext as UserProfileTaskViewModel).User_idUser = CurrentUser.IdUser;
+                (Ipage.DataContext as UserProfileTaskViewModel).User_Username = CurrentUser.Username;*/
+                Ipage.ShowDialog();
             }
 
             LoadTasks(CurrentUser.IdUser);
@@ -238,7 +240,6 @@ namespace WpfDemo.ViewModel
         private void ShowAddTask(object obj)
         {
             AddTaskToUser Ipage = new AddTaskToUser();
-            //(Ipage.DataContext as AddTaskToUserViewModel).CurrentUser = (UserTasksDataGrid.SelectedItem as User);
             (Ipage.DataContext as AddTaskToUserViewModel).User_idUser = CurrentUser.IdUser;
             (Ipage.DataContext as AddTaskToUserViewModel).User_Username = CurrentUser.Username;
             Ipage.ShowDialog();

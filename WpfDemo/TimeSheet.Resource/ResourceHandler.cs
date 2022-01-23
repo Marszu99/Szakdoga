@@ -2,7 +2,7 @@
 {
     public static class ResourceHandler
     {
-        public static bool isEnglish;
+        public static bool isEnglish = true;
 
         public static string GetResourceString(string key)
         {
