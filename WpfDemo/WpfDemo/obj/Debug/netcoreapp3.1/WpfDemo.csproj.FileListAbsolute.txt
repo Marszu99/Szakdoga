@@ -83,7 +83,6 @@ C:\Marci\Egyetem\BLB-Soft\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\UserProfi
 C:\Marci\Egyetem\BLB-Soft\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\UserProfileTaskView.baml
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\WpfDemo.csproj.AssemblyReference.cache
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\Components\BindablePasswordBox.g.cs
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\AddTaskToUser.g.cs
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\ListRecordsView.g.cs
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\ListTasksView.g.cs
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\ListUsersView.g.cs
@@ -96,7 +95,6 @@ C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\TabcontrolView.g.cs
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\TaskManagementView.g.cs
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\TaskView.g.cs
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\UpdateTask.g.cs
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\UserManagementView.g.cs
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\UserProfileTaskView.g.cs
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\UserProfileView.g.cs
@@ -145,7 +143,6 @@ C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\WpfDemo.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\WpfDemo.genruntimeconfig.cache
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\Components\BindablePasswordBox.baml
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\AddTaskToUser.baml
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\ListRecordsView.baml
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\ListTasksView.baml
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\ListUsersView.baml
@@ -158,7 +155,6 @@ C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\TabcontrolView.baml
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\TaskManagementView.baml
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\TaskView.baml
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\UpdateTask.baml
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\UserManagementView.baml
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\UserProfileTaskView.baml
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\View\UserProfileView.baml

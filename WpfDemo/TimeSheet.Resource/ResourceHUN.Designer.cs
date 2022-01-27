@@ -70,15 +70,6 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Létrehoz.
-        /// </summary>
-        internal static string Add {
-            get {
-                return ResourceManager.GetString("Add", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Vissza.
         /// </summary>
         internal static string Back {
@@ -502,6 +493,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Új feladat.
+        /// </summary>
+        internal static string NewTask {
+            get {
+                return ResourceManager.GetString("NewTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jelszó.
         /// </summary>
         internal static string Password {
@@ -790,7 +790,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Telefonszám legalább 11 és legfeljebb 13 számot tartalmazhat!.
+        ///   Looks up a localized string similar to Telefonszám legalább 10 és legfeljebb 13 számot tartalmazhat!.
         /// </summary>
         internal static string TelephoneWrongLength {
             get {

@@ -53,7 +53,7 @@ namespace TimeSheet.DataAccess
                 foreach (DataRow dr in dt.Rows)
                 {
                     //Notification notification = new Notification();
-                    //notification.idNotification = int.Parse(dr["idNotification"].ToString());
+                    //notification.IdNotification = int.Parse(dr["IdNotification"].ToString());
                     //notification.Message = dr["Message"].ToString();
 
                     if (count > 1) notifcationMessage += "\n";

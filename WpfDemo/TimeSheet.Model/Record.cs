@@ -8,7 +8,7 @@ namespace TimeSheet.Model
         public DateTime Date { get; set; }
         public string Comment { get; set; }
         public int Duration { get; set; }
-        public string DurationFormatUserProfile { get; set; } // UserProfile miatt
+        //public string DurationFormatUserProfile { get; set; } // UserProfile miatt
         public Task Task { get; set; }
         public User User { get; set; }
         public int User_idUser { get; set; }// ez igy jo-e??

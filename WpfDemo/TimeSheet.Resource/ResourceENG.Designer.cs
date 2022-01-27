@@ -70,15 +70,6 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add.
-        /// </summary>
-        internal static string Add {
-            get {
-                return ResourceManager.GetString("Add", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
         internal static string Back {
@@ -502,6 +493,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Task.
+        /// </summary>
+        internal static string NewTask {
+            get {
+                return ResourceManager.GetString("NewTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         internal static string Password {
@@ -790,7 +790,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Telephone number needs to be greater than 10 and less than 14!.
+        ///   Looks up a localized string similar to Telephone number needs to be greater than 9 and less than 14!.
         /// </summary>
         internal static string TelephoneWrongLength {
             get {

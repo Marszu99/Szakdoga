@@ -10,9 +10,6 @@
     <Compile Update="Components\BindablePasswordBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\AddTaskToUser.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\ListRecordsView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -64,9 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Components\BindablePasswordBox.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="View\AddTaskToUser.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\ListRecordsView.xaml">

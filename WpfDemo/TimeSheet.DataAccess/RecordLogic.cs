@@ -103,7 +103,7 @@ namespace TimeSheet.DataAccess
                     record.Date = DateTime.Parse(dr["Date"].ToString());
                     record.Comment = dr["Comment"].ToString();
                     record.Duration = int.Parse(dr["Duration"].ToString());
-                    record.DurationFormatUserProfile = TimeSpan.FromMinutes(record.Duration).ToString("hh':'mm"); //UserPorfile miatt
+                    //record.DurationFormatUserProfile = TimeSpan.FromMinutes(record.Duration).ToString("hh':'mm"); //UserPorfile miatt
                     record.User_idUser = int.Parse(dr["User_idUser"].ToString());
                     record.User_Username = dr["Username"].ToString();
                     record.Task_idTask = int.Parse(dr["Task_idTask"].ToString());

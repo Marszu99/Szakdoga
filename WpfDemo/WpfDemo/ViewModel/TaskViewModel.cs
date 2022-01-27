@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Model.Extension;
 using TimeSheet.Resource;
+using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 
 
@@ -18,6 +21,7 @@ namespace WpfDemo.ViewModel
     public class TaskViewModel : ViewModelBase, IDataErrorInfo
     {
         private Task _task;
+        //private TaskView _view;
         private bool _isChanged = false;
         private bool _isTitleChanged = false;
         private bool _isDescriptionChanged = false;
@@ -121,8 +125,7 @@ namespace WpfDemo.ViewModel
                     .ToDictionary<TaskStatus, TaskStatus, string>(
                     item => item,
                     item => item.ToString());
-                }
-                
+                }     
             }
         }
 
@@ -194,7 +197,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return LoginViewModel.LoggedUser.Status == 1 ? "*" : "0";
+                return LoginViewModel.LoggedUser.Status == 1 ? "0.8*" : "0";
             }
         }
 
@@ -289,6 +292,7 @@ namespace WpfDemo.ViewModel
         public TaskViewModel(Task task)
         {
             _task = task;
+            //_view = view;
 
             SaveCommand = new RelayCommand(Save, CanSave);
         }
@@ -331,16 +335,64 @@ namespace WpfDemo.ViewModel
 
         private void CreateTask()
         {
+            /*if (this._view.OneTimeTask.IsChecked == true)
+            {
+                //this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
+                MessageBox.Show(ResourceHandler.GetResourceString("OneTime"));
+            }
+            else if (this._view.DailyTask.IsChecked == true)
+            {
+                //TaskService ts = new TaskService();
+                MessageBox.Show(ResourceHandler.GetResourceString("Daily"));
+            }
+            else if (this._view.WeeklyTask.IsChecked == true)
+            {
+                MessageBox.Show(ResourceHandler.GetResourceString("Weekly"));
+            }
+            else if (this._view.MonthlyTask.IsChecked == true)
+            {
+                MessageBox.Show(ResourceHandler.GetResourceString("Monthly"));
+            }*/
+
+
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
             MessageBox.Show(ResourceHandler.GetResourceString("TaskCreatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
 
-            if(this._task.User.Status != 1)
+            if (this._task.User.Status != 1)
             {
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("New task!", this._task.IdTask);
             }
             RefreshValues();
         }
 
+        public class EnumMatchToBooleanConverter : IValueConverter
+        {
+            public object Convert(object value, Type targetType,
+                                  object parameter, CultureInfo culture)
+            {
+                if (value == null || parameter == null)
+                    return false;
+
+                string checkValue = value.ToString();
+                string targetValue = parameter.ToString();
+                return checkValue.Equals(targetValue,
+                         StringComparison.InvariantCultureIgnoreCase);
+            }
+
+            public object ConvertBack(object value, Type targetType,
+                                      object parameter, CultureInfo culture)
+            {
+                if (value == null || parameter == null)
+                    return null;
+
+                bool useValue = (bool)value;
+                string targetValue = parameter.ToString();
+                if (useValue)
+                    return Enum.Parse(targetType, targetValue);
+
+                return null;
+            }
+        }
 
         private void UpdateTask()
         {

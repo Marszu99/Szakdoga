@@ -2,8 +2,7 @@
 {
     public class Notification
     {
-        public int idNotification { get; set; }
+        public int IdNotification { get; set; }
         public string Message { get; set; }
-        public string Password { get; set; }
     }
 }

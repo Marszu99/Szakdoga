@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfDemo.View"
+             xmlns:l="clr-namespace:WpfDemo.ViewModel"
              mc:Ignorable="d" 
-             Name="Task" Height="600" Width="600" Background="DarkGray">
+             Name="Task" Height="650" Width="600" Background="DarkGray">
 
     <Grid Margin="0 0 0 0">
         <Grid.ColumnDefinitions>
@@ -15,10 +16,11 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="{Binding SelectedTask.TaskViewUserRowHeight}"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="1.1*"/>
+            <RowDefinition Height="0.8*"/>
             <RowDefinition Height="0.75*"/>
         </Grid.RowDefinitions>
 
@@ -30,8 +32,11 @@
                    Margin="0 0 15 0" FontSize="30"/>
         <TextBlock Text="{Binding SelectedTask.DeadlineString}"  Grid.Column="0" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0 0 15 0" FontSize="30"/>
-        <TextBlock Text="{Binding SelectedTask.StatusString}"  Grid.Column="0" Grid.Row="4" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Text="Times"  Grid.Column="0" Grid.Row="4" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0 0 15 0" FontSize="30"/>
+        <TextBlock Text="{Binding SelectedTask.StatusString}"  Grid.Column="0" Grid.Row="5" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   Margin="0 0 15 0" FontSize="30"/>
+
 
         <ComboBox x:Name="CreateTaskUser" ItemsSource="{Binding UserList, UpdateSourceTrigger=PropertyChanged}" Padding="2" Grid.Column="1" Grid.Row="0" 
                   Height="37" FontSize="26" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" IsEnabled="{Binding SelectedTask.IsUserEnabled}" 
@@ -67,13 +72,40 @@
                     ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Deadline]}">
         </DatePicker>
 
-        <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="4"
+        <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="5"
                   Width="150" Height="39" FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left"
                   SelectedValue="{Binding SelectedTask.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Key" DisplayMemberPath="Value"
                   ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Status]}">
         </ComboBox>
 
-        <Button x:Name="CreateTaskForUserButton" Command="{Binding SelectedTask.SaveCommand}" Content="{Binding SelectedTask.SaveString}" Grid.Column="1" Grid.Row="5" Height="45" Width="70"
+        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
+            <RadioButton x:Name="OneTimeTask" Content="One Time" FontSize="21" VerticalContentAlignment="Center"/>
+            <RadioButton x:Name="DailyTask" Content="Daily" FontSize="21" VerticalContentAlignment="Center"/>
+            <RadioButton x:Name="WeeklyTask" Content="Weekly" FontSize="21" VerticalContentAlignment="Center"/>
+            <RadioButton x:Name="MonthlyTask" Content="Monthly" FontSize="21" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <!--<Grid Grid.Column="1" Grid.Row="4">
+            <Grid.Resources>
+                <l:EnumMatchToBooleanConverter x:Key="enumConverter" />
+            </Grid.Resources>
+
+            <RadioButton Content="Option 1" GroupName="Options1" 
+             IsChecked="{Binding Path=CurrentOption, Mode=TwoWay, 
+                                 Converter={StaticResource enumConverter},
+                                 ConverterParameter=Option1}"  />
+            <RadioButton Content="Option 2" GroupName="Options2" 
+                 IsChecked="{Binding Path=CurrentOption, Mode=TwoWay, 
+                                     Converter={StaticResource enumConverter},
+                                     ConverterParameter=Option2}"  />
+            <RadioButton Content="Option 3" GroupName="Options3" 
+                 IsChecked="{Binding Path=CurrentOption, Mode=TwoWay, 
+                                     Converter={StaticResource enumConverter},
+                                     ConverterParameter=Option3}"  />
+        </Grid>
+        -->
+
+        <Button x:Name="CreateTaskForUserButton" Command="{Binding SelectedTask.SaveCommand}" Content="{Binding SelectedTask.SaveString}" Grid.Column="1" Grid.Row="6" Height="45" Width="70"
                 Margin="0 0 160 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -87,5 +119,5 @@
     <UserControl.InputBindings>
         <KeyBinding Key="Enter" Command="{Binding SelectedTask.SaveCommand}"/>
     </UserControl.InputBindings>
-    
+
 </UserControl>

@@ -155,9 +155,7 @@ namespace WpfDemo.ViewModel
 
 
         public RelayCommand DeleteCommand { get; private set; }
-        public RelayCommand ShowTaskCommand { get; private set; } // nem joooo!!!
-        public RelayCommand ShowAddTaskCommand { get; private set; }
-        public RelayCommand ShowUpdateTaskCommand { get; private set; }
+        public RelayCommand ShowTaskCommand { get; private set; }
 
         public UserProfileViewModel(int userid)
         {
@@ -166,9 +164,7 @@ namespace WpfDemo.ViewModel
             LoadRecords(userid);
             
             DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
-            ShowTaskCommand = new RelayCommand(ShowTask, CanShowTask);  // nem joooo!!!
-            ShowAddTaskCommand = new RelayCommand(ShowAddTask, CanShowAddTask);
-            ShowUpdateTaskCommand = new RelayCommand(ShowUpdateTask, CanShowUpdateTask);
+            ShowTaskCommand = new RelayCommand(ShowTask, CanShowTask);
         }
 
         private bool CanShowTask(object arg)
@@ -176,7 +172,7 @@ namespace WpfDemo.ViewModel
             return LoginViewModel.LoggedUser.Status != 0;
         }
 
-        private void ShowTask(object obj) // nem joooo!!!
+        private void ShowTask(object obj)
         {
             if(_selectedTask == null)
             {
@@ -184,21 +180,16 @@ namespace WpfDemo.ViewModel
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.User_idUser = CurrentUser.IdUser;
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.User_Username = CurrentUser.Username;
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.Deadline = DateTime.Today.AddDays(1);
+                (Ipage.DataContext as UserProfileTaskViewModel).CurrentUser_Status = CurrentUser.Status;
+                //(Ipage.DataContext as UserProfileTaskViewModel).CurrentUser = CurrentUser;
                 Ipage.ShowDialog();
             }
             else
             {
                 UserProfileTaskView Ipage = new UserProfileTaskView();
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask = SelectedTask;
-                (Ipage.DataContext as UpdateTaskViewModel).CurrentTask.User_idUser = CurrentUser.IdUser;
-                (Ipage.DataContext as UpdateTaskViewModel).CurrentTask.User_Username = CurrentUser.Username;
-                /*(Ipage.DataContext as UserProfileTaskViewModel).IdTask = SelectedTask.IdTask;
-                (Ipage.DataContext as UserProfileTaskViewModel).Title = SelectedTask.Title;
-                (Ipage.DataContext as UserProfileTaskViewModel).Description = SelectedTask.Description;
-                (Ipage.DataContext as UserProfileTaskViewModel).Deadline = SelectedTask.Deadline;
-                (Ipage.DataContext as UserProfileTaskViewModel).Status = SelectedTask.Status;
-                (Ipage.DataContext as UserProfileTaskViewModel).User_idUser = CurrentUser.IdUser;
-                (Ipage.DataContext as UserProfileTaskViewModel).User_Username = CurrentUser.Username;*/
+                (Ipage.DataContext as UserProfileTaskViewModel).CurrentUser_Status = CurrentUser.Status;
+                //(Ipage.DataContext as UserProfileTaskViewModel).CurrentUser = CurrentUser;
                 Ipage.ShowDialog();
             }
 
@@ -206,14 +197,6 @@ namespace WpfDemo.ViewModel
         }
 
         private bool CanDeleteTask(object arg)
-        {
-            return _selectedTask != null && LoginViewModel.LoggedUser.Status != 0;
-        }
-        private bool CanShowAddTask(object arg)
-        {
-            return true;
-        }
-        private bool CanShowUpdateTask(object arg)
         {
             return _selectedTask != null && LoginViewModel.LoggedUser.Status != 0;
         }
@@ -237,32 +220,17 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private void ShowAddTask(object obj)
-        {
-            AddTaskToUser Ipage = new AddTaskToUser();
-            (Ipage.DataContext as AddTaskToUserViewModel).User_idUser = CurrentUser.IdUser;
-            (Ipage.DataContext as AddTaskToUserViewModel).User_Username = CurrentUser.Username;
-            Ipage.ShowDialog();
-            LoadTasks(CurrentUser.IdUser);
-        }
-
-        private void ShowUpdateTask(object obj)
-        {
-            UpdateTask Ipage = new UpdateTask();
-            (Ipage.DataContext as UpdateTaskViewModel).CurrentTask = SelectedTask;
-            (Ipage.DataContext as UpdateTaskViewModel).CurrentTask.User_idUser = CurrentUser.IdUser;
-            (Ipage.DataContext as UpdateTaskViewModel).CurrentTask.User_Username = CurrentUser.Username;
-            Ipage.ShowDialog();
-            LoadTasks(CurrentUser.IdUser);
-        }
-
 
         void LoadRecords(int userid)
         {
             _recordList.Clear();
 
             var records = new RecordRepository(new RecordLogic()).GetUserRecords(userid);//CurrentUser.IdUser
-            records.ForEach(record => _recordList.Add(record));  //TimeSpan.FromMinutes(_record.Duration).ToString("hh':'mm");
+            records.ForEach(record => _recordList.Add(record));  //TimeSpan.FromMinutes(record.Duration).ToString("hh':'mm");
+                                                                 //record.Duration == record.Duration.Replace(TimeSpan.FromMinutes(record.Duration).ToString("hh':'mm"))
+                                                                 //_recordList.Select(record => record.Duration.Replace(TimeSpan.FromMinutes(record.Duration).ToString("hh':'mm"));
+
+            //var recordss = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUserIdUser).Where(record => record.Duration.Replace(TimeSpan.FromMinutes(record.Duration).ToString("hh':'mm"))).ToList();
         }
         void LoadTasks(int userid)
         {
@@ -271,7 +239,6 @@ namespace WpfDemo.ViewModel
             var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
             tasks.ForEach(task => _taskList.Add(task));
         }
-
 
         public string UsernameString
         {
@@ -341,6 +308,13 @@ namespace WpfDemo.ViewModel
             get
             {
                 return ResourceHandler.GetResourceString("Status");
+            }
+        }
+        public string NewTaskString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("NewTask");
             }
         }
         public string RecordsString
