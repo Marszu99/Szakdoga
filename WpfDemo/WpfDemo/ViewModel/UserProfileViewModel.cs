@@ -180,7 +180,6 @@ namespace WpfDemo.ViewModel
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.User_idUser = CurrentUser.IdUser;
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.User_Username = CurrentUser.Username;
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.Deadline = DateTime.Today.AddDays(1);
-                (Ipage.DataContext as UserProfileTaskViewModel).CurrentUser_Status = CurrentUser.Status;
                 //(Ipage.DataContext as UserProfileTaskViewModel).CurrentUser = CurrentUser;
                 Ipage.ShowDialog();
             }
@@ -188,7 +187,6 @@ namespace WpfDemo.ViewModel
             {
                 UserProfileTaskView Ipage = new UserProfileTaskView();
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask = SelectedTask;
-                (Ipage.DataContext as UserProfileTaskViewModel).CurrentUser_Status = CurrentUser.Status;
                 //(Ipage.DataContext as UserProfileTaskViewModel).CurrentUser = CurrentUser;
                 Ipage.ShowDialog();
             }
@@ -203,7 +201,7 @@ namespace WpfDemo.ViewModel
 
         private void DeleteTask(object obj)
         {
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show(ResourceHandler.GetResourceString("TaskDeleteQuestion1") + SelectedTask.Title + ResourceHandler.GetResourceString("TaskDeleteQuestion2"), ResourceHandler.GetResourceString("Warning"), System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult messageBoxResult = MessageBox.Show(ResourceHandler.GetResourceString("TaskDeleteQuestion1") + SelectedTask.Title + ResourceHandler.GetResourceString("TaskDeleteQuestion2"), ResourceHandler.GetResourceString("Warning"), MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 try
@@ -315,6 +313,13 @@ namespace WpfDemo.ViewModel
             get
             {
                 return ResourceHandler.GetResourceString("NewTask");
+            }
+        }
+        public string DeleteString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Delete");
             }
         }
         public string RecordsString

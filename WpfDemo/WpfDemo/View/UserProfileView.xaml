@@ -117,7 +117,7 @@
 
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Delete" Command="{Binding DeleteCommand}"/>
+                        <MenuItem Header="{Binding DeleteString}" Command="{Binding DeleteCommand}"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
 

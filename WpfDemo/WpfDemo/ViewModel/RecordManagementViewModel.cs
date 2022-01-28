@@ -328,6 +328,13 @@ namespace WpfDemo.ViewModel
                 return ResourceHandler.GetResourceString("Search");
             }
         }
+        public string DeleteString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Delete");
+            }
+        }
         public string TaskString
         {
             get

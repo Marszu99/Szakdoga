@@ -43,7 +43,7 @@
                   SelectedItem="{Binding SelectedTask.User, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[User]}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Username}"></TextBlock>
+                    <TextBlock Text="{Binding Username}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

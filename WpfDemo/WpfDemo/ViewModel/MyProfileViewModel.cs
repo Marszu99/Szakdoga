@@ -14,7 +14,7 @@ using WpfDemo.ViewModel.Command;
 
 namespace WpfDemo.ViewModel
 {
-    public class MyProfileViewModel: ViewModelBase, IDataErrorInfo
+    public class MyProfileViewModel : ViewModelBase, IDataErrorInfo
     {
 
         private User _user;
@@ -102,7 +102,23 @@ namespace WpfDemo.ViewModel
             {
                 CurrentLoggedUser.Telephone = value;
                 OnPropertyChanged(nameof(Telephone));
+
                 _isChanged = true;
+            }
+        }
+
+        private bool NewUserValuesHasBeenAdded
+        {
+            get
+            {
+                return (string.IsNullOrWhiteSpace(CurrentLoggedUser.FirstName) || string.IsNullOrWhiteSpace(CurrentLoggedUser.LastName) || string.IsNullOrWhiteSpace(CurrentLoggedUser.Telephone)) ? false : true;              
+            }
+        }
+        public string MyProfileViewWindowStyle
+        {
+            get
+            {               
+                return !NewUserValuesHasBeenAdded ? "None" : "SingleBorderWindow";
             }
         }
 
@@ -175,13 +191,13 @@ namespace WpfDemo.ViewModel
         }
         private bool CanExecuteSave(object arg)
         {
-           return !string.IsNullOrEmpty(CurrentLoggedUser.Password) && !string.IsNullOrEmpty(CurrentLoggedUser.FirstName) && !string.IsNullOrEmpty(CurrentLoggedUser.LastName) &&
-                  !string.IsNullOrEmpty(CurrentLoggedUser.Email) && !string.IsNullOrEmpty(CurrentLoggedUser.Telephone) && _isChanged == true;
+            return !string.IsNullOrEmpty(CurrentLoggedUser.Password) && !string.IsNullOrEmpty(CurrentLoggedUser.FirstName) && !string.IsNullOrEmpty(CurrentLoggedUser.LastName) &&
+                    !string.IsNullOrEmpty(CurrentLoggedUser.Email) && !string.IsNullOrEmpty(CurrentLoggedUser.Telephone) && _isChanged;
         }
         private bool CanExecuteCancel(object arg)
         {
             return true;
-        }          
+        }
 
         private void ChangeUserValues(object obj)
         {
@@ -256,6 +272,8 @@ namespace WpfDemo.ViewModel
                 _view.ChangeUserValuesButton.Visibility = Visibility.Visible;
                 _view.SaveChangedUserValuesButton.Visibility = Visibility.Hidden;
                 _view.CancelChangeUserValuesButton.Visibility = Visibility.Hidden;
+
+                OnPropertyChanged(nameof(MyProfileViewWindowStyle));
             }
             catch (SqlException)
             {
@@ -269,6 +287,7 @@ namespace WpfDemo.ViewModel
 
         private void CancelChangeUserValues(object obj)
         {
+            CurrentLoggedUser = new UserRepository(new UserLogic()).GetUserByUsername(CurrentLoggedUser.Username);
             //_view.MyProfilePassword.IsReadOnly = true;
             _view.MyProfilePassword.IsEnabled = false;
 

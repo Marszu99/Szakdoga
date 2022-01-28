@@ -28,6 +28,7 @@ namespace WpfDemo.ViewModel
                 _selectedUser = value;
                 OnPropertyChanged(nameof(SelectedUser));
                 OnPropertyChanged(nameof(SelectedUserVisibility));
+                OnPropertyChanged(nameof(ListUsersViewContextMenuVisibility));
             }
         }
 
@@ -81,7 +82,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+                return LoginViewModel.LoggedUser.Status == 0 || SelectedUser.Username == LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 
@@ -225,6 +226,13 @@ namespace WpfDemo.ViewModel
             get
             {
                 return ResourceHandler.GetResourceString("Search");
+            }
+        }
+        public string DeleteString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Delete");
             }
         }
         public string UsernameString

@@ -156,20 +156,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private int _currentUser_Status;
-        public int CurrentUser_Status
-        {
-            get
-            {
-                return _currentUser_Status;
-            }
-            set
-            {
-                _currentUser_Status = value;
-                OnPropertyChanged(nameof(CurrentUser_Status));
-            }
-        }
-
         public DateTime CreationDate
         {
             get
@@ -288,7 +274,7 @@ namespace WpfDemo.ViewModel
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User_idUser);
             MessageBox.Show(ResourceHandler.GetResourceString("TaskCreatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
 
-            if (_currentUser_Status != 1)
+            if (this._task.User_Username != LoginViewModel.LoggedUser.Username)
             {
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("New task!", this._task.IdTask);
             }
@@ -302,7 +288,7 @@ namespace WpfDemo.ViewModel
             MessageBox.Show(ResourceHandler.GetResourceString("TaskUpdatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
 
-            if (_currentUser_Status != 1)
+            if (this._task.User_Username != LoginViewModel.LoggedUser.Username)
             {
                 if (_isTitleChanged && !_isDescriptionChanged && !_isDeadlineChanged)
                 {

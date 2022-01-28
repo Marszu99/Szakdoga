@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfDemo.View" xmlns:components="clr-namespace:WpfDemo.Components"
         mc:Ignorable="d"
         Title="MyProfil" Width="1550" Height="870" Background="DarkGray" 
-        WindowStartupLocation="Manual" ResizeMode="NoResize"
+        WindowStartupLocation="Manual" ResizeMode="NoResize" WindowStyle="{Binding MyProfileViewWindowStyle}"
         Left="-8" Top="0">
 
     <Grid Margin="5 0 5 0">

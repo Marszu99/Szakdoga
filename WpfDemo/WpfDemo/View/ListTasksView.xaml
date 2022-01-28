@@ -30,7 +30,7 @@
 
                     <DataGrid.ContextMenu>
                         <ContextMenu Visibility="{Binding ListTasksViewContextMenuVisibility}">
-                            <MenuItem Header="Delete" Command="{Binding DeleteCommand}"/>
+                            <MenuItem Header="{Binding DeleteString}" Command="{Binding DeleteCommand}"/>
                         </ContextMenu>
                     </DataGrid.ContextMenu>
 
