@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
+using System.Text;
 using System.Windows;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
@@ -313,7 +315,8 @@ namespace WpfDemo.ViewModel
                 {
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
                     MessageBox.Show(ResourceHandler.GetResourceString("TaskDeletedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    
+                    SendNotificationEmail(SelectedTask.Title);
                     RefreshTaskList(obj);
                 }
                 catch (SqlException)
@@ -325,14 +328,22 @@ namespace WpfDemo.ViewModel
 
         private bool IsTaskClicked(object arg)
         {
-            return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotifications(SelectedTask.IdTask) != null;//new NotificationRepository(new NotificationLogic()).GetTaskNotifications(SelectedTask.IdTask).Count != 0;
+            if (LoginViewModel.LoggedUser.Status == 1)
+            {
+                return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(SelectedTask.IdTask) != null;
+            }
+            else
+            {
+                return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(SelectedTask.IdTask) != null;
+            }
+            //return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotifications(SelectedTask.IdTask) != null;//new NotificationRepository(new NotificationLogic()).GetTaskNotifications(SelectedTask.IdTask).Count != 0;
         }
 
         private void HasRead(object obj)
         {
             try
             {
-                new NotificationRepository(new NotificationLogic()).HasReadNotification(SelectedTask.IdTask);
+                new NotificationRepository(new NotificationLogic()).HasReadNotification(SelectedTask.IdTask, LoginViewModel.LoggedUser.Status);
 
                 RefreshTaskList(obj);
             }
@@ -340,6 +351,24 @@ namespace WpfDemo.ViewModel
             {
                 MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
             }
+        }
+
+        private void SendNotificationEmail(string TaskTitle)
+        {
+            SmtpClient client = new SmtpClient();
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            //client.Timeout = 10;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential("wpfszakdoga@gmail.com", "Marszu99");
+            string EmailSubject = "Task Notification";
+            string EmailMessage = TaskTitle + " has been deleted!";
+            MailMessage mm = new MailMessage("wpfszakdoga@gmail.com", SelectedTask.User.Email, EmailSubject, EmailMessage);
+            mm.BodyEncoding = UTF8Encoding.UTF8;
+            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            client.Send(mm);
         }
 
 

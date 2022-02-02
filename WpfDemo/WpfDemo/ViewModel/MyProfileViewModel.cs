@@ -14,12 +14,14 @@ using WpfDemo.ViewModel.Command;
 
 namespace WpfDemo.ViewModel
 {
-    public class MyProfileViewModel : ViewModelBase, IDataErrorInfo
+    public class MyProfileViewModel : ViewModelBase, IDataErrorInfo//IEditableObject,IRevertibleChangeTracking 
     {
 
         private User _user;
         private MyProfileView _view;
         private bool _isChanged = false;
+        private System.ComponentModel.IEditableObject _IEditableObject;
+        private System.ComponentModel.IRevertibleChangeTracking _IRevertibleChangeTracking;
 
 
         public User CurrentLoggedUser
@@ -230,6 +232,8 @@ namespace WpfDemo.ViewModel
             _view.ChangeUserValuesButton.Visibility = Visibility.Hidden;
             _view.SaveChangedUserValuesButton.Visibility = Visibility.Visible;
             _view.CancelChangeUserValuesButton.Visibility = Visibility.Visible;
+
+            //_IEditableObject.BeginEdit();
         }
 
         private void SaveChangedUserValues(object obj)
@@ -287,7 +291,9 @@ namespace WpfDemo.ViewModel
 
         private void CancelChangeUserValues(object obj)
         {
-            CurrentLoggedUser = new UserRepository(new UserLogic()).GetUserByUsername(CurrentLoggedUser.Username);
+            _IRevertibleChangeTracking.RejectChanges();
+            //_IEditableObject.CancelEdit();
+
             //_view.MyProfilePassword.IsReadOnly = true;
             _view.MyProfilePassword.IsEnabled = false;
 
@@ -323,23 +329,23 @@ namespace WpfDemo.ViewModel
         }
 
 
-        private ObservableCollection<Task> _mytodotaskList = new ObservableCollection<Task>();
-        private ObservableCollection<Task> _mydonetaskList = new ObservableCollection<Task>();
+        private ObservableCollection<Task> _myToDoTaskList = new ObservableCollection<Task>();
+        private ObservableCollection<Task> _myDoneTaskList = new ObservableCollection<Task>();
 
         public ObservableCollection<Task> MyToDoTaskList
         {
             get
             {
-                return _mytodotaskList;
+                return _myToDoTaskList;
             }
         }
 
-        void LoadToDoTasks()
+        public void LoadToDoTasks()
         {
-            _mytodotaskList.Clear();
+            _myToDoTaskList.Clear();
 
             var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser);
-            tasks.ForEach(task => _mytodotaskList.Add(task));
+            tasks.ForEach(task => _myToDoTaskList.Add(task));
         }
 
 
@@ -347,16 +353,16 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _mydonetaskList;
+                return _myDoneTaskList;
             }
         }
 
-        void LoadDoneTasks()
+        public void LoadDoneTasks()
         {
-            _mydonetaskList.Clear();
+            _myDoneTaskList.Clear();
 
             var tasks = new TaskRepository(new TaskLogic()).GetAllDoneTasksFromUser(LoginViewModel.LoggedUser.IdUser);
-            tasks.ForEach(task => _mydonetaskList.Add(task));
+            tasks.ForEach(task => _myDoneTaskList.Add(task));
         }
 
 

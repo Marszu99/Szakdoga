@@ -799,15 +799,6 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Telephone number needs to be greater than 9 and less than 14!.
-        /// </summary>
-        internal static string TelephoneWrongLength {
-            get {
-                return ResourceManager.GetString("TelephoneWrongLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         internal static string Title {

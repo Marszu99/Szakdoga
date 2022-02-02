@@ -1,6 +1,4 @@
-﻿using PhoneNumbers;
-using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 using TimeSheet.DataAccess;
 using TimeSheet.Resource;
@@ -19,8 +17,6 @@ namespace TimeSheet.Model.Extension
         private const int MaximumLastNameLength = 45;
         private const int MinimumEmailLength = 11;
         private const int MaximumEmailLength = 100;
-        private const int MinimumTelephoneLength = 10;
-        private const int MaximumTelephoneLength = 13;
         private const int MinimumCompanyNameLength = 10;
         private const int MaximumCompanyNameLength = 60;
 
@@ -168,25 +164,11 @@ namespace TimeSheet.Model.Extension
         {
             string result = null;
 
-            string telephoneNumber = null;
-            foreach (char telephoneCharacter in telephone)
-            {
-                if (char.IsDigit(telephoneCharacter))
-                {
-                    telephoneNumber += telephoneCharacter;
-                }
-            }
-
             if (string.IsNullOrWhiteSpace(telephone))
             {
                 result = ResourceHandler.GetResourceString("TelephoneIsEmpty");
             }
-
-            else if (telephoneNumber.Length < MinimumTelephoneLength || telephoneNumber.Length > MaximumTelephoneLength) // kell-e ez ha a Regex-es a telefon hosszat is megoldja?
-            {
-                result = ResourceHandler.GetResourceString("TelephoneWrongLength");
-            }
-            /*else if (!PhoneNumberUtil.IsViablePhoneNumber(telephone)) //jo ez vagy specifikaljak magyar telefonszamokra mert igy elfogana a 999999999999-et?
+            /*else if (!PhoneNumberUtil.IsViablePhoneNumber(telephone))
             {
                 result = ResourceHandler.GetResourceString("TelephoneIsInvalid");
             }*/

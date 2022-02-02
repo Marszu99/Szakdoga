@@ -799,15 +799,6 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Telefonszám legalább 10 és legfeljebb 13 számot tartalmazhat!.
-        /// </summary>
-        internal static string TelephoneWrongLength {
-            get {
-                return ResourceManager.GetString("TelephoneWrongLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cím.
         /// </summary>
         internal static string Title {

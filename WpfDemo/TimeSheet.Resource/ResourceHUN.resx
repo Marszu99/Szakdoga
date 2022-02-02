@@ -363,9 +363,6 @@
   <data name="TelephoneIsInvalid" xml:space="preserve">
     <value>Helytelen telefonszám!</value>
   </data>
-  <data name="TelephoneWrongLength" xml:space="preserve">
-    <value>Telefonszám legalább 10 és legfeljebb 13 számot tartalmazhat!</value>
-  </data>
   <data name="Title" xml:space="preserve">
     <value>Cím</value>
   </data>

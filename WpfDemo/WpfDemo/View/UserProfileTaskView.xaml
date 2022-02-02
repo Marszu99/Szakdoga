@@ -70,7 +70,7 @@
         </DatePicker>
 
         <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="4"
-                  Width="150" Height="38" FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left"
+                  Width="150" Height="38" FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="{Binding IsUserProfileTaskViewStatusEnabled}"
                   SelectedValue="{Binding Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Key" DisplayMemberPath="Value"
                   ToolTipService.ToolTip="{Binding ErrorCollection[Status]}">
         </ComboBox>

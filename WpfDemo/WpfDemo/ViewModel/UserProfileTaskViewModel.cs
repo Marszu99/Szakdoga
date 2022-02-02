@@ -169,6 +169,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public bool IsUserProfileTaskViewStatusEnabled
+        {
+            get
+            {
+                return _task.User_Username == LoginViewModel.LoggedUser.Username;
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }
@@ -276,7 +284,7 @@ namespace WpfDemo.ViewModel
 
             if (this._task.User_Username != LoginViewModel.LoggedUser.Username)
             {
-                new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("New task!", this._task.IdTask);
+                new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("New task!", 0, this._task.IdTask);
             }
             RefreshValues();
         }
@@ -292,31 +300,31 @@ namespace WpfDemo.ViewModel
             {
                 if (_isTitleChanged && !_isDescriptionChanged && !_isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title has changed!", this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title has changed!", 0, this._task.IdTask);
                 }
                 else if (!_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description has changed!", this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description has changed!", 0, this._task.IdTask);
                 }
                 else if (!_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Deadline has changed!", this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Deadline has changed!", 0, this._task.IdTask);
                 }
                 else if (_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description has changed!", this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description has changed!", 0, this._task.IdTask);
                 }
                 else if (!_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description and Deadline has changed!", this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description and Deadline has changed!", 0, this._task.IdTask);
                 }
                 else if (_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Deadline has changed!", this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Deadline has changed!", 0, this._task.IdTask);
                 }
                 else if (_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description and Deadline has changed!", this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description and Deadline has changed!", 0, this._task.IdTask);
                 }
                 _isTitleChanged = false;
                 _isDescriptionChanged = false;
