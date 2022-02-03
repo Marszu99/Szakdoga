@@ -267,6 +267,9 @@
   <data name="NewTask" xml:space="preserve">
     <value>Új feladat</value>
   </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Értesítések</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Jelszó</value>
   </data>

@@ -55,11 +55,11 @@ namespace WpfDemo.ViewModel
             {
                 if (ResourceHandler.isEnglish)
                 {
-                    return LoginViewModel.LoggedUser.Status == 0 ? "468.7 0 0 0" : "290 0 0 0";
+                    return LoginViewModel.LoggedUser.Status == 0 ? "331.5 0 0 0" : "152.5 0 0 0";//"468.7 0 0 0" : "290 0 0 0"
                 }
                 else
                 {
-                    return LoginViewModel.LoggedUser.Status == 0 ? "438 0 0 0" : "244 0 0 0";
+                    return LoginViewModel.LoggedUser.Status == 0 ? "316 0 0 0" : "122 0 0 0";//"438 0 0 0" : "244 0 0 0"
                 }
             }
         }
@@ -110,6 +110,8 @@ namespace WpfDemo.ViewModel
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand HasReadCommand { get; private set; }
+        public static RelayCommand NotificationsSwitchOnOffCommand { get; private set; }
+
 
 
         public TaskManagementViewModel(TaskManagementView view)
@@ -122,7 +124,8 @@ namespace WpfDemo.ViewModel
             RefreshTaskListCommand = new RelayCommand(RefreshTaskList, CanExecuteRefresh);
             SortingByCheckBoxCommand = new RelayCommand(SortingByCheckBox, CanExecuteSort);
             DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
-            HasReadCommand = new RelayCommand(HasRead, IsTaskClicked);
+            HasReadCommand = new RelayCommand(HasRead, CanExecuteReadTaskNotifications);
+            NotificationsSwitchOnOffCommand = new RelayCommand(NotificationSwitchOnOff, CanExecuteSwitch);
         }
 
 
@@ -326,16 +329,23 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private bool IsTaskClicked(object arg)
+        private bool CanExecuteReadTaskNotifications(object arg)
         {
-            if (LoginViewModel.LoggedUser.Status == 1)
+            if (TaskViewModel.IsNotificationsOn)
             {
-                return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(SelectedTask.IdTask) != null;
+                if (LoginViewModel.LoggedUser.Status == 1)
+                {
+                    return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(SelectedTask.IdTask) != null;
+                }
+                else
+                {
+                    return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(SelectedTask.IdTask) != null;
+                }
             }
             else
             {
-                return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(SelectedTask.IdTask) != null;
-            }
+                return false;
+            }        
             //return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotifications(SelectedTask.IdTask) != null;//new NotificationRepository(new NotificationLogic()).GetTaskNotifications(SelectedTask.IdTask).Count != 0;
         }
 
@@ -350,6 +360,24 @@ namespace WpfDemo.ViewModel
             catch (SqlException)
             {
                 MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+            }
+        }
+
+        private bool CanExecuteSwitch(object arg)
+        {
+            return true;
+        }
+        private void NotificationSwitchOnOff(object obj)
+        {
+            if (_view.NotificationsCheckBox.IsChecked == true)
+            {
+                TaskViewModel.IsNotificationsOn = true;
+                RefreshTaskList(obj);
+            }
+            else
+            {
+                TaskViewModel.IsNotificationsOn = false;
+                RefreshTaskList(obj);
             }
         }
 
@@ -398,6 +426,13 @@ namespace WpfDemo.ViewModel
             get
             {
                 return ResourceHandler.GetResourceString("ActiveTasks");
+            }
+        }
+        public string NotificationsString
+        {
+            get
+            {
+                return ResourceHandler.GetResourceString("Notifications");
             }
         }
         public string SearchString

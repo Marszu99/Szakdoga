@@ -29,6 +29,7 @@ namespace WpfDemo.ViewModel
         private bool _isDescriptionChanged = false;
         private bool _isDeadlineChanged = false;
         private bool _isStatusChanged = false;
+        public static bool IsNotificationsOn = true;
 
 
         public Task Task
@@ -230,20 +231,20 @@ namespace WpfDemo.ViewModel
         }
 
 
-        //private string _notificationText;
         public string NotificationText
         {
             get
             {
                 //return _task.User_Username == LoginViewModel.LoggedUser.Username ? new NotificationRepository(new NotificationLogic()).GetTaskNotifications(this._task.IdTask) : null;
-                return LoginViewModel.LoggedUser.Status == 1 ? new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(this._task.IdTask) : new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(this._task.IdTask);
-
+                if (IsNotificationsOn)
+                {
+                    return LoginViewModel.LoggedUser.Status == 1 ? new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(this._task.IdTask) : new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(this._task.IdTask);
+                }
+                else
+                {
+                    return null;
+                }
             }
-            /*set
-            {
-                _notificationText = value;
-                OnPropertyChanged(NotificationText);
-            }*/
         }
 
         public string ListTasksBackground
@@ -251,9 +252,15 @@ namespace WpfDemo.ViewModel
             get
             {
                 //return _task.User_Username == LoginViewModel.LoggedUser.Username && new NotificationRepository(new NotificationLogic()).GetTaskNotifications(this._task.IdTask) != null ? "DarkOrange" : "#eee";
-                return (LoginViewModel.LoggedUser.Status == 1 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(this._task.IdTask) != null)
-                       || (LoginViewModel.LoggedUser.Status == 0 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(this._task.IdTask) != null) ? "DarkOrange" : "#eee";
-
+                if (IsNotificationsOn)
+                {
+                    return (LoginViewModel.LoggedUser.Status == 1 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(this._task.IdTask) != null)
+                            || (LoginViewModel.LoggedUser.Status == 0 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(this._task.IdTask) != null) ? "DarkOrange" : "#eee";
+                }
+                else
+                {
+                    return "#eee";
+                }
             }
         }
 
@@ -372,12 +379,13 @@ namespace WpfDemo.ViewModel
             }*/
 
 
-                this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
+            this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
             MessageBox.Show(ResourceHandler.GetResourceString("TaskCreatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
 
             if (this._task.User.Status != 1)
             {
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("New task!", 0, this._task.IdTask);
+                SendNotificationEmail(" has been added to your tasks!");
             }
             RefreshValues();
         }

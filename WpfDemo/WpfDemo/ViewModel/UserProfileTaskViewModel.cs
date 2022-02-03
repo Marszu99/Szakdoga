@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using TimeSheet.DataAccess;
@@ -285,6 +287,7 @@ namespace WpfDemo.ViewModel
             if (this._task.User_Username != LoginViewModel.LoggedUser.Username)
             {
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("New task!", 0, this._task.IdTask);
+                SendNotificationEmail(" has been added to your tasks!");
             }
             RefreshValues();
         }
@@ -301,35 +304,61 @@ namespace WpfDemo.ViewModel
                 if (_isTitleChanged && !_isDescriptionChanged && !_isDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title has changed!", 0, this._task.IdTask);
+                    SendNotificationEmail(" has been updated! Title has changed!");
                 }
                 else if (!_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description has changed!", 0, this._task.IdTask);
+                    SendNotificationEmail(" has been updated! Description has changed!");
                 }
                 else if (!_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Deadline has changed!", 0, this._task.IdTask);
+                    SendNotificationEmail(" has been updated! Deadline has changed!");
                 }
                 else if (_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description has changed!", 0, this._task.IdTask);
+                    SendNotificationEmail(" has been updated! Title and Description has changed!");
                 }
                 else if (!_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description and Deadline has changed!", 0, this._task.IdTask);
+                    SendNotificationEmail(" has been updated! Description and Deadline has changed!");
                 }
                 else if (_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Deadline has changed!", 0, this._task.IdTask);
+                    SendNotificationEmail(" has been updated! Title and Deadline has changed!");
                 }
                 else if (_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description and Deadline has changed!", 0, this._task.IdTask);
+                    SendNotificationEmail(" has been updated! Title and Description and Deadline has changed!");
                 }
+
                 _isTitleChanged = false;
                 _isDescriptionChanged = false;
                 _isDeadlineChanged = false;
             }
+        }
+
+        private void SendNotificationEmail(string EmailNotificationMessage)
+        {
+            SmtpClient client = new SmtpClient();
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            //client.Timeout = 10;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential("wpfszakdoga@gmail.com", "Marszu99");
+            string EmailSubject = "Task Notification";
+            string EmailMessage = this._task.Title + EmailNotificationMessage;
+            MailMessage mm = new MailMessage("wpfszakdoga@gmail.com", this._task.User.Email, EmailSubject, EmailMessage);
+            mm.BodyEncoding = UTF8Encoding.UTF8;
+            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            client.Send(mm);
         }
 
         public void RefreshValues()

@@ -10,10 +10,9 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        
         <FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
         <!--ListTasksViewUserVisibility-hez es ResourceStringekhez kell-->
         
