@@ -63,13 +63,14 @@ DROP TABLE IF EXISTS `notification`;
 CREATE TABLE `notification` (
   `idNotification` int NOT NULL AUTO_INCREMENT,
   `Message` text NOT NULL,
+  `NotificationFor` tinyint NOT NULL,
   `ReadFlag` tinyint DEFAULT '1',
   `StatusDelete` tinyint DEFAULT '1',
   `Task_idTask` int NOT NULL,
   PRIMARY KEY (`idNotification`,`Task_idTask`),
   KEY `fk_Notification_Task1_idx` (`Task_idTask`),
   CONSTRAINT `fk_Notification_Task1` FOREIGN KEY (`Task_idTask`) REFERENCES `task` (`idTask`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +79,7 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
-INSERT INTO `notification` VALUES (1,'asd',0,1,1),(2,'asd',0,0,2),(3,'Updated task!',1,1,6);
+INSERT INTO `notification` VALUES (1,'asd',0,0,1,1),(2,'asd',0,0,0,2),(3,'Updated task!',0,0,1,6),(4,'Updated task!',0,0,1,3),(5,'Updated task!',0,0,1,4),(6,'Updated task!',0,0,1,3),(7,'Updated task!',0,0,1,4),(8,'Updated task!',0,0,1,6),(9,'Updated task!',0,0,1,6),(10,'Updated task!',0,0,1,2),(11,'Updated task!',0,0,1,5),(12,'Updated task!',0,0,1,5),(13,'Updated task!',0,0,1,5),(14,'Updated task!',0,0,1,6),(15,'Updated task!',0,0,1,3),(16,'Updated task!',0,0,1,2),(17,'Updated task!',0,0,1,4),(18,'Updated task!',0,0,1,3),(19,'Updated task!',0,0,1,3),(20,'Updated task!',0,0,1,3),(21,'Task has been updated! Description has changed!',0,0,1,6),(22,'Task has been updated! Description has changed!',0,0,1,4),(24,'Task has been updated! Title and Description and Deadline has changed!',0,0,1,6),(25,'Task has been updated! Title and Description and Deadline has changed!',0,0,1,6),(26,'Task has been updated! Description has changed!',0,0,1,6),(29,'asd',0,0,0,10),(30,'asd',0,0,0,10),(31,'NotificationNewTask',0,1,1,14),(32,'Task has been updated! Deadline has changed!',0,0,1,5),(33,'Task has been updated! Deadline has changed!',0,0,1,2),(34,'New task!',0,0,1,15),(35,'Task has been updated! Description has changed!',0,0,1,15),(36,'Task has been updated! Description and Deadline has changed!',0,0,1,15),(37,'NotificationNewTask',0,0,1,16),(38,'Task has been updated! Description has changed!',0,0,1,16),(39,'NotificationTaskInProgress',1,1,1,6),(40,'NotificationTaskDescriptionChanged',0,1,1,6),(41,'NotificationTaskDeadlineChanged',0,1,1,6);
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,6 +94,7 @@ SET @saved_cs_client     = @@character_set_client;
 /*!50001 CREATE VIEW `notificationview` AS SELECT 
  1 AS `idNotification`,
  1 AS `Message`,
+ 1 AS `NotificationFor`,
  1 AS `ReadFlag`,
  1 AS `Task_idTask`*/;
 SET character_set_client = @saved_cs_client;
@@ -117,7 +119,7 @@ CREATE TABLE `record` (
   KEY `fk_Record_User1_idx` (`User_idUser`) /*!80000 INVISIBLE */,
   CONSTRAINT `fk_Record_Task1` FOREIGN KEY (`Task_idTask`) REFERENCES `task` (`idTask`),
   CONSTRAINT `fk_Record_User1` FOREIGN KEY (`User_idUser`) REFERENCES `user` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +128,7 @@ CREATE TABLE `record` (
 
 LOCK TABLES `record` WRITE;
 /*!40000 ALTER TABLE `record` DISABLE KEYS */;
-INSERT INTO `record` VALUES (4,'2021-12-11','Regisztacio',250,1,9,2),(5,'2021-12-11','Teszt',230,1,10,3);
+INSERT INTO `record` VALUES (4,'2021-12-15','Regisztacio',250,1,9,2),(5,'2021-12-11','Teszt',230,1,10,3),(6,'2021-12-18','Proba',220,1,9,5),(7,'2021-12-11',NULL,210,0,10,3),(8,'2021-12-12','Szép lett!',250,1,10,4),(9,'2021-12-18','Komment',120,1,9,2),(10,'2021-12-21',NULL,210,0,10,6),(11,'2021-12-21',NULL,210,0,10,6),(12,'2021-12-22','Kész',210,1,9,9),(13,'2021-12-23',NULL,210,0,10,6),(14,'2021-12-23',NULL,210,0,10,6),(15,'2022-02-08','',220,0,10,14);
 /*!40000 ALTER TABLE `record` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +171,7 @@ CREATE TABLE `task` (
   PRIMARY KEY (`idTask`,`User_idUser`),
   KEY `fk_Task_User1_idx` (`User_idUser`),
   CONSTRAINT `fk_Task_User1` FOREIGN KEY (`User_idUser`) REFERENCES `user` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,7 +180,7 @@ CREATE TABLE `task` (
 
 LOCK TABLES `task` WRITE;
 /*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (1,'ddd',NULL,'2021-12-10','Created',0,'2021-12-09',1),(2,'Programozas',NULL,'2021-12-24','Created',1,'2021-12-11',9),(3,'Teszteles','','2021-12-30','InProgress',1,'2021-12-11',10),(4,'Design','','2022-01-06','Created',1,'2021-12-11',10),(5,'DB','','2021-12-31','Created',1,'2021-12-11',9),(6,'Git','','2021-12-31','Created',1,'2021-12-11',10);
+INSERT INTO `task` VALUES (1,'ddd',NULL,'2021-12-10','Created',0,'2021-12-09',1),(2,'Programozas','Mukodjon!','2022-07-22','InProgress',1,'2021-12-11',9),(3,'Teszteles','Unit tesztek','2022-03-18','Done',1,'2021-12-11',10),(4,'Design','Szep legyem!','2022-06-24','InProgress',1,'2021-12-11',10),(5,'DB','','2022-01-27','InProgress',1,'2021-12-11',9),(6,'Git','Nagyooooon hosssszuuuuu leiraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas','2022-07-31','InProgress',1,'2021-12-11',10),(7,'ASD',NULL,'2021-12-23','Created',0,'2021-12-22',10),(8,'ad','a','2020-01-01','Created',0,'2021-12-22',10),(9,'Wiki','','2021-12-23','Done',1,'2021-12-22',9),(10,'asd',NULL,'2021-12-24','Created',0,'2021-12-23',10),(11,'d',NULL,'2021-12-24','Created',0,'2021-12-23',9),(12,'a',NULL,'2021-12-24','Created',0,'2021-12-23',9),(13,'b',NULL,'2021-12-24','Created',0,'2021-12-23',9),(14,'AutomatákPDF','','2022-05-13','Created',1,'2021-12-23',10),(15,'d','dddd','2022-07-07','Created',0,'2022-01-27',10),(16,'ss','as','2022-01-28','Created',0,'2022-01-27',10),(17,'TestRefresh',NULL,'2022-08-26','Created',0,'2022-02-08',9),(18,'TestRefresh','','2022-08-27','Created',1,'2022-02-08',9),(19,'d',NULL,'2022-02-09','Created',0,'2022-02-08',9);
 /*!40000 ALTER TABLE `task` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +225,7 @@ CREATE TABLE `user` (
   KEY `fk_User_Company1_idx` (`StatusDelete`),
   KEY `fk_User_Company1_idx1` (`Company_idCompany`),
   CONSTRAINT `fk_User_Company1` FOREIGN KEY (`Company_idCompany`) REFERENCES `company` (`idCompany`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,7 +234,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'asd','asd','asd','asd','asd','76876',1,0,1),(2,'Marszi99','Password','Cseh','Marci','csehmarcell@yahoo.com','06898776778',1,0,2),(3,'Marszi','Password','Marci','Cseh','csehmarcell@yahoo.com','06876876378',1,0,3),(4,'Marszu99','Password','Marcell','Cseh','csehmarcell@yahoo.com','06987394827',1,0,4),(5,'CsehHedvig','nfq3XGTxXP',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,4),(6,'CsehMarci','Ht7TpfQDkr',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,4),(7,'csehlaszlo','lacko12','aaaa','aaaa','csehmarcell@yahoo.com','36302988033',1,0,5),(8,'KovacsGeza','ObPZ0BmJoK',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,5),(9,'Marszu99','Password','Cseh','Marcell','csehmarcell@yahoo.com','06987987776',1,1,6),(10,'Username','Password','Cseh','Laszlo','csehmarcell@yahoo.com','069898787766',0,1,6);
+INSERT INTO `user` VALUES (1,'asd','asd','asd','asd','asd','76876',1,0,1),(2,'Marszi99','Password','Cseh','Marci','csehmarcell@yahoo.com','06898776778',1,0,2),(3,'Marszi','Password','Marci','Cseh','csehmarcell@yahoo.com','06876876378',1,0,3),(4,'Marszu99','Password','Marcell','Cseh','csehmarcell@yahoo.com','06987394827',1,0,4),(5,'CsehHedvig','nfq3XGTxXP',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,4),(6,'CsehMarci','Ht7TpfQDkr',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,4),(7,'csehlaszlo','lacko12','aaaa','aaaa','csehmarcell@yahoo.com','36302988033',1,0,5),(8,'KovacsGeza','ObPZ0BmJoK',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,5),(9,'Marszu99','Password','Marcell','Cseh','csehmarcell@yahoo.com','06703070041',1,1,6),(10,'Username','Password','Laszlo','Cseh','csehmarcell@yahoo.com','06704009188',0,1,6),(11,'CsehMarcell','Password','Cseh','Marcell','csehmarcell@yahoo.com','+367088788666',0,0,6),(12,'asdddd','od5575qs1D',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(13,'DeleteTeszt','DeleteTeszt',NULL,NULL,'DeleteTeszt',NULL,0,0,6),(14,'Username1','IdlUkA5G6W',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(15,'Username1','1JiWgX9o5Z',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(16,'Username1','AFaYlJnION','asda','asdd','csehmarcell@yahoo.com','06777878788',0,0,6),(17,'Username1','l5MAGzOgsr','asdasd','asd','csehmarcell@yahoo.com','06789877799',0,0,6),(18,'Username1','bo3JzWWbr2','asdd','asdd','csehmarcell@yahoo.com','0678877997',0,0,6),(19,'Username1','PqcE56V3x4','asdd','asdasd','csehmarcell@yahoo.com','0678778999',0,0,6),(20,'Username1','EhhmAJZAKi','asd','aasd','csehmarcell@yahoo.com','0678799777',0,0,6),(21,'Username1','yOsc4bSvx0','asdd','asdd','csehmarcell@yahoo.com','0670987987',0,0,6),(22,'Username1','rqwWWX0GDg','asdd','asdd','csehmarcell@yahoo.com','06709878979',0,0,6),(23,'Username1','n1Po55bbXH','asd','asd','csehmarcell@yahoo.com','0670876878',0,0,6);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -274,9 +276,9 @@ SET character_set_client = @saved_cs_client;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateNotificationForTask`(IN message TEXT, IN taskid INT )
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateNotificationForTask`(IN message TEXT, IN notificationFor TINYINT, IN taskid INT)
 BEGIN
-INSERT INTO notification (Message,Task_idTask) VALUES (message,taskid);
+INSERT INTO notification (Message,Task_idTask,NotificationFor) VALUES (message,taskid,notificationFor);
 SELECT last_insert_id();
 END ;;
 DELIMITER ;
@@ -413,20 +415,17 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteUser`(IN id INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteUser`(IN id INT, IN status TINYINT)
 BEGIN
-    DECLARE deleteCompany INT DEFAULT 0;
-	UPDATE user SET StatusDelete = 0 WHERE idUser = id;
-    UPDATE task SET StatusDelete = 0 WHERE task.User_idUser = id;
-    UPDATE record SET StatusDelete = 0 WHERE record.User_idUser = id;
-    IF (user.idUser = id && user.Status = 1) THEN
-		SET deleteCompany = 1;
-	END IF;
-    IF deleteCompany = 1 THEN 
+    IF status = 1 THEN 
 		UPDATE company SET company.StatusDelete = 0;
         UPDATE user SET user.StatusDelete = 0;
         UPDATE task SET task.StatusDelete = 0;
         UPDATE record SET record.StatusDelete = 0;
+	ELSE
+		UPDATE user SET StatusDelete = 0 WHERE idUser = id;
+		UPDATE task SET StatusDelete = 0 WHERE task.User_idUser = id;
+		UPDATE record SET StatusDelete = 0 WHERE record.User_idUser = id;
     END IF;
 END ;;
 DELIMITER ;
@@ -445,25 +444,6 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAdmin`()
-BEGIN
-SELECT * FROM userview WHERE userview.Status=1;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `GetAdminUser` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAdminUser`()
 BEGIN
 SELECT * FROM userview WHERE userview.Status=1;
 END ;;
@@ -605,7 +585,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `GetTaskNotifications` */;
+/*!50003 DROP PROCEDURE IF EXISTS `GetTaskNotificationsForAdmin` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -615,9 +595,28 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetTaskNotifications`(IN taskid INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetTaskNotificationsForAdmin`(IN taskid INT)
 BEGIN
-SELECT * FROM notificationview WHERE notificationview.Task_idTask = taskid && notificationview.ReadFlag = "1";
+SELECT * FROM notificationview WHERE notificationview.Task_idTask = taskid && notificationview.ReadFlag = "1" && notificationview.NotificationFor = "1";
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GetTaskNotificationsForEmployee` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetTaskNotificationsForEmployee`(IN taskid INT)
+BEGIN
+SELECT * FROM notificationview WHERE notificationview.Task_idTask = taskid && notificationview.ReadFlag = "1" && notificationview.NotificationFor = "0";
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -729,9 +728,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `HasReadNotification`(IN id INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `HasReadNotification`(IN id INT, IN notificationFor TINYINT)
 BEGIN
-	UPDATE notification SET ReadFlag = 0 WHERE notification.Task_idTask = id;
+	UPDATE notification SET ReadFlag = 0 WHERE notification.Task_idTask = id && notification.NotificationFor = notificationFor;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -853,7 +852,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `notificationview` AS select `notification`.`idNotification` AS `idNotification`,`notification`.`Message` AS `Message`,`notification`.`ReadFlag` AS `ReadFlag`,`taskview`.`idTask` AS `Task_idTask` from (`notification` join `taskview` on((`notification`.`Task_idTask` = `taskview`.`idTask`))) where (`notification`.`StatusDelete` = 1) */;
+/*!50001 VIEW `notificationview` AS select `notification`.`idNotification` AS `idNotification`,`notification`.`Message` AS `Message`,`notification`.`NotificationFor` AS `NotificationFor`,`notification`.`ReadFlag` AS `ReadFlag`,`taskview`.`idTask` AS `Task_idTask` from (`notification` join `taskview` on((`notification`.`Task_idTask` = `taskview`.`idTask`))) where (`notification`.`StatusDelete` = 1) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -921,4 +920,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-16 22:55:32
+-- Dump completed on 2022-02-11 17:33:47
