@@ -215,25 +215,9 @@ namespace WpfDemo.ViewModel
                         result = UserValidationHelper.ValidateUserName(_user.Username);
                         break;
 
-                   /* case nameof(Password):
-                        result = UserValidationHelper.ValidatePassword(_user.Password);
-                        break;
-
-                    case nameof(FirstName):
-                        result = UserValidationHelper.ValidateFirstName(_user.FirstName);
-                        break;
-
-                    case nameof(LastName):
-                        result = UserValidationHelper.ValidateLastName(_user.LastName);
-                        break;*/
-
                     case nameof(Email):
                         result = UserValidationHelper.ValidateEmail(_user.Email);
                         break;
-
-                    /*case nameof(Telephone):
-                        result = UserValidationHelper.ValidateTelephone(_user.Telephone);
-                        break;*/
                 }
 
                 if (ErrorCollection.ContainsKey(propertyName))
@@ -248,6 +232,13 @@ namespace WpfDemo.ViewModel
 
                 return result;
             }
+        }
+
+
+        public event Action<User> UserCreated;
+        public void CreateUserToList(User user)
+        {
+            UserCreated?.Invoke(user);
         }
 
 
@@ -278,11 +269,10 @@ namespace WpfDemo.ViewModel
                 {
                     UpdateUser();
                 }
-                UserManagementViewModel.RefreshUserListCommand.Execute(obj);
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
             catch (UserValidationException)
             {
@@ -300,7 +290,7 @@ namespace WpfDemo.ViewModel
         {
             string createdUserRandomPassword = RandomPassword(10);
             this._user.IdUser = new UserRepository(new UserLogic()).CreateUser(this._user, createdUserRandomPassword);
-            MessageBox.Show(ResourceHandler.GetResourceString("UserCreatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Resources.UserCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
             SendEmail(createdUserRandomPassword);
             RefreshValues();
         }
@@ -334,7 +324,7 @@ namespace WpfDemo.ViewModel
         private void UpdateUser()
         {
             new UserRepository(new UserLogic()).UpdateUser(this._user);
-            MessageBox.Show(ResourceHandler.GetResourceString("UserUpdatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Resources.UserUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
         }
 
@@ -350,47 +340,46 @@ namespace WpfDemo.ViewModel
             this.Telephone = "";
         }
 
-
         public string UsernameString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Username");
+                return Resources.Username;
             }
         }
         public string FirstNameString
         {
             get
             {
-                return ResourceHandler.GetResourceString("FirstName");
+                return Resources.FirstName;
             }
         }
         public string LastNameString
         {
             get
             {
-                return ResourceHandler.GetResourceString("LastName");
+                return Resources.LastName;
             }
         }
         public string EmailString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Email");
+                return Resources.Email;
             }
         }
         public string TelephoneString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Telephone");
+                return Resources.Telephone;
             }
         }
         public string SaveString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Save");
+                return Resources.Save;
             }
         }
     }

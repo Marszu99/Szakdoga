@@ -1,13 +1,15 @@
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\bin\Debug\netstandard2.0\TimeSheet.Resource.deps.json
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\bin\Debug\netstandard2.0\TimeSheet.Resource.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\bin\Debug\netstandard2.0\TimeSheet.Resource.pdb
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\bin\Debug\netstandard2.0\hu-HU\TimeSheet.Resource.resources.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.csproj.AssemblyReference.cache
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.ResourceENG.resources
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.ResourceHUN.resources
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.Resources.resources
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.Resources.hu-HU.resources
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.csproj.GenerateResource.cache
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.GeneratedMSBuildEditorConfig.editorconfig
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.AssemblyInfoInputs.cache
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.AssemblyInfo.cs
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.csproj.CoreCompileInputs.cache
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\hu-HU\TimeSheet.Resource.resources.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Resource\obj\Debug\netstandard2.0\TimeSheet.Resource.pdb

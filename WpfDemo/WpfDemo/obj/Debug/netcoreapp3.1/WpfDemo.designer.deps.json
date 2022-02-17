@@ -14,21 +14,21 @@
           }
         }
       },
-      "Dapper/2.0.90": {
+      "Dapper/2.0.123": {
         "dependencies": {
           "System.Reflection.Emit.Lightweight": "4.7.0"
         },
         "runtime": {
           "lib/netstandard2.0/Dapper.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.90.36046"
+            "fileVersion": "2.0.123.33578"
           }
         }
       },
       "Google.Protobuf/3.14.0": {
         "dependencies": {
-          "System.Memory": "4.5.3",
-          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
+          "System.Memory": "4.5.4",
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
         },
         "runtime": {
           "lib/netstandard2.0/Google.Protobuf.dll": {
@@ -37,32 +37,32 @@
           }
         }
       },
-      "K4os.Compression.LZ4/1.1.11": {
+      "K4os.Compression.LZ4/1.2.6": {
         "dependencies": {
-          "System.Memory": "4.5.3"
+          "System.Memory": "4.5.4"
         },
         "runtime": {
           "lib/netstandard2.0/K4os.Compression.LZ4.dll": {
-            "assemblyVersion": "1.1.11.0",
-            "fileVersion": "1.1.11.0"
+            "assemblyVersion": "1.2.6.0",
+            "fileVersion": "1.2.6.0"
           }
         }
       },
-      "K4os.Compression.LZ4.Streams/1.1.11": {
+      "K4os.Compression.LZ4.Streams/1.2.6": {
         "dependencies": {
-          "K4os.Compression.LZ4": "1.1.11",
+          "K4os.Compression.LZ4": "1.2.6",
           "K4os.Hash.xxHash": "1.0.6"
         },
         "runtime": {
-          "lib/netstandard2.0/K4os.Compression.LZ4.Streams.dll": {
-            "assemblyVersion": "1.1.11.0",
-            "fileVersion": "1.1.11.0"
+          "lib/netstandard2.1/K4os.Compression.LZ4.Streams.dll": {
+            "assemblyVersion": "1.2.6.0",
+            "fileVersion": "1.2.6.0"
           }
         }
       },
       "K4os.Hash.xxHash/1.0.6": {
         "dependencies": {
-          "System.Memory": "4.5.3"
+          "System.Memory": "4.5.4"
         },
         "runtime": {
           "lib/netstandard2.0/K4os.Hash.xxHash.dll": {
@@ -128,38 +128,40 @@
           }
         }
       },
-      "MySql.Data/8.0.26": {
+      "MySql.Data/8.0.28": {
         "dependencies": {
           "BouncyCastle.NetCore": "1.8.5",
           "Google.Protobuf": "3.14.0",
-          "K4os.Compression.LZ4": "1.1.11",
-          "K4os.Compression.LZ4.Streams": "1.1.11",
-          "K4os.Hash.xxHash": "1.0.6",
+          "K4os.Compression.LZ4.Streams": "1.2.6",
           "System.Buffers": "4.5.1",
           "System.Configuration.ConfigurationManager": "4.4.1",
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0",
           "System.Security.Permissions": "4.7.0",
           "System.Text.Encoding.CodePages": "4.4.0"
         },
         "runtime": {
           "lib/netstandard2.1/MySql.Data.dll": {
-            "assemblyVersion": "8.0.26.0",
-            "fileVersion": "8.0.26.0"
+            "assemblyVersion": "8.0.28.0",
+            "fileVersion": "8.0.28.0"
           },
           "lib/netstandard2.1/Ubiety.Dns.Core.dll": {
             "assemblyVersion": "2.2.1.0",
             "fileVersion": "2.2.1.0"
           },
-          "lib/netstandard2.1/Zstandard.Net.dll": {
-            "assemblyVersion": "1.1.7.0",
-            "fileVersion": "1.1.7.0"
+          "lib/netstandard2.1/ZstdNet.dll": {
+            "assemblyVersion": "1.4.5.0",
+            "fileVersion": "1.4.5.0"
           }
         }
       },
-      "MySqlConnector/1.3.11": {
+      "MySqlConnector/2.1.6": {
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "5.0.1"
+        },
         "runtime": {
           "lib/netcoreapp3.1/MySqlConnector.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.3.11.0"
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.1.6.0"
           }
         }
       },
@@ -217,7 +219,7 @@
           }
         }
       },
-      "System.Data.SqlClient/4.8.2": {
+      "System.Data.SqlClient/4.8.3": {
         "dependencies": {
           "Microsoft.Win32.Registry": "4.7.0",
           "System.Security.Principal.Windows": "4.7.0",
@@ -225,22 +227,30 @@
         },
         "runtime": {
           "lib/netcoreapp2.1/System.Data.SqlClient.dll": {
-            "assemblyVersion": "4.6.1.2",
-            "fileVersion": "4.700.20.37001"
+            "assemblyVersion": "4.6.1.3",
+            "fileVersion": "4.700.21.41603"
           }
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll": {
             "rid": "unix",
             "assetType": "runtime",
-            "assemblyVersion": "4.6.1.2",
-            "fileVersion": "4.700.20.37001"
+            "assemblyVersion": "4.6.1.3",
+            "fileVersion": "4.700.21.41603"
           },
           "runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll": {
             "rid": "win",
             "assetType": "runtime",
-            "assemblyVersion": "4.6.1.2",
-            "fileVersion": "4.700.20.37001"
+            "assemblyVersion": "4.6.1.3",
+            "fileVersion": "4.700.21.41603"
+          }
+        }
+      },
+      "System.Diagnostics.DiagnosticSource/5.0.1": {
+        "runtime": {
+          "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.220.61120"
           }
         }
       },
@@ -270,13 +280,13 @@
           }
         }
       },
-      "System.Memory/4.5.3": {},
+      "System.Memory/4.5.4": {},
       "System.Reflection.Emit.Lightweight/4.7.0": {},
-      "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {
         "runtime": {
           "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll": {
-            "assemblyVersion": "4.0.4.1",
-            "fileVersion": "4.6.26919.2"
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
           }
         }
       },
@@ -398,12 +408,12 @@
       "path": "bouncycastle.netcore/1.8.5",
       "hashPath": "bouncycastle.netcore.1.8.5.nupkg.sha512"
     },
-    "Dapper/2.0.90": {
+    "Dapper/2.0.123": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-e4YjOLJptnpwHIbP8HxjaYf7So9lhUC43rvvGMEkH4Q4CiVlm4rOxYDo0HyuHlMQKj0U5Ob/nCMm52TUhTaZQg==",
-      "path": "dapper/2.0.90",
-      "hashPath": "dapper.2.0.90.nupkg.sha512"
+      "sha512": "sha512-RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
+      "path": "dapper/2.0.123",
+      "hashPath": "dapper.2.0.123.nupkg.sha512"
     },
     "Google.Protobuf/3.14.0": {
       "type": "package",
@@ -412,19 +422,19 @@
       "path": "google.protobuf/3.14.0",
       "hashPath": "google.protobuf.3.14.0.nupkg.sha512"
     },
-    "K4os.Compression.LZ4/1.1.11": {
+    "K4os.Compression.LZ4/1.2.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-RNvJw0UGkedPhCqVBNIogtfQebY+bQt0PN7xDbVe5LWLra0ZEqPfjPSl7iStj3rgDnkqkkTTpm+vCX3hU1qKmA==",
-      "path": "k4os.compression.lz4/1.1.11",
-      "hashPath": "k4os.compression.lz4.1.1.11.nupkg.sha512"
+      "sha512": "sha512-4EN8EE6bZG2U8dFfeqn+Om3UNajK3cPYHvyQROCFm4jNFVLuRB7Nl5bDkjBSAjfctS6konm+ay3u5RafBzltDA==",
+      "path": "k4os.compression.lz4/1.2.6",
+      "hashPath": "k4os.compression.lz4.1.2.6.nupkg.sha512"
     },
-    "K4os.Compression.LZ4.Streams/1.1.11": {
+    "K4os.Compression.LZ4.Streams/1.2.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-x+BidXriYsNP4HNTHKx+5cVQguHHwbfs6nM79fDHOCOrcNwnaBms4dwzAV/ZALmKsNKcHmY74PeUZiCC4qLKwQ==",
-      "path": "k4os.compression.lz4.streams/1.1.11",
-      "hashPath": "k4os.compression.lz4.streams.1.1.11.nupkg.sha512"
+      "sha512": "sha512-5KMcNFRHeRrnJ9c8k5fZcfAJJEY0FndMiDiHIYa35Mx5KCMkeSNo/PEXu7YmtCoVczJagx+Vt7J/F+//S1PcJQ==",
+      "path": "k4os.compression.lz4.streams/1.2.6",
+      "hashPath": "k4os.compression.lz4.streams.1.2.6.nupkg.sha512"
     },
     "K4os.Hash.xxHash/1.0.6": {
       "type": "package",
@@ -461,19 +471,19 @@
       "path": "microsoft.win32.systemevents/4.7.0",
       "hashPath": "microsoft.win32.systemevents.4.7.0.nupkg.sha512"
     },
-    "MySql.Data/8.0.26": {
+    "MySql.Data/8.0.28": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-iOxE24dI01JZlZ1EObkz9WwYMzX+0RnBf5a11OkPDCOGv2Yo0tTWmwAJfVXkuuSD47XngOir7l7+xZZ56lZyAA==",
-      "path": "mysql.data/8.0.26",
-      "hashPath": "mysql.data.8.0.26.nupkg.sha512"
+      "sha512": "sha512-7b699tU9ba0r7SBK7K9snGJB9ulnOdwEXG28kpVvaQSN0hHenfoJ/ADOtdfhcvcn1KStBX8pFK5qIl8scdBL2g==",
+      "path": "mysql.data/8.0.28",
+      "hashPath": "mysql.data.8.0.28.nupkg.sha512"
     },
-    "MySqlConnector/1.3.11": {
+    "MySqlConnector/2.1.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-CwzHwRTN+zMKYfEpfwWJ2QzI6JtTYujBbrVHp45zq1BttuykQkqGlZYL9ZUwA2x5xTRBJTDZoy9S6kfN6S0Suw==",
-      "path": "mysqlconnector/1.3.11",
-      "hashPath": "mysqlconnector.1.3.11.nupkg.sha512"
+      "sha512": "sha512-btDnflhsn3g3G+9oQKIVh1dmVfGkUphMWFmtAR2lfAm4ir2QnjMfaVDqNLqNNwNNIN5jsUuT25ffivK56DvsOQ==",
+      "path": "mysqlconnector/2.1.6",
+      "hashPath": "mysqlconnector.2.1.6.nupkg.sha512"
     },
     "runtime.native.System.Data.SqlClient.sni/4.7.0": {
       "type": "package",
@@ -524,12 +534,19 @@
       "path": "system.configuration.configurationmanager/4.4.1",
       "hashPath": "system.configuration.configurationmanager.4.4.1.nupkg.sha512"
     },
-    "System.Data.SqlClient/4.8.2": {
+    "System.Data.SqlClient/4.8.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-80vGtW6uLB4AkyrdVuKTXYUyuXDPAsSKbTVfvjndZaRAYxzFzWhJbvUfeAKrN+128ycWZjLIAl61dFUwWHOOTw==",
-      "path": "system.data.sqlclient/4.8.2",
-      "hashPath": "system.data.sqlclient.4.8.2.nupkg.sha512"
+      "sha512": "sha512-yERfVLXAY0QbylAgaGLByYN0hFxX28aeEQ0hUgJO+Ntn1AfmWl5HHUoYJA0Yl9HhIUUJHVaS/Sw/RLZr5aaC+A==",
+      "path": "system.data.sqlclient/4.8.3",
+      "hashPath": "system.data.sqlclient.4.8.3.nupkg.sha512"
+    },
+    "System.Diagnostics.DiagnosticSource/5.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uXQEYqav2V3zP6OwkOKtLv+qIi6z3m1hsGyKwXX7ZA7htT4shoVccGxnJ9kVRFPNAsi1ArZTq2oh7WOto6GbkQ==",
+      "path": "system.diagnostics.diagnosticsource/5.0.1",
+      "hashPath": "system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512"
     },
     "System.Drawing.Common/4.7.0": {
       "type": "package",
@@ -538,12 +555,12 @@
       "path": "system.drawing.common/4.7.0",
       "hashPath": "system.drawing.common.4.7.0.nupkg.sha512"
     },
-    "System.Memory/4.5.3": {
+    "System.Memory/4.5.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
-      "path": "system.memory/4.5.3",
-      "hashPath": "system.memory.4.5.3.nupkg.sha512"
+      "sha512": "sha512-1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
+      "path": "system.memory/4.5.4",
+      "hashPath": "system.memory.4.5.4.nupkg.sha512"
     },
     "System.Reflection.Emit.Lightweight/4.7.0": {
       "type": "package",
@@ -552,12 +569,12 @@
       "path": "system.reflection.emit.lightweight/4.7.0",
       "hashPath": "system.reflection.emit.lightweight.4.7.0.nupkg.sha512"
     },
-    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+    "System.Runtime.CompilerServices.Unsafe/5.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wprSFgext8cwqymChhrBLu62LMg/1u92bU+VOwyfBimSPVFXtsNqEWC92Pf9ofzJFlk4IHmJA75EDJn1b2goAQ==",
-      "path": "system.runtime.compilerservices.unsafe/4.5.2",
-      "hashPath": "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512"
+      "sha512": "sha512-ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA==",
+      "path": "system.runtime.compilerservices.unsafe/5.0.0",
+      "hashPath": "system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
     },
     "System.Security.AccessControl/4.7.0": {
       "type": "package",

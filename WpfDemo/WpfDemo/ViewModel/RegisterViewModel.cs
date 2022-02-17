@@ -10,6 +10,7 @@ using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 using System.Net.Mail;
 using System.Text;
+using TimeSheet.Resource;
 
 namespace WpfDemo.ViewModel
 {
@@ -274,7 +275,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show("Server error!");
+                MessageBox.Show(Resources.ServerError);
             }
             catch (UserValidationException)
             {

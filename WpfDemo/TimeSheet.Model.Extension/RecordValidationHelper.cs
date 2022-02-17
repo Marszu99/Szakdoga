@@ -11,7 +11,7 @@ namespace TimeSheet.Model.Extension
 
             if (task == null)
             {
-                result = ResourceHandler.GetResourceString("NeedToChooseTaskForRecord");
+                result = Resources.NeedToChooseTaskForRecord;
             }
 
             return result;
@@ -23,15 +23,15 @@ namespace TimeSheet.Model.Extension
 
             if (date == null)
             {
-                result = ResourceHandler.GetResourceString("DateIsEmpty");
+                result = Resources.DateIsEmpty;
             }
             else if (date > DateTime.Today)
             {
-                result = ResourceHandler.GetResourceString("DateCantBeInFuture");
+                result = Resources.DateCantBeInFuture;
             }
             else if (date < TaskCreationDate)
             {
-                result = ResourceHandler.GetResourceString("DateCantBePastTheTaskCreationDate");
+                result = Resources.DateCantBePastTheTaskCreationDate;
             }
 
             return result;
@@ -43,11 +43,11 @@ namespace TimeSheet.Model.Extension
 
             if (duration < 0)
             {
-                result = ResourceHandler.GetResourceString("DurationCantBeLowerZero");
+                result = Resources.DurationCantBeLowerZero;
             }
             else if (duration > 720)
             {
-                result = ResourceHandler.GetResourceString("DurationCantBeHigher12Hours");
+                result = Resources.DurationCantBeHigher12Hours;
             }
 
             return result;

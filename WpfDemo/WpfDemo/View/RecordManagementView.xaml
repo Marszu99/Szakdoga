@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfDemo.View"
+             xmlns:local="clr-namespace:WpfDemo"
+             xmlns:view="clr-namespace:WpfDemo.View"
+             xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
              mc:Ignorable="d" 
              Background="DarkGray"
              d:DesignWidth="1550" d:DesignHeight="690">
@@ -20,7 +22,8 @@
 
         <Grid Grid.Row="0" Margin="0 5 0 5">
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="NewRecordButton" Command="{Binding CreateRecordCommand}" Content="{Binding NewString}" Grid.Column="0" Grid.Row="0" Width="60" Margin="10 0 0 0"
+                <!--local:ResxStatic l10n:Resources.New,Binding NewString-->
+                <Button x:Name="NewRecordButton" Command="{Binding CreateRecordCommand}" Content="{local:ResxStatic l10n:Resources.New}" Grid.Column="0" Grid.Row="0" Width="60" Margin="10 0 0 0"
                                         FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -29,7 +32,8 @@
                     </Button.Resources>
                 </Button>
 
-                <Button x:Name="RefreshListRecordsButton" Command="{Binding RefreshRecordListCommand}" Content="{Binding RefreshString}" Grid.Column="0" Grid.Row="0" Width="65"
+                <!--local:ResxStatic l10n:Resources.Refresh,Binding RefreshString-->
+                <Button x:Name="RefreshListRecordsButton" Command="{Binding RefreshRecordListCommand}" Content="{local:ResxStatic l10n:Resources.Refresh}" Grid.Column="0" Grid.Row="0" Width="65"
                                         Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -38,7 +42,8 @@
                     </Button.Resources>
                 </Button>
 
-                <TextBlock Text="{Binding MyRecordsString}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" Visibility="{Binding RecordCheckBoxAndTextVisibility}"/>
+                <!--local:ResxStatic l10n:Resources.MyRecords,Binding MyRecordsString-->
+                <TextBlock Text="{local:ResxStatic l10n:Resources.MyRecords}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" Visibility="{Binding RecordCheckBoxAndTextVisibility}"/>
                 <CheckBox x:Name="ShowingMyRecordsCheckBox" Command="{Binding SortingByCheckBoxCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
                           Width="14" Height="14" IsChecked="True" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" BorderBrush="Black" Visibility="{Binding RecordCheckBoxAndTextVisibility}">
                     <CheckBox.LayoutTransform>
@@ -46,7 +51,8 @@
                     </CheckBox.LayoutTransform>
                 </CheckBox>
 
-                <TextBlock Text="{Binding SearchString, StringFormat='{}{0}:'}" Margin="{Binding SearchTextMargin}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                <!--local:ResxStatic l10n:Resources.Search,Binding SearchString-->
+                <TextBlock Text="{local:ResxStatic l10n:Resources.Search, StringFormat='{}{0}:'}" Margin="{Binding SearchTextMargin}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
                 <TextBox x:Name="RecordSearchingText" Margin="5 0 0 0" Background="#eee" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
                          Width="165" FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
                     <TextBox.Resources>
@@ -57,7 +63,7 @@
                 </TextBox>
             </StackPanel>
         </Grid>
-        <local:ListRecordsView x:Name="ListRecordsContent" Grid.Row="1" Margin="10 0 0 0"/>
-        <local:RecordView Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding SelectedRecordVisibility}"/>
+        <view:ListRecordsView x:Name="ListRecordsContent" Grid.Row="1" Margin="10 0 0 0"/>
+        <view:RecordView Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding SelectedRecordVisibility}"/>
     </Grid>
 </UserControl>

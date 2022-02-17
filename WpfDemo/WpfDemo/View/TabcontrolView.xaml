@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfDemo.View"
+        xmlns:local="clr-namespace:WpfDemo"
+        xmlns:view="clr-namespace:WpfDemo.View"
+        xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
         mc:Ignorable="d"
         Name="TabcontrolWindowPage" Background="Gray"
         d:DesignWidth="1550" d:DesignHeight="830">
@@ -76,16 +78,19 @@
                     </Style>
                 </TabControl.Resources>
 
-                <TabItem Header="{Binding RecordString}" x:Name="RecordTabItem">
-                    <local:RecordManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
+                <!--local:ResxStatic l10n:Resources.Record,Binding RecordString-->
+                <TabItem Header="{local:ResxStatic l10n:Resources.Record}" x:Name="RecordTabItem">
+                    <view:RecordManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
 
-                <TabItem Header="{Binding TaskString}" x:Name="TaskTabItem">
-                    <local:TaskManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
+                <!--local:ResxStatic l10n:Resources.Task,Binding TaskString-->
+                <TabItem Header="{local:ResxStatic l10n:Resources.Task}" x:Name="TaskTabItem">
+                    <view:TaskManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
 
-                <TabItem Header="{Binding UserString}" x:Name="UserTabItem">
-                    <local:UserManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
+                <!--local:ResxStatic l10n:Resources.User,Binding UserString-->
+                <TabItem Header="{local:ResxStatic l10n:Resources.User}" x:Name="UserTabItem">
+                    <view:UserManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
             </TabControl>
 
@@ -115,9 +120,12 @@
                     <Grid Grid.Row="1">
                         <Menu Background="#FFCEC7C7">
                             <MenuItem Header="{Binding LoggedUserUsername}" FontSize="24" Foreground="Black" Width="205" Margin="40 0 0 0" Padding="5 0 0 0">
-                                <MenuItem Header="{Binding ProfileString}" Command="{Binding ShowMyProfileCommand}"/>
-                                <MenuItem Header="{Binding LanuageString}" Command="{Binding ChangeLanguageCommand}"/>
-                                <MenuItem Header="{Binding LogoutString}" Command="{Binding LogoutCommand}"/>
+                                <!--local:ResxStatic l10n:Resources.Profile,Binding ProfileString-->
+                                <!--local:ResxStatic l10n:Resources.Lanuage,Binding LanuageString-->
+                                <!--local:ResxStatic l10n:Resources.Logout,Binding LogoutString-->
+                                <MenuItem Header="{local:ResxStatic l10n:Resources.Profile}" Command="{Binding ShowMyProfileCommand}"/>
+                                <MenuItem Header="{local:ResxStatic l10n:Resources.Lanuage}" Command="{Binding ChangeLanguageCommand}"/>
+                                <MenuItem Header="{local:ResxStatic l10n:Resources.Logout}" Command="{Binding LogoutCommand}"/>
                             </MenuItem>
                         </Menu>
                         <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\ProfileIcon.png" Height="32" Width="50" HorizontalAlignment="Left" Opacity="0.8"/>

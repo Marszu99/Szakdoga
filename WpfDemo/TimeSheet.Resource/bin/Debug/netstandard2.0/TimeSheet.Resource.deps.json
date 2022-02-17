@@ -13,6 +13,11 @@
         },
         "runtime": {
           "TimeSheet.Resource.dll": {}
+        },
+        "resources": {
+          "hu-HU/TimeSheet.Resource.resources.dll": {
+            "locale": "hu-HU"
+          }
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},

@@ -11,7 +11,7 @@
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
         }
       },
-      "Dapper/2.0.90": {
+      "Dapper/2.0.123": {
         "type": "package",
         "dependencies": {
           "System.Reflection.Emit.Lightweight": "4.7.0"
@@ -36,10 +36,10 @@
           "lib/netstandard2.0/Google.Protobuf.dll": {}
         }
       },
-      "K4os.Compression.LZ4/1.1.11": {
+      "K4os.Compression.LZ4/1.2.6": {
         "type": "package",
         "dependencies": {
-          "System.Memory": "4.5.3"
+          "System.Memory": "4.5.4"
         },
         "compile": {
           "lib/netstandard2.0/K4os.Compression.LZ4.dll": {}
@@ -48,17 +48,17 @@
           "lib/netstandard2.0/K4os.Compression.LZ4.dll": {}
         }
       },
-      "K4os.Compression.LZ4.Streams/1.1.11": {
+      "K4os.Compression.LZ4.Streams/1.2.6": {
         "type": "package",
         "dependencies": {
-          "K4os.Compression.LZ4": "1.1.11",
+          "K4os.Compression.LZ4": "1.2.6",
           "K4os.Hash.xxHash": "1.0.6"
         },
         "compile": {
-          "lib/netstandard2.0/K4os.Compression.LZ4.Streams.dll": {}
+          "lib/netstandard2.1/K4os.Compression.LZ4.Streams.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/K4os.Compression.LZ4.Streams.dll": {}
+          "lib/netstandard2.1/K4os.Compression.LZ4.Streams.dll": {}
         }
       },
       "K4os.Hash.xxHash/1.0.6": {
@@ -135,32 +135,34 @@
           }
         }
       },
-      "MySql.Data/8.0.26": {
+      "MySql.Data/8.0.28": {
         "type": "package",
         "dependencies": {
           "BouncyCastle.NetCore": "1.8.5",
           "Google.Protobuf": "3.14.0",
-          "K4os.Compression.LZ4": "1.1.11",
-          "K4os.Compression.LZ4.Streams": "1.1.11",
-          "K4os.Hash.xxHash": "1.0.6",
+          "K4os.Compression.LZ4.Streams": "1.2.6",
           "System.Buffers": "4.5.1",
           "System.Configuration.ConfigurationManager": "4.4.1",
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0",
           "System.Security.Permissions": "4.7.0",
           "System.Text.Encoding.CodePages": "4.4.0"
         },
         "compile": {
           "lib/netstandard2.1/MySql.Data.dll": {},
           "lib/netstandard2.1/Ubiety.Dns.Core.dll": {},
-          "lib/netstandard2.1/Zstandard.Net.dll": {}
+          "lib/netstandard2.1/ZstdNet.dll": {}
         },
         "runtime": {
           "lib/netstandard2.1/MySql.Data.dll": {},
           "lib/netstandard2.1/Ubiety.Dns.Core.dll": {},
-          "lib/netstandard2.1/Zstandard.Net.dll": {}
+          "lib/netstandard2.1/ZstdNet.dll": {}
         }
       },
-      "MySqlConnector/1.3.11": {
+      "MySqlConnector/2.1.6": {
         "type": "package",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "5.0.1"
+        },
         "compile": {
           "lib/netcoreapp3.1/MySqlConnector.dll": {}
         },
@@ -233,7 +235,7 @@
           "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
         }
       },
-      "System.Data.SqlClient/4.8.2": {
+      "System.Data.SqlClient/4.8.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.Win32.Registry": "4.7.0",
@@ -255,6 +257,15 @@
             "assetType": "runtime",
             "rid": "win"
           }
+        }
+      },
+      "System.Diagnostics.DiagnosticSource/5.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll": {}
         }
       },
       "System.Drawing.Common/4.7.0": {
@@ -280,7 +291,7 @@
           }
         }
       },
-      "System.Memory/4.5.3": {
+      "System.Memory/4.5.4": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.1/_._": {}
@@ -298,10 +309,10 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
-      "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+      "System.Runtime.CompilerServices.Unsafe/5.0.0": {
         "type": "package",
         "compile": {
-          "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+          "ref/netstandard2.1/System.Runtime.CompilerServices.Unsafe.dll": {}
         },
         "runtime": {
           "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
@@ -502,15 +513,15 @@
         "lib/xamarinios/BouncyCastle.Crypto.xml"
       ]
     },
-    "Dapper/2.0.90": {
-      "sha512": "e4YjOLJptnpwHIbP8HxjaYf7So9lhUC43rvvGMEkH4Q4CiVlm4rOxYDo0HyuHlMQKj0U5Ob/nCMm52TUhTaZQg==",
+    "Dapper/2.0.123": {
+      "sha512": "RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
       "type": "package",
-      "path": "dapper/2.0.90",
+      "path": "dapper/2.0.123",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Dapper.png",
-        "dapper.2.0.90.nupkg.sha512",
+        "dapper.2.0.123.nupkg.sha512",
         "dapper.nuspec",
         "lib/net461/Dapper.dll",
         "lib/net461/Dapper.xml",
@@ -540,14 +551,14 @@
         "lib/netstandard2.0/Google.Protobuf.xml"
       ]
     },
-    "K4os.Compression.LZ4/1.1.11": {
-      "sha512": "RNvJw0UGkedPhCqVBNIogtfQebY+bQt0PN7xDbVe5LWLra0ZEqPfjPSl7iStj3rgDnkqkkTTpm+vCX3hU1qKmA==",
+    "K4os.Compression.LZ4/1.2.6": {
+      "sha512": "4EN8EE6bZG2U8dFfeqn+Om3UNajK3cPYHvyQROCFm4jNFVLuRB7Nl5bDkjBSAjfctS6konm+ay3u5RafBzltDA==",
       "type": "package",
-      "path": "k4os.compression.lz4/1.1.11",
+      "path": "k4os.compression.lz4/1.2.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "k4os.compression.lz4.1.1.11.nupkg.sha512",
+        "k4os.compression.lz4.1.2.6.nupkg.sha512",
         "k4os.compression.lz4.nuspec",
         "lib/net45/K4os.Compression.LZ4.dll",
         "lib/net45/K4os.Compression.LZ4.xml",
@@ -559,14 +570,14 @@
         "lib/netstandard2.0/K4os.Compression.LZ4.xml"
       ]
     },
-    "K4os.Compression.LZ4.Streams/1.1.11": {
-      "sha512": "x+BidXriYsNP4HNTHKx+5cVQguHHwbfs6nM79fDHOCOrcNwnaBms4dwzAV/ZALmKsNKcHmY74PeUZiCC4qLKwQ==",
+    "K4os.Compression.LZ4.Streams/1.2.6": {
+      "sha512": "5KMcNFRHeRrnJ9c8k5fZcfAJJEY0FndMiDiHIYa35Mx5KCMkeSNo/PEXu7YmtCoVczJagx+Vt7J/F+//S1PcJQ==",
       "type": "package",
-      "path": "k4os.compression.lz4.streams/1.1.11",
+      "path": "k4os.compression.lz4.streams/1.2.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
+        "k4os.compression.lz4.streams.1.2.6.nupkg.sha512",
         "k4os.compression.lz4.streams.nuspec",
         "lib/net45/K4os.Compression.LZ4.Streams.dll",
         "lib/net45/K4os.Compression.LZ4.Streams.xml",
@@ -575,7 +586,9 @@
         "lib/netstandard1.6/K4os.Compression.LZ4.Streams.dll",
         "lib/netstandard1.6/K4os.Compression.LZ4.Streams.xml",
         "lib/netstandard2.0/K4os.Compression.LZ4.Streams.dll",
-        "lib/netstandard2.0/K4os.Compression.LZ4.Streams.xml"
+        "lib/netstandard2.0/K4os.Compression.LZ4.Streams.xml",
+        "lib/netstandard2.1/K4os.Compression.LZ4.Streams.dll",
+        "lib/netstandard2.1/K4os.Compression.LZ4.Streams.xml"
       ]
     },
     "K4os.Hash.xxHash/1.0.6": {
@@ -713,41 +726,45 @@
         "version.txt"
       ]
     },
-    "MySql.Data/8.0.26": {
-      "sha512": "iOxE24dI01JZlZ1EObkz9WwYMzX+0RnBf5a11OkPDCOGv2Yo0tTWmwAJfVXkuuSD47XngOir7l7+xZZ56lZyAA==",
+    "MySql.Data/8.0.28": {
+      "sha512": "7b699tU9ba0r7SBK7K9snGJB9ulnOdwEXG28kpVvaQSN0hHenfoJ/ADOtdfhcvcn1KStBX8pFK5qIl8scdBL2g==",
       "type": "package",
-      "path": "mysql.data/8.0.26",
+      "path": "mysql.data/8.0.28",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/net452/MySql.Data.dll",
         "lib/net452/MySql.Data.xml",
         "lib/net452/Ubiety.Dns.Core.dll",
-        "lib/net452/Zstandard.Net.dll",
+        "lib/net452/ZstdNet.dll",
         "lib/net48/MySql.Data.dll",
         "lib/net48/MySql.Data.xml",
         "lib/net48/Ubiety.Dns.Core.dll",
-        "lib/net48/Zstandard.Net.dll",
+        "lib/net48/ZstdNet.dll",
         "lib/net5.0/MySql.Data.dll",
         "lib/net5.0/MySql.Data.xml",
         "lib/net5.0/Ubiety.Dns.Core.dll",
-        "lib/net5.0/Zstandard.Net.dll",
+        "lib/net5.0/ZstdNet.dll",
+        "lib/net6.0/MySql.Data.dll",
+        "lib/net6.0/MySql.Data.xml",
+        "lib/net6.0/Ubiety.Dns.Core.dll",
+        "lib/net6.0/ZstdNet.dll",
         "lib/netstandard2.0/MySql.Data.dll",
         "lib/netstandard2.0/MySql.Data.xml",
         "lib/netstandard2.0/Ubiety.Dns.Core.dll",
-        "lib/netstandard2.0/Zstandard.Net.dll",
+        "lib/netstandard2.0/ZstdNet.dll",
         "lib/netstandard2.1/MySql.Data.dll",
         "lib/netstandard2.1/MySql.Data.xml",
         "lib/netstandard2.1/Ubiety.Dns.Core.dll",
-        "lib/netstandard2.1/Zstandard.Net.dll",
-        "mysql.data.8.0.26.nupkg.sha512",
+        "lib/netstandard2.1/ZstdNet.dll",
+        "mysql.data.8.0.28.nupkg.sha512",
         "mysql.data.nuspec"
       ]
     },
-    "MySqlConnector/1.3.11": {
-      "sha512": "CwzHwRTN+zMKYfEpfwWJ2QzI6JtTYujBbrVHp45zq1BttuykQkqGlZYL9ZUwA2x5xTRBJTDZoy9S6kfN6S0Suw==",
+    "MySqlConnector/2.1.6": {
+      "sha512": "btDnflhsn3g3G+9oQKIVh1dmVfGkUphMWFmtAR2lfAm4ir2QnjMfaVDqNLqNNwNNIN5jsUuT25ffivK56DvsOQ==",
       "type": "package",
-      "path": "mysqlconnector/1.3.11",
+      "path": "mysqlconnector/2.1.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -760,18 +777,16 @@
         "lib/net471/MySqlConnector.xml",
         "lib/net5.0/MySqlConnector.dll",
         "lib/net5.0/MySqlConnector.xml",
-        "lib/netcoreapp2.1/MySqlConnector.dll",
-        "lib/netcoreapp2.1/MySqlConnector.xml",
+        "lib/net6.0/MySqlConnector.dll",
+        "lib/net6.0/MySqlConnector.xml",
         "lib/netcoreapp3.1/MySqlConnector.dll",
         "lib/netcoreapp3.1/MySqlConnector.xml",
-        "lib/netstandard1.3/MySqlConnector.dll",
-        "lib/netstandard1.3/MySqlConnector.xml",
         "lib/netstandard2.0/MySqlConnector.dll",
         "lib/netstandard2.0/MySqlConnector.xml",
         "lib/netstandard2.1/MySqlConnector.dll",
         "lib/netstandard2.1/MySqlConnector.xml",
         "logo.png",
-        "mysqlconnector.1.3.11.nupkg.sha512",
+        "mysqlconnector.2.1.6.nupkg.sha512",
         "mysqlconnector.nuspec"
       ]
     },
@@ -916,10 +931,10 @@
         "version.txt"
       ]
     },
-    "System.Data.SqlClient/4.8.2": {
-      "sha512": "80vGtW6uLB4AkyrdVuKTXYUyuXDPAsSKbTVfvjndZaRAYxzFzWhJbvUfeAKrN+128ycWZjLIAl61dFUwWHOOTw==",
+    "System.Data.SqlClient/4.8.3": {
+      "sha512": "yERfVLXAY0QbylAgaGLByYN0hFxX28aeEQ0hUgJO+Ntn1AfmWl5HHUoYJA0Yl9HhIUUJHVaS/Sw/RLZr5aaC+A==",
       "type": "package",
-      "path": "system.data.sqlclient/4.8.2",
+      "path": "system.data.sqlclient/4.8.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -996,8 +1011,36 @@
         "runtimes/win/lib/netstandard2.0/System.Data.SqlClient.xml",
         "runtimes/win/lib/uap10.0.16299/System.Data.SqlClient.dll",
         "runtimes/win/lib/uap10.0.16299/System.Data.SqlClient.xml",
-        "system.data.sqlclient.4.8.2.nupkg.sha512",
+        "system.data.sqlclient.4.8.3.nupkg.sha512",
         "system.data.sqlclient.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Diagnostics.DiagnosticSource/5.0.1": {
+      "sha512": "uXQEYqav2V3zP6OwkOKtLv+qIi6z3m1hsGyKwXX7ZA7htT4shoVccGxnJ9kVRFPNAsi1ArZTq2oh7WOto6GbkQ==",
+      "type": "package",
+      "path": "system.diagnostics.diagnosticsource/5.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net45/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net45/System.Diagnostics.DiagnosticSource.xml",
+        "lib/net46/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net46/System.Diagnostics.DiagnosticSource.xml",
+        "lib/net5.0/System.Diagnostics.DiagnosticSource.dll",
+        "lib/net5.0/System.Diagnostics.DiagnosticSource.xml",
+        "lib/netstandard1.1/System.Diagnostics.DiagnosticSource.dll",
+        "lib/netstandard1.1/System.Diagnostics.DiagnosticSource.xml",
+        "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll",
+        "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.xml",
+        "lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.dll",
+        "lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.xml",
+        "system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
+        "system.diagnostics.diagnosticsource.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
@@ -1041,22 +1084,24 @@
         "version.txt"
       ]
     },
-    "System.Memory/4.5.3": {
-      "sha512": "3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
+    "System.Memory/4.5.4": {
+      "sha512": "1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
       "type": "package",
-      "path": "system.memory/4.5.3",
+      "path": "system.memory/4.5.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Memory.dll",
+        "lib/net461/System.Memory.xml",
         "lib/netcoreapp2.1/_._",
         "lib/netstandard1.1/System.Memory.dll",
         "lib/netstandard1.1/System.Memory.xml",
         "lib/netstandard2.0/System.Memory.dll",
         "lib/netstandard2.0/System.Memory.xml",
         "ref/netcoreapp2.1/_._",
-        "system.memory.4.5.3.nupkg.sha512",
+        "system.memory.4.5.4.nupkg.sha512",
         "system.memory.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -1120,26 +1165,33 @@
         "version.txt"
       ]
     },
-    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
-      "sha512": "wprSFgext8cwqymChhrBLu62LMg/1u92bU+VOwyfBimSPVFXtsNqEWC92Pf9ofzJFlk4IHmJA75EDJn1b2goAQ==",
+    "System.Runtime.CompilerServices.Unsafe/5.0.0": {
+      "sha512": "ZD9TMpsmYJLrxbbmdvhwt9YEgG5WntEnZ/d1eH8JBX9LBp+Ju8BSBhUGbZMNVHHomWo2KVImJhTDl2hIgw/6MA==",
       "type": "package",
-      "path": "system.runtime.compilerservices.unsafe/4.5.2",
+      "path": "system.runtime.compilerservices.unsafe/5.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
+        "lib/net45/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/net45/System.Runtime.CompilerServices.Unsafe.xml",
         "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll",
         "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.xml",
         "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
         "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
         "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
         "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/net461/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/net461/System.Runtime.CompilerServices.Unsafe.xml",
         "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
         "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
         "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
         "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
-        "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
+        "ref/netstandard2.1/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard2.1/System.Runtime.CompilerServices.Unsafe.xml",
+        "system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
         "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -1410,10 +1462,10 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Dapper >= 2.0.90",
-      "MySql.Data >= 8.0.26",
-      "MySqlConnector >= 1.3.11",
-      "System.Data.SqlClient >= 4.8.2",
+      "Dapper >= 2.0.123",
+      "MySql.Data >= 8.0.28",
+      "MySqlConnector >= 2.1.6",
+      "System.Data.SqlClient >= 4.8.3",
       "TimeSheet.Logic >= 1.0.0",
       "TimeSheet.Model >= 1.0.0",
       "TimeSheet.Resource >= 1.0.0"
@@ -1470,19 +1522,19 @@
         "dependencies": {
           "Dapper": {
             "target": "Package",
-            "version": "[2.0.90, )"
+            "version": "[2.0.123, )"
           },
           "MySql.Data": {
             "target": "Package",
-            "version": "[8.0.26, )"
+            "version": "[8.0.28, )"
           },
           "MySqlConnector": {
             "target": "Package",
-            "version": "[1.3.11, )"
+            "version": "[2.1.6, )"
           },
           "System.Data.SqlClient": {
             "target": "Package",
-            "version": "[4.8.2, )"
+            "version": "[4.8.3, )"
           }
         },
         "imports": [
@@ -1503,7 +1555,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
       }
     }
   }

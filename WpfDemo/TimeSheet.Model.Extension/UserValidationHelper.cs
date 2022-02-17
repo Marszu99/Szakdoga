@@ -26,22 +26,22 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(username))
             {             
-                result = ResourceHandler.GetResourceString("UsernameIsEmpty");
+                result = Resources.UsernameIsEmpty;
             }
             else if (username.Length < MinimumUsernameLength || username.Length > MaximumUsernameLength)
             {
-                result = ResourceHandler.GetResourceString("UsernameWrongLength");
+                result = Resources.UsernameWrongLength;
             }
             else if (username.Contains(" "))
             {
-                result = ResourceHandler.GetResourceString("UsernameOneWord");
+                result = Resources.UsernameOneWord;
             }
 
             foreach (User _user in new UserLogic().GetAllUsers())
             {
                 if (username == _user.Username)
                 {
-                    result = username + ResourceHandler.GetResourceString("UsernameAlreadyExists");
+                    result = username + Resources.UsernameAlreadyExists;
                 }
             }
 
@@ -54,15 +54,15 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                result = ResourceHandler.GetResourceString("PasswordIsEmpty");
+                result = Resources.PasswordIsEmpty;
             }
             else if (password.Length < MinimumPasswordLength || password.Length > MaximumPasswordLength)
             {
-                result = ResourceHandler.GetResourceString("PasswordWrongLength");
+                result = Resources.PasswordWrongLength;
             }
             else if (password.Contains(" "))
             {
-                result = ResourceHandler.GetResourceString("PasswordOneWord");
+                result = Resources.PasswordOneWord;
             }
 
             return result;
@@ -74,11 +74,11 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(password2))
             {
-                result = ResourceHandler.GetResourceString("Password2IsEmpty");
+                result = Resources.Password2IsEmpty;
             }
             else if (password2 != password)
             {
-                result = ResourceHandler.GetResourceString("Password2DoesntMatch");
+                result = Resources.Password2DoesntMatch;
             }
 
             return result;
@@ -90,15 +90,15 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(firstname))
             {
-                result = ResourceHandler.GetResourceString("FirstNameIsEmpty");
+                result = Resources.FirstNameIsEmpty;
             }
             else if (firstname.Length < MinimumFirstNameLength || firstname.Length > MaximumFirstNameLength)
             {
-                result = ResourceHandler.GetResourceString("FirstNameWrongLength");
+                result = Resources.FirstNameWrongLength;
             }
             else if (!firstname.ToCharArray().All(char.IsLetter))
             {
-                result = ResourceHandler.GetResourceString("FirstNameNoNumbers");
+                result = Resources.FirstNameNoNumbers;
             }
 
             return result;
@@ -110,15 +110,15 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(lastname))
             {
-                result = ResourceHandler.GetResourceString("LastNameIsEmpty");
+                result = Resources.LastNameIsEmpty;
             }
             else if (lastname.Length < MinimumLastNameLength || lastname.Length > MaximumLastNameLength)
             {
-                result = ResourceHandler.GetResourceString("LastNameWrongLength");
+                result = Resources.LastNameWrongLength;
             }
             else if (!lastname.ToCharArray().All(char.IsLetter))
             {
-                result = ResourceHandler.GetResourceString("LastNameNoNumbers");
+                result = Resources.LastNameNoNumbers;
             }
 
             return result;
@@ -130,15 +130,15 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(email))
             {
-                result = ResourceHandler.GetResourceString("EmailIsEmpty");
+                result = Resources.EmailIsEmpty;
             }
             else if (email.Length < MinimumEmailLength || email.Length > MaximumEmailLength)
             {
-                result = ResourceHandler.GetResourceString("EmailWrongLength");
+                result = Resources.EmailWrongLength;
             }
             else if (!Regex.IsMatch(email, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
             {
-                result = ResourceHandler.GetResourceString("EmailIsInvalid");
+                result = Resources.EmailIsInvalid;
             }
 
             return result;
@@ -150,11 +150,11 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(email2))
             {
-                result = ResourceHandler.GetResourceString("Email2IsEmpty");
+                result = Resources.Email2IsEmpty;
             }
             else if (email2 != email)
             {
-                result = ResourceHandler.GetResourceString("Email2DoesntMatch");
+                result = Resources.Email2DoesntMatch;
             }
 
             return result;
@@ -166,15 +166,15 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(telephone))
             {
-                result = ResourceHandler.GetResourceString("TelephoneIsEmpty");
+                result = Resources.TelephoneIsEmpty;
             }
             /*else if (!PhoneNumberUtil.IsViablePhoneNumber(telephone))
             {
-                result = ResourceHandler.GetResourceString("TelephoneIsInvalid");
+                result = Resources.TelephoneIsInvalid");
             }*/
             else if (!Regex.IsMatch(telephone, @"^((?:\+?3|0)6)(?:-|\()?(\d{1,2})(?:-|\))?(\d{3})-?(\d{3,4})$"))    // magyar telefonszamra specifikalt
             {
-                result = ResourceHandler.GetResourceString("TelephoneIsInvalid");
+                result = Resources.TelephoneIsInvalid;
             }
 
             return result;
@@ -186,11 +186,11 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(companyName))
             {
-                result = ResourceHandler.GetResourceString("CompanyNameIsEmpty");
+                result = Resources.CompanyNameIsEmpty;
             }
             else if (companyName.Length < MinimumCompanyNameLength || companyName.Length > MaximumCompanyNameLength)
             {
-                result = ResourceHandler.GetResourceString("CompanyNameWrongLength");
+                result = Resources.CompanyNameWrongLength;
             }
 
             return result;
@@ -202,11 +202,11 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(companyName2))
             {
-                result = ResourceHandler.GetResourceString("CompanyName2IsEmpty");
+                result = Resources.CompanyName2IsEmpty;
             }
             else if (companyName2 != companyName)
             {
-                result = ResourceHandler.GetResourceString("CompanyName2DoesntMatch");
+                result = Resources.CompanyName2DoesntMatch;
             }
 
             return result;

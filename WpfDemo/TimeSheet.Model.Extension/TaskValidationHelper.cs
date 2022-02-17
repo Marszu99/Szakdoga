@@ -15,7 +15,7 @@ namespace TimeSheet.Model.Extension
 
             if (user == null)
             {
-                result = ResourceHandler.GetResourceString("NeedToChooseUserForTask");
+                result = Resources.NeedToChooseUserForTask;
             }
 
             return result;
@@ -27,11 +27,11 @@ namespace TimeSheet.Model.Extension
 
             if (string.IsNullOrWhiteSpace(title))
             {
-                result = ResourceHandler.GetResourceString("TitleIsEmpty");
+                result = Resources.TitleIsEmpty;
             }
             else if (title.Length > MaximumTitleLength)
             {
-                result = ResourceHandler.GetResourceString("TitleWrongLength");
+                result = Resources.TitleWrongLength;
             }
 
             return result;
@@ -43,11 +43,11 @@ namespace TimeSheet.Model.Extension
 
             if (deadline == null)
             {
-                result = ResourceHandler.GetResourceString("DeadlineIsEmpty");
+                result = Resources.DeadlineIsEmpty;
             }
             else if (deadline <= DateTime.Today)
             {
-                result = ResourceHandler.GetResourceString("DeadlineMoreThan24Hours");
+                result = Resources.DeadlineMoreThan24Hours;
             }
 
             return result;
@@ -60,11 +60,11 @@ namespace TimeSheet.Model.Extension
 
             if (status == TaskStatus.Done && recordList.Count == 0)
             {
-                result = ResourceHandler.GetResourceString("StatusCannotBeDoneWithNoRecords");
+                result = Resources.StatusCannotBeDoneWithNoRecords;
             }
             else if (status == TaskStatus.Created && recordList.Count != 0)
             {
-                result = ResourceHandler.GetResourceString("StatusCannotBeCreatedWithRecords");
+                result = Resources.StatusCannotBeCreatedWithRecords;
             }
 
             return result;

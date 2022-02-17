@@ -14,7 +14,6 @@ using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Model.Extension;
 using TimeSheet.Resource;
-using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 
 
@@ -116,7 +115,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                if(_task.IdTask != 0)
+                if (_task.IdTask != 0)
                 {
                     return Enum.GetValues(typeof(TaskStatus)).Cast<TaskStatus>()
                     .ToDictionary<TaskStatus, TaskStatus, string>(
@@ -130,7 +129,7 @@ namespace WpfDemo.ViewModel
                     .ToDictionary<TaskStatus, TaskStatus, string>(
                     item => item,
                     item => item.ToString());
-                }     
+                }
             }
         }
 
@@ -209,7 +208,7 @@ namespace WpfDemo.ViewModel
         public bool IsTaskViewValuesReadOnly
         {
             get
-            { 
+            {
                 return LoginViewModel.LoggedUser.Status == 0;
             }
         }
@@ -235,10 +234,17 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                //return _task.User_Username == LoginViewModel.LoggedUser.Username ? new NotificationRepository(new NotificationLogic()).GetTaskNotifications(this._task.IdTask) : null;
                 if (IsNotificationsOn)
                 {
-                    return LoginViewModel.LoggedUser.Status == 1 ? new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(this._task.IdTask) : new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(this._task.IdTask);
+                    List<string> notificationList = new List<string>();
+
+                    notificationList = LoginViewModel.LoggedUser.Status == 1 ?
+                        new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(this._task.IdTask) :
+                        new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(this._task.IdTask);
+
+                    string notifications = string.Join(Environment.NewLine, notificationList.Select(notification => ResourceHandler.GetResourceString(notification)));
+
+                    return string.IsNullOrWhiteSpace(notifications) ? null : notifications;
                 }
                 else
                 {
@@ -251,11 +257,11 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                //return _task.User_Username == LoginViewModel.LoggedUser.Username && new NotificationRepository(new NotificationLogic()).GetTaskNotifications(this._task.IdTask) != null ? "DarkOrange" : "#eee";
                 if (IsNotificationsOn)
                 {
-                    return (LoginViewModel.LoggedUser.Status == 1 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(this._task.IdTask) != null)
-                            || (LoginViewModel.LoggedUser.Status == 0 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(this._task.IdTask) != null) ? "DarkOrange" : "#eee";
+                    return (LoginViewModel.LoggedUser.Status == 1 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(this._task.IdTask).Count > 0)
+                            || (LoginViewModel.LoggedUser.Status == 0 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(this._task.IdTask).Count > 0)
+                            ? "DarkOrange" : "#eee";
                 }
                 else
                 {
@@ -311,7 +317,16 @@ namespace WpfDemo.ViewModel
         }
 
 
+        public event Action<Task> TaskCreated;
+        public void CreateTaskToList(Task task)
+        {
+            TaskCreated?.Invoke(task);
+        }
+
+
         public ICommand SaveCommand { get; }
+        public RelayCommand CancelTaskViewCommand { get; private set; }
+
 
         public TaskViewModel(Task task)
         {
@@ -319,7 +334,9 @@ namespace WpfDemo.ViewModel
             //_view = view;
 
             SaveCommand = new RelayCommand(Save, CanSave);
+            CancelTaskViewCommand = new RelayCommand(CancelTaskView, CanCancelTaskView);
         }
+
 
         private bool CanSave(object arg)
         {
@@ -338,11 +355,10 @@ namespace WpfDemo.ViewModel
                 {
                     UpdateTask();
                 }
-                TaskManagementViewModel.RefreshTaskListCommand.Execute(this); // ez igy jo????
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
             catch (TaskValidationException)
             {
@@ -362,29 +378,29 @@ namespace WpfDemo.ViewModel
             /*if (this._view.OneTimeTask.IsChecked == true)
             {
                 //this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
-                MessageBox.Show(ResourceHandler.GetResourceString("OneTime"));
+                MessageBox.Show(Resources.OneTime"));
             }
             else if (this._view.DailyTask.IsChecked == true)
             {
                 //TaskService ts = new TaskService();
-                MessageBox.Show(ResourceHandler.GetResourceString("Daily"));
+                MessageBox.Show(Resources.Daily"));
             }
             else if (this._view.WeeklyTask.IsChecked == true)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("Weekly"));
+                MessageBox.Show(Resources.Weekly"));
             }
             else if (this._view.MonthlyTask.IsChecked == true)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("Monthly"));
+                MessageBox.Show(Resources.Monthly"));
             }*/
 
 
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
-            MessageBox.Show(ResourceHandler.GetResourceString("TaskCreatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Resources.TaskCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             if (this._task.User.Status != 1)
             {
-                new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("New task!", 0, this._task.IdTask);
+                new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationNewTask", 0, this._task.IdTask);
                 SendNotificationEmail(" has been added to your tasks!");
             }
             RefreshValues();
@@ -422,54 +438,54 @@ namespace WpfDemo.ViewModel
         private void UpdateTask()
         {
             new TaskRepository(new TaskLogic()).UpdateTask(this._task, this._task.IdTask, this._task.User_idUser);
-            MessageBox.Show(ResourceHandler.GetResourceString("TaskUpdatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Resources.TaskUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
 
             if (this._task.User.Status != 1)
             {
                 if (_isTitleChanged && !_isDescriptionChanged && !_isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title has changed!");
                 }
                 else if (!_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskDescriptionChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Description has changed!");
                 }
                 else if (!_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Deadline has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Deadline has changed!");
                 }
                 else if (_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleDescriptionChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title and Description has changed!");
                 }
                 else if (!_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description and Deadline has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskDescriptionDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Description and Deadline has changed!");
                 }
                 else if (_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Deadline has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title and Deadline has changed!");
                 }
                 else if (_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description and Deadline has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleDescriptionDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title and Description and Deadline has changed!");
                 }
                 else if (_isStatusChanged && this._task.Status.ToString() == "InProgress")
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task is InProgress!", 1, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskInProgress", 1, this._task.IdTask);
                     SendNotificationEmail(" is InProgress!");
                 }
                 else if (_isStatusChanged && this._task.Status.ToString() == "Done")
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been Done!", 1, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskDone", 1, this._task.IdTask);
                     SendNotificationEmail(" has been Done!");
                 }
 
@@ -478,6 +494,20 @@ namespace WpfDemo.ViewModel
                 _isDeadlineChanged = false;
             }
         }
+
+
+
+        public event Action<object> TaskCanceled;
+        private bool CanCancelTaskView(object arg)
+        {
+            return true;
+        }
+
+        private void CancelTaskView(object obj)
+        {
+            TaskManagementViewModel.asd = true;
+        }
+
 
         private void SendNotificationEmail(string EmailNotificationMessage)
         {
@@ -506,47 +536,46 @@ namespace WpfDemo.ViewModel
             this.Deadline = DateTime.Today.AddDays(1);
         }
 
-
         public string TitleString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Title");
+                return Resources.Title;
             }
         }
         public string UserString
         {
             get
             {
-                return ResourceHandler.GetResourceString("User");
+                return Resources.User;
             }
         }
         public string DescriptionString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Description");
+                return Resources.Description;
             }
         }
         public string DeadlineString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Deadline");
+                return Resources.Deadline;
             }
         }
         public string StatusString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Status");
+                return Resources.Status;
             }
         }
         public string SaveString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Save");
+                return Resources.Save;
             }
         }
     }

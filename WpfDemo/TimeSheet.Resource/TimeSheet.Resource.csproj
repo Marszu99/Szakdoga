@@ -5,26 +5,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="ResourceENG.Designer.cs">
+    <Compile Update="Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceENG.resx</DependentUpon>
-    </Compile>
-    <Compile Update="ResourceHUN.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ResourceHUN.resx</DependentUpon>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="ResourceENG.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceENG.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="ResourceHUN.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourceHUN.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Resources.hu-HU.resx">
+      <Generator></Generator>
     </EmbeddedResource>
   </ItemGroup>
 

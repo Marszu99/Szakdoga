@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfDemo.View"
+             xmlns:local="clr-namespace:WpfDemo"
+             xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="900" Background="DarkGray"
              x:Name="ListAllTasks">
@@ -29,7 +30,8 @@
 
                     <DataGrid.ContextMenu>
                         <ContextMenu Visibility="{Binding ListTasksViewContextMenuVisibility}">
-                            <MenuItem Header="{Binding DeleteString}" Command="{Binding DeleteCommand}"/>
+                            <!--local:ResxStatic l10n:Resources.Delete,Binding DeleteString-->
+                            <MenuItem Header="{local:ResxStatic l10n:Resources.Delete}" Command="{Binding DeleteCommand}"/>
                         </ContextMenu>
                     </DataGrid.ContextMenu>
 

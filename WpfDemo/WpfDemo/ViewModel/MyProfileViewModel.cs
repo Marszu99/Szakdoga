@@ -241,7 +241,7 @@ namespace WpfDemo.ViewModel
             try
             {
                 new UserRepository(new UserLogic()).UpdateUser(CurrentLoggedUser);
-                MessageBox.Show(ResourceHandler.GetResourceString("UserUpdatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(Resources.UserUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
                 // _view.MyProfilePassword.IsReadOnly = true;
                 _view.MyProfilePassword.IsEnabled = false;
@@ -281,7 +281,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show("Server error!");
+                MessageBox.Show(Resources.ServerError);
             }
             catch (UserValidationException)
             {
@@ -365,110 +365,109 @@ namespace WpfDemo.ViewModel
             tasks.ForEach(task => _myDoneTaskList.Add(task));
         }
 
-
         public string UsernameString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Username");
+                return Resources.Username;
             }
         }
         public string PasswordString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Password");
+                return Resources.Password;
             }
         }
         public string FirstNameString
         {
             get
             {
-                return ResourceHandler.GetResourceString("FirstName");
+                return Resources.FirstName;
             }
         }
         public string LastNameString
         {
             get
             {
-                return ResourceHandler.GetResourceString("LastName");
+                return Resources.LastName;
             }
         }
         public string EmailString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Email");
+                return Resources.Email;
             }
         }
         public string TelephoneString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Telephone");
+                return Resources.Telephone;
             }
         }
         public string MyProfileString
         {
             get
             {
-                return ResourceHandler.GetResourceString("MyProfile");
+                return Resources.MyProfile;
             }
         }
         public string ChangeString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Change");
+                return Resources.Change;
             }
         }
         public string SaveString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Save");
+                return Resources.Save;
             }
         }
         public string CancelString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Cancel");
+                return Resources.Cancel;
             }
         }
         public string ToDoTasksString
         {
             get
             {
-                return ResourceHandler.GetResourceString("ToDoTasks");
+                return Resources.ToDoTasks;
             }
         }
         public string TitleString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Title");
+                return Resources.Title;
             }
         }
         public string DescriptionString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Description");
+                return Resources.Description;
             }
         }
         public string DeadlineString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Deadline");
+                return Resources.Deadline;
             }
         }
         public string DoneTasksString
         {
             get
             {
-                return ResourceHandler.GetResourceString("DoneTasks");
+                return Resources.DoneTasks;
             }
         }
     }

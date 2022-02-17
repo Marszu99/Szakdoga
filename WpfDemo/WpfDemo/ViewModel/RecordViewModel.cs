@@ -277,7 +277,13 @@ namespace WpfDemo.ViewModel
                 return result;
             }
         }
-        
+
+        public event Action<Record> RecordCreated;
+        public void CreateRecordToList(Record record)
+        {
+            RecordCreated?.Invoke(record);
+        }
+
 
         public ICommand SaveCommand { get; }
         public RelayCommand DurationAddCommand { get; private set; }
@@ -341,11 +347,10 @@ namespace WpfDemo.ViewModel
                 {
                     UpdateRecord();
                 }
-                RecordManagementViewModel.RefreshRecordListCommand.Execute(obj);  // ez igy jo????
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
             catch (RecordValidationException)
             {
@@ -361,14 +366,14 @@ namespace WpfDemo.ViewModel
         private void CreateRecord()
         {
             this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._record.Task.User_idUser, this._record.Task.IdTask); 
-            MessageBox.Show(ResourceHandler.GetResourceString("RecordCreatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Resources.RecordCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
             RefreshValues();
         }
 
         private void UpdateRecord()
         {
             new RecordRepository(new RecordLogic()).UpdateRecord(this._record, this._record.IdRecord, this._record.User_idUser, this._record.Task.IdTask);
-            MessageBox.Show(ResourceHandler.GetResourceString("RecordUpdatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Resources.RecordUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
         }
 
@@ -382,56 +387,54 @@ namespace WpfDemo.ViewModel
             this.Task_Status = 0;
         }
 
-
         public string TaskString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Task");
+                return Resources.Task;
             }
         }
         public string UserString
         {
             get
             {
-                return ResourceHandler.GetResourceString("User");
+                return Resources.User;
             }
         }
         public string DateString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Date");
+                return Resources.Date;
             }
         }
         public string CommentString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Comment");
+                return Resources.Comment;
             }
         }
         public string DurationString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Duration");
+                return Resources.Duration;
             }
         }
         public string StatusString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Status");
+                return Resources.Status;
             }
         }
         public string SaveString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Save");
+                return Resources.Save;
             }
         }
-
     }
 }

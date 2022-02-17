@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfDemo.View" xmlns:components="clr-namespace:WpfDemo.Components"
+        xmlns:local="clr-namespace:WpfDemo" 
+        xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
+        xmlns:components="clr-namespace:WpfDemo.Components"
         mc:Ignorable="d"
         Title="MyProfil" Width="1550" Height="870" Background="DarkGray" 
         WindowStartupLocation="Manual" ResizeMode="NoResize" WindowStyle="{Binding MyProfileViewWindowStyle}"
@@ -11,19 +13,26 @@
 
     <Grid Margin="5 0 5 0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0" Text="{Binding MyProfileString}" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="100 40 280 0" Width="250" Height="65"/>
+        <!--local:ResxStatic l10n:Resources.MyProfile,Binding MyProfileString-->
+        <TextBlock Grid.Column="0" Text="{local:ResxStatic l10n:Resources.MyProfile}" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="100 40 280 0" Width="250" Height="65"/>
 
+        <!--local:ResxStatic l10n:Resources.Username,Binding UsernameString-->
+        <!--local:ResxStatic l10n:Resources.Password,Binding PasswordString-->
+        <!--local:ResxStatic l10n:Resources.FirstName,Binding FirstNameString-->
+        <!--local:ResxStatic l10n:Resources.LastName,Binding LastNameString-->
+        <!--local:ResxStatic l10n:Resources.Email,Binding EmailString-->
+        <!--local:ResxStatic l10n:Resources.Telephone,Binding TelephoneString-->
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="250" Margin="20 100 0 200">
-            <TextBlock Text="{Binding UsernameString, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
-            <TextBlock Text="{Binding PasswordString, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
-            <TextBlock Text="{Binding FirstNameString, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
-            <TextBlock Text="{Binding LastNameString, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
-            <TextBlock Text="{Binding EmailString, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
-            <TextBlock Text="{Binding TelephoneString, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.Username, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.Password, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.FirstName, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.LastName, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.Email, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.Telephone, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="420" Margin="280 100 0 200">
@@ -105,8 +114,8 @@
             </TextBox>
         </StackPanel>
 
-
-        <Button Grid.Column="0" Content="{Binding ChangeString}" x:Name="ChangeUserValuesButton" Command="{Binding ChangeUserValuesCommand}" Height="40" FontSize="22" 
+        <!--local:ResxStatic l10n:Resources.Change,Binding ChangeString-->
+        <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Change}" x:Name="ChangeUserValuesButton" Command="{Binding ChangeUserValuesCommand}" Height="40" FontSize="22" 
                 HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 300 150" Padding="4" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -115,7 +124,8 @@
             </Button.Resources>
         </Button>
 
-        <Button Grid.Column="0" Content="{Binding SaveString}" x:Name="SaveChangedUserValuesButton" Command="{Binding SaveChangedUserValuesCommand}" Height="40" FontSize="22" 
+        <!--local:ResxStatic l10n:Resources.Save,Binding SaveString-->
+        <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Save}" x:Name="SaveChangedUserValuesButton" Command="{Binding SaveChangedUserValuesCommand}" Height="40" FontSize="22" 
                 HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 425 150" Padding="5" Visibility="Hidden" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -124,7 +134,8 @@
             </Button.Resources>
         </Button>
 
-        <Button Grid.Column="0" Content="{Binding CancelString}" x:Name="CancelChangeUserValuesButton" Command="{Binding CancelChangeUserValuesCommand}" Height="40" FontSize="22" 
+        <!--local:ResxStatic l10n:Resources.Cancel,Binding CancelString-->
+        <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Cancel}" x:Name="CancelChangeUserValuesButton" Command="{Binding CancelChangeUserValuesCommand}" Height="40" FontSize="22" 
                 HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 200 150" Padding="4" Visibility="Hidden" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -142,8 +153,9 @@
 
             <FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
             <!--ResourceStringekhez kell-->
-            
-            <TextBlock Text="{Binding ToDoTasksString}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 30 0 0" Height="40"/>
+
+            <!--local:ResxStatic l10n:Resources.ToDoTasks,Binding ToDoTasksString-->
+            <TextBlock Text="{local:ResxStatic l10n:Resources.ToDoTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 30 0 0" Height="40"/>
 
             <DataGrid  x:Name="UserToDoTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyToDoTaskList}" Margin="0 70 0 20" HorizontalAlignment="Left" Width="700" AutoGenerateColumns="False" ColumnWidth="*"
                               Background="LightGray" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
@@ -196,8 +208,8 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-
-            <TextBlock Grid.Row="1" Text="{Binding DoneTasksString}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 10 0 0" Height="40"/>
+            <!--local:ResxStatic l10n:Resources.DoneTasks,Binding DoneTasksString-->
+            <TextBlock Grid.Row="1" Text="{local:ResxStatic l10n:Resources.DoneTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 10 0 0" Height="40"/>
 
             <DataGrid  x:Name="UserDoneTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyDoneTaskList}" Margin="0 50 0 20" HorizontalAlignment="Left" Width="700" AutoGenerateColumns="False" ColumnWidth="*"
                               Background="LightGray" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 

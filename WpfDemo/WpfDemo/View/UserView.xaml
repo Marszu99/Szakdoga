@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfDemo.View" 
+        xmlns:local="clr-namespace:WpfDemo"
+        xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource" 
         mc:Ignorable="d"
         Name="updateUser" Height="{Binding SelectedUser.UserViewHeight}" Width="600" Background="DarkGray">
     <Grid>
@@ -21,16 +22,20 @@
             <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
 
-
-        <TextBlock Grid.Row="0" Text="{Binding SelectedUser.UsernameString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <!--local:ResxStatic l10n:Resources.Username,Binding SelectedUser.UsernameString-->
+        <!--local:ResxStatic l10n:Resources.FirstName,Binding SelectedUser.FirstNameString-->
+        <!--local:ResxStatic l10n:Resources.LastName,Binding SelectedUser.LastNameString-->
+        <!--local:ResxStatic l10n:Resources.Email,Binding SelectedUser.EmailString-->
+        <!--local:ResxStatic l10n:Resources.Telephone,Binding SelectedUser.TelephoneString-->
+        <TextBlock Grid.Row="0" Text="{local:ResxStatic l10n:Resources.Username}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="{Binding SelectedUser.UserViewFirstNameGridRow}" Text="{Binding SelectedUser.FirstNameString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="{Binding SelectedUser.UserViewFirstNameGridRow}" Text="{local:ResxStatic l10n:Resources.FirstName}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="2" Text="{Binding SelectedUser.LastNameString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="2" Text="{local:ResxStatic l10n:Resources.LastName}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="{Binding SelectedUser.UserViewEmailGridRow}" Text="{Binding SelectedUser.EmailString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="{Binding SelectedUser.UserViewEmailGridRow}" Text="{local:ResxStatic l10n:Resources.Email}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="4" Text="{Binding SelectedUser.TelephoneString}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Grid.Row="4" Text="{local:ResxStatic l10n:Resources.Telephone}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0" FontSize="30"/>
 
 
@@ -117,9 +122,10 @@
             </TextBox.Resources>
         </TextBox>
 
+        <!--local:ResxStatic l10n:Resources.Save,Binding SelectedUser.SaveString-->
         <Button x:Name="SaveUserButton" 
                 Command="{Binding SelectedUser.SaveCommand}"
-                Content="{Binding SelectedUser.SaveString}" Grid.Column="1" Grid.Row="6" Height="45" Width="70" Margin="100 0 0 0" FontSize="26" HorizontalAlignment="Left"
+                Content="{local:ResxStatic l10n:Resources.Save}" Grid.Column="1" Grid.Row="6" Height="45" Width="70" Margin="100 0 0 0" FontSize="26" HorizontalAlignment="Left"
                 BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedUser.UserViewSaveButtonVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

@@ -14,24 +14,25 @@ namespace TimeSheet.Logic
         }
 
         public int CreateNotificationForTask(string message, int notificationFor, int taskid)
-        {          
+        {
             return _notificationlogic.CreateNotificationForTask(message, notificationFor, taskid);
         }
 
-        public string GetTaskNotifications(int taskid)//public List<Notification> GetTaskNotifications(int taskid)
-
-        {
-            return _notificationlogic.GetTaskNotifications(taskid);
-        }
-
-        public string GetTaskNotificationsForEmployee(int taskid)
-
+        /*public string GetTaskNotificationsForEmployee(int taskid)
         {
             return _notificationlogic.GetTaskNotificationsForEmployee(taskid);
         }
 
         public string GetTaskNotificationsForAdmin(int taskid)
+        {
+            return _notificationlogic.GetTaskNotificationsForAdmin(taskid);
+        }*/
 
+        public List<string> GetTaskNotificationsForEmployee(int taskid)
+        {
+            return _notificationlogic.GetTaskNotificationsForEmployee(taskid);
+        }
+        public List<string> GetTaskNotificationsForAdmin(int taskid)
         {
             return _notificationlogic.GetTaskNotificationsForAdmin(taskid);
         }

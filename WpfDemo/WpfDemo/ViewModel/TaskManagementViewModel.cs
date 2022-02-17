@@ -17,6 +17,7 @@ namespace WpfDemo.ViewModel
     public class TaskManagementViewModel : ViewModelBase
     {
         private TaskManagementView _view;
+        public static bool asd = false;
 
 
         public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>(); //List?
@@ -53,7 +54,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                if (ResourceHandler.isEnglish)
+                if (TabcontrolViewModel.IsLanguageEnglish)
                 {
                     return LoginViewModel.LoggedUser.Status == 0 ? "331.5 0 0 0" : "152.5 0 0 0";//"468.7 0 0 0" : "290 0 0 0"
                 }
@@ -84,7 +85,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return SelectedTask == null ? Visibility.Hidden : Visibility.Visible;
+                return SelectedTask == null || asd == true ? Visibility.Hidden : Visibility.Visible;
             }
         }
 
@@ -106,11 +107,11 @@ namespace WpfDemo.ViewModel
 
 
         public RelayCommand CreateTaskCommand { get; private set; }
-        public static RelayCommand RefreshTaskListCommand { get; private set; }
+        public RelayCommand RefreshTaskListCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand HasReadCommand { get; private set; }
-        public static RelayCommand NotificationsSwitchOnOffCommand { get; private set; }
+        public RelayCommand NotificationsSwitchOnOffCommand { get; private set; }
 
 
 
@@ -127,7 +128,6 @@ namespace WpfDemo.ViewModel
             HasReadCommand = new RelayCommand(HasRead, CanExecuteReadTaskNotifications);
             NotificationsSwitchOnOffCommand = new RelayCommand(NotificationSwitchOnOff, CanExecuteSwitch);
         }
-
 
         private bool CanExecuteShow(object arg)
         {
@@ -163,14 +163,21 @@ namespace WpfDemo.ViewModel
                     var taskViewModel = new TaskViewModel(task);
                     taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
                     TaskList.Add(taskViewModel);
+
+                    taskViewModel.TaskCreated += OnTaskCreated;
                 });
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
             
         }
+        private void OnTaskCreated(Task task)
+        {
+            TaskList.Add(new TaskViewModel(task));
+        }
+
 
         public void LoadUsers()
         {
@@ -183,7 +190,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
         }
 
@@ -299,7 +306,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
         }
 
@@ -311,20 +318,23 @@ namespace WpfDemo.ViewModel
 
         private void DeleteTask(object obj)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show(ResourceHandler.GetResourceString("TaskDeleteQuestion1") + SelectedTask.Title + ResourceHandler.GetResourceString("TaskDeleteQuestion2"), ResourceHandler.GetResourceString("Warning"), MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult messageBoxResult = MessageBox.Show(Resources.TaskDeleteQuestion1 + SelectedTask.Title + Resources.TaskDeleteQuestion2, Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 try
                 {
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
-                    MessageBox.Show(ResourceHandler.GetResourceString("TaskDeletedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
-                    
-                    SendNotificationEmail(SelectedTask.Title);
+                    MessageBox.Show(Resources.TaskDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    if(this.SelectedTask.User_Username != LoginViewModel.LoggedUser.Username)
+                    {
+                        SendNotificationEmail(SelectedTask.Title);
+                    }
                     RefreshTaskList(obj);
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                    MessageBox.Show(Resources.ServerError);
                 }
             }
         }
@@ -345,8 +355,7 @@ namespace WpfDemo.ViewModel
             else
             {
                 return false;
-            }        
-            //return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotifications(SelectedTask.IdTask) != null;//new NotificationRepository(new NotificationLogic()).GetTaskNotifications(SelectedTask.IdTask).Count != 0;
+            }
         }
 
         private void HasRead(object obj)
@@ -359,7 +368,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
         }
 
@@ -399,89 +408,88 @@ namespace WpfDemo.ViewModel
             client.Send(mm);
         }
 
-
         public string NewString
         {
             get
             {
-                return ResourceHandler.GetResourceString("New");
+                return Resources.New;
             }
         }
         public string RefreshString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Refresh");
+                return Resources.Refresh;
             }
         }
         public string MyTasksString
         {
             get
             {
-                return ResourceHandler.GetResourceString("MyTasks");
+                return Resources.MyTasks;
             }
         }
         public string ActiveTasksString
         {
             get
             {
-                return ResourceHandler.GetResourceString("ActiveTasks");
+                return Resources.ActiveTasks;
             }
         }
         public string NotificationsString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Notifications");
+                return Resources.Notifications;
             }
         }
         public string SearchString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Search");
+                return Resources.Search;
             }
         }
         public string DeleteString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Delete");
+                return Resources.Delete;
             }
         }
         public string TitleString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Title");
+                return Resources.Title;
             }
         }
         public string UserString
         {
             get
             {
-                return ResourceHandler.GetResourceString("User");
+                return Resources.User;
             }
         }
         public string DescriptionString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Description");
+                return Resources.Description;
             }
         }
         public string DeadlineString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Deadline");
+                return Resources.Deadline;
             }
         }
         public string StatusString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Status");
+                return Resources.Status;
             }
         }
     }

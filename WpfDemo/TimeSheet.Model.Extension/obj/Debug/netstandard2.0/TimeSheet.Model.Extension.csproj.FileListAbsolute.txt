@@ -18,8 +18,11 @@ C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bi
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\TimeSheet.Model.Extension.pdb
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\TimeSheet.DataAccess.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\TimeSheet.Model.dll
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\TimeSheet.Resource.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\TimeSheet.DataAccess.pdb
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\TimeSheet.Model.pdb
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\TimeSheet.Resource.pdb
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\hu-HU\TimeSheet.Resource.resources.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\obj\Debug\netstandard2.0\TimeSheet.Model.Extension.csproj.AssemblyReference.cache
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\obj\Debug\netstandard2.0\TimeSheet.Model.Extension.GeneratedMSBuildEditorConfig.editorconfig
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\obj\Debug\netstandard2.0\TimeSheet.Model.Extension.AssemblyInfoInputs.cache
@@ -28,5 +31,3 @@ C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\ob
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\obj\Debug\netstandard2.0\TimeSheet.Model.Extension.csproj.CopyComplete
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\obj\Debug\netstandard2.0\TimeSheet.Model.Extension.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\obj\Debug\netstandard2.0\TimeSheet.Model.Extension.pdb
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\TimeSheet.Resource.dll
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Model.Extension\bin\Debug\netstandard2.0\TimeSheet.Resource.pdb

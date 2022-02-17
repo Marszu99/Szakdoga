@@ -1,4 +1,6 @@
 ﻿using System.Data.SqlClient;
+using System.Globalization;
+using System.Threading;
 using System.Windows;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
@@ -69,7 +71,7 @@ namespace WpfDemo.ViewModel
         private void Login(object obj)
         {
             try
-            {
+            {               
                 Refresh();
                 if (new UserRepository(new UserLogic()).IsValidLogin(_username, _password))
                 {
@@ -93,11 +95,11 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
             catch (LoginUserException)
             {
-                _view.LoginUserErrorMessage.Text = ResourceHandler.GetResourceString("LoginErrorMessage");
+                _view.LoginUserErrorMessage.Text = Resources.LoginErrorMessage;
             }
             catch (LoginException ex)
             {
@@ -115,26 +117,25 @@ namespace WpfDemo.ViewModel
             _view.LoginUserErrorMessage.Text = "";
         }
 
-
         public string UsernameString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Username");
+                return Resources.Username;
             }
         }
         public string PasswordString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Password");
+                return Resources.Password;
             }
         }
         public string LoginString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Login");
+                return Resources.Login;
             }
         }
     }

@@ -1,4 +1,6 @@
 ﻿using System.Data.SqlClient;
+using System.Globalization;
+using System.Threading;
 using System.Windows;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
@@ -11,6 +13,7 @@ namespace WpfDemo.ViewModel
     public class TabcontrolViewModel : ViewModelBase
     {
         private TabcontrolView _view;
+        public static bool IsLanguageEnglish = true;
 
 
         public string LoggedUserUsername
@@ -73,25 +76,41 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
         }
         private void ChangeLanguage(object obj)
         {
-            if (ResourceHandler.isEnglish)
+            if (IsLanguageEnglish)
             {
-                ResourceHandler.isEnglish = false;
-                _view.TabcontrolWindowContent.Content = new TabcontrolView();
+                CultureInfo cultureInfo = new CultureInfo("hu-HU");
+                cultureInfo.DateTimeFormat.ShortDatePattern = "yyyy.MM.dd";
+                cultureInfo.DateTimeFormat.LongDatePattern = "yyyy.MM.dd HH:mm";
+                cultureInfo.DateTimeFormat.FullDateTimePattern = "yyyy.MM.dd HH:mm";
+                Thread.CurrentThread.CurrentUICulture = cultureInfo;
+                Thread.CurrentThread.CurrentCulture = cultureInfo;
+
+                ResxStaticExtension.OnLanguageChanged();
+
+                IsLanguageEnglish = false;
             }
             else
             {
-                ResourceHandler.isEnglish = true;
-                _view.TabcontrolWindowContent.Content = new TabcontrolView();
+                CultureInfo cultureInfo = new CultureInfo("en-US");
+                cultureInfo.DateTimeFormat.ShortDatePattern = "yyyy.MM.dd";
+                cultureInfo.DateTimeFormat.LongDatePattern = "yyyy.MM.dd HH:mm";
+                cultureInfo.DateTimeFormat.FullDateTimePattern = "yyyy.MM.dd HH:mm";
+                Thread.CurrentThread.CurrentUICulture = cultureInfo;
+                Thread.CurrentThread.CurrentCulture = cultureInfo;
+
+                ResxStaticExtension.OnLanguageChanged();
+
+                IsLanguageEnglish = true;
             }
         }
         private void Logout(object obj)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show(ResourceHandler.GetResourceString("LogoutMessage"), ResourceHandler.GetResourceString("Logout"), MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult messageBoxResult = MessageBox.Show(Resources.LogoutMessage, Resources.Logout, MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 _view.TabcontrolWindowContent.Content = new LoginView();
@@ -102,42 +121,42 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return ResourceHandler.GetResourceString("Profile");
+                return Resources.Profile;
             }
         }
         public string LanuageString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Language");
+                return Resources.Language;
             }
         }
         public string LogoutString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Logout");
+                return Resources.Logout;
             }
         }
         public string RecordString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Record");
+                return Resources.Record;
             }
         }
         public string TaskString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Task");
+                return Resources.Task;
             }
         }
         public string UserString
         {
             get
             {
-                return ResourceHandler.GetResourceString("User");
+                return Resources.User;
             }
         }
     }

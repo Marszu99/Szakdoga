@@ -264,7 +264,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
             catch (TaskValidationException)
             {
@@ -282,11 +282,11 @@ namespace WpfDemo.ViewModel
         private void CreateTask()
         {
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User_idUser);
-            MessageBox.Show(ResourceHandler.GetResourceString("TaskCreatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Resources.TaskCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             if (this._task.User_Username != LoginViewModel.LoggedUser.Username)
             {
-                new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("New task!", 0, this._task.IdTask);
+                new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationNewTask", 0, this._task.IdTask);
                 SendNotificationEmail(" has been added to your tasks!");
             }
             RefreshValues();
@@ -296,44 +296,44 @@ namespace WpfDemo.ViewModel
         private void UpdateTask()
         {
             new TaskRepository(new TaskLogic()).UpdateTask(this._task, this._task.IdTask, this._task.User_idUser);
-            MessageBox.Show(ResourceHandler.GetResourceString("TaskUpdatedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Resources.TaskUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
 
             if (this._task.User_Username != LoginViewModel.LoggedUser.Username)
             {
                 if (_isTitleChanged && !_isDescriptionChanged && !_isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title has changed!");
                 }
                 else if (!_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskDescriptionChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Description has changed!");
                 }
                 else if (!_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Deadline has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Deadline has changed!");
                 }
                 else if (_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleDescriptionChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title and Description has changed!");
                 }
                 else if (!_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Description and Deadline has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskDescriptionDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Description and Deadline has changed!");
                 }
                 else if (_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Deadline has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title and Deadline has changed!");
                 }
                 else if (_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
                 {
-                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("Task has been updated! Title and Description and Deadline has changed!", 0, this._task.IdTask);
+                    new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleDescriptionDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title and Description and Deadline has changed!");
                 }
 
@@ -369,53 +369,54 @@ namespace WpfDemo.ViewModel
             this.Deadline = DateTime.Today.AddDays(1);
         }
 
+
         public string TitleString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Title");
+                return Resources.Title;
             }
         }
         public string UserString
         {
             get
             {
-                return ResourceHandler.GetResourceString("User");
+                return Resources.User;
             }
         }
         public string DescriptionString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Description");
+                return Resources.Description;
             }
         }
         public string DeadlineString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Deadline");
+                return Resources.Deadline;
             }
         }
         public string StatusString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Status");
+                return Resources.Status;
             }
         }
         public string SaveString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Save");
+                return Resources.Save;
             }
         }
         public string CancelString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Cancel");
+                return Resources.Cancel;
             }
         }
     }

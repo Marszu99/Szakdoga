@@ -239,6 +239,11 @@
       "TimeSheet.Resource/1.0.0": {
         "runtime": {
           "TimeSheet.Resource.dll": {}
+        },
+        "resources": {
+          "hu-HU/TimeSheet.Resource.resources.dll": {
+            "locale": "hu-HU"
+          }
         }
       }
     }

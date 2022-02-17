@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfDemo.View"
+        xmlns:local="clr-namespace:WpfDemo"
+        xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
         mc:Ignorable="d"
         Title="UserProfileTaskView" Height="600" Width="550" Background="DarkGray"
         WindowStartupLocation="Manual" Left="650" Top="100">
@@ -23,15 +24,20 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="{Binding UserString}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <!--local:ResxStatic l10n:Resources.User,Binding UserString-->
+        <!--local:ResxStatic l10n:Resources.Title,Binding TitleString-->
+        <!--local:ResxStatic l10n:Resources.Description,Binding DescriptionString-->
+        <!--local:ResxStatic l10n:Resources.Deadline,Binding DeadlineString-->
+        <!--local:ResxStatic l10n:Resources.Status,Binding StatusString-->
+        <TextBlock Text="{local:ResxStatic l10n:Resources.User}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0 0 10 0" FontSize="30"/>
-        <TextBlock Text="{Binding TitleString}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Title}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0 0 10 0" FontSize="30"/>
-        <TextBlock Text="{Binding DescriptionString}" Grid.Row="2" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Description}" Grid.Row="2" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0 0 10 0" FontSize="30"/>
-        <TextBlock Text="{Binding DeadlineString}" Grid.Row="3" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Deadline}" Grid.Row="3" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0 0 10 0" FontSize="30"/>
-        <TextBlock Text="{Binding StatusString}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Status}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0 0 10 0" FontSize="30"/>
 
 
@@ -75,7 +81,8 @@
                   ToolTipService.ToolTip="{Binding ErrorCollection[Status]}">
         </ComboBox>
 
-        <Button x:Name="SaveTaskToUserButton" Command="{Binding SaveCommand}" Content="{Binding SaveString}" Grid.Column="1" Grid.Row="5" Height="45" Width="70"
+        <!--local:ResxStatic l10n:Resources.Save,Binding SaveString-->
+        <Button x:Name="SaveTaskToUserButton" Command="{Binding SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" Grid.Column="1" Grid.Row="5" Height="45" Width="70"
                 HorizontalAlignment="Left" Margin="0 0 0 0" Padding="4" FontSize="26" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -84,7 +91,8 @@
             </Button.Resources>
         </Button>
 
-        <Button x:Name="BackToListButton" Command="{Binding ExitWindowCommand}" Content="{Binding CancelString}" Grid.Column="1" Grid.Row="5" Height="45" Width="85"
+        <!--local:ResxStatic l10n:Resources.Cancel,Binding CancelString-->
+        <Button x:Name="BackToListButton" Command="{Binding ExitWindowCommand}" Content="{local:ResxStatic l10n:Resources.Cancel}" Grid.Column="1" Grid.Row="5" Height="45" Width="85"
                 Margin="0 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

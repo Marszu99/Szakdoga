@@ -52,7 +52,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                if (ResourceHandler.isEnglish)
+                if (TabcontrolViewModel.IsLanguageEnglish)
                 {
                     return "400 0 0 0";
                 }
@@ -125,7 +125,7 @@ namespace WpfDemo.ViewModel
 
 
         public RelayCommand CreateRecordCommand { get; private set; }
-        public static RelayCommand RefreshRecordListCommand { get; private set; }
+        public RelayCommand RefreshRecordListCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
 
@@ -180,15 +180,20 @@ namespace WpfDemo.ViewModel
                     var recordViewModel = new RecordViewModel(record, TaskList.ToList());
                     recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
                     RecordList.Add(recordViewModel);
+
+                    recordViewModel.RecordCreated += OnRecordCreated;
                 });
             }
             catch (SqlException)
             {
-                MessageBox.Show("Server errror!");
+                MessageBox.Show(Resources.ServerError);
             }
-
-
         }
+        private void OnRecordCreated(Record record)
+        {
+            RecordList.Add(new RecordViewModel(record, TaskList.ToList()));
+        }
+
 
         public void LoadTasks()
         {
@@ -201,7 +206,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
         }
 
@@ -271,7 +276,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
         }
 
@@ -283,19 +288,19 @@ namespace WpfDemo.ViewModel
 
         private void DeleteRecord(object obj)
         {
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show(ResourceHandler.GetResourceString("RecordDeleteQuestion"), ResourceHandler.GetResourceString("Warning"), System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult messageBoxResult = MessageBox.Show(Resources.RecordDeleteQuestion, Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 try
                 {
                     new RecordRepository(new RecordLogic()).DeleteRecord(SelectedRecord.IdRecord);
-                    MessageBox.Show(ResourceHandler.GetResourceString("RecordDeletedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(Resources.RecordDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
                     RefreshRecordList(obj);
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                    MessageBox.Show(Resources.ServerError);
                 }
             }
         }
@@ -304,77 +309,77 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return ResourceHandler.GetResourceString("New");
+                return Resources.New;
             }
         }
         public string RefreshString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Refresh");
+                return Resources.Refresh;
             }
         }
         public string MyRecordsString
         {
             get
             {
-                return ResourceHandler.GetResourceString("MyRecords");
+                return Resources.MyRecords;
             }
         }
         public string SearchString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Search");
+                return Resources.Search;
             }
         }
         public string DeleteString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Delete");
+                return Resources.Delete;
             }
         }
         public string TaskString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Task");
+                return Resources.Task;
             }
         }
         public string UserString
         {
             get
             {
-                return ResourceHandler.GetResourceString("User");
+                return Resources.User;
             }
         }
         public string DateString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Date");
+                return Resources.Date;
             }
         }
         public string CommentString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Comment");
+                return Resources.Comment;
             }
         }
         public string DurationString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Duration");
+                return Resources.Duration;
             }
         }
         public string StatusString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Status");
+                return Resources.Status;
             }
         }
     }

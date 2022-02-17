@@ -56,9 +56,8 @@ namespace WpfDemo.ViewModel
                     }
                     catch (SqlException)
                     {
-                        MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                        MessageBox.Show(Resources.ServerError);
                     }
-                    
                 }
             }
         }
@@ -67,7 +66,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                if (ResourceHandler.isEnglish)
+                if (TabcontrolViewModel.IsLanguageEnglish)
                 {
                     return LoginViewModel.LoggedUser.Status == 0 ? "13 0 0 0" : "530 0 0 0"; // 675 a 13 helyett?
                 }
@@ -120,7 +119,7 @@ namespace WpfDemo.ViewModel
         public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand ShowUserProfilCommand { get; private set; }
         public RelayCommand CreateUserCommand { get; private set; }
-        public static RelayCommand RefreshUserListCommand { get; private set; }
+        public RelayCommand RefreshUserListCommand { get; private set; }
 
         public UserManagementViewModel(UserManagementView view)
         {
@@ -163,33 +162,48 @@ namespace WpfDemo.ViewModel
             {
                 var users = new UserRepository(new UserLogic()).GetAllUsers();
                 users.ForEach(user => UserList.Add(new UserViewModel(user)));
+
+                //users.TaskCreated += OnUserCreated;
             }
             catch (SqlException)
             {
-                MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                MessageBox.Show(Resources.ServerError);
             }
-
+        }
+        private void OnUserCreated(User user)
+        {
+            UserList.Add(new UserViewModel(user));
         }
 
+
+        private bool CanDeleteUser(object arg)
+        {
+            return _selectedUser != null && SelectedUser.Username != LoginViewModel.LoggedUser.Username && LoginViewModel.LoggedUser.Status != 0;
+        }
         private void DeleteUser(object obj)
         {
-            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show(ResourceHandler.GetResourceString("UserDeleteQuestion1") + SelectedUser.Username + ResourceHandler.GetResourceString("UserDeleteQuestion2"), ResourceHandler.GetResourceString("Warning"), System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult messageBoxResult = MessageBox.Show(Resources.UserDeleteQuestion1 + SelectedUser.Username + Resources.UserDeleteQuestion2, Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 try
                 {
                     new UserRepository(new UserLogic()).DeleteUser(SelectedUser.IdUser, SelectedUser.Status);
-                    MessageBox.Show(ResourceHandler.GetResourceString("UserDeletedMessage"), ResourceHandler.GetResourceString("Information"), MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(Resources.UserDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
                     LoadUsers();
                 }
                 catch (SqlException)
                 {
-                    MessageBox.Show(ResourceHandler.GetResourceString("ServerError"));
+                    MessageBox.Show(Resources.ServerError);
                 }
             }
         }
 
+
+        private bool CanShowUserProfil(object arg)
+        {
+            return _selectedUser != null;
+        }
         private void ShowUserProfil(object obj)
         {
             UserProfileView Ipage = new UserProfileView(SelectedUser.IdUser);
@@ -197,63 +211,54 @@ namespace WpfDemo.ViewModel
             Ipage.ShowDialog();
         }
 
-        private bool CanDeleteUser(object arg)
-        {
-            return _selectedUser != null && SelectedUser.Username != LoginViewModel.LoggedUser.Username && LoginViewModel.LoggedUser.Status != 0;
-        }
-        private bool CanShowUserProfil(object arg)
-        {
-            return _selectedUser != null;
-        }
-
 
         public string NewString
         {
             get
             {
-                return ResourceHandler.GetResourceString("New");
+                return Resources.New;
             }
         }
         public string RefreshString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Refresh");
+                return Resources.Refresh;
             }
         }
         public string SearchString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Search");
+                return Resources.Search;
             }
         }
         public string DeleteString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Delete");
+                return Resources.Delete;
             }
         }
         public string UsernameString
         {
             get
             {
-                return ResourceHandler.GetResourceString("Username");
+                return Resources.Username;
             }
         }
         public string FirstNameString
         {
             get
             {
-                return ResourceHandler.GetResourceString("FirstName");
+                return Resources.FirstName;
             }
         }
         public string LastNameString
         {
             get
             {
-                return ResourceHandler.GetResourceString("LastName");
+                return Resources.LastName;
             }
         }
     }
