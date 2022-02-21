@@ -81,6 +81,7 @@ namespace WpfDemo.ViewModel
                         _view.Content = new TabcontrolView();
                         MyProfileView Ipage = new MyProfileView();
                         (Ipage.DataContext as MyProfileViewModel).CurrentLoggedUser = LoggedUser;
+                        MessageBox.Show(Resources.MissingProfileDatasMessage);
                         Ipage.ShowDialog();
                     }
                     else

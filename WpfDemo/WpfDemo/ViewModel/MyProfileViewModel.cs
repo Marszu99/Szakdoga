@@ -291,7 +291,7 @@ namespace WpfDemo.ViewModel
 
         private void CancelChangeUserValues(object obj)
         {
-            _IRevertibleChangeTracking.RejectChanges();
+            //_IRevertibleChangeTracking.RejectChanges();
             //_IEditableObject.CancelEdit();
 
             //_view.MyProfilePassword.IsReadOnly = true;

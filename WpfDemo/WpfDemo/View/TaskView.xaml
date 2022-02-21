@@ -20,7 +20,7 @@
             <RowDefinition Height="0.8*"/>
             <RowDefinition Height="1.5*"/>
             <RowDefinition Height="0.8*"/>
-            <RowDefinition Height="1.1*"/>
+            <!--<RowDefinition Height="1.1*"/>-->
             <RowDefinition Height="0.8*"/>
             <RowDefinition Height="0.75*"/>
         </Grid.RowDefinitions>
@@ -38,13 +38,13 @@
                    Margin="0 0 15 0" FontSize="30"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Deadline}"  Grid.Column="0" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0 0 15 0" FontSize="30"/>
-        <TextBlock Text="Times"  Grid.Column="0" Grid.Row="4" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0 0 15 0" FontSize="30"/>
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Status}"  Grid.Column="0" Grid.Row="5" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+        <!--<TextBlock Text="Times"  Grid.Column="0" Grid.Row="4" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   Margin="0 0 15 0" FontSize="30"/>-->
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Status}"  Grid.Column="0" Grid.Row="4" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
                    Margin="0 0 15 0" FontSize="30"/>
 
 
-        <ComboBox x:Name="CreateTaskUser" ItemsSource="{Binding UserList, UpdateSourceTrigger=PropertyChanged}" Padding="2" Grid.Column="1" Grid.Row="0" 
+        <ComboBox x:Name="CreateTaskUser" ItemsSource="{Binding SelectedTask.UserList, UpdateSourceTrigger=PropertyChanged}" Padding="2" Grid.Column="1" Grid.Row="0" 
                   Height="37" FontSize="26" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" IsEnabled="{Binding SelectedTask.IsUserEnabled}" 
                   SelectedItem="{Binding SelectedTask.User, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[User]}">
             <ComboBox.ItemTemplate>
@@ -78,41 +78,21 @@
                     ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Deadline]}">
         </DatePicker>
 
-        <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="5"
+        <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="4"
                   Width="150" Height="39" FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="{Binding SelectedTask.IsTaskViewStatusEnabled}"
                   SelectedValue="{Binding SelectedTask.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Key" DisplayMemberPath="Value"
                   ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Status]}">
         </ComboBox>
 
-        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
+        <!--<StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
             <RadioButton x:Name="OneTimeTask" Content="One Time" FontSize="21" VerticalContentAlignment="Center"/>
             <RadioButton x:Name="DailyTask" Content="Daily" FontSize="21" VerticalContentAlignment="Center"/>
             <RadioButton x:Name="WeeklyTask" Content="Weekly" FontSize="21" VerticalContentAlignment="Center"/>
             <RadioButton x:Name="MonthlyTask" Content="Monthly" FontSize="21" VerticalContentAlignment="Center"/>
-        </StackPanel>
-
-        <!--<Grid Grid.Column="1" Grid.Row="4">
-            <Grid.Resources>
-                <l:EnumMatchToBooleanConverter x:Key="enumConverter" />
-            </Grid.Resources>
-
-            <RadioButton Content="Option 1" GroupName="Options1" 
-             IsChecked="{Binding Path=CurrentOption, Mode=TwoWay, 
-                                 Converter={StaticResource enumConverter},
-                                 ConverterParameter=Option1}"  />
-            <RadioButton Content="Option 2" GroupName="Options2" 
-                 IsChecked="{Binding Path=CurrentOption, Mode=TwoWay, 
-                                     Converter={StaticResource enumConverter},
-                                     ConverterParameter=Option2}"  />
-            <RadioButton Content="Option 3" GroupName="Options3" 
-                 IsChecked="{Binding Path=CurrentOption, Mode=TwoWay, 
-                                     Converter={StaticResource enumConverter},
-                                     ConverterParameter=Option3}"  />
-        </Grid>
-        -->
+        </StackPanel>-->
 
         <!--local:ResxStatic l10n:Resources.Save,Binding SelectedTask.SaveString-->
-        <Button x:Name="CreateTaskForUserButton" Command="{Binding SelectedTask.SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" Grid.Column="1" Grid.Row="6" Height="45" Width="70"
+        <Button x:Name="CreateTaskForUserButton" Command="{Binding SelectedTask.SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" Grid.Column="1" Grid.Row="5" Height="45" Width="70"
                 Margin="0 0 160 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -121,7 +101,8 @@
             </Button.Resources>
         </Button>
 
-        <Button x:Name="CancelCreateTaskForUserButton" Command="{Binding SelectedTask.CancelTaskViewCommand}" Content="{local:ResxStatic l10n:Resources.Cancel}" Grid.Column="1" Grid.Row="6" Height="45" Width="85"
+        <!--local:ResxStatic l10n:Resources.Cancel,Binding SelectedTask.CancelString-->
+        <Button x:Name="CancelCreateTaskForUserButton" Command="{Binding SelectedTask.CancelTaskViewCommand}" Content="{local:ResxStatic l10n:Resources.Cancel}" Grid.Column="1" Grid.Row="5" Height="45" Width="85"
                 Margin="50 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

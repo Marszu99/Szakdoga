@@ -278,12 +278,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public event Action<Record> RecordCreated;
-        public void CreateRecordToList(Record record)
-        {
-            RecordCreated?.Invoke(record);
-        }
-
 
         public ICommand SaveCommand { get; }
         public RelayCommand DurationAddCommand { get; private set; }
@@ -367,7 +361,13 @@ namespace WpfDemo.ViewModel
         {
             this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._record.Task.User_idUser, this._record.Task.IdTask); 
             MessageBox.Show(Resources.RecordCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
-            RefreshValues();
+
+            CreateRecordToList(this);
+        }
+        public event Action<RecordViewModel> RecordCreated;
+        public void CreateRecordToList(RecordViewModel recordViewModel)
+        {
+            RecordCreated?.Invoke(recordViewModel);
         }
 
         private void UpdateRecord()
@@ -377,15 +377,6 @@ namespace WpfDemo.ViewModel
             _isChanged = false;
         }
 
-        private void RefreshValues()
-        {
-            this.IdRecord = 0;
-            this.Task = null;
-            this.Date = DateTime.Today;
-            this.Duration = 210;
-            this.Comment = "";
-            this.Task_Status = 0;
-        }
 
         public string TaskString
         {

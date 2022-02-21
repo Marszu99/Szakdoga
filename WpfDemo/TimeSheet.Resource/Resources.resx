@@ -201,6 +201,9 @@
   <data name="EmailIsInvalid" xml:space="preserve">
     <value>Invalid email!</value>
   </data>
+  <data name="EmailWithColon" xml:space="preserve">
+    <value>Email: </value>
+  </data>
   <data name="EmailWrongLength" xml:space="preserve">
     <value>Email have to reach minimum 11 characters and also can't be more than 100!</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="FirstNameNoNumbers" xml:space="preserve">
     <value>FirstName needs to be one word that contains only letters of the alphabet!</value>
+  </data>
+  <data name="FirstNameWithColon" xml:space="preserve">
+    <value>FirstName: </value>
   </data>
   <data name="FirstNameWrongLength" xml:space="preserve">
     <value>FirstName have to reach minimum 3 characters and also can't be more than 45!</value>
@@ -231,6 +237,9 @@
   <data name="LastNameNoNumbers" xml:space="preserve">
     <value>LastName needs to be one word that contains only letters of the alphabet!</value>
   </data>
+  <data name="LastNameWithColon" xml:space="preserve">
+    <value>LastName: </value>
+  </data>
   <data name="LastNameWrongLength" xml:space="preserve">
     <value>LastName have to reach minimum 3 characters and also can't be more than 45!</value>
   </data>
@@ -245,6 +254,9 @@
   </data>
   <data name="LogoutMessage" xml:space="preserve">
     <value>Are you sure you want to logout?</value>
+  </data>
+  <data name="MissingProfileDatasMessage" xml:space="preserve">
+    <value>Please fill your missing profile datas!</value>
   </data>
   <data name="MyProfile" xml:space="preserve">
     <value>My Profile</value>
@@ -314,6 +326,9 @@
   </data>
   <data name="PasswordOneWord" xml:space="preserve">
     <value>Password needs to be one word!</value>
+  </data>
+  <data name="PasswordWithColon" xml:space="preserve">
+    <value>Password: </value>
   </data>
   <data name="PasswordWrongLength" xml:space="preserve">
     <value>Password have to reach minimum 6 characters and also can't be more than 45!</value>
@@ -396,6 +411,9 @@
   <data name="TelephoneIsInvalid" xml:space="preserve">
     <value>Invalid telephone number!</value>
   </data>
+  <data name="TelephoneWithColon" xml:space="preserve">
+    <value>Telephone: </value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>
   </data>
@@ -435,8 +453,14 @@
   <data name="UsernameOneWord" xml:space="preserve">
     <value>Username needs to be one word!</value>
   </data>
+  <data name="UsernameWithColon" xml:space="preserve">
+    <value>Username: </value>
+  </data>
   <data name="UsernameWrongLength" xml:space="preserve">
     <value>Username have to reach minimum 6 characters and also can't be more than 45!</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
   </data>
   <data name="UserUpdatedMessage" xml:space="preserve">
     <value>User has been updated succesfully!</value>

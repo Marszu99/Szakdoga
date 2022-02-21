@@ -20,19 +20,19 @@
         <!--local:ResxStatic l10n:Resources.MyProfile,Binding MyProfileString-->
         <TextBlock Grid.Column="0" Text="{local:ResxStatic l10n:Resources.MyProfile}" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="100 40 280 0" Width="250" Height="65"/>
 
-        <!--local:ResxStatic l10n:Resources.Username,Binding UsernameString-->
-        <!--local:ResxStatic l10n:Resources.Password,Binding PasswordString-->
-        <!--local:ResxStatic l10n:Resources.FirstName,Binding FirstNameString-->
-        <!--local:ResxStatic l10n:Resources.LastName,Binding LastNameString-->
-        <!--local:ResxStatic l10n:Resources.Email,Binding EmailString-->
-        <!--local:ResxStatic l10n:Resources.Telephone,Binding TelephoneString-->
+        <!--local:ResxStatic l10n:Resources.UsernameWithColon,Binding UsernameString-->
+        <!--local:ResxStatic l10n:Resources.PasswordWithColon,Binding PasswordString-->
+        <!--local:ResxStatic l10n:Resources.FirstNameWithColon,Binding FirstNameString-->
+        <!--local:ResxStatic l10n:Resources.LastNameWithColon,Binding LastNameString-->
+        <!--local:ResxStatic l10n:Resources.EmailWithColon,Binding EmailString-->
+        <!--local:ResxStatic l10n:Resources.TelephoneWithColon,Binding TelephoneString-->
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="250" Margin="20 100 0 200">
-            <TextBlock Text="{local:ResxStatic l10n:Resources.Username, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
-            <TextBlock Text="{local:ResxStatic l10n:Resources.Password, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
-            <TextBlock Text="{local:ResxStatic l10n:Resources.FirstName, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
-            <TextBlock Text="{local:ResxStatic l10n:Resources.LastName, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
-            <TextBlock Text="{local:ResxStatic l10n:Resources.Email, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
-            <TextBlock Text="{local:ResxStatic l10n:Resources.Telephone, StringFormat='{}{0}:'}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.UsernameWithColon}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.PasswordWithColon}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.FirstNameWithColon}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.LastNameWithColon}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.EmailWithColon}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.TelephoneWithColon}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 40 0 0" FontSize="34"/>
         </StackPanel>
 
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="420" Margin="280 100 0 200">
@@ -151,8 +151,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
-            <!--ResourceStringekhez kell-->
+            <!--<FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
+            ResourceStringekhez kell-->
 
             <!--local:ResxStatic l10n:Resources.ToDoTasks,Binding ToDoTasksString-->
             <TextBlock Text="{local:ResxStatic l10n:Resources.ToDoTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 30 0 0" Height="40"/>
@@ -184,21 +184,21 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{Binding DataContext.TitleString, Source={x:Reference frameworkElement}}" Binding="{Binding Title}" Width="175">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Title}" Binding="{Binding Title}" Width="175">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{Binding DataContext.DescriptionString, Source={x:Reference frameworkElement}}" Binding="{Binding Description}" Width="*">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Description}" Binding="{Binding Description}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{Binding DataContext.DeadlineString, Source={x:Reference frameworkElement}}" Binding="{Binding Deadline}" Width="225">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Deadline}" Binding="{Binding Deadline}" Width="225">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
@@ -238,21 +238,21 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{Binding DataContext.TitleString, Source={x:Reference frameworkElement}}" Binding="{Binding Title}" Width="175">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Title}" Binding="{Binding Title}" Width="175">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{Binding DataContext.DescriptionString, Source={x:Reference frameworkElement}}" Binding="{Binding Description}" Width="*">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Description}" Binding="{Binding Description}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{Binding DataContext.DeadlineString, Source={x:Reference frameworkElement}}" Binding="{Binding Deadline}" Width="225">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Deadline}" Binding="{Binding Deadline}" Width="225">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />

@@ -142,7 +142,15 @@ namespace WpfDemo.ViewModel
         private void CreateUser(object obj)
         {
             SelectedUser = new UserViewModel(new User());
+            SelectedUser.UserCreated += OnUserCreated;
         }
+        private void OnUserCreated(UserViewModel userViewModel)
+        {
+            UserList.Add(userViewModel);
+            SelectedUser = new UserViewModel(new User());
+            SelectedUser.UserCreated += OnUserCreated;
+        }
+
 
         private bool CanExecuteRefresh(object arg)
         {
@@ -162,17 +170,11 @@ namespace WpfDemo.ViewModel
             {
                 var users = new UserRepository(new UserLogic()).GetAllUsers();
                 users.ForEach(user => UserList.Add(new UserViewModel(user)));
-
-                //users.TaskCreated += OnUserCreated;
             }
             catch (SqlException)
             {
                 MessageBox.Show(Resources.ServerError);
             }
-        }
-        private void OnUserCreated(User user)
-        {
-            UserList.Add(new UserViewModel(user));
         }
 
 

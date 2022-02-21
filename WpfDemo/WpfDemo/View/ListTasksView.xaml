@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
-        <!--ListTasksViewUserVisibility-hez es ResourceStringekhez kell-->
+        <!--ListTasksViewUserVisibility-hez kell-->
         
         <Grid Grid.Row="1">
             <DockPanel>
@@ -59,35 +59,35 @@
                     </DataGrid.CellStyle>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="{Binding DataContext.TitleString, Source={x:Reference frameworkElement}}" Binding="{Binding Title}" Width="175" FontSize="20">
+                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Title}" Binding="{Binding Title}" Width="175" FontSize="20">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{Binding DataContext.UserString, Source={x:Reference frameworkElement}}" Binding="{Binding User.Username}" Width="170" FontSize="20" Visibility="{Binding DataContext.ListTasksViewUserVisibility, Source={x:Reference frameworkElement}}">
+                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Username}" Binding="{Binding User.Username}" Width="170" FontSize="20" Visibility="{Binding DataContext.ListTasksViewUserVisibility, Source={x:Reference frameworkElement}}">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{Binding DataContext.DescriptionString, Source={x:Reference frameworkElement}}" Binding="{Binding Description}" Width="*" FontSize="20">
+                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Description}" Binding="{Binding Description}" Width="*" FontSize="20">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{Binding DataContext.DeadlineString, Source={x:Reference frameworkElement}}" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="108" FontSize="20">
+                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Deadline}" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="108" FontSize="20">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{Binding DataContext.StatusString, Source={x:Reference frameworkElement}}" Binding="{Binding Status}" Width="105" FontSize="20">
+                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Status}" Binding="{Binding Status}" Width="105" FontSize="20">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />

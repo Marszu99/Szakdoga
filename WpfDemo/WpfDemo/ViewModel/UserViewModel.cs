@@ -235,13 +235,6 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public event Action<User> UserCreated;
-        public void CreateUserToList(User user)
-        {
-            UserCreated?.Invoke(user);
-        }
-
-
         public ICommand SaveCommand { get; }
 
 
@@ -291,8 +284,16 @@ namespace WpfDemo.ViewModel
             string createdUserRandomPassword = RandomPassword(10);
             this._user.IdUser = new UserRepository(new UserLogic()).CreateUser(this._user, createdUserRandomPassword);
             MessageBox.Show(Resources.UserCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
+
+            CreateUserToList(this);
+
             SendEmail(createdUserRandomPassword);
-            RefreshValues();
+        }
+
+        public event Action<UserViewModel> UserCreated;
+        public void CreateUserToList(UserViewModel userViewModel)
+        {
+            UserCreated?.Invoke(userViewModel);
         }
         private void SendEmail(string createdUserRandomPassword)
         {
@@ -328,17 +329,6 @@ namespace WpfDemo.ViewModel
             _isChanged = false;
         }
 
-
-        private void RefreshValues()
-        {
-            this.IdUser = 0;
-            this.Username = "";
-            this.Password = "";
-            this.FirstName = "";
-            this.LastName = "";
-            this.Email = "";
-            this.Telephone = "";
-        }
 
         public string UsernameString
         {

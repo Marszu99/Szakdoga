@@ -63,6 +63,49 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        /*private DateTime _dateFrom = DateTime.Today;
+        public DateTime DateFrom
+        {
+            get
+            {
+                foreach (RecordViewModel recordViewModel in RecordList)
+                {
+                    if (record.Record.Date < _dateFrom)
+                    {
+                        _dateFrom = record.Record.Date;
+                    }
+                }
+                return _dateFrom;
+            }
+            set
+            {
+                _dateFrom = value;
+                OnPropertyChanged(nameof(DateFrom));
+                //SortingByCheckBox(_searchValue);
+            }
+        }
+        private DateTime _dateTo = DateTime.Parse("0001.01.01");
+        public DateTime DateTo
+        {
+            get
+            {
+                foreach(RecordViewModel recordViewModel in RecordList)
+                {
+                    if(record.Record.Date > _dateTo)
+                    {
+                        _dateTo = record.Record.Date;
+                    }
+                }
+                return _dateTo;
+            }
+            set
+            {
+                _dateTo = value;
+                OnPropertyChanged(nameof(DateTo));
+                //SortingByCheckBox(_searchValue);
+            }
+        }*/
+
         public Visibility RecordCheckBoxAndTextVisibility
         {
             get
@@ -155,6 +198,15 @@ namespace WpfDemo.ViewModel
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
                 TaskList
                 .Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
+            SelectedRecord.RecordCreated += OnRecordCreated;
+        }
+        private void OnRecordCreated(RecordViewModel recordViewModel)
+        {
+            RecordList.Add(recordViewModel);
+            SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
+                TaskList
+                .Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
+            SelectedRecord.RecordCreated += OnRecordCreated;
         }
 
 
@@ -180,18 +232,12 @@ namespace WpfDemo.ViewModel
                     var recordViewModel = new RecordViewModel(record, TaskList.ToList());
                     recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
                     RecordList.Add(recordViewModel);
-
-                    recordViewModel.RecordCreated += OnRecordCreated;
                 });
             }
             catch (SqlException)
             {
                 MessageBox.Show(Resources.ServerError);
             }
-        }
-        private void OnRecordCreated(Record record)
-        {
-            RecordList.Add(new RecordViewModel(record, TaskList.ToList()));
         }
 
 

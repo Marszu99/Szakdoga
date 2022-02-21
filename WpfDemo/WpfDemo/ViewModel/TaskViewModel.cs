@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
-using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
@@ -22,7 +20,6 @@ namespace WpfDemo.ViewModel
     public class TaskViewModel : ViewModelBase, IDataErrorInfo
     {
         private Task _task;
-        //private TaskView _view;
         private bool _isChanged = false;
         private bool _isTitleChanged = false;
         private bool _isDescriptionChanged = false;
@@ -175,6 +172,10 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(User_Username));
             }
         }
+        public List<User> UserList // Kell h mikor New utan kivalasztunk egy taskot akkor ne legyen ures a User
+        {
+            get;
+        }
 
         public DateTime CreationDate
         {
@@ -317,21 +318,14 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public event Action<Task> TaskCreated;
-        public void CreateTaskToList(Task task)
-        {
-            TaskCreated?.Invoke(task);
-        }
-
-
         public ICommand SaveCommand { get; }
         public RelayCommand CancelTaskViewCommand { get; private set; }
 
 
-        public TaskViewModel(Task task)
+        public TaskViewModel(Task task, List<User> userList)
         {
             _task = task;
-            //_view = view;
+            UserList = userList;
 
             SaveCommand = new RelayCommand(Save, CanSave);
             CancelTaskViewCommand = new RelayCommand(CancelTaskView, CanCancelTaskView);
@@ -375,64 +369,22 @@ namespace WpfDemo.ViewModel
 
         private void CreateTask()
         {
-            /*if (this._view.OneTimeTask.IsChecked == true)
-            {
-                //this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
-                MessageBox.Show(Resources.OneTime"));
-            }
-            else if (this._view.DailyTask.IsChecked == true)
-            {
-                //TaskService ts = new TaskService();
-                MessageBox.Show(Resources.Daily"));
-            }
-            else if (this._view.WeeklyTask.IsChecked == true)
-            {
-                MessageBox.Show(Resources.Weekly"));
-            }
-            else if (this._view.MonthlyTask.IsChecked == true)
-            {
-                MessageBox.Show(Resources.Monthly"));
-            }*/
-
-
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
             MessageBox.Show(Resources.TaskCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
+
+            CreateTaskToList(this);
+
 
             if (this._task.User.Status != 1)
             {
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationNewTask", 0, this._task.IdTask);
                 SendNotificationEmail(" has been added to your tasks!");
             }
-            RefreshValues();
         }
-
-        public class EnumMatchToBooleanConverter : IValueConverter
+        public event Action<TaskViewModel> TaskCreated;
+        public void CreateTaskToList(TaskViewModel taskViewModel)
         {
-            public object Convert(object value, Type targetType,
-                                  object parameter, CultureInfo culture)
-            {
-                if (value == null || parameter == null)
-                    return false;
-
-                string checkValue = value.ToString();
-                string targetValue = parameter.ToString();
-                return checkValue.Equals(targetValue,
-                         StringComparison.InvariantCultureIgnoreCase);
-            }
-
-            public object ConvertBack(object value, Type targetType,
-                                      object parameter, CultureInfo culture)
-            {
-                if (value == null || parameter == null)
-                    return null;
-
-                bool useValue = (bool)value;
-                string targetValue = parameter.ToString();
-                if (useValue)
-                    return Enum.Parse(targetType, targetValue);
-
-                return null;
-            }
+            TaskCreated?.Invoke(taskViewModel);
         }
 
         private void UpdateTask()
@@ -496,8 +448,11 @@ namespace WpfDemo.ViewModel
         }
 
 
-
         public event Action<object> TaskCanceled;
+        public void CancelTask(Object obj)
+        {
+            TaskCanceled?.Invoke(obj);
+        }
         private bool CanCancelTaskView(object arg)
         {
             return true;
@@ -505,7 +460,7 @@ namespace WpfDemo.ViewModel
 
         private void CancelTaskView(object obj)
         {
-            TaskManagementViewModel.asd = true;
+            CancelTask(obj);
         }
 
 
@@ -525,15 +480,6 @@ namespace WpfDemo.ViewModel
             mm.BodyEncoding = UTF8Encoding.UTF8;
             mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             client.Send(mm);
-        }
-
-        private void RefreshValues()
-        {
-            this.IdTask = 0;
-            this.User = null;
-            this.Title = "";
-            this.Description = "";
-            this.Deadline = DateTime.Today.AddDays(1);
         }
 
         public string TitleString
@@ -576,6 +522,13 @@ namespace WpfDemo.ViewModel
             get
             {
                 return Resources.Save;
+            }
+        }
+        public string CancelString
+        {
+            get
+            {
+                return Resources.Cancel;
             }
         }
     }

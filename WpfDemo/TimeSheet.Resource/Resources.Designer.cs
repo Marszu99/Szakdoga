@@ -313,6 +313,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email: .
+        /// </summary>
+        public static string EmailWithColon {
+            get {
+                return ResourceManager.GetString("EmailWithColon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email have to reach minimum 11 characters and also can&apos;t be more than 100!.
         /// </summary>
         public static string EmailWrongLength {
@@ -345,6 +354,15 @@ namespace TimeSheet.Resource {
         public static string FirstNameNoNumbers {
             get {
                 return ResourceManager.GetString("FirstNameNoNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FirstName: .
+        /// </summary>
+        public static string FirstNameWithColon {
+            get {
+                return ResourceManager.GetString("FirstNameWithColon", resourceCulture);
             }
         }
         
@@ -403,6 +421,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LastName: .
+        /// </summary>
+        public static string LastNameWithColon {
+            get {
+                return ResourceManager.GetString("LastNameWithColon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LastName have to reach minimum 3 characters and also can&apos;t be more than 45!.
         /// </summary>
         public static string LastNameWrongLength {
@@ -444,6 +471,15 @@ namespace TimeSheet.Resource {
         public static string LogoutMessage {
             get {
                 return ResourceManager.GetString("LogoutMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fill your missing profile datas!.
+        /// </summary>
+        public static string MissingProfileDatasMessage {
+            get {
+                return ResourceManager.GetString("MissingProfileDatasMessage", resourceCulture);
             }
         }
         
@@ -651,6 +687,15 @@ namespace TimeSheet.Resource {
         public static string PasswordOneWord {
             get {
                 return ResourceManager.GetString("PasswordOneWord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password: .
+        /// </summary>
+        public static string PasswordWithColon {
+            get {
+                return ResourceManager.GetString("PasswordWithColon", resourceCulture);
             }
         }
         
@@ -898,6 +943,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Telephone: .
+        /// </summary>
+        public static string TelephoneWithColon {
+            get {
+                return ResourceManager.GetString("TelephoneWithColon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string Title {
@@ -1015,11 +1069,29 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Username: .
+        /// </summary>
+        public static string UsernameWithColon {
+            get {
+                return ResourceManager.GetString("UsernameWithColon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username have to reach minimum 6 characters and also can&apos;t be more than 45!.
         /// </summary>
         public static string UsernameWrongLength {
             get {
                 return ResourceManager.GetString("UsernameWrongLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string Users {
+            get {
+                return ResourceManager.GetString("Users", resourceCulture);
             }
         }
         

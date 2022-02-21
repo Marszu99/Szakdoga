@@ -19,10 +19,10 @@ namespace WpfDemo.ViewModel
         private User _user;
         private Task _selectedTask;
 
-        private ObservableCollection<Record> _recordList = new ObservableCollection<Record>();
+        private ObservableCollection<RecordViewModel> _recordList = new ObservableCollection<RecordViewModel>();
         private ObservableCollection<Task> _taskList = new ObservableCollection<Task>();
 
-        public ObservableCollection<Record> RecordList
+        public ObservableCollection<RecordViewModel> RecordList
         {
             get
             {
@@ -112,7 +112,6 @@ namespace WpfDemo.ViewModel
                     {
                         MessageBox.Show(Resources.ServerError);
                     }
-
                 }
             }
         }
@@ -135,14 +134,24 @@ namespace WpfDemo.ViewModel
 
                     try
                     {
-                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUserIdUser).Where(record => record.Task_Title.Contains(_searchRecordListValue) || record.User_Username.Contains(_searchRecordListValue) || record.Date.ToShortDateString().Contains(_searchRecordListValue) || record.Comment.Contains(_searchRecordListValue) || record.Duration.ToString().Contains(_searchRecordListValue) || record.Task_Status.ToString().Contains(_searchRecordListValue)).ToList();
-                        records.ForEach(record => _recordList.Add(record));
+
+                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUserIdUser).Where(record => record.Task_Title.Contains(_searchRecordListValue)
+                        || record.User_Username.Contains(_searchRecordListValue) || record.Date.ToShortDateString().Contains(_searchRecordListValue)
+                        || record.Comment.Contains(_searchRecordListValue) || record.Duration.ToString().Contains(_searchRecordListValue)
+                        || record.Task_Status.ToString().Contains(_searchRecordListValue)).ToList();
+                        records.ForEach(record =>
+                        {
+                            var recordViewModel = new RecordViewModel(record, TaskList.ToList());
+                            recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
+                            RecordList.Add(recordViewModel);
+
+                            //recordViewModel.RecordCreated += OnRecordCreated;
+                        });
                     }
                     catch (SqlException)
                     {
                         MessageBox.Show(Resources.ServerError);
                     }
-
                 }
             }
         }
@@ -152,6 +161,14 @@ namespace WpfDemo.ViewModel
             get
             {
                 return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility UserProfileViewTasksContextMenuVisibility // Delete Header Visibility
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 
@@ -246,12 +263,14 @@ namespace WpfDemo.ViewModel
         {
             _recordList.Clear();
 
-            var records = new RecordRepository(new RecordLogic()).GetUserRecords(userid);//CurrentUser.IdUser
-            records.ForEach(record => _recordList.Add(record));  //TimeSpan.FromMinutes(record.Duration).ToString("hh':'mm");
-                                                                 //record.Duration == record.Duration.Replace(TimeSpan.FromMinutes(record.Duration).ToString("hh':'mm"))
-                                                                 //_recordList.Select(record => record.Duration.Replace(TimeSpan.FromMinutes(record.Duration).ToString("hh':'mm"));
+            var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUserIdUser);
+            records.ForEach(record =>
+            {
+                var recordViewModel = new RecordViewModel(record, TaskList.ToList());
+                recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
+                RecordList.Add(recordViewModel);
 
-            //var recordss = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUserIdUser).Where(record => record.Duration.Replace(TimeSpan.FromMinutes(record.Duration).ToString("hh':'mm"))).ToList();
+            });
         }
         private void LoadTasks(int userid)
         {

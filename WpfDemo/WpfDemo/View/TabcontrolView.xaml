@@ -78,18 +78,18 @@
                     </Style>
                 </TabControl.Resources>
 
-                <!--local:ResxStatic l10n:Resources.Record,Binding RecordString-->
-                <TabItem Header="{local:ResxStatic l10n:Resources.Record}" x:Name="RecordTabItem">
+                <!--local:ResxStatic l10n:Resources.Records,Binding RecordString-->
+                <TabItem Header="{local:ResxStatic l10n:Resources.Records}" x:Name="RecordTabItem">
                     <view:RecordManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
 
-                <!--local:ResxStatic l10n:Resources.Task,Binding TaskString-->
-                <TabItem Header="{local:ResxStatic l10n:Resources.Task}" x:Name="TaskTabItem">
+                <!--local:ResxStatic l10n:Resources.Tasks,Binding TaskString-->
+                <TabItem Header="{local:ResxStatic l10n:Resources.Tasks}" x:Name="TaskTabItem">
                     <view:TaskManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
 
-                <!--local:ResxStatic l10n:Resources.User,Binding UserString-->
-                <TabItem Header="{local:ResxStatic l10n:Resources.User}" x:Name="UserTabItem">
+                <!--local:ResxStatic l10n:Resources.Users,Binding UserString-->
+                <TabItem Header="{local:ResxStatic l10n:Resources.Users}" x:Name="UserTabItem">
                     <view:UserManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
             </TabControl>
@@ -121,10 +121,10 @@
                         <Menu Background="#FFCEC7C7">
                             <MenuItem Header="{Binding LoggedUserUsername}" FontSize="24" Foreground="Black" Width="205" Margin="40 0 0 0" Padding="5 0 0 0">
                                 <!--local:ResxStatic l10n:Resources.Profile,Binding ProfileString-->
-                                <!--local:ResxStatic l10n:Resources.Lanuage,Binding LanuageString-->
+                                <!--local:ResxStatic l10n:Resources.Language,Binding LanuageString-->
                                 <!--local:ResxStatic l10n:Resources.Logout,Binding LogoutString-->
                                 <MenuItem Header="{local:ResxStatic l10n:Resources.Profile}" Command="{Binding ShowMyProfileCommand}"/>
-                                <MenuItem Header="{local:ResxStatic l10n:Resources.Lanuage}" Command="{Binding ChangeLanguageCommand}"/>
+                                <MenuItem Header="{local:ResxStatic l10n:Resources.Language}" Command="{Binding ChangeLanguageCommand}"/>
                                 <MenuItem Header="{local:ResxStatic l10n:Resources.Logout}" Command="{Binding LogoutCommand}"/>
                             </MenuItem>
                         </Menu>

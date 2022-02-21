@@ -91,6 +91,7 @@ namespace WpfDemo.ViewModel
                 Thread.CurrentThread.CurrentCulture = cultureInfo;
 
                 ResxStaticExtension.OnLanguageChanged();
+                //_view.Content = new TabcontrolView();
 
                 IsLanguageEnglish = false;
             }
@@ -105,6 +106,7 @@ namespace WpfDemo.ViewModel
 
                 ResxStaticExtension.OnLanguageChanged();
 
+                //_view.Content = new TabcontrolView();
                 IsLanguageEnglish = true;
             }
         }
@@ -138,25 +140,25 @@ namespace WpfDemo.ViewModel
                 return Resources.Logout;
             }
         }
-        public string RecordString
+        public string RecordsString
         {
             get
             {
-                return Resources.Record;
+                return Resources.Records;
             }
         }
-        public string TaskString
+        public string TasksString
         {
             get
             {
-                return Resources.Task;
+                return Resources.Tasks;
             }
         }
-        public string UserString
+        public string UsersString
         {
             get
             {
-                return Resources.User;
+                return Resources.Users;
             }
         }
     }

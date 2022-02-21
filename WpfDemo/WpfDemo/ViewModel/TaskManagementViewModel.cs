@@ -17,7 +17,6 @@ namespace WpfDemo.ViewModel
     public class TaskManagementViewModel : ViewModelBase
     {
         private TaskManagementView _view;
-        public static bool asd = false;
 
 
         public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>(); //List?
@@ -56,14 +55,15 @@ namespace WpfDemo.ViewModel
             {
                 if (TabcontrolViewModel.IsLanguageEnglish)
                 {
-                    return LoginViewModel.LoggedUser.Status == 0 ? "331.5 0 0 0" : "152.5 0 0 0";//"468.7 0 0 0" : "290 0 0 0"
+                    return LoginViewModel.LoggedUser.Status == 0 ? "331.5 0 0 0" : "152.5 0 0 0"; //"468.7 0 0 0" : "290 0 0 0"
                 }
                 else
                 {
-                    return LoginViewModel.LoggedUser.Status == 0 ? "316 0 0 0" : "122 0 0 0";//"438 0 0 0" : "244 0 0 0"
+                    return LoginViewModel.LoggedUser.Status == 0 ? "316 0 0 0" : "122 0 0 0"; //"438 0 0 0" : "244 0 0 0"
                 }
             }
         }
+
 
         public Visibility NewTaskButtonVisibility
         {
@@ -85,7 +85,12 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return SelectedTask == null || asd == true ? Visibility.Hidden : Visibility.Visible;
+                if (SelectedTask != null)
+                {
+                    SelectedTask.TaskCanceled += OnTaskCanceled;
+
+                }
+                return SelectedTask == null ? Visibility.Hidden : Visibility.Visible;
             }
         }
 
@@ -137,8 +142,20 @@ namespace WpfDemo.ViewModel
         {
             RefreshTaskList(obj);
             LoadUsers();
-            SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) });
+            SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
+            SelectedTask.TaskCreated += OnTaskCreated;
         }
+        private void OnTaskCreated(TaskViewModel taskViewModel)
+        {
+            TaskList.Add(taskViewModel);
+            SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
+            SelectedTask.TaskCreated += OnTaskCreated;
+        }
+        private void OnTaskCanceled(Object obj)
+        {
+            SelectedTask = null;
+        }
+
 
         private bool CanExecuteRefresh(object arg)
         {
@@ -160,22 +177,15 @@ namespace WpfDemo.ViewModel
 
                 tasks.ForEach(task =>
                 {
-                    var taskViewModel = new TaskViewModel(task);
+                    var taskViewModel = new TaskViewModel(task, UserList.ToList());
                     taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
                     TaskList.Add(taskViewModel);
-
-                    taskViewModel.TaskCreated += OnTaskCreated;
                 });
             }
             catch (SqlException)
             {
                 MessageBox.Show(Resources.ServerError);
-            }
-            
-        }
-        private void OnTaskCreated(Task task)
-        {
-            TaskList.Add(new TaskViewModel(task));
+            }      
         }
 
 
@@ -213,7 +223,7 @@ namespace WpfDemo.ViewModel
 
                         tasks.ForEach(task =>
                         {
-                            var taskViewModel = new TaskViewModel(task);
+                            var taskViewModel = new TaskViewModel(task, UserList.ToList());
                             taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
                             TaskList.Add(taskViewModel);
                         });
@@ -226,7 +236,7 @@ namespace WpfDemo.ViewModel
 
                         tasks.ForEach(task =>
                         {
-                            var taskViewModel = new TaskViewModel(task);
+                            var taskViewModel = new TaskViewModel(task, UserList.ToList());
                             taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
                             TaskList.Add(taskViewModel);
                         });
@@ -239,7 +249,7 @@ namespace WpfDemo.ViewModel
 
                         tasks.ForEach(task =>
                         {
-                            var taskViewModel = new TaskViewModel(task);
+                            var taskViewModel = new TaskViewModel(task, UserList.ToList());
                             taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
                             TaskList.Add(taskViewModel);
                         });
@@ -259,7 +269,7 @@ namespace WpfDemo.ViewModel
 
                         tasks.ForEach(task =>
                         {
-                            var taskViewModel = new TaskViewModel(task);
+                            var taskViewModel = new TaskViewModel(task, UserList.ToList());
                             taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
                             TaskList.Add(taskViewModel);
                         });
@@ -272,7 +282,7 @@ namespace WpfDemo.ViewModel
 
                         tasks.ForEach(task =>
                         {
-                            var taskViewModel = new TaskViewModel(task);
+                            var taskViewModel = new TaskViewModel(task, UserList.ToList());
                             taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
                             TaskList.Add(taskViewModel);
                         });
@@ -285,7 +295,7 @@ namespace WpfDemo.ViewModel
 
                         tasks.ForEach(task =>
                         {
-                            var taskViewModel = new TaskViewModel(task);
+                            var taskViewModel = new TaskViewModel(task, UserList.ToList());
                             taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
                             TaskList.Add(taskViewModel);
                         });
@@ -297,7 +307,7 @@ namespace WpfDemo.ViewModel
                         var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task => task.Title.Contains(_searchValue) || task.User_Username.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
                         tasks.ForEach(task =>
                         {
-                            var taskViewModel = new TaskViewModel(task);
+                            var taskViewModel = new TaskViewModel(task, UserList.ToList());
                             taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
                             TaskList.Add(taskViewModel);
                         });
