@@ -24,8 +24,9 @@
             <StackPanel Orientation="Horizontal">
 
                 <!--local:ResxStatic l10n:Resources.New,Binding NewString-->
-                <Button x:Name="NewTaskButton" Command="{Binding CreateTaskCommand}" Content="{local:ResxStatic l10n:Resources.New}" Grid.Column="0" Grid.Row="0" Width="60" Margin="10 0 0 0" FontSize="17"
-                                        Padding="0" BorderThickness="1" BorderBrush="Black" Visibility="{Binding NewTaskButtonVisibility}">
+                <Button x:Name="NewTaskButton" Command="{Binding CreateTaskCommand}" Content="{local:ResxStatic l10n:Resources.New}" Grid.Column="0" Grid.Row="0"
+                        Width="60" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black" 
+                        Visibility="{Binding NewTaskButtonVisibility}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -34,8 +35,8 @@
                 </Button>
 
                 <!--local:ResxStatic l10n:Resources.Refresh,Binding RefreshString-->
-                <Button x:Name="RefreshListTasksButton" Command="{Binding RefreshTaskListCommand}" Content="{local:ResxStatic l10n:Resources.Refresh}" Grid.Column="0" Grid.Row="0" Width="65" 
-                                        Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black">
+                <Button x:Name="RefreshListTasksButton" Command="{Binding RefreshTaskListCommand}" Content="{local:ResxStatic l10n:Resources.Refresh}"
+                        Grid.Column="0" Grid.Row="0" Width="65" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -44,16 +45,19 @@
                 </Button>
 
                 <!--local:ResxStatic l10n:Resources.MyTasks,Binding MyTasksString-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.MyTasks}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" Visibility="{Binding TaskCheckBoxAndTextVisibility}"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.MyTasks}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"
+                           Visibility="{Binding TaskCheckBoxAndTextVisibility}"/>
                 <CheckBox x:Name="ShowingMyTasksCheckBox" Command="{Binding SortingByCheckBoxCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
-                          Width="14" Height="14" IsChecked="True" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" BorderBrush="Black" Visibility="{Binding TaskCheckBoxAndTextVisibility}">
+                          Width="14" Height="14" IsChecked="True" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" BorderBrush="Black" 
+                          Visibility="{Binding TaskCheckBoxAndTextVisibility}">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="1.8" />
                     </CheckBox.LayoutTransform>
                 </CheckBox>
 
                 <!--local:ResxStatic l10n:Resources.ActiveTasks,Binding ActiveTasksString-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.ActiveTasks}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.ActiveTasks}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                           FontSize="17"/>
                 <CheckBox x:Name="ShowingActiveTasksCheckBox" Command="{Binding SortingByCheckBoxCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
                           Width="14" Height="14" IsChecked="True" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" BorderBrush="Black">
                     <CheckBox.LayoutTransform>
@@ -62,7 +66,8 @@
                 </CheckBox>
 
                 <!--local:ResxStatic l10n:Resources.Notifications,Binding NotificationsString-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.Notifications}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.Notifications}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           FontSize="17"/>
                 <CheckBox x:Name="NotificationsCheckBox" Command="{Binding NotificationsSwitchOnOffCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
                           Width="14" Height="14" IsChecked="True" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" BorderBrush="Black">
                     <CheckBox.LayoutTransform>
@@ -71,7 +76,8 @@
                 </CheckBox>
 
                 <!--local:ResxStatic l10n:Resources.Search,Binding SearchString-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="{Binding SearchTextMargin}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="{Binding SearchTextMargin}" VerticalAlignment="Center" 
+                           HorizontalAlignment="Center" FontSize="20"/>
                 <TextBox x:Name="TaskSearchingText" Margin="5 0 0 0" Background="#eee" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
                          Width="165" FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
                     <TextBox.Resources>

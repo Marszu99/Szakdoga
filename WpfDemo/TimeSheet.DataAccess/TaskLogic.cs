@@ -59,7 +59,7 @@ namespace TimeSheet.DataAccess
                     task.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Status"].ToString());
                     task.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
                     task.User_idUser = int.Parse(dr["User_idUser"].ToString());
-                    task.User_Username = dr["Username"].ToString();
+                    //task.User_Username = dr["Username"].ToString();
 
                     tasks.Add(task);
                 }
@@ -96,7 +96,7 @@ namespace TimeSheet.DataAccess
                     task.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Status"].ToString());
                     task.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
                     task.User_idUser = int.Parse(dr["User_idUser"].ToString());
-                    task.User_Username = dr["Username"].ToString();
+                    //task.User_Username = dr["Username"].ToString();
 
                     tasks.Add(task);
                 }
@@ -131,7 +131,7 @@ namespace TimeSheet.DataAccess
                     task.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Status"].ToString());
                     task.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
                     task.User_idUser = int.Parse(dr["User_idUser"].ToString());
-                    task.User_Username = dr["Username"].ToString();
+                    //task.User_Username = dr["Username"].ToString();
 
                     tasks.Add(task);
                 }
@@ -168,7 +168,7 @@ namespace TimeSheet.DataAccess
                     task.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Status"].ToString());
                     task.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
                     task.User_idUser = int.Parse(dr["User_idUser"].ToString());
-                    task.User_Username = dr["Username"].ToString();
+                    //task.User_Username = dr["Username"].ToString();
                     //task.User_idUser = id; Melyik szebb???
 
                     tasks.Add(task);
@@ -206,7 +206,7 @@ namespace TimeSheet.DataAccess
                     task.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Status"].ToString());
                     task.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
                     task.User_idUser = int.Parse(dr["User_idUser"].ToString());
-                    task.User_Username = dr["Username"].ToString();
+                    //task.User_Username = dr["Username"].ToString();
 
                     tasks.Add(task);
                 }

@@ -155,6 +155,11 @@ namespace TimeSheet.Logic
             return _userLogic.GetUserByUsername(username);
         }
 
+        public User GetUserByID(int userid)
+        {
+            return _userLogic.GetUserByID(userid);
+        }
+
         public User GetAdmin()
         {
             return _userLogic.GetAdmin();

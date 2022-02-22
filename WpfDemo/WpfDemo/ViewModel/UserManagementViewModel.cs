@@ -51,7 +51,8 @@ namespace WpfDemo.ViewModel
 
                     try
                     {
-                        var users = new UserRepository(new UserLogic()).GetAllUsers().Where(user => user.Username.Contains(_searchValue) || user.FirstName.Contains(_searchValue) || user.LastName.Contains(_searchValue)).ToList();
+                        var users = new UserRepository(new UserLogic()).GetAllUsers().Where(user => user.Username.Contains(_searchValue) 
+                                    || user.FirstName.Contains(_searchValue) || user.LastName.Contains(_searchValue)).ToList();
                         users.ForEach(user => UserList.Add(new UserViewModel(user)));
                     }
                     catch (SqlException)
@@ -97,23 +98,17 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _selectedUser == null ? Visibility.Hidden : Visibility.Visible;
-                /*if (SelectedUser == null)
+                if (SelectedUser != null)
                 {
-                    return Visibility.Hidden;
+                    SelectedUser.UserCanceled += OnUserCanceled;
+
                 }
-                else
-                {
-                    if (SelectedUser.Username == LoginViewModel.LoggedUser.Username || SelectedUser.IdUser == 0)
-                    {
-                        return Visibility.Visible;
-                    }
-                    else
-                    {
-                        return Visibility.Hidden;
-                    }
-                }*/
+                return SelectedUser == null ? Visibility.Hidden : Visibility.Visible;
             }
+        }
+        private void OnUserCanceled(Object obj)
+        {
+            SelectedUser = null;
         }
 
         public RelayCommand DeleteCommand { get; private set; }
@@ -184,7 +179,9 @@ namespace WpfDemo.ViewModel
         }
         private void DeleteUser(object obj)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show(Resources.UserDeleteQuestion1 + SelectedUser.Username + Resources.UserDeleteQuestion2, Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult messageBoxResult = MessageBox.Show(Resources.UserDeleteQuestion1 + SelectedUser.Username + Resources.UserDeleteQuestion2, 
+                                                Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 try

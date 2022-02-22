@@ -23,8 +23,8 @@
         <Grid Grid.Row="0" Margin="0 5 0 5">
             <StackPanel Orientation="Horizontal">
                 <!--local:ResxStatic l10n:Resources.New,Binding NewString-->
-                <Button x:Name="NewRecordButton" Command="{Binding CreateRecordCommand}" Content="{local:ResxStatic l10n:Resources.New}" Grid.Column="0" Grid.Row="0" Width="60" Margin="10 0 0 0"
-                                        FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black">
+                <Button x:Name="NewRecordButton" Command="{Binding CreateRecordCommand}" Content="{local:ResxStatic l10n:Resources.New}" Grid.Column="0" 
+                        Grid.Row="0" Width="60" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -33,8 +33,8 @@
                 </Button>
 
                 <!--local:ResxStatic l10n:Resources.Refresh,Binding RefreshString-->
-                <Button x:Name="RefreshListRecordsButton" Command="{Binding RefreshRecordListCommand}" Content="{local:ResxStatic l10n:Resources.Refresh}" Grid.Column="0" Grid.Row="0" Width="65"
-                                        Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black">
+                <Button x:Name="RefreshListRecordsButton" Command="{Binding RefreshRecordListCommand}" Content="{local:ResxStatic l10n:Resources.Refresh}"
+                        Grid.Column="0" Grid.Row="0" Width="65" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -43,9 +43,11 @@
                 </Button>
 
                 <!--local:ResxStatic l10n:Resources.MyRecords,Binding MyRecordsString-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.MyRecords}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" Visibility="{Binding RecordCheckBoxAndTextVisibility}"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.MyRecords}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           FontSize="17" Visibility="{Binding RecordCheckBoxAndTextVisibility}"/>
                 <CheckBox x:Name="ShowingMyRecordsCheckBox" Command="{Binding SortingByCheckBoxCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
-                          Width="14" Height="14" IsChecked="True" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" BorderBrush="Black" Visibility="{Binding RecordCheckBoxAndTextVisibility}">
+                          Width="14" Height="14" IsChecked="True" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" BorderBrush="Black" 
+                          Visibility="{Binding RecordCheckBoxAndTextVisibility}">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="1.8" />
                     </CheckBox.LayoutTransform>
@@ -63,7 +65,8 @@
 
 
                 <!--local:ResxStatic l10n:Resources.Search,Binding SearchString-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="{Binding SearchTextMargin}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="{Binding SearchTextMargin}" VerticalAlignment="Center"
+                           HorizontalAlignment="Center" FontSize="20"/>
                 <TextBox x:Name="RecordSearchingText" Margin="5 0 0 0" Background="#eee" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
                          Width="165" FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
                     <TextBox.Resources>

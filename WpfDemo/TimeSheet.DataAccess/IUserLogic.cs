@@ -12,6 +12,7 @@ namespace TimeSheet.DataAccess
         void DeleteUser(int id, int status);
         bool IsValidLogin(string username, string password);
         User GetUserByUsername(string username);
+        User GetUserByID(int userid);
         User GetAdmin();
     }
 }

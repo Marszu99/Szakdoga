@@ -26,40 +26,40 @@
 
             <StackPanel Orientation="Horizontal">
                 <!--local:ResxStatic l10n:Resources.Username:,Binding UsernameString-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.UsernameWithColon}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                       Margin="10 20 0 0" FontSize="30"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.UsernameWithColon}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Left" 
+                           VerticalAlignment="Top" Margin="10 20 0 0" FontSize="30"/>
                 <Label x:Name="userNameLabel" Grid.Row="0" Grid.Column="0" FontSize="28" Content="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}"
                        Margin="0 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1">
                 <!--local:ResxStatic l10n:Resources.FirstNameWithColon,Binding FirstNameString, StringFormat='{}{0}:'-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.FirstNameWithColon}" Grid.Row="0" FontWeight="Bold"  Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                       Margin="10 20 0 0" FontSize="30"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.FirstNameWithColon}" Grid.Row="0" FontWeight="Bold"  Grid.Column="1" HorizontalAlignment="Left" 
+                           VerticalAlignment="Top" Margin="10 20 0 0" FontSize="30"/>
                 <Label x:Name="firstNameLabel" Grid.Row="0" Grid.Column="1" FontSize="28" Content="{Binding CurrentUser.FirstName, UpdateSourceTrigger=PropertyChanged}"
                        Margin="0 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="2">
                 <!--local:ResxStatic l10n:Resources.LastNameWithColon,Binding LastNameString-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.LastNameWithColon}" Grid.Row="0" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                       Margin="0 20 0 0" FontSize="30"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.LastNameWithColon}" Grid.Row="0" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Left"
+                           VerticalAlignment="Top" Margin="0 20 0 0" FontSize="30"/>
                 <Label x:Name="lastNameLabel" Grid.Row="0" Grid.Column="2" FontSize="28" Content="{Binding CurrentUser.LastName, UpdateSourceTrigger=PropertyChanged}"
                        Margin="0 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="0">
                 <!--local:ResxStatic l10n:Resources.EmailWithColon,Binding EmailString-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.EmailWithColon}" Grid.Row="0" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-                       Margin="10 0 0 110" FontSize="30"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.EmailWithColon}" Grid.Row="0" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Left" 
+                           VerticalAlignment="Bottom" Margin="10 0 0 110" FontSize="30"/>
                 <Label x:Name="emailLabel" Grid.Row="0" Grid.Column="0" FontSize="28" Content="{Binding CurrentUser.Email, UpdateSourceTrigger=PropertyChanged}"
                        Margin="0 0 0 106" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1">
                 <!--local:ResxStatic l10n:Resources.TelephoneWithColon,Binding TelephoneString-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.TelephoneWithColon}" Grid.Row="0" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-                       Margin="10 0 0 110" FontSize="30"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.TelephoneWithColon}" Grid.Row="0" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom" Margin="10 0 0 110" FontSize="30"/>
                 <Label x:Name="telephoneLabel" Grid.Row="0" Grid.Column="1" FontSize="28" Content="{Binding CurrentUser.Telephone, UpdateSourceTrigger=PropertyChanged}"
                        Margin="0 0 0 105" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
             </StackPanel>
@@ -70,12 +70,16 @@
 
             <!--local:ResxStatic l10n:Resources.Tasks,Binding TasksString-->
             <!--local:ResxStatic l10n:Resources.Records,Binding RecordsString-->
-            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{local:ResxStatic l10n:Resources.Tasks}" Margin="0 0 0 -5" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{local:ResxStatic l10n:Resources.Records}" Margin="795 0 0 -5" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{local:ResxStatic l10n:Resources.Tasks}" Margin="0 0 0 -5" HorizontalAlignment="Left" 
+                   VerticalAlignment="Bottom"/>
+            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{local:ResxStatic l10n:Resources.Records}" Margin="795 0 0 -5" HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"/>
 
-            <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Grid.Row="1" Margin="0 0 622 1" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Grid.Row="1" Margin="0 0 622 1" VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+                       FontSize="20"/>
             <TextBox x:Name="TaskSearchingText" Grid.Row="1" Margin="0 0 385 1" Background="#eee" Text="{Binding SearchTaskListValue, UpdateSourceTrigger=PropertyChanged}"
-                         Width="165" FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
+                     Width="165" FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1"
+                     BorderBrush="Black" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -84,9 +88,11 @@
             </TextBox>
 
             <!--local:ResxStatic l10n:Resources.Search,Binding SearchString-->
-            <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Grid.Row="1" Margin="0 0 170 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="20"/>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Grid.Row="1" Margin="0 0 170 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                       FontSize="20"/>
             <TextBox x:Name="RecordSearchingText" Grid.Row="1" Margin="0 0 0 1" Background="#eee" Text="{Binding SearchRecordListValue, UpdateSourceTrigger=PropertyChanged}"
-                         Width="165" FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Right" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
+                     Width="165" FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Right" HorizontalContentAlignment="Left" BorderThickness="1" 
+                     BorderBrush="Black" >
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -96,8 +102,9 @@
         </Grid>
 
         <!--local:ResxStatic l10n:Resources.NewTask,Binding NewTaskString-->
-        <Button Grid.Row="2" x:Name="AddTaskToUserTaskButton" Command="{Binding ShowTaskCommand}" Content="{local:ResxStatic l10n:Resources.NewTask}" Margin="0 0 140 0" Height="30" Width="75"
-                    HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="14" BorderThickness="1" BorderBrush="Black" Visibility="{Binding AddTaskButtonVisibility}">
+        <Button Grid.Row="2" x:Name="AddTaskToUserTaskButton" Command="{Binding ShowTaskCommand}" Content="{local:ResxStatic l10n:Resources.NewTask}" 
+                Margin="0 0 140 0" Height="30" Width="75" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="14" 
+                BorderThickness="1" BorderBrush="Black" Visibility="{Binding AddTaskButtonVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -116,9 +123,10 @@
             <!--<FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
             ResourceStringekhez kell-->
 
-            <DataGrid  x:Name="UserTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" HorizontalAlignment="Left" Width="650" AutoGenerateColumns="False" ColumnWidth="*"
-                          Background="LightGray" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                          ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="0" Grid.ColumnSpan="2">
+            <DataGrid  x:Name="UserTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" 
+                       HorizontalAlignment="Left" Width="650" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" 
+                       ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                       Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="0" Grid.ColumnSpan="2">
 
                 <DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding ShowTaskCommand}"/>
@@ -214,7 +222,7 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Title}" Binding="{Binding Task_Title}" Width="150">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Task}" Binding="{Binding Task_Title}" Width="150">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>

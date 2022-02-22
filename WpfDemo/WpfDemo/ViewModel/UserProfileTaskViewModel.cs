@@ -20,6 +20,7 @@ namespace WpfDemo.ViewModel
     public class UserProfileTaskViewModel : ViewModelBase, IDataErrorInfo
     {
         private Task _task;
+        private User _currentUser;
         private UserProfileTaskView _view;
         private bool _isChanged = false;
         private bool _isTitleChanged = false;
@@ -145,16 +146,17 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string User_Username
+        public User CurrentUser
         {
             get
             {
-                return _task.User_Username;
+                _currentUser = new UserRepository(new UserLogic()).GetUserByID(User_idUser);
+                return _currentUser;
             }
             set
             {
-                _task.User_Username = value;
-                OnPropertyChanged(nameof(User_Username));
+                _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
             }
         }
 
@@ -175,7 +177,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _task.User_Username == LoginViewModel.LoggedUser.Username;
+                return CurrentUser.Username == LoginViewModel.LoggedUser.Username;
             }
         }
 
@@ -284,7 +286,7 @@ namespace WpfDemo.ViewModel
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User_idUser);
             MessageBox.Show(Resources.TaskCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
-            if (this._task.User_Username != LoginViewModel.LoggedUser.Username)
+            if (this.CurrentUser.Username != LoginViewModel.LoggedUser.Username)
             {
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationNewTask", 0, this._task.IdTask);
                 SendNotificationEmail(" has been added to your tasks!");
@@ -299,7 +301,7 @@ namespace WpfDemo.ViewModel
             MessageBox.Show(Resources.TaskUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
 
-            if (this._task.User_Username != LoginViewModel.LoggedUser.Username)
+            if (this.CurrentUser.Username != LoginViewModel.LoggedUser.Username)
             {
                 if (_isTitleChanged && !_isDescriptionChanged && !_isDeadlineChanged)
                 {
@@ -355,7 +357,7 @@ namespace WpfDemo.ViewModel
             client.Credentials = new System.Net.NetworkCredential("wpfszakdoga@gmail.com", "Marszu99");
             string EmailSubject = "Task Notification";
             string EmailMessage = this._task.Title + EmailNotificationMessage;
-            MailMessage mm = new MailMessage("wpfszakdoga@gmail.com", this._task.User.Email, EmailSubject, EmailMessage);
+            MailMessage mm = new MailMessage("wpfszakdoga@gmail.com", this.CurrentUser.Email, EmailSubject, EmailMessage);
             mm.BodyEncoding = UTF8Encoding.UTF8;
             mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             client.Send(mm);

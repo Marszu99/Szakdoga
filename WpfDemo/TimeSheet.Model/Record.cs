@@ -8,12 +8,12 @@ namespace TimeSheet.Model
         public DateTime Date { get; set; }
         public string Comment { get; set; }
         public int Duration { get; set; }
-        public Task Task { get; set; }
-        public User User { get; set; }
-        public int User_idUser { get; set; }// ez igy jo-e??
-        public string User_Username { get; set; }// ez igy jo-e??
-        public int Task_idTask { get; set; }// ez igy jo-e??
-        public string Task_Title { get; set; }// ez igy jo-e??
-        public TaskStatus Task_Status { get; set; }// ez igy jo-e??
+        public Task Task { get; set; }// nem kell
+        public User User { get; set; }// nem kell
+        public int User_idUser { get; set; }// kell
+        public string User_Username { get; set; }// nem kell
+        public int Task_idTask { get; set; }// kell
+        public string Task_Title { get; set; }// nem kell
+        public TaskStatus Task_Status { get; set; }// nem kell
     }
 }

@@ -9,9 +9,9 @@ namespace TimeSheet.Model
         public string Description { get; set; }
         public TaskStatus Status { get; set; }
         public DateTime Deadline { get; set; }
-        public User User { get; set; }
-        public int User_idUser { get; set; } // ez igy jo-e??
-        public string User_Username { get; set; } // ez igy jo-e??
+        //public User User { get; set; }
+        public int User_idUser { get; set; }
+        //public string User_Username { get; set; }
         public DateTime CreationDate { get; set; }
     }
 }

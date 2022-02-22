@@ -113,7 +113,8 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return (string.IsNullOrWhiteSpace(CurrentLoggedUser.FirstName) || string.IsNullOrWhiteSpace(CurrentLoggedUser.LastName) || string.IsNullOrWhiteSpace(CurrentLoggedUser.Telephone)) ? false : true;              
+                return (string.IsNullOrWhiteSpace(CurrentLoggedUser.FirstName) || string.IsNullOrWhiteSpace(CurrentLoggedUser.LastName) 
+                        || string.IsNullOrWhiteSpace(CurrentLoggedUser.Telephone)) ? false : true;              
             }
         }
         public string MyProfileViewWindowStyle
@@ -193,8 +194,8 @@ namespace WpfDemo.ViewModel
         }
         private bool CanExecuteSave(object arg)
         {
-            return !string.IsNullOrEmpty(CurrentLoggedUser.Password) && !string.IsNullOrEmpty(CurrentLoggedUser.FirstName) && !string.IsNullOrEmpty(CurrentLoggedUser.LastName) &&
-                    !string.IsNullOrEmpty(CurrentLoggedUser.Email) && !string.IsNullOrEmpty(CurrentLoggedUser.Telephone) && _isChanged;
+            return !string.IsNullOrEmpty(CurrentLoggedUser.Password) && !string.IsNullOrEmpty(CurrentLoggedUser.FirstName) && !string.IsNullOrEmpty(CurrentLoggedUser.LastName)
+                   && !string.IsNullOrEmpty(CurrentLoggedUser.Email) && !string.IsNullOrEmpty(CurrentLoggedUser.Telephone) && _isChanged;
         }
         private bool CanExecuteCancel(object arg)
         {

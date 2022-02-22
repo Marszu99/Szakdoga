@@ -19,9 +19,10 @@
         
         <Grid Grid.Row="1">
             <DockPanel>
-                <DataGrid x:Name="ListTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" Width="900" HorizontalAlignment="Left"
-                          AutoGenerateColumns="False" ColumnWidth="*" Background="DarkGray" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                          ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20">
+                <DataGrid x:Name="ListTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}"
+                          Width="900" HorizontalAlignment="Left" AutoGenerateColumns="False" ColumnWidth="*" Background="DarkGray"
+                          ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                          Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20">
 
                     <DataGrid.InputBindings>
                         <KeyBinding Key="Delete" Command="{Binding DeleteCommand}"/>
@@ -66,7 +67,8 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Username}" Binding="{Binding User.Username}" Width="170" FontSize="20" Visibility="{Binding DataContext.ListTasksViewUserVisibility, Source={x:Reference frameworkElement}}">
+                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Username}" Binding="{Binding User.Username}" Width="170" FontSize="20"
+                                            Visibility="{Binding DataContext.ListTasksViewUserVisibility, Source={x:Reference frameworkElement}}">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />
@@ -80,7 +82,8 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Deadline}" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="108" FontSize="20">
+                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Deadline}" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" 
+                                            Width="108" FontSize="20">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium" />

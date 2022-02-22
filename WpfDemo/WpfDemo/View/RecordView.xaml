@@ -27,18 +27,19 @@
         <!--local:ResxStatic l10n:Resources.Date,Binding SelectedRecord.DateString-->
         <!--local:ResxStatic l10n:Resources.Duration,Binding SelectedRecord.DurationString-->
         <!--local:ResxStatic l10n:Resources.Comment,Binding SelectedRecord.CommentString-->
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Task}" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0 0 15 0" FontSize="30"/>
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Date}" Grid.Column="0" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0 0 15 0" FontSize="30"/>
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Duration}" Grid.Column="0" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0 0 15 0" FontSize="30"/>
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Comment}" Grid.Column="0" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0 0 15 0" FontSize="30"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Task}" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right"
+                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="30"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Date}" Grid.Column="0" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="30"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Duration}" Grid.Column="0" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="30"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Comment}" Grid.Column="0" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="30"/>
 
-        <ComboBox x:Name="CreateRecordTask" ItemsSource="{Binding SelectedRecord.ActiveTasks, UpdateSourceTrigger=PropertyChanged}" Padding="2" Grid.Column="1" Grid.Row="0"
-                   Height="38" FontSize="26" HorizontalContentAlignment="Stretch" IsEnabled="{Binding SelectedRecord.IsTaskEnabled}"
-                   SelectedItem="{Binding SelectedRecord.Task, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Task]}">
+        <ComboBox x:Name="CreateRecordTask" ItemsSource="{Binding SelectedRecord.ActiveTasks, UpdateSourceTrigger=PropertyChanged}" Padding="2" Grid.Column="1"
+                  Grid.Row="0" Height="38" FontSize="26" HorizontalContentAlignment="Stretch" IsEnabled="{Binding SelectedRecord.IsTaskEnabled}"
+                  SelectedItem="{Binding SelectedRecord.Task, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                  ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Task]}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Title}"/>
@@ -46,8 +47,9 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <DatePicker x:Name="CreateRecordDate" SelectedDate="{Binding SelectedRecord.Date, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" SelectedDateFormat="Short" Grid.Column="1" 
-                    Grid.Row="1" HorizontalAlignment="Left" Height="41" FontSize="26" IsHitTestVisible="{Binding SelectedRecord.IsRecordViewDateHitTestVisible}"
+        <DatePicker x:Name="CreateRecordDate" SelectedDate="{Binding SelectedRecord.Date, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                    SelectedDateFormat="Short" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Height="41" FontSize="26" 
+                    IsHitTestVisible="{Binding SelectedRecord.IsRecordViewDateHitTestVisible}"
                     ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Date]}">
             <!--<DatePicker.Resources>
                 <Style TargetType="DatePickerTextBox">
@@ -57,8 +59,9 @@
         </DatePicker>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
-            <TextBox x:Name="CreateRecordDuration" Text="{Binding SelectedRecord.DurationFormat, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}" Background="#eee" Width="100" Height="36"
-                     FontSize="26" Margin="0 0 0 0" HorizontalContentAlignment="Right" BorderThickness="1" BorderBrush="Black" IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}"
+            <TextBox x:Name="CreateRecordDuration" Text="{Binding SelectedRecord.DurationFormat, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}"
+                     Background="#eee" Width="100" Height="36" FontSize="26" Margin="0 0 0 0" HorizontalContentAlignment="Right" BorderThickness="1"
+                     BorderBrush="Black" IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}"
                      ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[DurationFormat]}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -67,8 +70,8 @@
                 </TextBox.Resources>
             </TextBox>
 
-            <Button x:Name="DurationAddButtton" Command="{Binding SelectedRecord.DurationAddCommand}" Width="35" Height="35" FontSize="24" FontWeight="Bold" Content="+" Margin="10 0 0 0" 
-                    BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
+            <Button x:Name="DurationAddButtton" Command="{Binding SelectedRecord.DurationAddCommand}" Width="35" Height="35" FontSize="24" FontWeight="Bold"
+                    Content="+" Margin="10 0 0 0" BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -76,8 +79,8 @@
                 </Button.Resources>
             </Button>
 
-            <Button x:Name="DurationReduceButtton" Command="{Binding SelectedRecord.DurationReduceCommand}" Width="35" Height="35" FontSize="24" FontWeight="Bold" Content="-" Margin="5 0 0 0" 
-                    BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
+            <Button x:Name="DurationReduceButtton" Command="{Binding SelectedRecord.DurationReduceCommand}" Width="35" Height="35" FontSize="24" FontWeight="Bold"
+                    Content="-" Margin="5 0 0 0" BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -86,8 +89,10 @@
             </Button>
         </StackPanel>
 
-        <TextBox x:Name="CreateRecordComment" Text="{Binding SelectedRecord.Comment, UpdateSourceTrigger=PropertyChanged}" Background="#eee" Grid.Column="1" Grid.Row="3" Margin="0 0 1 0" IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}"
-                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" BorderThickness="1" BorderBrush="Black">
+        <TextBox x:Name="CreateRecordComment" Text="{Binding SelectedRecord.Comment, UpdateSourceTrigger=PropertyChanged}" Background="#eee" Grid.Column="1"
+                 Grid.Row="3" Margin="0 0 1 0" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" 
+                 IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -96,8 +101,18 @@
         </TextBox>
 
         <!--local:ResxStatic l10n:Resources.Save,Binding SelectedRecord.SaveString-->
-        <Button x:Name="CreateRecordButton" Command="{Binding SelectedRecord.SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" Grid.Column="1" Grid.Row="4" Height="45" Width="70"
-                Margin="0, 0, 160, 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
+        <Button x:Name="CreateRecordButton" Command="{Binding SelectedRecord.SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" Grid.Column="1"
+                Grid.Row="4" Height="45" Width="70" Margin="0, 0, 160, 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black"
+                Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="CancelCreateRecordButton" Command="{Binding SelectedRecord.CancelRecordViewCommand}" Content="{local:ResxStatic l10n:Resources.Cancel}"
+                Grid.Column="1" Grid.Row="5" Height="45" Width="85" Margin="50 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>

@@ -22,8 +22,8 @@
             <Border HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="DimGray" Background="DimGray" BorderThickness="2" Height="55">
                 <!--maradjon??-->
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10" Width="1550">
-                    <Button x:Name="PreviousTabButton" Click="PreviousTabButton_Click" FontFamily="Marlett" Content="3" Grid.Column="0" Grid.Row="0" Width="50" Height="28" 
-                        Margin="5 0 0 0" FontSize="30" BorderThickness="1" BorderBrush="Black">
+                    <Button x:Name="PreviousTabButton" Click="PreviousTabButton_Click" FontFamily="Marlett" Content="3" Grid.Column="0" Grid.Row="0" Width="50"
+                            Height="28" Margin="5 0 0 0" FontSize="30" BorderThickness="1" BorderBrush="Black">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="4"/>
@@ -31,8 +31,8 @@
                         </Button.Resources>
                     </Button>
                     
-                    <Button x:Name="NextTabButton" Click="NextTabButton_Click" FontFamily="Marlett" Content="4" Grid.Column="0" Grid.Row="0" Width="50" Height="28" Margin="0 0 0 0"
-                        FontSize="30" BorderThickness="1" BorderBrush="Black">
+                    <Button x:Name="NextTabButton" Click="NextTabButton_Click" FontFamily="Marlett" Content="4" Grid.Column="0" Grid.Row="0" Width="50" Height="28"
+                            Margin="0 0 0 0" FontSize="30" BorderThickness="1" BorderBrush="Black">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="4"/>
@@ -43,7 +43,7 @@
                 </StackPanel>
             </Border>
 
-            <TextBlock Text="Worktime Registry" Margin="0 0 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="33" FontWeight="Bold" FontStyle="Italic"/>
+            <TextBlock Text="Worktime Registry" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="33" FontWeight="Bold" FontStyle="Italic"/>
 
             <!--<TextBlock Grid.Row="0" Text="{Binding CompanyName}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="38" Margin="1200 0 0 0"
                        FontSize="33" FontFamily="Times New Roman" Foreground="Black" Padding="0 0 0 0"/>-->
@@ -56,7 +56,8 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="TabItem">
                                     <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gray" CornerRadius="4,4,0,0" Margin="5 0 0 0">
-                                        <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10 0 10 2"/>
+                                        <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header"
+                                                          Margin="10 0 10 2"/>
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsSelected" Value="True">
@@ -128,7 +129,8 @@
                                 <MenuItem Header="{local:ResxStatic l10n:Resources.Logout}" Command="{Binding LogoutCommand}"/>
                             </MenuItem>
                         </Menu>
-                        <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\ProfileIcon.png" Height="32" Width="50" HorizontalAlignment="Left" Opacity="0.8"/>
+                        <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\ProfileIcon.png" Height="32" Width="50" 
+                               HorizontalAlignment="Left" Opacity="0.8"/>
                     </Grid>
                 </Border>
             </StackPanel>

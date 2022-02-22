@@ -1,6 +1,4 @@
 ﻿using System.Data.SqlClient;
-using System.Globalization;
-using System.Threading;
 using System.Windows;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
@@ -76,7 +74,8 @@ namespace WpfDemo.ViewModel
                 if (new UserRepository(new UserLogic()).IsValidLogin(_username, _password))
                 {
                     LoggedUser = new UserRepository(new UserLogic()).GetUserByUsername(_username);
-                    if (string.IsNullOrWhiteSpace(LoggedUser.FirstName) && string.IsNullOrWhiteSpace(LoggedUser.LastName) && string.IsNullOrWhiteSpace(LoggedUser.Telephone))// ha új felhasználó lép be akkor annak nincs megadva alapbol ezek az adatok
+                    if (string.IsNullOrWhiteSpace(LoggedUser.FirstName) && string.IsNullOrWhiteSpace(LoggedUser.LastName) && 
+                        string.IsNullOrWhiteSpace(LoggedUser.Telephone))// ha új felhasználó lép be akkor annak nincs megadva alapbol ezek az adatok
                     {
                         _view.Content = new TabcontrolView();
                         MyProfileView Ipage = new MyProfileView();

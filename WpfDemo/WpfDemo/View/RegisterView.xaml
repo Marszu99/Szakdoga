@@ -60,9 +60,9 @@
                 <TextBlock Text="Company2" Grid.Row="4" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" 
                            Margin="0 0 20 0" FontSize="32"/>
 
-                <TextBox x:Name="CreateUserUsername" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30"
-                         Text="{Binding Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                         ToolTipService.ToolTip="{Binding ErrorCollection[Username]}">
+                <TextBox x:Name="CreateUserUsername" Text="{Binding Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" Background="#eee"
+                         BorderThickness="1" BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[Username]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -71,8 +71,8 @@
                 </TextBox>
 
                 <components:BindablePasswordBox x:Name="CreateUserPassword" Password="{Binding Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" Background="#eee"
-                                                ToolTipService.ToolTip="{Binding ErrorCollection[Password]}">
+                                                Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30"
+                                                Background="#eee" ToolTipService.ToolTip="{Binding ErrorCollection[Password]}">
                     <components:BindablePasswordBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -81,8 +81,8 @@
                 </components:BindablePasswordBox>
 
                 <components:BindablePasswordBox x:Name="CreateUserPassword2" Password="{Binding Password2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                                Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" Background="#eee"
-                                                ToolTipService.ToolTip="{Binding ErrorCollection[Password2]}">
+                                                Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" 
+                                                Background="#eee" ToolTipService.ToolTip="{Binding ErrorCollection[Password2]}">
                     <components:BindablePasswordBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -90,9 +90,9 @@
                     </components:BindablePasswordBox.Resources>
                 </components:BindablePasswordBox>
 
-                <TextBox x:Name="CreateUserFirstName" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30"
-                         Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                         ToolTipService.ToolTip="{Binding ErrorCollection[FirstName]}">
+                <TextBox x:Name="CreateUserFirstName" Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" Background="#eee"
+                         BorderThickness="1" BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[FirstName]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -100,9 +100,9 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <TextBox x:Name="CreateUserLastName" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" 
-                         Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                         ToolTipService.ToolTip="{Binding ErrorCollection[LastName]}">
+                <TextBox x:Name="CreateUserLastName" Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" Background="#eee" 
+                         BorderThickness="1" BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[LastName]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -110,9 +110,9 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <TextBox x:Name="CreateUserEmail" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30"
-                         Text="{Binding Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                         ToolTipService.ToolTip="{Binding ErrorCollection[Email]}">
+                <TextBox x:Name="CreateUserEmail" Text="{Binding Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" Background="#eee"
+                         BorderThickness="1" BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[Email]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -120,9 +120,9 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <TextBox x:Name="CreateUserEmail2" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" 
-                         Text="{Binding Email2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                          ToolTipService.ToolTip="{Binding ErrorCollection[Email2]}">
+                <TextBox x:Name="CreateUserEmail2" Text="{Binding Email2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" Background="#eee" 
+                         BorderThickness="1" BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[Email2]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -130,9 +130,9 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <TextBox x:Name="CreateUserTelephone" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" 
-                         Text="{Binding Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                          ToolTipService.ToolTip="{Binding ErrorCollection[Telephone]}">
+                <TextBox x:Name="CreateUserTelephone" Text="{Binding Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" Background="#eee"
+                         BorderThickness="1" BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[Telephone]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -140,9 +140,9 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <TextBox x:Name="CreateUserCompanyName" Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" 
-                         Text="{Binding CompanyName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                         ToolTipService.ToolTip="{Binding ErrorCollection[CompanyName]}">
+                <TextBox x:Name="CreateUserCompanyName" Text="{Binding CompanyName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" Background="#eee"
+                         BorderThickness="1" BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[CompanyName]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -150,9 +150,9 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <TextBox x:Name="CreateUserCompanyName2" Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" 
-                         Text="{Binding CompanyName2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" BorderThickness="1" BorderBrush="Black"
-                         ToolTipService.ToolTip="{Binding ErrorCollection[CompanyName2]}">
+                <TextBox x:Name="CreateUserCompanyName2" Text="{Binding CompanyName2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Stretch" FontSize="30" Background="#eee"
+                         BorderThickness="1" BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[CompanyName2]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -162,8 +162,8 @@
 
             </Grid>
 
-            <Button x:Name="CreateUserButton" Command="{Binding RegisterAdminCommand}" Grid.Column="2" Grid.Row="4" Content="Register" Height="53" Width="120" FontSize="30" HorizontalAlignment="Center"
-                    Margin="0" Padding="3" BorderThickness="1" BorderBrush="Black">
+            <Button x:Name="CreateUserButton" Command="{Binding RegisterAdminCommand}" Grid.Column="2" Grid.Row="4" Content="Register" Height="53" Width="120"
+                    FontSize="30" HorizontalAlignment="Center" Margin="0" Padding="3" BorderThickness="1" BorderBrush="Black">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

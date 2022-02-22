@@ -29,20 +29,21 @@
         <!--local:ResxStatic l10n:Resources.Description,Binding DescriptionString-->
         <!--local:ResxStatic l10n:Resources.Deadline,Binding DeadlineString-->
         <!--local:ResxStatic l10n:Resources.Status,Binding StatusString-->
-        <TextBlock Text="{local:ResxStatic l10n:Resources.User}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0 0 10 0" FontSize="30"/>
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Title}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0 0 10 0" FontSize="30"/>
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Description}" Grid.Row="2" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0 0 10 0" FontSize="30"/>
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Deadline}" Grid.Row="3" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0 0 10 0" FontSize="30"/>
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Status}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0 0 10 0" FontSize="30"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.User}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Margin="0 0 10 0" FontSize="30"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Title}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right"
+                   VerticalAlignment="Center" Margin="0 0 10 0" FontSize="30"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Description}" Grid.Row="2" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Margin="0 0 10 0" FontSize="30"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Deadline}" Grid.Row="3" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Margin="0 0 10 0" FontSize="30"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Status}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Margin="0 0 10 0" FontSize="30"/>
 
 
-        <TextBox x:Name="AddTaskUser" Background="#eee" Grid.Column="1" Grid.Row="0" Text="{Binding User_Username, UpdateSourceTrigger=PropertyChanged}" 
-                 Height="35" FontSize="26" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0 0 0 0" IsReadOnly="True" BorderThickness="1" BorderBrush="Black">
+        <TextBox x:Name="AddTaskUser" Background="#eee" Grid.Column="1" Grid.Row="0" Text="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}" 
+                 Height="35" FontSize="26" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0 0 0 0" IsReadOnly="True" BorderThickness="1"
+                 BorderBrush="Black">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -52,8 +53,8 @@
 
 
         <TextBox x:Name="AddTaskTitle" Background="#eee" Grid.Column="1" Grid.Row="1" Text="{Binding Title, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
-                 Height="35" FontSize="26"  HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0 0 0 0" BorderThickness="1" BorderBrush="Black"
-                 ToolTipService.ToolTip="{Binding ErrorCollection[Title]}">
+                 Height="35" FontSize="26"  HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0 0 0 0" BorderThickness="1" 
+                 BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[Title]}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -61,8 +62,9 @@
             </TextBox.Resources>
         </TextBox>
 
-        <TextBox x:Name="AddTaskDescription" Background="#eee" Grid.Column="1" Grid.Row="2" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 1 0"
-                 HorizontalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" BorderThickness="1" BorderBrush="Black">
+        <TextBox x:Name="AddTaskDescription" Background="#eee" Grid.Column="1" Grid.Row="2" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" 
+                 Margin="0 0 1 0" HorizontalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" 
+                 BorderThickness="1" BorderBrush="Black">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -82,8 +84,8 @@
         </ComboBox>
 
         <!--local:ResxStatic l10n:Resources.Save,Binding SaveString-->
-        <Button x:Name="SaveTaskToUserButton" Command="{Binding SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" Grid.Column="1" Grid.Row="5" Height="45" Width="70"
-                HorizontalAlignment="Left" Margin="0 0 0 0" Padding="4" FontSize="26" BorderThickness="1" BorderBrush="Black">
+        <Button x:Name="SaveTaskToUserButton" Command="{Binding SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" Grid.Column="1" Grid.Row="5" 
+                Height="45" Width="70" HorizontalAlignment="Left" Margin="0 0 0 0" Padding="4" FontSize="26" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -92,8 +94,8 @@
         </Button>
 
         <!--local:ResxStatic l10n:Resources.Cancel,Binding CancelString-->
-        <Button x:Name="BackToListButton" Command="{Binding ExitWindowCommand}" Content="{local:ResxStatic l10n:Resources.Cancel}" Grid.Column="1" Grid.Row="5" Height="45" Width="85"
-                Margin="0 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
+        <Button x:Name="BackToListButton" Command="{Binding ExitWindowCommand}" Content="{local:ResxStatic l10n:Resources.Cancel}" Grid.Column="1" Grid.Row="5"
+                Height="45" Width="85" Margin="0 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>

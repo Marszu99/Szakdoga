@@ -16,7 +16,7 @@ namespace WpfDemo.ViewModel
 {
     public class UserProfileViewModel : ViewModelBase
     {
-        private User _user;
+        private User _currentUser;
         private Task _selectedTask;
 
         private ObservableCollection<RecordViewModel> _recordList = new ObservableCollection<RecordViewModel>();
@@ -37,41 +37,16 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        /*private UserProfileTaskViewModel _selectedTask;
-        public UserProfileTaskViewModel SelectedTask
-        {
-            get { return _selectedTask; }
-            set
-            {
-                _selectedTask = value;
-                OnPropertyChanged(nameof(SelectedTask));
-            }
-        }*/
-
         public User CurrentUser
         {
             get
             {
-                return _user;
+                return _currentUser;
             }
             set
             {
-                _user = value;
+                _currentUser = value;
                 OnPropertyChanged(nameof(CurrentUser));
-            }
-        }
-
-        private int _currentUserIdUser;
-        public int CurrentUserIdUser
-        {
-            get
-            {
-                return _currentUserIdUser;
-            }
-            set
-            {
-                _currentUserIdUser = value;
-                OnPropertyChanged(nameof(CurrentUserIdUser));
             }
         }
 
@@ -97,7 +72,7 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(SearchTaskListValue));
                 if (String.IsNullOrWhiteSpace(_searchTaskListValue))
                 {
-                    LoadTasks(CurrentUserIdUser);
+                    LoadTasks(CurrentUser.IdUser);
                 }
                 else
                 {
@@ -105,7 +80,9 @@ namespace WpfDemo.ViewModel
 
                     try
                     {
-                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CurrentUserIdUser).Where(task => task.Title.Contains(_searchTaskListValue) || task.Description.Contains(_searchTaskListValue) || task.Deadline.ToShortDateString().Contains(_searchTaskListValue) || task.Status.ToString().Contains(_searchTaskListValue)).ToList();
+                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CurrentUser.IdUser).Where(task => task.Title.Contains(_searchTaskListValue)
+                                    || task.Description.Contains(_searchTaskListValue) || task.Deadline.ToShortDateString().Contains(_searchTaskListValue) 
+                                    || task.Status.ToString().Contains(_searchTaskListValue)).ToList();
                         tasks.ForEach(task => _taskList.Add(task));
                     }
                     catch (SqlException)
@@ -124,9 +101,10 @@ namespace WpfDemo.ViewModel
             {
                 _searchRecordListValue = value;
                 OnPropertyChanged(nameof(SearchRecordListValue));
+
                 if (String.IsNullOrWhiteSpace(_searchRecordListValue))
                 {
-                    LoadRecords(CurrentUserIdUser);
+                    LoadRecords(CurrentUser.IdUser);
                 }
                 else
                 {
@@ -134,18 +112,17 @@ namespace WpfDemo.ViewModel
 
                     try
                     {
+                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUser.IdUser).Where(record => 
+                                      record.Task_Title.Contains(_searchRecordListValue) || record.User_Username.Contains(_searchRecordListValue)
+                                      || record.Date.ToShortDateString().Contains(_searchRecordListValue) 
+                                      || record.Comment.Contains(_searchRecordListValue) || record.Duration.ToString().Contains(_searchRecordListValue)
+                                      || record.Task_Status.ToString().Contains(_searchRecordListValue)).ToList();
 
-                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUserIdUser).Where(record => record.Task_Title.Contains(_searchRecordListValue)
-                        || record.User_Username.Contains(_searchRecordListValue) || record.Date.ToShortDateString().Contains(_searchRecordListValue)
-                        || record.Comment.Contains(_searchRecordListValue) || record.Duration.ToString().Contains(_searchRecordListValue)
-                        || record.Task_Status.ToString().Contains(_searchRecordListValue)).ToList();
                         records.ForEach(record =>
                         {
-                            var recordViewModel = new RecordViewModel(record, TaskList.ToList());
-                            recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
-                            RecordList.Add(recordViewModel);
-
-                            //recordViewModel.RecordCreated += OnRecordCreated;
+                            var recordViewModel = new RecordViewModel(record, _taskList.ToList());
+                            recordViewModel.Task = _taskList.First(task => task.IdTask == record.Task_idTask);
+                            _recordList.Add(recordViewModel);
                         });
                     }
                     catch (SqlException)
@@ -178,7 +155,6 @@ namespace WpfDemo.ViewModel
 
         public UserProfileViewModel(int userid)
         {
-            _currentUserIdUser = userid;
             LoadTasks(userid);
             LoadRecords(userid);
             
@@ -197,7 +173,6 @@ namespace WpfDemo.ViewModel
             {
                 UserProfileTaskView Ipage = new UserProfileTaskView();
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.User_idUser = CurrentUser.IdUser;
-                (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.User_Username = CurrentUser.Username;
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.Deadline = DateTime.Today.AddDays(1);
                 //(Ipage.DataContext as UserProfileTaskViewModel).CurrentUser = CurrentUser;
                 Ipage.ShowDialog();
@@ -220,7 +195,9 @@ namespace WpfDemo.ViewModel
 
         private void DeleteTask(object obj)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show(Resources.TaskDeleteQuestion1 + SelectedTask.Title + Resources.TaskDeleteQuestion2, Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult messageBoxResult = MessageBox.Show(Resources.TaskDeleteQuestion1 + SelectedTask.Title + Resources.TaskDeleteQuestion2, 
+                                                Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 try
@@ -228,7 +205,7 @@ namespace WpfDemo.ViewModel
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
                     MessageBox.Show(Resources.TaskDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    if (this.SelectedTask.User_Username != LoginViewModel.LoggedUser.Username)
+                    if (this.CurrentUser.Username != LoginViewModel.LoggedUser.Username)
                     {
                         SendNotificationEmail(SelectedTask.Title);
                     }
@@ -253,25 +230,13 @@ namespace WpfDemo.ViewModel
             client.Credentials = new System.Net.NetworkCredential("wpfszakdoga@gmail.com", "Marszu99");
             string EmailSubject = "Task Notification";
             string EmailMessage = TaskTitle + " has been deleted!";
-            MailMessage mm = new MailMessage("wpfszakdoga@gmail.com", SelectedTask.User.Email, EmailSubject, EmailMessage);
+            MailMessage mm = new MailMessage("wpfszakdoga@gmail.com", CurrentUser.Email, EmailSubject, EmailMessage);
             mm.BodyEncoding = UTF8Encoding.UTF8;
             mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             client.Send(mm);
         }
 
-        private void LoadRecords(int userid)
-        {
-            _recordList.Clear();
 
-            var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUserIdUser);
-            records.ForEach(record =>
-            {
-                var recordViewModel = new RecordViewModel(record, TaskList.ToList());
-                recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
-                RecordList.Add(recordViewModel);
-
-            });
-        }
         private void LoadTasks(int userid)
         {
             _taskList.Clear();
@@ -279,6 +244,20 @@ namespace WpfDemo.ViewModel
             var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
             tasks.ForEach(task => _taskList.Add(task));
         }
+
+        private void LoadRecords(int userid)
+        {
+            _recordList.Clear();
+
+            var records = new RecordRepository(new RecordLogic()).GetUserRecords(userid);
+            records.ForEach(record =>
+            {
+                var recordViewModel = new RecordViewModel(record, _taskList.ToList());
+                recordViewModel.Task = _taskList.First(task => task.IdTask == record.Task_idTask);
+                _recordList.Add(recordViewModel);
+            });
+        }
+        
 
         public string UsernameString
         {

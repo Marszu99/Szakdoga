@@ -236,6 +236,7 @@ namespace WpfDemo.ViewModel
 
 
         public ICommand SaveCommand { get; }
+        public RelayCommand CancelUserViewCommand { get; private set; }
 
 
         public UserViewModel(User user)
@@ -243,6 +244,7 @@ namespace WpfDemo.ViewModel
             _user = user;
 
             SaveCommand = new RelayCommand(Save, CanSave);
+            CancelUserViewCommand = new RelayCommand(CancelUserView, CanCancelUserView);
         }
 
         private bool CanSave(object arg)
@@ -289,7 +291,6 @@ namespace WpfDemo.ViewModel
 
             SendEmail(createdUserRandomPassword);
         }
-
         public event Action<UserViewModel> UserCreated;
         public void CreateUserToList(UserViewModel userViewModel)
         {
@@ -327,6 +328,21 @@ namespace WpfDemo.ViewModel
             new UserRepository(new UserLogic()).UpdateUser(this._user);
             MessageBox.Show(Resources.UserUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
+        }
+
+        public event Action<object> UserCanceled;
+        public void CancelUser(Object obj)
+        {
+            UserCanceled?.Invoke(obj);
+        }
+        private bool CanCancelUserView(object arg)
+        {
+            return true;
+        }
+
+        private void CancelUserView(object obj)
+        {
+            CancelUser(obj);
         }
 
 

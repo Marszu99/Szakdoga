@@ -202,7 +202,7 @@
     <value>Helytelen email!</value>
   </data>
   <data name="EmailWithColon" xml:space="preserve">
-    <value>Email: </value>
+    <value>Email:</value>
   </data>
   <data name="EmailWrongLength" xml:space="preserve">
     <value>Email legalább 11 és legfeljebb 100 karakter lehet!</value>
@@ -217,7 +217,7 @@
     <value>Keresztnév nem tartalmazhat betűkön kívül más karaktereket!</value>
   </data>
   <data name="FirstNameWithColon" xml:space="preserve">
-    <value>Keresztnév: </value>
+    <value>Keresztnév:</value>
   </data>
   <data name="FirstNameWrongLength" xml:space="preserve">
     <value>Keresztnév legalább 3 és legfeljebb 45 karakter lehet!</value>
@@ -238,7 +238,7 @@
     <value>Vezetéknév nem tartalmazhat betűkön kívül más karaktereket!</value>
   </data>
   <data name="LastNameWithColon" xml:space="preserve">
-    <value>Vezetéknév: </value>
+    <value>Vezetéknév:</value>
   </data>
   <data name="LastNameWrongLength" xml:space="preserve">
     <value>Vezetéknév legalább 3 és legfeljebb 45 karakter lehet!</value>
@@ -328,7 +328,7 @@
     <value>Jelszónak egy szónak kell lennie!</value>
   </data>
   <data name="PasswordWithColon" xml:space="preserve">
-    <value>Jelszó: </value>
+    <value>Jelszó:</value>
   </data>
   <data name="PasswordWrongLength" xml:space="preserve">
     <value>Jelszó legalább 6 és legfeljebb 45 karakter lehet!</value>
@@ -412,7 +412,7 @@
     <value>Helytelen telefonszám!</value>
   </data>
   <data name="TelephoneWithColon" xml:space="preserve">
-    <value>Telefonszám: </value>
+    <value>Telefonszám:</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Cím</value>
@@ -454,7 +454,7 @@
     <value>Felhasználónévnek egy szónak kell lennie!</value>
   </data>
   <data name="UsernameWithColon" xml:space="preserve">
-    <value>Felhasználónév: </value>
+    <value>Felhasználónév:</value>
   </data>
   <data name="UsernameWrongLength" xml:space="preserve">
     <value>Felhasználónév legalább 6 és legfeljebb 45 karakter lehet!</value>

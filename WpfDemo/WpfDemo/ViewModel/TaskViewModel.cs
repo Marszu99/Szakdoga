@@ -20,6 +20,7 @@ namespace WpfDemo.ViewModel
     public class TaskViewModel : ViewModelBase, IDataErrorInfo
     {
         private Task _task;
+        private User _user;
         private bool _isChanged = false;
         private bool _isTitleChanged = false;
         private bool _isDescriptionChanged = false;
@@ -134,11 +135,12 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _task.User;
+                _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
+                return _user;
             }
             set
             {
-                _task.User = value;
+                _user = value;
                 OnPropertyChanged(nameof(User));
                 if (_task.IdTask == 0) // kell ez mert kulonbon update eseten a Save gomb nem lennne disabled-d
                 {
@@ -160,18 +162,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string User_Username
-        {
-            get
-            {
-                return _task.User_Username;
-            }
-            set
-            {
-                _task.User_Username = value;
-                OnPropertyChanged(nameof(User_Username));
-            }
-        }
         public List<User> UserList // Kell h mikor New utan kivalasztunk egy taskot akkor ne legyen ures a User
         {
             get;
@@ -226,7 +216,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _task.User_Username == LoginViewModel.LoggedUser.Username;
+                return _user.Username == LoginViewModel.LoggedUser.Username;
             }
         }
 
@@ -284,7 +274,7 @@ namespace WpfDemo.ViewModel
                 switch (propertyName)
                 {
                     case nameof(User):
-                        result = TaskValidationHelper.ValidateUser(_task.User);
+                        result = TaskValidationHelper.ValidateUser(this._user);
                         break;
 
                     case nameof(Title):
@@ -369,13 +359,13 @@ namespace WpfDemo.ViewModel
 
         private void CreateTask()
         {
-            this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User.IdUser);
+            this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User_idUser);
             MessageBox.Show(Resources.TaskCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             CreateTaskToList(this);
 
 
-            if (this._task.User.Status != 1)
+            if (this._user.Status != 1)
             {
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationNewTask", 0, this._task.IdTask);
                 SendNotificationEmail(" has been added to your tasks!");
@@ -393,7 +383,7 @@ namespace WpfDemo.ViewModel
             MessageBox.Show(Resources.TaskUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
 
-            if (this._task.User.Status != 1)
+            if (this._user.Status != 1)
             {
                 if (_isTitleChanged && !_isDescriptionChanged && !_isDeadlineChanged)
                 {
@@ -476,7 +466,7 @@ namespace WpfDemo.ViewModel
             client.Credentials = new System.Net.NetworkCredential("wpfszakdoga@gmail.com", "Marszu99");
             string EmailSubject = "Task Notification";
             string EmailMessage = this._task.Title + EmailNotificationMessage;
-            MailMessage mm = new MailMessage("wpfszakdoga@gmail.com", this._task.User.Email, EmailSubject, EmailMessage);
+            MailMessage mm = new MailMessage("wpfszakdoga@gmail.com", this._user.Email, EmailSubject, EmailMessage);
             mm.BodyEncoding = UTF8Encoding.UTF8;
             mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             client.Send(mm);

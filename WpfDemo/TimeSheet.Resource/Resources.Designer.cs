@@ -313,7 +313,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email: .
+        ///   Looks up a localized string similar to Email:.
         /// </summary>
         public static string EmailWithColon {
             get {
@@ -358,7 +358,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FirstName: .
+        ///   Looks up a localized string similar to FirstName:.
         /// </summary>
         public static string FirstNameWithColon {
             get {
@@ -421,7 +421,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LastName: .
+        ///   Looks up a localized string similar to LastName:.
         /// </summary>
         public static string LastNameWithColon {
             get {
@@ -691,7 +691,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password: .
+        ///   Looks up a localized string similar to Password:.
         /// </summary>
         public static string PasswordWithColon {
             get {
@@ -943,7 +943,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Telephone: .
+        ///   Looks up a localized string similar to Telephone:.
         /// </summary>
         public static string TelephoneWithColon {
             get {
@@ -1069,7 +1069,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Username: .
+        ///   Looks up a localized string similar to Username:.
         /// </summary>
         public static string UsernameWithColon {
             get {

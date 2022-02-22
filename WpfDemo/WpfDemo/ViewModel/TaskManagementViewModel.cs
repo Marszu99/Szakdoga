@@ -93,6 +93,10 @@ namespace WpfDemo.ViewModel
                 return SelectedTask == null ? Visibility.Hidden : Visibility.Visible;
             }
         }
+        private void OnTaskCanceled(Object obj)
+        {
+            SelectedTask = null;
+        }
 
         public Visibility ListTasksViewUserVisibility
         {
@@ -151,10 +155,6 @@ namespace WpfDemo.ViewModel
             SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
             SelectedTask.TaskCreated += OnTaskCreated;
         }
-        private void OnTaskCanceled(Object obj)
-        {
-            SelectedTask = null;
-        }
 
 
         private bool CanExecuteRefresh(object arg)
@@ -185,7 +185,7 @@ namespace WpfDemo.ViewModel
             catch (SqlException)
             {
                 MessageBox.Show(Resources.ServerError);
-            }      
+            }
         }
 
 
@@ -265,7 +265,9 @@ namespace WpfDemo.ViewModel
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser).Where(task => task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
+                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser).Where(task => task.Title.Contains(_searchValue)
+                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue)
+                                    || task.Status.ToString().Contains(_searchValue)).ToList();
 
                         tasks.ForEach(task =>
                         {
@@ -278,7 +280,9 @@ namespace WpfDemo.ViewModel
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser).Where(task => task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser).Where(task => task.Title.Contains(_searchValue)
+                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) 
+                                    || task.Status.ToString().Contains(_searchValue)).ToList();
 
                         tasks.ForEach(task =>
                         {
@@ -291,7 +295,9 @@ namespace WpfDemo.ViewModel
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks().Where(task => task.Title.Contains(_searchValue) || task.User_Username.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks().Where(task => task.Title.Contains(_searchValue) 
+                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) 
+                                    || task.Status.ToString().Contains(_searchValue)).ToList();// task.User_Username.Contains(_searchValue)
 
                         tasks.ForEach(task =>
                         {
@@ -304,7 +310,9 @@ namespace WpfDemo.ViewModel
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task => task.Title.Contains(_searchValue) || task.User_Username.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)).ToList();
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task => task.Title.Contains(_searchValue) 
+                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) 
+                                    || task.Status.ToString().Contains(_searchValue)).ToList();// task.User_Username.Contains(_searchValue)
                         tasks.ForEach(task =>
                         {
                             var taskViewModel = new TaskViewModel(task, UserList.ToList());
@@ -328,7 +336,9 @@ namespace WpfDemo.ViewModel
 
         private void DeleteTask(object obj)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show(Resources.TaskDeleteQuestion1 + SelectedTask.Title + Resources.TaskDeleteQuestion2, Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult messageBoxResult = MessageBox.Show(Resources.TaskDeleteQuestion1 + SelectedTask.Title + Resources.TaskDeleteQuestion2,
+                                                Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 try
@@ -336,7 +346,7 @@ namespace WpfDemo.ViewModel
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
                     MessageBox.Show(Resources.TaskDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    if(this.SelectedTask.User_Username != LoginViewModel.LoggedUser.Username)
+                    if(this.SelectedTask.User.Username != LoginViewModel.LoggedUser.Username)
                     {
                         SendNotificationEmail(SelectedTask.Title);
                     }

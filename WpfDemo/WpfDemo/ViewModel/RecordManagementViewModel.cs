@@ -126,23 +126,17 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return SelectedRecord == null ? Visibility.Hidden : Visibility.Visible;
-                /*if (SelectedRecord == null)
+                if (SelectedRecord != null)
                 {
-                    return Visibility.Hidden;
+                    SelectedRecord.RecordCanceled += OnRecordCanceled;
+
                 }
-                else
-                {
-                    if (SelectedRecord.User_Username == LoginViewModel.LoggedUser.Username || SelectedRecord.IdRecord == 0)
-                    {
-                        return Visibility.Visible;
-                    }
-                    else
-                    {
-                        return Visibility.Hidden;
-                    }
-                }*/
+                return SelectedRecord == null ? Visibility.Hidden : Visibility.Visible;
             }
+        }
+        private void OnRecordCanceled(Object obj)
+        {
+            SelectedRecord = null;
         }
 
         public Visibility ListRecordsViewContextMenuVisibility // Delete Header Visibility
@@ -298,7 +292,10 @@ namespace WpfDemo.ViewModel
                     {
                         RecordList.Clear();
 
-                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record => record.Task_Title.Contains(_searchValue) || record.User_Username.Contains(_searchValue) || record.Date.ToShortDateString().Contains(_searchValue) || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) || record.Task_Status.ToString().Contains(_searchValue)).ToList();
+                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record => record.Task_Title.Contains(_searchValue)
+                                        || record.User_Username.Contains(_searchValue) || record.Date.ToShortDateString().Contains(_searchValue) 
+                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) 
+                                        || record.Task_Status.ToString().Contains(_searchValue)).ToList();
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
@@ -310,7 +307,10 @@ namespace WpfDemo.ViewModel
                     {
                         RecordList.Clear();
 
-                        var records = new RecordRepository(new RecordLogic()).GetAllRecords().Where(record => record.Task_Title.Contains(_searchValue) || record.User_Username.Contains(_searchValue) || record.Date.ToShortDateString().Contains(_searchValue) || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) || record.Task_Status.ToString().Contains(_searchValue)).ToList();
+                        var records = new RecordRepository(new RecordLogic()).GetAllRecords().Where(record => record.Task_Title.Contains(_searchValue) 
+                                        || record.User_Username.Contains(_searchValue) || record.Date.ToShortDateString().Contains(_searchValue) 
+                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) 
+                                        || record.Task_Status.ToString().Contains(_searchValue)).ToList();
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());

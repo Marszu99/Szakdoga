@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using TimeSheet.Model;
 
 namespace TimeSheet.DataAccess
@@ -177,6 +176,40 @@ namespace TimeSheet.DataAccess
                 MySqlCommand myCmd = new MySqlCommand("szakdoga.GetUserByUsername", connection);
                 myCmd.Parameters.Add(new MySqlParameter("@username", MySqlDbType.VarChar));
                 myCmd.Parameters["@username"].Value = username;
+                myCmd.CommandType = CommandType.StoredProcedure;
+                myCmd.ExecuteNonQuery();
+
+                MySqlDataReader sdr = myCmd.ExecuteReader();
+
+                dt.Load(sdr);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    user.IdUser = int.Parse(dr["IdUser"].ToString());
+                    user.Username = dr["UserName"].ToString();
+                    user.Password = dr["Password"].ToString();
+                    user.FirstName = dr["FirstName"].ToString();
+                    user.LastName = dr["LastName"].ToString();
+                    user.Email = dr["Email"].ToString();
+                    user.Telephone = dr["Telephone"].ToString();
+                    user.Status = int.Parse(dr["Status"].ToString());
+                }
+
+                return user;
+            }
+        }
+
+        public User GetUserByID(int userid)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
+            {
+                User user = new User();
+                DataTable dt = new DataTable();
+                connection.Open();
+
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetUserByID", connection);
+                myCmd.Parameters.Add(new MySqlParameter("@id", MySqlDbType.Int32));
+                myCmd.Parameters["@id"].Value = userid;
                 myCmd.CommandType = CommandType.StoredProcedure;
                 myCmd.ExecuteNonQuery();
 

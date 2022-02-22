@@ -280,6 +280,8 @@ namespace WpfDemo.ViewModel
 
 
         public ICommand SaveCommand { get; }
+        public RelayCommand CancelRecordViewCommand { get; private set; }
+
         public RelayCommand DurationAddCommand { get; private set; }
         public RelayCommand DurationReduceCommand { get; private set; }
 
@@ -290,6 +292,7 @@ namespace WpfDemo.ViewModel
             ActiveTasks = activeTasks;
 
             SaveCommand = new RelayCommand(Save, CanSave);
+            CancelRecordViewCommand = new RelayCommand(CancelRecordView, CanCancelRecordView);
             DurationAddCommand = new RelayCommand(Add10MinToDuration, CanExecuteAdd);
             DurationReduceCommand = new RelayCommand(Reduce10MinFromDuration, CanExecuteReduce);
         }
@@ -359,7 +362,7 @@ namespace WpfDemo.ViewModel
 
         private void CreateRecord()
         {
-            this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._record.Task.User_idUser, this._record.Task.IdTask); 
+            this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._record.Task.User_idUser, this._record.Task.IdTask);
             MessageBox.Show(Resources.RecordCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             CreateRecordToList(this);
@@ -377,6 +380,21 @@ namespace WpfDemo.ViewModel
             _isChanged = false;
         }
 
+
+        public event Action<object> RecordCanceled;
+        public void CancelRecord(Object obj)
+        {
+            RecordCanceled?.Invoke(obj);
+        }
+        private bool CanCancelRecordView(object arg)
+        {
+            return true;
+        }
+
+        private void CancelRecordView(object obj)
+        {
+            CancelRecord(obj);
+        }
 
         public string TaskString
         {
