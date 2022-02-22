@@ -113,10 +113,9 @@ namespace WpfDemo.ViewModel
                     try
                     {
                         var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUser.IdUser).Where(record => 
-                                      record.Task_Title.Contains(_searchRecordListValue) || record.User_Username.Contains(_searchRecordListValue)
-                                      || record.Date.ToShortDateString().Contains(_searchRecordListValue) 
-                                      || record.Comment.Contains(_searchRecordListValue) || record.Duration.ToString().Contains(_searchRecordListValue)
-                                      || record.Task_Status.ToString().Contains(_searchRecordListValue)).ToList();
+                                      record.Date.ToShortDateString().Contains(_searchRecordListValue) || record.Comment.Contains(_searchRecordListValue) 
+                                      || record.Duration.ToString().Contains(_searchRecordListValue)).ToList();
+                        //record.User_Username.Contains(_searchRecordListValue), record.Task_Title.Contains(_searchRecordListValue),record.Task_Status.ToString().Contains(_searchRecordListValue)
 
                         records.ForEach(record =>
                         {
@@ -197,7 +196,6 @@ namespace WpfDemo.ViewModel
         {
             MessageBoxResult messageBoxResult = MessageBox.Show(Resources.TaskDeleteQuestion1 + SelectedTask.Title + Resources.TaskDeleteQuestion2, 
                                                 Resources.Warning, MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 try

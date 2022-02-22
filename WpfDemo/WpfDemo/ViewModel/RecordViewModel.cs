@@ -16,6 +16,8 @@ namespace WpfDemo.ViewModel
     public class RecordViewModel : ViewModelBase, IDataErrorInfo
     {
         private Record _record;
+        private Task _task;
+        private User _user;
         private bool _isChanged = false;
 
 
@@ -108,11 +110,12 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _record.User;
+                _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);//_record.User_idUser
+                return _user;
             }
             set
             {
-                _record.User = value;
+                _user = value;
                 OnPropertyChanged(nameof(User));
             }
         }
@@ -121,11 +124,11 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _record.Task;
+                return _task;
             }
             set
             {
-                _record.Task = value;
+                _task = value;
                 OnPropertyChanged(nameof(Task));
                 if (_record.IdRecord == 0)  // kell ez mert kulonbon update eseten a Save gomb nem lennne disabled-d
                 {
@@ -152,19 +155,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string User_Username
-        {
-            get
-            {
-                return _record.User_Username;
-            }
-            set
-            {
-                _record.User_Username = value;
-                OnPropertyChanged(nameof(User_Username));
-            }
-        }
-
         public int Task_idTask
         {
             get
@@ -178,31 +168,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public TaskStatus Task_Status
-        {
-            get
-            {
-                return _record.Task_Status;
-            }
-            set
-            {
-                _record.Task_Status = value;
-                OnPropertyChanged(nameof(Task_Status));
-            }
-        }
-
-        public string Task_Title
-        {
-            get
-            {
-                return _record.Task_Title;
-            }
-            set
-            {
-                _record.Task_Title = value;
-                OnPropertyChanged(nameof(Task_Title));
-            }
-        }
 
         public bool IsTaskEnabled
         {
@@ -216,7 +181,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _record != null && _record.IdRecord != 0 && _record.User_Username != LoginViewModel.LoggedUser.Username ? true : false;
+                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? true : false;
             }
         }
 
@@ -224,7 +189,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _record != null && _record.IdRecord != 0 && _record.User_Username != LoginViewModel.LoggedUser.Username ? false : true;
+                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? false : true;
             }
         }
 
@@ -232,7 +197,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _record != null && _record.IdRecord != 0 && _record.User_Username != LoginViewModel.LoggedUser.Username ? Visibility.Hidden : Visibility.Visible;
+                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? Visibility.Hidden : Visibility.Visible;
             }
         }
 
@@ -249,11 +214,11 @@ namespace WpfDemo.ViewModel
                 switch (propertyName)
                 {
                     case nameof(Task):
-                        result = RecordValidationHelper.ValidateTask(_record.Task);
+                        result = RecordValidationHelper.ValidateTask(_task);
                         break;
 
                     case nameof(Date):
-                        result = RecordValidationHelper.ValidateDate(_record.Date, _record.Task == null ? DateTime.MinValue : _record.Task.CreationDate);
+                        result = RecordValidationHelper.ValidateDate(_record.Date, _task == null ? DateTime.MinValue : _task.CreationDate);
                         break;
 
                     case nameof(Duration):
@@ -362,7 +327,7 @@ namespace WpfDemo.ViewModel
 
         private void CreateRecord()
         {
-            this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._record.Task.User_idUser, this._record.Task.IdTask);
+            this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._task.User_idUser, this._task.IdTask);
             MessageBox.Show(Resources.RecordCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             CreateRecordToList(this);
@@ -375,7 +340,7 @@ namespace WpfDemo.ViewModel
 
         private void UpdateRecord()
         {
-            new RecordRepository(new RecordLogic()).UpdateRecord(this._record, this._record.IdRecord, this._record.User_idUser, this._record.Task.IdTask);
+            new RecordRepository(new RecordLogic()).UpdateRecord(this._record, this._record.IdRecord, this._record.User_idUser, this._task.IdTask);
             MessageBox.Show(Resources.RecordUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
             _isChanged = false;
         }

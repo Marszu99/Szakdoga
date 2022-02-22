@@ -17,9 +17,11 @@ namespace TimeSheet.Logic
 
         public int CreateRecord(Record record, int userid, int taskid)
         {
-            if (RecordValidationHelper.ValidateDate(record.Date, record.Task.CreationDate) != null)
+            Task recordTask = new TaskRepository(new TaskLogic()).GetTaskByID(taskid);
+
+            if (RecordValidationHelper.ValidateDate(record.Date, recordTask.CreationDate) != null)
             {
-                throw new RecordValidationException(RecordValidationHelper.ValidateDate(record.Date, record.Task.CreationDate));
+                throw new RecordValidationException(RecordValidationHelper.ValidateDate(record.Date, recordTask.CreationDate));
             }
 
             if (RecordValidationHelper.ValidateDuration(record.Duration) != null)
@@ -46,9 +48,11 @@ namespace TimeSheet.Logic
 
         public void UpdateRecord(Record record, int recordid, int taskid, int userid)
         {
-            if (RecordValidationHelper.ValidateDate(record.Date, record.Task.CreationDate) != null)
+            Task recordTask = new TaskRepository(new TaskLogic()).GetTaskByID(taskid);
+
+            if (RecordValidationHelper.ValidateDate(record.Date, recordTask.CreationDate) != null)
             {
-                throw new RecordValidationException(RecordValidationHelper.ValidateDate(record.Date, record.Task.CreationDate));
+                throw new RecordValidationException(RecordValidationHelper.ValidateDate(record.Date, recordTask.CreationDate));
             }
 
             if (RecordValidationHelper.ValidateDuration(record.Duration) != null)

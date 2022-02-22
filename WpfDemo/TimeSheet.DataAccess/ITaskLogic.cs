@@ -11,6 +11,7 @@ namespace TimeSheet.DataAccess
         List<Task> GetAllActiveTasks();
         List<Task> GetAllActiveTasksFromUser(int userid);
         List<Task> GetAllDoneTasksFromUser(int userid);
+        Task GetTaskByID(int taskid);
         void UpdateTask(Task task, int taskid, int userid);
         void DeleteTask(int taskid);
     }

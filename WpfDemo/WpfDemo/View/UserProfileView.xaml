@@ -222,14 +222,14 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Task}" Binding="{Binding Task_Title}" Width="150">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Task}" Binding="{Binding Task.Title}" Width="150">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Status}" Binding="{Binding Task_Status}" Width="110">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Status}" Binding="{Binding Task.Status}" Width="110">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>

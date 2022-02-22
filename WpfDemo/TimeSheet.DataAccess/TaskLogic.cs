@@ -59,7 +59,6 @@ namespace TimeSheet.DataAccess
                     task.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Status"].ToString());
                     task.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
                     task.User_idUser = int.Parse(dr["User_idUser"].ToString());
-                    //task.User_Username = dr["Username"].ToString();
 
                     tasks.Add(task);
                 }
@@ -96,7 +95,6 @@ namespace TimeSheet.DataAccess
                     task.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Status"].ToString());
                     task.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
                     task.User_idUser = int.Parse(dr["User_idUser"].ToString());
-                    //task.User_Username = dr["Username"].ToString();
 
                     tasks.Add(task);
                 }
@@ -131,7 +129,6 @@ namespace TimeSheet.DataAccess
                     task.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Status"].ToString());
                     task.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
                     task.User_idUser = int.Parse(dr["User_idUser"].ToString());
-                    //task.User_Username = dr["Username"].ToString();
 
                     tasks.Add(task);
                 }
@@ -168,7 +165,6 @@ namespace TimeSheet.DataAccess
                     task.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Status"].ToString());
                     task.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
                     task.User_idUser = int.Parse(dr["User_idUser"].ToString());
-                    //task.User_Username = dr["Username"].ToString();
                     //task.User_idUser = id; Melyik szebb???
 
                     tasks.Add(task);
@@ -206,12 +202,44 @@ namespace TimeSheet.DataAccess
                     task.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Status"].ToString());
                     task.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
                     task.User_idUser = int.Parse(dr["User_idUser"].ToString());
-                    //task.User_Username = dr["Username"].ToString();
 
                     tasks.Add(task);
                 }
 
                 return tasks;
+            }
+        }
+
+        public Task GetTaskByID(int taskid)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
+            {
+                Task task = new Task();
+
+                DataTable dt = new DataTable();
+                connection.Open();
+
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetTaskByID", connection);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                myCmd.Parameters.Add(new MySqlParameter("@taskid", MySqlDbType.Int32));
+                myCmd.Parameters["@taskid"].Value = taskid;
+
+                MySqlDataReader sdr = myCmd.ExecuteReader();
+
+                dt.Load(sdr);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    task.IdTask = int.Parse(dr["idTask"].ToString());
+                    task.Title = dr["Title"].ToString();
+                    task.Description = dr["Description"].ToString();
+                    task.Deadline = DateTime.Parse(dr["Deadline"].ToString());
+                    task.Status = (TaskStatus)Enum.Parse(typeof(TaskStatus), dr["Status"].ToString());
+                    task.CreationDate = DateTime.Parse(dr["CreationDate"].ToString());
+                    task.User_idUser = int.Parse(dr["User_idUser"].ToString());
+                }
+
+                return task;
             }
         }
 

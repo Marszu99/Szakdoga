@@ -56,6 +56,11 @@ namespace TimeSheet.Logic
             return _tasklogic.GetAllDoneTasksFromUser(userid);
         }
 
+        public Task GetTaskByID(int taskid)//(RecordRepository => RecordValidationHelper.ValidateDate => CreationDate miatt)
+        {
+            return _tasklogic.GetTaskByID(taskid);
+        }
+
         public void UpdateTask(Task task, int taskid, int userid)
         {
             if (TaskValidationHelper.ValidateTitle(task.Title) != null)

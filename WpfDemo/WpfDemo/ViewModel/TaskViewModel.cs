@@ -135,7 +135,6 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                //_user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
                 return _user;
             }
             set
