@@ -135,7 +135,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
+                //_user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
                 return _user;
             }
             set
@@ -216,7 +216,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _user.Username == LoginViewModel.LoggedUser.Username;
+                return this._task.IdTask != 0 && _user.Username == LoginViewModel.LoggedUser.Username;
             }
         }
 
@@ -359,7 +359,7 @@ namespace WpfDemo.ViewModel
 
         private void CreateTask()
         {
-            this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User_idUser);
+            this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._user.IdUser);
             MessageBox.Show(Resources.TaskCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             CreateTaskToList(this);
