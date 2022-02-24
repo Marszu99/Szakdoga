@@ -49,22 +49,6 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public string SearchTextMargin
-        {
-            get
-            {
-                if (TabcontrolViewModel.IsLanguageEnglish)
-                {
-                    return LoginViewModel.LoggedUser.Status == 0 ? "331.5 0 0 0" : "152.5 0 0 0"; //"468.7 0 0 0" : "290 0 0 0"
-                }
-                else
-                {
-                    return LoginViewModel.LoggedUser.Status == 0 ? "316 0 0 0" : "122 0 0 0"; //"438 0 0 0" : "244 0 0 0"
-                }
-            }
-        }
-
-
         public Visibility NewTaskButtonVisibility
         {
             get
@@ -297,7 +281,8 @@ namespace WpfDemo.ViewModel
 
                         var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks().Where(task => task.Title.Contains(_searchValue) 
                                     || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) 
-                                    || task.Status.ToString().Contains(_searchValue)).ToList();// task.User_Username.Contains(_searchValue)
+                                    || task.Status.ToString().Contains(_searchValue)
+                                    || new UserRepository(new UserLogic()).GetUserByID(task.User_idUser).Username.Contains(_searchValue)).ToList();
 
                         tasks.ForEach(task =>
                         {
@@ -312,7 +297,8 @@ namespace WpfDemo.ViewModel
 
                         var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task => task.Title.Contains(_searchValue) 
                                     || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) 
-                                    || task.Status.ToString().Contains(_searchValue)).ToList();// task.User_Username.Contains(_searchValue)
+                                    || task.Status.ToString().Contains(_searchValue)
+                                    || new UserRepository(new UserLogic()).GetUserByID(task.User_idUser).Username.Contains(_searchValue)).ToList();
                         tasks.ForEach(task =>
                         {
                             var taskViewModel = new TaskViewModel(task, UserList.ToList());

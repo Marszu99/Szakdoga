@@ -13,7 +13,7 @@ namespace WpfDemo.ViewModel
     public class TabcontrolViewModel : ViewModelBase
     {
         private TabcontrolView _view;
-        public static bool IsLanguageEnglish = true;
+        private bool _isLanguageEnglish = true;
 
 
         public string LoggedUserUsername
@@ -81,7 +81,7 @@ namespace WpfDemo.ViewModel
         }
         private void ChangeLanguage(object obj)
         {
-            if (IsLanguageEnglish)
+            if (_isLanguageEnglish)
             {
                 CultureInfo cultureInfo = new CultureInfo("hu-HU");
                 cultureInfo.DateTimeFormat.ShortDatePattern = "yyyy.MM.dd";
@@ -93,7 +93,7 @@ namespace WpfDemo.ViewModel
                 ResxStaticExtension.OnLanguageChanged();
                 //_view.Content = new TabcontrolView();
 
-                IsLanguageEnglish = false;
+                _isLanguageEnglish = false;
             }
             else
             {
@@ -107,7 +107,7 @@ namespace WpfDemo.ViewModel
                 ResxStaticExtension.OnLanguageChanged();
 
                 //_view.Content = new TabcontrolView();
-                IsLanguageEnglish = true;
+                _isLanguageEnglish = true;
             }
         }
         private void Logout(object obj)

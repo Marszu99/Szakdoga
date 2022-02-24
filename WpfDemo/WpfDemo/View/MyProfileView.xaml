@@ -210,7 +210,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Deadline}" Binding="{Binding Deadline}" Width="225">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Deadline}" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="105">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />
@@ -266,7 +266,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Deadline}" Binding="{Binding Deadline}" Width="225">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Deadline}" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="105">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium" />

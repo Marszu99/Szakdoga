@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0 5 0 5">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
 
                 <!--local:ResxStatic l10n:Resources.New,Binding NewString-->
                 <Button x:Name="NewTaskButton" Command="{Binding CreateTaskCommand}" Content="{local:ResxStatic l10n:Resources.New}" Grid.Column="0" Grid.Row="0"
@@ -74,18 +74,20 @@
                         <ScaleTransform ScaleX="1.8" ScaleY="1.8" />
                     </CheckBox.LayoutTransform>
                 </CheckBox>
+            </StackPanel>
 
-                <!--local:ResxStatic l10n:Resources.Search,Binding SearchString-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="{Binding SearchTextMargin}" VerticalAlignment="Center" 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <!--local:ResxStatic l10n:Resources.Search,Binding SearchString-->
+                    <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="0" VerticalAlignment="Center" 
                            HorizontalAlignment="Center" FontSize="20"/>
-                <TextBox x:Name="TaskSearchingText" Margin="5 0 0 0" Background="#eee" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBox x:Name="TaskSearchingText" Margin="5 0 0 0" Background="#eee" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
                          Width="165" FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
-                    <TextBox.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="4"/>
-                        </Style>
-                    </TextBox.Resources>
-                </TextBox>
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="4"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
             </StackPanel>
         </Grid>
         <view:ListTasksView x:Name="ListTasksContent" Grid.Row="1" Margin="10 0 0 0"/>

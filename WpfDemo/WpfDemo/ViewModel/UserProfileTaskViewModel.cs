@@ -286,6 +286,8 @@ namespace WpfDemo.ViewModel
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User_idUser);
             MessageBox.Show(Resources.TaskCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
+            //CreateTaskToList(this._task);
+
             if (this.CurrentUser.Username != LoginViewModel.LoggedUser.Username)
             {
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationNewTask", 0, this._task.IdTask);
@@ -293,6 +295,11 @@ namespace WpfDemo.ViewModel
             }
             RefreshValues();
         }
+        /*public event Action<Task> TaskCreated; NEM JOOOO!!!!
+        public void CreateTaskToList(Task task)
+        {
+            TaskCreated?.Invoke(task);
+        }*/
 
 
         private void UpdateTask()

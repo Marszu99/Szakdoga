@@ -19,21 +19,22 @@ namespace WpfDemo.ViewModel
         private User _currentUser;
         private Task _selectedTask;
 
-        private ObservableCollection<RecordViewModel> _recordList = new ObservableCollection<RecordViewModel>();
         private ObservableCollection<Task> _taskList = new ObservableCollection<Task>();
+        private ObservableCollection<RecordViewModel> _recordList = new ObservableCollection<RecordViewModel>();
 
-        public ObservableCollection<RecordViewModel> RecordList
-        {
-            get
-            {
-                return _recordList;
-            }
-        }
+
         public ObservableCollection<Task> TaskList
         {
             get
             {
                 return _taskList;
+            }
+        }
+        public ObservableCollection<RecordViewModel> RecordList
+        {
+            get
+            {
+                return _recordList;
             }
         }
 
@@ -114,8 +115,9 @@ namespace WpfDemo.ViewModel
                     {
                         var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUser.IdUser).Where(record => 
                                       record.Date.ToShortDateString().Contains(_searchRecordListValue) || record.Comment.Contains(_searchRecordListValue) 
-                                      || record.Duration.ToString().Contains(_searchRecordListValue)).ToList();
-                        //record.User_Username.Contains(_searchRecordListValue), record.Task_Title.Contains(_searchRecordListValue),record.Task_Status.ToString().Contains(_searchRecordListValue)
+                                      || record.Duration.ToString().Contains(_searchRecordListValue) 
+                                      || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchRecordListValue)
+                                      || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Status.ToString().Contains(_searchRecordListValue)).ToList();
 
                         records.ForEach(record =>
                         {
@@ -175,6 +177,8 @@ namespace WpfDemo.ViewModel
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.Deadline = DateTime.Today.AddDays(1);
                 //(Ipage.DataContext as UserProfileTaskViewModel).CurrentUser = CurrentUser;
                 Ipage.ShowDialog();
+                
+                //OnTaskCreated(SelectedTask);
             }
             else
             {
@@ -186,6 +190,13 @@ namespace WpfDemo.ViewModel
 
             LoadTasks(CurrentUser.IdUser);
         }
+        /*private void OnTaskCreated(Task task) NEEEEM JOOOO!!!!
+        {
+            TaskList.Add(task);
+            //SelectedTask = new UserProfileTaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) });
+            //SelectedTask.TaskCreated += OnTaskCreated;
+        }*/
+
 
         private bool CanDeleteTask(object arg)
         {

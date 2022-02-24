@@ -48,21 +48,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string SearchTextMargin
-        {
-            get
-            {
-                if (TabcontrolViewModel.IsLanguageEnglish)
-                {
-                    return "400 0 0 0";
-                }
-                else
-                {
-                    return "389 0 0 0";
-                }
-            }
-        }
-
         /*private DateTime _dateFrom = DateTime.Today;
         public DateTime DateFrom
         {
@@ -190,16 +175,14 @@ namespace WpfDemo.ViewModel
             RefreshRecordList(obj);
             LoadTasks();
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
-                TaskList
-                .Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
+                TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
             SelectedRecord.RecordCreated += OnRecordCreated;
         }
         private void OnRecordCreated(RecordViewModel recordViewModel)
         {
             RecordList.Add(recordViewModel);
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
-                TaskList
-                .Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
+                TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
             SelectedRecord.RecordCreated += OnRecordCreated;
         }
 
@@ -291,10 +274,11 @@ namespace WpfDemo.ViewModel
                     if (_view.ShowingMyRecordsCheckBox.IsChecked == true)
                     {
                         RecordList.Clear();
-
+                        
                         var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record => record.Date.ToShortDateString().Contains(_searchValue)
-                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue)).ToList();
-                        //record.User_Username.Contains(_searchValue),record.Task_Title.Contains(_searchValue) ,record.Task_Status.ToString().Contains(_searchValue)
+                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) 
+                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue)
+                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Status.ToString().Contains(_searchValue)).ToList();
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
@@ -307,8 +291,10 @@ namespace WpfDemo.ViewModel
                         RecordList.Clear();
 
                         var records = new RecordRepository(new RecordLogic()).GetAllRecords().Where(record => record.Date.ToShortDateString().Contains(_searchValue)
-                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue)).ToList();
-                        //record.User_Username.Contains(_searchValue),record.Task_Title.Contains(_searchValue) ,record.Task_Status.ToString().Contains(_searchValue)
+                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) 
+                                        || new UserRepository(new UserLogic()).GetUserByID(record.User_idUser).Username.Contains(_searchValue)
+                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue)
+                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Status.ToString().Contains(_searchValue)).ToList();
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
