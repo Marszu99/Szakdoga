@@ -13,17 +13,17 @@
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="45"/>
+                <RowDefinition Height="55"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="55"/>
             </Grid.RowDefinitions>
                         
             
-            <Border HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="DimGray" Background="DimGray" BorderThickness="2" Height="55">
+            <Border HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="DimGray" Background="DimGray" BorderThickness="2" Height="60">
                 <!--maradjon??-->
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10" Width="1550">
                     <Button x:Name="PreviousTabButton" Click="PreviousTabButton_Click" FontFamily="Marlett" Content="3" Grid.Column="0" Grid.Row="0" Width="50"
-                            Height="28" Margin="5 0 0 0" FontSize="30" BorderThickness="1" BorderBrush="Black">
+                            Height="32" Margin="5 10 0 0" FontSize="35" BorderThickness="1" BorderBrush="Black">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="4"/>
@@ -31,19 +31,18 @@
                         </Button.Resources>
                     </Button>
                     
-                    <Button x:Name="NextTabButton" Click="NextTabButton_Click" FontFamily="Marlett" Content="4" Grid.Column="0" Grid.Row="0" Width="50" Height="28"
-                            Margin="0 0 0 0" FontSize="30" BorderThickness="1" BorderBrush="Black">
+                    <Button x:Name="NextTabButton" Click="NextTabButton_Click" FontFamily="Marlett" Content="4" Grid.Column="0" Grid.Row="0" Width="50" Height="32"
+                            Margin="0 10 0 0" FontSize="35" BorderThickness="1" BorderBrush="Black">
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="4"/>
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <!--<TextBlock Text="Worktime Registry" Margin="550 0 0 0" VerticalAlignment="Top" FontSize="32" FontWeight="Bold" FontStyle="Italic"/>-->
                 </StackPanel>
             </Border>
 
-            <TextBlock Text="Worktime Registry" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="33" FontWeight="Bold" FontStyle="Italic"/>
+            <TextBlock Text="Worktime Registry" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" FontStyle="Italic"/>
 
             <!--<TextBlock Grid.Row="0" Text="{Binding CompanyName}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="38" Margin="1200 0 0 0"
                        FontSize="33" FontFamily="Times New Roman" Foreground="Black" Padding="0 0 0 0"/>-->
@@ -79,71 +78,129 @@
                     </Style>
                 </TabControl.Resources>
 
-                <!--local:ResxStatic l10n:Resources.Records,Binding RecordString-->
-                <TabItem Header="{local:ResxStatic l10n:Resources.Records}" x:Name="RecordTabItem">
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\record.png" VerticalAlignment="Center" Width="24"/>
+                            <TextBlock Text="{local:ResxStatic l10n:Resources.Records}" VerticalAlignment="Center" Margin="5, 0" FontSize="22"/>
+                        </StackPanel>
+                    </TabItem.Header>
                     <view:RecordManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
 
-                <!--local:ResxStatic l10n:Resources.Tasks,Binding TaskString-->
-                <TabItem Header="{local:ResxStatic l10n:Resources.Tasks}" x:Name="TaskTabItem">
+
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\tasks.png" VerticalAlignment="Center" Width="24"/>
+                            <TextBlock Text="{local:ResxStatic l10n:Resources.Tasks}" VerticalAlignment="Center" Margin="5, 0" FontSize="22"/>
+                        </StackPanel>
+                    </TabItem.Header>
                     <view:TaskManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
 
-                <!--local:ResxStatic l10n:Resources.Users,Binding UserString-->
-                <TabItem Header="{local:ResxStatic l10n:Resources.Users}" x:Name="UserTabItem">
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\users.png" VerticalAlignment="Center" Width="24"/>
+                            <TextBlock Text="{local:ResxStatic l10n:Resources.Users}" VerticalAlignment="Center" Margin="5, 0" FontSize="22"/>
+                        </StackPanel>
+                    </TabItem.Header>
                     <view:UserManagementView Grid.Row="1" Margin="0" FontWeight="Normal"/>
                 </TabItem>
             </TabControl>
-
-            <!--<StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Height="38" Width="200" Margin="0 0 120 0" Background="#FFCEC7C7">
-                <Border BorderBrush="#FF323131" BorderThickness="3">
-                    <Grid Grid.Row="1">
-                        <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\ProfileIcon.png" Height="32" Width="50" HorizontalAlignment="Left" Opacity="0.8"/>
-                        <TextBlock x:Name="LoginUsername1" Text="{Binding LoggedUserUsername}" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="24" Foreground="Black" Width="155" Padding="5 0 0 0">
-                            <TextBlock.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" Command="{Binding ShowMyProfileCommand}"/>
-                            </TextBlock.InputBindings>
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="PowderBlue"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                    </Grid>
-                </Border>
-            </StackPanel>-->
-            <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Height="40" Width="250" Margin="0 0 5 0" Background="#FFCEC7C7">
+            
+            
+            <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Height="45" Width="260" Margin="0 0 5 0" Background="#FFCEC7C7">
                 <Border BorderBrush="#FF323131" BorderThickness="3">
                     <Grid Grid.Row="1">
                         <Menu Background="#FFCEC7C7">
-                            <MenuItem Header="{Binding LoggedUserUsername}" FontSize="24" Foreground="Black" Width="205" Margin="40 0 0 0" Padding="5 0 0 0">
-                                <!--local:ResxStatic l10n:Resources.Profile,Binding ProfileString-->
-                                <!--local:ResxStatic l10n:Resources.Language,Binding LanuageString-->
-                                <!--local:ResxStatic l10n:Resources.Logout,Binding LogoutString-->
-                                <MenuItem Header="{local:ResxStatic l10n:Resources.Profile}" Command="{Binding ShowMyProfileCommand}"/>
+                            <MenuItem Header="{Binding LoggedUserUsername}" FontSize="28" Foreground="Black" Width="206" Margin="48 0 0 0" Padding="5 0 0 0">
+                                <MenuItem Header="{local:ResxStatic l10n:Resources.Profile}" Command="{Binding ShowMyProfileCommand}">
+                                    <MenuItem.Icon>
+                                        <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\editProfile.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
                                 <MenuItem Header="{local:ResxStatic l10n:Resources.Language}" Command="{Binding ChangeLanguageCommand}"/>
-                                <MenuItem Header="{local:ResxStatic l10n:Resources.Logout}" Command="{Binding LogoutCommand}"/>
+
+                                <MenuItem Header="{local:ResxStatic l10n:Resources.Logout}" Command="{Binding LogoutCommand}">
+                                    <MenuItem.Icon>
+                                        <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\logout.png"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+
+                                <!--<MenuItem Command="{Binding ChangeLanguageCommand}>
+                                    <ToggleButton Content="ASD" Style="{StaticResource ToggleButtonStyle1}">
+                                        <ToggleButton.Resources>
+                                            <Style x:Key="ButtonFocusVisual">
+                                                <Setter Property="Control.Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate>
+                                                            <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                                                   StrokeThickness="1" StrokeDashArray="1 2"/>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                            <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+                                                <GradientStop Color="#F3F3F3" Offset="0"/>
+                                                <GradientStop Color="#EBEBEB" Offset="0.5"/>
+                                                <GradientStop Color="#DDDDDD" Offset="0.5"/>
+                                                <GradientStop Color="#CDCDCD" Offset="1"/>
+                                            </LinearGradientBrush>
+                                            <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+                                            <Style x:Key="ToggleButtonStyle1" TargetType="{x:Type ToggleButton}">
+                                                <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+                                                <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+                                                <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+                                                <Setter Property="BorderThickness" Value="1"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                                <Setter Property="Padding" Value="1"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}"
+                                                                              RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                                <Border x:Name="on" Width="25" Height="25" Background="LightGray" CornerRadius="2,0,0,4" Margin="10,0,0,0">
+                                                                    <TextBlock x:Name="onText" Text="On" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                                <Border x:Name="off" Width="25" Height="25" Background="LightGray" CornerRadius="0,2,4,0">
+                                                                    <TextBlock x:Name="offText" Text="Off" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </StackPanel>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsEnabled" Value="false">
+                                                                    <Setter Property="Foreground" Value="#ADADAD"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsChecked" Value="true">
+                                                                    <Setter TargetName="on" Property="Background" Value="LightBlue"/>
+                                                                    <Setter TargetName="onText" Property="Foreground" Value="White"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsChecked" Value="False">
+                                                                    <Setter TargetName="off" Property="Background" Value="LightBlue"/>
+                                                                    <Setter TargetName="offText" Property="Foreground" Value="White"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Resources>
+                                    </ToggleButton>
+                                </MenuItem>-->
                             </MenuItem>
                         </Menu>
-                        <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\ProfileIcon.png" Height="32" Width="50" 
-                               HorizontalAlignment="Left" Opacity="0.8"/>
+                        <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\ProfileIcon.png" Height="39" Width="48" 
+                               HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="0.8"/>
                     </Grid>
                 </Border>
             </StackPanel>
 
-            <!--<Button Grid.Row="1" x:Name="LogoutButton" Command="{Binding LogoutCommand}" Content="{Binding LogoutString}" HorizontalAlignment="Right" VerticalAlignment="Top" Height="38" Width="90"
-                    FontSize="24" Margin="0 0 15 0" Padding="1.5" BorderThickness="1" BorderBrush="Black">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </Button.Resources>
-            </Button>-->
-                     
 
             <Grid Grid.Row="2"  Background="DarkGray">
                 <Expander ExpandDirection="Up" IsExpanded="False" Margin="5 0 0 0">

@@ -22,7 +22,6 @@
 
         <Grid Grid.Row="0" Margin="0 5 0 5">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <!--local:ResxStatic l10n:Resources.New,Binding NewString-->
                 <Button x:Name="NewUserButton" Command="{Binding CreateUserCommand}" Content="{local:ResxStatic l10n:Resources.New}" Grid.Column="0" Grid.Row="0"
                         Width="60" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black" 
                         Visibility="{Binding UserManagementButtonsVisibility}">
@@ -33,7 +32,6 @@
                     </Button.Resources>
                 </Button>
 
-                <!--local:ResxStatic l10n:Resources.Refresh,Binding RefreshString-->
                 <Button x:Name="RefreshListUsersButton" Command="{Binding RefreshUserListCommand}" Content="{local:ResxStatic l10n:Resources.Refresh}" 
                         Grid.Column="0" Grid.Row="0" Width="65" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black"
                         Visibility="{Binding UserManagementButtonsVisibility}">
@@ -46,7 +44,6 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <!--local:ResxStatic l10n:Resources.Search,Binding SearchString-->
                 <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="0" VerticalAlignment="Center"
                            HorizontalAlignment="Center" FontSize="20"/>
                 <TextBox x:Name="UserSearchingText" Margin="5 0 0 0" Background="#eee" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"

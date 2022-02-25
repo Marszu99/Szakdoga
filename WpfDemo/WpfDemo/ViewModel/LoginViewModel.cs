@@ -116,27 +116,5 @@ namespace WpfDemo.ViewModel
         {
             _view.LoginUserErrorMessage.Text = "";
         }
-
-        public string UsernameString
-        {
-            get
-            {
-                return Resources.Username;
-            }
-        }
-        public string PasswordString
-        {
-            get
-            {
-                return Resources.Password;
-            }
-        }
-        public string LoginString
-        {
-            get
-            {
-                return Resources.Login;
-            }
-        }
     }
 }

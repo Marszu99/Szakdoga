@@ -23,10 +23,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--local:ResxStatic l10n:Resources.Task,Binding SelectedRecord.TaskString-->
-        <!--local:ResxStatic l10n:Resources.Date,Binding SelectedRecord.DateString-->
-        <!--local:ResxStatic l10n:Resources.Duration,Binding SelectedRecord.DurationString-->
-        <!--local:ResxStatic l10n:Resources.Comment,Binding SelectedRecord.CommentString-->
         <TextBlock Text="{local:ResxStatic l10n:Resources.Task}" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right"
                    VerticalAlignment="Center" Margin="0 0 15 0" FontSize="30"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Date}" Grid.Column="0" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Right" 
@@ -51,11 +47,6 @@
                     SelectedDateFormat="Short" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Height="41" FontSize="26" 
                     IsHitTestVisible="{Binding SelectedRecord.IsRecordViewDateHitTestVisible}"
                     ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Date]}">
-            <!--<DatePicker.Resources>
-                <Style TargetType="DatePickerTextBox">
-                    <Setter Property="IsReadOnly" Value="{Binding IsRecordViewValuesReadOnly}"/>
-                </Style>
-            </DatePicker.Resources>-->
         </DatePicker>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
@@ -100,7 +91,6 @@
             </TextBox.Resources>
         </TextBox>
 
-        <!--local:ResxStatic l10n:Resources.Save,Binding SelectedRecord.SaveString-->
         <Button x:Name="CreateRecordButton" Command="{Binding SelectedRecord.SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" Grid.Column="1"
                 Grid.Row="4" Height="45" Width="70" Margin="0, 0, 160, 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black"
                 Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">

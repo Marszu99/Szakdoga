@@ -194,56 +194,5 @@ namespace WpfDemo.ViewModel
             (Ipage.DataContext as UserProfileViewModel).CurrentUser = SelectedUser.User;
             Ipage.ShowDialog();
         }
-
-
-        public string NewString
-        {
-            get
-            {
-                return Resources.New;
-            }
-        }
-        public string RefreshString
-        {
-            get
-            {
-                return Resources.Refresh;
-            }
-        }
-        public string SearchString
-        {
-            get
-            {
-                return Resources.Search;
-            }
-        }
-        public string DeleteString
-        {
-            get
-            {
-                return Resources.Delete;
-            }
-        }
-        public string UsernameString
-        {
-            get
-            {
-                return Resources.Username;
-            }
-        }
-        public string FirstNameString
-        {
-            get
-            {
-                return Resources.FirstName;
-            }
-        }
-        public string LastNameString
-        {
-            get
-            {
-                return Resources.LastName;
-            }
-        }
     }
 }

@@ -24,11 +24,9 @@
             <TextBlock Grid.Row="0" Grid.Column="1" Text="Worktime Registry" FontSize="72" FontWeight="SemiBold" FontStyle="Italic" HorizontalAlignment="left"
                        VerticalAlignment="Top" Margin="0 85 0 0"/>
 
-            <!--local:ResxStatic l10n:Resources.Username,Binding UsernameString-->
             <TextBlock Text="{local:ResxStatic l10n:Resources.Username}" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right"
                        VerticalAlignment="Bottom" Margin="0 0 0 30"
                        FontSize="55"/>
-            <!--local:ResxStatic l10n:Resources.Password,Binding PasswordString-->
             <TextBlock Text="{local:ResxStatic l10n:Resources.Password}" Grid.Column="0" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Right"
                        VerticalAlignment="Top" Margin="0 15 0 0" FontSize="55"/>
 
@@ -53,7 +51,6 @@
                      <Hyperlink x:Name="RegisterButton" Command="{Binding ShowRegisterCommand}" FontSize="35" FontStyle="Normal" Foreground="Blue">Register</Hyperlink>
                 </TextBlock>-->
 
-            <!--local:ResxStatic l10n:Resources.Login,Binding LoginString-->
             <Button Grid.Row="1" Grid.Column="1" x:Name="LoginButton" Command="{Binding LoginCommand}" Content="{local:ResxStatic l10n:Resources.Login}" 
                     Height="65" FontSize="40" Margin="20 0 0 75" Padding="5" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black">
                 <Button.Resources>

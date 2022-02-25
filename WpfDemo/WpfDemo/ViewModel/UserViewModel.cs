@@ -344,49 +344,5 @@ namespace WpfDemo.ViewModel
         {
             CancelUser(obj);
         }
-
-
-        public string UsernameString
-        {
-            get
-            {
-                return Resources.Username;
-            }
-        }
-        public string FirstNameString
-        {
-            get
-            {
-                return Resources.FirstName;
-            }
-        }
-        public string LastNameString
-        {
-            get
-            {
-                return Resources.LastName;
-            }
-        }
-        public string EmailString
-        {
-            get
-            {
-                return Resources.Email;
-            }
-        }
-        public string TelephoneString
-        {
-            get
-            {
-                return Resources.Telephone;
-            }
-        }
-        public string SaveString
-        {
-            get
-            {
-                return Resources.Save;
-            }
-        }
     }
 }

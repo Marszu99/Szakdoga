@@ -360,55 +360,5 @@ namespace WpfDemo.ViewModel
         {
             CancelRecord(obj);
         }
-
-        public string TaskString
-        {
-            get
-            {
-                return Resources.Task;
-            }
-        }
-        public string UserString
-        {
-            get
-            {
-                return Resources.User;
-            }
-        }
-        public string DateString
-        {
-            get
-            {
-                return Resources.Date;
-            }
-        }
-        public string CommentString
-        {
-            get
-            {
-                return Resources.Comment;
-            }
-        }
-        public string DurationString
-        {
-            get
-            {
-                return Resources.Duration;
-            }
-        }
-        public string StatusString
-        {
-            get
-            {
-                return Resources.Status;
-            }
-        }
-        public string SaveString
-        {
-            get
-            {
-                return Resources.Save;
-            }
-        }
     }
 }

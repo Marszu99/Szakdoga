@@ -24,11 +24,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--local:ResxStatic l10n:Resources.User,Binding UserString-->
-        <!--local:ResxStatic l10n:Resources.Title,Binding TitleString-->
-        <!--local:ResxStatic l10n:Resources.Description,Binding DescriptionString-->
-        <!--local:ResxStatic l10n:Resources.Deadline,Binding DeadlineString-->
-        <!--local:ResxStatic l10n:Resources.Status,Binding StatusString-->
+
         <TextBlock Text="{local:ResxStatic l10n:Resources.User}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
                    VerticalAlignment="Center" Margin="0 0 10 0" FontSize="30"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Title}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right"
@@ -83,7 +79,6 @@
                   ToolTipService.ToolTip="{Binding ErrorCollection[Status]}">
         </ComboBox>
 
-        <!--local:ResxStatic l10n:Resources.Save,Binding SaveString-->
         <Button x:Name="SaveTaskToUserButton" Command="{Binding SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" Grid.Column="1" Grid.Row="5" 
                 Height="45" Width="70" HorizontalAlignment="Left" Margin="0 0 0 0" Padding="4" FontSize="26" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>
@@ -93,7 +88,6 @@
             </Button.Resources>
         </Button>
 
-        <!--local:ResxStatic l10n:Resources.Cancel,Binding CancelString-->
         <Button x:Name="BackToListButton" Command="{Binding ExitWindowCommand}" Content="{local:ResxStatic l10n:Resources.Cancel}" Grid.Column="1" Grid.Row="5"
                 Height="45" Width="85" Margin="0 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
             <Button.Resources>

@@ -17,16 +17,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!--local:ResxStatic l10n:Resources.MyProfile,Binding MyProfileString-->
         <TextBlock Grid.Column="0" Text="{local:ResxStatic l10n:Resources.MyProfile}" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" 
                    HorizontalAlignment="Center" Margin="100 40 280 0" Width="250" Height="65"/>
 
-        <!--local:ResxStatic l10n:Resources.UsernameWithColon,Binding UsernameString-->
-        <!--local:ResxStatic l10n:Resources.PasswordWithColon,Binding PasswordString-->
-        <!--local:ResxStatic l10n:Resources.FirstNameWithColon,Binding FirstNameString-->
-        <!--local:ResxStatic l10n:Resources.LastNameWithColon,Binding LastNameString-->
-        <!--local:ResxStatic l10n:Resources.EmailWithColon,Binding EmailString-->
-        <!--local:ResxStatic l10n:Resources.TelephoneWithColon,Binding TelephoneString-->
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="250" Margin="20 100 0 200">
             <TextBlock Text="{local:ResxStatic l10n:Resources.UsernameWithColon}" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center"
                        Margin="0 40 0 0" FontSize="34"/>
@@ -121,7 +114,6 @@
             </TextBox>
         </StackPanel>
 
-        <!--local:ResxStatic l10n:Resources.Change,Binding ChangeString-->
         <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Change}" x:Name="ChangeUserValuesButton" Command="{Binding ChangeUserValuesCommand}" 
                 Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 300 150" Padding="4" BorderThickness="1" 
                 BorderBrush="Black">
@@ -132,7 +124,6 @@
             </Button.Resources>
         </Button>
 
-        <!--local:ResxStatic l10n:Resources.Save,Binding SaveString-->
         <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Save}" x:Name="SaveChangedUserValuesButton" Command="{Binding SaveChangedUserValuesCommand}"
                 Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 425 150" Padding="5" Visibility="Hidden"
                 BorderThickness="1" BorderBrush="Black">
@@ -143,7 +134,6 @@
             </Button.Resources>
         </Button>
 
-        <!--local:ResxStatic l10n:Resources.Cancel,Binding CancelString-->
         <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Cancel}" x:Name="CancelChangeUserValuesButton" Command="{Binding CancelChangeUserValuesCommand}"
                 Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 200 150" Padding="4" Visibility="Hidden" 
                 BorderThickness="1" BorderBrush="Black">
@@ -164,9 +154,12 @@
             <!--<FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
             ResourceStringekhez kell-->
 
-            <!--local:ResxStatic l10n:Resources.ToDoTasks,Binding ToDoTasksString-->
-            <TextBlock Text="{local:ResxStatic l10n:Resources.ToDoTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"
-                       Margin="5 30 0 0" Height="40"/>
+            <!--<TextBlock Text="{local:ResxStatic l10n:Resources.ToDoTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"
+                       Margin="5 30 0 0" Height="40"/>-->
+            <StackPanel Orientation="Horizontal" Margin="5 30 0 0">
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\to-do-list.png" VerticalAlignment="Top" Margin="0 5 0 0" Width="35"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.ToDoTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" Margin="2 0 0 0" Height="40"/>
+            </StackPanel>
 
             <DataGrid  x:Name="UserToDoTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyToDoTaskList}" Margin="0 70 0 20" HorizontalAlignment="Left"
                        Width="700" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" ScrollViewer.CanContentScroll="True" 
@@ -220,9 +213,12 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <!--local:ResxStatic l10n:Resources.DoneTasks,Binding DoneTasksString-->
-            <TextBlock Grid.Row="1" Text="{local:ResxStatic l10n:Resources.DoneTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top"
-                       HorizontalAlignment="Left" Margin="5 10 0 0" Height="40"/>
+            <!--<TextBlock  Text="{local:ResxStatic l10n:Resources.DoneTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top"
+                       HorizontalAlignment="Left" Margin="5 10 0 0" Height="40"/>-->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5 10 0 0">
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\record.png" VerticalAlignment="Top" Margin="0 5 0 0" Width="35"/>
+                <TextBlock Text="{local:ResxStatic l10n:Resources.DoneTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" Margin="2 0 0 0" Height="40"/>
+            </StackPanel>
 
             <DataGrid  x:Name="UserDoneTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyDoneTaskList}" Margin="0 50 0 20" HorizontalAlignment="Left"
                        Width="700" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" ScrollViewer.CanContentScroll="True" 

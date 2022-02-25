@@ -377,56 +377,5 @@ namespace WpfDemo.ViewModel
             this.Description = "";
             this.Deadline = DateTime.Today.AddDays(1);
         }
-
-
-        public string TitleString
-        {
-            get
-            {
-                return Resources.Title;
-            }
-        }
-        public string UserString
-        {
-            get
-            {
-                return Resources.User;
-            }
-        }
-        public string DescriptionString
-        {
-            get
-            {
-                return Resources.Description;
-            }
-        }
-        public string DeadlineString
-        {
-            get
-            {
-                return Resources.Deadline;
-            }
-        }
-        public string StatusString
-        {
-            get
-            {
-                return Resources.Status;
-            }
-        }
-        public string SaveString
-        {
-            get
-            {
-                return Resources.Save;
-            }
-        }
-        public string CancelString
-        {
-            get
-            {
-                return Resources.Cancel;
-            }
-        }
     }
 }

@@ -118,48 +118,5 @@ namespace WpfDemo.ViewModel
                 _view.TabcontrolWindowContent.Content = new LoginView();
             }
         }
-
-        public string ProfileString
-        {
-            get
-            {
-                return Resources.Profile;
-            }
-        }
-        public string LanuageString
-        {
-            get
-            {
-                return Resources.Language;
-            }
-        }
-        public string LogoutString
-        {
-            get
-            {
-                return Resources.Logout;
-            }
-        }
-        public string RecordsString
-        {
-            get
-            {
-                return Resources.Records;
-            }
-        }
-        public string TasksString
-        {
-            get
-            {
-                return Resources.Tasks;
-            }
-        }
-        public string UsersString
-        {
-            get
-            {
-                return Resources.Users;
-            }
-        }
     }
 }

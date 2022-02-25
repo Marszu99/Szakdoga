@@ -31,7 +31,6 @@
 
                     <DataGrid.ContextMenu>
                         <ContextMenu Visibility="{Binding ListTasksViewContextMenuVisibility}">
-                            <!--local:ResxStatic l10n:Resources.Delete,Binding DeleteString-->
                             <MenuItem Header="{local:ResxStatic l10n:Resources.Delete}" Command="{Binding DeleteCommand}"/>
                         </ContextMenu>
                     </DataGrid.ContextMenu>

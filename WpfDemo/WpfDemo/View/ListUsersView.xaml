@@ -25,14 +25,12 @@
                           Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="18">
 
                     <DataGrid.InputBindings>
-                        <!--<MouseBinding MouseAction="LeftClick" Command="{Binding SelectUpdateUserCommand}"/>-->
                         <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding ShowUserProfilCommand}"/>
                         <KeyBinding Key="Delete"  Command="{Binding DeleteCommand}"/>
                     </DataGrid.InputBindings>
 
                     <DataGrid.ContextMenu>
                         <ContextMenu Visibility="{Binding ListUsersViewContextMenuVisibility}">
-                            <!--local:ResxStatic l10n:Resources.Delete,Binding DeleteString-->
                             <MenuItem Header="{local:ResxStatic l10n:Resources.Delete}" Command="{Binding DeleteCommand}"/>
                         </ContextMenu>
                     </DataGrid.ContextMenu>
