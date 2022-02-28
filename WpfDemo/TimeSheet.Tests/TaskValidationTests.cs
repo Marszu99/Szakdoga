@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using System;
 using TimeSheet.Model.Extension;
+using TimeSheet.Resource;
+
 
 namespace TimeSheet.Tests
 {
@@ -16,7 +18,7 @@ namespace TimeSheet.Tests
         {
             string result = TaskValidationHelper.ValidateTitle(title);
 
-            Assert.That(result, Is.EqualTo("Title is empty!"));
+            Assert.That(result, Is.EqualTo(Resources.TitleIsEmpty));
         }
 
         [Test]
@@ -25,7 +27,7 @@ namespace TimeSheet.Tests
         {
             string result = TaskValidationHelper.ValidateTitle(title);
 
-            Assert.That(result, Is.EqualTo("Title can't be more than 45 characters!"));
+            Assert.That(result, Is.EqualTo(Resources.TitleWrongLength));
         }
 
         [Test]
@@ -43,7 +45,7 @@ namespace TimeSheet.Tests
         {
             string result = TaskValidationHelper.ValidateDeadline(deadline);
 
-            Assert.That(result, Is.EqualTo("Deadline is empty!"));
+            Assert.That(result, Is.EqualTo(Resources.DeadlineIsEmpty));
         }
 
         [Test]
@@ -51,7 +53,7 @@ namespace TimeSheet.Tests
         {
             string result = TaskValidationHelper.ValidateDeadline(DateTime.Today.AddDays(-14));
 
-            Assert.That(result, Is.EqualTo("Deadline has to be atleast more than 24 hours away from the current time!"));
+            Assert.That(result, Is.EqualTo(Resources.DeadlineMoreThan24Hours));
         }
 
         [Test]
@@ -59,7 +61,7 @@ namespace TimeSheet.Tests
         {
             string result = TaskValidationHelper.ValidateDeadline(DateTime.Today);
 
-            Assert.That(result, Is.EqualTo("Deadline has to be atleast more than 24 hours away from the current time!"));
+            Assert.That(result, Is.EqualTo(Resources.DeadlineMoreThan24Hours));
         }
 
         [Test]

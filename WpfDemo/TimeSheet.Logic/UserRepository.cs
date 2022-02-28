@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TimeSheet.DataAccess;
 using TimeSheet.Model;
 using TimeSheet.Model.Extension;
+using TimeSheet.Resource;
 
 namespace TimeSheet.Logic
 {
@@ -81,7 +82,7 @@ namespace TimeSheet.Logic
             {
                 if (user.Username == _user.Username)
                 {
-                    throw new UserValidationException(user.Username + " already exists!");
+                    throw new UserValidationException(user.Username + Resources.UsernameAlreadyExists);
                 }
             }
 
@@ -140,11 +141,11 @@ namespace TimeSheet.Logic
         {
             if (string.IsNullOrWhiteSpace(username))
             {
-                throw new LoginException("Username is empty!");
+                throw new LoginException(Resources.UsernameIsEmpty);
             }
             if (string.IsNullOrWhiteSpace(password))
             {
-                throw new LoginException("Password is empty!");
+                throw new LoginException(Resources.PasswordIsEmpty);
             }
 
             return _userLogic.IsValidLogin(username, password);

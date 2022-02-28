@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using TimeSheet.Model.Extension;
+using TimeSheet.Resource;
 
 
 namespace TimeSheet.Tests
@@ -15,7 +16,7 @@ namespace TimeSheet.Tests
             DateTime TaskCreationDate = DateTime.Today.AddYears(-1);
             string result = RecordValidationHelper.ValidateDate(date, TaskCreationDate);
 
-            Assert.That(result, Is.EqualTo("Date is empty!"));
+            Assert.That(result, Is.EqualTo(Resources.DateIsEmpty));
         }
 
         [Test]
@@ -25,7 +26,7 @@ namespace TimeSheet.Tests
 
             string result = RecordValidationHelper.ValidateDate(DateTime.Today.AddDays(1), TaskCreationDate);
 
-            Assert.That(result, Is.EqualTo("Record's date can't be in the future!"));
+            Assert.That(result, Is.EqualTo(Resources.DateCantBeInFuture));
         }
 
         [Test]
@@ -35,7 +36,7 @@ namespace TimeSheet.Tests
 
             string result = RecordValidationHelper.ValidateDate(DateTime.Today, TaskCreationDate);
 
-            Assert.That(result, Is.EqualTo("Record's date can't be earlier than the date when the task was created!"));
+            Assert.That(result, Is.EqualTo(Resources.DateCantBePastTheTaskCreationDate));
         }
 
         [Test]
@@ -54,7 +55,7 @@ namespace TimeSheet.Tests
         {
             string result = RecordValidationHelper.ValidateDuration(duration);
 
-            Assert.That(result, Is.EqualTo("Duration can't be lower than 0!"));
+            Assert.That(result, Is.EqualTo(Resources.DurationCantBeLowerZero));
         }
 
         [Test]
@@ -72,7 +73,7 @@ namespace TimeSheet.Tests
         {
             string result = RecordValidationHelper.ValidateDuration(duration);
 
-            Assert.That(result, Is.EqualTo("Duration can't be higher than 12 hours!"));
+            Assert.That(result, Is.EqualTo(Resources.DurationCantBeHigher12Hours));
         }
 
         [Test]

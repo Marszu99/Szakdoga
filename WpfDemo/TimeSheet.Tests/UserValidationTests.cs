@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using TimeSheet.Model.Extension;
+using TimeSheet.Resource;
 
 
 namespace TimeSheet.Tests
@@ -17,7 +18,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateUserName(username);
 
-            Assert.That(result, Is.EqualTo("Username is empty!"));
+            Assert.That(result, Is.EqualTo(Resources.UsernameIsEmpty));
         }
 
         [Test]
@@ -26,7 +27,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateUserName(username);
 
-            Assert.That(result, Is.EqualTo("Username have to reach minimum 6 characters and also can't be more than 45!"));
+            Assert.That(result, Is.EqualTo(Resources.UsernameWrongLength));
         }
 
         [Test]
@@ -35,7 +36,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateUserName(username);
 
-            Assert.That(result, Is.EqualTo("Username have to reach minimum 6 characters and also can't be more than 45!"));
+            Assert.That(result, Is.EqualTo(Resources.UsernameWrongLength));
         }
 
         [Test]
@@ -54,7 +55,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateUserName(username);
 
-            Assert.That(result, Is.EqualTo("Username needs to be one word!"));
+            Assert.That(result, Is.EqualTo(Resources.UsernameOneWord));
         }
 
         [Test]
@@ -75,7 +76,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidatePassword(password);
 
-            Assert.That(result, Is.EqualTo("Password is empty!"));
+            Assert.That(result, Is.EqualTo(Resources.PasswordIsEmpty));
         }
 
         [Test]
@@ -84,7 +85,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidatePassword(password);
 
-            Assert.That(result, Is.EqualTo("Password have to reach minimum 6 characters and also can't be more than 45!"));
+            Assert.That(result, Is.EqualTo(Resources.PasswordWrongLength));
         }
 
         [Test]
@@ -93,7 +94,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidatePassword(password);
 
-            Assert.That(result, Is.EqualTo("Password have to reach minimum 6 characters and also can't be more than 45!"));
+            Assert.That(result, Is.EqualTo(Resources.PasswordWrongLength));
         }
 
         [Test]
@@ -112,7 +113,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidatePassword(password);
 
-            Assert.That(result, Is.EqualTo("Password needs to be one word!"));
+            Assert.That(result, Is.EqualTo(Resources.PasswordOneWord));
         }
 
         [Test]
@@ -133,7 +134,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateFirstName(firstname);
 
-            Assert.That(result, Is.EqualTo("FirstName is empty!"));
+            Assert.That(result, Is.EqualTo(Resources.FirstNameIsEmpty));
         }
 
         [Test]
@@ -142,7 +143,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateFirstName(firstname);
 
-            Assert.That(result, Is.EqualTo("FirstName have to reach minimum 3 characters and also can't be more than 45!"));
+            Assert.That(result, Is.EqualTo(Resources.FirstNameWrongLength));
         }
 
         [Test]
@@ -151,7 +152,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateFirstName(firstname);
 
-            Assert.That(result, Is.EqualTo("FirstName have to reach minimum 3 characters and also can't be more than 45!"));
+            Assert.That(result, Is.EqualTo(Resources.FirstNameWrongLength));
         }
 
         [Test]
@@ -173,7 +174,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateFirstName(firstname);
 
-            Assert.That(result, Is.EqualTo("FirstName needs to be one word that contains only letters of the alphabet!"));
+            Assert.That(result, Is.EqualTo(Resources.FirstNameNoNumbers));
         }
 
         [Test]
@@ -194,7 +195,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateLastName(lastname);
 
-            Assert.That(result, Is.EqualTo("LastName is empty!"));
+            Assert.That(result, Is.EqualTo(Resources.LastNameIsEmpty));
         }
 
         [Test]
@@ -203,7 +204,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateLastName(lastname);
 
-            Assert.That(result, Is.EqualTo("LastName have to reach minimum 3 characters and also can't be more than 45!"));
+            Assert.That(result, Is.EqualTo(Resources.LastNameWrongLength));
         }
 
         [Test]
@@ -212,7 +213,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateLastName(lastname);
 
-            Assert.That(result, Is.EqualTo("LastName have to reach minimum 3 characters and also can't be more than 45!"));
+            Assert.That(result, Is.EqualTo(Resources.LastNameWrongLength));
         }
 
         [Test]
@@ -234,7 +235,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateLastName(lastname);
 
-            Assert.That(result, Is.EqualTo("LastName needs to be one word that contains only letters of the alphabet!"));
+            Assert.That(result, Is.EqualTo(Resources.LastNameNoNumbers));
         }
 
         [Test]
@@ -255,7 +256,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateEmail(email);
 
-            Assert.That(result, Is.EqualTo("Email is empty!"));
+            Assert.That(result, Is.EqualTo(Resources.EmailIsEmpty));
         }
 
         [Test]
@@ -264,7 +265,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateEmail(email);
 
-            Assert.That(result, Is.EqualTo("Email have to reach minimum 11 characters and also can't be more than 100!"));
+            Assert.That(result, Is.EqualTo(Resources.EmailWrongLength));
         }
 
         [Test]
@@ -273,7 +274,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateEmail(email);
 
-            Assert.That(result, Is.EqualTo("Email have to reach minimum 11 characters and also can't be more than 100!"));
+            Assert.That(result, Is.EqualTo(Resources.EmailWrongLength));
         }
 
         [Test]
@@ -295,7 +296,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateEmail(email);
 
-            Assert.That(result, Is.EqualTo("Invalid email!"));
+            Assert.That(result, Is.EqualTo(Resources.EmailIsInvalid));
         }
 
         [Test]
@@ -307,25 +308,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateTelephone(telephone);
 
-            Assert.That(result, Is.EqualTo("Telephone is empty!"));
-        }
-
-        [Test]
-        [TestCase("12")]
-        public void ValidateTelephone_WhenTelephoneIsLessTahn10Characters_ReturnsErrorsString(string telephone)
-        {
-            string result = UserValidationHelper.ValidateTelephone(telephone);
-
-            Assert.That(result, Is.EqualTo("Telephone number needs to be greater than 10 and less than 14!"));
-        }
-
-        [Test]
-        [TestCase("1234567891011121314")]
-        public void ValidateTelephone_WhenTelephoneIsGreaterThan14Characters_ReturnsErrorsString(string telephone)
-        {
-            string result = UserValidationHelper.ValidateTelephone(telephone);
-
-            Assert.That(result, Is.EqualTo("Telephone number needs to be greater than 10 and less than 14!"));
+            Assert.That(result, Is.EqualTo(Resources.TelephoneIsEmpty));
         }
 
         [Test]
@@ -348,7 +331,7 @@ namespace TimeSheet.Tests
         {
             string result = UserValidationHelper.ValidateTelephone(telephone);
 
-            Assert.That(result, Is.EqualTo("Invalid telephone number!"));
+            Assert.That(result, Is.EqualTo(Resources.TelephoneIsInvalid));
         }
 
         [Test]
