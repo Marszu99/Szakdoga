@@ -331,6 +331,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string English {
+            get {
+                return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to FirstName.
         /// </summary>
         public static string FirstName {
@@ -372,6 +381,15 @@ namespace TimeSheet.Resource {
         public static string FirstNameWrongLength {
             get {
                 return ResourceManager.GetString("FirstNameWrongLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hungary.
+        /// </summary>
+        public static string Hungary {
+            get {
+                return ResourceManager.GetString("Hungary", resourceCulture);
             }
         }
         

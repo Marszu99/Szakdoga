@@ -207,6 +207,9 @@
   <data name="EmailWrongLength" xml:space="preserve">
     <value>Email legalább 11 és legfeljebb 100 karakter lehet!</value>
   </data>
+  <data name="English" xml:space="preserve">
+    <value>Angol</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>Keresztnév</value>
   </data>
@@ -221,6 +224,9 @@
   </data>
   <data name="FirstNameWrongLength" xml:space="preserve">
     <value>Keresztnév legalább 3 és legfeljebb 45 karakter lehet!</value>
+  </data>
+  <data name="Hungary" xml:space="preserve">
+    <value>Magyar</value>
   </data>
   <data name="Information" xml:space="preserve">
     <value>Információ</value>

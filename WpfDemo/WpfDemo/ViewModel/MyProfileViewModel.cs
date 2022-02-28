@@ -295,6 +295,14 @@ namespace WpfDemo.ViewModel
             //_IRevertibleChangeTracking.RejectChanges();
             //_IEditableObject.CancelEdit();
 
+            User CurrentLoggedUserValues = new UserRepository(new UserLogic()).GetUserByID(CurrentLoggedUser.IdUser);
+            CurrentLoggedUser.Password = CurrentLoggedUserValues.Password;
+            CurrentLoggedUser.FirstName = CurrentLoggedUserValues.FirstName;
+            CurrentLoggedUser.LastName = CurrentLoggedUserValues.LastName;
+            CurrentLoggedUser.Email = CurrentLoggedUserValues.Email;
+            CurrentLoggedUser.Telephone = CurrentLoggedUserValues.Telephone;
+            OnPropertyChanged(nameof(CurrentLoggedUser));
+
             //_view.MyProfilePassword.IsReadOnly = true;
             _view.MyProfilePassword.IsEnabled = false;
 

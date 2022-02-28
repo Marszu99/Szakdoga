@@ -30,7 +30,11 @@
 
                     <DataGrid.ContextMenu>
                         <ContextMenu Visibility="{Binding ListRecordsViewContextMenuVisibility}">
-                            <MenuItem Header="{local:ResxStatic l10n:Resources.Delete}" Command="{Binding DeleteCommand}"/>
+                            <MenuItem Header="{local:ResxStatic l10n:Resources.Delete}" Command="{Binding DeleteCommand}">
+                                <MenuItem.Icon>
+                                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\x.png"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </ContextMenu>
                     </DataGrid.ContextMenu>
 
