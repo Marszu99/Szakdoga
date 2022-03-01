@@ -13,7 +13,7 @@
 
     <Grid Margin="5 0 5 0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.1*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -35,7 +35,7 @@
                        Margin="0 40 0 0" FontSize="34"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="420" Margin="280 100 0 200">
+        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="500" Margin="280 100 0 200">
             <TextBox Text="{Binding CurrentLoggedUser.Username, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center"
                      Margin="0 40 0 0" FontSize="34" Background="DarkGray" IsReadOnly="True">
                 <TextBox.Resources>
@@ -48,70 +48,91 @@
                 </TextBox.InputBindings>
             </TextBox>
 
-            <components:BindablePasswordBox x:Name="MyProfilePassword" Password="{Binding Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                                            HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 0 0" FontSize="34" Background="DarkGray"
-                                            IsEnabled="False" BorderBrush="DarkGray" ToolTipService.ToolTip="{Binding ErrorCollection[Password]}">
-                <components:BindablePasswordBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </components:BindablePasswordBox.Resources>
-                <components:BindablePasswordBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
-                </components:BindablePasswordBox.InputBindings>
-            </components:BindablePasswordBox>
+            <StackPanel Margin="0 28 0 0" Orientation="Horizontal">
+                <components:BindablePasswordBox x:Name="MyProfilePassword" Password="{Binding Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                                HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="DarkGray" MaxWidth="440"
+                                                IsEnabled="False" BorderBrush="DarkGray" ToolTipService.ToolTip="{Binding ErrorCollection[Password]}">
+                    <components:BindablePasswordBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </components:BindablePasswordBox.Resources>
+                    <components:BindablePasswordBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
+                    </components:BindablePasswordBox.InputBindings>
+                </components:BindablePasswordBox>
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" Width="65" Height="65"
+                       Visibility="{Binding PasswordErrorIconVisibility}" Margin="0 0 0 0"/>
+            </StackPanel>
 
-            <TextBox x:Name="MyProfileFirstName" Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                     HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 0 0" FontSize="34" Background="DarkGray" IsReadOnly="True"
-                     ToolTipService.ToolTip="{Binding ErrorCollection[FirstName]}">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </TextBox.Resources>
-                <TextBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
-                </TextBox.InputBindings>
-            </TextBox>
+            <StackPanel Margin="0 20 0 0" Orientation="Horizontal">
+                <TextBox x:Name="MyProfileFirstName" Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="DarkGray" IsReadOnly="True" MaxWidth="440"
+                         ToolTipService.ToolTip="{Binding ErrorCollection[FirstName]}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" Width="65" Height="65" 
+                       Visibility="{Binding FirstNameErrorIconVisibility}" Margin="0 0 0 0"/>
+            </StackPanel>
 
-            <TextBox x:Name="MyProfileLastName" Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                     HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 0 0" FontSize="34" Background="DarkGray" IsReadOnly="True"
-                     ToolTipService.ToolTip="{Binding ErrorCollection[LastName]}">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>                   
-                </TextBox.Resources>
-                <TextBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
-                </TextBox.InputBindings>
-            </TextBox>
 
-            <TextBox x:Name="MyProfileEmail" Text="{Binding Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
-                     HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 0 0" FontSize="34" Background="DarkGray" IsReadOnly="True"
-                     ToolTipService.ToolTip="{Binding ErrorCollection[Email]}">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </TextBox.Resources>
-                <TextBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
-                </TextBox.InputBindings>
-            </TextBox>
+            <StackPanel Margin="0 20 0 0" Orientation="Horizontal">
+                <TextBox x:Name="MyProfileLastName" Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="DarkGray" IsReadOnly="True" MaxWidth="440"
+                         ToolTipService.ToolTip="{Binding ErrorCollection[LastName]}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" Width="65" Height="65"
+                       Visibility="{Binding LastNameErrorIconVisibility}" Margin="0 0 0 0"/>
+            </StackPanel>
 
-            <TextBox x:Name="MyProfileTelephone" Text="{Binding Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                     HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 38 0 0" FontSize="34" Background="DarkGray" IsReadOnly="True"
-                     ToolTipService.ToolTip="{Binding ErrorCollection[Telephone]}">
-                <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </TextBox.Resources>
-                <TextBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
-                </TextBox.InputBindings>
-            </TextBox>
+            <StackPanel Margin="0 20 0 0" Orientation="Horizontal">
+                <TextBox x:Name="MyProfileEmail" Text="{Binding Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="DarkGray" IsReadOnly="True" MaxWidth="440"
+                         ToolTipService.ToolTip="{Binding ErrorCollection[Email]}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" Width="65" Height="65" 
+                       Visibility="{Binding EmailErrorIconVisibility}" Margin="0 0 0 0"/>
+            </StackPanel>
+
+            <StackPanel Margin="0 22 0 0" Orientation="Horizontal">
+                <TextBox x:Name="MyProfileTelephone" Text="{Binding Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="DarkGray" IsReadOnly="True" MaxWidth="440"
+                         ToolTipService.ToolTip="{Binding ErrorCollection[Telephone]}">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </TextBox.Resources>
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SaveChangedUserValuesCommand}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" Width="65" Height="65" 
+                       Visibility="{Binding TelephoneErrorIconVisibility}" Margin="0 0 0 0"/>
+            </StackPanel>
         </StackPanel>
 
         <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Change}" x:Name="ChangeUserValuesButton" Command="{Binding ChangeUserValuesCommand}" 
@@ -144,6 +165,16 @@
             </Button.Resources>
         </Button>
 
+        <!--<Image Grid.Column="0" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" Width="65" Height="65"
+               Visibility="{Binding PasswordErrorIconVisibility}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 220 0 0"/>
+        <Image Grid.Column="0" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" Width="65" Height="65"
+               Visibility="{Binding FirstNameErrorIconVisibility}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 305 0 0"/>
+        <Image Grid.Column="0" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" Width="65" Height="65"
+               Visibility="{Binding LastNameErrorIconVisibility}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 390 0 0"/>
+        <Image Grid.Column="0" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" Width="65" Height="65"
+               Visibility="{Binding EmailErrorIconVisibility}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 475 0 0"/>
+        <Image Grid.Column="0" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" Width="65" Height="65"
+               Visibility="{Binding TelephoneErrorIconVisibility}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 560 0 0"/>-->
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -157,7 +188,7 @@
             <!--<TextBlock Text="{local:ResxStatic l10n:Resources.ToDoTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"
                        Margin="5 30 0 0" Height="40"/>-->
             <StackPanel Orientation="Horizontal" Margin="5 30 0 0">
-                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\to-do-list.png" VerticalAlignment="Top" Margin="0 5 0 0" Width="35"/>
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\to-do-list.png" VerticalAlignment="Top" Margin="0 4 0 0" Width="35"/>
                 <TextBlock Text="{local:ResxStatic l10n:Resources.ToDoTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" Margin="2 0 0 0" Height="40"/>
             </StackPanel>
 

@@ -72,17 +72,24 @@
             </TextBox.Resources>
         </TextBox>
 
-        <DatePicker x:Name="CreateTaskDeadline" SelectedDate="{Binding SelectedTask.Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedDateFormat="Short" Height="41" HorizontalAlignment="Left" FontSize="26" Margin="0 0 0 0" Grid.Column="1" Grid.Row="3"
-                    IsHitTestVisible="{Binding SelectedTask.IsTaskViewDeadlineHitTestVisible}" 
+        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+            <DatePicker x:Name="CreateTaskDeadline" SelectedDate="{Binding SelectedTask.Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedDateFormat="Short" Height="41" FontSize="26" Margin="0" IsHitTestVisible="{Binding SelectedTask.IsTaskViewDeadlineHitTestVisible}" 
                     ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Deadline]}">
-        </DatePicker>
+            </DatePicker>
+            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
+                   Visibility="{Binding SelectedTask.DeadlineErrorIconVisibility}" Width="70" Height="70"/>
+        </StackPanel>
 
-        <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Grid.Column="1" Grid.Row="4" Width="150" Height="39" 
+        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
+            <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Width="150" Height="39" 
                   FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="{Binding SelectedTask.IsTaskViewStatusEnabled}"
                   SelectedValue="{Binding SelectedTask.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Key" DisplayMemberPath="Value"
                   ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Status]}">
-        </ComboBox>
+            </ComboBox>
+            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
+                   Visibility="{Binding SelectedTask.StatusErrorIconVisibility}" Width="60" Height="60"/>
+        </StackPanel>
 
         <!--<StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
             <RadioButton x:Name="OneTimeTask" Content="One Time" FontSize="21" VerticalContentAlignment="Center"/>
@@ -90,6 +97,11 @@
             <RadioButton x:Name="WeeklyTask" Content="Weekly" FontSize="21" VerticalContentAlignment="Center"/>
             <RadioButton x:Name="MonthlyTask" Content="Monthly" FontSize="21" VerticalContentAlignment="Center"/>
         </StackPanel>-->
+
+        <Image Grid.Column="2" Grid.Row="0" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+               Visibility="{Binding SelectedTask.UserErrorIconVisibility}" Width="75" Height="75"/>
+        <Image Grid.Column="2" Grid.Row="1" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+               Visibility="{Binding SelectedTask.TitleErrorIconVisibility}" Width="75" Height="75"/>
 
         <Button x:Name="CreateTaskForUserButton" Command="{Binding SelectedTask.SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" 
                 Grid.Column="1" Grid.Row="5" Height="45" Width="70" Margin="0 0 160 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">

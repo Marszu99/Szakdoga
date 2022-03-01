@@ -20,6 +20,11 @@ namespace WpfDemo.ViewModel
         private User _user;
         private MyProfileView _view;
         private bool _isChanged = false;
+        private bool _isPasswordChanged = false;
+        private bool _isFirstNameChanged = false;
+        private bool _isLastNameChanged = false;
+        private bool _isEmailChanged = false;
+        private bool _isTelephoneChanged = false;
         private System.ComponentModel.IEditableObject _IEditableObject;
         private System.ComponentModel.IRevertibleChangeTracking _IRevertibleChangeTracking;
 
@@ -49,6 +54,8 @@ namespace WpfDemo.ViewModel
                 _user.Password = value;
                 OnPropertyChanged(nameof(Password));
                 _isChanged = true;
+                _isPasswordChanged = true;
+                OnPropertyChanged(nameof(PasswordErrorIconVisibility));
             }
         }
 
@@ -63,6 +70,8 @@ namespace WpfDemo.ViewModel
                 _user.FirstName = value;
                 OnPropertyChanged(nameof(FirstName));
                 _isChanged = true;
+                _isFirstNameChanged = true;
+                OnPropertyChanged(nameof(FirstNameErrorIconVisibility));
             }
         }
 
@@ -77,6 +86,8 @@ namespace WpfDemo.ViewModel
                 CurrentLoggedUser.LastName = value;
                 OnPropertyChanged(nameof(LastName));
                 _isChanged = true;
+                _isLastNameChanged = true;
+                OnPropertyChanged(nameof(LastNameErrorIconVisibility));
             }
         }
 
@@ -91,6 +102,8 @@ namespace WpfDemo.ViewModel
                 _user.Email = value;
                 OnPropertyChanged(nameof(Email));
                 _isChanged = true;
+                _isEmailChanged = true;
+                OnPropertyChanged(nameof(EmailErrorIconVisibility));
             }
         }
 
@@ -104,8 +117,9 @@ namespace WpfDemo.ViewModel
             {
                 CurrentLoggedUser.Telephone = value;
                 OnPropertyChanged(nameof(Telephone));
-
                 _isChanged = true;
+                _isTelephoneChanged = true;
+                OnPropertyChanged(nameof(TelephoneErrorIconVisibility));
             }
         }
 
@@ -125,6 +139,46 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility PasswordErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidatePassword(_user.Password) == null || !_isPasswordChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility FirstNameErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateFirstName(_user.FirstName) == null || !_isFirstNameChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility LastNameErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateLastName(_user.LastName) == null || !_isLastNameChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility EmailErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateEmail(_user.Email) == null || !_isEmailChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility TelephoneErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateTelephone(_user.Telephone) == null || !_isTelephoneChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }
@@ -135,38 +189,41 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                switch (propertyName)
+                if (_isChanged)
                 {
-                    case nameof(Password):
-                        result = UserValidationHelper.ValidatePassword(_user.Password);
-                        break;
+                    switch (propertyName)
+                    {
+                        case nameof(Password):
+                            result = UserValidationHelper.ValidatePassword(_user.Password);
+                            break;
 
-                    case nameof(FirstName):
-                        result = UserValidationHelper.ValidateFirstName(_user.FirstName);
-                        break;
+                        case nameof(FirstName):
+                            result = UserValidationHelper.ValidateFirstName(_user.FirstName);
+                            break;
 
-                    case nameof(LastName):
-                        result = UserValidationHelper.ValidateLastName(_user.LastName);
-                        break;
+                        case nameof(LastName):
+                            result = UserValidationHelper.ValidateLastName(_user.LastName);
+                            break;
 
-                    case nameof(Email):
-                        result = UserValidationHelper.ValidateEmail(_user.Email);
-                        break;
+                        case nameof(Email):
+                            result = UserValidationHelper.ValidateEmail(_user.Email);
+                            break;
 
-                    case nameof(Telephone):
-                        result = UserValidationHelper.ValidateTelephone(_user.Telephone);
-                        break;
+                        case nameof(Telephone):
+                            result = UserValidationHelper.ValidateTelephone(_user.Telephone);
+                            break;
+                    }
+
+                    if (ErrorCollection.ContainsKey(propertyName))
+                    {
+                        ErrorCollection[propertyName] = result;
+                    }
+                    else if (result != null)
+                    {
+                        ErrorCollection.Add(propertyName, result);
+                    }
+                    OnPropertyChanged("ErrorCollection");
                 }
-
-                if (ErrorCollection.ContainsKey(propertyName))
-                {
-                    ErrorCollection[propertyName] = result;
-                }
-                else if (result != null)
-                {
-                    ErrorCollection.Add(propertyName, result);
-                }
-                OnPropertyChanged("ErrorCollection");
 
                 return result;
             }

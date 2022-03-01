@@ -19,6 +19,17 @@ namespace WpfDemo.ViewModel
 
         private User _user;
         private RegisterView _view;
+        private bool _isChanged = false;
+        private bool _isUsernameChanged = false;
+        private bool _isPasswordChanged = false;
+        private bool _isPassword2Changed = false;
+        private bool _isFirstNameChanged = false;
+        private bool _isLastNameChanged = false;
+        private bool _isEmailChanged = false;
+        private bool _isEmail2Changed = false;
+        private bool _isTelephoneChanged = false;
+        private bool _isCompanyNameChanged = false;
+        private bool _isCompanyName2Changed = false;
 
         public User User
         {
@@ -51,6 +62,8 @@ namespace WpfDemo.ViewModel
             {
                 _user.Username = value;
                 OnPropertyChanged(nameof(Username));
+                _isUsernameChanged = true;
+                OnPropertyChanged(nameof(UsernameErrorIconVisibility));
             }
         }
 
@@ -64,6 +77,8 @@ namespace WpfDemo.ViewModel
             {
                 _user.Password = value;
                 OnPropertyChanged(nameof(Password));
+                _isPasswordChanged = true;
+                OnPropertyChanged(nameof(PasswordErrorIconVisibility));
             }
         }
 
@@ -78,6 +93,8 @@ namespace WpfDemo.ViewModel
             {
                 _password2 = value;
                 OnPropertyChanged(nameof(Password2));
+                _isPassword2Changed = true;
+                OnPropertyChanged(nameof(Password2ErrorIconVisibility));
             }
         }
 
@@ -91,6 +108,8 @@ namespace WpfDemo.ViewModel
             {
                 _user.FirstName = value;
                 OnPropertyChanged(nameof(FirstName));
+                _isFirstNameChanged = true;
+                OnPropertyChanged(nameof(FirstNameErrorIconVisibility));
             }
         }
 
@@ -104,6 +123,8 @@ namespace WpfDemo.ViewModel
             {
                 _user.LastName = value;
                 OnPropertyChanged(nameof(LastName));
+                _isLastNameChanged = true;
+                OnPropertyChanged(nameof(LastNameErrorIconVisibility));
             }
         }
 
@@ -117,6 +138,8 @@ namespace WpfDemo.ViewModel
             {
                 _user.Email = value;
                 OnPropertyChanged(nameof(Email));
+                _isEmailChanged = true;
+                OnPropertyChanged(nameof(EmailErrorIconVisibility));
             }
         }
 
@@ -131,6 +154,8 @@ namespace WpfDemo.ViewModel
             {
                 _email2 = value;
                 OnPropertyChanged(nameof(Email2));
+                _isEmail2Changed = true;
+                OnPropertyChanged(nameof(Email2ErrorIconVisibility));
             }
         }
 
@@ -144,6 +169,8 @@ namespace WpfDemo.ViewModel
             {
                 _user.Telephone = value;
                 OnPropertyChanged(nameof(Telephone));
+                _isTelephoneChanged = true;
+                OnPropertyChanged(nameof(TelephoneErrorIconVisibility));
             }
         }
 
@@ -158,6 +185,8 @@ namespace WpfDemo.ViewModel
             {
                 _companyName = value;
                 OnPropertyChanged(nameof(CompanyName));
+                _isCompanyNameChanged = true;
+                OnPropertyChanged(nameof(CompanyNameErrorIconVisibility));
             }
         }
 
@@ -172,8 +201,92 @@ namespace WpfDemo.ViewModel
             {
                 _companyName2 = value;
                 OnPropertyChanged(nameof(CompanyName2));
+                _isCompanyName2Changed = true;
+                OnPropertyChanged(nameof(CompanyName2ErrorIconVisibility));
             }
         }
+
+
+        public Visibility UsernameErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateUserName(_user.Username) == null || !_isUsernameChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility PasswordErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidatePassword(_user.Password) == null || !_isPasswordChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility Password2ErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidatePassword2(_user.Password, _password2) == null || !_isPassword2Changed ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility FirstNameErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateFirstName(_user.FirstName) == null || !_isFirstNameChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility LastNameErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateLastName(_user.LastName) == null || !_isLastNameChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility EmailErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateEmail(_user.Email) == null || !_isEmailChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility Email2ErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateEmail2(_user.Email, _email2) == null || !_isEmail2Changed ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility TelephoneErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateTelephone(_user.Telephone) == null || !_isTelephoneChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility CompanyNameErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateCompanyName(_companyName) == null || !_isCompanyNameChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility CompanyName2ErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateCompanyName2(_companyName, _companyName2) == null || !_isCompanyName2Changed ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }
@@ -184,58 +297,63 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                switch (propertyName)
+                if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(Password2) && !string.IsNullOrEmpty(FirstName) &&
+                    !string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Email2) && !string.IsNullOrEmpty(Telephone) &&
+                    !string.IsNullOrEmpty(CompanyName) && !string.IsNullOrEmpty(CompanyName2))
                 {
-                    case nameof(Username):
-                        result = UserValidationHelper.ValidateUserName(_user.Username);
-                        break;
+                    switch (propertyName)
+                    {
+                        case nameof(Username):
+                            result = UserValidationHelper.ValidateUserName(_user.Username);
+                            break;
 
-                    case nameof(Password):
-                        result = UserValidationHelper.ValidatePassword(_user.Password);
-                        break;
+                        case nameof(Password):
+                            result = UserValidationHelper.ValidatePassword(_user.Password);
+                            break;
 
-                    case nameof(Password2):
-                        result = UserValidationHelper.ValidatePassword2(_user.Password, _password2);
-                        break;
+                        case nameof(Password2):
+                            result = UserValidationHelper.ValidatePassword2(_user.Password, _password2);
+                            break;
 
-                    case nameof(FirstName):
-                        result = UserValidationHelper.ValidateFirstName(_user.FirstName);
-                        break;
+                        case nameof(FirstName):
+                            result = UserValidationHelper.ValidateFirstName(_user.FirstName);
+                            break;
 
-                    case nameof(LastName):
-                        result = UserValidationHelper.ValidateLastName(_user.LastName);
-                        break;
+                        case nameof(LastName):
+                            result = UserValidationHelper.ValidateLastName(_user.LastName);
+                            break;
 
-                    case nameof(Email):
-                        result = UserValidationHelper.ValidateEmail(_user.Email);
-                        break;
+                        case nameof(Email):
+                            result = UserValidationHelper.ValidateEmail(_user.Email);
+                            break;
 
-                    case nameof(Email2):
-                        result = UserValidationHelper.ValidateEmail2(_user.Email, _email2);
-                        break;
+                        case nameof(Email2):
+                            result = UserValidationHelper.ValidateEmail2(_user.Email, _email2);
+                            break;
 
-                    case nameof(Telephone):
-                        result = UserValidationHelper.ValidateTelephone(_user.Telephone);
-                        break;
+                        case nameof(Telephone):
+                            result = UserValidationHelper.ValidateTelephone(_user.Telephone);
+                            break;
 
-                    case nameof(CompanyName):
-                        result = UserValidationHelper.ValidateCompanyName(_companyName);
-                        break;
+                        case nameof(CompanyName):
+                            result = UserValidationHelper.ValidateCompanyName(_companyName);
+                            break;
 
-                    case nameof(CompanyName2):
-                        result = UserValidationHelper.ValidateCompanyName2(_companyName, _companyName2);
-                        break;
+                        case nameof(CompanyName2):
+                            result = UserValidationHelper.ValidateCompanyName2(_companyName, _companyName2);
+                            break;
+                    }
+
+                    if (ErrorCollection.ContainsKey(propertyName))
+                    {
+                        ErrorCollection[propertyName] = result;
+                    }
+                    else if (result != null)
+                    {
+                        ErrorCollection.Add(propertyName, result);
+                    }
+                    OnPropertyChanged("ErrorCollection");
                 }
-
-                if (ErrorCollection.ContainsKey(propertyName))
-                {
-                    ErrorCollection[propertyName] = result;
-                }
-                else if (result != null)
-                {
-                    ErrorCollection.Add(propertyName, result);
-                }
-                OnPropertyChanged("ErrorCollection");
 
                 return result;
             }
@@ -260,7 +378,7 @@ namespace WpfDemo.ViewModel
             return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(Password2) && !string.IsNullOrEmpty(FirstName) && 
                    !string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Email2) && !string.IsNullOrEmpty(Telephone) &&
                    !string.IsNullOrEmpty(CompanyName) && !string.IsNullOrEmpty(CompanyName2);
-        }       
+        }
 
         private void RegisterAdmin(object arg)
         {

@@ -19,7 +19,9 @@ namespace WpfDemo.ViewModel
         private Task _task;
         private User _user;
         private bool _isChanged = false;
-
+        private bool _isTaskChanged = false;
+        private bool _isDateChanged = false;
+        private bool _isDurationChanged = false;
 
         public Record Record
         {
@@ -53,8 +55,11 @@ namespace WpfDemo.ViewModel
                 _record.Date = value;
                 OnPropertyChanged(nameof(Date));
                 _isChanged = true;
+                _isDateChanged = true;
+                OnPropertyChanged(nameof(DateErrorIconVisibility));
             }
         }
+
         public string Comment
         {
             get
@@ -81,6 +86,8 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(Duration));
                 OnPropertyChanged(nameof(DurationFormat));
                 _isChanged = true;
+                _isDurationChanged = true;
+                OnPropertyChanged(nameof(DurationErrorIconVisibility));
             }
         }
 
@@ -98,6 +105,9 @@ namespace WpfDemo.ViewModel
 
                     _record.Duration = (int)input.TotalMinutes;
                     OnPropertyChanged(nameof(DurationFormat));
+                    _isChanged = true;
+                    _isDurationChanged = true;
+                    OnPropertyChanged(nameof(DurationErrorIconVisibility));
                 }
                 catch (FormatException)
                 {
@@ -133,7 +143,9 @@ namespace WpfDemo.ViewModel
                 if (_record.IdRecord == 0)  // kell ez mert kulonbon update eseten a Save gomb nem lennne disabled-d
                 {
                     _isChanged = true;
+                    _isTaskChanged = true;
                 }
+                OnPropertyChanged(nameof(TaskErrorIconVisibility));
             }
         }
 
@@ -201,6 +213,29 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility TaskErrorIconVisibility
+        {
+            get
+            {
+                return RecordValidationHelper.ValidateTask(_task) == null || !_isTaskChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility DateErrorIconVisibility
+        {
+            get
+            {
+                return RecordValidationHelper.ValidateDate(_record.Date, _task == null ? DateTime.MinValue : _task.CreationDate) == null || !_isDateChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility DurationErrorIconVisibility
+        {
+            get
+            {
+                return RecordValidationHelper.ValidateDuration(_record.Duration) == null || !_isDurationChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }
@@ -211,33 +246,36 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                switch (propertyName)
+                if (_isChanged)
                 {
-                    case nameof(Task):
-                        result = RecordValidationHelper.ValidateTask(_task);
-                        break;
+                    switch (propertyName)
+                    {
+                        case nameof(Task):
+                            result = RecordValidationHelper.ValidateTask(_task);
+                            break;
 
-                    case nameof(Date):
-                        result = RecordValidationHelper.ValidateDate(_record.Date, _task == null ? DateTime.MinValue : _task.CreationDate);
-                        break;
+                        case nameof(Date):
+                            result = RecordValidationHelper.ValidateDate(_record.Date, _task == null ? DateTime.MinValue : _task.CreationDate);
+                            break;
 
-                    case nameof(Duration):
-                        result = RecordValidationHelper.ValidateDuration(_record.Duration);
-                        break;
+                        case nameof(DurationFormat):
+                            result = RecordValidationHelper.ValidateDuration(_record.Duration);
+                            break;
 
-                    default: // ez kell???
-                        break;
+                        default: // ez kell???
+                            break;
+                    }
+
+                    if (ErrorCollection.ContainsKey(propertyName))
+                    {
+                        ErrorCollection[propertyName] = result;
+                    }
+                    else if (result != null)
+                    {
+                        ErrorCollection.Add(propertyName, result);
+                    }
+                    OnPropertyChanged("ErrorCollection");
                 }
-
-                if (ErrorCollection.ContainsKey(propertyName))
-                {
-                    ErrorCollection[propertyName] = result;
-                }
-                else if (result != null)
-                {
-                    ErrorCollection.Add(propertyName, result);
-                }
-                OnPropertyChanged("ErrorCollection");
 
                 return result;
             }

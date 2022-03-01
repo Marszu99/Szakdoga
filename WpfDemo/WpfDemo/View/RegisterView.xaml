@@ -24,18 +24,18 @@
 
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.15*"/>
                 </Grid.ColumnDefinitions>
 
 
@@ -159,6 +159,27 @@
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
+
+                <Image Grid.Column="2" Grid.Row="0" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                       Visibility="{Binding UsernameErrorIconVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60"/>
+                <Image Grid.Column="2" Grid.Row="1" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                       Visibility="{Binding PasswordErrorIconVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60"/>
+                <Image Grid.Column="2" Grid.Row="2" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                       Visibility="{Binding Password2ErrorIconVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60"/>
+                <Image Grid.Column="2" Grid.Row="3" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                       Visibility="{Binding FirstNameErrorIconVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60"/>
+                <Image Grid.Column="2" Grid.Row="4" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                       Visibility="{Binding LastNameErrorIconVisibility}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="60"/>
+                <Image Grid.Column="4" Grid.Row="0" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                       Visibility="{Binding EmailErrorIconVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="60"/>
+                <Image Grid.Column="4" Grid.Row="1" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                       Visibility="{Binding Email2ErrorIconVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="60"/>
+                <Image Grid.Column="4" Grid.Row="2" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                       Visibility="{Binding TelephoneErrorIconVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="60"/>
+                <Image Grid.Column="4" Grid.Row="3" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                       Visibility="{Binding CompanyNameErrorIconVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="60"/>
+                <Image Grid.Column="4" Grid.Row="4" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                       Visibility="{Binding CompanyName2ErrorIconVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="60"/>
 
             </Grid>
 

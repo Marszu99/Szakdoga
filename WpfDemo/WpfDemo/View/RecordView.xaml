@@ -11,9 +11,9 @@
 
     <Grid Margin="0 0 0 0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition  Width="0.9*"/>
-            <ColumnDefinition  Width="1.5*"/>
-            <ColumnDefinition  Width="0.5*"/>
+            <ColumnDefinition Width="0.9*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -43,13 +43,17 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <DatePicker x:Name="CreateRecordDate" SelectedDate="{Binding SelectedRecord.Date, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
-                    SelectedDateFormat="Short" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Height="41" FontSize="26" 
-                    IsHitTestVisible="{Binding SelectedRecord.IsRecordViewDateHitTestVisible}"
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+            <DatePicker x:Name="CreateRecordDate" SelectedDate="{Binding SelectedRecord.Date, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                    SelectedDateFormat="Short" Height="41" FontSize="26" IsHitTestVisible="{Binding SelectedRecord.IsRecordViewDateHitTestVisible}"
                     ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Date]}">
-        </DatePicker>
+            </DatePicker>
+            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
+                   Visibility="{Binding SelectedRecord.DateErrorIconVisibility}" Width="70" Height="70"/>
+        </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
             <TextBox x:Name="CreateRecordDuration" Text="{Binding SelectedRecord.DurationFormat, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}"
                      Background="#eee" Width="100" Height="36" FontSize="26" Margin="0 0 0 0" HorizontalContentAlignment="Right" BorderThickness="1"
                      BorderBrush="Black" IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}"
@@ -78,6 +82,9 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            
+            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
+                   Visibility="{Binding SelectedRecord.DurationErrorIconVisibility}" Width="70" Height="70"/>
         </StackPanel>
 
         <TextBox x:Name="CreateRecordComment" Text="{Binding SelectedRecord.Comment, UpdateSourceTrigger=PropertyChanged}" Background="#eee" Grid.Column="1"
@@ -90,6 +97,10 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
+
+        <Image Grid.Column="2" Grid.Row="0" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+               Visibility="{Binding SelectedRecord.TaskErrorIconVisibility}"/>
+
 
         <Button x:Name="CreateRecordButton" Command="{Binding SelectedRecord.SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" Grid.Column="1"
                 Grid.Row="4" Height="45" Width="70" Margin="0, 0, 160, 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black"

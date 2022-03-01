@@ -90,6 +90,7 @@ namespace WpfDemo.ViewModel
                 }
                 else
                 {
+                    _view.LoginErrorIcon.Visibility = Visibility.Visible;
                     throw new LoginUserException();
                 }
             }

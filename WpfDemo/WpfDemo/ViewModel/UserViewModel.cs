@@ -20,7 +20,8 @@ namespace WpfDemo.ViewModel
     {
         private User _user;
         private bool _isChanged = false;
-
+        private bool _isUsernameChanged = false;
+        private bool _isEmailChanged = false;
 
         public int IdUser
         {
@@ -45,6 +46,9 @@ namespace WpfDemo.ViewModel
             {
                 _user.Username = value;
                 OnPropertyChanged(nameof(Username));
+                _isChanged = true;
+                _isUsernameChanged = true;
+                OnPropertyChanged(nameof(UsernameErrorIconVisibility));
             }
         }
         public string Password
@@ -57,7 +61,6 @@ namespace WpfDemo.ViewModel
             {
                 _user.Password = value;
                 OnPropertyChanged(nameof(Password));
-                _isChanged = true;
             }
         }
 
@@ -71,7 +74,6 @@ namespace WpfDemo.ViewModel
             {
                 _user.FirstName = value;
                 OnPropertyChanged(nameof(FirstName));
-                _isChanged = true;
             }
         }
 
@@ -85,7 +87,6 @@ namespace WpfDemo.ViewModel
             {
                 _user.LastName = value;
                 OnPropertyChanged(nameof(LastName));
-                _isChanged = true;
             }
         }
 
@@ -100,6 +101,8 @@ namespace WpfDemo.ViewModel
                 _user.Email = value;
                 OnPropertyChanged(nameof(Email));
                 _isChanged = true;
+                _isEmailChanged = true;
+                OnPropertyChanged(nameof(EmailErrorIconVisibility));
             }
         }
 
@@ -113,7 +116,6 @@ namespace WpfDemo.ViewModel
             {
                 _user.Telephone = value;
                 OnPropertyChanged(nameof(Telephone));
-                _isChanged = true;
             }
         }
 
@@ -199,6 +201,22 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility UsernameErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateUserName(_user.Username) == null || !_isUsernameChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility EmailErrorIconVisibility
+        {
+            get
+            {
+                return UserValidationHelper.ValidateEmail(_user.Email) == null || !_isEmailChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }
@@ -209,26 +227,29 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                switch (propertyName)
+                if (_isChanged)
                 {
-                    case nameof(Username):
-                        result = UserValidationHelper.ValidateUserName(_user.Username);
-                        break;
+                    switch (propertyName)
+                    {
+                        case nameof(Username):
+                            result = UserValidationHelper.ValidateUserName(_user.Username);
+                            break;
 
-                    case nameof(Email):
-                        result = UserValidationHelper.ValidateEmail(_user.Email);
-                        break;
-                }
+                        case nameof(Email):
+                            result = UserValidationHelper.ValidateEmail(_user.Email);
+                            break;
+                    }
 
-                if (ErrorCollection.ContainsKey(propertyName))
-                {
-                    ErrorCollection[propertyName] = result;
+                    if (ErrorCollection.ContainsKey(propertyName))
+                    {
+                        ErrorCollection[propertyName] = result;
+                    }
+                    else if (result != null)
+                    {
+                        ErrorCollection.Add(propertyName, result);
+                    }
+                    OnPropertyChanged("ErrorCollection");
                 }
-                else if (result != null)
-                {
-                    ErrorCollection.Add(propertyName, result);
-                }
-                OnPropertyChanged("ErrorCollection");
 
                 return result;
             }

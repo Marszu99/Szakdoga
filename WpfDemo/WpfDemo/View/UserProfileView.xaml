@@ -12,9 +12,9 @@
 
     <Grid Margin="10 0 10 5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.5*"/>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1.3*"/>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="2.5*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -26,38 +26,38 @@
 
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{local:ResxStatic l10n:Resources.UsernameWithColon}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Left" 
-                           VerticalAlignment="Top" Margin="10 20 0 0" FontSize="30"/>
-                <Label x:Name="userNameLabel" Grid.Row="0" Grid.Column="0" FontSize="28" Content="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}"
-                       Margin="0 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
+                           VerticalAlignment="Top" Margin="10 40 0 0" FontSize="33"/>
+                <Label x:Name="userNameLabel" Grid.Row="0" Grid.Column="0" FontSize="30" Content="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}"
+                       Margin="0 39.5 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1">
                 <!--local:ResxStatic l10n:Resources.FirstNameWithColon,Binding FirstNameString, StringFormat='{}{0}:'-->
                 <TextBlock Text="{local:ResxStatic l10n:Resources.FirstNameWithColon}" Grid.Row="0" FontWeight="Bold"  Grid.Column="1" HorizontalAlignment="Left" 
-                           VerticalAlignment="Top" Margin="10 20 0 0" FontSize="30"/>
-                <Label x:Name="firstNameLabel" Grid.Row="0" Grid.Column="1" FontSize="28" Content="{Binding CurrentUser.FirstName, UpdateSourceTrigger=PropertyChanged}"
-                       Margin="0 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
+                           VerticalAlignment="Top" Margin="10 40 0 0" FontSize="33"/>
+                <Label x:Name="firstNameLabel" Grid.Row="0" Grid.Column="1" FontSize="30" Content="{Binding CurrentUser.FirstName, UpdateSourceTrigger=PropertyChanged}"
+                       Margin="0 39 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="2">
                 <TextBlock Text="{local:ResxStatic l10n:Resources.LastNameWithColon}" Grid.Row="0" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Left"
-                           VerticalAlignment="Top" Margin="0 20 0 0" FontSize="30"/>
+                           VerticalAlignment="Top" Margin="0 40 0 0" FontSize="33"/>
                 <Label x:Name="lastNameLabel" Grid.Row="0" Grid.Column="2" FontSize="28" Content="{Binding CurrentUser.LastName, UpdateSourceTrigger=PropertyChanged}"
-                       Margin="0 17 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
+                       Margin="0 40 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="0">
                 <TextBlock Text="{local:ResxStatic l10n:Resources.EmailWithColon}" Grid.Row="0" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Left" 
-                           VerticalAlignment="Bottom" Margin="10 0 0 110" FontSize="30"/>
-                <Label x:Name="emailLabel" Grid.Row="0" Grid.Column="0" FontSize="28" Content="{Binding CurrentUser.Email, UpdateSourceTrigger=PropertyChanged}"
-                       Margin="0 0 0 106" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
+                           VerticalAlignment="Bottom" Margin="10 0 0 90" FontSize="33"/>
+                <Label x:Name="emailLabel" Grid.Row="0" Grid.Column="0" FontSize="30" Content="{Binding CurrentUser.Email, UpdateSourceTrigger=PropertyChanged}"
+                       Margin="0 0 0 85" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1">
                 <TextBlock Text="{local:ResxStatic l10n:Resources.TelephoneWithColon}" Grid.Row="0" FontWeight="Bold" Grid.Column="1" HorizontalAlignment="Left"
-                           VerticalAlignment="Bottom" Margin="10 0 0 110" FontSize="30"/>
-                <Label x:Name="telephoneLabel" Grid.Row="0" Grid.Column="1" FontSize="28" Content="{Binding CurrentUser.Telephone, UpdateSourceTrigger=PropertyChanged}"
-                       Margin="0 0 0 105" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
+                           VerticalAlignment="Bottom" Margin="10 0 0 90" FontSize="33"/>
+                <Label x:Name="telephoneLabel" Grid.Row="0" Grid.Column="1" FontSize="30" Content="{Binding CurrentUser.Telephone, UpdateSourceTrigger=PropertyChanged}"
+                       Margin="0 0 0 85" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
             </StackPanel>
         </Grid>
         
@@ -68,14 +68,14 @@
                    VerticalAlignment="Bottom"/>
             <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{local:ResxStatic l10n:Resources.Records}" Margin="795 0 0 -5" HorizontalAlignment="Left"
                    VerticalAlignment="Bottom"/>-->
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5 0 0 0">
-                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\tasks.png" VerticalAlignment="Bottom" Margin="0 0 0 1" Width="24"/>
-                <Label Content="{local:ResxStatic l10n:Resources.Tasks}" FontWeight="Bold" FontSize="26" Margin="-4 0 0 -5" VerticalAlignment="Bottom"/>
+            <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\tasks.png" VerticalAlignment="Bottom" Margin="0 0 0 1" Width="40"/>
+                <Label Content="{local:ResxStatic l10n:Resources.Tasks}" FontWeight="Bold" FontSize="36" Margin="-5 14 0 0" Height="50"/>
             </StackPanel>
 
             <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Grid.Row="1" Margin="0 0 622 1" VerticalAlignment="Bottom" HorizontalAlignment="Center" 
                        FontSize="20"/>
-            <TextBox x:Name="TaskSearchingText" Grid.Row="1" Margin="0 0 385 1" Background="#eee" Text="{Binding SearchTaskListValue, UpdateSourceTrigger=PropertyChanged}"
+            <TextBox x:Name="TaskSearchingText" Margin="0 0 385 1" Background="#eee" Text="{Binding SearchTaskListValue, UpdateSourceTrigger=PropertyChanged}"
                      Width="165" FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1"
                      BorderBrush="Black" >
                 <TextBox.Resources>
@@ -85,14 +85,14 @@
                 </TextBox.Resources>
             </TextBox>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="800 0 0 -5">
-                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\record.png" VerticalAlignment="Center" Margin="0 2 0 0" Width="24"/>
-                <Label Content="{local:ResxStatic l10n:Resources.Records}" FontWeight="Bold" FontSize="26" Margin="-4 0 0 -5" VerticalAlignment="Bottom"/>
+            <StackPanel Orientation="Horizontal" Margin="800 0 0 -5">
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\record.png" VerticalAlignment="Bottom" Margin="0 0 0 5" Width="41"/>
+                <Label Content="{local:ResxStatic l10n:Resources.Records}" FontWeight="Bold" FontSize="36" Margin="-7 13 0 0"/>
             </StackPanel>
             
             <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Grid.Row="1" Margin="0 0 170 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
                        FontSize="20"/>
-            <TextBox x:Name="RecordSearchingText" Grid.Row="1" Margin="0 0 0 1" Background="#eee" Text="{Binding SearchRecordListValue, UpdateSourceTrigger=PropertyChanged}"
+            <TextBox x:Name="RecordSearchingText" Margin="0 0 0 1" Background="#eee" Text="{Binding SearchRecordListValue, UpdateSourceTrigger=PropertyChanged}"
                      Width="165" FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Right" HorizontalContentAlignment="Left" BorderThickness="1" 
                      BorderBrush="Black" >
                 <TextBox.Resources>

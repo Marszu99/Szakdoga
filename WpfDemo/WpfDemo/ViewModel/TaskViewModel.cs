@@ -22,6 +22,7 @@ namespace WpfDemo.ViewModel
         private Task _task;
         private User _user;
         private bool _isChanged = false;
+        private bool _isUserChanged = false;
         private bool _isTitleChanged = false;
         private bool _isDescriptionChanged = false;
         private bool _isDeadlineChanged = false;
@@ -62,6 +63,7 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(Title));
                 _isChanged = true;
                 _isTitleChanged = true;
+                OnPropertyChanged(nameof(TitleErrorIconVisibility));
             }
         }
         public string Description
@@ -91,6 +93,7 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(Deadline));
                 _isChanged = true;
                 _isDeadlineChanged = true;
+                OnPropertyChanged(nameof(DeadlineErrorIconVisibility));
             }
         }
 
@@ -106,6 +109,7 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(Status));
                 _isChanged = true;
                 _isStatusChanged = true;
+                OnPropertyChanged(nameof(StatusErrorIconVisibility));
             }
         }
 
@@ -144,7 +148,9 @@ namespace WpfDemo.ViewModel
                 if (_task.IdTask == 0) // kell ez mert kulonbon update eseten a Save gomb nem lennne disabled-d
                 {
                     _isChanged = true;
+                    _isUserChanged = true;
                 }
+                OnPropertyChanged(nameof(UserErrorIconVisibility));
             }
         }
 
@@ -260,6 +266,38 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility UserErrorIconVisibility
+        {
+            get
+            {
+                return TaskValidationHelper.ValidateUser(this._user) == null || !_isUserChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility TitleErrorIconVisibility
+        {
+            get
+            {
+                return TaskValidationHelper.ValidateTitle(_task.Title) == null || !_isTitleChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility DeadlineErrorIconVisibility
+        {
+            get
+            {
+                return TaskValidationHelper.ValidateDeadline(_task.Deadline) == null || !_isDeadlineChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility StatusErrorIconVisibility
+        {
+            get
+            {
+                return TaskValidationHelper.ValidateStatus(_task.Status, _task.IdTask) == null || !_isStatusChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } }
@@ -270,37 +308,40 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                switch (propertyName)
+                if (_isChanged)
                 {
-                    case nameof(User):
-                        result = TaskValidationHelper.ValidateUser(this._user);
-                        break;
+                    switch (propertyName)
+                    {
+                        case nameof(User):
+                            result = TaskValidationHelper.ValidateUser(this._user);
+                            break;
 
-                    case nameof(Title):
-                        result = TaskValidationHelper.ValidateTitle(_task.Title);
-                        break;
+                        case nameof(Title):
+                            result = TaskValidationHelper.ValidateTitle(_task.Title);
+                            break;
 
-                    case nameof(Deadline):
-                        result = TaskValidationHelper.ValidateDeadline(_task.Deadline);
-                        break;
+                        case nameof(Deadline):
+                            result = TaskValidationHelper.ValidateDeadline(_task.Deadline);
+                            break;
 
-                    case nameof(Status):
-                        result = TaskValidationHelper.ValidateStatus(_task.Status, _task.IdTask);
-                        break;
+                        case nameof(Status):
+                            result = TaskValidationHelper.ValidateStatus(_task.Status, _task.IdTask);
+                            break;
 
-                    default: // ez kell???
-                        break;
+                        default: // ez kell???
+                            break;
+                    }
+
+                    if (ErrorCollection.ContainsKey(propertyName))
+                    {
+                        ErrorCollection[propertyName] = result;
+                    }
+                    else if (result != null)
+                    {
+                        ErrorCollection.Add(propertyName, result);
+                    }
+                    OnPropertyChanged("ErrorCollection");
                 }
-
-                if (ErrorCollection.ContainsKey(propertyName))
-                {
-                    ErrorCollection[propertyName] = result;
-                }
-                else if (result != null)
-                {
-                    ErrorCollection.Add(propertyName, result);
-                }
-                OnPropertyChanged("ErrorCollection");
 
                 return result;
             }

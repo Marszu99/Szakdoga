@@ -60,9 +60,12 @@
                 </Button.Resources>
             </Button>
 
-
-            <TextBlock x:Name="LoginUserErrorMessage" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                   Margin="20 85 0 50" FontSize="35" Foreground="DarkRed"/>
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="20 85 0 50" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Image x:Name="LoginErrorIcon" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" Width="50" Height="50"
+                       Visibility="Hidden" Margin="0 0 0 0"/>
+                <TextBlock x:Name="LoginUserErrorMessage" FontSize="35" Foreground="DarkRed"/>
+            </StackPanel>
+            
 
         </Grid>
         <Frame x:Name="LoginWindow" Margin="0 0 0 0" NavigationUIVisibility="Hidden"/>
