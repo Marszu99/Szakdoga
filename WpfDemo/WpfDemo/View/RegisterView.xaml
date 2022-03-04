@@ -184,7 +184,7 @@
             </Grid>
 
             <Button x:Name="CreateUserButton" Command="{Binding RegisterAdminCommand}" Grid.Column="2" Grid.Row="4" Content="Register" Height="53" Width="120"
-                    FontSize="30" HorizontalAlignment="Center" Margin="0" Padding="3" BorderThickness="1" BorderBrush="Black">
+                    FontSize="30" HorizontalAlignment="Center" Margin="0" Padding="3" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

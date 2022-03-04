@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
@@ -49,7 +50,6 @@ namespace WpfDemo.ViewModel
             ShowMyProfileCommand = new RelayCommand(ShowMyProfile, CanShowMyProfile);
             ChangeLanguageCommand = new RelayCommand(ChangeLanguage, CanChangeLanguage);
             LogoutCommand = new RelayCommand(Logout, CanExecuteLogout);
-
         }
 
         
@@ -66,6 +66,7 @@ namespace WpfDemo.ViewModel
             return true;
         }
 
+
         private void ShowMyProfile(object obj)
         {
             try
@@ -79,6 +80,7 @@ namespace WpfDemo.ViewModel
                 MessageBox.Show(Resources.ServerError);
             }
         }
+
         private void ChangeLanguage(object obj)
         {
             if (_isLanguageEnglish)
@@ -91,7 +93,8 @@ namespace WpfDemo.ViewModel
                 Thread.CurrentThread.CurrentCulture = cultureInfo;
 
                 ResxStaticExtension.OnLanguageChanged();
-                //_view.Content = new TabcontrolView();
+
+                RefreshTaskListForNotificationsLanguageChange(obj);
 
                 _isLanguageEnglish = false;
             }
@@ -106,10 +109,17 @@ namespace WpfDemo.ViewModel
 
                 ResxStaticExtension.OnLanguageChanged();
 
-                //_view.Content = new TabcontrolView();
+                RefreshTaskListForNotificationsLanguageChange(obj);
+
                 _isLanguageEnglish = true;
             }
         }
+        public event Action<object> RefreshTaskList;
+        public void RefreshTaskListForNotificationsLanguageChange(Object obj)
+        {
+            RefreshTaskList?.Invoke(obj);
+        }
+
         private void Logout(object obj)
         {
             MessageBoxResult messageBoxResult = MessageBox.Show(Resources.LogoutMessage, Resources.Logout, MessageBoxButton.YesNo, MessageBoxImage.Question);

@@ -74,18 +74,25 @@
 
         <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
             <DatePicker x:Name="CreateTaskDeadline" SelectedDate="{Binding SelectedTask.Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedDateFormat="Short" Height="41" FontSize="26" Margin="0" IsHitTestVisible="{Binding SelectedTask.IsTaskViewDeadlineHitTestVisible}" 
-                    ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Deadline]}">
+                        SelectedDateFormat="Short" Height="41" FontSize="26" Margin="0" FirstDayOfWeek="Monday"
+                        IsHitTestVisible="{Binding SelectedTask.IsTaskViewDeadlineHitTestVisible}" 
+                        ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Deadline]}">
+                <DatePicker.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </DatePicker.Resources>
             </DatePicker>
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
                    Visibility="{Binding SelectedTask.DeadlineErrorIconVisibility}" Width="70" Height="70"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
-            <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Width="150" Height="39" 
-                  FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="{Binding SelectedTask.IsTaskViewStatusEnabled}"
-                  SelectedValue="{Binding SelectedTask.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Key" DisplayMemberPath="Value"
-                  ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Status]}">
+            <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Width="150" Height="39" FontSize="26"
+                      HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="{Binding SelectedTask.IsTaskViewStatusEnabled}"
+                      SelectedValue="{Binding SelectedTask.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                      SelectedValuePath="Key" DisplayMemberPath="Value"
+                      ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Status]}">
             </ComboBox>
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
                    Visibility="{Binding SelectedTask.StatusErrorIconVisibility}" Width="60" Height="60"/>
@@ -103,8 +110,8 @@
         <Image Grid.Column="2" Grid.Row="1" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
                Visibility="{Binding SelectedTask.TitleErrorIconVisibility}" Width="75" Height="75"/>
 
-        <Button x:Name="CreateTaskForUserButton" Command="{Binding SelectedTask.SaveCommand}" Content="{local:ResxStatic l10n:Resources.Save}" 
-                Grid.Column="1" Grid.Row="5" Height="45" Width="70" Margin="0 0 160 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
+        <Button x:Name="CreateTaskForUserButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SelectedTask.SaveCommand}" 
+                Grid.Column="1" Grid.Row="5" Height="45" Width="70" Margin="0 0 160 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -112,8 +119,8 @@
             </Button.Resources>
         </Button>
 
-        <Button x:Name="CancelCreateTaskForUserButton" Command="{Binding SelectedTask.CancelTaskViewCommand}" Content="{local:ResxStatic l10n:Resources.Cancel}" 
-                Grid.Column="1" Grid.Row="5" Height="45" Width="85" Margin="50 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black">
+        <Button x:Name="CancelCreateTaskForUserButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding SelectedTask.CancelTaskViewCommand}"
+                Grid.Column="1" Grid.Row="5" Height="45" Width="85" Margin="50 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>

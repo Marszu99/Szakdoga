@@ -21,7 +21,7 @@ namespace WpfDemo.ViewModel
     {
         private Task _task;
         private User _user;
-        private bool _isChanged = false;
+        //private bool _isChanged = false;
         private bool _isUserChanged = false;
         private bool _isTitleChanged = false;
         private bool _isDescriptionChanged = false;
@@ -61,7 +61,6 @@ namespace WpfDemo.ViewModel
             {
                 _task.Title = value;
                 OnPropertyChanged(nameof(Title));
-                _isChanged = true;
                 _isTitleChanged = true;
                 OnPropertyChanged(nameof(TitleErrorIconVisibility));
             }
@@ -76,7 +75,6 @@ namespace WpfDemo.ViewModel
             {
                 _task.Description = value;
                 OnPropertyChanged(nameof(Description));
-                _isChanged = true;
                 _isDescriptionChanged = true;
             }
         }
@@ -91,7 +89,6 @@ namespace WpfDemo.ViewModel
             {
                 _task.Deadline = value;
                 OnPropertyChanged(nameof(Deadline));
-                _isChanged = true;
                 _isDeadlineChanged = true;
                 OnPropertyChanged(nameof(DeadlineErrorIconVisibility));
             }
@@ -107,7 +104,6 @@ namespace WpfDemo.ViewModel
             {
                 _task.Status = value;
                 OnPropertyChanged(nameof(Status));
-                _isChanged = true;
                 _isStatusChanged = true;
                 OnPropertyChanged(nameof(StatusErrorIconVisibility));
             }
@@ -147,7 +143,6 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(User));
                 if (_task.IdTask == 0) // kell ez mert kulonbon update eseten a Save gomb nem lennne disabled-d
                 {
-                    _isChanged = true;
                     _isUserChanged = true;
                 }
                 OnPropertyChanged(nameof(UserErrorIconVisibility));
@@ -308,7 +303,7 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                if (_isChanged)
+                if (_isUserChanged || _isTitleChanged || _isDeadlineChanged || _isStatusChanged)
                 {
                     switch (propertyName)
                     {
@@ -364,7 +359,8 @@ namespace WpfDemo.ViewModel
 
         private bool CanSave(object arg)
         {
-            return User != null && !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Deadline.ToString()) && _isChanged;
+            return User != null && !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Deadline.ToString()) && 
+                   (_isUserChanged || _isTitleChanged || _isDescriptionChanged || _isDeadlineChanged || _isStatusChanged);
         }
 
         private void Save(object obj)
@@ -410,6 +406,8 @@ namespace WpfDemo.ViewModel
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationNewTask", 0, this._task.IdTask);
                 SendNotificationEmail(" has been added to your tasks!");
             }
+
+            IsChangedTaskValuesToFalse();
         }
         public event Action<TaskViewModel> TaskCreated;
         public void CreateTaskToList(TaskViewModel taskViewModel)
@@ -421,7 +419,6 @@ namespace WpfDemo.ViewModel
         {
             new TaskRepository(new TaskLogic()).UpdateTask(this._task, this._task.IdTask, this._task.User_idUser);
             MessageBox.Show(Resources.TaskUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
-            _isChanged = false;
 
             if (this._user.Status != 1)
             {
@@ -470,13 +467,19 @@ namespace WpfDemo.ViewModel
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskDone", 1, this._task.IdTask);
                     SendNotificationEmail(" has been Done!");
                 }
-
-                _isTitleChanged = false;
-                _isDescriptionChanged = false;
-                _isDeadlineChanged = false;
             }
+
+            IsChangedTaskValuesToFalse();
         }
 
+        private void IsChangedTaskValuesToFalse()
+        {
+            _isUserChanged = false;
+            _isTitleChanged = false;
+            _isDescriptionChanged = false;
+            _isDeadlineChanged = false;
+            _isStatusChanged = false;
+        }
 
         public event Action<object> TaskCanceled;
         public void CancelTask(Object obj)

@@ -7,7 +7,7 @@
         xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
         xmlns:components="clr-namespace:WpfDemo.Components"
         mc:Ignorable="d"
-        Title="MyProfil" Width="1550" Height="870" Background="DarkGray" 
+        Title="MyProfile" Width="1550" Height="870" Background="DarkGray" 
         WindowStartupLocation="Manual" ResizeMode="NoResize" WindowStyle="{Binding MyProfileViewWindowStyle}"
         Left="-8" Top="0">
 
@@ -37,7 +37,7 @@
 
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Width="500" Margin="280 100 0 200">
             <TextBox Text="{Binding CurrentLoggedUser.Username, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                     Margin="0 40 0 0" FontSize="34" Background="DarkGray" IsReadOnly="True">
+                     Margin="0 40 0 0" FontSize="34" Background="DarkGray" IsReadOnly="True" BorderThickness="0">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -50,8 +50,9 @@
 
             <StackPanel Margin="0 28 0 0" Orientation="Horizontal">
                 <components:BindablePasswordBox x:Name="MyProfilePassword" Password="{Binding Password, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                                                HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="DarkGray" MaxWidth="440"
-                                                IsEnabled="False" BorderBrush="DarkGray" ToolTipService.ToolTip="{Binding ErrorCollection[Password]}">
+                                                HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="{Binding MyProfileViewUserValuesBackground}"
+                                                MinWidth="125" MaxWidth="440" IsEnabled="{Binding MyProfileViewUserPasswordIsEnabled}" BorderBrush="DarkGray" 
+                                                ToolTipService.ToolTip="{Binding ErrorCollection[Password]}">
                     <components:BindablePasswordBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -67,7 +68,9 @@
 
             <StackPanel Margin="0 20 0 0" Orientation="Horizontal">
                 <TextBox x:Name="MyProfileFirstName" Text="{Binding FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="DarkGray" IsReadOnly="True" MaxWidth="440"
+                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="{Binding MyProfileViewUserValuesBackground}"
+                         IsReadOnly="{Binding MyProfileViewUserValuesIsReadOnly}" MinWidth="55" MaxWidth="440"
+                         BorderThickness="{Binding MyProfileViewUserValuesBorderThickness}" BorderBrush="{Binding MyProfileViewUserValuesBorderBrush}"
                          ToolTipService.ToolTip="{Binding ErrorCollection[FirstName]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -85,7 +88,9 @@
 
             <StackPanel Margin="0 20 0 0" Orientation="Horizontal">
                 <TextBox x:Name="MyProfileLastName" Text="{Binding LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="DarkGray" IsReadOnly="True" MaxWidth="440"
+                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="{Binding MyProfileViewUserValuesBackground}"
+                         IsReadOnly="{Binding MyProfileViewUserValuesIsReadOnly}" MinWidth="55" MaxWidth="440"
+                         BorderThickness="{Binding MyProfileViewUserValuesBorderThickness}" BorderBrush="{Binding MyProfileViewUserValuesBorderBrush}"
                          ToolTipService.ToolTip="{Binding ErrorCollection[LastName]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -102,7 +107,9 @@
 
             <StackPanel Margin="0 20 0 0" Orientation="Horizontal">
                 <TextBox x:Name="MyProfileEmail" Text="{Binding Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
-                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="DarkGray" IsReadOnly="True" MaxWidth="440"
+                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="{Binding MyProfileViewUserValuesBackground}"
+                         IsReadOnly="{Binding MyProfileViewUserValuesIsReadOnly}" MinWidth="210" MaxWidth="440"
+                         BorderThickness="{Binding MyProfileViewUserValuesBorderThickness}" BorderBrush="{Binding MyProfileViewUserValuesBorderBrush}"
                          ToolTipService.ToolTip="{Binding ErrorCollection[Email]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -119,7 +126,9 @@
 
             <StackPanel Margin="0 22 0 0" Orientation="Horizontal">
                 <TextBox x:Name="MyProfileTelephone" Text="{Binding Telephone, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="DarkGray" IsReadOnly="True" MaxWidth="440"
+                         HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="34" Background="{Binding MyProfileViewUserValuesBackground}" 
+                         IsReadOnly="{Binding MyProfileViewUserValuesIsReadOnly}" MinWidth="170" MaxWidth="440"
+                         BorderThickness="{Binding MyProfileViewUserValuesBorderThickness}" BorderBrush="{Binding MyProfileViewUserValuesBorderBrush}"
                          ToolTipService.ToolTip="{Binding ErrorCollection[Telephone]}">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -137,7 +146,7 @@
 
         <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Change}" x:Name="ChangeUserValuesButton" Command="{Binding ChangeUserValuesCommand}" 
                 Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 300 150" Padding="4" BorderThickness="1" 
-                BorderBrush="Black">
+                BorderBrush="Black" Cursor="Hand" Visibility="{Binding MyProfileViewChangeUserValuesButtonVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -146,8 +155,8 @@
         </Button>
 
         <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Save}" x:Name="SaveChangedUserValuesButton" Command="{Binding SaveChangedUserValuesCommand}"
-                Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 425 150" Padding="5" Visibility="Hidden"
-                BorderThickness="1" BorderBrush="Black">
+                Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 425 150" Padding="5" BorderThickness="1" 
+                BorderBrush="Black" Cursor="Hand" Visibility="{Binding MyProfileViewSaveAndCancelButtonsVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -156,8 +165,8 @@
         </Button>
 
         <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Cancel}" x:Name="CancelChangeUserValuesButton" Command="{Binding CancelChangeUserValuesCommand}"
-                Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 200 150" Padding="4" Visibility="Hidden" 
-                BorderThickness="1" BorderBrush="Black">
+                Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 200 150" Padding="4" BorderThickness="1" 
+                BorderBrush="Black" Cursor="Hand" Visibility="{Binding MyProfileViewSaveAndCancelButtonsVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -182,9 +191,6 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!--<FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
-            ResourceStringekhez kell-->
-
             <!--<TextBlock Text="{local:ResxStatic l10n:Resources.ToDoTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"
                        Margin="5 30 0 0" Height="40"/>-->
             <StackPanel Orientation="Horizontal" Margin="5 30 0 0">
@@ -192,10 +198,10 @@
                 <TextBlock Text="{local:ResxStatic l10n:Resources.ToDoTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" Margin="2 0 0 0" Height="40"/>
             </StackPanel>
 
-            <DataGrid  x:Name="UserToDoTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyToDoTaskList}" Margin="0 70 0 20" HorizontalAlignment="Left"
-                       Width="700" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" ScrollViewer.CanContentScroll="True" 
-                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                       Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1">
+            <DataGrid x:Name="UserToDoTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyToDoTaskList}" Margin="0 70 0 20" HorizontalAlignment="Left"
+                      Width="700" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" ScrollViewer.CanContentScroll="True" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                      Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1">
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
@@ -247,14 +253,14 @@
             <!--<TextBlock  Text="{local:ResxStatic l10n:Resources.DoneTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top"
                        HorizontalAlignment="Left" Margin="5 10 0 0" Height="40"/>-->
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5 10 0 0">
-                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\done-list.png" VerticalAlignment="Top" Margin="0 5 0 0" Width="35"/>
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\done-list.png" VerticalAlignment="Top" Margin="3 5 0 0" Width="35"/>
                 <TextBlock Text="{local:ResxStatic l10n:Resources.DoneTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" Margin="2 0 0 0" Height="40"/>
             </StackPanel>
 
-            <DataGrid  x:Name="UserDoneTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyDoneTaskList}" Margin="0 50 0 20" HorizontalAlignment="Left"
-                       Width="700" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" ScrollViewer.CanContentScroll="True" 
-                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                       Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1" Grid.Row="1">
+            <DataGrid x:Name="UserDoneTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyDoneTaskList}" Margin="0 50 0 20" HorizontalAlignment="Left"
+                      Width="700" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" ScrollViewer.CanContentScroll="True" 
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1" Grid.Row="1">
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">

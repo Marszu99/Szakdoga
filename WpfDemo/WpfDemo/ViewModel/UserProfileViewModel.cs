@@ -18,7 +18,6 @@ namespace WpfDemo.ViewModel
     {
         private User _currentUser;
         private Task _selectedTask;
-
         private ObservableCollection<Task> _taskList = new ObservableCollection<Task>();
         private ObservableCollection<RecordViewModel> _recordList = new ObservableCollection<RecordViewModel>();
 

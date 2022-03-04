@@ -3,13 +3,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Windows;
-using System.Windows.Media;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Model.Extension;
 using TimeSheet.Resource;
-using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 
 namespace WpfDemo.ViewModel
@@ -18,13 +16,19 @@ namespace WpfDemo.ViewModel
     {
 
         private User _user;
-        private MyProfileView _view;
-        private bool _isChanged = false;
         private bool _isPasswordChanged = false;
         private bool _isFirstNameChanged = false;
         private bool _isLastNameChanged = false;
         private bool _isEmailChanged = false;
         private bool _isTelephoneChanged = false;
+        private string _myProfileViewUserValuesBackground = "DarkGray";
+        private string _myProfileViewUserValuesBorderThickness = "0";
+        private string _myProfileViewUserValuesBorderBrush = "DarkGray";
+        private bool _myProfileViewUserValuesIsReadOnly = true;
+        private bool _myProfileViewUserPasswordIsEnabled = false;
+        private string _myProfileViewChangeUserValuesButtonVisibility = "Visible";
+        private string _myProfileViewSaveAndCancelButtonsVisibility = "Hidden";
+
         private System.ComponentModel.IEditableObject _IEditableObject;
         private System.ComponentModel.IRevertibleChangeTracking _IRevertibleChangeTracking;
 
@@ -53,7 +57,6 @@ namespace WpfDemo.ViewModel
             {
                 _user.Password = value;
                 OnPropertyChanged(nameof(Password));
-                _isChanged = true;
                 _isPasswordChanged = true;
                 OnPropertyChanged(nameof(PasswordErrorIconVisibility));
             }
@@ -69,7 +72,6 @@ namespace WpfDemo.ViewModel
             {
                 _user.FirstName = value;
                 OnPropertyChanged(nameof(FirstName));
-                _isChanged = true;
                 _isFirstNameChanged = true;
                 OnPropertyChanged(nameof(FirstNameErrorIconVisibility));
             }
@@ -85,7 +87,6 @@ namespace WpfDemo.ViewModel
             {
                 CurrentLoggedUser.LastName = value;
                 OnPropertyChanged(nameof(LastName));
-                _isChanged = true;
                 _isLastNameChanged = true;
                 OnPropertyChanged(nameof(LastNameErrorIconVisibility));
             }
@@ -101,7 +102,6 @@ namespace WpfDemo.ViewModel
             {
                 _user.Email = value;
                 OnPropertyChanged(nameof(Email));
-                _isChanged = true;
                 _isEmailChanged = true;
                 OnPropertyChanged(nameof(EmailErrorIconVisibility));
             }
@@ -117,7 +117,6 @@ namespace WpfDemo.ViewModel
             {
                 CurrentLoggedUser.Telephone = value;
                 OnPropertyChanged(nameof(Telephone));
-                _isChanged = true;
                 _isTelephoneChanged = true;
                 OnPropertyChanged(nameof(TelephoneErrorIconVisibility));
             }
@@ -136,6 +135,97 @@ namespace WpfDemo.ViewModel
             get
             {               
                 return !NewUserValuesHasBeenAdded ? "None" : "SingleBorderWindow";
+            }
+        }
+
+        public string MyProfileViewUserValuesBackground
+        {
+            get
+            {
+                return _myProfileViewUserValuesBackground;
+            }
+            set
+            {
+                _myProfileViewUserValuesBackground = value;
+                OnPropertyChanged(nameof(MyProfileViewUserValuesBackground));
+            }
+        }
+
+        public string MyProfileViewUserValuesBorderThickness
+        {
+            get
+            {
+                return _myProfileViewUserValuesBorderThickness;
+            }
+            set
+            {
+                _myProfileViewUserValuesBorderThickness = value;
+                OnPropertyChanged(nameof(MyProfileViewUserValuesBorderThickness));
+            }
+        }
+
+        public string MyProfileViewUserValuesBorderBrush
+        {
+            get
+            {
+                return _myProfileViewUserValuesBorderBrush;
+            }
+            set
+            {
+                _myProfileViewUserValuesBorderBrush = value;
+                OnPropertyChanged(nameof(MyProfileViewUserValuesBorderBrush));
+            }
+        }
+
+        public bool MyProfileViewUserValuesIsReadOnly
+        {
+            get
+            {
+                return _myProfileViewUserValuesIsReadOnly;
+            }
+            set
+            {
+                _myProfileViewUserValuesIsReadOnly = value;
+                OnPropertyChanged(nameof(MyProfileViewUserValuesIsReadOnly));
+            }
+        }
+
+        public bool MyProfileViewUserPasswordIsEnabled
+        {
+            get
+            {
+                return _myProfileViewUserPasswordIsEnabled;
+            }
+            set
+            {
+                _myProfileViewUserPasswordIsEnabled = value;
+                OnPropertyChanged(nameof(MyProfileViewUserPasswordIsEnabled));
+            }
+        }
+
+        public string MyProfileViewChangeUserValuesButtonVisibility
+        {
+            get
+            {
+                return _myProfileViewChangeUserValuesButtonVisibility;
+            }
+            set
+            {
+                _myProfileViewChangeUserValuesButtonVisibility = value;
+                OnPropertyChanged(nameof(MyProfileViewChangeUserValuesButtonVisibility));
+            }
+        }
+
+        public string MyProfileViewSaveAndCancelButtonsVisibility
+        {
+            get
+            {
+                return _myProfileViewSaveAndCancelButtonsVisibility;
+            }
+            set
+            {
+                _myProfileViewSaveAndCancelButtonsVisibility = value;
+                OnPropertyChanged(nameof(MyProfileViewSaveAndCancelButtonsVisibility));
             }
         }
 
@@ -189,7 +279,7 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                if (_isChanged)
+                if (_isPasswordChanged || _isFirstNameChanged || _isLastNameChanged || _isEmailChanged || _isTelephoneChanged)
                 {
                     switch (propertyName)
                     {
@@ -234,9 +324,8 @@ namespace WpfDemo.ViewModel
         public RelayCommand SaveChangedUserValuesCommand { get; private set; }
         public RelayCommand CancelChangeUserValuesCommand { get; private set; }
 
-        public MyProfileViewModel(MyProfileView view)
+        public MyProfileViewModel()
         {
-            _view = view;
             LoadToDoTasks();
             LoadDoneTasks();
 
@@ -252,7 +341,8 @@ namespace WpfDemo.ViewModel
         private bool CanExecuteSave(object arg)
         {
             return !string.IsNullOrEmpty(CurrentLoggedUser.Password) && !string.IsNullOrEmpty(CurrentLoggedUser.FirstName) && !string.IsNullOrEmpty(CurrentLoggedUser.LastName)
-                   && !string.IsNullOrEmpty(CurrentLoggedUser.Email) && !string.IsNullOrEmpty(CurrentLoggedUser.Telephone) && _isChanged;
+                   && !string.IsNullOrEmpty(CurrentLoggedUser.Email) && !string.IsNullOrEmpty(CurrentLoggedUser.Telephone) && 
+                   (_isPasswordChanged || _isFirstNameChanged || _isLastNameChanged || _isEmailChanged || _isTelephoneChanged);
         }
         private bool CanExecuteCancel(object arg)
         {
@@ -260,36 +350,14 @@ namespace WpfDemo.ViewModel
         }
 
         private void ChangeUserValues(object obj)
-        {
-            //_view.MyProfilePassword.IsReadOnly = false;
-            _view.MyProfilePassword.IsEnabled = true;
-
-            _view.MyProfileFirstName.IsReadOnly = false;
-            _view.MyProfileFirstName.BorderThickness.Equals(1);
-            _view.MyProfileFirstName.BorderBrush = Brushes.Black;
-
-            _view.MyProfileLastName.IsReadOnly = false;
-            _view.MyProfileLastName.BorderThickness.Equals(1);
-            _view.MyProfileLastName.BorderBrush = Brushes.Black;
-
-            _view.MyProfileEmail.IsReadOnly = false;
-            _view.MyProfileEmail.BorderThickness.Equals(1);
-            _view.MyProfileEmail.BorderBrush = Brushes.Black;
-
-            _view.MyProfileTelephone.IsReadOnly = false;
-            _view.MyProfileTelephone.BorderThickness.Equals(1);
-            _view.MyProfileTelephone.BorderBrush = Brushes.Black;
-
-            BrushConverter bc = new BrushConverter();
-            _view.MyProfilePassword.Background = (Brush)bc.ConvertFrom("#FFEEEEEE");
-            _view.MyProfileFirstName.Background = (Brush)bc.ConvertFrom("#FFEEEEEE");
-            _view.MyProfileLastName.Background = (Brush)bc.ConvertFrom("#FFEEEEEE");
-            _view.MyProfileEmail.Background = (Brush)bc.ConvertFrom("#FFEEEEEE");
-            _view.MyProfileTelephone.Background = (Brush)bc.ConvertFrom("#FFEEEEEE");
-
-            _view.ChangeUserValuesButton.Visibility = Visibility.Hidden;
-            _view.SaveChangedUserValuesButton.Visibility = Visibility.Visible;
-            _view.CancelChangeUserValuesButton.Visibility = Visibility.Visible;
+        {       
+            MyProfileViewUserValuesIsReadOnly = false;
+            MyProfileViewUserPasswordIsEnabled = true;
+            MyProfileViewUserValuesBackground = "#FFEEEEEE";
+            MyProfileViewUserValuesBorderThickness = "1";
+            MyProfileViewUserValuesBorderBrush = "Black";
+            MyProfileViewChangeUserValuesButtonVisibility = "Hidden";
+            MyProfileViewSaveAndCancelButtonsVisibility = "Visible";
 
             //_IEditableObject.BeginEdit();
         }
@@ -301,40 +369,15 @@ namespace WpfDemo.ViewModel
                 new UserRepository(new UserLogic()).UpdateUser(CurrentLoggedUser);
                 MessageBox.Show(Resources.UserUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // _view.MyProfilePassword.IsReadOnly = true;
-                _view.MyProfilePassword.IsEnabled = false;
+                MyProfileViewUserValuesIsReadOnly = true;
+                MyProfileViewUserPasswordIsEnabled = false;
+                MyProfileViewUserValuesBackground = "DarkGray";
+                MyProfileViewUserValuesBorderThickness = "0";
+                MyProfileViewUserValuesBorderBrush = "DarkGray";
+                MyProfileViewChangeUserValuesButtonVisibility = "Visible";
+                MyProfileViewSaveAndCancelButtonsVisibility = "Hidden";
 
-                _view.MyProfileFirstName.IsReadOnly = true;
-                _view.MyProfileFirstName.BorderThickness.Equals(0);
-                _view.MyProfileFirstName.BorderBrush = Brushes.DarkGray;
-
-
-                _view.MyProfileLastName.IsReadOnly = true;
-                _view.MyProfileLastName.BorderThickness.Equals(0);
-                _view.MyProfileLastName.BorderBrush = Brushes.DarkGray;
-
-
-                _view.MyProfileEmail.IsReadOnly = true;
-                _view.MyProfileEmail.BorderThickness.Equals(0);
-                _view.MyProfileEmail.BorderBrush = Brushes.DarkGray;
-
-
-                _view.MyProfileTelephone.IsReadOnly = true;
-                _view.MyProfileTelephone.BorderThickness.Equals(0);
-                _view.MyProfileTelephone.BorderBrush = Brushes.DarkGray;
-
-
-
-                _view.MyProfilePassword.Background = Brushes.DarkGray;
-                _view.MyProfileFirstName.Background = Brushes.DarkGray;
-                _view.MyProfileLastName.Background = Brushes.DarkGray;
-                _view.MyProfileEmail.Background = Brushes.DarkGray;
-                _view.MyProfileTelephone.Background = Brushes.DarkGray;
-
-                _view.ChangeUserValuesButton.Visibility = Visibility.Visible;
-                _view.SaveChangedUserValuesButton.Visibility = Visibility.Hidden;
-                _view.CancelChangeUserValuesButton.Visibility = Visibility.Hidden;
-
+                IsChangedUservaluesToFalse();
                 OnPropertyChanged(nameof(MyProfileViewWindowStyle));
             }
             catch (SqlException)
@@ -360,38 +403,15 @@ namespace WpfDemo.ViewModel
             CurrentLoggedUser.Telephone = CurrentLoggedUserValues.Telephone;
             OnPropertyChanged(nameof(CurrentLoggedUser));
 
-            //_view.MyProfilePassword.IsReadOnly = true;
-            _view.MyProfilePassword.IsEnabled = false;
+            MyProfileViewUserValuesIsReadOnly = true;
+            MyProfileViewUserPasswordIsEnabled = false;
+            MyProfileViewUserValuesBackground = "DarkGray";
+            MyProfileViewUserValuesBorderThickness = "0";
+            MyProfileViewUserValuesBorderBrush = "DarkGray";
+            MyProfileViewChangeUserValuesButtonVisibility = "Visible";
+            MyProfileViewSaveAndCancelButtonsVisibility = "Hidden";
 
-            _view.MyProfileFirstName.IsReadOnly = true;
-            _view.MyProfileFirstName.BorderThickness.Equals(0);
-            _view.MyProfileFirstName.BorderBrush = Brushes.DarkGray;
-
-
-            _view.MyProfileLastName.IsReadOnly = true;
-            _view.MyProfileLastName.BorderThickness.Equals(0);
-            _view.MyProfileLastName.BorderBrush = Brushes.DarkGray;
-
-
-            _view.MyProfileEmail.IsReadOnly = true;
-            _view.MyProfileEmail.BorderThickness.Equals(0);
-            _view.MyProfileEmail.BorderBrush = Brushes.DarkGray;
-
-
-            _view.MyProfileTelephone.IsReadOnly = true;
-            _view.MyProfileTelephone.BorderThickness.Equals(0);
-            _view.MyProfileTelephone.BorderBrush = Brushes.DarkGray;
-
-
-            _view.MyProfilePassword.Background = Brushes.DarkGray;
-            _view.MyProfileFirstName.Background = Brushes.DarkGray;
-            _view.MyProfileLastName.Background = Brushes.DarkGray;
-            _view.MyProfileEmail.Background = Brushes.DarkGray;
-            _view.MyProfileTelephone.Background = Brushes.DarkGray;
-
-            _view.ChangeUserValuesButton.Visibility = Visibility.Visible;
-            _view.SaveChangedUserValuesButton.Visibility = Visibility.Hidden;
-            _view.CancelChangeUserValuesButton.Visibility = Visibility.Hidden;
+            IsChangedUservaluesToFalse();
         }
 
 
@@ -429,6 +449,15 @@ namespace WpfDemo.ViewModel
 
             var tasks = new TaskRepository(new TaskLogic()).GetAllDoneTasksFromUser(LoginViewModel.LoggedUser.IdUser);
             tasks.ForEach(task => _myDoneTaskList.Add(task));
+        }
+
+        private void IsChangedUservaluesToFalse()
+        {
+            _isPasswordChanged = false;
+            _isFirstNameChanged = false;
+            _isLastNameChanged = false;
+            _isEmailChanged = false;
+            _isTelephoneChanged = false;
         }
     }
 }

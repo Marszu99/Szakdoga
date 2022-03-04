@@ -22,7 +22,6 @@ namespace WpfDemo.ViewModel
         private Task _task;
         private User _currentUser;
         private UserProfileTaskView _view;
-        private bool _isChanged = false;
         private bool _isTitleChanged = false;
         private bool _isDescriptionChanged = false;
         private bool _isDeadlineChanged = false;
@@ -64,7 +63,6 @@ namespace WpfDemo.ViewModel
             {
                 _task.Title = value;
                 OnPropertyChanged(nameof(Title));
-                _isChanged = true;
                 _isTitleChanged = true;
                 OnPropertyChanged(nameof(TitleErrorIconVisibility));
             }
@@ -79,7 +77,6 @@ namespace WpfDemo.ViewModel
             {
                 _task.Description = value;
                 OnPropertyChanged(nameof(Description));
-                _isChanged = true;
                 _isDescriptionChanged = true;
             }
         }
@@ -94,7 +91,6 @@ namespace WpfDemo.ViewModel
             {
                 _task.Deadline = value;
                 OnPropertyChanged(nameof(Deadline));
-                _isChanged = true;
                 _isDeadlineChanged = true;
                 OnPropertyChanged(nameof(DeadlineErrorIconVisibility));
             }
@@ -110,7 +106,6 @@ namespace WpfDemo.ViewModel
             {
                 _task.Status = value;
                 OnPropertyChanged(nameof(Status));
-                _isChanged = true;
                 _isStatusChanged = true;
                 OnPropertyChanged(nameof(StatusErrorIconVisibility));
             }
@@ -220,7 +215,7 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                if (_isChanged)
+                if (_isTitleChanged || _isDeadlineChanged || _isStatusChanged)
                 {
                     switch (propertyName)
                     {
@@ -280,7 +275,8 @@ namespace WpfDemo.ViewModel
 
         private bool CanSave(object arg)
         {
-            return !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Deadline.ToString()) && _isChanged;
+            return !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Deadline.ToString()) && 
+                   (_isTitleChanged || _isDescriptionChanged || _isDeadlineChanged || _isStatusChanged);
         }
 
         private void Save(object obj)
@@ -338,7 +334,6 @@ namespace WpfDemo.ViewModel
         {
             new TaskRepository(new TaskLogic()).UpdateTask(this._task, this._task.IdTask, this._task.User_idUser);
             MessageBox.Show(Resources.TaskUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
-            _isChanged = false;
 
             if (this.CurrentUser.Username != LoginViewModel.LoggedUser.Username)
             {
@@ -377,11 +372,13 @@ namespace WpfDemo.ViewModel
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleDescriptionDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title and Description and Deadline has changed!");
                 }
-
-                _isTitleChanged = false;
-                _isDescriptionChanged = false;
-                _isDeadlineChanged = false;
             }
+
+            //Disabled legyen mentes utan a Save gomb es az ertesitesek miatt is kell
+            _isTitleChanged = false;
+            _isDescriptionChanged = false;
+            _isDeadlineChanged = false;
+            _isStatusChanged = false;
         }
 
         private void SendNotificationEmail(string EmailNotificationMessage)

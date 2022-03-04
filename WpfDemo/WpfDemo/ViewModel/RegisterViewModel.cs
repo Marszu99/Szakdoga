@@ -19,7 +19,6 @@ namespace WpfDemo.ViewModel
 
         private User _user;
         private RegisterView _view;
-        private bool _isChanged = false;
         private bool _isUsernameChanged = false;
         private bool _isPasswordChanged = false;
         private bool _isPassword2Changed = false;
@@ -297,9 +296,8 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(Password2) && !string.IsNullOrEmpty(FirstName) &&
-                    !string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Email2) && !string.IsNullOrEmpty(Telephone) &&
-                    !string.IsNullOrEmpty(CompanyName) && !string.IsNullOrEmpty(CompanyName2))
+                if (_isUsernameChanged || _isPasswordChanged || _isPassword2Changed || _isFirstNameChanged || _isLastNameChanged || _isEmailChanged ||
+                    _isEmail2Changed || _isTelephoneChanged || _isCompanyNameChanged || _isCompanyName2Changed)
                 {
                     switch (propertyName)
                     {

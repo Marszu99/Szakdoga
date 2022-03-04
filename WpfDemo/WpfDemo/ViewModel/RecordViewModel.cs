@@ -18,9 +18,9 @@ namespace WpfDemo.ViewModel
         private Record _record;
         private Task _task;
         private User _user;
-        private bool _isChanged = false;
         private bool _isTaskChanged = false;
         private bool _isDateChanged = false;
+        private bool _isCommentChanged = false;
         private bool _isDurationChanged = false;
 
         public Record Record
@@ -54,7 +54,6 @@ namespace WpfDemo.ViewModel
             {
                 _record.Date = value;
                 OnPropertyChanged(nameof(Date));
-                _isChanged = true;
                 _isDateChanged = true;
                 OnPropertyChanged(nameof(DateErrorIconVisibility));
             }
@@ -70,7 +69,7 @@ namespace WpfDemo.ViewModel
             {
                 _record.Comment = value;
                 OnPropertyChanged(nameof(Comment));
-                _isChanged = true;
+                _isCommentChanged = true;
             }
         }
 
@@ -85,7 +84,6 @@ namespace WpfDemo.ViewModel
                 _record.Duration = value;
                 OnPropertyChanged(nameof(Duration));
                 OnPropertyChanged(nameof(DurationFormat));
-                _isChanged = true;
                 _isDurationChanged = true;
                 OnPropertyChanged(nameof(DurationErrorIconVisibility));
             }
@@ -105,7 +103,6 @@ namespace WpfDemo.ViewModel
 
                     _record.Duration = (int)input.TotalMinutes;
                     OnPropertyChanged(nameof(DurationFormat));
-                    _isChanged = true;
                     _isDurationChanged = true;
                     OnPropertyChanged(nameof(DurationErrorIconVisibility));
                 }
@@ -142,7 +139,6 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(Task));
                 if (_record.IdRecord == 0)  // kell ez mert kulonbon update eseten a Save gomb nem lennne disabled-d
                 {
-                    _isChanged = true;
                     _isTaskChanged = true;
                 }
                 OnPropertyChanged(nameof(TaskErrorIconVisibility));
@@ -246,7 +242,7 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                if (_isChanged)
+                if (_isTaskChanged || _isDateChanged || _isDurationChanged)
                 {
                     switch (propertyName)
                     {
@@ -332,7 +328,8 @@ namespace WpfDemo.ViewModel
 
         private bool CanSave(object arg)
         {
-            return Task != null && !string.IsNullOrEmpty(Duration.ToString()) && !string.IsNullOrEmpty(Date.ToString()) && _isChanged;
+            return Task != null && !string.IsNullOrEmpty(Duration.ToString()) && !string.IsNullOrEmpty(Date.ToString()) &&
+                   (_isTaskChanged || _isDateChanged || _isCommentChanged || _isDurationChanged);
         }
 
         private void Save(object obj)
@@ -368,6 +365,8 @@ namespace WpfDemo.ViewModel
             this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._task.User_idUser, this._task.IdTask);
             MessageBox.Show(Resources.RecordCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
+            IsChangedRecordValuesToFalse();
+
             CreateRecordToList(this);
         }
         public event Action<RecordViewModel> RecordCreated;
@@ -380,7 +379,16 @@ namespace WpfDemo.ViewModel
         {
             new RecordRepository(new RecordLogic()).UpdateRecord(this._record, this._record.IdRecord, this._record.User_idUser, this._task.IdTask);
             MessageBox.Show(Resources.RecordUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
-            _isChanged = false;
+
+            IsChangedRecordValuesToFalse();
+        }
+
+        private void IsChangedRecordValuesToFalse() // Save gomb enable-se miatt
+        {
+            _isTaskChanged = false;
+            _isDateChanged = false;
+            _isCommentChanged = false;
+            _isDurationChanged = false;
         }
 
 

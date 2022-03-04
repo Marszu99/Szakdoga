@@ -72,7 +72,6 @@ namespace WpfDemo.ViewModel
                 if (SelectedTask != null)
                 {
                     SelectedTask.TaskCanceled += OnTaskCanceled;
-
                 }
                 return SelectedTask == null ? Visibility.Hidden : Visibility.Visible;
             }

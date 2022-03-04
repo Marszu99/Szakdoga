@@ -14,7 +14,7 @@ namespace WpfDemo.View
         public MyProfileView()
         {
             InitializeComponent();
-            this.DataContext = new MyProfileViewModel(this);
+            this.DataContext = new MyProfileViewModel();
         }
     }
 }

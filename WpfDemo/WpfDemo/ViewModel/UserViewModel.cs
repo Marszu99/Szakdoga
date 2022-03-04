@@ -19,7 +19,6 @@ namespace WpfDemo.ViewModel
     public class UserViewModel : ViewModelBase, IDataErrorInfo
     {
         private User _user;
-        private bool _isChanged = false;
         private bool _isUsernameChanged = false;
         private bool _isEmailChanged = false;
 
@@ -46,7 +45,6 @@ namespace WpfDemo.ViewModel
             {
                 _user.Username = value;
                 OnPropertyChanged(nameof(Username));
-                _isChanged = true;
                 _isUsernameChanged = true;
                 OnPropertyChanged(nameof(UsernameErrorIconVisibility));
             }
@@ -100,7 +98,6 @@ namespace WpfDemo.ViewModel
             {
                 _user.Email = value;
                 OnPropertyChanged(nameof(Email));
-                _isChanged = true;
                 _isEmailChanged = true;
                 OnPropertyChanged(nameof(EmailErrorIconVisibility));
             }
@@ -193,6 +190,22 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public string UserViewValuesBackground
+        {
+            get
+            {
+                return _user.IdUser != 0 ? "transparent" : "#eee";
+            }
+        }
+
+        public string UserViewValuesBorderThickness
+        {
+            get
+            {
+                return _user.IdUser != 0 ? "0" : "1";
+            }
+        }
+
         public Visibility UserViewSaveButtonVisibility
         {
             get
@@ -227,7 +240,7 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                if (_isChanged)
+                if (_isUsernameChanged || _isEmailChanged)
                 {
                     switch (propertyName)
                     {
@@ -270,21 +283,22 @@ namespace WpfDemo.ViewModel
 
         private bool CanSave(object arg)
         {
-            return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Email) && _isChanged;
+            return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Email) && (_isUsernameChanged || _isEmailChanged);
         }
 
         private void Save(object obj)
         {
             try
             {
-                if (CheckIfNewUser())
-                {
-                    CreateUser();
-                }
-                else
-                {
-                    UpdateUser();
-                }
+                CreateUser();
+                /* if (CheckIfNewUser())
+                 {
+                     CreateUser();
+                 }
+                 else
+                 {
+                     UpdateUser();
+                 }*/
             }
             catch (SqlException)
             {
@@ -296,10 +310,10 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private bool CheckIfNewUser()
+        /*private bool CheckIfNewUser()
         {
             return this._user.IdUser == 0;
-        }
+        }*/
 
 
         private void CreateUser()
@@ -344,12 +358,11 @@ namespace WpfDemo.ViewModel
             return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        private void UpdateUser()
+        /*private void UpdateUser()
         {
             new UserRepository(new UserLogic()).UpdateUser(this._user);
             MessageBox.Show(Resources.UserUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
-            _isChanged = false;
-        }
+        }*/
 
         public event Action<object> UserCanceled;
         public void CancelUser(Object obj)
