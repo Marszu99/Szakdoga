@@ -162,7 +162,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _user != null && _user.IdUser != 0 ? "600" : "200";
+                return _user != null && _user.IdUser != 0 ? "665" : "200";
             }
         }
 
@@ -190,6 +190,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public string UserViewThirdColumnWidth
+        {
+            get
+            {
+                return _user.IdUser != 0 ? "0" : "0.2*";
+            }
+        }
+
         public string UserViewValuesBackground
         {
             get
@@ -210,7 +218,39 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _user != null && _user.IdUser != 0 ? Visibility.Hidden : Visibility.Visible;
+                return _user != null && _user.IdUser != 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public Visibility UserViewUsernameVisibility
+        {
+            get
+            {
+                return _user != null && _user.IdUser == 0 ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+
+        public Visibility UserViewUsernameWithColonVisibility
+        {
+            get
+            {
+                return _user != null &&  _user.IdUser != 0 ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+
+        public Visibility UserViewEmailVisibility
+        {
+            get
+            {
+                return _user != null && _user.IdUser == 0 ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+
+        public Visibility UserViewEmailWithColonVisibility
+        {
+            get
+            {
+                return _user != null && _user.IdUser != 0 ? Visibility.Visible : Visibility.Hidden;
             }
         }
 

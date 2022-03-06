@@ -177,7 +177,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return CurrentUser.Username == LoginViewModel.LoggedUser.Username;
+                return CurrentUser.Username == LoginViewModel.LoggedUser.Username && _task.IdTask != 0;
             }
         }
 

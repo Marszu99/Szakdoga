@@ -322,7 +322,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email have to reach minimum 11 characters and also can&apos;t be more than 100!.
+        ///   Looks up a localized string similar to Email can&apos;t be more than 100 characters!.
         /// </summary>
         public static string EmailWrongLength {
             get {

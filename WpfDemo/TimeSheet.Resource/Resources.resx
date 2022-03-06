@@ -205,7 +205,7 @@
     <value>Email:</value>
   </data>
   <data name="EmailWrongLength" xml:space="preserve">
-    <value>Email have to reach minimum 11 characters and also can't be more than 100!</value>
+    <value>Email can't be more than 100 characters!</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>English</value>

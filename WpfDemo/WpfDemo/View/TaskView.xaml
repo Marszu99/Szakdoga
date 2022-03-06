@@ -7,13 +7,151 @@
              xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
              xmlns:l="clr-namespace:WpfDemo.ViewModel"
              mc:Ignorable="d" 
-             Name="Task" Height="650" Width="600" Background="DarkGray">
+             Name="Task" Height="665" Width="540" Background="LightGray" BorderBrush="Black" BorderThickness="1"><!--BorderBrush="CornflowerBlue"-->
+
+<UserControl.Resources><!--https://stackoverflow.com/questions/17727879/how-to-change-the-cornerradius-of-the-combobox-wpf-->
+    <Style x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="32"/>
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            x:Name="Border"
+                            Grid.ColumnSpan="2"
+                            CornerRadius="4"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Black"
+                            BorderThickness="1" />
+                        <Path
+                            x:Name="Arrow"
+                            Grid.Column="1"    
+                            Fill="{TemplateBinding Foreground}"
+                            Stroke="{TemplateBinding Foreground}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="M 0 0 L 4 4 L 8 0 Z"/>
+                    </Grid>
+                    <ControlTemplate.Triggers><!--A ControlTemplate.Triggers-ben levo dolgok: https://social.msdn.microsoft.com/Forums/vstudio/en-US/dd893f6e-720f-49ef-827d-78b1d20d660a/change-mouseover-effect-of-combobox?forum=wpf-->
+                        <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="#FFBEE6FD"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FF3C7FB1"/>
+                            <Setter TargetName="Arrow" Property="Fill" Value="Transparent"/>
+                        </Trigger>
+                        <Trigger Property="ToggleButton.IsChecked" Value="true">
+                            <Setter TargetName="Arrow" Property="Fill" Value="Transparent"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="#EEEEEE"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+        <Border x:Name="PART_ContentHost" Focusable="True" />
+    </ControlTemplate>
+
+    <Style x:Key="theComboBox" TargetType="{x:Type ComboBox}">
+        <Setter Property="Foreground" Value="#333" />
+        <Setter Property="BorderBrush" Value="Gray" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="MinWidth" Value="150"/>
+        <Setter Property="MinHeight" Value="35"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <ToggleButton
+                            Cursor="Hand"
+                            Name="ToggleButton"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Style="{StaticResource ComboBoxToggleButton}"
+                            Grid.Column="2"
+                            Focusable="false"
+                            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press"/>
+
+                        <ContentPresenter
+                                Name="ContentSite"
+                                IsHitTestVisible="False"
+                                Content="{TemplateBinding SelectionBoxItem}"
+                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                Margin="10,3,30,3"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left" />
+                        <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}"
+                            Template="{StaticResource ComboBoxTextBox}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="3,3,23,3"
+                            Focusable="True"                               
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                        <Popup
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True"
+                            Focusable="False"
+                            PopupAnimation="Slide">
+                            <Grid
+                                Name="DropDown"
+                                SnapsToDevicePixels="True"               
+                                MinWidth="{TemplateBinding ActualWidth}"
+                                MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <Border
+                                CornerRadius="4"
+                                x:Name="DropDownBorder"
+                                Background="White"
+                                BorderThickness="1"
+                                BorderBrush="#F6F6F6"/>
+                                <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                </ScrollViewer>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                        </Trigger>
+                        <Trigger Property="IsGrouping" Value="true">
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </Trigger>
+                        <Trigger Property="IsEditable" Value="true">
+                            <Setter Property="IsTabStop" Value="false"/>
+                            <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        </Style.Triggers>
+    </Style>
+</UserControl.Resources>
 
     <Grid Margin="0 0 0 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.9*"/>
             <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="{Binding SelectedTask.TaskViewUserRowHeight}"/>
@@ -27,43 +165,52 @@
 
 
         <TextBlock Text="{local:ResxStatic l10n:Resources.User}" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="30"/>
+                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Title}" Grid.Column="0" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Right"
-                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="30"/>
+                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Description}" Grid.Column="0" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Right"
-                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="30"/>
+                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Deadline}" Grid.Column="0" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="30"/>
+                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="32"/>
         <!--<TextBlock Text="Times"  Grid.Column="0" Grid.Row="4" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                   Margin="0 0 15 0" FontSize="30"/>-->
+                   Margin="0 0 15 0" FontSize="32"/>-->
         <TextBlock Text="{local:ResxStatic l10n:Resources.Status}" Grid.Column="0" Grid.Row="4" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="30"/>
+                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="32"/>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+            <ComboBox x:Name="CreateTaskUser" ItemsSource="{Binding SelectedTask.UserList, UpdateSourceTrigger=PropertyChanged}" Padding="2"  
+                      Background="#eee" Height="41" FontSize="26" Width="250" HorizontalContentAlignment="Left" IsEnabled="{Binding SelectedTask.IsUserEnabled}" 
+                      SelectedItem="{Binding SelectedTask.User, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                      ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[User]}" Style="{DynamicResource theComboBox}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Username}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                   Visibility="{Binding SelectedTask.UserErrorIconVisibility}" Width="70" Height="70"/>
+        </StackPanel>
 
 
-        <ComboBox x:Name="CreateTaskUser" ItemsSource="{Binding SelectedTask.UserList, UpdateSourceTrigger=PropertyChanged}" Padding="2" Grid.Column="1" Grid.Row="0" 
-                  Height="37" FontSize="26" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" IsEnabled="{Binding SelectedTask.IsUserEnabled}" 
-                  SelectedItem="{Binding SelectedTask.User, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
-                  ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[User]}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Username}"/>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+            <TextBox x:Name="CreateTaskTitle" Text="{Binding SelectedTask.Title, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" 
+                     Width="250" Height="40" FontSize="26" HorizontalAlignment="Left" Margin="0" Padding="2,1" BorderThickness="1" BorderBrush="Black" 
+                     IsReadOnly="{Binding SelectedTask.IsTaskViewValuesReadOnly}" ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Title]}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                   Visibility="{Binding SelectedTask.TitleErrorIconVisibility}" Width="70" Height="70"/>
+        </StackPanel>
 
-        <TextBox x:Name="CreateTaskTitle" Text="{Binding SelectedTask.Title, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" 
-                 Grid.Column="1" Grid.Row="1" Height="36" FontSize="26" HorizontalAlignment="Stretch" Margin="0 0 0 0" BorderThickness="1" BorderBrush="Black" 
-                 IsReadOnly="{Binding SelectedTask.IsTaskViewValuesReadOnly}" ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Title]}">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
 
         <TextBox x:Name="CreateTaskDescription" Text="{Binding SelectedTask.Description, UpdateSourceTrigger=PropertyChanged}" Background="#eee"
-                 Grid.Column="1" Grid.Row="2" Margin="0 0 1 0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="26" TextWrapping="Wrap"
-                 VerticalScrollBarVisibility="Visible" AcceptsReturn="True" BorderThickness="1" BorderBrush="Black"
+                 Grid.Column="1" Grid.Row="2" Margin="0 0 1 0" Padding="2,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="26" 
+                 TextWrapping="Wrap"  VerticalScrollBarVisibility="Visible" AcceptsReturn="True" BorderThickness="1" BorderBrush="Black"
                  IsReadOnly="{Binding SelectedTask.IsTaskViewValuesReadOnly}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -71,10 +218,11 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
+        
 
         <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
             <DatePicker x:Name="CreateTaskDeadline" SelectedDate="{Binding SelectedTask.Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                        SelectedDateFormat="Short" Height="41" FontSize="26" Margin="0" FirstDayOfWeek="Monday"
+                        SelectedDateFormat="Short" Height="41" Width="165" FontSize="26" Margin="0" Padding="3,2" FirstDayOfWeek="Monday"
                         IsHitTestVisible="{Binding SelectedTask.IsTaskViewDeadlineHitTestVisible}" 
                         ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Deadline]}">
                 <DatePicker.Resources>
@@ -82,17 +230,35 @@
                         <Setter Property="CornerRadius" Value="4"/>
                     </Style>
                 </DatePicker.Resources>
+                <DatePicker.Style>
+                    <Style TargetType="{x:Type DatePicker}">
+                        <Style.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="Background" Value="#eee"/>
+                                <!--Transparent-->
+                            </Style>
+                        </Style.Resources>
+                        <Setter Property="Background" Value="#eee"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF3C7FB1"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DatePicker.Style>
             </DatePicker>
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
                    Visibility="{Binding SelectedTask.DeadlineErrorIconVisibility}" Width="70" Height="70"/>
         </StackPanel>
+        
 
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
-            <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Width="150" Height="39" FontSize="26"
-                      HorizontalAlignment="Left" HorizontalContentAlignment="Left" IsEnabled="{Binding SelectedTask.IsTaskViewStatusEnabled}"
+            <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2" Width="150" Height="41" FontSize="26"
+                      Background="#eee" HorizontalContentAlignment="Left" IsEnabled="{Binding SelectedTask.IsTaskViewStatusEnabled}"
                       SelectedValue="{Binding SelectedTask.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                       SelectedValuePath="Key" DisplayMemberPath="Value"
-                      ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Status]}">
+                      ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Status]}" Style="{DynamicResource theComboBox}">
             </ComboBox>
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
                    Visibility="{Binding SelectedTask.StatusErrorIconVisibility}" Width="60" Height="60"/>
@@ -105,28 +271,25 @@
             <RadioButton x:Name="MonthlyTask" Content="Monthly" FontSize="21" VerticalContentAlignment="Center"/>
         </StackPanel>-->
 
-        <Image Grid.Column="2" Grid.Row="0" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
-               Visibility="{Binding SelectedTask.UserErrorIconVisibility}" Width="75" Height="75"/>
-        <Image Grid.Column="2" Grid.Row="1" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
-               Visibility="{Binding SelectedTask.TitleErrorIconVisibility}" Width="75" Height="75"/>
+        <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
+            <Button x:Name="CreateTaskForUserButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SelectedTask.SaveCommand}" 
+                    Height="45" Width="70" Margin="0 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
-        <Button x:Name="CreateTaskForUserButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SelectedTask.SaveCommand}" 
-                Grid.Column="1" Grid.Row="5" Height="45" Width="70" Margin="0 0 160 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-
-        <Button x:Name="CancelCreateTaskForUserButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding SelectedTask.CancelTaskViewCommand}"
-                Grid.Column="1" Grid.Row="5" Height="45" Width="85" Margin="50 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+            <Button x:Name="CancelCreateTaskForUserButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding SelectedTask.CancelTaskViewCommand}"
+                    Height="45" Width="85" Margin="30 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
 
     </Grid>
 

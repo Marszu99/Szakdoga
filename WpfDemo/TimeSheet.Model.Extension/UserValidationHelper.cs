@@ -15,7 +15,7 @@ namespace TimeSheet.Model.Extension
         private const int MaximumFirstNameLength = 45;
         private const int MinimumLastNameLength = 3;
         private const int MaximumLastNameLength = 45;
-        private const int MinimumEmailLength = 11;
+        //private const int MinimumEmailLength = 11;
         private const int MaximumEmailLength = 100;
         private const int MinimumCompanyNameLength = 10;
         private const int MaximumCompanyNameLength = 60;
@@ -132,7 +132,7 @@ namespace TimeSheet.Model.Extension
             {
                 result = Resources.EmailIsEmpty;
             }
-            else if (email.Length < MinimumEmailLength || email.Length > MaximumEmailLength)
+            else if (email.Length > MaximumEmailLength) // (email.Length < MinimumEmailLength || email.Length > MaximumEmailLength) 
             {
                 result = Resources.EmailWrongLength;
             }

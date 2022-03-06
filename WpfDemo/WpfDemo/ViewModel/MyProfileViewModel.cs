@@ -26,8 +26,8 @@ namespace WpfDemo.ViewModel
         private string _myProfileViewUserValuesBorderBrush = "DarkGray";
         private bool _myProfileViewUserValuesIsReadOnly = true;
         private bool _myProfileViewUserPasswordIsEnabled = false;
-        private string _myProfileViewChangeUserValuesButtonVisibility = "Visible";
-        private string _myProfileViewSaveAndCancelButtonsVisibility = "Hidden";
+        private Visibility _myProfileViewChangeUserValuesButtonVisibility = Visibility.Visible;
+        private Visibility _myProfileViewSaveAndCancelButtonsVisibility = Visibility.Hidden;
 
         private System.ComponentModel.IEditableObject _IEditableObject;
         private System.ComponentModel.IRevertibleChangeTracking _IRevertibleChangeTracking;
@@ -203,7 +203,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string MyProfileViewChangeUserValuesButtonVisibility
+        public Visibility MyProfileViewChangeUserValuesButtonVisibility
         {
             get
             {
@@ -216,7 +216,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string MyProfileViewSaveAndCancelButtonsVisibility
+        public Visibility MyProfileViewSaveAndCancelButtonsVisibility
         {
             get
             {
@@ -356,8 +356,8 @@ namespace WpfDemo.ViewModel
             MyProfileViewUserValuesBackground = "#FFEEEEEE";
             MyProfileViewUserValuesBorderThickness = "1";
             MyProfileViewUserValuesBorderBrush = "Black";
-            MyProfileViewChangeUserValuesButtonVisibility = "Hidden";
-            MyProfileViewSaveAndCancelButtonsVisibility = "Visible";
+            MyProfileViewChangeUserValuesButtonVisibility = Visibility.Hidden;
+            MyProfileViewSaveAndCancelButtonsVisibility = Visibility.Visible;
 
             //_IEditableObject.BeginEdit();
         }
@@ -374,8 +374,8 @@ namespace WpfDemo.ViewModel
                 MyProfileViewUserValuesBackground = "DarkGray";
                 MyProfileViewUserValuesBorderThickness = "0";
                 MyProfileViewUserValuesBorderBrush = "DarkGray";
-                MyProfileViewChangeUserValuesButtonVisibility = "Visible";
-                MyProfileViewSaveAndCancelButtonsVisibility = "Hidden";
+                MyProfileViewChangeUserValuesButtonVisibility = Visibility.Visible;
+                MyProfileViewSaveAndCancelButtonsVisibility = Visibility.Hidden;
 
                 IsChangedUservaluesToFalse();
                 OnPropertyChanged(nameof(MyProfileViewWindowStyle));
@@ -408,8 +408,8 @@ namespace WpfDemo.ViewModel
             MyProfileViewUserValuesBackground = "DarkGray";
             MyProfileViewUserValuesBorderThickness = "0";
             MyProfileViewUserValuesBorderBrush = "DarkGray";
-            MyProfileViewChangeUserValuesButtonVisibility = "Visible";
-            MyProfileViewSaveAndCancelButtonsVisibility = "Hidden";
+            MyProfileViewChangeUserValuesButtonVisibility = Visibility.Visible;
+            MyProfileViewSaveAndCancelButtonsVisibility = Visibility.Hidden;
 
             IsChangedUservaluesToFalse();
         }

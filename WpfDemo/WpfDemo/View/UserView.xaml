@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfDemo"
         xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource" 
         mc:Ignorable="d"
-        Name="updateUser" Height="{Binding SelectedUser.UserViewHeight}" Width="600" Background="DarkGray">
+        Name="User" Height="{Binding SelectedUser.UserViewHeight}" Width="540" Background="LightGray" BorderBrush="Black" BorderThickness="1">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,24 +18,28 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/><!--0.7*-->
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="1.4*"/>
+            <ColumnDefinition Width="{Binding SelectedUser.UserViewThirdColumnWidth}"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0" Text="{local:ResxStatic l10n:Resources.Username}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="{Binding SelectedUser.UserViewFirstNameGridRow}" Text="{local:ResxStatic l10n:Resources.FirstName}" FontWeight="Bold" Grid.Column="0"
-                   HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="2" Text="{local:ResxStatic l10n:Resources.LastName}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Margin="0" FontSize="30" Visibility="{Binding SelectedUser.UserViewUsernameVisibility}"/>
+        <TextBlock Grid.Row="0" Text="{local:ResxStatic l10n:Resources.UsernameWithColon}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Margin="0" FontSize="30" Visibility="{Binding SelectedUser.UserViewUsernameWithColonVisibility}"/>
+        <TextBlock Grid.Row="{Binding SelectedUser.UserViewFirstNameGridRow}" Text="{local:ResxStatic l10n:Resources.FirstNameWithColon}" FontWeight="Bold" 
+                   Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0" FontSize="30"/>
+        <TextBlock Grid.Row="2" Text="{local:ResxStatic l10n:Resources.LastNameWithColon}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" 
                    VerticalAlignment="Center" Margin="0" FontSize="30"/>
         <TextBlock Grid.Row="{Binding SelectedUser.UserViewEmailGridRow}" Text="{local:ResxStatic l10n:Resources.Email}" FontWeight="Bold" Grid.Column="0" 
-                   HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0" FontSize="30"/>
-        <TextBlock Grid.Row="4" Text="{local:ResxStatic l10n:Resources.Telephone}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" 
+                   HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0" FontSize="30" Visibility="{Binding SelectedUser.UserViewEmailVisibility}"/>
+        <TextBlock Grid.Row="{Binding SelectedUser.UserViewEmailGridRow}" Text="{local:ResxStatic l10n:Resources.EmailWithColon}" FontWeight="Bold" Grid.Column="0" 
+                   HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0" FontSize="30" Visibility="{Binding SelectedUser.UserViewEmailWithColonVisibility}"/>
+        <TextBlock Grid.Row="4" Text="{local:ResxStatic l10n:Resources.TelephoneWithColon}" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Right" 
                    VerticalAlignment="Center" Margin="0" FontSize="30"/>
 
 
         <TextBox x:Name="UserUsername" Text="{Binding SelectedUser.Username, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                 Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="26" Margin="15" 
+                 Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="26" Margin="10 5 10 0" 
                  BorderThickness="{Binding SelectedUser.UserViewValuesBorderThickness}" BorderBrush="Black" 
                  Background="{Binding SelectedUser.UserViewValuesBackground}" IsReadOnly="{Binding SelectedUser.IsUserViewValuesReadOnly}"
                  ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[Username]}">
@@ -48,8 +52,8 @@
 
         <TextBox x:Name="UserFirstName" Text="{Binding SelectedUser.FirstName, UpdateSourceTrigger=PropertyChanged}"
                  Grid.Row="{Binding SelectedUser.UserViewFirstNameGridRow}" Grid.Column="1" HorizontalAlignment="Stretch" 
-                 VerticalAlignment="Center" Margin="15" FontSize="26" BorderThickness="{Binding SelectedUser.UserViewValuesBorderThickness}" BorderBrush="Black" 
-                 Background="{Binding SelectedUser.UserViewValuesBackground}" IsReadOnly="True" 
+                 VerticalAlignment="Center" Margin="10 5 0 0" FontSize="26" BorderThickness="{Binding SelectedUser.UserViewValuesBorderThickness}" 
+                 BorderBrush="Black" Background="{Binding SelectedUser.UserViewValuesBackground}" IsReadOnly="True" 
                  IsEnabled="{Binding SelectedUser.IsUserViewValuesEnabled}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -59,7 +63,7 @@
         </TextBox>
 
         <TextBox x:Name="UserLastName" Text="{Binding SelectedUser.LastName, UpdateSourceTrigger=PropertyChanged}"
-                 Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="15" FontSize="26"
+                 Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10 5 0 0" FontSize="26"
                  BorderThickness="{Binding SelectedUser.UserViewValuesBorderThickness}" BorderBrush="Black" 
                  Background="{Binding SelectedUser.UserViewValuesBackground}" IsReadOnly="True" IsEnabled="{Binding SelectedUser.IsUserViewValuesEnabled}">
             <TextBox.Resources>
@@ -71,8 +75,8 @@
 
         <TextBox x:Name="UserEmail" Text="{Binding SelectedUser.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                  Grid.Row="{Binding SelectedUser.UserViewEmailGridRow}" Grid.Column="1" HorizontalAlignment="Stretch" 
-                 VerticalAlignment="Center" Margin="15" FontSize="26" BorderThickness="{Binding SelectedUser.UserViewValuesBorderThickness}" BorderBrush="Black" 
-                 Background="{Binding SelectedUser.UserViewValuesBackground}" IsReadOnly="{Binding SelectedUser.IsUserViewValuesReadOnly}"
+                 VerticalAlignment="Center" Margin="10 1 10 0" FontSize="26" BorderThickness="{Binding SelectedUser.UserViewValuesBorderThickness}" 
+                 BorderBrush="Black" Background="{Binding SelectedUser.UserViewValuesBackground}" IsReadOnly="{Binding SelectedUser.IsUserViewValuesReadOnly}"
                  ToolTipService.ToolTip="{Binding SelectedUser.ErrorCollection[Email]}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -82,7 +86,7 @@
         </TextBox>
 
         <TextBox x:Name="UserTelephone" Text="{Binding SelectedUser.Telephone, UpdateSourceTrigger=PropertyChanged}"
-                 Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="15" FontSize="26" 
+                 Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10 5 0 0" FontSize="26" 
                  BorderThickness="{Binding SelectedUser.UserViewValuesBorderThickness}" BorderBrush="Black" 
                  Background="{Binding SelectedUser.UserViewValuesBackground}" IsReadOnly="True" IsEnabled="{Binding SelectedUser.IsUserViewValuesEnabled}">
             <TextBox.Resources>
@@ -98,29 +102,30 @@
                Visibility="{Binding SelectedUser.EmailErrorIconVisibility}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="60"/>
 
 
-        <Button x:Name="SaveUserButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SelectedUser.SaveCommand}" Grid.Column="1" 
-                Grid.Row="6" Height="45" Width="70" Margin="20 0 0 0" FontSize="26" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
+        <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
+            <Button x:Name="SaveUserButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SelectedUser.SaveCommand}" Height="45" Width="70" 
+                    Margin="10 0 0 0" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
                 Visibility="{Binding SelectedUser.UserViewSaveButtonVisibility}">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
-        <Button x:Name="CancelCreateUserButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding SelectedUser.CancelUserViewCommand}"
-                Grid.Column="1" Grid.Row="5" Height="45" Width="85" Margin="0 0 20 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-
+            <Button x:Name="CancelCreateUserButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding SelectedUser.CancelUserViewCommand}"
+                Height="45" Width="85" Margin="20 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+        
     </Grid>
 
     <UserControl.InputBindings>
         <KeyBinding Key="Enter" Command="{Binding SelectedUser.SaveCommand}"/>
     </UserControl.InputBindings>
-
 </UserControl>

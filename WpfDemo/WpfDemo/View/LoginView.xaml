@@ -31,7 +31,7 @@
                        VerticalAlignment="Top" Margin="0 15 0 0" FontSize="55"/>
 
             <TextBox x:Name="LoginUsername" Text="{Binding Username}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" 
-                     Margin="20 0 0 30" Width="500" BorderThickness="1" BorderBrush="Black" FontSize="42" Background="#eee">
+                     Margin="20 0 0 30" Padding="2,0" Width="500" BorderThickness="1" BorderBrush="Black" FontSize="42" Background="#eee">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

@@ -145,7 +145,7 @@
     <value>Cég nevének mezője üres!</value>
   </data>
   <data name="CompanyNameWrongLength" xml:space="preserve">
-    <value>Cég neve legalább 10 és legfeljebb 60 karakter lehet!</value>
+    <value>Cég neve legalább 10 és legfeljebb 60 karakter hosszú lehet!</value>
   </data>
   <data name="Date" xml:space="preserve">
     <value>Dátum</value>
@@ -205,7 +205,7 @@
     <value>Email:</value>
   </data>
   <data name="EmailWrongLength" xml:space="preserve">
-    <value>Email legalább 11 és legfeljebb 100 karakter lehet!</value>
+    <value>Email legfeljebb 100 karakter hosszú lehet!</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>Angol</value>
@@ -223,7 +223,7 @@
     <value>Keresztnév:</value>
   </data>
   <data name="FirstNameWrongLength" xml:space="preserve">
-    <value>Keresztnév legalább 3 és legfeljebb 45 karakter lehet!</value>
+    <value>Keresztnév legalább 3 és legfeljebb 45 karakter hosszú lehet!</value>
   </data>
   <data name="Hungary" xml:space="preserve">
     <value>Magyar</value>
@@ -247,16 +247,16 @@
     <value>Vezetéknév:</value>
   </data>
   <data name="LastNameWrongLength" xml:space="preserve">
-    <value>Vezetéknév legalább 3 és legfeljebb 45 karakter lehet!</value>
+    <value>Vezetéknév legalább 3 és legfeljebb 45 karakter hosszú lehet!</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Bejelentkezés</value>
+    <value>Belépés</value>
   </data>
   <data name="LoginErrorMessage" xml:space="preserve">
     <value>Helytelen a felhasználónév vagy a jelszó!</value>
   </data>
   <data name="Logout" xml:space="preserve">
-    <value>Kijelentkezés</value>
+    <value>Kilépés</value>
   </data>
   <data name="LogoutMessage" xml:space="preserve">
     <value>Biztos, hogy ki akar jelentkezni?</value>
@@ -337,7 +337,7 @@
     <value>Jelszó:</value>
   </data>
   <data name="PasswordWrongLength" xml:space="preserve">
-    <value>Jelszó legalább 6 és legfeljebb 45 karakter lehet!</value>
+    <value>Jelszó legalább 6 és legfeljebb 45 karakter hosszú lehet!</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profil</value>
@@ -463,7 +463,7 @@
     <value>Felhasználónév:</value>
   </data>
   <data name="UsernameWrongLength" xml:space="preserve">
-    <value>Felhasználónév legalább 6 és legfeljebb 45 karakter lehet!</value>
+    <value>Felhasználónév legalább 6 és legfeljebb 45 karakter hosszú lehet!</value>
   </data>
   <data name="Users" xml:space="preserve">
     <value>Felhasználók</value>

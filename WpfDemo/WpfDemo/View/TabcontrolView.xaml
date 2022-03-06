@@ -15,6 +15,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="55"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
 
@@ -26,8 +27,8 @@
             <!--<TextBlock Grid.Row="0" Text="{Binding CompanyName}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="38" Margin="1200 0 0 0"
                        FontSize="33" FontFamily="Times New Roman" Foreground="Black" Padding="0 0 0 0"/>-->
 
-            
-            <TabControl x:Name="tabControl" Grid.Row="1" Background="DarkGray" Margin="0 8 0 0" FontSize="18" Padding="0 0 0 50">
+
+            <TabControl x:Name="tabControl" Grid.Row="1" Background="DarkGray" Margin="15 8 15 0" Padding="0" FontSize="18">
                 <TabControl.Resources>
                     <Style TargetType="TabItem">
                         <Setter Property="Template">
@@ -94,7 +95,8 @@
                 <Border BorderBrush="#FF323131" BorderThickness="3" CornerRadius="2">
                     <Grid Grid.Row="1">
                         <Menu Background="#FFCEC7C7">
-                            <MenuItem Header="{Binding LoggedUserUsername}" FontSize="29" Foreground="Black" Width="226" Margin="48 0 0 0" Padding="5 0 0 0" Cursor="Hand">
+                            <MenuItem Header="{Binding LoggedUserUsername}" FontSize="29" Foreground="Black" Width="226" Margin="48 0 0 0" Padding="5 0 0 0"
+                                      Cursor="Hand">
 
                                 <MenuItem Header="{local:ResxStatic l10n:Resources.Profile}" Command="{Binding ShowMyProfileCommand}" Cursor="Hand">
                                     <MenuItem.Icon>
@@ -241,10 +243,12 @@
                                                                                       RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             <Border x:Name="english" Width="100" Height="30" Background="LightGray" CornerRadius="2,0,0,4" Margin="0,0,0,0">
-                                <TextBlock x:Name="englishText" Text="{local:ResxStatic l10n:Resources.English}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="englishText" Text="{local:ResxStatic l10n:Resources.English}" HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"/>
                             </Border>
                             <Border x:Name="hungary" Width="120" Height="30" Background="LightGray" CornerRadius="0,2,4,0">
-                                <TextBlock x:Name="hungaryText" Text="{local:ResxStatic l10n:Resources.Hungary}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="hungaryText" Text="{local:ResxStatic l10n:Resources.Hungary}" HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"/>
                             </Border>
                         </StackPanel>
                         <ControlTemplate.Triggers>

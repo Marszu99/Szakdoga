@@ -8,22 +8,28 @@
              xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
              mc:Ignorable="d" 
              Background="DarkGray"
-             d:DesignWidth="1550" d:DesignHeight="690">
+             d:DesignWidth="1510" d:DesignHeight="690">
 
-    <Grid Width="1550">
+    <Grid Width="1510">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="910"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
+            <!--<RowDefinition Height="35"/>-->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0 5 0 5">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <Grid Grid.Column="0" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 5 0 5">
                 <Button x:Name="NewRecordButton" Content="{local:ResxStatic l10n:Resources.New}" Command="{Binding CreateRecordCommand}" Grid.Column="0" 
-                        Grid.Row="0" Width="60" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                    Grid.Row="0" Width="60" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -32,7 +38,7 @@
                 </Button>
 
                 <Button x:Name="RefreshListRecordsButton" Content="{local:ResxStatic l10n:Resources.Refresh}" Command="{Binding RefreshRecordListCommand}"
-                        Grid.Column="0" Grid.Row="0" Width="65" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                    Grid.Column="0" Grid.Row="0" Width="65" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -41,10 +47,10 @@
                 </Button>
 
                 <TextBlock Text="{local:ResxStatic l10n:Resources.MyRecords}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
-                           FontSize="17" Visibility="{Binding RecordCheckBoxAndTextVisibility}"/>
+                        FontSize="17" Visibility="{Binding RecordCheckBoxAndTextVisibility}"/>
                 <CheckBox x:Name="ShowingMyRecordsCheckBox" Command="{Binding SortingByCheckBoxCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
-                          Width="15" Height="15" IsChecked="True" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" BorderBrush="Black" Cursor="Hand"
-                          Visibility="{Binding RecordCheckBoxAndTextVisibility}">
+                        Width="15" Height="15" IsChecked="True" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" BorderBrush="Black" Cursor="Hand"
+                        Visibility="{Binding RecordCheckBoxAndTextVisibility}">
                     <CheckBox.LayoutTransform>
                         <ScaleTransform ScaleX="1.8" ScaleY="1.8" />
                     </CheckBox.LayoutTransform>
@@ -56,21 +62,21 @@
                 </CheckBox>
 
                 <!--
-                <TextBlock Text="Date: " Margin="50 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-                <DatePicker x:Name="DateFrom" SelectedDate="{Binding DateFrom, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedDateFormat="Short" Width="125" Height="29" HorizontalAlignment="Left" FontSize="17" Margin="0 0 0 0">
-                </DatePicker>
-                <TextBlock Text="-" Margin="0 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
-                <DatePicker x:Name="DateTo" SelectedDate="{Binding DateTo, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedDateFormat="Short" Width="125" Height="29" HorizontalAlignment="Left" FontSize="17" Margin="0 0 10 0">
-                </DatePicker>-->
+            <TextBlock Text="Date: " Margin="50 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+            <DatePicker x:Name="DateFrom" SelectedDate="{Binding DateFrom, UpdateSourceTrigger=PropertyChanged}"
+                SelectedDateFormat="Short" Width="125" Height="29" HorizontalAlignment="Left" FontSize="17" Margin="0 0 0 0">
+            </DatePicker>
+            <TextBlock Text="-" Margin="0 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+            <DatePicker x:Name="DateTo" SelectedDate="{Binding DateTo, UpdateSourceTrigger=PropertyChanged}"
+                SelectedDateFormat="Short" Width="125" Height="29" HorizontalAlignment="Left" FontSize="17" Margin="0 0 10 0">
+            </DatePicker>-->
             </StackPanel>
-            
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5 0 5">
                 <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="0" VerticalAlignment="Center"
-                           HorizontalAlignment="Left" FontSize="20"/>
+                        HorizontalAlignment="Left" FontSize="20"/>
                 <TextBox x:Name="RecordSearchingText" Margin="5 0 0 0" Background="#eee" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
-                         Width="165" FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
+                        Width="165" FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -78,8 +84,11 @@
                     </TextBox.Resources>
                 </TextBox>
             </StackPanel>
+
+            <view:ListRecordsView x:Name="ListRecordsContent" Grid.Row="1" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1"/>
         </Grid>
-        <view:ListRecordsView x:Name="ListRecordsContent" Grid.Row="1" Margin="10 0 0 0"/>
-        <view:RecordView Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding SelectedRecordVisibility}"/>
+
+        <view:RecordView Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="0 5 0 0" Margin="0 0 6 0" 
+                         Visibility="{Binding SelectedRecordVisibility}"/>
     </Grid>
 </UserControl>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfDemo.View"
         mc:Ignorable="d"
         Title="Main" Width="1550" Height="870" Background="Gray"
-        WindowStartupLocation="Manual" ResizeMode="NoResize"
+        WindowStartupLocation="Manual" ResizeMode="CanMinimize"
         Left="-8" Top="0">
 
     <Frame x:Name="MainWindow" Margin="0 0 0 0" NavigationUIVisibility="Hidden"/>

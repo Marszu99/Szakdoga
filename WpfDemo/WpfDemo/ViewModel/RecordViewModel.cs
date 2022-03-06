@@ -205,7 +205,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? Visibility.Hidden : Visibility.Visible;
+                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 
@@ -221,7 +221,8 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return RecordValidationHelper.ValidateDate(_record.Date, _task == null ? DateTime.MinValue : _task.CreationDate) == null || !_isDateChanged ? Visibility.Hidden : Visibility.Visible;
+                return RecordValidationHelper.ValidateDate(_record.Date, _task == null ? DateTime.MinValue : _task.CreationDate) == null || !_isDateChanged 
+                       ? Visibility.Hidden : Visibility.Visible;
             }
         }
 

@@ -8,20 +8,26 @@
              xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
              mc:Ignorable="d" 
              Background="DarkGray"
-             d:DesignWidth="1550" d:DesignHeight="690">
+             d:DesignWidth="1510" d:DesignHeight="690">
     
-    <Grid Width="1550">
+    <Grid Width="1510">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="910"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
+            <!--<RowDefinition Height="35"/>-->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0 5 0 5">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <Grid Grid.Column="0" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 5 0 5">
 
                 <Button x:Name="NewTaskButton" Content="{local:ResxStatic l10n:Resources.New}" Command="{Binding CreateTaskCommand}" Grid.Column="0" Grid.Row="0"
                         Width="60" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
@@ -86,7 +92,7 @@
                 </CheckBox>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5 0 5">
                     <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="0" VerticalAlignment="Center" 
                            HorizontalAlignment="Center" FontSize="20"/>
                     <TextBox x:Name="TaskSearchingText" Margin="5 0 0 0" Background="#eee" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
@@ -98,8 +104,12 @@
                         </TextBox.Resources>
                     </TextBox>
             </StackPanel>
+            
+            <view:ListTasksView x:Name="ListTasksContent" Grid.Row="1" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1"/>
         </Grid>
-        <view:ListTasksView x:Name="ListTasksContent" Grid.Row="1" Margin="10 0 0 0"/>
-        <view:TaskView Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding SelectedTaskVisibility}"/>
+
+
+        <view:TaskView Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0 5 0 0" Margin="0 0 16 0" 
+                       Visibility="{Binding SelectedTaskVisibility}"/>
     </Grid>
 </UserControl>
