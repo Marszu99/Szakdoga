@@ -188,22 +188,29 @@
 
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
             <DatePicker x:Name="CreateRecordDate" SelectedDate="{Binding SelectedRecord.Date, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
-                        SelectedDateFormat="Short" Height="41" Width="165" FontSize="26" Padding="3,2" FirstDayOfWeek="Monday" 
+                        SelectedDateFormat="Short" Background="#eee" Height="41" Width="165" FontSize="26" Padding="3,2" FirstDayOfWeek="Monday" 
                         IsHitTestVisible="{Binding SelectedRecord.IsRecordViewDateHitTestVisible}" 
-                        ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Date]}" >
+                        ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Date]}">
                 <DatePicker.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
+                    <Style TargetType="{x:Type DatePickerTextBox}"><!--https://social.msdn.microsoft.com/Forums/vstudio/en-US/77e907cc-e949-4a37-b633-06337acddb7f/how-to-remove-datepicker-inner-border?forum=wpf-->
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate x:Name="dptext" TargetType="{x:Type DatePickerTextBox}">
+                                    <Grid>
+                                        <Grid x:Name="WatermarkContent" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                            <ScrollViewer x:Name="PART_ContentHost" Margin="0" 
+                                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
-                </DatePicker.Resources>
-                <DatePicker.Style>
                     <Style TargetType="{x:Type DatePicker}">
-                        <Style.Resources>
-                            <Style TargetType="DatePickerTextBox">
-                                <Setter Property="Background" Value="#eee"/><!--Transparent-->
-                            </Style>
-                        </Style.Resources>
-                        <Setter Property="Background" Value="#eee"/>
                         <Setter Property="BorderBrush" Value="Black"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -211,7 +218,16 @@
                             </Trigger>
                         </Style.Triggers>
                     </Style>
-                </DatePicker.Style>
+                </DatePicker.Resources>
+                <!--<DatePicker.CalendarStyle>
+                    <Style TargetType="Calendar">
+                        <Style.Triggers>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DatePicker.CalendarStyle>-->
             </DatePicker>
             
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"

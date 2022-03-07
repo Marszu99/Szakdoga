@@ -494,6 +494,7 @@ namespace WpfDemo.ViewModel
         private void CancelTaskView(object obj)
         {
             CancelTask(obj);
+            IsChangedTaskValuesToFalse();
         }
 
 

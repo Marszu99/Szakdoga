@@ -406,6 +406,7 @@ namespace WpfDemo.ViewModel
         private void CancelRecordView(object obj)
         {
             CancelRecord(obj);
+            IsChangedRecordValuesToFalse();
         }
     }
 }

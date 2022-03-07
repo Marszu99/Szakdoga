@@ -162,7 +162,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _user != null && _user.IdUser != 0 ? "665" : "200";
+                return _user != null && _user.IdUser != 0 ? "664" : "200";
             }
         }
 
