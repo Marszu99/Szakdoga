@@ -90,7 +90,7 @@
                 <Label Content="{local:ResxStatic l10n:Resources.Records}" FontWeight="Bold" FontSize="36" Margin="-7 13 0 0"/>
             </StackPanel>
 
-            <StackPanel Margin="0 0 0 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+            <StackPanel Margin="0 0 1 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
                 <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" FontSize="20"/>
                 <TextBox x:Name="RecordSearchingText" Margin="5 0 0 1" Background="#eee" Text="{Binding SearchRecordListValue, UpdateSourceTrigger=PropertyChanged}"
                          Width="165" FontSize="18" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
@@ -118,7 +118,7 @@
                 <ColumnDefinition Width="622*"/>
                 <ColumnDefinition Width="107*"/>
                 <ColumnDefinition Width="73*"/>
-                <ColumnDefinition Width="729*"/>
+                <ColumnDefinition Width="730*"/>
             </Grid.ColumnDefinitions>
 
             <DataGrid x:Name="UserTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" 
@@ -200,7 +200,7 @@
             <DataGrid x:Name="UserRecordsDataGrid" x:FieldModifier="public" ItemsSource="{Binding RecordList}" AutoGenerateColumns="False" Background="LightGray" 
                       BorderBrush="Black" BorderThickness="1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" Grid.Column="2" FontSize="20" 
-                      Grid.ColumnSpan="2" Margin="72 0 0 0">
+                      Grid.ColumnSpan="2" Margin="72 0 0 0" Width="720">
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">

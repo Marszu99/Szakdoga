@@ -22,7 +22,7 @@
                 <DataGrid x:Name="ListTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}"
                           Width="900" HorizontalAlignment="Left" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray"
                           ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                          Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20">
+                          Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" BorderBrush="Transparent">
 
                     <DataGrid.InputBindings>
                         <KeyBinding Key="Delete" Command="{Binding DeleteCommand}"/>

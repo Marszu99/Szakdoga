@@ -37,13 +37,15 @@
                     </Grid>
                     <ControlTemplate.Triggers><!--A ControlTemplate.Triggers-ben levo dolgok: https://social.msdn.microsoft.com/Forums/vstudio/en-US/dd893f6e-720f-49ef-827d-78b1d20d660a/change-mouseover-effect-of-combobox?forum=wpf-->
                         <Trigger Property="ToggleButton.IsMouseOver" Value="true">
-                            <Setter TargetName="Border" Property="Background" Value="#FFBEE6FD"/>
-                            <Setter TargetName="Border" Property="BorderBrush" Value="#FF3C7FB1"/>
+                            <!--<Setter TargetName="Border" Property="Background" Value="#FFBEE6FD"/>-->
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FF3C7FB1"/><!--#FF7EB4EA-->
                             <Setter TargetName="Arrow" Property="Fill" Value="Transparent"/>
                         </Trigger>
                         <Trigger Property="ToggleButton.IsChecked" Value="true">
+                            <!--<Setter TargetName="Border" Property="Background" Value="#FFBEE6FD"/>-->
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FF3C7FB1"/><!--#FF7EB4EA-->
                             <Setter TargetName="Arrow" Property="Fill" Value="Transparent"/>
-                        </Trigger>
+                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Border" Property="Background" Value="#EEEEEE"/>
                         </Trigger>
@@ -142,8 +144,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-        </Style.Triggers>
     </Style>
 </UserControl.Resources>
 
@@ -187,6 +187,15 @@
                         <TextBlock Text="{Binding Username}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
+                <ComboBox.Resources>
+                    <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Resources>
             </ComboBox>
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
                    Visibility="{Binding SelectedTask.UserErrorIconVisibility}" Width="70" Height="70"/>
@@ -248,7 +257,7 @@
                         <Setter Property="BorderBrush" Value="Black"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderBrush" Value="#FF3C7FB1"/>
+                                <Setter Property="BorderBrush" Value="#FF3C7FB1"/><!--#FF7EB4EA-->
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -265,6 +274,15 @@
                       SelectedValue="{Binding SelectedTask.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                       SelectedValuePath="Key" DisplayMemberPath="Value"
                       ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Status]}" Style="{DynamicResource theComboBox}">
+                <ComboBox.Resources>
+                    <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Resources>
             </ComboBox>
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
                    Visibility="{Binding SelectedTask.StatusErrorIconVisibility}" Width="60" Height="60"/>

@@ -22,7 +22,7 @@
                 <DataGrid x:Name="ListRecordsDataGrid" x:FieldModifier="public" ItemsSource="{Binding RecordList}" SelectedItem="{Binding SelectedRecord}"
                           Width="900" HorizontalAlignment="Left" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" 
                           ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                          Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="19">
+                          Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="19" BorderBrush="Transparent">
 
                     <DataGrid.InputBindings><!--ehhez kell a IsSynchronizedWithCurrentItem="True"-->
                         <KeyBinding Key="Delete"  Command="{Binding DeleteCommand}"/>

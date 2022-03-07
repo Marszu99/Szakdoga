@@ -37,11 +37,13 @@
                         </Grid>
                         <ControlTemplate.Triggers><!--A ControlTemplate.Triggers-ben levo dolgok: https://social.msdn.microsoft.com/Forums/vstudio/en-US/dd893f6e-720f-49ef-827d-78b1d20d660a/change-mouseover-effect-of-combobox?forum=wpf-->
                             <Trigger Property="ToggleButton.IsMouseOver" Value="true">
-                                <Setter TargetName="Border" Property="Background" Value="#FFBEE6FD"/>
-                                <Setter TargetName="Border" Property="BorderBrush" Value="#FF3C7FB1"/>
+                                <!--<Setter TargetName="Border" Property="Background" Value="#FFBEE6FD"/>-->
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FF3C7FB1"/><!--#FF7EB4EA-->
                                 <Setter TargetName="Arrow" Property="Fill" Value="Transparent"/>
                             </Trigger>
                             <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                <!--<Setter TargetName="Border" Property="Background" Value="#FFBEE6FD"/>-->
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FF3C7FB1"/><!--#FF7EB4EA-->
                                 <Setter TargetName="Arrow" Property="Fill" Value="Transparent"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
@@ -83,7 +85,6 @@
                                 Focusable="false"
                                 IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
                                 ClickMode="Press"/>
-
                         <ContentPresenter
                                     Name="ContentSite"
                                     IsHitTestVisible="False"
@@ -92,7 +93,7 @@
                                     ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
                                     Margin="10,3,30,3"
                                     VerticalAlignment="Center"
-                                    HorizontalAlignment="Left" />
+                                    HorizontalAlignment="Left"/>
                         <TextBox x:Name="PART_EditableTextBox"
                                 Style="{x:Null}"
                                 Template="{StaticResource ComboBoxTextBox}"
@@ -121,29 +122,27 @@
                                     BorderThickness="1"
                                     BorderBrush="#F6F6F6"/>
                                 <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
-                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
                                 </ScrollViewer>
                             </Grid>
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
-                            <Trigger Property="HasItems" Value="false">
-                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
-                            </Trigger>
-                            <Trigger Property="IsGrouping" Value="true">
-                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
-                            </Trigger>
-                            <Trigger Property="IsEditable" Value="true">
-                                <Setter Property="IsTabStop" Value="false"/>
-                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                        </Trigger>
+                        <Trigger Property="IsGrouping" Value="true">
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </Trigger>
+                        <Trigger Property="IsEditable" Value="true">
+                            <Setter Property="IsTabStop" Value="false"/>
+                            <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-        </Style.Triggers>
     </Style>
 </UserControl.Resources>
 
@@ -180,6 +179,15 @@
                         <TextBlock Text="{Binding Title}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
+                <ComboBox.Resources>
+                    <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Resources>
             </ComboBox>
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
                    Visibility="{Binding SelectedRecord.TaskErrorIconVisibility}" Width="75" Height="75"/>
@@ -214,15 +222,29 @@
                         <Setter Property="BorderBrush" Value="Black"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderBrush" Value="#FF3C7FB1"/>
+                                <Setter Property="BorderBrush" Value="#FF3C7FB1"/><!--#FF7EB4EA-->
                             </Trigger>
                         </Style.Triggers>
                     </Style>
+                   <!-- <Style x:Key="{x:Type CalendarDayButton}" TargetType="{x:Type CalendarDayButton}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style x:Key="{x:Type CalendarItem}" TargetType="{x:Type CalendarItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>-->
                 </DatePicker.Resources>
                 <!--<DatePicker.CalendarStyle>
                     <Style TargetType="Calendar">
                         <Style.Triggers>
-                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Trigger Property="CalendarItem.IsMouseOver" Value="True">
                                 <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
                         </Style.Triggers>
