@@ -259,6 +259,9 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="BorderBrush" Value="#FF3C7FB1"/><!--#FF7EB4EA-->
                             </Trigger>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="BorderBrush" Value="#FF3C7FB1"/>
+                            </Trigger>
                         </Style.Triggers>
                     </Style>
                 </DatePicker.Resources>
