@@ -52,7 +52,7 @@
                 </TextBlock>-->
 
             <Button x:Name="LoginButton" Content="{local:ResxStatic l10n:Resources.Login}" Command="{Binding LoginCommand}" Grid.Row="1" Grid.Column="1" 
-                    Height="65" FontSize="40" Margin="20 0 0 75" Padding="5" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                    Height="60" FontSize="35" Margin="20 0 0 75" Padding="7 2" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>

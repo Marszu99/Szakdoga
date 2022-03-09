@@ -103,15 +103,7 @@
             </StackPanel>
         </Grid>
 
-        <Button x:Name="AddTaskToUserTaskButton" Content="{local:ResxStatic l10n:Resources.NewTask}" Command="{Binding ShowTaskCommand}" Grid.Row="2" 
-                Margin="0 0 140 0" Height="30" Width="75" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="14" 
-                BorderThickness="1" BorderBrush="Black" Cursor="Hand" Visibility="{Binding AddTaskButtonVisibility}">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -121,6 +113,16 @@
                 <ColumnDefinition Width="730*"/>
             </Grid.ColumnDefinitions>
 
+            <Button x:Name="AddTaskToUserTaskButton" Content="{local:ResxStatic l10n:Resources.New}" Command="{Binding ShowTaskCommand}" Grid.Row="2" Grid.Column="1"
+                Margin="40 5 0 0" Padding="5 0" Height="30" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="20" 
+                BorderThickness="1" BorderBrush="Black" Cursor="Hand" Visibility="{Binding AddTaskButtonVisibility}">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
             <DataGrid x:Name="UserTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" 
                       HorizontalAlignment="Left" Width="650" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" BorderBrush="Black"
                       BorderThickness="1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 

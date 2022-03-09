@@ -70,7 +70,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back.
+        ///   Looks up a localized string similar to BACK.
         /// </summary>
         public static string Back {
             get {
@@ -79,7 +79,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to CANCEL.
         /// </summary>
         public static string Cancel {
             get {
@@ -88,7 +88,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change.
+        ///   Looks up a localized string similar to CHANGE.
         /// </summary>
         public static string Change {
             get {
@@ -214,7 +214,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized string similar to DELETE.
         /// </summary>
         public static string Delete {
             get {
@@ -232,7 +232,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Done Tasks.
+        ///   Looks up a localized string similar to DONE.
         /// </summary>
         public static string DoneTasks {
             get {
@@ -331,7 +331,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to English.
+        ///   Looks up a localized string similar to ENGLISH.
         /// </summary>
         public static string English {
             get {
@@ -385,7 +385,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hungary.
+        ///   Looks up a localized string similar to HUNGARY.
         /// </summary>
         public static string Hungary {
             get {
@@ -403,7 +403,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Language.
+        ///   Looks up a localized string similar to LANGUAGE.
         /// </summary>
         public static string Language {
             get {
@@ -457,7 +457,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login.
+        ///   Looks up a localized string similar to LOGIN.
         /// </summary>
         public static string Login {
             get {
@@ -475,7 +475,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Logout.
+        ///   Looks up a localized string similar to LOGOUT.
         /// </summary>
         public static string Logout {
             get {
@@ -502,7 +502,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My Profile.
+        ///   Looks up a localized string similar to MY PROFILE.
         /// </summary>
         public static string MyProfile {
             get {
@@ -547,20 +547,11 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New.
+        ///   Looks up a localized string similar to NEW.
         /// </summary>
         public static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to New Task.
-        /// </summary>
-        public static string NewTask {
-            get {
-                return ResourceManager.GetString("NewTask", resourceCulture);
             }
         }
         
@@ -727,7 +718,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Profile.
+        ///   Looks up a localized string similar to PROFILE.
         /// </summary>
         public static string Profile {
             get {
@@ -772,7 +763,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Records.
+        ///   Looks up a localized string similar to RECORDS.
         /// </summary>
         public static string Records {
             get {
@@ -790,7 +781,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Refresh.
+        ///   Looks up a localized string similar to REFRESH.
         /// </summary>
         public static string Refresh {
             get {
@@ -799,7 +790,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Register.
+        ///   Looks up a localized string similar to REGISTER.
         /// </summary>
         public static string Register {
             get {
@@ -817,7 +808,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save.
+        ///   Looks up a localized string similar to SAVE.
         /// </summary>
         public static string Save {
             get {
@@ -916,7 +907,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tasks.
+        ///   Looks up a localized string similar to TASKS.
         /// </summary>
         public static string Tasks {
             get {
@@ -997,7 +988,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ToDo Tasks.
+        ///   Looks up a localized string similar to TODO.
         /// </summary>
         public static string ToDoTasks {
             get {
@@ -1105,7 +1096,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Users.
+        ///   Looks up a localized string similar to USERS.
         /// </summary>
         public static string Users {
             get {

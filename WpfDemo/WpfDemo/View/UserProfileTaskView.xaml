@@ -269,23 +269,26 @@
         <Image Grid.Column="2" Grid.Row="1" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
                Visibility="{Binding TitleErrorIconVisibility}" Width="65" Height="65"/>
 
-        <Button x:Name="SaveTaskToUserButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SaveCommand}" Grid.Column="1" Grid.Row="5" 
-                Height="45" Width="70" HorizontalAlignment="Left" Margin="0 0 0 0" Padding="4" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+        <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
+            <Button x:Name="SaveTaskToUserButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SaveCommand}"  
+                Height="45" HorizontalAlignment="Left" Margin="0" Padding="4" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
-        <Button x:Name="BackToListButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding ExitWindowCommand}" Grid.Column="1" Grid.Row="5"
-                Height="45" Width="85" Margin="0 0 0 0" Padding="3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+            <Button x:Name="BackToListButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding ExitWindowCommand}"
+                Height="45" Margin="30 0 0 0" Padding="5 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+        
 
     </Grid>
 

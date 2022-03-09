@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Net.Mail;
+using System.Text;
 using System.Windows;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
@@ -368,6 +370,7 @@ namespace WpfDemo.ViewModel
             {
                 new UserRepository(new UserLogic()).UpdateUser(CurrentLoggedUser);
                 MessageBox.Show(Resources.UserUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
+                SendEmail();
 
                 MyProfileViewUserValuesIsReadOnly = true;
                 MyProfileViewUserPasswordIsEnabled = false;
@@ -388,6 +391,30 @@ namespace WpfDemo.ViewModel
             {
 
             }
+        }
+        private void SendEmail()
+        {
+            SmtpClient client = new SmtpClient();
+            client.Port = 587;
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            //client.Timeout = 10;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential("wpfszakdoga@gmail.com", "Marszu99");
+            string EmailSubject = "Profile data changes";
+            string EmailMessage = "Succesfully changed your profile's datas!\n\n" +
+                                  "Your profile's data:" +
+                                  "\n\t\t\t\t\t\t\t\tUsername: " + this._user.Username +
+                                  "\n\t\t\t\t\t\t\t\tPassword: " + this._user.Password +
+                                  "\n\t\t\t\t\t\t\t\tFirstName: " + this._user.FirstName +
+                                  "\n\t\t\t\t\t\t\t\tLastName: " + this._user.LastName +
+                                  "\n\t\t\t\t\t\t\t\tEmail: " + this._user.Email +
+                                  "\n\t\t\t\t\t\t\t\tTelephone: " + this._user.Password;
+            MailMessage mm = new MailMessage("wpfszakdoga@gmail.com", this._user.Email, EmailSubject, EmailMessage);
+            mm.BodyEncoding = UTF8Encoding.UTF8;
+            mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            client.Send(mm);
         }
 
         private void CancelChangeUserValues(object obj)

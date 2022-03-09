@@ -30,7 +30,7 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 5 0 5">
 
                 <Button x:Name="NewTaskButton" Content="{local:ResxStatic l10n:Resources.New}" Command="{Binding CreateTaskCommand}" Grid.Column="0" Grid.Row="0"
-                        Width="60" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
+                        Margin="10 0 0 0" FontSize="17" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
                         Visibility="{Binding NewTaskButtonVisibility}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -40,7 +40,7 @@
                 </Button>
 
                 <Button x:Name="RefreshListTasksButton" Content="{local:ResxStatic l10n:Resources.Refresh}" Command="{Binding RefreshTaskListCommand}"
-                        Grid.Column="0" Grid.Row="0" Width="65" Margin="10 0 0 0" FontSize="17" Padding="0" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                        Grid.Column="0" Grid.Row="0" Margin="10 0 0 0" FontSize="17" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
