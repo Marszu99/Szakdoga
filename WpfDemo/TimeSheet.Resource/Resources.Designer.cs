@@ -394,7 +394,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Information.
+        ///   Looks up a localized string similar to INFORMATION.
         /// </summary>
         public static string Information {
             get {
@@ -1114,7 +1114,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warning!.
+        ///   Looks up a localized string similar to WARNING!.
         /// </summary>
         public static string Warning {
             get {

@@ -29,11 +29,25 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(LoggedUsername));
             }*/
         }
+
         public string CompanyName
         {
             get
             {
                 return new CompanyRepository(new CompanyLogic()).GetCompany().CompanyName;
+            }
+        }
+
+        public bool IsLanguageEnglish
+        {
+            get
+            {
+                return _isLanguageEnglish;
+            }
+            set
+            {
+                _isLanguageEnglish = value;
+                OnPropertyChanged(nameof(IsLanguageEnglish));
             }
         }
 
@@ -77,7 +91,7 @@ namespace WpfDemo.ViewModel
             }
             catch (SqlException)
             {
-                MessageBox.Show(Resources.ServerError);
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

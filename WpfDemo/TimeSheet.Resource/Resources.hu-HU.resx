@@ -229,7 +229,7 @@
     <value>MAGYAR</value>
   </data>
   <data name="Information" xml:space="preserve">
-    <value>Információ</value>
+    <value>INFORMÁCIÓ</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>NYELV</value>
@@ -469,6 +469,6 @@
     <value>Felhasználó sikeresen módosítva!</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>Figyelmeztetés!</value>
+    <value>FIGYELMEZTETÉS!</value>
   </data>
 </root>

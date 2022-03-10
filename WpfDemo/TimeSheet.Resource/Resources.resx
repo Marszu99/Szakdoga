@@ -229,7 +229,7 @@
     <value>HUNGARY</value>
   </data>
   <data name="Information" xml:space="preserve">
-    <value>Information</value>
+    <value>INFORMATION</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>LANGUAGE</value>
@@ -469,6 +469,6 @@
     <value>User has been updated succesfully!</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>Warning!</value>
+    <value>WARNING!</value>
   </data>
 </root>
