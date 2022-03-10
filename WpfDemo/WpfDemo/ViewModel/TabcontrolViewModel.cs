@@ -38,19 +38,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public bool IsLanguageEnglish
-        {
-            get
-            {
-                return _isLanguageEnglish;
-            }
-            set
-            {
-                _isLanguageEnglish = value;
-                OnPropertyChanged(nameof(IsLanguageEnglish));
-            }
-        }
-
 
         public RelayCommand ShowMyProfileCommand { get; private set; }
         public RelayCommand ChangeLanguageCommand { get; private set; }

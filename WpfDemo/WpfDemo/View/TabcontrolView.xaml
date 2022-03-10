@@ -111,7 +111,7 @@
                                     </MenuItem.Icon>
                                 </MenuItem>-->
 
-                                <MenuItem Command="{Binding ShowMyProfileCommand}" Cursor="Hand" Padding="5 0" BorderThickness="2,0">
+                                <MenuItem Command="{Binding ShowMyProfileCommand}" Cursor="Hand" Padding="5 0" BorderThickness="2 0">
                                     <MenuItem.Header>
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\editProfile.png" Width="20"
@@ -121,10 +121,17 @@
                                     </MenuItem.Header>
                                 </MenuItem>
 
-                                <MenuItem Header="{local:ResxStatic l10n:Resources.Language}" Command="{Binding ChangeLanguageCommand}" Cursor="Hand" 
-                                          Padding="5 0" BorderThickness="2 0" FontSize="27"/> <!--ToolTip="Changing the program's language to hungary"-->
+                                <MenuItem Cursor="Hand" Margin="0" Padding="0" BorderThickness="1" BorderBrush="Gray">
+                                    <MenuItem.Header>
+                                        <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Cursor="Hand" Command="{Binding ChangeLanguageCommand}"
+                                                      Padding="0" Margin="0" FontSize="27" IsChecked="True"/><!--ToolTip="Changing the program's language"-->
+                                    </MenuItem.Header>
+                                </MenuItem>                           
 
-                                <MenuItem Command="{Binding LogoutCommand}" Cursor="Hand"  Padding="5 0 5 0" BorderThickness="2 0">
+                                <!--<MenuItem Header="{local:ResxStatic l10n:Resources.Language}" Command="{Binding ChangeLanguageCommand}" Cursor="Hand" 
+                                          Padding="5 0" BorderThickness="2 0" FontSize="27"/>--> 
+
+                                <MenuItem Command="{Binding LogoutCommand}" Cursor="Hand" Padding="5 0 5 0" BorderThickness="2 0">
                                     <MenuItem.Header>
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\logout.png" Width="20" 
@@ -133,17 +140,6 @@
                                         </StackPanel>
                                     </MenuItem.Header>
                                 </MenuItem>
-
-                                <!--<MenuItem Command="{Binding ChangeLanguageCommand}" Cursor="Hand" Padding="5 0 5 0" BorderThickness="2 0">
-                                    <MenuItem.Header>
-                                        <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Cursor="Hand" Command="{Binding ChangeLanguageCommand}"
-                                                      Padding="0 0" BorderThickness="2 0" FontSize="27" IsChecked="{Binding IsLanguageEnglish}"/>
-                                    </MenuItem.Header>
-                                </MenuItem>
-
-                                <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Command="{Binding ChangeLanguageCommand}" Cursor="Hand" 
-                                              Padding="0 0" BorderThickness="2 0" FontSize="27" IsChecked="{Binding IsLanguageEnglish}"/>-->
-
                             </MenuItem>
                         </Menu>
                         <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\ProfileIcon.png" Height="40" Width="50" 
@@ -158,12 +154,12 @@
     </Grid>
 
     <UserControl.Resources>
-        <Style x:Key="ButtonFocusVisual">
+        <Style x:Key="ButtonFocusVisual"><!--https://stackoverflow.com/questions/38321275/toggle-button-in-wpf-->
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
                         <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
-                                                                           StrokeThickness="1" StrokeDashArray="1 2"/>
+                                   StrokeThickness="1" StrokeDashArray="1 2"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -189,28 +185,28 @@
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
                         <StackPanel Orientation="Horizontal">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}"
-                                                                                      RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            <Border x:Name="english" Width="100" Height="30" Background="LightGray" CornerRadius="2,0,0,4" Margin="0,0,0,0">
-                                <TextBlock x:Name="englishText" Text="{local:ResxStatic l10n:Resources.English}" HorizontalAlignment="Center" 
-                                           VerticalAlignment="Center"/>
+                                              RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Border x:Name="english" Width="113" Background="LightGray" CornerRadius="2 0 0 4" Margin="0">
+                                <TextBlock x:Name="englishText" Text="ENG" HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"/><!--{local:ResxStatic l10n:Resources.English}-->
                             </Border>
-                            <Border x:Name="hungary" Width="120" Height="30" Background="LightGray" CornerRadius="0,2,4,0">
-                                <TextBlock x:Name="hungaryText" Text="{local:ResxStatic l10n:Resources.Hungary}" HorizontalAlignment="Center" 
-                                           VerticalAlignment="Center"/>
+                            <Border x:Name="hungary" Width="113" Background="LightGray" CornerRadius="0 2 4 0" Margin="0">
+                                <TextBlock x:Name="hungaryText" Text="HUN" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/> <!--{local:ResxStatic l10n:Resources.Hungary}-->
                             </Border>
                         </StackPanel>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
+                            <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Foreground" Value="#ADADAD"/>
                             </Trigger>
-                            <Trigger Property="IsChecked" Value="true">
-                                <Setter TargetName="english" Property="Background" Value="LightBlue"/>
-                                <Setter TargetName="englishText" Property="Foreground" Value="White"/>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="hungary" Property="Background" Value="#FFF4F4F4"/>
+                                <Setter TargetName="hungaryText" Property="Foreground" Value="#FF838383"/>
                             </Trigger>
                             <Trigger Property="IsChecked" Value="False">
-                                <Setter TargetName="hungary" Property="Background" Value="LightBlue"/>
-                                <Setter TargetName="hungaryText" Property="Foreground" Value="White"/>
+                                <Setter TargetName="english" Property="Background" Value="#FFF4F4F4"/>
+                                <Setter TargetName="englishText" Property="Foreground" Value="#FF838383"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

@@ -7,6 +7,7 @@
         xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource" 
         mc:Ignorable="d"
         Name="User" Height="{Binding SelectedUser.UserViewHeight}" Width="540" Background="LightGray" BorderBrush="Black" BorderThickness="1">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -114,7 +115,7 @@
             </Button>
 
             <Button x:Name="CancelCreateUserButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding SelectedUser.CancelUserViewCommand}"
-                Height="45" Margin="20 0 0 0" Padding="6 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                    Height="45" Margin="20 0 0 0" Padding="6 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
