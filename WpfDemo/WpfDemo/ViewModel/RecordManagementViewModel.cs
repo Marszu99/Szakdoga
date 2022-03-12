@@ -8,15 +8,12 @@ using TimeSheet.DataAccess;
 using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Resource;
-using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 
 namespace WpfDemo.ViewModel
 {
     public class RecordManagementViewModel : ViewModelBase
     {
-        private RecordManagementView _view;
-
         public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>();
         public ObservableCollection<Task> TaskList { get; } = new ObservableCollection<Task>();
         public ObservableCollection<RecordViewModel> RecordList { get; } = new ObservableCollection<RecordViewModel>();
@@ -48,48 +45,21 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        /*private DateTime _dateFrom = DateTime.Today;
-        public DateTime DateFrom
+
+        private bool _isMyRecordsCheckBoxChecked = true;
+        public bool IsMyRecordsCheckBoxChecked
         {
-            get
-            {
-                foreach (RecordViewModel recordViewModel in RecordList)
-                {
-                    if (record.Record.Date < _dateFrom)
-                    {
-                        _dateFrom = record.Record.Date;
-                    }
-                }
-                return _dateFrom;
+            get 
+            { 
+                return _isMyRecordsCheckBoxChecked; 
             }
             set
             {
-                _dateFrom = value;
-                OnPropertyChanged(nameof(DateFrom));
-                //SortingByCheckBox(_searchValue);
+                _isMyRecordsCheckBoxChecked = value;
+                OnPropertyChanged(nameof(IsMyRecordsCheckBoxChecked));
             }
         }
-        private DateTime _dateTo = DateTime.Parse("0001.01.01");
-        public DateTime DateTo
-        {
-            get
-            {
-                foreach(RecordViewModel recordViewModel in RecordList)
-                {
-                    if(record.Record.Date > _dateTo)
-                    {
-                        _dateTo = record.Record.Date;
-                    }
-                }
-                return _dateTo;
-            }
-            set
-            {
-                _dateTo = value;
-                OnPropertyChanged(nameof(DateTo));
-                //SortingByCheckBox(_searchValue);
-            }
-        }*/
+
 
         public Visibility RecordCheckBoxAndTextVisibility
         {
@@ -114,7 +84,6 @@ namespace WpfDemo.ViewModel
                 if (SelectedRecord != null)
                 {
                     SelectedRecord.RecordCanceled += OnRecordCanceled;
-
                 }
                 return SelectedRecord == null ? Visibility.Hidden : Visibility.Visible;
             }
@@ -152,12 +121,10 @@ namespace WpfDemo.ViewModel
         public RelayCommand DeleteCommand { get; private set; }
 
 
-        public RecordManagementViewModel(RecordManagementView view)
+        public RecordManagementViewModel()
         {
-            _view = view;
-
             LoadTasks();
-            RefreshRecordList(view);
+            RefreshRecordList(_searchValue);
 
             CreateRecordCommand = new RelayCommand(CreateRecord, CanExecuteShow);
             RefreshRecordListCommand = new RelayCommand(RefreshRecordList, CanExecuteRefresh);
@@ -172,8 +139,9 @@ namespace WpfDemo.ViewModel
         }
         private void CreateRecord(object obj)
         {
-            RefreshRecordList(obj);
+            RefreshRecordList(obj);  //KELL?????????????
             LoadTasks();
+
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
                 TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
             SelectedRecord.RecordCreated += OnRecordCreated;
@@ -181,6 +149,7 @@ namespace WpfDemo.ViewModel
         private void OnRecordCreated(RecordViewModel recordViewModel)
         {
             RecordList.Add(recordViewModel);
+
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
                 TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
             SelectedRecord.RecordCreated += OnRecordCreated;
@@ -244,7 +213,7 @@ namespace WpfDemo.ViewModel
             {
                 if (String.IsNullOrWhiteSpace(_searchValue))
                 {
-                    if (_view.ShowingMyRecordsCheckBox.IsChecked == true)
+                    if (IsMyRecordsCheckBoxChecked)
                     {
                         RecordList.Clear();
 
@@ -271,12 +240,12 @@ namespace WpfDemo.ViewModel
                 }
                 else
                 {
-                    if (_view.ShowingMyRecordsCheckBox.IsChecked == true)
+                    if (IsMyRecordsCheckBoxChecked)
                     {
                         RecordList.Clear();
-                        
+
                         var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record => record.Date.ToShortDateString().Contains(_searchValue)
-                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) 
+                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue)
                                         || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue)
                                         || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Status.ToString().Contains(_searchValue)).ToList();
                         records.ForEach(record =>
@@ -291,7 +260,7 @@ namespace WpfDemo.ViewModel
                         RecordList.Clear();
 
                         var records = new RecordRepository(new RecordLogic()).GetAllRecords().Where(record => record.Date.ToShortDateString().Contains(_searchValue)
-                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue) 
+                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue)
                                         || new UserRepository(new UserLogic()).GetUserByID(record.User_idUser).Username.Contains(_searchValue)
                                         || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue)
                                         || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Status.ToString().Contains(_searchValue)).ToList();

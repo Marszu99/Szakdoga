@@ -27,9 +27,11 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 5 0 5">
-                <Button x:Name="NewUserButton" Content="{local:ResxStatic l10n:Resources.New}" Command="{Binding CreateUserCommand}" Grid.Column="0" Grid.Row="0"
-                        Margin="10 0 0 0" FontSize="17" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
-                        Visibility="{Binding UserManagementButtonsVisibility}">
+                <Button x:Name="NewUserButton" Command="{Binding CreateUserCommand}" Grid.Column="0" Grid.Row="0"
+                        Margin="10 0 0 0" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
+                        Visibility="{Binding UserManagementButtonsVisibility}" ToolTip="{local:ResxStatic l10n:Resources.CreateNewUser}">
+                    <!--FontSize="17"-->
+                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\create-user.png"/>
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -37,9 +39,10 @@
                     </Button.Resources>
                 </Button>
 
-                <Button x:Name="RefreshListUsersButton" Content="{local:ResxStatic l10n:Resources.Refresh}" Command="{Binding RefreshUserListCommand}" 
-                        Grid.Column="0" Grid.Row="0" Margin="10 0 0 0" FontSize="17" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
-                        Visibility="{Binding UserManagementButtonsVisibility}">
+                <Button x:Name="RefreshListUsersButton" Command="{Binding RefreshUserListCommand}" Grid.Column="0" Grid.Row="0" 
+                        Margin="10 0 0 0" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
+                        Visibility="{Binding UserManagementButtonsVisibility}" ToolTip="{local:ResxStatic l10n:Resources.RefreshList}">
+                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\refresh.png"/>
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>

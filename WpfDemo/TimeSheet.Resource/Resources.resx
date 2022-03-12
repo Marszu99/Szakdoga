@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActiveTasks" xml:space="preserve">
-    <value>Active Tasks</value>
+    <value>Active</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>BACK</value>
@@ -146,6 +146,15 @@
   </data>
   <data name="CompanyNameWrongLength" xml:space="preserve">
     <value>Company's name have to reach minimum 10 characters and also can't be more than 60!</value>
+  </data>
+  <data name="CreateNewRecord" xml:space="preserve">
+    <value>Create new record</value>
+  </data>
+  <data name="CreateNewTask" xml:space="preserve">
+    <value>Create new task</value>
+  </data>
+  <data name="CreateNewUser" xml:space="preserve">
+    <value>Create new user</value>
   </data>
   <data name="Date" xml:space="preserve">
     <value>Date</value>
@@ -268,19 +277,16 @@
     <value>MY PROFILE</value>
   </data>
   <data name="MyRecords" xml:space="preserve">
-    <value>My Records</value>
+    <value>My</value>
   </data>
   <data name="MyTasks" xml:space="preserve">
-    <value>My Tasks</value>
+    <value>My</value>
   </data>
   <data name="NeedToChooseTaskForRecord" xml:space="preserve">
     <value>Need to choose a Task for the record!</value>
   </data>
   <data name="NeedToChooseUserForTask" xml:space="preserve">
     <value>Need to choose a User for the task!</value>
-  </data>
-  <data name="New" xml:space="preserve">
-    <value>NEW</value>
   </data>
   <data name="NotificationNewTask" xml:space="preserve">
     <value>New task!</value>
@@ -357,8 +363,8 @@
   <data name="RecordUpdatedMessage" xml:space="preserve">
     <value>Record has been updated succesfully!</value>
   </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>REFRESH</value>
+  <data name="RefreshList" xml:space="preserve">
+    <value>Refreshes the list</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>REGISTER</value>

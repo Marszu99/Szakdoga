@@ -9,16 +9,12 @@ using TimeSheet.DataAccess;
 using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Resource;
-using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 
 namespace WpfDemo.ViewModel
 {
     public class TaskManagementViewModel : ViewModelBase
     {
-        private TaskManagementView _view;
-
-
         public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>(); //List?
         public ObservableCollection<TaskViewModel> TaskList { get; } = new ObservableCollection<TaskViewModel>();
 
@@ -45,6 +41,51 @@ namespace WpfDemo.ViewModel
                 _searchValue = value;
                 OnPropertyChanged(nameof(SearchValue));
                 SortingByCheckBox(_searchValue);
+            }
+        }
+
+
+        private bool _isMyTasksCheckBoxChecked = true;
+        public bool IsMyTasksCheckBoxChecked
+        {
+            get
+            {
+                return _isMyTasksCheckBoxChecked;
+            }
+            set
+            {
+                _isMyTasksCheckBoxChecked = value;
+                OnPropertyChanged(nameof(IsMyTasksCheckBoxChecked));
+            }
+        }
+
+
+        private bool _isActiveTasksCheckBoxChecked = true;
+        public bool IsActiveTasksCheckBoxChecked
+        {
+            get
+            {
+                return _isActiveTasksCheckBoxChecked;
+            }
+            set
+            {
+                _isActiveTasksCheckBoxChecked = value;
+                OnPropertyChanged(nameof(IsActiveTasksCheckBoxChecked));
+            }
+        }
+
+
+        private bool _isNotificationsCheckBoxChecked = true;
+        public bool IsNotificationsCheckBoxChecked
+        {
+            get
+            {
+                return _isNotificationsCheckBoxChecked;
+            }
+            set
+            {
+                _isNotificationsCheckBoxChecked = value;
+                OnPropertyChanged(nameof(IsNotificationsCheckBoxChecked));
             }
         }
 
@@ -107,11 +148,10 @@ namespace WpfDemo.ViewModel
 
 
 
-        public TaskManagementViewModel(TaskManagementView view)
+        public TaskManagementViewModel()
         {
-            _view = view;
             LoadUsers();
-            RefreshTaskList(view);
+            RefreshTaskList(_searchValue);
 
             CreateTaskCommand = new RelayCommand(CreateTask, CanExecuteShow);
             RefreshTaskListCommand = new RelayCommand(RefreshTaskList, CanExecuteRefresh);
@@ -127,14 +167,16 @@ namespace WpfDemo.ViewModel
         }
         private void CreateTask(object obj)
         {
-            RefreshTaskList(obj);
+            RefreshTaskList(obj);  //KELL?????????????
             LoadUsers();
+
             SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
             SelectedTask.TaskCreated += OnTaskCreated;
         }
         private void OnTaskCreated(TaskViewModel taskViewModel)
         {
             TaskList.Add(taskViewModel);
+
             SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
             SelectedTask.TaskCreated += OnTaskCreated;
         }
@@ -198,7 +240,7 @@ namespace WpfDemo.ViewModel
             {
                 if (String.IsNullOrWhiteSpace(_searchValue))
                 {
-                    if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == false)
+                    if (IsMyTasksCheckBoxChecked && !IsActiveTasksCheckBoxChecked)
                     {
                         TaskList.Clear();
 
@@ -211,7 +253,7 @@ namespace WpfDemo.ViewModel
                             TaskList.Add(taskViewModel);
                         });
                     }
-                    else if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == true)
+                    else if (IsMyTasksCheckBoxChecked && IsActiveTasksCheckBoxChecked)
                     {
                         TaskList.Clear();
 
@@ -224,7 +266,7 @@ namespace WpfDemo.ViewModel
                             TaskList.Add(taskViewModel);
                         });
                     }
-                    else if (_view.ShowingMyTasksCheckBox.IsChecked == false && _view.ShowingActiveTasksCheckBox.IsChecked == true)
+                    else if (!IsMyTasksCheckBoxChecked && IsActiveTasksCheckBoxChecked)
                     {
                         TaskList.Clear();
 
@@ -244,7 +286,7 @@ namespace WpfDemo.ViewModel
                 }
                 else
                 {
-                    if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == false)
+                    if (IsMyTasksCheckBoxChecked && !IsActiveTasksCheckBoxChecked)
                     {
                         TaskList.Clear();
 
@@ -259,12 +301,12 @@ namespace WpfDemo.ViewModel
                             TaskList.Add(taskViewModel);
                         });
                     }
-                    else if (_view.ShowingMyTasksCheckBox.IsChecked == true && _view.ShowingActiveTasksCheckBox.IsChecked == true)
+                    else if (IsMyTasksCheckBoxChecked && IsActiveTasksCheckBoxChecked)
                     {
                         TaskList.Clear();
 
                         var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser).Where(task => task.Title.Contains(_searchValue)
-                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) 
+                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue)
                                     || task.Status.ToString().Contains(_searchValue)).ToList();
 
                         tasks.ForEach(task =>
@@ -274,12 +316,12 @@ namespace WpfDemo.ViewModel
                             TaskList.Add(taskViewModel);
                         });
                     }
-                    else if (_view.ShowingMyTasksCheckBox.IsChecked == false && _view.ShowingActiveTasksCheckBox.IsChecked == true)
+                    else if (!IsMyTasksCheckBoxChecked && IsActiveTasksCheckBoxChecked)
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks().Where(task => task.Title.Contains(_searchValue) 
-                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) 
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks().Where(task => task.Title.Contains(_searchValue)
+                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue)
                                     || task.Status.ToString().Contains(_searchValue)
                                     || new UserRepository(new UserLogic()).GetUserByID(task.User_idUser).Username.Contains(_searchValue)).ToList();
 
@@ -294,8 +336,8 @@ namespace WpfDemo.ViewModel
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task => task.Title.Contains(_searchValue) 
-                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue) 
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task => task.Title.Contains(_searchValue)
+                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue)
                                     || task.Status.ToString().Contains(_searchValue)
                                     || new UserRepository(new UserLogic()).GetUserByID(task.User_idUser).Username.Contains(_searchValue)).ToList();
                         tasks.ForEach(task =>
@@ -383,7 +425,7 @@ namespace WpfDemo.ViewModel
         }
         private void NotificationSwitchOnOff(object obj)
         {
-            if (_view.NotificationsCheckBox.IsChecked == true)
+            if (IsNotificationsCheckBoxChecked)
             {
                 TaskViewModel.IsNotificationsOn = true;
                 RefreshTaskList(obj);

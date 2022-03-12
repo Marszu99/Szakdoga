@@ -11,7 +11,7 @@ namespace WpfDemo.View
         public TaskManagementView()
         {
             InitializeComponent();
-            this.DataContext = new TaskManagementViewModel(this);
+            this.DataContext = new TaskManagementViewModel();
         }
     }
 }

@@ -113,9 +113,11 @@
                 <ColumnDefinition Width="730*"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="AddTaskToUserTaskButton" Content="{local:ResxStatic l10n:Resources.New}" Command="{Binding ShowTaskCommand}" Grid.Row="2" Grid.Column="1"
-                Margin="40 5 0 0" Padding="5 0" Height="30" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" FontSize="20" 
-                BorderThickness="1" BorderBrush="Black" Cursor="Hand" Visibility="{Binding AddTaskButtonVisibility}">
+            <Button x:Name="AddTaskToUserTaskButton" Command="{Binding ShowTaskCommand}" Grid.Row="2" Grid.Column="1"
+                    Margin="40 2.5 0 0" Padding="5 0" Height="32" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"
+                    BorderThickness="1" BorderBrush="Black" Cursor="Hand" Visibility="{Binding AddTaskButtonVisibility}"
+                    ToolTip="{local:ResxStatic l10n:Resources.CreateNewTask}"><!--FontSize="20"-->
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\create-task.png"/>
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

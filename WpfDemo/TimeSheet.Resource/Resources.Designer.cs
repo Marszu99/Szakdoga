@@ -61,7 +61,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active Tasks.
+        ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string ActiveTasks {
             get {
@@ -147,6 +147,33 @@ namespace TimeSheet.Resource {
         public static string CompanyNameWrongLength {
             get {
                 return ResourceManager.GetString("CompanyNameWrongLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new record.
+        /// </summary>
+        public static string CreateNewRecord {
+            get {
+                return ResourceManager.GetString("CreateNewRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new task.
+        /// </summary>
+        public static string CreateNewTask {
+            get {
+                return ResourceManager.GetString("CreateNewTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new user.
+        /// </summary>
+        public static string CreateNewUser {
+            get {
+                return ResourceManager.GetString("CreateNewUser", resourceCulture);
             }
         }
         
@@ -511,7 +538,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My Records.
+        ///   Looks up a localized string similar to My.
         /// </summary>
         public static string MyRecords {
             get {
@@ -520,7 +547,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My Tasks.
+        ///   Looks up a localized string similar to My.
         /// </summary>
         public static string MyTasks {
             get {
@@ -543,15 +570,6 @@ namespace TimeSheet.Resource {
         public static string NeedToChooseUserForTask {
             get {
                 return ResourceManager.GetString("NeedToChooseUserForTask", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to NEW.
-        /// </summary>
-        public static string New {
-            get {
-                return ResourceManager.GetString("New", resourceCulture);
             }
         }
         
@@ -781,11 +799,11 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to REFRESH.
+        ///   Looks up a localized string similar to Refreshes the list.
         /// </summary>
-        public static string Refresh {
+        public static string RefreshList {
             get {
-                return ResourceManager.GetString("Refresh", resourceCulture);
+                return ResourceManager.GetString("RefreshList", resourceCulture);
             }
         }
         

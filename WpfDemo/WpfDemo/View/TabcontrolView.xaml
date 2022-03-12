@@ -121,7 +121,7 @@
                                     </MenuItem.Header>
                                 </MenuItem>
 
-                                <MenuItem Cursor="Hand" Margin="0" Padding="0" BorderThickness="1" BorderBrush="Gray">
+                                <MenuItem Cursor="Hand" Margin="0" Padding="0 0 -1.5 0" BorderThickness="1" BorderBrush="Gray">
                                     <MenuItem.Header>
                                         <ToggleButton Style="{DynamicResource ToggleButtonStyle1}" Cursor="Hand" Command="{Binding ChangeLanguageCommand}"
                                                       Padding="0" Margin="0" FontSize="27" IsChecked="True"/><!--ToolTip="Changing the program's language"-->

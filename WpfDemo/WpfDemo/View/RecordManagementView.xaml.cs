@@ -11,7 +11,7 @@ namespace WpfDemo.View
         public RecordManagementView()
         {
             InitializeComponent();
-            this.DataContext = new RecordManagementViewModel(this);
+            this.DataContext = new RecordManagementViewModel();
         }
     }
 }

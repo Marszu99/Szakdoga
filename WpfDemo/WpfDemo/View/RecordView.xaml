@@ -142,26 +142,26 @@
                 </TextBox.Resources>
             </TextBox>
 
-            <Button x:Name="DurationAddButtton" Content="+" Command="{Binding SelectedRecord.DurationAddCommand}" Width="35" Height="35" FontSize="24"
-                    FontWeight="Bold" Margin="10 0 0 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand" 
+            <Button x:Name="DurationAddButtton" Content="+" Command="{Binding SelectedRecord.DurationAddCommand}" Width="35" Height="35" FontSize="40"
+                    FontWeight="Bold" Margin="10 0 0 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Padding="0 -15 0 0" 
                     Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
+                        <Setter Property="CornerRadius" Value="20"/>
                     </Style>
                 </Button.Resources>
             </Button>
 
-            <Button x:Name="DurationReduceButtton" Content="-" Command="{Binding SelectedRecord.DurationReduceCommand}" Width="35" Height="35" FontSize="24" 
-                    FontWeight="Bold" Margin="5 0 0 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
+            <Button x:Name="DurationReduceButtton" Content="-" Command="{Binding SelectedRecord.DurationReduceCommand}" Width="35" Height="35" FontSize="45" 
+                    FontWeight="Bold" Margin="5 0 0 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Padding="0 -20 0 0" 
                     Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
+                        <Setter Property="CornerRadius" Value="20"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            
+
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
                    Visibility="{Binding SelectedRecord.DurationErrorIconVisibility}" Width="70" Height="70"/>
         </StackPanel>

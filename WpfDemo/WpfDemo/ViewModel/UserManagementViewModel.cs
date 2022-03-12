@@ -14,8 +14,6 @@ namespace WpfDemo.ViewModel
 {
     public class UserManagementViewModel : ViewModelBase
     {
-        private UserManagementView _view;
-
         public ObservableCollection<UserViewModel> UserList { get; } = new ObservableCollection<UserViewModel>();
 
 
@@ -101,10 +99,8 @@ namespace WpfDemo.ViewModel
         public RelayCommand CreateUserCommand { get; private set; }
         public RelayCommand RefreshUserListCommand { get; private set; }
 
-        public UserManagementViewModel(UserManagementView view)
+        public UserManagementViewModel()
         {
-            _view = view;
-
             LoadUsers();
 
             CreateUserCommand = new RelayCommand(CreateUser, CanExecuteShow);
