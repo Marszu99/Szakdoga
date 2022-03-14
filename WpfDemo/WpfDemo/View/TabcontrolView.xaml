@@ -114,7 +114,7 @@
                                 <MenuItem Command="{Binding ShowMyProfileCommand}" Cursor="Hand" Padding="5 0" BorderThickness="2 0">
                                     <MenuItem.Header>
                                         <StackPanel Orientation="Horizontal">
-                                            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\editProfile.png" Width="20"
+                                            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\profile.png" Width="20"
                                                    Height="20"/>
                                             <TextBlock Margin="5 0" Text="{local:ResxStatic l10n:Resources.Profile}" FontSize="27"/>
                                         </StackPanel>
