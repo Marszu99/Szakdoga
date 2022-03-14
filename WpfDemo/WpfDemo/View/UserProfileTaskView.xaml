@@ -6,14 +6,13 @@
         xmlns:local="clr-namespace:WpfDemo"
         xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
         mc:Ignorable="d"
-        Title="UserProfileTaskView" Height="600" Width="580" Background="DarkGray"
+        Title="UserProfileTaskView" Height="600" Width="560" Background="DarkGray"
         WindowStartupLocation="Manual" Left="652" Top="100" ResizeMode="CanMinimize">
     
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="0.2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -25,21 +24,22 @@
         </Grid.RowDefinitions>
 
 
-        <TextBlock Text="{local:ResxStatic l10n:Resources.User}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 10 0" FontSize="32"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.UserWithColon}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Title}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right"
-                   VerticalAlignment="Center" Margin="0 0 10 0" FontSize="32"/>
+                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Description}" Grid.Row="2" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 10 0" FontSize="32"/>
+                   VerticalAlignment="Top" Margin="0 0 8 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Deadline}" Grid.Row="3" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 10 0" FontSize="32"/>
+                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Status}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 10 0" FontSize="32"/>
+                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32" Visibility="{Binding UserProfileTaskViewStatusVisibility}"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.StatusWithColon}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
+                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32" Visibility="{Binding UserProfileTaskViewStatusWithColonVisibility}"/>
 
 
-        <TextBox x:Name="AddTaskUser" Text="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}" Background="#eee" Grid.Column="1" Grid.Row="0" 
-                 Height="38" FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0" Padding="2,1" IsReadOnly="True" 
-                 BorderThickness="1" BorderBrush="Black">
+        <TextBox x:Name="AddTaskUser" Text="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="0" Background="Transparent"
+                 Height="38" FontSize="28" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="-3 5 0 0" Padding="0" IsReadOnly="True" BorderThickness="0">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -48,18 +48,23 @@
         </TextBox>
 
 
-        <TextBox x:Name="AddTaskTitle" Text="{Binding Title, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" Grid.Column="1"
-                 Grid.Row="1" Width="200" Height="38" FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0" Padding="2,1" 
-                 BorderThickness="1" BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[Title]}">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+            <TextBox x:Name="AddTaskTitle" Text="{Binding Title, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" 
+                     Width="200" Height="37" FontSize="26" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" 
+                     BorderThickness="1" BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[Title]}">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
+                   Visibility="{Binding TitleErrorIconVisibility}" Width="65" Height="65"/>
+        </StackPanel>
+        
 
         <TextBox x:Name="AddTaskDescription" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Background="#eee" Grid.Column="1" Grid.Row="2"  
-                 Margin="0 0 1 0" Padding="2,1" HorizontalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" 
+                 Margin="0 4 20 0" Padding="2 1" HorizontalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
                  AcceptsReturn="True" BorderThickness="1" BorderBrush="Black">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -70,7 +75,7 @@
 
         <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
             <DatePicker x:Name="AddTaskDeadline" SelectedDate="{Binding Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
-                        SelectedDateFormat="Short" Background="#eee" Height="41" Width="165" FontSize="26" Margin="0" Padding="3,2" FirstDayOfWeek="Monday"
+                        SelectedDateFormat="Short" Background="#eee" Height="38" Width="165" FontSize="26" Margin="0 2 0 0" Padding="3,2" FirstDayOfWeek="Monday"
                         ToolTipService.ToolTip="{Binding ErrorCollection[Deadline]}">
                 <DatePicker.Resources>
                     <Style TargetType="{x:Type DatePickerTextBox}"><!--https://social.msdn.microsoft.com/Forums/vstudio/en-US/77e907cc-e949-4a37-b633-06337acddb7f/how-to-remove-datepicker-inner-border?forum=wpf-->
@@ -109,8 +114,8 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
-            <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding TaskStatuses}" Padding="2,1" Width="145" Height="40" FontSize="26" 
-                      Background="#eee" HorizontalContentAlignment="Left" IsEnabled="{Binding IsUserProfileTaskViewStatusEnabled}"
+            <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding TaskStatuses}" Padding="2,1" Width="160" Height="40" FontSize="26" 
+                      Background="#eee" HorizontalContentAlignment="Left" Visibility="{Binding UserProfileTaskViewStatusComboboxVisibility}"
                       SelectedValue="{Binding Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                       SelectedValuePath="Key" DisplayMemberPath="Value"
                       ToolTipService.ToolTip="{Binding ErrorCollection[Status]}" Style="{DynamicResource theComboBox}">
@@ -124,16 +129,19 @@
                     </Style>
                 </ComboBox.Resources>
             </ComboBox>
+
+            <TextBox Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" Height="40" FontSize="28"
+                     HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="-3 5 0 0" Padding="0" IsReadOnly="True" BorderThickness="0"
+                     Visibility="{Binding UserProfileTaskViewStatusTextBoxVisibility}"/>
+
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
                    Visibility="{Binding StatusErrorIconVisibility}" Width="60" Height="60"/>
         </StackPanel>
 
-        <Image Grid.Column="2" Grid.Row="1" Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
-               Visibility="{Binding TitleErrorIconVisibility}" Width="65" Height="65"/>
 
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
             <Button x:Name="SaveTaskToUserButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SaveCommand}"  
-                Height="45" HorizontalAlignment="Left" Margin="0" Padding="4" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                    Height="45" HorizontalAlignment="Left" Margin="0" Padding="4" FontSize="26" BorderThickness="1" BorderBrush="Black" Background="#FF7FE468" Cursor="Hand">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -142,7 +150,7 @@
             </Button>
 
             <Button x:Name="BackToListButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding ExitWindowCommand}"
-                Height="45" Margin="30 0 0 0" Padding="5 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                    Height="45" Margin="30 0 0 0" Padding="5 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Background="#FFF77575" Cursor="Hand">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

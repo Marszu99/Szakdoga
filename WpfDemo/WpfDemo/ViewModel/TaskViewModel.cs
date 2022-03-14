@@ -180,43 +180,12 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public bool IsUserEnabled // ez igy kene TaskViewUserRowHeight mellett?
-        {
-            get
-            {
-                return _task.IdTask == 0;
-            }
-        }
 
         public string TaskViewUserRowHeight
         {
             get
             {
                 return LoginViewModel.LoggedUser.Status == 1 ? "0.8*" : "0";
-            }
-        }
-
-        public bool IsTaskViewValuesReadOnly
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 0;
-            }
-        }
-
-        public bool IsTaskViewDeadlineHitTestVisible
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 1;
-            }
-        }
-
-        public bool IsTaskViewStatusEnabled
-        {
-            get
-            {
-                return this._task.IdTask != 0 && _user.Username == LoginViewModel.LoggedUser.Username;
             }
         }
 
@@ -258,6 +227,85 @@ namespace WpfDemo.ViewModel
                 {
                     return "#eee";
                 }
+            }
+        }
+
+        public string IsTaskViewDescriptionBackground
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? "#FFC7C7C7" : "#eee";
+            }
+        }
+
+        public bool IsTaskViewDescriptionReadOnly
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0;
+            }
+        }
+
+
+        public Visibility TaskViewUserComboBoxVisibility
+        {
+            get
+            {
+                return _task.IdTask == 0 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility TaskViewUserTextBoxVisibility
+        {
+            get
+            {
+                return _task.IdTask != 0 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility TaskViewTitleDeadlineComboBoxVisibility
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status != 0 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility TaskViewTitleDeadlineTextBoxVisibility
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility TaskViewStatusComboboxVisibility
+        {
+            get
+            {
+                if (_user != null)
+                {
+                    if (_user.Username == LoginViewModel.LoggedUser.Username && _task.IdTask != 0)
+                    {
+                        return Visibility.Visible;
+                    }
+                    else
+                    {
+                        return Visibility.Collapsed;
+                    }
+                }
+                else
+                {
+                    return Visibility.Collapsed;
+                }
+            }
+        }
+
+        public Visibility TaskViewStatusTextBoxVisibility
+        {
+            get
+            {
+                return _user.Username != LoginViewModel.LoggedUser.Username || _task.IdTask == 0 ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 

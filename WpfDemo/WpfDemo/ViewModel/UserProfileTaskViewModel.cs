@@ -189,6 +189,38 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility UserProfileTaskViewStatusVisibility
+        {
+            get
+            {
+                return CurrentUser.Username == LoginViewModel.LoggedUser.Username && _task.IdTask != 0  ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+
+        public Visibility UserProfileTaskViewStatusWithColonVisibility
+        {
+            get
+            {
+                return CurrentUser.Username != LoginViewModel.LoggedUser.Username || _task.IdTask == 0  ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
+
+        public Visibility UserProfileTaskViewStatusComboboxVisibility
+        {
+            get
+            {
+                return CurrentUser.Username == LoginViewModel.LoggedUser.Username && _task.IdTask != 0 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility UserProfileTaskViewStatusTextBoxVisibility
+        {
+            get
+            {
+                return CurrentUser.Username != LoginViewModel.LoggedUser.Username || _task.IdTask == 0 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
         public Visibility DeadlineErrorIconVisibility
         {
             get

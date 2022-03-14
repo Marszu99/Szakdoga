@@ -120,6 +120,9 @@
   <data name="ActiveTasks" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="Add10MinToDuration" xml:space="preserve">
+    <value>Adds 10 minutes to the duration</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>BACK</value>
   </data>
@@ -390,6 +393,12 @@
   <data name="StatusCannotBeDoneWithNoRecords" xml:space="preserve">
     <value>Status cannot be "Done" when there is no recods for the task!</value>
   </data>
+  <data name="StatusWithColon" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="Subtract10MinFromDuration" xml:space="preserve">
+    <value>Subtracts 10 minutes from the duration</value>
+  </data>
   <data name="Task" xml:space="preserve">
     <value>Task</value>
   </data>
@@ -473,6 +482,9 @@
   </data>
   <data name="UserUpdatedMessage" xml:space="preserve">
     <value>User has been updated succesfully!</value>
+  </data>
+  <data name="UserWithColon" xml:space="preserve">
+    <value>User:</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>WARNING!</value>

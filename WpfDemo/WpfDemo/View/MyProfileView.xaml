@@ -156,7 +156,7 @@
 
         <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Save}" x:Name="SaveChangedUserValuesButton" Command="{Binding SaveChangedUserValuesCommand}"
                 Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 425 150" Padding="5" BorderThickness="1" 
-                BorderBrush="Black" Cursor="Hand" Visibility="{Binding MyProfileViewSaveAndCancelButtonsVisibility}">
+                BorderBrush="Black" Background="#FF7FE468" Cursor="Hand" Visibility="{Binding MyProfileViewSaveAndCancelButtonsVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -166,7 +166,7 @@
 
         <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Cancel}" x:Name="CancelChangeUserValuesButton" Command="{Binding CancelChangeUserValuesCommand}"
                 Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 200 150" Padding="4" BorderThickness="1" 
-                BorderBrush="Black" Cursor="Hand" Visibility="{Binding MyProfileViewSaveAndCancelButtonsVisibility}">
+                BorderBrush="Black" Background="#FFF77575" Cursor="Hand" Visibility="{Binding MyProfileViewSaveAndCancelButtonsVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -194,7 +194,8 @@
             <!--<TextBlock Text="{local:ResxStatic l10n:Resources.ToDoTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"
                        Margin="5 30 0 0" Height="40"/>-->
             <StackPanel Orientation="Horizontal" Margin="5 30 0 0">
-                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\to-do-list.png" VerticalAlignment="Top" Margin="0 4 0 0" Width="35"/>
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\to-do-list.png" VerticalAlignment="Top" Margin="0 4 0 0" 
+                       Width="35"/>
                 <TextBlock Text="{local:ResxStatic l10n:Resources.ToDoTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" Margin="2 0 0 0" Height="40"/>
             </StackPanel>
 
@@ -253,7 +254,8 @@
             <!--<TextBlock  Text="{local:ResxStatic l10n:Resources.DoneTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top"
                        HorizontalAlignment="Left" Margin="5 10 0 0" Height="40"/>-->
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5 10 0 0">
-                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\done-list.png" VerticalAlignment="Top" Margin="3 5 0 0" Width="35"/>
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\done-list.png" VerticalAlignment="Top" Margin="3 5 0 0" 
+                       Width="35"/>
                 <TextBlock Text="{local:ResxStatic l10n:Resources.DoneTasks}" FontSize="35" FontWeight="Bold" VerticalAlignment="Top" Margin="2 0 0 0" Height="40"/>
             </StackPanel>
 

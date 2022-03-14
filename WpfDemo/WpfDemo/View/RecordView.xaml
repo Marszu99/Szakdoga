@@ -6,14 +6,13 @@
              xmlns:local="clr-namespace:WpfDemo"
              xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
              mc:Ignorable="d" 
-             Height="699.5" Width="540" Background="LightGray" BorderBrush="Black" BorderThickness="1"
+             Height="665" Width="540" Background="LightGray" BorderBrush="Black" BorderThickness="1"
              Name="RecordViewUserControl">
-    
+
     <Grid Margin="0 0 0 0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.9*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="0.1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -24,19 +23,20 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="{local:ResxStatic l10n:Resources.Task}" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right"
-                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="32"/>
+                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Date}" Grid.Column="0" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="32"/>
+                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Duration}" Grid.Column="0" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="32"/>
+                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Comment}" Grid.Column="0" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 15 0" FontSize="32"/>
+                   VerticalAlignment="Top" Margin="0 0 8 0" FontSize="32"/>
 
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
-            <ComboBox x:Name="CreateRecordTask" ItemsSource="{Binding SelectedRecord.ActiveTasks, UpdateSourceTrigger=PropertyChanged}" Padding="2" 
-                      Background="#eee" Width="250" Height="41" FontSize="26" HorizontalContentAlignment="Left" IsEnabled="{Binding SelectedRecord.IsTaskEnabled}" 
+            <ComboBox x:Name="CreateRecordTask" ItemsSource="{Binding SelectedRecord.ActiveTasks, UpdateSourceTrigger=PropertyChanged}" Padding="2 0" 
+                      Margin="0 2 0 0" Background="#eee" Width="250" Height="40" FontSize="26" HorizontalContentAlignment="Left"
                       SelectedItem="{Binding SelectedRecord.Task, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                      ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Task]}" Style="{DynamicResource theComboBox}">
+                      ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Task]}" Style="{DynamicResource theComboBox}"
+                      Visibility="{Binding SelectedRecord.RecordViewTaskComboBoxVisibility}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Title}"/>
@@ -52,6 +52,11 @@
                     </Style>
                 </ComboBox.Resources>
             </ComboBox>
+
+            <TextBox Text="{Binding SelectedRecord.Task.Title, UpdateSourceTrigger=PropertyChanged}" Background="#FFC7C7C7" Height="37" FontSize="26"
+                     HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" IsReadOnly="True" BorderThickness="1" 
+                     BorderBrush="Black" Visibility="{Binding SelectedRecord.RecordViewTaskTextboxVisibility}" Style="{DynamicResource TextBoxReadOnlyStyle}"/>
+
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png" 
                    Visibility="{Binding SelectedRecord.TaskErrorIconVisibility}" Width="75" Height="75"/>
         </StackPanel>
@@ -59,11 +64,12 @@
 
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
             <DatePicker x:Name="CreateRecordDate" SelectedDate="{Binding SelectedRecord.Date, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
-                        SelectedDateFormat="Short" Background="#eee" Height="41" Width="165" FontSize="26" Padding="3,2" FirstDayOfWeek="Monday" 
-                        IsHitTestVisible="{Binding SelectedRecord.IsRecordViewDateHitTestVisible}" 
+                        SelectedDateFormat="Short" Background="#eee" Height="38" Width="165" FontSize="26" Padding="3,2" FirstDayOfWeek="Monday" Margin="0 2 0 0"
+                        Visibility="{Binding SelectedRecord.RecordViewDateDatePickerVisibility}" 
                         ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Date]}">
                 <DatePicker.Resources>
-                    <Style TargetType="{x:Type DatePickerTextBox}"><!--https://social.msdn.microsoft.com/Forums/vstudio/en-US/77e907cc-e949-4a37-b633-06337acddb7f/how-to-remove-datepicker-inner-border?forum=wpf-->
+                    <Style TargetType="{x:Type DatePickerTextBox}">
+                        <!--https://social.msdn.microsoft.com/Forums/vstudio/en-US/77e907cc-e949-4a37-b633-06337acddb7f/how-to-remove-datepicker-inner-border?forum=wpf-->
                         <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="Template">
                             <Setter.Value>
@@ -85,14 +91,15 @@
                         <Setter Property="BorderBrush" Value="Black"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderBrush" Value="#FF3C7FB1"/><!--#FF7EB4EA-->
+                                <Setter Property="BorderBrush" Value="#FF3C7FB1"/>
+                                <!--#FF7EB4EA-->
                             </Trigger>
                             <Trigger Property="IsKeyboardFocusWithin" Value="True">
                                 <Setter Property="BorderBrush" Value="#FF3C7FB1"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
-                   <!-- <Style x:Key="{x:Type CalendarDayButton}" TargetType="{x:Type CalendarDayButton}">
+                    <!-- <Style x:Key="{x:Type CalendarDayButton}" TargetType="{x:Type CalendarDayButton}">
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Cursor" Value="Hand"/>
@@ -124,7 +131,11 @@
                     </Style>
                 </DatePicker.CalendarStyle>-->
             </DatePicker>
-            
+
+            <TextBox Text="{Binding SelectedRecord.Date, StringFormat='yyyy.MM.dd', UpdateSourceTrigger=PropertyChanged}" Background="#FFC7C7C7" Height="36" 
+                     FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" IsReadOnly="True" BorderThickness="1" 
+                     BorderBrush="Black" Visibility="{Binding SelectedRecord.RecordViewDateTextBoxVisibility}" Style="{DynamicResource TextBoxReadOnlyStyle}"/>
+
             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\error.png"
                    Visibility="{Binding SelectedRecord.DateErrorIconVisibility}" Width="70" Height="70"/>
         </StackPanel>
@@ -132,9 +143,9 @@
 
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
             <TextBox x:Name="CreateRecordDuration" Text="{Binding SelectedRecord.DurationFormat, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}"
-                     Background="#eee" Width="75" Height="36" FontSize="26" Margin="0 0 0 0" HorizontalContentAlignment="Center" BorderThickness="1"
-                     BorderBrush="Black" IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}"
-                     ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[DurationFormat]}">
+                     Background="{Binding SelectedRecord.RecordViewDurationCommentBackground}" Width="75" Height="36" FontSize="26" Margin="0 2 0 0"
+                     HorizontalContentAlignment="Center" BorderThickness="1" BorderBrush="Black" IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}"
+                     ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[DurationFormat]}" Style="{DynamicResource TextBoxReadOnlyStyle}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -142,9 +153,11 @@
                 </TextBox.Resources>
             </TextBox>
 
-            <Button x:Name="DurationAddButtton" Content="+" Command="{Binding SelectedRecord.DurationAddCommand}" Width="35" Height="35" FontSize="40"
-                    FontWeight="Bold" Margin="10 0 0 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Padding="0 -15 0 0" 
-                    Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
+            <Button x:Name="DurationAddButtton" Command="{Binding SelectedRecord.DurationAddCommand}" Width="25" Height="25"
+                    FontWeight="Bold" Margin="10 5 0 0" BorderThickness="0" Cursor="Hand" Padding="0" Background="Transparent"
+                    Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}" Style="{DynamicResource ButtonStyle1}"
+                    ToolTip="{local:ResxStatic l10n:Resources.Add10MinToDuration}">
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\plus.png"/>
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="20"/>
@@ -152,9 +165,11 @@
                 </Button.Resources>
             </Button>
 
-            <Button x:Name="DurationReduceButtton" Content="-" Command="{Binding SelectedRecord.DurationReduceCommand}" Width="35" Height="35" FontSize="45" 
-                    FontWeight="Bold" Margin="5 0 0 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Padding="0 -20 0 0" 
-                    Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
+            <Button x:Name="DurationReduceButtton" Command="{Binding SelectedRecord.DurationReduceCommand}" Width="25" Height="25"
+                    FontWeight="Bold" Margin="10 5 0 0" BorderThickness="0" Cursor="Hand" Padding="0 0 0 0" Background="Transparent"
+                    Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}" Style="{DynamicResource ButtonStyle1}"
+                    ToolTip="{local:ResxStatic l10n:Resources.Subtract10MinFromDuration}">
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\minus.png"/>
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="20"/>
@@ -166,10 +181,11 @@
                    Visibility="{Binding SelectedRecord.DurationErrorIconVisibility}" Width="70" Height="70"/>
         </StackPanel>
 
-        <TextBox x:Name="CreateRecordComment" Text="{Binding SelectedRecord.Comment, UpdateSourceTrigger=PropertyChanged}" Background="#eee" Grid.Column="1"
-                 Grid.Row="3" Margin="0 0 1 0" Padding="2,1" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Stretch" 
-                 VerticalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" 
-                 IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}">
+
+        <TextBox x:Name="CreateRecordComment" Text="{Binding SelectedRecord.Comment, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3"
+                 Background="{Binding SelectedRecord.RecordViewDurationCommentBackground}" Margin="0 4 20 0" Padding="2,1" BorderThickness="1" BorderBrush="Black"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" 
+                 IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}" Style="{DynamicResource TextBoxReadOnlyStyle}">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -177,9 +193,10 @@
             </TextBox.Resources>
         </TextBox>
 
+
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
             <Button x:Name="CreateRecordButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SelectedRecord.SaveCommand}"
-                    Height="45" Margin="0" Padding="6 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
+                    Height="45" Margin="0" Padding="6 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Background="#FF7FE468"
                     Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -189,7 +206,7 @@
             </Button>
 
             <Button x:Name="CancelCreateRecordButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding SelectedRecord.CancelRecordViewCommand}"
-                    Height="45" Margin="30 0 0 0" Padding="6 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand">
+                    Height="45" Margin="30 0 0 0" Padding="6 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Background="#FFF77575">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -203,7 +220,8 @@
         <KeyBinding Key="Enter" Command="{Binding SelectedRecord.SaveCommand}"/>
     </UserControl.InputBindings>
 
-    <UserControl.Resources><!--https://stackoverflow.com/questions/17727879/how-to-change-the-cornerradius-of-the-combobox-wpf-->
+    <UserControl.Resources>
+        <!--https://stackoverflow.com/questions/17727879/how-to-change-the-cornerradius-of-the-combobox-wpf-->
         <Style x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
             <Setter Property="Template">
                 <Setter.Value>
@@ -332,6 +350,87 @@
                                 <Setter Property="IsTabStop" Value="false"/>
                                 <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
                                 <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- + és - gomb style beallitasa, h mindene transparent legyen minden esetben-->
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="Transparent"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="Transparent"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="Transparent"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="Transparent"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--TextBox ReadOnly="true" eseten nem valtozik meg BorderBrush szine ha folemesz vagy belekattintasz-->
+        <Style x:Key="TextBoxReadOnlyStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsReadOnly" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="Black"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

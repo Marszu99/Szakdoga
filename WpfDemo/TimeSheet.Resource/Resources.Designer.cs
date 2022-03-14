@@ -70,6 +70,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adds 10 minutes to the duration.
+        /// </summary>
+        public static string Add10MinToDuration {
+            get {
+                return ResourceManager.GetString("Add10MinToDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BACK.
         /// </summary>
         public static string Back {
@@ -880,6 +889,24 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status:.
+        /// </summary>
+        public static string StatusWithColon {
+            get {
+                return ResourceManager.GetString("StatusWithColon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subtracts 10 minutes from the duration.
+        /// </summary>
+        public static string Subtract10MinFromDuration {
+            get {
+                return ResourceManager.GetString("Subtract10MinFromDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task.
         /// </summary>
         public static string Task {
@@ -1128,6 +1155,15 @@ namespace TimeSheet.Resource {
         public static string UserUpdatedMessage {
             get {
                 return ResourceManager.GetString("UserUpdatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User:.
+        /// </summary>
+        public static string UserWithColon {
+            get {
+                return ResourceManager.GetString("UserWithColon", resourceCulture);
             }
         }
         

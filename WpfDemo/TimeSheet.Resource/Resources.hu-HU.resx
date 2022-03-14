@@ -120,6 +120,9 @@
   <data name="ActiveTasks" xml:space="preserve">
     <value>Aktív</value>
   </data>
+  <data name="Add10MinToDuration" xml:space="preserve">
+    <value>10 percet hozzáad az időtartamhoz</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>VISSZA</value>
   </data>
@@ -390,6 +393,12 @@
   <data name="StatusCannotBeDoneWithNoRecords" xml:space="preserve">
     <value>Státusz nem lehet "Done", ha nincs a feladathoz rögzítés!</value>
   </data>
+  <data name="StatusWithColon" xml:space="preserve">
+    <value>Státusz:</value>
+  </data>
+  <data name="Subtract10MinFromDuration" xml:space="preserve">
+    <value>10 percet levon az időtartamból</value>
+  </data>
   <data name="Task" xml:space="preserve">
     <value>Feladat</value>
   </data>
@@ -473,6 +482,9 @@
   </data>
   <data name="UserUpdatedMessage" xml:space="preserve">
     <value>Felhasználó sikeresen módosítva!</value>
+  </data>
+  <data name="UserWithColon" xml:space="preserve">
+    <value>Felhasználó:</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>FIGYELMEZTETÉS!</value>

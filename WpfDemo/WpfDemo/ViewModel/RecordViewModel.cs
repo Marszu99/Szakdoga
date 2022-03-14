@@ -117,7 +117,15 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);//_record.User_idUser
+                try
+                {
+                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);//_record.User_idUser
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
                 return _user;
             }
             set
@@ -189,15 +197,144 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? true : false;
+                /*try
+                {
+                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
+                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? true : false;*/
+                if (_user != null)
+                {
+                    if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        public bool IsRecordViewDateHitTestVisible
+        public string RecordViewDurationCommentBackground
         {
             get
             {
-                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? false : true;
+                /*try
+                {
+                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
+                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? "#FFC7C7C7" : "#eee";*/
+                if (_user != null)
+                {
+                    if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
+                    {
+                        return "#FFC7C7C7";
+                    }
+                    else
+                    {
+                        return "#eee";
+                    }
+                }
+                else
+                {
+                    return "#eee";
+                }
+            }
+        }
+
+        public Visibility RecordViewTaskComboBoxVisibility
+        {
+            get
+            {
+                return _record != null && _record.IdRecord == 0 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility RecordViewTaskTextboxVisibility
+        {
+            get
+            {
+                return _record != null && _record.IdRecord != 0 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility RecordViewDateDatePickerVisibility
+        {
+            get
+            {
+                /*try
+                {                 
+                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
+                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;*/
+                if (_user != null)
+                {
+                    if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
+                    {
+                        return Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        return Visibility.Visible;
+                    }
+                }
+                else
+                {
+                    return Visibility.Visible;
+                }
+
+            }
+        }
+
+        public Visibility RecordViewDateTextBoxVisibility
+        {
+            get
+            {
+                /*try
+                {
+                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
+                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? Visibility.Visible : Visibility.Collapsed;*/
+                if (_user != null)
+                {
+                    if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
+                    {
+                        return Visibility.Visible;
+                    }
+                    else
+                    {
+                        return Visibility.Collapsed;
+                    }
+                }
+                else
+                {
+                    return Visibility.Collapsed;
+                }
             }
         }
 
@@ -205,9 +342,34 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;
+                /*try
+                {
+                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
+                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;*/
+                if (_user != null)
+                {
+                    if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
+                    {
+                        return Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        return Visibility.Visible;
+                    }
+                }
+                else
+                {
+                    return Visibility.Visible;
+                }
             }
         }
+
 
         public Visibility TaskErrorIconVisibility
         {

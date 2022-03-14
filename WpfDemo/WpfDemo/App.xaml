@@ -16,10 +16,10 @@
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
+                            <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/><!--Default: #FF7EB4EA-->
                             </Trigger>
-                            <Trigger Property="IsFocused" Value="true">
+                            <Trigger Property="IsFocused" Value="True">
                                 <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/><!--Default: #FF7EB4EA-->
                             </Trigger>
                         </ControlTemplate.Triggers>

@@ -370,7 +370,7 @@ namespace WpfDemo.ViewModel
             {
                 new UserRepository(new UserLogic()).UpdateUser(CurrentLoggedUser);
                 MessageBox.Show(Resources.UserUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
-                SendEmail();
+                SendEmail(); // Kuldok emailt ha esetleg elfelejtene a megadott jelszot vagy elirna...
 
                 MyProfileViewUserValuesIsReadOnly = true;
                 MyProfileViewUserPasswordIsEnabled = false;

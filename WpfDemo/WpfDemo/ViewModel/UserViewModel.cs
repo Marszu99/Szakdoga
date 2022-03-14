@@ -190,14 +190,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string UserViewThirdColumnWidth
-        {
-            get
-            {
-                return _user.IdUser != 0 ? "0" : "0.2*";
-            }
-        }
-
         public string UserViewValuesBackground
         {
             get
@@ -211,6 +203,14 @@ namespace WpfDemo.ViewModel
             get
             {
                 return _user.IdUser != 0 ? "0" : "1";
+            }
+        }
+
+        public string UserViewEmailWidth
+        {
+            get
+            {
+                return _user != null && _user.IdUser != 0 ? "290" : "250";
             }
         }
 
@@ -258,7 +258,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return UserValidationHelper.ValidateUserName(_user.Username) == null || !_isUsernameChanged ? Visibility.Hidden : Visibility.Visible;
+                return UserValidationHelper.ValidateUserName(_user.Username) == null || !_isUsernameChanged ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 
@@ -266,7 +266,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return UserValidationHelper.ValidateEmail(_user.Email) == null || !_isEmailChanged ? Visibility.Hidden : Visibility.Visible;
+                return UserValidationHelper.ValidateEmail(_user.Email) == null || !_isEmailChanged ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 
