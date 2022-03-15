@@ -25,9 +25,9 @@
         <TextBlock Text="{local:ResxStatic l10n:Resources.Task}" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right"
                    VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Date}" Grid.Column="0" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
+                   VerticalAlignment="Center" Margin="0 0 8 20" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Duration}" Grid.Column="0" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
+                   VerticalAlignment="Center" Margin="0 0 8 40" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Comment}" Grid.Column="0" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right" 
                    VerticalAlignment="Top" Margin="0 0 8 0" FontSize="32"/>
 
@@ -62,7 +62,7 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 20">
             <DatePicker x:Name="CreateRecordDate" SelectedDate="{Binding SelectedRecord.Date, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                         SelectedDateFormat="Short" Background="#eee" Height="38" Width="165" FontSize="26" Padding="3,2" FirstDayOfWeek="Monday" Margin="0 2 0 0"
                         Visibility="{Binding SelectedRecord.RecordViewDateDatePickerVisibility}" 
@@ -141,7 +141,7 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="0 0 0 40">
             <TextBox x:Name="CreateRecordDuration" Text="{Binding SelectedRecord.DurationFormat, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}"
                      Background="{Binding SelectedRecord.RecordViewDurationCommentBackground}" Width="75" Height="36" FontSize="26" Margin="0 2 0 0"
                      HorizontalContentAlignment="Center" BorderThickness="1" BorderBrush="Black" IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}"

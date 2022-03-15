@@ -25,13 +25,13 @@
 
 
         <TextBlock Text="{local:ResxStatic l10n:Resources.UserWithColon}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
+                   VerticalAlignment="Center" Margin="0 5 8 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Title}" Grid.Row="1" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right"
-                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
+                   VerticalAlignment="Center" Margin="0 0 8 15" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Description}" Grid.Row="2" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
                    VerticalAlignment="Top" Margin="0 0 8 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Deadline}" Grid.Row="3" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
-                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
+                   VerticalAlignment="Center" Margin="0 20 8 0" FontSize="32"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.Status}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
                    VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32" Visibility="{Binding UserProfileTaskViewStatusVisibility}"/>
         <TextBlock Text="{local:ResxStatic l10n:Resources.StatusWithColon}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Right" 
@@ -39,7 +39,7 @@
 
 
         <TextBox x:Name="AddTaskUser" Text="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="0" Background="Transparent"
-                 Height="38" FontSize="28" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="-3 5 0 0" Padding="0" IsReadOnly="True" BorderThickness="0">
+                 Height="38" FontSize="28" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="-3 10 0 0" Padding="0" IsReadOnly="True" BorderThickness="0">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -48,7 +48,7 @@
         </TextBox>
 
 
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 15">
             <TextBox x:Name="AddTaskTitle" Text="{Binding Title, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Background="#eee" 
                      Width="200" Height="37" FontSize="26" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" 
                      BorderThickness="1" BorderBrush="Black" ToolTipService.ToolTip="{Binding ErrorCollection[Title]}">
@@ -73,7 +73,7 @@
             </TextBox.Resources>
         </TextBox>
 
-        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" Margin="0 20 0 0">
             <DatePicker x:Name="AddTaskDeadline" SelectedDate="{Binding Deadline, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                         SelectedDateFormat="Short" Background="#eee" Height="38" Width="165" FontSize="26" Margin="0 2 0 0" Padding="3,2" FirstDayOfWeek="Monday"
                         ToolTipService.ToolTip="{Binding ErrorCollection[Deadline]}">
