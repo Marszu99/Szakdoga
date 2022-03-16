@@ -352,7 +352,7 @@ namespace WpfDemo.ViewModel
         }
 
         private void ChangeUserValues(object obj)
-        {       
+        {
             MyProfileViewUserValuesIsReadOnly = false;
             MyProfileViewUserPasswordIsEnabled = true;
             MyProfileViewUserValuesBackground = "#FFEEEEEE";
@@ -422,13 +422,31 @@ namespace WpfDemo.ViewModel
             //_IRevertibleChangeTracking.RejectChanges();
             //_IEditableObject.CancelEdit();
 
-            User CurrentLoggedUserValues = new UserRepository(new UserLogic()).GetUserByID(CurrentLoggedUser.IdUser);
-            CurrentLoggedUser.Password = CurrentLoggedUserValues.Password;
-            CurrentLoggedUser.FirstName = CurrentLoggedUserValues.FirstName;
-            CurrentLoggedUser.LastName = CurrentLoggedUserValues.LastName;
-            CurrentLoggedUser.Email = CurrentLoggedUserValues.Email;
-            CurrentLoggedUser.Telephone = CurrentLoggedUserValues.Telephone;
-            OnPropertyChanged(nameof(CurrentLoggedUser));
+            if (_isPasswordChanged || _isFirstNameChanged || _isLastNameChanged || _isEmailChanged || _isTelephoneChanged)
+            {
+                try
+                {
+                    User CurrentLoggedUserValues = new UserRepository(new UserLogic()).GetUserByID(CurrentLoggedUser.IdUser);
+                    CurrentLoggedUser.Password = CurrentLoggedUserValues.Password;
+                    CurrentLoggedUser.FirstName = CurrentLoggedUserValues.FirstName;
+                    CurrentLoggedUser.LastName = CurrentLoggedUserValues.LastName;
+                    CurrentLoggedUser.Email = CurrentLoggedUserValues.Email;
+                    CurrentLoggedUser.Telephone = CurrentLoggedUserValues.Telephone;
+
+                    //OnPropertyChanged(nameof(CurrentLoggedUser));
+
+                    OnPropertyChanged(nameof(Password));
+                    OnPropertyChanged(nameof(FirstName));
+                    OnPropertyChanged(nameof(LastName));
+                    OnPropertyChanged(nameof(Email));
+                    OnPropertyChanged(nameof(Telephone));
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+           
 
             MyProfileViewUserValuesIsReadOnly = true;
             MyProfileViewUserPasswordIsEnabled = false;

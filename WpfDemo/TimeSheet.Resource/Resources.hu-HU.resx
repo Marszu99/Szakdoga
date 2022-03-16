@@ -181,7 +181,7 @@
     <value>A határidőnek legalább 24 órával később kell lennie mint a jelenlegi idő!</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>TÖRLÉS</value>
+    <value>Törlés</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Leírás</value>

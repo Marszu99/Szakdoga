@@ -38,8 +38,8 @@
                             <MenuItem Command="{Binding DeleteCommand}" Cursor="Hand" Padding="5 0" Style="{DynamicResource PopupMenuItem}">
                                 <MenuItem.Header>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\delete.png" Width="20"/>
-                                        <TextBlock Text="{local:ResxStatic l10n:Resources.Delete}" FontSize="19" Margin="5 0"/>
+                                        <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\delete.png" Width="20" Margin="5 0"/>
+                                        <TextBlock Text="{local:ResxStatic l10n:Resources.Delete}" FontSize="19" Margin="1 0 3 0"/>
                                     </StackPanel>
                                 </MenuItem.Header>
                             </MenuItem>
