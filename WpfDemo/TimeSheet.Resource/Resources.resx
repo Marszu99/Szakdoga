@@ -150,6 +150,9 @@
   <data name="CompanyNameWrongLength" xml:space="preserve">
     <value>Company's name have to reach minimum 10 characters and also can't be more than 60!</value>
   </data>
+  <data name="Created" xml:space="preserve">
+    <value>Created</value>
+  </data>
   <data name="CreateNewRecord" xml:space="preserve">
     <value>Create new record</value>
   </data>
@@ -185,6 +188,9 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Done</value>
   </data>
   <data name="DoneTasks" xml:space="preserve">
     <value>DONE</value>
@@ -242,6 +248,9 @@
   </data>
   <data name="Information" xml:space="preserve">
     <value>INFORMATION</value>
+  </data>
+  <data name="InProgress" xml:space="preserve">
+    <value>In Progress</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>LANGUAGE</value>

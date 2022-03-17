@@ -17,6 +17,8 @@ namespace WpfDemo.ViewModel
         public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>();
         public ObservableCollection<Task> TaskList { get; } = new ObservableCollection<Task>();
         public ObservableCollection<RecordViewModel> RecordList { get; } = new ObservableCollection<RecordViewModel>();
+        private int _lastSelectedRecordID = 0; // utoljara valasztott Record ID-ja
+        private int _lastSelectedRecordCount = 0; // utoljara valasztott elem indexe a RecordList-bol
 
 
         private RecordViewModel _selectedRecord;
@@ -26,6 +28,41 @@ namespace WpfDemo.ViewModel
             set
             {
                 _selectedRecord = value;
+
+                if (_selectedRecord != null)
+                {
+                    if (_lastSelectedRecordID != 0 && _lastSelectedRecordID != _selectedRecord.Record.IdRecord) // ha nem az utoljara valasztott Record id-ja nem egyezik a mostanival
+                    {
+                        //RecordViewModel LastSelectedRecord = (RecordViewModel)RecordList.Where(recordViewModel => recordViewModel.IdRecord == _lastSelectedRecordID);
+
+                        for (int i = 0; i < RecordList.Count(); i++)
+                        {
+                            if (RecordList[i].IdRecord == _lastSelectedRecordID) // ha egyezik az utoljara valasztott Record Id-ja a Listaban talalhato i. IdRecord-dal es lementem a megfelelo indexet
+                            {
+                                _lastSelectedRecordCount = i;
+                            }
+                        }
+
+                        if (RecordList[_lastSelectedRecordCount].IsSelectedRecordValuesChanged) // visszatoltom az eredeti adatokat ha tortent valtozas
+                        {
+                            try
+                            {
+                                Record SelectedRecordValues = new RecordRepository(new RecordLogic()).GetRecordByID(_lastSelectedRecordID);
+                                RecordList[_lastSelectedRecordCount].Date = SelectedRecordValues.Date;
+                                RecordList[_lastSelectedRecordCount].Comment = SelectedRecordValues.Comment;
+                                RecordList[_lastSelectedRecordCount].Duration = SelectedRecordValues.Duration;
+
+                                RecordList[_lastSelectedRecordCount].IsChangedRecordValuesToFalse(); // igy a Save gomb disabled lesz ha visszakattintok
+                            }
+                            catch (SqlException)
+                            {
+                                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                        }
+                    }
+                    _lastSelectedRecordID = _selectedRecord.Record.IdRecord;
+                }
+
                 OnPropertyChanged(nameof(SelectedRecord));
                 OnPropertyChanged(nameof(SelectedRecordVisibility));
                 OnPropertyChanged(nameof(ListRecordsViewContextMenuVisibility));
@@ -85,12 +122,30 @@ namespace WpfDemo.ViewModel
                 {
                     SelectedRecord.RecordCanceled += OnRecordCanceled;
                 }
-                return SelectedRecord == null ? Visibility.Hidden : Visibility.Visible;
+                return SelectedRecord == null ? Visibility.Collapsed : Visibility.Visible;
             }
         }
         private void OnRecordCanceled(Object obj)
         {
-            SelectedRecord = null;
+            if (SelectedRecord != null) // Ha 2x megnyitottam ugyanazt egymas utan akkor valamiert lefutt tobbszor ezert van ez az if
+            {
+                if (SelectedRecord.IsSelectedRecordValuesChanged) // Cancel eseten visszatoltom az eredti adatokat ha megvaltoztattuk oket
+                {
+                    try
+                    {
+                        Record SelectedRecordValues = new RecordRepository(new RecordLogic()).GetRecordByID(SelectedRecord.IdRecord);
+                        SelectedRecord.Date = SelectedRecordValues.Date;
+                        SelectedRecord.Comment = SelectedRecordValues.Comment;
+                        SelectedRecord.Duration = SelectedRecordValues.Duration;
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }      
+
+                SelectedRecord = null; // null-ozom h a SelectedRecord Visibility-je Collapsed legyen
+            }
         }
 
         public Visibility ListRecordsViewContextMenuVisibility // Delete Header Visibility

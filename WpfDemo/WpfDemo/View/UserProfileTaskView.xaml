@@ -114,7 +114,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
-            <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding TaskStatuses}" Padding="2,1" Width="160" Height="40" FontSize="26" 
+            <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding TaskStatuses}" Padding="2,1" Width="190" Height="40" FontSize="26" 
                       Background="#eee" HorizontalContentAlignment="Left" Visibility="{Binding UserProfileTaskViewStatusComboboxVisibility}"
                       SelectedValue="{Binding Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                       SelectedValuePath="Key" DisplayMemberPath="Value"

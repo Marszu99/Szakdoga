@@ -17,6 +17,8 @@ namespace WpfDemo.ViewModel
     {
         public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>(); //List?
         public ObservableCollection<TaskViewModel> TaskList { get; } = new ObservableCollection<TaskViewModel>();
+        private int _lastSelectedTaskID = 0; // utoljara valasztott Task ID-ja
+        private int _lastSelectedTaskCount = 0; // utoljara valasztott elem indexe a TaskList-bol
 
 
         private TaskViewModel _selectedTask;
@@ -26,6 +28,40 @@ namespace WpfDemo.ViewModel
             set
             {
                 _selectedTask = value;
+
+                if (_selectedTask != null)
+                {
+                    if (_lastSelectedTaskID != 0 && _lastSelectedTaskID != _selectedTask.Task.IdTask) // ha nem az utoljara valasztott Task id-ja nem egyezik a mostanival
+                    {
+                        for (int i = 0; i < TaskList.Count(); i++)
+                        {
+                            if (TaskList[i].IdTask == _lastSelectedTaskID) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                            {
+                                _lastSelectedTaskCount = i;
+                            }
+                        }
+
+                        if (TaskList[_lastSelectedTaskCount].IsSelectedTaskValuesChanged) // visszatoltom az eredeti adatokat ha tortent valtozas
+                        {
+                            try
+                            {
+                                Task SelectedTaskValues = new TaskRepository(new TaskLogic()).GetTaskByID(_lastSelectedTaskID);
+                                TaskList[_lastSelectedTaskCount].Title = SelectedTaskValues.Title;
+                                TaskList[_lastSelectedTaskCount].Description = SelectedTaskValues.Description;
+                                TaskList[_lastSelectedTaskCount].Deadline = SelectedTaskValues.Deadline;
+                                TaskList[_lastSelectedTaskCount].Status = SelectedTaskValues.Status;
+
+                                TaskList[_lastSelectedTaskCount].IsChangedTaskValuesToFalse(); // igy a Save gomb disabled lesz ha visszakattintok
+                            }
+                            catch (SqlException)
+                            {
+                                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                            }
+                        }
+                    }
+                    _lastSelectedTaskID = _selectedTask.Task.IdTask;
+                }
+
                 OnPropertyChanged(nameof(SelectedTask));
                 OnPropertyChanged(nameof(SelectedTaskVisibility));
             }
@@ -114,12 +150,31 @@ namespace WpfDemo.ViewModel
                 {
                     SelectedTask.TaskCanceled += OnTaskCanceled;
                 }
-                return SelectedTask == null ? Visibility.Hidden : Visibility.Visible;
+                return SelectedTask == null ? Visibility.Collapsed : Visibility.Visible;
             }
         }
         private void OnTaskCanceled(Object obj)
         {
-            SelectedTask = null;
+            if (SelectedTask != null) // Ha 2x megnyitottam ugyanazt egymas utan akkor valamiert lefutt tobbszor ezert van ez az if
+            {
+                if (SelectedTask.IsSelectedTaskValuesChanged) // Cancel eseten visszatoltom az eredti adatokat ha megvaltoztattuk oket
+                {
+                    try
+                    {
+                        Task SelectedTaskValues = new TaskRepository(new TaskLogic()).GetTaskByID(SelectedTask.IdTask);
+                        SelectedTask.Title = SelectedTaskValues.Title;
+                        SelectedTask.Description = SelectedTaskValues.Description;
+                        SelectedTask.Deadline = SelectedTaskValues.Deadline;
+                        SelectedTask.Status = SelectedTaskValues.Status;
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                
+                SelectedTask = null; // null-ozom h a SelectedTask Visibility-je Collapsed legyen
+            }
         }
 
         public Visibility ListTasksViewUserVisibility

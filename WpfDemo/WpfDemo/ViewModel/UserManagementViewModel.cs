@@ -86,7 +86,7 @@ namespace WpfDemo.ViewModel
                     SelectedUser.UserCanceled += OnUserCanceled;
 
                 }
-                return SelectedUser == null ? Visibility.Hidden : Visibility.Visible;
+                return SelectedUser == null ? Visibility.Collapsed : Visibility.Visible;
             }
         }
         private void OnUserCanceled(Object obj)

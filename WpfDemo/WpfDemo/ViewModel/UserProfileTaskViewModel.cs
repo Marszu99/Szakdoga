@@ -120,7 +120,7 @@ namespace WpfDemo.ViewModel
                     return Enum.GetValues(typeof(TaskStatus)).Cast<TaskStatus>()
                     .ToDictionary<TaskStatus, TaskStatus, string>(
                     item => item,
-                    item => item.ToString());
+                    item => ResourceHandler.GetResourceString(item.ToString())); // item => item.ToString());
                 }
                 else
                 {
@@ -128,7 +128,7 @@ namespace WpfDemo.ViewModel
                     .Where(item => item == TaskStatus.Created)
                     .ToDictionary<TaskStatus, TaskStatus, string>(
                     item => item,
-                    item => item.ToString());
+                    item => ResourceHandler.GetResourceString(item.ToString())); // item => item.ToString());
                 }
             }
         }

@@ -73,7 +73,7 @@ namespace WpfDemo.ViewModel
             try
             {
                 MyProfileView Ipage = new MyProfileView();
-                (Ipage.DataContext as MyProfileViewModel).CurrentLoggedUser = LoginViewModel.LoggedUser; // CurrentLoggedUser kell vagy a MyProfileViewModel-nel is hasznaljak LoggedUser-t?
+                (Ipage.DataContext as MyProfileViewModel).CurrentLoggedUser = new UserRepository(new UserLogic()).GetUserByID(LoginViewModel.LoggedUser.IdUser); // igy ha valamit megvaltoztatok a CurrentLoggedUser adatain es ki "X"-szelem a window-t akkor ujratolti az eredeti adatokat
                 Ipage.ShowDialog();
             }
             catch (SqlException)

@@ -23,6 +23,7 @@ namespace WpfDemo.ViewModel
         private bool _isCommentChanged = false;
         private bool _isDurationChanged = false;
 
+
         public Record Record
         {
             get
@@ -181,6 +182,14 @@ namespace WpfDemo.ViewModel
             {
                 _record.Task_idTask = value;
                 OnPropertyChanged(nameof(Task_idTask));
+            }
+        }
+
+        public bool IsSelectedRecordValuesChanged // OnRecordCanceled-hez h a benne levo try-catch csak akkor fusson le ha valtoztak az adatok
+        {
+            get
+            {
+                return _isTaskChanged || _isDateChanged || _isCommentChanged || _isDurationChanged ? true : false;
             }
         }
 
@@ -546,7 +555,7 @@ namespace WpfDemo.ViewModel
             IsChangedRecordValuesToFalse();
         }
 
-        private void IsChangedRecordValuesToFalse() // Save gomb enable-se miatt
+        public void IsChangedRecordValuesToFalse() // Save gomb enable-se miatt
         {
             _isTaskChanged = false;
             _isDateChanged = false;

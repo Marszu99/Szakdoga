@@ -31,8 +31,8 @@ namespace WpfDemo.ViewModel
         private Visibility _myProfileViewChangeUserValuesButtonVisibility = Visibility.Visible;
         private Visibility _myProfileViewSaveAndCancelButtonsVisibility = Visibility.Hidden;
 
-        private System.ComponentModel.IEditableObject _IEditableObject;
-        private System.ComponentModel.IRevertibleChangeTracking _IRevertibleChangeTracking;
+        //private System.ComponentModel.IEditableObject _IEditableObject;
+        //private System.ComponentModel.IRevertibleChangeTracking _IRevertibleChangeTracking;
 
 
         public User CurrentLoggedUser

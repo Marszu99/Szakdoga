@@ -147,6 +147,38 @@ namespace TimeSheet.DataAccess
             }
         }
 
+        public Record GetRecordByID(int recordid)
+        {
+            using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
+            {
+                Record record = new Record();
+
+                DataTable dt = new DataTable();
+                connection.Open();
+
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetRecordByID", connection);
+                myCmd.CommandType = CommandType.StoredProcedure;
+                myCmd.Parameters.Add(new MySqlParameter("@id", MySqlDbType.Int32));
+                myCmd.Parameters["@id"].Value = recordid;
+
+                MySqlDataReader sdr = myCmd.ExecuteReader();
+
+                dt.Load(sdr);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    record.IdRecord = int.Parse(dr["idRecord"].ToString());
+                    record.Date = DateTime.Parse(dr["Date"].ToString());
+                    record.Comment = dr["Comment"].ToString();
+                    record.Duration = int.Parse(dr["Duration"].ToString());
+                    record.User_idUser = int.Parse(dr["User_idUser"].ToString());
+                    record.Task_idTask = int.Parse(dr["Task_idTask"].ToString());
+                }
+
+                return record;
+            }
+        }
+
         public void DeleteRecord(int recordid)
         {
             using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))

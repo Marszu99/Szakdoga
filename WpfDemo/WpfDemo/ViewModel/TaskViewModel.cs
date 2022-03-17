@@ -118,7 +118,7 @@ namespace WpfDemo.ViewModel
                     return Enum.GetValues(typeof(TaskStatus)).Cast<TaskStatus>()
                     .ToDictionary<TaskStatus, TaskStatus, string>(
                     item => item,
-                    item => item.ToString());
+                    item => ResourceHandler.GetResourceString(item.ToString())); // item => item.ToString());
                 }
                 else
                 {
@@ -126,7 +126,7 @@ namespace WpfDemo.ViewModel
                     .Where(item => item == TaskStatus.Created)
                     .ToDictionary<TaskStatus, TaskStatus, string>(
                     item => item,
-                    item => item.ToString());
+                    item => ResourceHandler.GetResourceString(item.ToString())); // item => item.ToString());
                 }
             }
         }
@@ -180,16 +180,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-
-        public string TaskViewUserRowHeight
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 1 ? "0.8*" : "0";
-            }
-        }
-
-
         public string NotificationText
         {
             get
@@ -230,11 +220,27 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public string TaskViewUserRowHeight
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 1 ? "0.8*" : "0";
+            }
+        }
+
         public string IsTaskViewDescriptionBackground
         {
             get
             {
                 return LoginViewModel.LoggedUser.Status == 0 ? "#FFC7C7C7" : "#eee";
+            }
+        }
+
+        public bool IsSelectedTaskValuesChanged // OnTaskCanceled-hez h a benne levo try-catch csak akkor fusson le ha valtoztak az adatok
+        {
+            get
+            {
+                return _isTitleChanged || _isDescriptionChanged || _isDeadlineChanged || _isStatusChanged ? true : false;
             }
         }
 
@@ -520,7 +526,7 @@ namespace WpfDemo.ViewModel
             IsChangedTaskValuesToFalse();
         }
 
-        private void IsChangedTaskValuesToFalse()
+        public void IsChangedTaskValuesToFalse()
         {
             _isUserChanged = false;
             _isTitleChanged = false;

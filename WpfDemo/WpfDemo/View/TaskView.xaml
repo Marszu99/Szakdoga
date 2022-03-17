@@ -148,7 +148,7 @@
         
 
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
-            <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2 0" Margin="0" Width="160" 
+            <ComboBox x:Name="CreateTaskStatus" ItemsSource="{Binding SelectedTask.TaskStatuses}" Padding="2 0" Margin="0" Width="190" 
                       Height="40" FontSize="26" Background="#eee" HorizontalContentAlignment="Left" Visibility="{Binding SelectedTask.TaskViewStatusComboboxVisibility}"
                       SelectedValue="{Binding SelectedTask.Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                       SelectedValuePath="Key" DisplayMemberPath="Value" ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[Status]}" 

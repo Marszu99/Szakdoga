@@ -41,9 +41,15 @@ namespace TimeSheet.Logic
         {
             return _recordlogic.GetUserRecords(userid);
         }
+
         public List<Record> GetTaskRecords(int taskid)//(TaskValidation.ValidateStatus miatt)
         {
             return _recordlogic.GetTaskRecords(taskid);
+        }
+
+        public Record GetRecordByID(int recordid)
+        {
+            return _recordlogic.GetRecordByID(recordid);
         }
 
         public void UpdateRecord(Record record, int recordid, int taskid, int userid)

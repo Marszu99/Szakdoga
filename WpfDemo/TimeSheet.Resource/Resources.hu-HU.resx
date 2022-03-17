@@ -150,6 +150,9 @@
   <data name="CompanyNameWrongLength" xml:space="preserve">
     <value>Cég neve legalább 10 és legfeljebb 60 karakter hosszú lehet!</value>
   </data>
+  <data name="Created" xml:space="preserve">
+    <value>Létrehozva</value>
+  </data>
   <data name="CreateNewRecord" xml:space="preserve">
     <value>Új rögzítés létrehozása</value>
   </data>
@@ -185,6 +188,9 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Leírás</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Kész</value>
   </data>
   <data name="DoneTasks" xml:space="preserve">
     <value>KÉSZ</value>
@@ -242,6 +248,9 @@
   </data>
   <data name="Information" xml:space="preserve">
     <value>INFORMÁCIÓ</value>
+  </data>
+  <data name="InProgress" xml:space="preserve">
+    <value>Folyamatban</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>NYELV</value>
@@ -388,10 +397,10 @@
     <value>Státusz</value>
   </data>
   <data name="StatusCannotBeCreatedWithRecords" xml:space="preserve">
-    <value>Státusz nem lehet "Created", ha vannak a feladathoz rögzítések!</value>
+    <value>Státusz nem lehet "Létrehozott", ha vannak a feladathoz rögzítések!</value>
   </data>
   <data name="StatusCannotBeDoneWithNoRecords" xml:space="preserve">
-    <value>Státusz nem lehet "Done", ha nincs a feladathoz rögzítés!</value>
+    <value>Státusz nem lehet "Kész", ha nincs a feladathoz rögzítés!</value>
   </data>
   <data name="StatusWithColon" xml:space="preserve">
     <value>Státusz:</value>
