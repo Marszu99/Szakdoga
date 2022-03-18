@@ -45,7 +45,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public DateTime Date
+        public DateTime Date // Datum bindolashoz
         {
             get
             {
@@ -60,7 +60,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Comment
+        public string Comment // Komment bindaloshoz
         {
             get
             {
@@ -74,7 +74,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public int Duration
+        public int Duration // Idotartam bindaloshoz
         {
             get
             {
@@ -84,13 +84,13 @@ namespace WpfDemo.ViewModel
             {
                 _record.Duration = value;
                 OnPropertyChanged(nameof(Duration));
-                OnPropertyChanged(nameof(DurationFormat));
+                OnPropertyChanged(nameof(DurationFormat)); // Ha valtozik az idotartam akkor frissitse annak a kiirasat is
                 _isDurationChanged = true;
                 OnPropertyChanged(nameof(DurationErrorIconVisibility));
             }
         }
 
-        public string DurationFormat
+        public string DurationFormat // Idotartam megfelelo kiirasanak a bindaloshoz
         {
             get
             {
@@ -154,7 +154,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public List<Task> ActiveTasks
+        public List<Task> ActiveTasks // Kell h mikor uj letrehozasa utan kivalasztunk egy recordot akkor ne legyen ures a Task
         {
             get;
         }
@@ -194,7 +194,7 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public bool IsTaskEnabled
+        public bool IsTaskEnabled // ha record nem uj akkor a Task Disabled lesz
         {
             get
             {
@@ -202,20 +202,10 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public bool IsRecordViewValuesReadOnly
+        public bool IsRecordViewValuesReadOnly // Ha az Admin mas Rogziteset nezi akkor azok ertekei ReadOnly-k
         {
             get
             {
-                /*try
-                {
-                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
-                }
-                catch (SqlException)
-                {
-                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-
-                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? true : false;*/
                 if (_user != null)
                 {
                     if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
@@ -234,20 +224,10 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string RecordViewDurationCommentBackground
+        public string RecordViewDurationCommentBackground // Ha az Admin mas Rogziteset nezi akkor azok Idotartama es Commentnek a hatterenek a szine megvaltozik
         {
             get
             {
-                /*try
-                {
-                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
-                }
-                catch (SqlException)
-                {
-                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-
-                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? "#FFC7C7C7" : "#eee";*/
                 if (_user != null)
                 {
                     if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
@@ -266,7 +246,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility RecordViewTaskComboBoxVisibility
+        public Visibility RecordViewTaskComboBoxVisibility // ha uj Rogzites keszul akkor a Combobox Visible egyebkent meg Collapsed
         {
             get
             {
@@ -274,7 +254,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility RecordViewTaskTextboxVisibility
+        public Visibility RecordViewTaskTextboxVisibility // ha nem uj Rogzites keszul akkor TextBoxkent jelenik meg a Task(Title)
         {
             get
             {
@@ -282,20 +262,10 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility RecordViewDateDatePickerVisibility
+        public Visibility RecordViewDateDatePickerVisibility // Ha az Admin mas Rogziteset nezi akkor azok Datuma nem valtoztathato
         {
             get
             {
-                /*try
-                {                 
-                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
-                }
-                catch (SqlException)
-                {
-                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-
-                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;*/
                 if (_user != null)
                 {
                     if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
@@ -315,20 +285,10 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility RecordViewDateTextBoxVisibility
+        public Visibility RecordViewDateTextBoxVisibility // Ha az Admin mas Rogziteset nezi akkor azok Datuma TextBoxkent jelenik meg
         {
             get
             {
-                /*try
-                {
-                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
-                }
-                catch (SqlException)
-                {
-                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-
-                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? Visibility.Visible : Visibility.Collapsed;*/
                 if (_user != null)
                 {
                     if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
@@ -347,20 +307,10 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility RecordViewButtonsVisibility
+        public Visibility RecordViewButtonsVisibility // Ha az Admin mas Rogziteset nezi akkor azoknak a "Cancel" gombon kivul a tobbi gombja nem lathato
         {
             get
             {
-                /*try
-                {
-                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);
-                }
-                catch (SqlException)
-                {
-                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-
-                return _record != null && _record.IdRecord != 0 && _user.Username != LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;*/
                 if (_user != null)
                 {
                     if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
@@ -380,7 +330,7 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Visibility TaskErrorIconVisibility
+        public Visibility TaskErrorIconVisibility // Ha a Feladat Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -388,7 +338,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility DateErrorIconVisibility
+        public Visibility DateErrorIconVisibility // Ha a Datum Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -397,7 +347,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility DurationErrorIconVisibility
+        public Visibility DurationErrorIconVisibility // Ha az Idotartam Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -405,10 +355,10 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
-        public string Error { get { return null; } }
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
+        public string Error { get { return null; } } // IDataError-hoz kell
 
-        public string this[string propertyName]
+        public string this[string propertyName] // ??
         {
             get
             {
@@ -460,7 +410,7 @@ namespace WpfDemo.ViewModel
         public RecordViewModel(Record record, List<Task> activeTasks)
         {
             _record = record;
-            ActiveTasks = activeTasks;
+            ActiveTasks = activeTasks; // betolti az aktiv feladatokat(amikre lehet Rogzitest csinalni)
 
             SaveCommand = new RelayCommand(Save, CanSave);
             CancelRecordViewCommand = new RelayCommand(CancelRecordView, CanCancelRecordView);
@@ -468,7 +418,7 @@ namespace WpfDemo.ViewModel
             DurationReduceCommand = new RelayCommand(Reduce10MinFromDuration, CanExecuteReduce);
         }
 
-        private bool CanExecuteAdd(object arg)
+        private bool CanExecuteAdd(object arg) // amig nem eri el a 12 orat addig elerheto a gomb
         {
             if (Duration < 720)
             {
@@ -477,13 +427,13 @@ namespace WpfDemo.ViewModel
             else return false;
         }
 
-        private void Add10MinToDuration(object obj)
+        private void Add10MinToDuration(object obj) // 10 perccel noveled az Idotartamot
         {
            Duration += 10;
         }
 
 
-        private bool CanExecuteReduce(object arg)
+        private bool CanExecuteReduce(object arg) // amig nem megy le 0 oraig addig elerheto a gomb
         {
             if (Duration > 0)
             {
@@ -492,13 +442,13 @@ namespace WpfDemo.ViewModel
             else return false;
         }
 
-        private void Reduce10MinFromDuration(object obj)
+        private void Reduce10MinFromDuration(object obj) // 10 perccel csokkented az Idotartamot
         {
             Duration -= 10;
         }
 
 
-        private bool CanSave(object arg)
+        private bool CanSave(object arg) // mentheto amig nem nullak az ertekek(kiveve a Koemment az lehet ures) es amig valamelyik ertek megvaltozott
         {
             return Task != null && !string.IsNullOrEmpty(Duration.ToString()) && !string.IsNullOrEmpty(Date.ToString()) &&
                    (_isTaskChanged || _isDateChanged || _isCommentChanged || _isDurationChanged);
@@ -508,7 +458,7 @@ namespace WpfDemo.ViewModel
         {
             try
             {
-                if (CheckIfNewRecord())
+                if (CheckIfNewRecord()) // az Id == 0 akkor uj Rogziteskent menti es ad neki Id-t kulonben meg modositja a meglevo Rogzitest
                 {
                     CreateRecord();
                 }
@@ -532,14 +482,14 @@ namespace WpfDemo.ViewModel
             return this._record.IdRecord == 0;
         }
 
-        private void CreateRecord()
+        private void CreateRecord() // Letrehozza az uj Rogzitest
         {
             this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._task.User_idUser, this._task.IdTask);
             MessageBox.Show(Resources.RecordCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
-            IsChangedRecordValuesToFalse();
+            IsChangedRecordValuesToFalse(); // kell h legkozelebb ha "Save" gombra nyomok akkor ne maradjanak bent a True-s bool ertekek
 
-            CreateRecordToList(this);
+            CreateRecordToList(this); // hozzaadja a listahoz
         }
         public event Action<RecordViewModel> RecordCreated;
         public void CreateRecordToList(RecordViewModel recordViewModel)
@@ -547,15 +497,15 @@ namespace WpfDemo.ViewModel
             RecordCreated?.Invoke(recordViewModel);
         }
 
-        private void UpdateRecord()
+        private void UpdateRecord() // Modositja a Rogzitest
         {
             new RecordRepository(new RecordLogic()).UpdateRecord(this._record, this._record.IdRecord, this._record.User_idUser, this._task.IdTask);
             MessageBox.Show(Resources.RecordUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
-            IsChangedRecordValuesToFalse();
+            IsChangedRecordValuesToFalse(); // kell h legkozelebb ha "Save" gombra nyomok akkor ne maradjanak bent a True-s bool ertekek
         }
 
-        public void IsChangedRecordValuesToFalse() // Save gomb enable-se miatt
+        public void IsChangedRecordValuesToFalse() // "Save" gomb disable-se miatt
         {
             _isTaskChanged = false;
             _isDateChanged = false;
@@ -576,8 +526,8 @@ namespace WpfDemo.ViewModel
 
         private void CancelRecordView(object obj)
         {
-            CancelRecord(obj);
-            IsChangedRecordValuesToFalse();
+            CancelRecord(obj); // Eltunteti a jelenlegi Rogzitest
+            IsChangedRecordValuesToFalse(); // kell h ha megvaltoztattam az ertekeket de a "Cancel" gombra nyomtam igy False-ra allitom a valtoztatasokat(tehat disable lesz a "Save" gomb)
         }
     }
 }

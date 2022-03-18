@@ -32,7 +32,7 @@ namespace WpfDemo.ViewModel
 
 
         private string _searchValue;
-        public string SearchValue
+        public string SearchValue // keresesi szoveg bindolashoz
         {
             get { return _searchValue; }
             set
@@ -61,29 +61,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility ListUsersViewContextMenuVisibility // Delete Header Visibility
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 0 || SelectedUser.Username == LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
 
-        public Visibility UserManagementButtonsVisibility
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
-
-        public Visibility SelectedUserVisibility
+        public Visibility SelectedUserVisibility // Kivalasztott felhasznalo lathatosaga
         {
             get
             {
                 if (SelectedUser != null)
                 {
-                    SelectedUser.UserCanceled += OnUserCanceled;
+                    SelectedUser.UserCanceled += OnUserCanceled; // UserCanceled Event("Cancel" gomb megnyomasa) eseten a kivalasztott felhasznalo eltunik
 
                 }
                 return SelectedUser == null ? Visibility.Collapsed : Visibility.Visible;
@@ -94,6 +79,23 @@ namespace WpfDemo.ViewModel
             SelectedUser = null;
         }
 
+        public Visibility ListUsersViewContextMenuVisibility // (Delete Header Visibility) Csak Admin eseteben jelenik meg jobb klikkre egy torles lehetoseg
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 || SelectedUser.Username == LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public Visibility UserManagementButtonsVisibility // Uj Felhasznalo letrehozasa gomb lathatossaga(Admin eseteben lathato)
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+
         public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand ShowUserProfilCommand { get; private set; }
         public RelayCommand CreateUserCommand { get; private set; }
@@ -101,7 +103,7 @@ namespace WpfDemo.ViewModel
 
         public UserManagementViewModel()
         {
-            LoadUsers();
+            LoadUsers(); // Felhasznalok betoltese
 
             CreateUserCommand = new RelayCommand(CreateUser, CanExecuteShow);
             RefreshUserListCommand = new RelayCommand(RefreshUserList, CanExecuteRefresh);
@@ -118,11 +120,13 @@ namespace WpfDemo.ViewModel
         private void CreateUser(object obj)
         {
             SelectedUser = new UserViewModel(new User());
-            SelectedUser.UserCreated += OnUserCreated;
+            SelectedUser.UserCreated += OnUserCreated; // UserCreated Event ("Save" gomb megnyomasa) eseten hozzaadodik a listahoz a felhasznalo es ujat tudsz letrehozni megint
         }
         private void OnUserCreated(UserViewModel userViewModel)
         {
-            UserList.Add(userViewModel);
+            UserList.Add(userViewModel);// hozzaadja a listahoz
+
+            // Uj letrehozasahoz
             SelectedUser = new UserViewModel(new User());
             SelectedUser.UserCreated += OnUserCreated;
         }
@@ -184,7 +188,7 @@ namespace WpfDemo.ViewModel
         {
             return _selectedUser != null;
         }
-        private void ShowUserProfil(object obj)
+        private void ShowUserProfil(object obj) // Dupla klikk eseten a UserProfileView-t megnyitja
         {
             UserProfileView Ipage = new UserProfileView(SelectedUser.IdUser);
             (Ipage.DataContext as UserProfileViewModel).CurrentUser = SelectedUser.User;

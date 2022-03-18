@@ -192,15 +192,6 @@
                 </Button.Resources>
             </Button>
 
-            <!--<Button x:Name="BackToLogin" Command="{Binding BackToLoginCommand}" Content="Back" Grid.Column="2" Grid.Row="4" Height="53" Width="85" FontSize="30" Margin="200 0 0 5" 
-                    Padding="3" BorderThickness="1" BorderBrush="Black">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </Button.Resources>
-            </Button>-->
-
         </Grid>
         <Frame x:Name="RegisterContent" Margin="0 0 0 0" NavigationUIVisibility="Hidden"/>
 

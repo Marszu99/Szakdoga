@@ -14,7 +14,7 @@ namespace WpfDemo.ViewModel
     public class TabcontrolViewModel : ViewModelBase
     {
         private TabcontrolView _view;
-        private bool _isLanguageEnglish = true;
+        private bool _isLanguageEnglish = true; // megkulonboztetem vele h mely nyelvre allitsa at a szoveget/kiirasokat
 
 
         public string LoggedUserUsername
@@ -84,7 +84,7 @@ namespace WpfDemo.ViewModel
 
         private void ChangeLanguage(object obj)
         {
-            if (_isLanguageEnglish)
+            if (_isLanguageEnglish) // ha Angol a nyelv akkor Magyarra valtoztatom ellenkezo esetben pedig vissza Angolra
             {
                 CultureInfo cultureInfo = new CultureInfo("hu-HU");
                 cultureInfo.DateTimeFormat.ShortDatePattern = "yyyy.MM.dd";
@@ -93,11 +93,11 @@ namespace WpfDemo.ViewModel
                 Thread.CurrentThread.CurrentUICulture = cultureInfo;
                 Thread.CurrentThread.CurrentCulture = cultureInfo;
 
-                ResxStaticExtension.OnLanguageChanged();
+                ResxStaticExtension.OnLanguageChanged(); // Ezzel valtozik meg a szovegek/kiirasok nyelve
 
                 RefreshTaskListForNotificationsLanguageChange(obj);
 
-                _isLanguageEnglish = false;
+                _isLanguageEnglish = false; // false-ra allitom h Angolra vissza tudjam allitani a nyelvet
             }
             else
             {
@@ -108,11 +108,11 @@ namespace WpfDemo.ViewModel
                 Thread.CurrentThread.CurrentUICulture = cultureInfo;
                 Thread.CurrentThread.CurrentCulture = cultureInfo;
 
-                ResxStaticExtension.OnLanguageChanged();
+                ResxStaticExtension.OnLanguageChanged(); // Ezzel valtozik meg a szovegek/kiirasok nyelve
 
                 RefreshTaskListForNotificationsLanguageChange(obj);
 
-                _isLanguageEnglish = true;
+                _isLanguageEnglish = true; // true-ra allitom h Magyarra tudjam allitani a nyelvet
             }
         }
         public event Action<object> RefreshTaskList;
@@ -121,7 +121,7 @@ namespace WpfDemo.ViewModel
             RefreshTaskList?.Invoke(obj);
         }
 
-        private void Logout(object obj)
+        private void Logout(object obj) // Kijelentkezes
         {
             MessageBoxResult messageBoxResult = MessageBox.Show(Resources.LogoutMessage, Resources.Logout, MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.Yes)

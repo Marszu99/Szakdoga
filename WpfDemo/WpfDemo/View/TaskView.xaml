@@ -163,7 +163,7 @@
                     </Style>
                 </ComboBox.Resources>
             </ComboBox>
-            <TextBox Text="{Binding SelectedTask.Status, UpdateSourceTrigger=PropertyChanged}" Background="#FFC7C7C7" Height="37"
+            <TextBox Text="{Binding SelectedTask.TaskStatusString, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Background="#FFC7C7C7" Height="37"
                      FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" IsReadOnly="True" 
                      BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedTask.TaskViewStatusTextBoxVisibility}"
                      Style="{DynamicResource TextBoxReadOnlyStyle}"/>

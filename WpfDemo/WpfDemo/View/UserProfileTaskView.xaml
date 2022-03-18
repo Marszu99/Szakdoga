@@ -130,7 +130,7 @@
                 </ComboBox.Resources>
             </ComboBox>
 
-            <TextBox Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" Height="40" FontSize="28"
+            <TextBox Text="{Binding TaskStatusString, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Background="Transparent" Height="40" FontSize="28"
                      HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="-3 5 0 0" Padding="0" IsReadOnly="True" BorderThickness="0"
                      Visibility="{Binding UserProfileTaskViewStatusTextBoxVisibility}"/>
 

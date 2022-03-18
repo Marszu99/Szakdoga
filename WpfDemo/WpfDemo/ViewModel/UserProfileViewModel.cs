@@ -17,12 +17,15 @@ namespace WpfDemo.ViewModel
     public class UserProfileViewModel : ViewModelBase
     {
         private User _currentUser;
-        private Task _selectedTask;
-        private ObservableCollection<Task> _taskList = new ObservableCollection<Task>();
+        private TaskViewModel _selectedTask;
+        public ObservableCollection<User> UserListForTaskList { get; } = new ObservableCollection<User>();
+
+        private ObservableCollection<TaskViewModel> _taskList = new ObservableCollection<TaskViewModel>();
+        public ObservableCollection<Task> TaskListForRecordList { get; } = new ObservableCollection<Task>();
         private ObservableCollection<RecordViewModel> _recordList = new ObservableCollection<RecordViewModel>();
 
 
-        public ObservableCollection<Task> TaskList
+        public ObservableCollection<TaskViewModel> TaskList
         {
             get
             {
@@ -51,7 +54,7 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Task SelectedTask
+        public TaskViewModel SelectedTask
         {
             get { return _selectedTask; }
             set
@@ -63,7 +66,7 @@ namespace WpfDemo.ViewModel
 
 
         private string _searchTaskListValue;
-        public string SearchTaskListValue
+        public string SearchTaskListValue // Feladatok listajaban valo keresesi szoveg bindolashoz
         {
             get { return _searchTaskListValue; }
             set
@@ -83,7 +86,12 @@ namespace WpfDemo.ViewModel
                         var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CurrentUser.IdUser).Where(task => task.Title.Contains(_searchTaskListValue)
                                     || task.Description.Contains(_searchTaskListValue) || task.Deadline.ToShortDateString().Contains(_searchTaskListValue) 
                                     || task.Status.ToString().Contains(_searchTaskListValue)).ToList();
-                        tasks.ForEach(task => _taskList.Add(task));
+                        tasks.ForEach(task =>
+                        {
+                            var taskViewModel = new TaskViewModel(task, UserListForTaskList.ToList());
+                            taskViewModel.User = UserListForTaskList.First(user => user.IdUser == task.User_idUser);
+                            TaskList.Add(taskViewModel);
+                        });
                     }
                     catch (SqlException)
                     {
@@ -94,7 +102,7 @@ namespace WpfDemo.ViewModel
         }
 
         private string _searchRecordListValue;
-        public string SearchRecordListValue
+        public string SearchRecordListValue // Rogzitesi listaban valo keresesi szoveg bindolashoz
         {
             get { return _searchRecordListValue; }
             set
@@ -120,8 +128,8 @@ namespace WpfDemo.ViewModel
 
                         records.ForEach(record =>
                         {
-                            var recordViewModel = new RecordViewModel(record, _taskList.ToList());
-                            recordViewModel.Task = _taskList.First(task => task.IdTask == record.Task_idTask);
+                            var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                            recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
                             _recordList.Add(recordViewModel);
                         });
                     }
@@ -133,7 +141,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility AddTaskButtonVisibility
+        public Visibility AddTaskButtonVisibility // uj Feladat hozzaadas gomb lathatosaga(Admin eseteben lathato)
         {
             get
             {
@@ -141,7 +149,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility UserProfileViewTasksContextMenuVisibility // Delete Header Visibility
+        public Visibility UserProfileViewTasksContextMenuVisibility // (Delete Header Visibility) Csak Admin eseteben jelenik meg jobb klikkre egy torles lehetoseg
         {
             get
             {
@@ -155,35 +163,33 @@ namespace WpfDemo.ViewModel
 
         public UserProfileViewModel(int userid)
         {
-            LoadTasks(userid);
-            LoadRecords(userid);
-            
+            LoadTasks(userid); // Betolti a Felhasznalo Feladatait
+            LoadRecords(userid); // Betolti a Felhasznalo Rogziteseit
+
             DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
             ShowTaskCommand = new RelayCommand(ShowTask, CanShowTask);
         }
 
-        private bool CanShowTask(object arg)
+        private bool CanShowTask(object arg) // Csak Admin lathatja egy masik ablakban a feladatok adatait
         {
             return LoginViewModel.LoggedUser.Status != 0;
         }
 
         private void ShowTask(object obj)
         {
-            if(_selectedTask == null)
+            if(_selectedTask == null) // Ha a valasztott feladat null akkor ujkent jon letre ellenkezo esetben pedig betolti a letezo feladat adatait
             {
                 UserProfileTaskView Ipage = new UserProfileTaskView();
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.User_idUser = CurrentUser.IdUser;
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.Deadline = DateTime.Today.AddDays(1);
-                //(Ipage.DataContext as UserProfileTaskViewModel).CurrentUser = CurrentUser;
                 Ipage.ShowDialog();
-                
+
                 //OnTaskCreated(SelectedTask);
             }
             else
             {
                 UserProfileTaskView Ipage = new UserProfileTaskView();
-                (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask = SelectedTask;
-                //(Ipage.DataContext as UserProfileTaskViewModel).CurrentUser = CurrentUser;
+                (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask = SelectedTask.Task;
                 Ipage.ShowDialog();
             }
 
@@ -213,11 +219,11 @@ namespace WpfDemo.ViewModel
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
                     MessageBox.Show(Resources.TaskDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    if (this.CurrentUser.Username != LoginViewModel.LoggedUser.Username)
+                    if (this.CurrentUser.Username != LoginViewModel.LoggedUser.Username) // ha a User nem admin(Miutan erre csak az Admin kepes)
                     {
-                        SendNotificationEmail(SelectedTask.Title);
+                        SendNotificationEmail(SelectedTask.Title); // kuld emailt h toroltek a feladatat
                     }
-                    LoadTasks(SelectedTask.User_idUser);
+                    LoadTasks(SelectedTask.User_idUser); // Frissiti a listat torles eseten
                 }
                 catch (SqlException)
                 {
@@ -248,22 +254,49 @@ namespace WpfDemo.ViewModel
         private void LoadTasks(int userid)
         {
             _taskList.Clear();
+            UserListForTaskList.Clear();
 
-            var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
-            tasks.ForEach(task => _taskList.Add(task));
+            try
+            {
+                var user = new UserRepository(new UserLogic()).GetUserByID(userid);
+                UserListForTaskList.Add(user);
+                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
+
+                tasks.ForEach(task =>
+                {
+                    var taskViewModel = new TaskViewModel(task, UserListForTaskList.ToList());
+                    taskViewModel.User = UserListForTaskList.First(user => user.IdUser == task.User_idUser);
+                    TaskList.Add(taskViewModel);
+                });
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void LoadRecords(int userid)
         {
             _recordList.Clear();
+            TaskListForRecordList.Clear();
 
-            var records = new RecordRepository(new RecordLogic()).GetUserRecords(userid);
-            records.ForEach(record =>
+            try
             {
-                var recordViewModel = new RecordViewModel(record, _taskList.ToList());
-                recordViewModel.Task = _taskList.First(task => task.IdTask == record.Task_idTask);
-                _recordList.Add(recordViewModel);
-            });
+                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
+                tasks.ForEach(task => TaskListForRecordList.Add(task));
+
+                var records = new RecordRepository(new RecordLogic()).GetUserRecords(userid);
+                records.ForEach(record =>
+                {
+                    var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                    recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                    _recordList.Add(recordViewModel);
+                });
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

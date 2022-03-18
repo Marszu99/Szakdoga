@@ -17,7 +17,7 @@ namespace WpfDemo.ViewModel
         public static User LoggedUser;
 
 
-        public string Username
+        public string Username // Felhasznalonev a bindolashoz
         {
             get
             {
@@ -30,7 +30,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Password
+        public string Password // Jelszo a bindolashoz
         {
             get
             {
@@ -69,14 +69,14 @@ namespace WpfDemo.ViewModel
         private void Login(object obj)
         {
             try
-            {               
-                Refresh();
+            {
                 if (new UserRepository(new UserLogic()).IsValidLogin(_username, _password))
                 {
-                    LoggedUser = new UserRepository(new UserLogic()).GetUserByUsername(_username);
-                    if (string.IsNullOrWhiteSpace(LoggedUser.FirstName) && string.IsNullOrWhiteSpace(LoggedUser.LastName) && 
-                        string.IsNullOrWhiteSpace(LoggedUser.Telephone))// ha új felhasználó lép be akkor annak nincs megadva alapbol ezek az adatok
+                    LoggedUser = new UserRepository(new UserLogic()).GetUserByUsername(_username); // Lementem a belepet felhasznalot(amig ki nem lep)
+
+                    if (string.IsNullOrWhiteSpace(LoggedUser.FirstName) && string.IsNullOrWhiteSpace(LoggedUser.LastName) && string.IsNullOrWhiteSpace(LoggedUser.Telephone))  // megnezzuk h uj felhasznalo lep-e be mert annak nincs megadva ezek az adatok
                     {
+                        // ha uj felhasznalokent lep be akkor kap uzenetet h ki kell tolteni a hianyzo adatait es MyProfileView-ba iranyitjuk at
                         _view.Content = new TabcontrolView();
                         MyProfileView Ipage = new MyProfileView();
                         (Ipage.DataContext as MyProfileViewModel).CurrentLoggedUser = LoggedUser;
@@ -111,11 +111,6 @@ namespace WpfDemo.ViewModel
         private void ShowRegister(object obj)
         {
             _view.LoginWindow.Content = new RegisterView();
-        }
-
-        public void Refresh()
-        {
-            _view.LoginUserErrorMessage.Text = "";
         }
     }
 }

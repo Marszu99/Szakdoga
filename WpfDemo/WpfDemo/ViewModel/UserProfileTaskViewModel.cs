@@ -53,7 +53,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Title
+        public string Title // Cim bindolashoz
         {
             get
             {
@@ -67,7 +67,7 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(TitleErrorIconVisibility));
             }
         }
-        public string Description
+        public string Description // Leiras bindolashoz
         {
             get
             {
@@ -81,7 +81,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public DateTime Deadline
+        public DateTime Deadline // Hatarido bindolashoz
         {
             get
             {
@@ -96,7 +96,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public TaskStatus Status
+        public TaskStatus Status // Statusz bindolashoz
         {
             get
             {
@@ -108,6 +108,13 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(Status));
                 _isStatusChanged = true;
                 OnPropertyChanged(nameof(StatusErrorIconVisibility));
+            }
+        }
+        public string TaskStatusString // kell h a listaban valtozzon nyelvvaltas eseten a kiiras
+        {
+            get 
+            { 
+                return ResourceHandler.GetResourceString(_task.Status.ToString());
             }
         }
 
@@ -160,7 +167,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public DateTime CreationDate
+        public DateTime CreationDate // letrehozasanak a rogzitese kell h a Rogzites datumahoz tudjunk Exception irni(h ne allitsa korabbra a CreationDate-nel)
         {
             get
             {
@@ -173,7 +180,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public bool IsUserProfileTaskViewStatusEnabled
+        public bool IsUserProfileTaskViewStatusEnabled // Ha az Admin a sajatjat modositja akkor annak a Statuszat tudja modositani ellenkezo esetben pedig egy TextBoxkent jelenik meg
         {
             get
             {
@@ -181,15 +188,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility TitleErrorIconVisibility
-        {
-            get
-            {
-                return TaskValidationHelper.ValidateTitle(_task.Title) == null || !_isTitleChanged ? Visibility.Hidden : Visibility.Visible;
-            }
-        }
-
-        public Visibility UserProfileTaskViewStatusVisibility
+        public Visibility UserProfileTaskViewStatusVisibility // Ha az Admin a sajatjat nezi akkor Stausz szoveg lathato
         {
             get
             {
@@ -197,7 +196,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility UserProfileTaskViewStatusWithColonVisibility
+        public Visibility UserProfileTaskViewStatusWithColonVisibility // Ha az Admin nem a sajatjat nezi akkor Stausz: szoveg lathato
         {
             get
             {
@@ -205,7 +204,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility UserProfileTaskViewStatusComboboxVisibility
+        public Visibility UserProfileTaskViewStatusComboboxVisibility // Ha az Admin a sajatjat modositja akkor annak a Statusza egy ComboBoxkent jelenik meg
         {
             get
             {
@@ -213,7 +212,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility UserProfileTaskViewStatusTextBoxVisibility
+        public Visibility UserProfileTaskViewStatusTextBoxVisibility // Ha az Admin nem a sajatjat modositja akkor annak a Statusza egy TextBoxkent jelenik meg(illetve uj letrehozasa eseten is)
         {
             get
             {
@@ -221,7 +220,15 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility DeadlineErrorIconVisibility
+        public Visibility TitleErrorIconVisibility // Ha a Cim Exceptiont kap akkor az ErrorIcon megjelenik
+        {
+            get
+            {
+                return TaskValidationHelper.ValidateTitle(_task.Title) == null || !_isTitleChanged ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility DeadlineErrorIconVisibility // Ha a Hatarido Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -229,7 +236,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility StatusErrorIconVisibility
+        public Visibility StatusErrorIconVisibility // Ha a Statusz Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -238,10 +245,10 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
-        public string Error { get { return null; } }
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
+        public string Error { get { return null; } } // IDataErrorInfo-hez kell
 
-        public string this[string propertyName]
+        public string this[string propertyName] // ??
         {
             get
             {
@@ -299,13 +306,13 @@ namespace WpfDemo.ViewModel
         {
             return true;
         }
-        private void ExitWindow(object obj)
+        private void ExitWindow(object obj) // Bezarja az ablakot
         {
             this._view.Close();
         }
 
 
-        private bool CanSave(object arg)
+        private bool CanSave(object arg) // mentheto amig nem nullak az ertekek(kiveve a Leiras az lehet ures) es amig valamelyik ertek megvaltozott
         {
             return !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Deadline.ToString()) && 
                    (_isTitleChanged || _isDescriptionChanged || _isDeadlineChanged || _isStatusChanged);
@@ -315,7 +322,7 @@ namespace WpfDemo.ViewModel
         {
             try
             {
-                if (CheckIfNewTask())
+                if (CheckIfNewTask()) // az Id == 0 akkor uj Feladatkent menti es ad neki Id-t kulonben meg modositja a meglevo Feladatot
                 {
                     CreateTask();
                 }
@@ -341,14 +348,14 @@ namespace WpfDemo.ViewModel
         }
 
 
-        private void CreateTask()
+        private void CreateTask() // Letrehozza az uj Feladatot
         {
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User_idUser);
             MessageBox.Show(Resources.TaskCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             //CreateTaskToList(this._task);
 
-            if (this.CurrentUser.Username != LoginViewModel.LoggedUser.Username)
+            if (this.CurrentUser.Username != LoginViewModel.LoggedUser.Username) // ha nem Adminnak adta a feladatot akkor kap emailt
             {
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationNewTask", 0, this._task.IdTask);
                 SendNotificationEmail(" has been added to your tasks!");
@@ -362,7 +369,7 @@ namespace WpfDemo.ViewModel
         }*/
 
 
-        private void UpdateTask()
+        private void UpdateTask() // Modositja a Feladatot
         {
             new TaskRepository(new TaskLogic()).UpdateTask(this._task, this._task.IdTask, this._task.User_idUser);
             MessageBox.Show(Resources.TaskUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);

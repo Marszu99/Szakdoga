@@ -35,7 +35,7 @@ namespace WpfDemo.ViewModel
         //private System.ComponentModel.IRevertibleChangeTracking _IRevertibleChangeTracking;
 
 
-        public User CurrentLoggedUser
+        public User CurrentLoggedUser // jelenlegi Felhasznalo bindolashoz
         {
             get
             {
@@ -49,7 +49,7 @@ namespace WpfDemo.ViewModel
         }
 
         // IDataErrorInfo miatt csinaltam pluszba a Password,FirstName,stb..
-        public string Password
+        public string Password // Jelszo bindolashoz
         {
             get
             {
@@ -64,7 +64,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string FirstName
+        public string FirstName // Keresztnev bindolashoz
         {
             get
             {
@@ -79,7 +79,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string LastName
+        public string LastName // Vezeteknev bindolashoz
         {
             get
             {
@@ -94,7 +94,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Email
+        public string Email // Email bindolashoz
         {
             get
             {
@@ -109,7 +109,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Telephone
+        public string Telephone // Telefon bindolashoz
         {
             get
             {
@@ -124,7 +124,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private bool NewUserValuesHasBeenAdded
+        private bool NewUserValuesHasBeenAdded  // megnezi h a bejelentkezett User uj User-e (uj Userkent nincsenek megadva a FirstName,LastName,Telephone adatok)
         {
             get
             {
@@ -132,7 +132,7 @@ namespace WpfDemo.ViewModel
                         || string.IsNullOrWhiteSpace(CurrentLoggedUser.Telephone)) ? false : true;              
             }
         }
-        public string MyProfileViewWindowStyle
+        public string MyProfileViewWindowStyle  // ha uj User lepett be akkor a folso szegelyt eltunteti (hogy ne lephessen ki es megtudja valtoztatni a hianyzo adatokat)
         {
             get
             {               
@@ -140,7 +140,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string MyProfileViewUserValuesBackground
+        public string MyProfileViewUserValuesBackground // Valtoztatom a hatteret ahhoz kepest h az adatok megvaltoztathatoak vagy nem valtoztathatoak meg
         {
             get
             {
@@ -153,7 +153,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string MyProfileViewUserValuesBorderThickness
+        public string MyProfileViewUserValuesBorderThickness // Valtoztatom a szegely szelesseget ahhoz kepest h az adatok megvaltoztathatoak vagy nem valtoztathatoak meg
         {
             get
             {
@@ -166,7 +166,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string MyProfileViewUserValuesBorderBrush
+        public string MyProfileViewUserValuesBorderBrush // Valtoztatom a szegely szinet ahhoz kepest h az adatok megvaltoztathatoak vagy nem valtoztathatoak meg
         {
             get
             {
@@ -179,7 +179,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public bool MyProfileViewUserValuesIsReadOnly
+        public bool MyProfileViewUserValuesIsReadOnly // Valtoztatom a TextBox modosithatosagat ahhoz kepest h az adatok megvaltoztathatoak vagy nem valtoztathatoak meg
         {
             get
             {
@@ -192,7 +192,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public bool MyProfileViewUserPasswordIsEnabled
+        public bool MyProfileViewUserPasswordIsEnabled // Valtoztatom a Password modosithatosagat ahhoz kepest h az adatok megvaltoztathatoak vagy nem valtoztathatoak meg
         {
             get
             {
@@ -205,7 +205,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility MyProfileViewChangeUserValuesButtonVisibility
+        public Visibility MyProfileViewChangeUserValuesButtonVisibility //Valtoztatom a gomb lathatosagat ahhoz kepest h az adatok megvaltoztathatoak vagy nem valtoztathatoak meg
         {
             get
             {
@@ -218,7 +218,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility MyProfileViewSaveAndCancelButtonsVisibility
+        public Visibility MyProfileViewSaveAndCancelButtonsVisibility // Valtoztatom a gombok lathatosagat ahhoz kepest h az adatok megvaltoztathatoak vagy nem valtoztathatoak meg
         {
             get
             {
@@ -231,7 +231,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility PasswordErrorIconVisibility
+        public Visibility PasswordErrorIconVisibility // Ha a Jelszo Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -239,7 +239,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility FirstNameErrorIconVisibility
+        public Visibility FirstNameErrorIconVisibility // Ha a Keresztnev Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -247,7 +247,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility LastNameErrorIconVisibility
+        public Visibility LastNameErrorIconVisibility // Ha a Vezeteknev Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -255,7 +255,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility EmailErrorIconVisibility
+        public Visibility EmailErrorIconVisibility // Ha az Email Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -263,7 +263,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility TelephoneErrorIconVisibility
+        public Visibility TelephoneErrorIconVisibility // Ha a Telefon Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -272,10 +272,10 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
-        public string Error { get { return null; } }
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
+        public string Error { get { return null; } } // IDataError-hoz kell
 
-        public string this[string propertyName]
+        public string this[string propertyName] // ??
         {
             get
             {
@@ -328,8 +328,8 @@ namespace WpfDemo.ViewModel
 
         public MyProfileViewModel()
         {
-            LoadToDoTasks();
-            LoadDoneTasks();
+            LoadToDoTasks(); // Betoltom a bejelentkezett elvegzendo feladatait
+            LoadDoneTasks(); // Betoltom a bejelentkezett kesz feladatait
 
             ChangeUserValuesCommand = new RelayCommand(ChangeUserValues, CanExecuteChange);
             SaveChangedUserValuesCommand = new RelayCommand(SaveChangedUserValues, CanExecuteSave);
@@ -340,7 +340,7 @@ namespace WpfDemo.ViewModel
         {
             return true;
         }
-        private bool CanExecuteSave(object arg)
+        private bool CanExecuteSave(object arg) // ra tud nyomni a "Mentes" gombra ha egyik ertek sem ures es van megvaltozott adat (illetve ha nincs Exception)
         {
             return !string.IsNullOrEmpty(CurrentLoggedUser.Password) && !string.IsNullOrEmpty(CurrentLoggedUser.FirstName) && !string.IsNullOrEmpty(CurrentLoggedUser.LastName)
                    && !string.IsNullOrEmpty(CurrentLoggedUser.Email) && !string.IsNullOrEmpty(CurrentLoggedUser.Telephone) && 
@@ -351,7 +351,7 @@ namespace WpfDemo.ViewModel
             return true;
         }
 
-        private void ChangeUserValues(object obj)
+        private void ChangeUserValues(object obj) // Atalakitom a TextBox designt illetve h modosithatok legyenek, illetve a kello gombokat lathatova teszem es ami nem kell azt meg Hidden-ne
         {
             MyProfileViewUserValuesIsReadOnly = false;
             MyProfileViewUserPasswordIsEnabled = true;
@@ -360,8 +360,6 @@ namespace WpfDemo.ViewModel
             MyProfileViewUserValuesBorderBrush = "Black";
             MyProfileViewChangeUserValuesButtonVisibility = Visibility.Hidden;
             MyProfileViewSaveAndCancelButtonsVisibility = Visibility.Visible;
-
-            //_IEditableObject.BeginEdit();
         }
 
         private void SaveChangedUserValues(object obj)
@@ -372,6 +370,7 @@ namespace WpfDemo.ViewModel
                 MessageBox.Show(Resources.UserUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
                 SendEmail(); // Kuldok emailt ha esetleg elfelejtene a megadott jelszot vagy elirna...
 
+                // Visszaalakitom a TextBox designt es nem modosíthatova teszem oket, illetve Change gombot lathatova teszem a tobbit Hidden-ne
                 MyProfileViewUserValuesIsReadOnly = true;
                 MyProfileViewUserPasswordIsEnabled = false;
                 MyProfileViewUserValuesBackground = "DarkGray";
@@ -380,8 +379,9 @@ namespace WpfDemo.ViewModel
                 MyProfileViewChangeUserValuesButtonVisibility = Visibility.Visible;
                 MyProfileViewSaveAndCancelButtonsVisibility = Visibility.Hidden;
 
-                IsChangedUservaluesToFalse();
-                OnPropertyChanged(nameof(MyProfileViewWindowStyle));
+                IsChangedUservaluesToFalse(); // kell h legkozelebb ha "Change" gombra nyomok akkor ne maradjanak bent a True-s bool ertekek
+
+                OnPropertyChanged(nameof(MyProfileViewWindowStyle)); // kell h megvaltozzon menteskor a folso szegely (uj User eseten lenyegesebb)
             }
             catch (SqlException)
             {
@@ -419,10 +419,7 @@ namespace WpfDemo.ViewModel
 
         private void CancelChangeUserValues(object obj)
         {
-            //_IRevertibleChangeTracking.RejectChanges();
-            //_IEditableObject.CancelEdit();
-
-            if (_isPasswordChanged || _isFirstNameChanged || _isLastNameChanged || _isEmailChanged || _isTelephoneChanged)
+            if (_isPasswordChanged || _isFirstNameChanged || _isLastNameChanged || _isEmailChanged || _isTelephoneChanged) // ha megvaltozott valamelyik adat akkor visszatolti az eredeti adatot ha a "Cancel" gombra megyunk
             {
                 try
                 {
@@ -433,21 +430,22 @@ namespace WpfDemo.ViewModel
                     CurrentLoggedUser.Email = CurrentLoggedUserValues.Email;
                     CurrentLoggedUser.Telephone = CurrentLoggedUserValues.Telephone;
 
-                    //OnPropertyChanged(nameof(CurrentLoggedUser));
-
+                    // Hogy megvaltozzon a kiirt adatok ezert hasznalom a OnPropertyChanged(nameof());
                     OnPropertyChanged(nameof(Password));
                     OnPropertyChanged(nameof(FirstName));
                     OnPropertyChanged(nameof(LastName));
                     OnPropertyChanged(nameof(Email));
                     OnPropertyChanged(nameof(Telephone));
+
+                    IsChangedUservaluesToFalse(); // kell h legkozelebb ha "Change" gombra nyomok akkor ne maradjanak bent a True-s bool ertekek
                 }
                 catch (SqlException)
                 {
                     MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-           
 
+            // Visszaalakitom a TextBox designt es nem modosíthatova teszem oket, illetve "Change" gombot lathatova teszem a tobbit Hidden-ne
             MyProfileViewUserValuesIsReadOnly = true;
             MyProfileViewUserPasswordIsEnabled = false;
             MyProfileViewUserValuesBackground = "DarkGray";
@@ -455,8 +453,6 @@ namespace WpfDemo.ViewModel
             MyProfileViewUserValuesBorderBrush = "DarkGray";
             MyProfileViewChangeUserValuesButtonVisibility = Visibility.Visible;
             MyProfileViewSaveAndCancelButtonsVisibility = Visibility.Hidden;
-
-            IsChangedUservaluesToFalse();
         }
 
 

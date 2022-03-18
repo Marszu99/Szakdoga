@@ -15,7 +15,7 @@ namespace WpfDemo.ViewModel
 {
     public class TaskManagementViewModel : ViewModelBase
     {
-        public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>(); //List?
+        public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>();
         public ObservableCollection<TaskViewModel> TaskList { get; } = new ObservableCollection<TaskViewModel>();
         private int _lastSelectedTaskID = 0; // utoljara valasztott Task ID-ja
         private int _lastSelectedTaskCount = 0; // utoljara valasztott elem indexe a TaskList-bol
@@ -69,7 +69,7 @@ namespace WpfDemo.ViewModel
 
 
         private string _searchValue;
-        public string SearchValue
+        public string SearchValue // keresesi szoveg bindolashoz
         {
             get { return _searchValue; }
             set
@@ -82,7 +82,7 @@ namespace WpfDemo.ViewModel
 
 
         private bool _isMyTasksCheckBoxChecked = true;
-        public bool IsMyTasksCheckBoxChecked
+        public bool IsMyTasksCheckBoxChecked // Sajat feladatokat mutato checkbox pipajahoz a bindolashoz
         {
             get
             {
@@ -97,7 +97,7 @@ namespace WpfDemo.ViewModel
 
 
         private bool _isActiveTasksCheckBoxChecked = true;
-        public bool IsActiveTasksCheckBoxChecked
+        public bool IsActiveTasksCheckBoxChecked // aktiv feladatokat mutato checkbox pipajahoz a bindolashoz
         {
             get
             {
@@ -112,7 +112,7 @@ namespace WpfDemo.ViewModel
 
 
         private bool _isNotificationsCheckBoxChecked = true;
-        public bool IsNotificationsCheckBoxChecked
+        public bool IsNotificationsCheckBoxChecked // ertesiteseket mutato checkbox pipajahoz a bindolashoz
         {
             get
             {
@@ -126,29 +126,13 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Visibility NewTaskButtonVisibility
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
-
-        public Visibility TaskCheckBoxAndTextVisibility
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
-
-        public Visibility SelectedTaskVisibility
+        public Visibility SelectedTaskVisibility // Kivalasztott feladat lathatosaga
         {
             get
             {
                 if (SelectedTask != null)
                 {
-                    SelectedTask.TaskCanceled += OnTaskCanceled;
+                    SelectedTask.TaskCanceled += OnTaskCanceled; // TaskCanceled Event("Cancel" gomb megnyomasa) eseten a kivalasztott feladat eltunik
                 }
                 return SelectedTask == null ? Visibility.Collapsed : Visibility.Visible;
             }
@@ -172,12 +156,12 @@ namespace WpfDemo.ViewModel
                         MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
-                
+
                 SelectedTask = null; // null-ozom h a SelectedTask Visibility-je Collapsed legyen
             }
         }
 
-        public Visibility ListTasksViewUserVisibility
+        public Visibility NewTaskButtonVisibility // uj feladat letrehozasa gomb lathatosaganak bindaloasahoz (ha admin lep be akkor lathato kulonben meg nem)
         {
             get
             {
@@ -185,7 +169,23 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility ListTasksViewContextMenuVisibility // Delete Header Visibility
+        public Visibility TaskCheckBoxAndTextVisibility // Sajat feladatokat mutato checkbox es szoveg lathatosaganak a bindolasahoz (ha admin lep be akkor lathato kulonben meg nem)
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public Visibility ListTasksViewUserVisibility // A feladatok listaban a User oszlop lathatosaganak a bindolasahoz (ha admin lep be akkor lathato kulonben meg nem)
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public Visibility ListTasksViewContextMenuVisibility // (Delete Header Visibility) Csak admin eseteben jelenik meg jobb klikkre egy torles lehetoseg
         {
             get
             {
@@ -205,8 +205,8 @@ namespace WpfDemo.ViewModel
 
         public TaskManagementViewModel()
         {
-            LoadUsers();
-            RefreshTaskList(_searchValue);
+            LoadUsers(); // Felhasznalok betoltese(ha esetleg ujat hozna letre)
+            RefreshTaskList(_searchValue); // Feladatok frissitese(Lista frissitese/betoltese)
 
             CreateTaskCommand = new RelayCommand(CreateTask, CanExecuteShow);
             RefreshTaskListCommand = new RelayCommand(RefreshTaskList, CanExecuteRefresh);
@@ -226,12 +226,13 @@ namespace WpfDemo.ViewModel
             LoadUsers();
 
             SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
-            SelectedTask.TaskCreated += OnTaskCreated;
+            SelectedTask.TaskCreated += OnTaskCreated; // TaskCreated Event ("Save" gomb megnyomasa) eseten hozzaadodik a listahoz a feladat es ujat tudsz letrehozni megint
         }
         private void OnTaskCreated(TaskViewModel taskViewModel)
         {
-            TaskList.Add(taskViewModel);
+            TaskList.Add(taskViewModel); // hozzaadja a listahoz
 
+            // Uj letrehozasahoz
             SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
             SelectedTask.TaskCreated += OnTaskCreated;
         }
@@ -243,11 +244,11 @@ namespace WpfDemo.ViewModel
         }
         private void RefreshTaskList(object obj)
         {
-            LoadTasks();
-            SortingByCheckBox(obj);
+            LoadTasks(); // Feladatok betoltese
+            SortingByCheckBox(obj); // Lista frissitese/szurese
         }
 
-        public void LoadTasks()
+        public void LoadTasks() // Feladatok betoltese
         {
             TaskList.Clear();
 
@@ -269,7 +270,7 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public void LoadUsers()
+        public void LoadUsers() // Felhasznalok betoltese
         {
             UserList.Clear();
 
@@ -289,7 +290,7 @@ namespace WpfDemo.ViewModel
         {
             return true;
         }
-        private void SortingByCheckBox(object obj)
+        private void SortingByCheckBox(object obj) // Lista szurese/frissitese
         {
             try
             {
@@ -428,11 +429,11 @@ namespace WpfDemo.ViewModel
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
                     MessageBox.Show(Resources.TaskDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    if(this.SelectedTask.User.Username != LoginViewModel.LoggedUser.Username)
+                    if(this.SelectedTask.User.Username != LoginViewModel.LoggedUser.Username) // ha a User nem admin(Miutan erre csak az Admin kepes)
                     {
-                        SendNotificationEmail(SelectedTask.Title);
+                        SendNotificationEmail(SelectedTask.Title); // kuld emailt h toroltek a feladatat
                     }
-                    RefreshTaskList(obj);
+                    RefreshTaskList(obj); // Frissiti a listat torles eseten
                 }
                 catch (SqlException)
                 {
@@ -443,13 +444,13 @@ namespace WpfDemo.ViewModel
 
         private bool CanExecuteReadTaskNotifications(object arg)
         {
-            if (TaskViewModel.IsNotificationsOn)
+            if (TaskViewModel.IsNotificationsOn) // ha lathatoak az ertesitesek
             {
-                if (LoginViewModel.LoggedUser.Status == 1)
+                if (LoginViewModel.LoggedUser.Status == 1) // megkapja az Adminhoz tartozo ertesiteseket a megfelelo feladathoz
                 {
                     return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(SelectedTask.IdTask) != null;
                 }
-                else
+                else // megkapja a sima Userhez tartozo ertesiteseket a megfelelo feladathoz
                 {
                     return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(SelectedTask.IdTask) != null;
                 }
@@ -460,13 +461,13 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private void HasRead(object obj)
+        private void HasRead(object obj) // elolvassa az ertesitest
         {
             try
             {
                 new NotificationRepository(new NotificationLogic()).HasReadNotification(SelectedTask.IdTask, LoginViewModel.LoggedUser.Status);
 
-                RefreshTaskList(obj);
+                RefreshTaskList(obj); // frissiti a listat h eltunjon az ertesites
             }
             catch (SqlException)
             {
@@ -480,14 +481,14 @@ namespace WpfDemo.ViewModel
         }
         private void NotificationSwitchOnOff(object obj)
         {
-            if (IsNotificationsCheckBoxChecked)
+            if (IsNotificationsCheckBoxChecked) // ha ki van pipalva a CheckBox
             {
-                TaskViewModel.IsNotificationsOn = true;
+                TaskViewModel.IsNotificationsOn = true; // ertesitesek be vannak kapcsolva
                 RefreshTaskList(obj);
             }
             else
             {
-                TaskViewModel.IsNotificationsOn = false;
+                TaskViewModel.IsNotificationsOn = false; // ertesitesek ki vannak kapcsolva
                 RefreshTaskList(obj);
             }
         }

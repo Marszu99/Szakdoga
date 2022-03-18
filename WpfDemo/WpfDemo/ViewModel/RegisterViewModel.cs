@@ -51,7 +51,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Username
+        public string Username // Felhasznalonev bindolashoz
         {
             get
             {
@@ -66,7 +66,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Password
+        public string Password // Jelszo bindolashoz
         {
             get
             {
@@ -82,7 +82,7 @@ namespace WpfDemo.ViewModel
         }
 
         private string _password2;
-        public string Password2
+        public string Password2 // Jelszo2 bindolashoz
         {
             get
             {
@@ -97,7 +97,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string FirstName
+        public string FirstName // Keresztnev bindolashoz
         {
             get
             {
@@ -112,7 +112,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string LastName
+        public string LastName // Vezeteknev bindolashoz
         {
             get
             {
@@ -127,7 +127,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Email
+        public string Email // Email bindolashoz
         {
             get
             {
@@ -143,7 +143,7 @@ namespace WpfDemo.ViewModel
         }
 
         private string _email2;
-        public string Email2
+        public string Email2 // Email2 bindolashoz
         {
             get
             {
@@ -158,7 +158,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Telephone
+        public string Telephone // Telephone bindolashoz
         {
             get
             {
@@ -174,7 +174,7 @@ namespace WpfDemo.ViewModel
         }
 
         private string _companyName;
-        public string CompanyName
+        public string CompanyName // Cegnev bindolashoz
         {
             get
             {
@@ -190,7 +190,7 @@ namespace WpfDemo.ViewModel
         }
 
         private string _companyName2;
-        public string CompanyName2
+        public string CompanyName2 // Cegnev2 bindolashoz
         {
             get
             {
@@ -206,7 +206,7 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Visibility UsernameErrorIconVisibility
+        public Visibility UsernameErrorIconVisibility // Ha a Felhasznalonev Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -214,7 +214,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility PasswordErrorIconVisibility
+        public Visibility PasswordErrorIconVisibility // Ha a Jelszo Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -222,7 +222,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility Password2ErrorIconVisibility
+        public Visibility Password2ErrorIconVisibility // Ha a Jelszo2 Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -230,7 +230,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility FirstNameErrorIconVisibility
+        public Visibility FirstNameErrorIconVisibility // Ha a Keresztnev Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -238,7 +238,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility LastNameErrorIconVisibility
+        public Visibility LastNameErrorIconVisibility // Ha a Vezeteknev Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -246,7 +246,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility EmailErrorIconVisibility
+        public Visibility EmailErrorIconVisibility // Ha a Email Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -254,7 +254,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility Email2ErrorIconVisibility
+        public Visibility Email2ErrorIconVisibility // Ha a Email2 Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -262,7 +262,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility TelephoneErrorIconVisibility
+        public Visibility TelephoneErrorIconVisibility // Ha a Telefon Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -270,7 +270,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility CompanyNameErrorIconVisibility
+        public Visibility CompanyNameErrorIconVisibility // Ha a Cegnev Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -278,7 +278,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility CompanyName2ErrorIconVisibility
+        public Visibility CompanyName2ErrorIconVisibility // Ha a Cegnev2 Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -287,10 +287,10 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
-        public string Error { get { return null; } }
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
+        public string Error { get { return null; } } // IDataError-hoz kell
 
-        public string this[string propertyName]
+        public string this[string propertyName] // ??
         {
             get
             {
@@ -358,20 +358,18 @@ namespace WpfDemo.ViewModel
         }
 
 
+        public RelayCommand RegisterAdminCommand { get; private set; }
+
         public RegisterViewModel(User user, RegisterView view)
         {
             _user = user;
             _view = view;
 
             RegisterAdminCommand = new RelayCommand(RegisterAdmin, CanExecuteRegister);
-            BackToLoginCommand = new RelayCommand(BackToLogin, CanExecute);
         }
 
 
-        public RelayCommand RegisterAdminCommand { get; private set; }
-        public RelayCommand BackToLoginCommand { get; private set; }
-
-        private bool CanExecuteRegister(object arg)
+        private bool CanExecuteRegister(object arg) // Ha egyik ertek sem ures akkor regisztralhatunk(illetve ha nincs Exception)
         {
             return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password) && !string.IsNullOrEmpty(Password2) && !string.IsNullOrEmpty(FirstName) && 
                    !string.IsNullOrEmpty(LastName) && !string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Email2) && !string.IsNullOrEmpty(Telephone) &&
@@ -384,8 +382,10 @@ namespace WpfDemo.ViewModel
             {
                 new UserRepository(new UserLogic()).RegisterAdmin(_user, _password2, _email2, _companyName, _companyName2);
                 MessageBox.Show("Admin has been registrated succesfully!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                SendEmail();
-                //ExpanderMessage.Text = "User has been created succesfully!";
+
+                SendEmail(); // Emailt kuld az Admin-nak a regisztralt adatokkal
+
+                // Belep a regisztralt felhasznalo adataival
                 LoginViewModel.LoggedUser = new UserRepository(new UserLogic()).GetUserByUsername(this.Username);
                 _view.Content = new TabcontrolView();
             }
@@ -399,19 +399,8 @@ namespace WpfDemo.ViewModel
             }
         }
 
-
-        private bool CanExecute(object arg)
-        {
-            return true;
-        }
-
-        private void BackToLogin(object arg)
-        {
-            _view.RegisterContent.Content = new LoginView();
-        }
-
         private void SendEmail()
-        {            
+        {
             SmtpClient client = new SmtpClient();
             client.Port = 587;
             client.Host = "smtp.gmail.com";

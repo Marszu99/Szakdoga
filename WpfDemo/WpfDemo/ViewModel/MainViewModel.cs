@@ -16,7 +16,7 @@ namespace WpfDemo.ViewModel
 
         public void MainWindowContent()
         {
-            if (new UserRepository(new UserLogic()).GetAdmin().IdUser == 0)
+            if (new UserRepository(new UserLogic()).GetAdmin().IdUser == 0) // Ha letezik admin akkor Login-ba dob ha pedig nem akkor regisztralunk admint
             {
                 _view.MainWindow.Content = new RegisterView();
             }

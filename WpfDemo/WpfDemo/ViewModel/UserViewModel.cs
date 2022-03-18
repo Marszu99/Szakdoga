@@ -35,7 +35,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Username
+        public string Username // Felhasznalonev bindolashoz
         {
             get
             {
@@ -49,7 +49,7 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(UsernameErrorIconVisibility));
             }
         }
-        public string Password
+        public string Password // Jelszo bindolashoz
         {
             get
             {
@@ -62,7 +62,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string FirstName
+        public string FirstName // Keresztnev bindolashoz
         {
             get
             {
@@ -75,7 +75,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string LastName
+        public string LastName // Vezeteknev bindolashoz
         {
             get
             {
@@ -88,7 +88,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Email
+        public string Email // Email bindolashoz
         {
             get
             {
@@ -103,7 +103,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string Telephone
+        public string Telephone // Telefon bindolashoz
         {
             get
             {
@@ -142,7 +142,7 @@ namespace WpfDemo.ViewModel
             }*/
         }
 
-        public bool IsUserViewValuesReadOnly
+        public bool IsUserViewValuesReadOnly // ha letezo Felhasznalora kattintunk akkor ReadOnlykent jelennek meg az adatai
         {
             get
             {
@@ -158,7 +158,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string UserViewHeight
+        public string UserViewHeight // Uj Felhasznalo letrehozasa eseten csak a Felhasznalonevet es Emailt adjuk meg igy oda eleg a kisebb magassag
         {
             get
             {
@@ -166,7 +166,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string UserViewRowHeight
+        public string UserViewRowHeight // Uj Felhaszno letrehozasa eseten a sor magassagat nullazuk
         {
             get
             {
@@ -174,7 +174,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string UserViewEmailGridRow
+        public string UserViewEmailGridRow // Uj Felhaszno letrehozasa eseten az Email soranak a nagysagat csokkentjuk
         {
             get
             {
@@ -182,7 +182,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string UserViewFirstNameGridRow
+        public string UserViewFirstNameGridRow // Uj Felhaszno letrehozasa eseten az Keresztnev soranak a nagysagat noveljuk
         {
             get
             {
@@ -190,7 +190,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string UserViewValuesBackground
+        public string UserViewValuesBackground // Uj Felhaszno letrehozasa eseten az Email soranak a magassagat csokkentjuk
         {
             get
             {
@@ -198,7 +198,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string UserViewValuesBorderThickness
+        public string UserViewValuesBorderThickness // Uj Felhaszno letrehozasa eseten a szegelyek szelessege no
         {
             get
             {
@@ -206,7 +206,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public string UserViewEmailWidth
+        public string UserViewEmailWidth // Uj Felhaszno letrehozasa eseten az Email TextBoxanak a hossz csokkent (ErrorIcon miatt)
         {
             get
             {
@@ -214,7 +214,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility UserViewSaveButtonVisibility
+        public Visibility UserViewSaveButtonVisibility // A mentes gomb csak uj Felhasznalo letrehozasa eseten latszik
         {
             get
             {
@@ -222,7 +222,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility UserViewUsernameVisibility
+        public Visibility UserViewUsernameVisibility // A Username kiiras uj Felhasznalo eseten latszik kulonben meg Hidden
         {
             get
             {
@@ -230,7 +230,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility UserViewUsernameWithColonVisibility
+        public Visibility UserViewUsernameWithColonVisibility // A Username: kiiras eletezo Felhasznalo eseten latszik kulonben meg Hidden
         {
             get
             {
@@ -238,7 +238,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility UserViewEmailVisibility
+        public Visibility UserViewEmailVisibility // Az Email kiiras uj Felhasznalo eseten latszik kulonben meg Hidden
         {
             get
             {
@@ -246,7 +246,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility UserViewEmailWithColonVisibility
+        public Visibility UserViewEmailWithColonVisibility // Az Email: kiiras eletezo Felhasznalo eseten latszik kulonben meg Hidden
         {
             get
             {
@@ -254,7 +254,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility UsernameErrorIconVisibility
+        public Visibility UsernameErrorIconVisibility // Ha a Felhasznalonev Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -262,7 +262,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility EmailErrorIconVisibility
+        public Visibility EmailErrorIconVisibility // Ha az Email Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
             {
@@ -271,10 +271,10 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
-        public string Error { get { return null; } }
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
+        public string Error { get { return null; } } // IDataErrorInfo-hez kell
 
-        public string this[string propertyName]
+        public string this[string propertyName] // ??
         {
             get
             {
@@ -321,9 +321,9 @@ namespace WpfDemo.ViewModel
             CancelUserViewCommand = new RelayCommand(CancelUserView, CanCancelUserView);
         }
 
-        private bool CanSave(object arg)
+        private bool CanSave(object arg) // mentheto amig nem nullak az ertekek
         {
-            return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Email) && (_isUsernameChanged || _isEmailChanged);
+            return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Email);
         }
 
         private void Save(object obj)
@@ -331,14 +331,6 @@ namespace WpfDemo.ViewModel
             try
             {
                 CreateUser();
-                /* if (CheckIfNewUser())
-                 {
-                     CreateUser();
-                 }
-                 else
-                 {
-                     UpdateUser();
-                 }*/
             }
             catch (SqlException)
             {
@@ -350,27 +342,23 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        /*private bool CheckIfNewUser()
+        private void CreateUser() // Letrehozza az uj Felhasznalot
         {
-            return this._user.IdUser == 0;
-        }*/
-
-
-        private void CreateUser()
-        {
-            string createdUserRandomPassword = RandomPassword(10);
+            string createdUserRandomPassword = RandomPassword(10); // Letrehozz egy random jelszot(ami 10 karakter hosszusagu)
             this._user.IdUser = new UserRepository(new UserLogic()).CreateUser(this._user, createdUserRandomPassword);
             MessageBox.Show(Resources.UserCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
-            CreateUserToList(this);
+            CreateUserToList(this); // hozzaadja a listahoz
 
-            SendEmail(createdUserRandomPassword);
+            SendEmail(createdUserRandomPassword); // elkuldi az emailt a Felhasznalonevvel es a random Jelszoval
         }
+
         public event Action<UserViewModel> UserCreated;
         public void CreateUserToList(UserViewModel userViewModel)
         {
             UserCreated?.Invoke(userViewModel);
         }
+
         private void SendEmail(string createdUserRandomPassword)
         {
             SmtpClient client = new SmtpClient();
@@ -398,11 +386,6 @@ namespace WpfDemo.ViewModel
             return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        /*private void UpdateUser()
-        {
-            new UserRepository(new UserLogic()).UpdateUser(this._user);
-            MessageBox.Show(Resources.UserUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
-        }*/
 
         public event Action<object> UserCanceled;
         public void CancelUser(Object obj)
@@ -416,7 +399,7 @@ namespace WpfDemo.ViewModel
 
         private void CancelUserView(object obj)
         {
-            CancelUser(obj);
+            CancelUser(obj); // Eltunteti a jelenlegi Felhasznalot
         }
     }
 }

@@ -71,20 +71,20 @@ namespace WpfDemo.ViewModel
 
 
         private string _searchValue;
-        public string SearchValue
+        public string SearchValue // keresesi szoveg bindolashoz
         {
             get { return _searchValue; }
             set
             {
                 _searchValue = value;
                 OnPropertyChanged(nameof(SearchValue));
-                SortingByCheckBox(_searchValue);
+                SortingByCheckBox(_searchValue); // ha valtoztatom a keresesi szoveget akkor azonnal szurje a listat
             }
         }
 
 
         private bool _isMyRecordsCheckBoxChecked = true;
-        public bool IsMyRecordsCheckBoxChecked
+        public bool IsMyRecordsCheckBoxChecked // Sajat rogziteseket mutato checkbox pipajahoz a bindolashoz
         {
             get 
             { 
@@ -98,29 +98,13 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Visibility RecordCheckBoxAndTextVisibility
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Hidden : Visibility.Visible;
-            }
-        }
-
-        public Visibility ListRecordsViewUserVisibility
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
-
-        public Visibility SelectedRecordVisibility
+        public Visibility SelectedRecordVisibility // Kivalasztott rogzites lathatosaga
         {
             get
             {
                 if (SelectedRecord != null)
                 {
-                    SelectedRecord.RecordCanceled += OnRecordCanceled;
+                    SelectedRecord.RecordCanceled += OnRecordCanceled; // RecordCanceled Event("Cancel" gomb megnyomasa) eseten a kivalasztott rogzites eltunik
                 }
                 return SelectedRecord == null ? Visibility.Collapsed : Visibility.Visible;
             }
@@ -142,13 +126,29 @@ namespace WpfDemo.ViewModel
                     {
                         MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                }      
+                }
 
                 SelectedRecord = null; // null-ozom h a SelectedRecord Visibility-je Collapsed legyen
             }
         }
 
-        public Visibility ListRecordsViewContextMenuVisibility // Delete Header Visibility
+        public Visibility RecordCheckBoxAndTextVisibility // Sajat rogziteseket mutato checkbox es szoveg lathatosaganak a bindolasahoz (ha admin lep be akkor lathato kulonben meg nem)
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+
+        public Visibility ListRecordsViewUserVisibility // A rogzitesek listaban a User oszlop lathatosaganak a bindolasahoz (ha admin lep be akkor lathato kulonben meg nem)
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }      
+
+        public Visibility ListRecordsViewContextMenuVisibility // (Delete Header Visibility) Csak sajat Rogzites eseteben jelenik meg jobb klikkre egy torles lehetoseg
         {
             get
             {
@@ -157,7 +157,7 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Dictionary<TaskStatus, string> TaskStatuses
+        public Dictionary<TaskStatus, string> TaskStatuses // KELLL??
         {
             get
             {
@@ -178,8 +178,8 @@ namespace WpfDemo.ViewModel
 
         public RecordManagementViewModel()
         {
-            LoadTasks();
-            RefreshRecordList(_searchValue);
+            LoadTasks(); // Feladatok betoltese(ha esetleg ujat kapnank)
+            RefreshRecordList(_searchValue); // Rogzitesek frissitese(Lista frissitese/betoltese)
 
             CreateRecordCommand = new RelayCommand(CreateRecord, CanExecuteShow);
             RefreshRecordListCommand = new RelayCommand(RefreshRecordList, CanExecuteRefresh);
@@ -199,12 +199,13 @@ namespace WpfDemo.ViewModel
 
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
                 TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
-            SelectedRecord.RecordCreated += OnRecordCreated;
+            SelectedRecord.RecordCreated += OnRecordCreated; // RecordCreated Event ("Save" gomb megnyomasa) eseten hozzaadodik a listahoz a rogzites es ujat tudsz letrehozni megint
         }
         private void OnRecordCreated(RecordViewModel recordViewModel)
         {
-            RecordList.Add(recordViewModel);
+            RecordList.Add(recordViewModel); // hozzaadja a listahoz
 
+            // Uj letrehozasahoz
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
                 TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
             SelectedRecord.RecordCreated += OnRecordCreated;
@@ -217,11 +218,11 @@ namespace WpfDemo.ViewModel
         }
         private void RefreshRecordList(object obj)
         {
-            LoadRecords();
-            SortingByCheckBox(obj);
+            LoadRecords(); // Rogzitesek betoltese
+            SortingByCheckBox(obj); // Lista frissitese/szurese
         }
 
-        public void LoadRecords()
+        public void LoadRecords() // Rogzitesek betoltese
         {
             RecordList.Clear();
 
@@ -242,7 +243,7 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public void LoadTasks()
+        public void LoadTasks() // Feladatok betoltese
         {
             TaskList.Clear();
 
@@ -262,7 +263,7 @@ namespace WpfDemo.ViewModel
         {
             return true;
         }
-        private void SortingByCheckBox(object obj)
+        private void SortingByCheckBox(object obj) // Lista szurese/frissitese
         {
             try
             {
@@ -350,7 +351,7 @@ namespace WpfDemo.ViewModel
                     new RecordRepository(new RecordLogic()).DeleteRecord(SelectedRecord.IdRecord);
                     MessageBox.Show(Resources.RecordDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    RefreshRecordList(obj);
+                    RefreshRecordList(obj); // Frissiti a listat torles eseten
                 }
                 catch (SqlException)
                 {

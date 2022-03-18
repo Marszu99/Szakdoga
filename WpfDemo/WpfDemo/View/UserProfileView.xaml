@@ -193,7 +193,7 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Status}" Binding="{Binding Status}" Width="110">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Status}" Binding="{Binding TaskStatusString}" Width="120">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>
