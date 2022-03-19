@@ -91,6 +91,11 @@
                                     <Setter Property="FontWeight" Value="Medium"/>
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Comment}" Binding="{Binding Comment}" Width="*" FontSize="19">
                             <DataGridTextColumn.HeaderStyle>
@@ -99,7 +104,7 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Duration}" Binding="{Binding DurationFormat}" Width="Auto" FontSize="19">
+                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Duration}" Binding="{Binding DurationFormat}" Width="95" FontSize="19">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium"/>
@@ -110,13 +115,6 @@
                                     <Setter Property="HorizontalAlignment" Value="Center"/>
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Status}" Binding="{Binding Task.Status}" Width="105" FontSize="19">
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="{x:Type DataGridColumnHeader}">
-                                    <Setter Property="FontWeight" Value="Medium"/>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>

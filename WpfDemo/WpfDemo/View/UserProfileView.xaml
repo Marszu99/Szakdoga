@@ -73,7 +73,7 @@
                 <Label Content="{local:ResxStatic l10n:Resources.Tasks}" FontWeight="Bold" FontSize="36" Margin="-5 14 0 0" Height="50"/>
             </StackPanel>
 
-            <StackPanel Margin="0 0 865 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+            <StackPanel Margin="0 0 835 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
                 <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" FontSize="20"/>
                 <TextBox x:Name="TaskSearchingText" Margin="5 0 0 1" Background="#eee" Text="{Binding SearchTaskListValue, UpdateSourceTrigger=PropertyChanged}"
                          Width="165" FontSize="18" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
@@ -85,7 +85,7 @@
                 </TextBox>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="800 0 0 -5">
+            <StackPanel Orientation="Horizontal" Margin="833 0 0 -5">
                 <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\record.png" VerticalAlignment="Bottom" Margin="0 0 0 5" Width="41"/>
                 <Label Content="{local:ResxStatic l10n:Resources.Records}" FontWeight="Bold" FontSize="36" Margin="-7 13 0 0"/>
             </StackPanel>
@@ -107,14 +107,17 @@
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="622*"/>
+                <!--<ColumnDefinition Width="622*"/>
                 <ColumnDefinition Width="107*"/>
                 <ColumnDefinition Width="73*"/>
-                <ColumnDefinition Width="730*"/>
+                <ColumnDefinition Width="730*"/>-->
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="145"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Button x:Name="AddTaskToUserTaskButton" Command="{Binding ShowTaskCommand}" Grid.Row="2" Grid.Column="1"
-                    Margin="40 2.5 0 0" Padding="5 0" Height="32" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"
+                    Margin="3 2.5 0 0" Padding="5 0" Height="32" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"
                     BorderThickness="1" BorderBrush="Black" Cursor="Hand" Visibility="{Binding AddTaskButtonVisibility}"
                     ToolTip="{local:ResxStatic l10n:Resources.CreateNewTask}"><!--FontSize="20"-->
                 <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\create-task.png"/>
@@ -126,7 +129,7 @@
             </Button>
             
             <DataGrid x:Name="UserTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" 
-                      HorizontalAlignment="Left" Width="650" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" BorderBrush="Black"
+                      HorizontalAlignment="Left" Width="685" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" BorderBrush="Black"
                       BorderThickness="1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" 
                       Grid.Column="0" Grid.ColumnSpan="2">
@@ -192,6 +195,11 @@
                                 <Setter Property="FontWeight" Value="Medium"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Status}" Binding="{Binding TaskStatusString}" Width="120">
                         <DataGridTextColumn.HeaderStyle>
@@ -207,7 +215,7 @@
             <DataGrid x:Name="UserRecordsDataGrid" x:FieldModifier="public" ItemsSource="{Binding RecordList}" AutoGenerateColumns="False" Background="LightGray" 
                       BorderBrush="Black" BorderThickness="1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" Grid.Column="2" FontSize="20" 
-                      Grid.ColumnSpan="2" Margin="72 0 0 0" Width="720">
+                      Grid.ColumnSpan="2" Margin="0 0 0 0" Width="685">
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
@@ -239,19 +247,17 @@
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Status}" Binding="{Binding Task.Status}" Width="110">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="FontWeight" Value="Medium"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
                     <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Date}" Binding="{Binding Date, StringFormat='yyyy.MM.dd'}" Width="105">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Comment}" Binding="{Binding Comment}" Width="*">
                         <DataGridTextColumn.HeaderStyle>

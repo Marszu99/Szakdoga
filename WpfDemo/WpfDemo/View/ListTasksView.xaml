@@ -95,6 +95,11 @@
                                     <Setter Property="FontWeight" Value="Medium" />
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Status}" Binding="{Binding TaskStatusString}" Width="120" FontSize="20">
                             <DataGridTextColumn.HeaderStyle>

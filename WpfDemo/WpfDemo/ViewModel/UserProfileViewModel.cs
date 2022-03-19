@@ -123,8 +123,7 @@ namespace WpfDemo.ViewModel
                         var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUser.IdUser).Where(record => 
                                       record.Date.ToShortDateString().Contains(_searchRecordListValue) || record.Comment.Contains(_searchRecordListValue) 
                                       || record.Duration.ToString().Contains(_searchRecordListValue) 
-                                      || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchRecordListValue)
-                                      || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Status.ToString().Contains(_searchRecordListValue)).ToList();
+                                      || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchRecordListValue)).ToList();
 
                         records.ForEach(record =>
                         {

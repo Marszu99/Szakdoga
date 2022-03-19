@@ -157,19 +157,6 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Dictionary<TaskStatus, string> TaskStatuses // KELLL??
-        {
-            get
-            {
-                return Enum.GetValues(typeof(TaskStatus)).Cast<TaskStatus>()
-                    .Where(item => item != TaskStatus.Created)
-                    .ToDictionary<TaskStatus, TaskStatus, string>(
-                    item => item,
-                    item => item.ToString());
-            }
-        }
-
-
         public RelayCommand CreateRecordCommand { get; private set; }
         public RelayCommand RefreshRecordListCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
@@ -302,8 +289,7 @@ namespace WpfDemo.ViewModel
 
                         var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record => record.Date.ToShortDateString().Contains(_searchValue)
                                         || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue)
-                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue)
-                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Status.ToString().Contains(_searchValue)).ToList();
+                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue)).ToList();
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
@@ -318,8 +304,7 @@ namespace WpfDemo.ViewModel
                         var records = new RecordRepository(new RecordLogic()).GetAllRecords().Where(record => record.Date.ToShortDateString().Contains(_searchValue)
                                         || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue)
                                         || new UserRepository(new UserLogic()).GetUserByID(record.User_idUser).Username.Contains(_searchValue)
-                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue)
-                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Status.ToString().Contains(_searchValue)).ToList();
+                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue)).ToList();
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
