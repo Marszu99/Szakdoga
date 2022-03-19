@@ -14,7 +14,7 @@ namespace WpfDemo.ViewModel
     public class TabcontrolViewModel : ViewModelBase
     {
         private TabcontrolView _view;
-        private bool _isLanguageEnglish = true; // megkulonboztetem vele h mely nyelvre allitsa at a szoveget/kiirasokat
+        private bool _isLanguageEnglish; // megkulonboztetem vele h mely nyelvre allitsa at a szoveget/kiirasokat
 
 
         public string LoggedUserUsername
@@ -28,6 +28,19 @@ namespace WpfDemo.ViewModel
                 LoginViewModel.LoggedUser.Username = value;
                 OnPropertyChanged(nameof(LoggedUsername));
             }*/
+        }
+
+        public bool IsToggleButtonChecked
+        {
+            get
+            {
+                return _isLanguageEnglish;
+            }
+            set
+            {
+                _isLanguageEnglish = value;
+                OnPropertyChanged(nameof(IsToggleButtonChecked));
+            }
         }
 
         public string CompanyName
@@ -44,9 +57,10 @@ namespace WpfDemo.ViewModel
         public RelayCommand LogoutCommand { get; private set; }
 
 
-        public TabcontrolViewModel(TabcontrolView view)
+        public TabcontrolViewModel(TabcontrolView view, bool isLanguageEnglish)
         {
             _view = view;
+            _isLanguageEnglish = isLanguageEnglish;
 
             ShowMyProfileCommand = new RelayCommand(ShowMyProfile, CanShowMyProfile);
             ChangeLanguageCommand = new RelayCommand(ChangeLanguage, CanChangeLanguage);
@@ -84,7 +98,7 @@ namespace WpfDemo.ViewModel
 
         private void ChangeLanguage(object obj)
         {
-            if (_isLanguageEnglish) // ha Angol a nyelv akkor Magyarra valtoztatom ellenkezo esetben pedig vissza Angolra
+            if (!_isLanguageEnglish) // ha _isLanguageEnglish erteke false akkor Magyarra valtoztatom ellenkezo esetben pedig vissza Angolra
             {
                 CultureInfo cultureInfo = new CultureInfo("hu-HU");
                 cultureInfo.DateTimeFormat.ShortDatePattern = "yyyy.MM.dd";
@@ -97,7 +111,7 @@ namespace WpfDemo.ViewModel
 
                 RefreshTaskListForNotificationsLanguageChange(obj);
 
-                _isLanguageEnglish = false; // false-ra allitom h Angolra vissza tudjam allitani a nyelvet
+                //_isLanguageEnglish = false; // false-ra allitom h Angolra vissza tudjam allitani a nyelvet
             }
             else
             {
@@ -112,7 +126,7 @@ namespace WpfDemo.ViewModel
 
                 RefreshTaskListForNotificationsLanguageChange(obj);
 
-                _isLanguageEnglish = true; // true-ra allitom h Magyarra tudjam allitani a nyelvet
+                //_isLanguageEnglish = true; // true-ra allitom h Magyarra tudjam allitani a nyelvet
             }
         }
         public event Action<object> RefreshTaskList;

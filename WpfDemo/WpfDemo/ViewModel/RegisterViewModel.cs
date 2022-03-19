@@ -387,7 +387,7 @@ namespace WpfDemo.ViewModel
 
                 // Belep a regisztralt felhasznalo adataival
                 LoginViewModel.LoggedUser = new UserRepository(new UserLogic()).GetUserByUsername(this.Username);
-                _view.Content = new TabcontrolView();
+                _view.Content = new TabcontrolView(true); // true erteket kuldok h a ToggleButton CheckBox-a True legyen(miutan meg nem lehetett modositani a nyelvet es az alap nyelv az angol)
             }
             catch (SqlException)
             {

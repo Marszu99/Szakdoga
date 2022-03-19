@@ -77,7 +77,7 @@ namespace WpfDemo.ViewModel
                     if (string.IsNullOrWhiteSpace(LoggedUser.FirstName) && string.IsNullOrWhiteSpace(LoggedUser.LastName) && string.IsNullOrWhiteSpace(LoggedUser.Telephone))  // megnezzuk h uj felhasznalo lep-e be mert annak nincs megadva ezek az adatok
                     {
                         // ha uj felhasznalokent lep be akkor kap uzenetet h ki kell tolteni a hianyzo adatait es MyProfileView-ba iranyitjuk at
-                        _view.Content = new TabcontrolView();
+                        _view.Content = new TabcontrolView(true); // true erteket kuldok h a ToggleButton CheckBox-a True legyen(miutan meg nem lehetett modositani a nyelvet es az alap nyelv az angol)
                         MyProfileView Ipage = new MyProfileView();
                         (Ipage.DataContext as MyProfileViewModel).CurrentLoggedUser = LoggedUser;
                         MessageBox.Show(Resources.MissingProfileDatasMessage);
@@ -85,7 +85,14 @@ namespace WpfDemo.ViewModel
                     }
                     else
                     {
-                        _view.Content = new TabcontrolView();
+                        if (_view.LoginButton.Content.ToString().Equals("BELÉPÉS")) // Mengezem h login eseten a gomb kiirasa magyar-e
+                        {
+                            _view.Content = new TabcontrolView(false); // ha magyar akkor false erteket kuldok h a ToggleButton CheckBox-a False legyen
+                        }
+                        else
+                        {
+                            _view.Content = new TabcontrolView(true); // ha angol akkor true erteket kuldok h a ToggleButton CheckBox-a True legyen
+                        }
                     }
                 }
                 else

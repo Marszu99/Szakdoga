@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using WpfDemo.ViewModel;
 
 namespace WpfDemo.View
@@ -10,10 +9,10 @@ namespace WpfDemo.View
     public partial class TabcontrolView : UserControl
     {
 
-        public TabcontrolView()
+        public TabcontrolView(bool isLanguageEnglish)
         {
             InitializeComponent();
-            this.DataContext = new TabcontrolViewModel(this);
+            this.DataContext = new TabcontrolViewModel(this, isLanguageEnglish);
         }
     }
 }
