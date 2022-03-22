@@ -78,7 +78,153 @@ namespace WpfDemo.ViewModel
             {
                 _searchValue = value;
                 OnPropertyChanged(nameof(SearchValue));
-                SortingByCheckBox(_searchValue); // ha valtoztatom a keresesi szoveget akkor azonnal szurje a listat
+                //SortingByCheckBox(_searchValue); // ha valtoztatom a keresesi szoveget akkor azonnal szurje a listat
+            }
+        }
+
+        private DateTime _dateFrom = DateTime.Today;
+        private int _dateFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkorabbi datumot belepeskor
+        public DateTime DateFrom
+        {
+            get
+            {
+                if (_dateFromHelper < 1) // Belepeskor beallitom a DateFrom datumat a legkorabbira
+                {
+                    foreach (RecordViewModel recordViewModel in RecordList)
+                    {
+                        if (recordViewModel.Record.Date < _dateFrom)
+                        {
+                            _dateFrom = recordViewModel.Record.Date;
+                        }
+                    }
+                    _dateFromHelper++;
+                }
+                return _dateFrom;
+            }
+            set
+            {
+                _dateFrom = value;
+                OnPropertyChanged(nameof(DateFrom));
+            }
+        }
+
+        private DateTime _dateTo = DateTime.Parse("0001.01.01");
+        private int _dateToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkesobbi datumot belepeskor
+        public DateTime DateTo
+        {
+            get
+            {
+                if (_dateToHelper < 1) // Belepeskor beallitom a DateTo datumat a legkesobbire
+                {
+                    foreach (RecordViewModel recordViewModel in RecordList)
+                    {
+                        if (recordViewModel.Record.Date > _dateTo)
+                        {
+                            _dateTo = recordViewModel.Record.Date;
+                        }
+                    }
+                    _dateToHelper++;
+                }
+                return _dateTo;
+            }
+            set
+            {
+                _dateTo = value;
+                OnPropertyChanged(nameof(DateTo));
+            }
+        }
+
+        private int _durationFrom = 720;
+        private int _durationFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legrovidebb Idotartamat belepeskor
+        public int DurationFrom
+        {
+            get
+            {
+                if (_durationFromHelper < 1) // Belepeskor beallitom a DurationFrom-ot a legrovidebbre
+                {
+                    foreach (RecordViewModel recordViewModel in RecordList)
+                    {
+                        if (recordViewModel.Record.Duration < _durationFrom)
+                        {
+                            _durationFrom = recordViewModel.Record.Duration;
+                        }
+                    }
+                    _durationFromHelper++;
+                }
+                return _durationFrom;
+            }
+            set
+            {
+                _durationFrom = value;
+                OnPropertyChanged(nameof(DurationFrom));
+            }
+        }
+        public string DurationFromFormat // Idotartam megfelelo kiirasanak a bindaloshoz
+        {
+            get
+            {
+                return TimeSpan.FromMinutes(_durationFrom).ToString("hh':'mm");
+            }
+            set
+            {
+                try
+                {
+                    TimeSpan input = TimeSpan.ParseExact(value, "hh':'mm", null);
+
+                    _durationFrom = (int)input.TotalMinutes;
+                    OnPropertyChanged(nameof(DurationFrom));
+                }
+                catch (FormatException)
+                {
+                    //Do Nothing
+                }
+            }
+        }
+
+        private int _durationTo = 0;
+        private int _durationToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo leghosszabb Idotartamat belepeskor
+        public int DurationTo
+        {
+            get
+            {
+                if (_durationToHelper < 1) // Belepeskor beallitom a DurationTo-t a leghosszabbra
+                {
+                    foreach (RecordViewModel recordViewModel in RecordList)
+                    {
+                        if (recordViewModel.Record.Duration > _durationTo)
+                        {
+                            _durationTo = recordViewModel.Record.Duration;
+                        }
+                    }
+                    _durationToHelper++;
+                }
+                return _durationTo;
+            }
+            set
+            {
+                _durationTo = value;
+                OnPropertyChanged(nameof(DurationTo));
+            }
+        }
+        public string DurationToFormat // Idotartam megfelelo kiirasanak a bindaloshoz
+        {
+            get
+            {
+                return TimeSpan.FromMinutes(_durationTo).ToString("hh':'mm");
+            }
+            set
+            {
+                try
+                {
+                    TimeSpan input = TimeSpan.ParseExact(value, "hh':'mm", null);
+
+                    _durationTo = (int)input.TotalMinutes;
+                    OnPropertyChanged(nameof(DurationTo));
+                }
+                catch (FormatException)
+                {
+                    //Do Nothing
+                }
             }
         }
 
@@ -86,9 +232,9 @@ namespace WpfDemo.ViewModel
         private bool _isMyRecordsCheckBoxChecked = true;
         public bool IsMyRecordsCheckBoxChecked // Sajat rogziteseket mutato checkbox pipajahoz a bindolashoz
         {
-            get 
-            { 
-                return _isMyRecordsCheckBoxChecked; 
+            get
+            {
+                return _isMyRecordsCheckBoxChecked;
             }
             set
             {
@@ -146,7 +292,7 @@ namespace WpfDemo.ViewModel
             {
                 return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
             }
-        }      
+        }
 
         public Visibility ListRecordsViewContextMenuVisibility // (Delete Header Visibility) Csak sajat Rogzites eseteben jelenik meg jobb klikkre egy torles lehetoseg
         {
@@ -160,6 +306,7 @@ namespace WpfDemo.ViewModel
         public RelayCommand CreateRecordCommand { get; private set; }
         public RelayCommand RefreshRecordListCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
+        public RelayCommand SearchingCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
 
 
@@ -171,6 +318,7 @@ namespace WpfDemo.ViewModel
             CreateRecordCommand = new RelayCommand(CreateRecord, CanExecuteShow);
             RefreshRecordListCommand = new RelayCommand(RefreshRecordList, CanExecuteRefresh);
             SortingByCheckBoxCommand = new RelayCommand(SortingByCheckBox, CanExecuteSort);
+            SearchingCommand = new RelayCommand(Search, CanExecuteSearch);
             DeleteCommand = new RelayCommand(DeleteRecord, CanDeleteRecord);
         }
 
@@ -192,6 +340,25 @@ namespace WpfDemo.ViewModel
         {
             RecordList.Add(recordViewModel); // hozzaadja a listahoz
 
+            // Megnezem h az uj Datum kesobbi e mint ami a DateTo-ba van es ha igen akkor kicserelem
+            if (recordViewModel.Record.Date > _dateTo)
+            {
+                _dateTo = recordViewModel.Record.Date;
+                OnPropertyChanged(nameof(DateTo));  // kell h megvaltozzon a DatePickerben a datum
+            }
+
+            // ha az uj Idotartam rovidebb vagy hosszabb mint amik ki vannak irva akkora megfelelot kicsreli
+            if (recordViewModel.Record.Duration > _durationTo)
+            {
+                _durationTo = recordViewModel.Record.Duration;
+                OnPropertyChanged(nameof(DurationToFormat)); // kell h a kiiras
+            }
+            if (recordViewModel.Record.Duration < _durationFrom)
+            {
+                _durationFrom = recordViewModel.Record.Duration;
+                OnPropertyChanged(nameof(DurationFromFormat)); // kell h a kiiras
+            }
+
             // Uj letrehozasahoz
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
                 TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
@@ -206,6 +373,11 @@ namespace WpfDemo.ViewModel
         private void RefreshRecordList(object obj)
         {
             LoadRecords(); // Rogzitesek betoltese
+
+            // A keresesi szoveget uresse teszem
+            _searchValue = "";
+            OnPropertyChanged(nameof(SearchValue));
+
             SortingByCheckBox(obj); // Lista frissitese/szurese
         }
 
@@ -248,9 +420,87 @@ namespace WpfDemo.ViewModel
 
         private bool CanExecuteSort(object arg)
         {
+            
             return true;
         }
         private void SortingByCheckBox(object obj) // Lista szurese/frissitese
+        {
+
+            try
+            {
+                if (IsMyRecordsCheckBoxChecked)
+                {
+                    RecordList.Clear();
+
+                    var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser);
+                    records.ForEach(record =>
+                    {
+                        var recordViewModel = new RecordViewModel(record, TaskList.ToList());
+                        recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
+                        RecordList.Add(recordViewModel);
+                    });
+                }
+                else
+                {
+                    RecordList.Clear();
+
+                    var records = new RecordRepository(new RecordLogic()).GetAllRecords();
+                    records.ForEach(record =>
+                    {
+                        var recordViewModel = new RecordViewModel(record, TaskList.ToList());
+                        recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
+                        RecordList.Add(recordViewModel);
+                    });
+                }
+
+                _durationFrom = 720;
+                _durationTo = 0;
+                _dateFrom = DateTime.Today;
+                if (RecordList.Count == 0) // ha nincs rekord akkor a mai datumot kapja meg
+                {
+                    _dateTo = DateTime.Today;
+                }
+                else
+                {
+                    _dateTo = DateTime.Parse("0001.01.01");
+                }
+                foreach (RecordViewModel recordViewModel in RecordList) // frissitett listabol kicserelem ha van uj legrovidebb,leghosszabb Idotartam es legkorabbi vagy legkesobbi Datum
+                {
+                    if (recordViewModel.Record.Date < _dateFrom)
+                    {
+                        _dateFrom = recordViewModel.Record.Date;
+                    }
+                    if (recordViewModel.Record.Date > _dateTo)
+                    {
+                        _dateTo = recordViewModel.Record.Date;
+                    }
+                    if (recordViewModel.Record.Duration < _durationFrom)
+                    {
+                        _durationFrom = recordViewModel.Record.Duration;
+                    }
+                    if (recordViewModel.Record.Duration > _durationTo)
+                    {
+                        _durationTo = recordViewModel.Record.Duration;
+                    }
+                }
+
+                OnPropertyChanged(nameof(DateFrom)); // kell h megvaltozzon a DatePickerben a datum
+                OnPropertyChanged(nameof(DateTo));  // kell h megvaltozzon a DatePickerben a datum
+                OnPropertyChanged(nameof(DurationFromFormat)); // h megvaltozzon a kiiras
+                OnPropertyChanged(nameof(DurationToFormat)); // h megvaltozzon a kiiras
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
+        private bool CanExecuteSearch(object arg)
+        {
+            return true;
+        }
+        private void Search(object obj) // Lista szurese/frissitese
         {
             try
             {
@@ -260,7 +510,8 @@ namespace WpfDemo.ViewModel
                     {
                         RecordList.Clear();
 
-                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser);
+                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record =>
+                                      (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)).ToList();
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
@@ -272,7 +523,8 @@ namespace WpfDemo.ViewModel
                     {
                         RecordList.Clear();
 
-                        var records = new RecordRepository(new RecordLogic()).GetAllRecords();
+                        var records = new RecordRepository(new RecordLogic()).GetAllRecords().Where(record =>
+                                      (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)).ToList();
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
@@ -287,9 +539,9 @@ namespace WpfDemo.ViewModel
                     {
                         RecordList.Clear();
 
-                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record => record.Date.ToShortDateString().Contains(_searchValue)
-                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue)
-                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue)).ToList();
+                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record =>
+                                        (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)
+                                        && (record.Comment.Contains(_searchValue) || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue))).ToList();
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
@@ -301,10 +553,10 @@ namespace WpfDemo.ViewModel
                     {
                         RecordList.Clear();
 
-                        var records = new RecordRepository(new RecordLogic()).GetAllRecords().Where(record => record.Date.ToShortDateString().Contains(_searchValue)
-                                        || record.Comment.Contains(_searchValue) || record.Duration.ToString().Contains(_searchValue)
-                                        || new UserRepository(new UserLogic()).GetUserByID(record.User_idUser).Username.Contains(_searchValue)
-                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue)).ToList();
+                        var records = new RecordRepository(new RecordLogic()).GetAllRecords().Where(record =>
+                                        (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)
+                                        && (record.Comment.Contains(_searchValue) || new UserRepository(new UserLogic()).GetUserByID(record.User_idUser).Username.Contains(_searchValue)
+                                        || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue))).ToList();
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
@@ -319,7 +571,6 @@ namespace WpfDemo.ViewModel
                 MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
 
         private bool CanDeleteRecord(object arg)
         {

@@ -76,7 +76,59 @@ namespace WpfDemo.ViewModel
             {
                 _searchValue = value;
                 OnPropertyChanged(nameof(SearchValue));
-                SortingByCheckBox(_searchValue);
+                //SortingByCheckBox(_searchValue);
+            }
+        }
+
+        private DateTime _deadlineFrom = DateTime.Today.AddYears(100);
+        private int _deadlineFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkorabbi Hataridot belepeskor
+        public DateTime DeadlineFrom
+        {
+            get
+            {
+                if (_deadlineFromHelper < 1) // Belepeskor beallitom a DeadlineFrom datumat a legkorabbira
+                {
+                    foreach (TaskViewModel taskViewModel in TaskList)
+                    {
+                        if (taskViewModel.Task.Deadline < _deadlineFrom)
+                        {
+                            _deadlineFrom = taskViewModel.Task.Deadline;
+                        }
+                    }
+                    _deadlineFromHelper++;
+                }
+                return _deadlineFrom;
+            }
+            set
+            {
+                _deadlineFrom = value;
+                OnPropertyChanged(nameof(DeadlineFrom));
+            }
+        }
+
+        private DateTime _deadlineTo = DateTime.Parse("0001.01.01");
+        private int _deadlineToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkesobbi datumot belepeskor
+        public DateTime DeadlineTo
+        {
+            get
+            {
+                if (_deadlineToHelper < 1) // Belepeskor beallitom a DeadlineTo datumat a legkesobbire
+                {
+                    foreach (TaskViewModel taskViewModel in TaskList)
+                    {
+                        if (taskViewModel.Task.Deadline > _deadlineTo)
+                        {
+                            _deadlineTo = taskViewModel.Task.Deadline;
+                        }
+                    }
+                    _deadlineToHelper++;
+                }
+                return _deadlineTo;
+            }
+            set
+            {
+                _deadlineTo = value;
+                OnPropertyChanged(nameof(DeadlineTo));
             }
         }
 
@@ -197,6 +249,7 @@ namespace WpfDemo.ViewModel
         public RelayCommand CreateTaskCommand { get; private set; }
         public RelayCommand RefreshTaskListCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
+        public RelayCommand SearchingCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand HasReadCommand { get; private set; }
         public RelayCommand NotificationsSwitchOnOffCommand { get; private set; }
@@ -211,6 +264,7 @@ namespace WpfDemo.ViewModel
             CreateTaskCommand = new RelayCommand(CreateTask, CanExecuteShow);
             RefreshTaskListCommand = new RelayCommand(RefreshTaskList, CanExecuteRefresh);
             SortingByCheckBoxCommand = new RelayCommand(SortingByCheckBox, CanExecuteSort);
+            SearchingCommand = new RelayCommand(Search, CanExecuteSearch);
             DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
             HasReadCommand = new RelayCommand(HasRead, CanExecuteReadTaskNotifications);
             NotificationsSwitchOnOffCommand = new RelayCommand(NotificationSwitchOnOff, CanExecuteSwitch);
@@ -232,6 +286,18 @@ namespace WpfDemo.ViewModel
         {
             TaskList.Add(taskViewModel); // hozzaadja a listahoz
 
+            if (taskViewModel.Task.Deadline > _deadlineTo) // Megnezem h az uj Hatarido kesobbi-e mint ami a DeadlineTo-ba van es ha igen akkor kicserelem
+            {
+                _deadlineTo = taskViewModel.Task.Deadline;
+                OnPropertyChanged(nameof(DeadlineTo)); // megvaltozzon a kiiras
+            }
+
+            if (taskViewModel.Task.Deadline < _deadlineFrom) // Megnezem h az uj Hatarido korabbi-e mint ami a DeadlineFrom-ba van es ha igen akkor kicserelem
+            {
+                _deadlineFrom = taskViewModel.Task.Deadline;
+                OnPropertyChanged(nameof(DeadlineFrom)); // megvaltozzon a kiiras
+            }
+
             // Uj letrehozasahoz
             SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
             SelectedTask.TaskCreated += OnTaskCreated;
@@ -245,6 +311,11 @@ namespace WpfDemo.ViewModel
         private void RefreshTaskList(object obj)
         {
             LoadTasks(); // Feladatok betoltese
+
+            // A keresesi szoveget uresse teszem
+            _searchValue = "";
+            OnPropertyChanged(nameof(SearchValue));
+
             SortingByCheckBox(obj); // Lista frissitese/szurese
         }
 
@@ -294,13 +365,106 @@ namespace WpfDemo.ViewModel
         {
             try
             {
+                if (IsMyTasksCheckBoxChecked && !IsActiveTasksCheckBoxChecked)
+                {
+                    TaskList.Clear();
+
+                    var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser);
+
+                    tasks.ForEach(task =>
+                    {
+                        var taskViewModel = new TaskViewModel(task, UserList.ToList());
+                        taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                        TaskList.Add(taskViewModel);
+                    });
+                }
+                else if (IsMyTasksCheckBoxChecked && IsActiveTasksCheckBoxChecked)
+                {
+                    TaskList.Clear();
+
+                    var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser);
+
+                    tasks.ForEach(task =>
+                    {
+                        var taskViewModel = new TaskViewModel(task, UserList.ToList());
+                        taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                        TaskList.Add(taskViewModel);
+                    });
+                }
+                else if (!IsMyTasksCheckBoxChecked && IsActiveTasksCheckBoxChecked)
+                {
+                    TaskList.Clear();
+
+                    var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks();
+
+                    tasks.ForEach(task =>
+                    {
+                        var taskViewModel = new TaskViewModel(task, UserList.ToList());
+                        taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                        TaskList.Add(taskViewModel);
+                    });
+                }
+                else
+                {
+                    TaskList.Clear();
+
+                    var tasks = new TaskRepository(new TaskLogic()).GetAllTasks();
+
+                    tasks.ForEach(task =>
+                    {
+                        var taskViewModel = new TaskViewModel(task, UserList.ToList());
+                        taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                        TaskList.Add(taskViewModel);
+                    });
+                }
+
+                _deadlineFrom = DateTime.Today.AddYears(1);
+                if (TaskList.Count == 0) // ha nincs task akkor a mai datumot kapja meg
+                {
+                    _deadlineTo = DateTime.Today;
+                }
+                else
+                {
+                    _deadlineTo = DateTime.Parse("0001.01.01");
+                }
+                foreach (TaskViewModel taskViewModel in TaskList)
+                {
+                    if (taskViewModel.Task.Deadline < _deadlineFrom)
+                    {
+                        _deadlineFrom = taskViewModel.Task.Deadline;
+                    }
+                    if (taskViewModel.Task.Deadline > _deadlineTo)
+                    {
+                        _deadlineTo = taskViewModel.Task.Deadline;
+                    }
+                }
+
+                OnPropertyChanged(nameof(DeadlineFrom)); // kell h megvaltozzon a DatePickerben a datum
+                OnPropertyChanged(nameof(DeadlineTo));  // kell h megvaltozzon a DatePickerben a datum
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
+        private bool CanExecuteSearch(object arg)
+        {
+            return true;
+        }
+        private void Search(object obj) // Lista szurese/frissitese
+        {
+            try
+            {
                 if (String.IsNullOrWhiteSpace(_searchValue))
                 {
                     if (IsMyTasksCheckBoxChecked && !IsActiveTasksCheckBoxChecked)
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser);
+                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser).Where(task =>
+                                    task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo).ToList();
 
                         tasks.ForEach(task =>
                         {
@@ -313,7 +477,8 @@ namespace WpfDemo.ViewModel
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser);
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser).Where(task =>
+                                    task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo).ToList();
 
                         tasks.ForEach(task =>
                         {
@@ -326,7 +491,8 @@ namespace WpfDemo.ViewModel
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks();
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks().Where(task =>
+                                    task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo).ToList();
 
                         tasks.ForEach(task =>
                         {
@@ -337,7 +503,17 @@ namespace WpfDemo.ViewModel
                     }
                     else
                     {
-                        LoadTasks();
+                        TaskList.Clear();
+
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task =>
+                                    task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo).ToList();
+
+                        tasks.ForEach(task =>
+                        {
+                            var taskViewModel = new TaskViewModel(task, UserList.ToList());
+                            taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                            TaskList.Add(taskViewModel);
+                        });
                     }
                 }
                 else
@@ -346,9 +522,9 @@ namespace WpfDemo.ViewModel
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser).Where(task => task.Title.Contains(_searchValue)
-                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue)
-                                    || task.Status.ToString().Contains(_searchValue)).ToList();
+                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser).Where(task =>
+                                    (task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo) 
+                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Status.ToString().Contains(_searchValue))).ToList();
 
                         tasks.ForEach(task =>
                         {
@@ -361,9 +537,9 @@ namespace WpfDemo.ViewModel
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser).Where(task => task.Title.Contains(_searchValue)
-                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue)
-                                    || task.Status.ToString().Contains(_searchValue)).ToList();
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser).Where(task =>
+                                    (task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo)
+                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Status.ToString().Contains(_searchValue))).ToList();
 
                         tasks.ForEach(task =>
                         {
@@ -376,10 +552,10 @@ namespace WpfDemo.ViewModel
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks().Where(task => task.Title.Contains(_searchValue)
-                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue)
-                                    || task.Status.ToString().Contains(_searchValue)
-                                    || new UserRepository(new UserLogic()).GetUserByID(task.User_idUser).Username.Contains(_searchValue)).ToList();
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks().Where(task =>
+                                    (task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo)
+                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)
+                                    || new UserRepository(new UserLogic()).GetUserByID(task.User_idUser).Username.Contains(_searchValue))).ToList();
 
                         tasks.ForEach(task =>
                         {
@@ -392,10 +568,10 @@ namespace WpfDemo.ViewModel
                     {
                         TaskList.Clear();
 
-                        var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task => task.Title.Contains(_searchValue)
-                                    || task.Description.Contains(_searchValue) || task.Deadline.ToShortDateString().Contains(_searchValue)
-                                    || task.Status.ToString().Contains(_searchValue)
-                                    || new UserRepository(new UserLogic()).GetUserByID(task.User_idUser).Username.Contains(_searchValue)).ToList();
+                        var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task =>
+                                    (task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo)
+                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)
+                                    || new UserRepository(new UserLogic()).GetUserByID(task.User_idUser).Username.Contains(_searchValue))).ToList();
                         tasks.ForEach(task =>
                         {
                             var taskViewModel = new TaskViewModel(task, UserList.ToList());
@@ -410,7 +586,6 @@ namespace WpfDemo.ViewModel
                 MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
 
         private bool CanDeleteTask(object arg)
         {

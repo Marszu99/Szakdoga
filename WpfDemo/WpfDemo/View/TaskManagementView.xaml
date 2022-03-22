@@ -97,16 +97,97 @@
             </StackPanel>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5 0 5">
-                <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="0" VerticalAlignment="Center" 
-                           HorizontalAlignment="Center" FontSize="20"/>
-                <TextBox x:Name="TaskSearchingText" Margin="5 0 0 0" Background="#eee" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
-                         Width="165" FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black">
+                <DatePicker x:Name="DateFrom" SelectedDate="{Binding DeadlineFrom, UpdateSourceTrigger=PropertyChanged}" Background="#eee"
+                            SelectedDateFormat="Short" Width="120" Height="25" FontSize="18" Margin="0" Padding="2 0 0 0" FirstDayOfWeek="Monday">
+                    <DatePicker.Resources>
+                        <Style TargetType="{x:Type DatePickerTextBox}">
+                            <!--https://social.msdn.microsoft.com/Forums/vstudio/en-US/77e907cc-e949-4a37-b633-06337acddb7f/how-to-remove-datepicker-inner-border?forum=wpf-->
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate x:Name="dptext" TargetType="{x:Type DatePickerTextBox}">
+                                        <Grid>
+                                            <Grid x:Name="WatermarkContent" 
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                                <ScrollViewer x:Name="PART_ContentHost" Margin="0" 
+                                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <Style TargetType="{x:Type DatePicker}">
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" Value="#FF3C7FB1"/>
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                    <Setter Property="BorderBrush" Value="#FF3C7FB1"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
+                <TextBlock Text="-" Margin="0 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                <DatePicker x:Name="DateTo" SelectedDate="{Binding DeadlineTo, UpdateSourceTrigger=PropertyChanged}" Background="#eee"
+                            SelectedDateFormat="Short" Width="120" Height="25" FontSize="18" Margin="0 0 10 0" Padding="2 0 0 0" FirstDayOfWeek="Monday">
+                    <DatePicker.Resources>
+                        <Style TargetType="{x:Type DatePickerTextBox}">
+                            <!--https://social.msdn.microsoft.com/Forums/vstudio/en-US/77e907cc-e949-4a37-b633-06337acddb7f/how-to-remove-datepicker-inner-border?forum=wpf-->
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate x:Name="dptext" TargetType="{x:Type DatePickerTextBox}">
+                                        <Grid>
+                                            <Grid x:Name="WatermarkContent" 
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                                <ScrollViewer x:Name="PART_ContentHost" Margin="0" 
+                                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <Style TargetType="{x:Type DatePicker}">
+                            <Setter Property="BorderBrush" Value="Black"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" Value="#FF3C7FB1"/>
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                    <Setter Property="BorderBrush" Value="#FF3C7FB1"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
+                
+                <!--<TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="0" VerticalAlignment="Center" 
+                           HorizontalAlignment="Center" FontSize="20"/>-->
+                <TextBox Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource SearchTextBoxStyle}" Margin="0" Background="#eee" 
+                         Width="165" FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1 1 0 1" BorderBrush="Black">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="4"/>
+                            <Setter Property="CornerRadius" Value="4 0 0 4"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
+                <Button Command="{Binding SearchingCommand}" Style="{DynamicResource SearchButtonStyle}" BorderThickness="0 1 1 1" BorderBrush="Black" Cursor="Hand"
+                        ToolTip="{local:ResxStatic l10n:Resources.SearchButtonMessage}">
+                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\search.png"/>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="0 4 4 0"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
             
             <view:ListTasksView x:Name="ListTasksContent" Grid.Row="1" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1"/>
@@ -116,4 +197,67 @@
         <view:TaskView Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="0 5 0 0" Margin="0 0 16 0" 
                        Visibility="{Binding SelectedTaskVisibility}"/>
     </Grid>
+
+    <UserControl.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="SearchButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="SearchTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding SearchingCommand}"/>
+    </UserControl.InputBindings>
 </UserControl>

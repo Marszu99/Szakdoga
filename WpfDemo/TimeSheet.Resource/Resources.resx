@@ -390,6 +390,9 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="SearchButtonMessage" xml:space="preserve">
+    <value>Searches from the list</value>
+  </data>
   <data name="ServerError" xml:space="preserve">
     <value>Server error!</value>
   </data>

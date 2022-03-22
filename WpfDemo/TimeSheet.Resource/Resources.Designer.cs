@@ -880,6 +880,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Searches from the list.
+        /// </summary>
+        public static string SearchButtonMessage {
+            get {
+                return ResourceManager.GetString("SearchButtonMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server error!.
         /// </summary>
         public static string ServerError {

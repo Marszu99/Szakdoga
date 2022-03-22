@@ -390,6 +390,9 @@
   <data name="Search" xml:space="preserve">
     <value>Keresés</value>
   </data>
+  <data name="SearchButtonMessage" xml:space="preserve">
+    <value>Keresés a listából</value>
+  </data>
   <data name="ServerError" xml:space="preserve">
     <value>Szerver hiba!</value>
   </data>
