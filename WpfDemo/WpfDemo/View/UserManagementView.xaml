@@ -26,42 +26,39 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 5 0 5">
-                <Button x:Name="NewUserButton" Command="{Binding CreateUserCommand}" Grid.Column="0" Grid.Row="0"
-                        Margin="10 0 0 0" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
-                        Visibility="{Binding UserManagementButtonsVisibility}" ToolTip="{local:ResxStatic l10n:Resources.CreateNewUser}">
-                    <!--FontSize="17"-->
-                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\create-user.png"/>
-                    <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="4"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-
-                <Button x:Name="RefreshListUsersButton" Command="{Binding RefreshUserListCommand}" Grid.Column="0" Grid.Row="0" 
-                        Margin="10 0 0 0" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
-                        Visibility="{Binding UserManagementButtonsVisibility}" ToolTip="{local:ResxStatic l10n:Resources.RefreshList}">
-                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\refresh.png"/>
-                    <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="4"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-            </StackPanel>
+            <Button x:Name="NewUserButton" Command="{Binding CreateUserCommand}" Grid.Column="0" Grid.Row="0"
+                    HorizontalAlignment="Left" Margin="10 5 0 5" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
+                    Visibility="{Binding UserManagementButtonsVisibility}" ToolTip="{local:ResxStatic l10n:Resources.CreateNewUser}">
+                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\create-user.png"/>
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5 0 5">
-                <TextBlock Text="{local:ResxStatic l10n:Resources.Search}" Margin="0" VerticalAlignment="Center"
-                           HorizontalAlignment="Center" FontSize="20"/>
-                <TextBox x:Name="UserSearchingText" Margin="5 0 0 0" Background="#eee" Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}"
-                         Width="165" FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1" BorderBrush="Black" >
+                <TextBox Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource SearchTextBoxWithWaterMarkStyle}" Margin="0" Background="#eee" 
+                         Width="165" Height="25" FontSize="18" VerticalAlignment="Center" HorizontalContentAlignment="Left" BorderThickness="1 1 0 1" BorderBrush="Black"
+                         Padding="2 0 0 1" Tag="{local:ResxStatic l10n:Resources.Search}" Cursor="IBeam">
                     <TextBox.Resources>
                         <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="4"/>
+                            <Setter Property="CornerRadius" Value="4 0 0 4"/>
                         </Style>
                     </TextBox.Resources>
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SearchingCommand}"/>
+                    </TextBox.InputBindings>
                 </TextBox>
+                <Button Command="{Binding SearchingCommand}" Style="{DynamicResource SearchButtonStyle}" BorderThickness="0 1 1 1" BorderBrush="Black" Cursor="Hand"
+                        ToolTip="{local:ResxStatic l10n:Resources.SearchButtonMessage}">
+                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\search.png"/>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="0 4 4 0"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
 
             <view:ListUsersView x:Name="ListUsersContent" Grid.Row="1" Margin="10 0 0 0" BorderBrush="Black" BorderThickness="1"/>
@@ -71,4 +68,77 @@
         <view:UserView Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="0 5 0 0" Margin="0 35 16 0"
                        Visibility="{Binding SelectedUserVisibility}"/>
     </Grid>
+
+    <UserControl.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="SearchButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SearchTextBoxWithWaterMarkStyle" TargetType="{x:Type TextBox}">
+            <!--https://code.4noobz.net/wpf-add-a-watermark-to-a-native-wpf-textbox/-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0" VerticalAlignment="Center" />
+                            <Label Margin="2 0 2 1" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center"
+                                   Visibility="Collapsed" Foreground="Gray" Padding="1 0 0 0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="WaterMarkLabel" Value="Visible"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="DimGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
 </UserControl>

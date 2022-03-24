@@ -511,7 +511,8 @@ namespace WpfDemo.ViewModel
                         RecordList.Clear();
 
                         var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record =>
-                                      (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)).ToList();
+                                        (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)).ToList();
+
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
@@ -524,7 +525,8 @@ namespace WpfDemo.ViewModel
                         RecordList.Clear();
 
                         var records = new RecordRepository(new RecordLogic()).GetAllRecords().Where(record =>
-                                      (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)).ToList();
+                                        (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)).ToList();
+
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
@@ -542,6 +544,7 @@ namespace WpfDemo.ViewModel
                         var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser).Where(record =>
                                         (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)
                                         && (record.Comment.Contains(_searchValue) || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue))).ToList();
+
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());
@@ -557,6 +560,7 @@ namespace WpfDemo.ViewModel
                                         (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)
                                         && (record.Comment.Contains(_searchValue) || new UserRepository(new UserLogic()).GetUserByID(record.User_idUser).Username.Contains(_searchValue)
                                         || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchValue))).ToList();
+
                         records.ForEach(record =>
                         {
                             var recordViewModel = new RecordViewModel(record, TaskList.ToList());

@@ -65,6 +65,60 @@ namespace WpfDemo.ViewModel
         }
 
 
+        private DateTime _deadlineFrom = DateTime.Today.AddYears(100);
+        private DateTime _deadlineFromLowest;
+        private int _deadlineFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkorabbi Hataridot belepeskor
+        public DateTime DeadlineFrom
+        {
+            get
+            {
+                if (_deadlineFromHelper < 1) // Belepeskor beallitom a DeadlineFrom datumat a legkorabbira
+                {
+                    foreach (TaskViewModel taskViewModel in TaskList)
+                    {
+                        if (taskViewModel.Task.Deadline < _deadlineFrom)
+                        {
+                            _deadlineFrom = taskViewModel.Task.Deadline;
+                        }
+                    }
+                    _deadlineFromHelper++;
+                }
+                return _deadlineFrom;
+            }
+            set
+            {
+                _deadlineFrom = value;
+                OnPropertyChanged(nameof(DeadlineFrom));
+            }
+        }
+
+        private DateTime _deadlineTo = DateTime.Parse("0001.01.01");
+        private DateTime _deadlineToHighest;
+        private int _deadlineToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkesobbi datumot belepeskor
+        public DateTime DeadlineTo
+        {
+            get
+            {
+                if (_deadlineToHelper < 1) // Belepeskor beallitom a DeadlineTo datumat a legkesobbire
+                {
+                    foreach (TaskViewModel taskViewModel in TaskList)
+                    {
+                        if (taskViewModel.Task.Deadline > _deadlineTo)
+                        {
+                            _deadlineTo = taskViewModel.Task.Deadline;
+                        }
+                    }
+                    _deadlineToHelper++;
+                }
+                return _deadlineTo;
+            }
+            set
+            {
+                _deadlineTo = value;
+                OnPropertyChanged(nameof(DeadlineTo));
+            }
+        }
+
         private string _searchTaskListValue;
         public string SearchTaskListValue // Feladatok listajaban valo keresesi szoveg bindolashoz
         {
@@ -73,30 +127,156 @@ namespace WpfDemo.ViewModel
             {
                 _searchTaskListValue = value;
                 OnPropertyChanged(nameof(SearchTaskListValue));
-                if (String.IsNullOrWhiteSpace(_searchTaskListValue))
-                {
-                    LoadTasks(CurrentUser.IdUser);
-                }
-                else
-                {
-                    _taskList.Clear();
+            }
+        }
 
-                    try
+
+        private DateTime _dateFrom = DateTime.Today;
+        private DateTime _dateFromLowest;
+        private int _dateFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkorabbi datumot belepeskor
+        public DateTime DateFrom
+        {
+            get
+            {
+                if (_dateFromHelper < 1) // Belepeskor beallitom a DateFrom datumat a legkorabbira
+                {
+                    foreach (RecordViewModel recordViewModel in RecordList)
                     {
-                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CurrentUser.IdUser).Where(task => task.Title.Contains(_searchTaskListValue)
-                                    || task.Description.Contains(_searchTaskListValue) || task.Deadline.ToShortDateString().Contains(_searchTaskListValue) 
-                                    || task.Status.ToString().Contains(_searchTaskListValue)).ToList();
-                        tasks.ForEach(task =>
+                        if (recordViewModel.Record.Date < _dateFrom)
                         {
-                            var taskViewModel = new TaskViewModel(task, UserListForTaskList.ToList());
-                            taskViewModel.User = UserListForTaskList.First(user => user.IdUser == task.User_idUser);
-                            TaskList.Add(taskViewModel);
-                        });
+                            _dateFrom = recordViewModel.Record.Date;
+                        }
                     }
-                    catch (SqlException)
+                    _dateFromHelper++;
+                }
+                return _dateFrom;
+            }
+            set
+            {
+                _dateFrom = value;
+                OnPropertyChanged(nameof(DateFrom));
+            }
+        }
+
+        private DateTime _dateTo = DateTime.Parse("0001.01.01");
+        private DateTime _dateToHighest;
+        private int _dateToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkesobbi datumot belepeskor
+        public DateTime DateTo
+        {
+            get
+            {
+                if (_dateToHelper < 1) // Belepeskor beallitom a DateTo datumat a legkesobbire
+                {
+                    foreach (RecordViewModel recordViewModel in RecordList)
                     {
-                        MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                        if (recordViewModel.Record.Date > _dateTo)
+                        {
+                            _dateTo = recordViewModel.Record.Date;
+                        }
                     }
+                    _dateToHelper++;
+                }
+                return _dateTo;
+            }
+            set
+            {
+                _dateTo = value;
+                OnPropertyChanged(nameof(DateTo));
+            }
+        }
+
+        private int _durationFrom = 720;
+        private int _durationFromLowest;
+        private int _durationFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legrovidebb Idotartamat belepeskor
+        public int DurationFrom
+        {
+            get
+            {
+                if (_durationFromHelper < 1) // Belepeskor beallitom a DurationFrom-ot a legrovidebbre
+                {
+                    foreach (RecordViewModel recordViewModel in RecordList)
+                    {
+                        if (recordViewModel.Record.Duration < _durationFrom)
+                        {
+                            _durationFrom = recordViewModel.Record.Duration;
+                        }
+                    }
+                    _durationFromHelper++;
+                }
+                return _durationFrom;
+            }
+            set
+            {
+                _durationFrom = value;
+                OnPropertyChanged(nameof(DurationFrom));
+            }
+        }
+        public string DurationFromFormat // Idotartam megfelelo kiirasanak a bindaloshoz
+        {
+            get
+            {
+                return TimeSpan.FromMinutes(_durationFrom).ToString("hh':'mm");
+            }
+            set
+            {
+                try
+                {
+                    TimeSpan input = TimeSpan.ParseExact(value, "hh':'mm", null);
+
+                    _durationFrom = (int)input.TotalMinutes;
+                    OnPropertyChanged(nameof(DurationFrom));
+                }
+                catch (FormatException)
+                {
+                    //Do Nothing
+                }
+            }
+        }
+
+        private int _durationTo = 0;
+        private int _durationToHighest;
+        private int _durationToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo leghosszabb Idotartamat belepeskor
+        public int DurationTo
+        {
+            get
+            {
+                if (_durationToHelper < 1) // Belepeskor beallitom a DurationTo-t a leghosszabbra
+                {
+                    foreach (RecordViewModel recordViewModel in RecordList)
+                    {
+                        if (recordViewModel.Record.Duration > _durationTo)
+                        {
+                            _durationTo = recordViewModel.Record.Duration;
+                        }
+                    }
+                    _durationToHelper++;
+                }
+                return _durationTo;
+            }
+            set
+            {
+                _durationTo = value;
+                OnPropertyChanged(nameof(DurationTo));
+            }
+        }
+        public string DurationToFormat // Idotartam megfelelo kiirasanak a bindaloshoz
+        {
+            get
+            {
+                return TimeSpan.FromMinutes(_durationTo).ToString("hh':'mm");
+            }
+            set
+            {
+                try
+                {
+                    TimeSpan input = TimeSpan.ParseExact(value, "hh':'mm", null);
+
+                    _durationTo = (int)input.TotalMinutes;
+                    OnPropertyChanged(nameof(DurationTo));
+                }
+                catch (FormatException)
+                {
+                    //Do Nothing
                 }
             }
         }
@@ -109,34 +289,6 @@ namespace WpfDemo.ViewModel
             {
                 _searchRecordListValue = value;
                 OnPropertyChanged(nameof(SearchRecordListValue));
-
-                if (String.IsNullOrWhiteSpace(_searchRecordListValue))
-                {
-                    LoadRecords(CurrentUser.IdUser);
-                }
-                else
-                {
-                    _recordList.Clear();
-
-                    try
-                    {
-                        var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUser.IdUser).Where(record => 
-                                      record.Date.ToShortDateString().Contains(_searchRecordListValue) || record.Comment.Contains(_searchRecordListValue) 
-                                      || record.Duration.ToString().Contains(_searchRecordListValue) 
-                                      || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchRecordListValue)).ToList();
-
-                        records.ForEach(record =>
-                        {
-                            var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
-                            recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
-                            _recordList.Add(recordViewModel);
-                        });
-                    }
-                    catch (SqlException)
-                    {
-                        MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                }
             }
         }
 
@@ -156,17 +308,24 @@ namespace WpfDemo.ViewModel
             }
         }
 
-
-        public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand ShowTaskCommand { get; private set; }
+        public RelayCommand SearchingTaskListCommand { get; private set; }
+        public RelayCommand RefreshingTaskListCommand { get; private set; }
+        public RelayCommand SearchingRecordListCommand { get; private set; }
+        public RelayCommand RefreshingRecordListCommand { get; private set; }
+        public RelayCommand DeleteCommand { get; private set; }
 
         public UserProfileViewModel(int userid)
         {
             LoadTasks(userid); // Betolti a Felhasznalo Feladatait
             LoadRecords(userid); // Betolti a Felhasznalo Rogziteseit
 
-            DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
             ShowTaskCommand = new RelayCommand(ShowTask, CanShowTask);
+            SearchingTaskListCommand = new RelayCommand(SearchTaskList, CanExecuteSearchTaskList);
+            RefreshingTaskListCommand = new RelayCommand(RefreshTaskList, CanExecuteRefreshTaskList);
+            SearchingRecordListCommand = new RelayCommand(SearchRecordList, CanExecuteSearchRecordList);
+            RefreshingRecordListCommand = new RelayCommand(RefreshRecordList, CanExecuteRefreshRecordList);
+            DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
         }
 
         private bool CanShowTask(object arg) // Csak Admin lathatja egy masik ablakban a feladatok adatait
@@ -200,6 +359,243 @@ namespace WpfDemo.ViewModel
             //SelectedTask = new UserProfileTaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) });
             //SelectedTask.TaskCreated += OnTaskCreated;
         }*/
+
+
+        private bool CanExecuteSearchTaskList(object arg)
+        {
+            return true;
+        }
+        private void SearchTaskList(object obj) // Lista szurese
+        {
+            try
+            {
+                if (String.IsNullOrWhiteSpace(_searchTaskListValue))
+                {
+                    _taskList.Clear();
+
+                    var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CurrentUser.IdUser).Where(task =>
+                                task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo).ToList();
+
+                    tasks.ForEach(task =>
+                    {
+                        var taskViewModel = new TaskViewModel(task, UserListForTaskList.ToList());
+                        taskViewModel.User = UserListForTaskList.First(user => user.IdUser == task.User_idUser);
+                        TaskList.Add(taskViewModel);
+                    });
+                }
+                else
+                {
+                    _taskList.Clear();
+
+                    var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CurrentUser.IdUser).Where(task =>
+                                (task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo) 
+                                && (task.Title.Contains(_searchTaskListValue) || task.Description.Contains(_searchTaskListValue)
+                                || ResourceHandler.GetResourceString(task.Status.ToString()).Contains(_searchTaskListValue))).ToList();
+
+                    tasks.ForEach(task =>
+                    {
+                        var taskViewModel = new TaskViewModel(task, UserListForTaskList.ToList());
+                        taskViewModel.User = UserListForTaskList.First(user => user.IdUser == task.User_idUser);
+                        TaskList.Add(taskViewModel);
+                    });
+                }
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
+        private bool CanExecuteRefreshTaskList(object arg)
+        {
+            return true;
+        }
+        private void RefreshTaskList(object obj) // Lista frissitese es keresesi ertekek visszaallitasa az alapra 
+        {
+            if (!String.IsNullOrWhiteSpace(_searchTaskListValue) || _deadlineFromLowest != _deadlineFrom || _deadlineToHighest != _deadlineTo) // Megnezem h valamelyik ertek valtozott-e es ha igen akkor frissitem
+            {
+                SearchTaskListValue = "";
+                OnPropertyChanged(nameof(SearchTaskListValue));
+                LoadTasks(CurrentUser.IdUser);
+            }
+        }
+        private void LoadTasks(int userid)
+        {
+            _taskList.Clear();
+            UserListForTaskList.Clear();
+
+            try
+            {
+                var user = new UserRepository(new UserLogic()).GetUserByID(userid);
+                UserListForTaskList.Add(user);
+                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
+
+                tasks.ForEach(task =>
+                {
+                    var taskViewModel = new TaskViewModel(task, UserListForTaskList.ToList());
+                    taskViewModel.User = UserListForTaskList.First(user => user.IdUser == task.User_idUser);
+                    TaskList.Add(taskViewModel);
+                });
+
+                // Resetelje a Hataridoket a megfelelore
+                _deadlineFrom = DateTime.Today.AddYears(1);
+                if (TaskList.Count == 0) // ha nincs task akkor a mai datumot kapja meg
+                {
+                    _deadlineTo = DateTime.Today;
+                }
+                else
+                {
+                    _deadlineTo = DateTime.Parse("0001.01.01");
+                }
+                foreach (TaskViewModel taskViewModel in TaskList)
+                {
+                    if (taskViewModel.Task.Deadline < _deadlineFrom)
+                    {
+                        _deadlineFrom = taskViewModel.Task.Deadline;
+                        _deadlineFromLowest = _deadlineFrom;
+                    }
+                    if (taskViewModel.Task.Deadline > _deadlineTo)
+                    {
+                        _deadlineTo = taskViewModel.Task.Deadline;
+                        _deadlineToHighest = _deadlineTo;
+                    }
+                }
+
+                OnPropertyChanged(nameof(DeadlineFrom)); // kell h megvaltozzon a DatePickerben a datum
+                OnPropertyChanged(nameof(DeadlineTo));  // kell h megvaltozzon a DatePickerben a datum
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
+        private bool CanExecuteSearchRecordList(object arg)
+        {
+            return true;
+        }
+        private void SearchRecordList(object obj) // Lista szurese
+        {
+            try
+            {
+                if (String.IsNullOrWhiteSpace(_searchRecordListValue))
+                {
+                    _recordList.Clear();
+
+                    var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CurrentUser.IdUser);
+                    tasks.ForEach(task => TaskListForRecordList.Add(task));
+
+                    var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUser.IdUser).Where(record =>
+                                    (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)).ToList();
+
+                    records.ForEach(record =>
+                    {
+                        var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                        recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                        _recordList.Add(recordViewModel);
+                    });
+                }
+                else
+                {
+                    _recordList.Clear();
+
+                    var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUser.IdUser).Where(record =>
+                                    (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)
+                                    && (record.Comment.Contains(_searchRecordListValue) || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchRecordListValue))).ToList();
+
+                    records.ForEach(record =>
+                    {
+                        var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                        recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                        _recordList.Add(recordViewModel);
+                    });
+                }
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private bool CanExecuteRefreshRecordList(object arg)
+        {
+            return true;
+        }
+        private void RefreshRecordList(object obj) // Lista frissitese es keresesi ertekek visszaallitasa az alapra 
+        {
+            if (!String.IsNullOrWhiteSpace(_searchRecordListValue) || _dateFromLowest != _dateFrom || _dateToHighest != _dateTo || _durationFromLowest != _durationFrom 
+                || _durationToHighest != _durationTo) // Megnezem h valamelyik ertek valtozott-e es ha igen akkor frissitem
+            {
+                SearchRecordListValue = "";
+                OnPropertyChanged(nameof(SearchRecordListValue));
+                LoadRecords(CurrentUser.IdUser);
+            }
+        }
+        private void LoadRecords(int userid)
+        {
+            _recordList.Clear();
+            TaskListForRecordList.Clear();
+
+            try
+            {
+                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
+                tasks.ForEach(task => TaskListForRecordList.Add(task));
+
+                var records = new RecordRepository(new RecordLogic()).GetUserRecords(userid);
+                records.ForEach(record =>
+                {
+                    var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                    recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                    _recordList.Add(recordViewModel);
+                });
+
+                _durationFrom = 720;
+                _durationTo = 0;
+                _dateFrom = DateTime.Today;
+                if (RecordList.Count == 0) // ha nincs rekord akkor a mai datumot kapja meg
+                {
+                    _dateTo = DateTime.Today;
+                }
+                else
+                {
+                    _dateTo = DateTime.Parse("0001.01.01");
+                }
+                foreach (RecordViewModel recordViewModel in RecordList) // frissitett listabol kicserelem ha van uj legrovidebb,leghosszabb Idotartam es legkorabbi vagy legkesobbi Datum
+                {
+                    if (recordViewModel.Record.Date < _dateFrom)
+                    {
+                        _dateFrom = recordViewModel.Record.Date;
+                        _dateFromLowest = _dateFrom;
+                    }
+                    if (recordViewModel.Record.Date > _dateTo)
+                    {
+                        _dateTo = recordViewModel.Record.Date;
+                        _dateToHighest = _dateTo;
+                    }
+                    if (recordViewModel.Record.Duration < _durationFrom)
+                    {
+                        _durationFrom = recordViewModel.Record.Duration;
+                        _durationFromLowest = _durationFrom;
+                    }
+                    if (recordViewModel.Record.Duration > _durationTo)
+                    {
+                        _durationTo = recordViewModel.Record.Duration;
+                        _durationToHighest = _durationTo;
+                    }
+                }
+
+                OnPropertyChanged(nameof(DateFrom)); // kell h megvaltozzon a DatePickerben a datum
+                OnPropertyChanged(nameof(DateTo));  // kell h megvaltozzon a DatePickerben a datum
+                OnPropertyChanged(nameof(DurationFromFormat)); // h megvaltozzon a kiiras
+                OnPropertyChanged(nameof(DurationToFormat)); // h megvaltozzon a kiiras
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
 
 
         private bool CanDeleteTask(object arg)
@@ -247,55 +643,6 @@ namespace WpfDemo.ViewModel
             mm.BodyEncoding = UTF8Encoding.UTF8;
             mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             client.Send(mm);
-        }
-
-
-        private void LoadTasks(int userid)
-        {
-            _taskList.Clear();
-            UserListForTaskList.Clear();
-
-            try
-            {
-                var user = new UserRepository(new UserLogic()).GetUserByID(userid);
-                UserListForTaskList.Add(user);
-                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
-
-                tasks.ForEach(task =>
-                {
-                    var taskViewModel = new TaskViewModel(task, UserListForTaskList.ToList());
-                    taskViewModel.User = UserListForTaskList.First(user => user.IdUser == task.User_idUser);
-                    TaskList.Add(taskViewModel);
-                });
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-        private void LoadRecords(int userid)
-        {
-            _recordList.Clear();
-            TaskListForRecordList.Clear();
-
-            try
-            {
-                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
-                tasks.ForEach(task => TaskListForRecordList.Add(task));
-
-                var records = new RecordRepository(new RecordLogic()).GetUserRecords(userid);
-                records.ForEach(record =>
-                {
-                    var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
-                    recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
-                    _recordList.Add(recordViewModel);
-                });
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
         }
     }
 }

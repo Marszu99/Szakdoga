@@ -378,6 +378,9 @@
   <data name="RefreshList" xml:space="preserve">
     <value>Refreshes the list</value>
   </data>
+  <data name="RefreshListAndSearchingValues" xml:space="preserve">
+    <value>Refreshes the list and resets the default value for the searching values</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>REGISTER</value>
   </data>

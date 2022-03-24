@@ -39,25 +39,6 @@ namespace WpfDemo.ViewModel
             {
                 _searchValue = value;
                 OnPropertyChanged(nameof(SearchValue));
-                if (String.IsNullOrWhiteSpace(_searchValue))
-                {
-                    LoadUsers();
-                }
-                else
-                {
-                    UserList.Clear();
-
-                    try
-                    {
-                        var users = new UserRepository(new UserLogic()).GetAllUsers().Where(user => user.Username.Contains(_searchValue) 
-                                    || user.FirstName.Contains(_searchValue) || user.LastName.Contains(_searchValue)).ToList();
-                        users.ForEach(user => UserList.Add(new UserViewModel(user)));
-                    }
-                    catch (SqlException)
-                    {
-                        MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                }
             }
         }
 
@@ -96,18 +77,17 @@ namespace WpfDemo.ViewModel
         }
 
 
+        public RelayCommand CreateUserCommand { get; private set; }
+        public RelayCommand SearchingCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand ShowUserProfilCommand { get; private set; }
-        public RelayCommand CreateUserCommand { get; private set; }
-        public RelayCommand RefreshUserListCommand { get; private set; }
 
         public UserManagementViewModel()
         {
             LoadUsers(); // Felhasznalok betoltese
 
             CreateUserCommand = new RelayCommand(CreateUser, CanExecuteShow);
-            RefreshUserListCommand = new RelayCommand(RefreshUserList, CanExecuteRefresh);
-
+            SearchingCommand = new RelayCommand(Search, CanExecuteSearch);
             DeleteCommand = new RelayCommand(DeleteUser, CanDeleteUser);
             ShowUserProfilCommand = new RelayCommand(ShowUserProfil, CanShowUserProfil);
         }
@@ -132,22 +112,33 @@ namespace WpfDemo.ViewModel
         }
 
 
-        private bool CanExecuteRefresh(object arg)
+        private bool CanExecuteSearch(object arg)
         {
             return true;
         }
-        private void RefreshUserList(object obj)
+        private void Search(object obj) // Lista szurese
         {
-            LoadUsers();
-            // SelectedUser = null; ezt egy fuggvenybe
+            try
+            {
+                UserList.Clear();
+
+                var users = new UserRepository(new UserLogic()).GetAllUsers().Where(user => user.Username.Contains(_searchValue)
+                            || user.FirstName.Contains(_searchValue) || user.LastName.Contains(_searchValue)).ToList();
+
+                users.ForEach(user => UserList.Add(new UserViewModel(user)));
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         public void LoadUsers()
         {
-            UserList.Clear();
-
             try
             {
+                UserList.Clear();
+
                 var users = new UserRepository(new UserLogic()).GetAllUsers();
                 users.ForEach(user => UserList.Add(new UserViewModel(user)));
             }

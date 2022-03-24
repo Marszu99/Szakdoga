@@ -844,6 +844,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Refreshes the list and resets the default value for the searching values.
+        /// </summary>
+        public static string RefreshListAndSearchingValues {
+            get {
+                return ResourceManager.GetString("RefreshListAndSearchingValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to REGISTER.
         /// </summary>
         public static string Register {

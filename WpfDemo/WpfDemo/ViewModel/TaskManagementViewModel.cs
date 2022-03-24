@@ -524,7 +524,8 @@ namespace WpfDemo.ViewModel
 
                         var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(LoginViewModel.LoggedUser.IdUser).Where(task =>
                                     (task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo) 
-                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Status.ToString().Contains(_searchValue))).ToList();
+                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) 
+                                    || ResourceHandler.GetResourceString(task.Status.ToString()).Contains(_searchValue))).ToList();
 
                         tasks.ForEach(task =>
                         {
@@ -539,7 +540,8 @@ namespace WpfDemo.ViewModel
 
                         var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser).Where(task =>
                                     (task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo)
-                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Status.ToString().Contains(_searchValue))).ToList();
+                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) 
+                                    || ResourceHandler.GetResourceString(task.Status.ToString()).Contains(_searchValue))).ToList();
 
                         tasks.ForEach(task =>
                         {
@@ -554,7 +556,8 @@ namespace WpfDemo.ViewModel
 
                         var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasks().Where(task =>
                                     (task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo)
-                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)
+                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) 
+                                    || ResourceHandler.GetResourceString(task.Status.ToString()).Contains(_searchValue)
                                     || new UserRepository(new UserLogic()).GetUserByID(task.User_idUser).Username.Contains(_searchValue))).ToList();
 
                         tasks.ForEach(task =>
@@ -570,8 +573,10 @@ namespace WpfDemo.ViewModel
 
                         var tasks = new TaskRepository(new TaskLogic()).GetAllTasks().Where(task =>
                                     (task.Deadline >= _deadlineFrom && task.Deadline <= _deadlineTo)
-                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) || task.Status.ToString().Contains(_searchValue)
+                                    && (task.Title.Contains(_searchValue) || task.Description.Contains(_searchValue) 
+                                    || ResourceHandler.GetResourceString(task.Status.ToString()).Contains(_searchValue)
                                     || new UserRepository(new UserLogic()).GetUserByID(task.User_idUser).Username.Contains(_searchValue))).ToList();
+
                         tasks.ForEach(task =>
                         {
                             var taskViewModel = new TaskViewModel(task, UserList.ToList());
