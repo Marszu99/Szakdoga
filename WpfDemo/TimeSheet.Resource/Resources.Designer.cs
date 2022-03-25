@@ -1168,6 +1168,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string UsernameProfile {
+            get {
+                return ResourceManager.GetString("UsernameProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username:.
         /// </summary>
         public static string UsernameWithColon {

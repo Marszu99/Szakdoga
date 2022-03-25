@@ -486,6 +486,9 @@
   <data name="UsernameOneWord" xml:space="preserve">
     <value>Username needs to be one word!</value>
   </data>
+  <data name="UsernameProfile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
   <data name="UsernameWithColon" xml:space="preserve">
     <value>Username:</value>
   </data>

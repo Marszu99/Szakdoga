@@ -486,6 +486,9 @@
   <data name="UsernameOneWord" xml:space="preserve">
     <value>Felhasználónévnek egy szónak kell lennie!</value>
   </data>
+  <data name="UsernameProfile" xml:space="preserve">
+    <value>Profilja</value>
+  </data>
   <data name="UsernameWithColon" xml:space="preserve">
     <value>Felhasználónév:</value>
   </data>
