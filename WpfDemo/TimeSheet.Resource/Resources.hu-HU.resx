@@ -120,6 +120,9 @@
   <data name="ActiveTasks" xml:space="preserve">
     <value>Aktív</value>
   </data>
+  <data name="ActiveTasksCheckBoxMessage" xml:space="preserve">
+    <value>Megjeleníti az aktív feladatokat</value>
+  </data>
   <data name="Add10MinToDuration" xml:space="preserve">
     <value>10 percet hozzáad az időtartamhoz</value>
   </data>
@@ -291,8 +294,14 @@
   <data name="MyRecords" xml:space="preserve">
     <value>Rögzítéseim</value>
   </data>
+  <data name="MyRecordsCheckBoxMessage" xml:space="preserve">
+    <value>Megjeleníti a saját rögzítéseimet</value>
+  </data>
   <data name="MyTasks" xml:space="preserve">
     <value>Feladataim</value>
+  </data>
+  <data name="MyTasksCheckBoxMessage" xml:space="preserve">
+    <value>Megjeleníti a saját feladataimat</value>
   </data>
   <data name="NeedToChooseTaskForRecord" xml:space="preserve">
     <value>Kell választani egy feladatot a rögzítéshez!</value>
@@ -305,6 +314,9 @@
   </data>
   <data name="Notifications" xml:space="preserve">
     <value>Értesítések</value>
+  </data>
+  <data name="NotificationsCheckBoxMessage" xml:space="preserve">
+    <value>Megjeleníti a feladatokhoz tartozó értesítéseket</value>
   </data>
   <data name="NotificationTaskDeadlineChanged" xml:space="preserve">
     <value>Feladat módosítva lett! Határidő megváltozott!</value>

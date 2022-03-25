@@ -24,18 +24,18 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
+            <TextBlock Grid.Row="0" Grid.Column="1" FontWeight="Bold" FontFamily="Verdana" FontSize="38" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                       Margin="0 6 0 0">
+                <Run Text="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}"/>
+                <Run Text="{local:ResxStatic l10n:Resources.UsernameProfile}"/>
+            </TextBlock>
+            
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{local:ResxStatic l10n:Resources.UsernameWithColon}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Left" 
                            VerticalAlignment="Top" Margin="10 80 0 0" FontSize="33"/>
                 <Label x:Name="userNameLabel" Grid.Row="0" Grid.Column="0" FontSize="30" Content="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}"
                        Margin="0 79.5 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
-
-            <TextBlock Grid.Row="0" Grid.Column="1" FontWeight="Bold" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 5 0 0">
-                <Run Text="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}"/>
-                <Run Text="{local:ResxStatic l10n:Resources.UsernameProfile}"/>
-            </TextBlock>
-
 
             <StackPanel Orientation="Horizontal" Grid.Column="1">
                 <!--local:ResxStatic l10n:Resources.FirstNameWithColon,Binding FirstNameString, StringFormat='{}{0}:'-->
@@ -49,7 +49,7 @@
                 <TextBlock Text="{local:ResxStatic l10n:Resources.LastNameWithColon}" Grid.Row="0" Grid.Column="2" FontWeight="Bold" HorizontalAlignment="Left"
                            VerticalAlignment="Top" Margin="0 80 0 0" FontSize="33"/>
                 <Label x:Name="lastNameLabel" Grid.Row="0" Grid.Column="2" FontSize="28" Content="{Binding CurrentUser.LastName, UpdateSourceTrigger=PropertyChanged}"
-                       Margin="0 80 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
+                       Margin="0 81 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="0">
@@ -74,9 +74,9 @@
                    VerticalAlignment="Bottom"/>
             <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{local:ResxStatic l10n:Resources.Records}" Margin="795 0 0 -5" HorizontalAlignment="Left"
                    VerticalAlignment="Bottom"/>-->
-            <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+            <StackPanel Orientation="Horizontal" Margin="7 0 0 0">
                 <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\tasks.png" VerticalAlignment="Bottom" Margin="0 0 0 1" Width="39"/>
-                <Label Content="{local:ResxStatic l10n:Resources.Tasks}" FontWeight="Bold" FontSize="34" Margin="-7 16 0 0" Height="50"/>
+                <Label Content="{local:ResxStatic l10n:Resources.Tasks}" FontWeight="Bold" FontSize="34" Margin="-7 20 0 0" Height="50" FontFamily="Constantia"/>
             </StackPanel>
 
             <StackPanel Margin="0 0 815 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal" Height="27">
@@ -185,7 +185,7 @@
 
             <StackPanel Orientation="Horizontal" Margin="822 0 0 -5">
                 <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\record.png" VerticalAlignment="Bottom" Margin="0 0 0 4" Width="41"/>
-                <Label Content="{local:ResxStatic l10n:Resources.Records}" FontWeight="Bold" FontSize="34" Margin="-7 16 0 0"/>
+                <Label Content="{local:ResxStatic l10n:Resources.Records}" FontWeight="Bold" FontSize="34" Margin="-7 20 0 0" FontFamily="Constantia"/>
             </StackPanel>
 
             <StackPanel Margin="0 0 3 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
@@ -451,7 +451,7 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Task}" Binding="{Binding Task.Title}" Width="170">
+                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Task}" Binding="{Binding Task.Title}" Width="160">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="FontWeight" Value="Medium"/>

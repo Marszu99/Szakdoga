@@ -120,6 +120,9 @@
   <data name="ActiveTasks" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="ActiveTasksCheckBoxMessage" xml:space="preserve">
+    <value>Shows the active tasks</value>
+  </data>
   <data name="Add10MinToDuration" xml:space="preserve">
     <value>Adds 10 minutes to the duration</value>
   </data>
@@ -291,8 +294,14 @@
   <data name="MyRecords" xml:space="preserve">
     <value>My</value>
   </data>
+  <data name="MyRecordsCheckBoxMessage" xml:space="preserve">
+    <value>Shows my own records</value>
+  </data>
   <data name="MyTasks" xml:space="preserve">
     <value>My</value>
+  </data>
+  <data name="MyTasksCheckBoxMessage" xml:space="preserve">
+    <value>Shows my own tasks</value>
   </data>
   <data name="NeedToChooseTaskForRecord" xml:space="preserve">
     <value>Need to choose a Task for the record!</value>
@@ -305,6 +314,9 @@
   </data>
   <data name="Notifications" xml:space="preserve">
     <value>Notifications</value>
+  </data>
+  <data name="NotificationsCheckBoxMessage" xml:space="preserve">
+    <value>Shows the notifications for the tasks</value>
   </data>
   <data name="NotificationTaskDeadlineChanged" xml:space="preserve">
     <value>Task has been updated! Deadline has changed!</value>

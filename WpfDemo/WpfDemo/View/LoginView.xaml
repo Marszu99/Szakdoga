@@ -21,8 +21,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="Worktime Registry" FontSize="72" FontWeight="SemiBold" FontStyle="Italic" HorizontalAlignment="left"
-                       VerticalAlignment="Top" Margin="0 85 0 0"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Worktime Registry" FontSize="80" FontWeight="SemiBold" FontStyle="Italic" HorizontalAlignment="left"
+                       VerticalAlignment="Top" Margin="-35 85 0 0" FontFamily="High Tower Text"/>
 
             <TextBlock Text="{local:ResxStatic l10n:Resources.Username}" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right"
                        VerticalAlignment="Bottom" Margin="0 0 0 30"

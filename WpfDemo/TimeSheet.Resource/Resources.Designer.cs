@@ -70,6 +70,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shows the active tasks.
+        /// </summary>
+        public static string ActiveTasksCheckBoxMessage {
+            get {
+                return ResourceManager.GetString("ActiveTasksCheckBoxMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adds 10 minutes to the duration.
         /// </summary>
         public static string Add10MinToDuration {
@@ -583,11 +592,29 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shows my own records.
+        /// </summary>
+        public static string MyRecordsCheckBoxMessage {
+            get {
+                return ResourceManager.GetString("MyRecordsCheckBoxMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My.
         /// </summary>
         public static string MyTasks {
             get {
                 return ResourceManager.GetString("MyTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shows my own tasks.
+        /// </summary>
+        public static string MyTasksCheckBoxMessage {
+            get {
+                return ResourceManager.GetString("MyTasksCheckBoxMessage", resourceCulture);
             }
         }
         
@@ -624,6 +651,15 @@ namespace TimeSheet.Resource {
         public static string Notifications {
             get {
                 return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shows the notifications for the tasks.
+        /// </summary>
+        public static string NotificationsCheckBoxMessage {
+            get {
+                return ResourceManager.GetString("NotificationsCheckBoxMessage", resourceCulture);
             }
         }
         

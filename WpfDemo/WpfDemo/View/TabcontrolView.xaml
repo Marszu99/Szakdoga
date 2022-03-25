@@ -20,7 +20,8 @@
 
 
             <Border Width="1550" HorizontalAlignment="Left" VerticalAlignment="Top"  BorderBrush="DimGray" Background="DimGray" BorderThickness="2" Height="60">
-                <TextBlock Text="Worktime Registry" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" FontStyle="Italic"/>
+                <TextBlock Text="Worktime Registry" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="45" FontWeight="SemiBold" FontStyle="Italic" 
+                           FontFamily="High Tower Text"/>
             </Border>
 
             
@@ -62,7 +63,7 @@
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\record.png" VerticalAlignment="Center" Width="30"/>
-                            <TextBlock Text="{local:ResxStatic l10n:Resources.Records}" VerticalAlignment="Bottom" Margin="2 0 0 0" FontSize="25"/>
+                            <TextBlock Text="{local:ResxStatic l10n:Resources.Records}" VerticalAlignment="Bottom" Margin="2 0 0 -3" FontSize="30" FontFamily="Bodoni MT"/>
                         </StackPanel>
                     </TabItem.Header>
                     <view:RecordManagementView Grid.Row="1" Margin="0" FontWeight="Normal" Cursor="Arrow"/>
@@ -73,7 +74,7 @@
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\tasks.png" VerticalAlignment="Center" Width="30"/>
-                            <TextBlock Text="{local:ResxStatic l10n:Resources.Tasks}" VerticalAlignment="Bottom" Margin="2 0 0 -4" FontSize="25"/>
+                            <TextBlock Text="{local:ResxStatic l10n:Resources.Tasks}" VerticalAlignment="Bottom" Margin="2 0 0 -4" FontSize="30" FontFamily="Bodoni MT"/>
                         </StackPanel>
                     </TabItem.Header>
                     <view:TaskManagementView Grid.Row="1" Margin="0" FontWeight="Normal" Cursor="Arrow"/>
@@ -83,7 +84,7 @@
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\users.png" VerticalAlignment="Center" Width="30"/>
-                            <TextBlock Text="{local:ResxStatic l10n:Resources.Users}" VerticalAlignment="Bottom" Margin="5 0 0 -3" FontSize="25"/>
+                            <TextBlock Text="{local:ResxStatic l10n:Resources.Users}" VerticalAlignment="Bottom" Margin="5 0 0 -4" FontSize="30" FontFamily="Bodoni MT"/>
                         </StackPanel>
                     </TabItem.Header>
                     <view:UserManagementView Grid.Row="1" Margin="0" FontWeight="Normal" Cursor="Arrow"/>
