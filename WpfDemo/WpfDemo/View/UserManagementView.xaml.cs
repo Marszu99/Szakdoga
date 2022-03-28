@@ -11,7 +11,7 @@ namespace WpfDemo.View
         public UserManagementView()
         {
             InitializeComponent();
-            this.DataContext = new UserManagementViewModel();
+            this.DataContext = new UserManagementViewModel(this);
         }
     }
 }

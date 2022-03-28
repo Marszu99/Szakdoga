@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Mail;
+using System.Reflection;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using TimeSheet.DataAccess;
 using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Resource;
+using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 
 namespace WpfDemo.ViewModel
@@ -17,6 +22,8 @@ namespace WpfDemo.ViewModel
     {
         public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>();
         public ObservableCollection<TaskViewModel> TaskList { get; } = new ObservableCollection<TaskViewModel>();
+
+        public TaskManagementView _view;
         private int _lastSelectedTaskID = 0; // utoljara valasztott Task ID-ja
         private int _lastSelectedTaskCount = 0; // utoljara valasztott elem indexe a TaskList-bol
 
@@ -248,6 +255,7 @@ namespace WpfDemo.ViewModel
 
         public RelayCommand CreateTaskCommand { get; private set; }
         public RelayCommand RefreshTaskListCommand { get; private set; }
+        public RelayCommand ExportToExcelCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
         public RelayCommand SearchingCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
@@ -256,13 +264,16 @@ namespace WpfDemo.ViewModel
 
 
 
-        public TaskManagementViewModel()
+        public TaskManagementViewModel(TaskManagementView view)
         {
             LoadUsers(); // Felhasznalok betoltese(ha esetleg ujat hozna letre)
             RefreshTaskList(_searchValue); // Feladatok frissitese(Lista frissitese/betoltese)
 
+            _view = view;
+
             CreateTaskCommand = new RelayCommand(CreateTask, CanExecuteShow);
             RefreshTaskListCommand = new RelayCommand(RefreshTaskList, CanExecuteRefresh);
+            ExportToExcelCommand = new RelayCommand(ExportToExcel, CanExportToExcel);
             SortingByCheckBoxCommand = new RelayCommand(SortingByCheckBox, CanExecuteSort);
             SearchingCommand = new RelayCommand(Search, CanExecuteSearch);
             DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
@@ -353,6 +364,177 @@ namespace WpfDemo.ViewModel
             catch (SqlException)
             {
                 MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
+        private bool CanExportToExcel(object arg)
+        {
+            return true;
+        }
+
+        private void ExportToExcel(object sender) // http://www.nullskull.com/a/10476796/xaml-datagrid-export-data-to-excel-using-mvvm-design-pattern.aspx + Right Click on the Project name -> Click "Add reference" -> Goto "COM" tab -> Search for "Microsoft Excel Object Library" click "OK" to add the reference.
+        {
+            DataGrid currentGrid = _view.ListTasksContent.ListTasksDataGrid;
+            if (currentGrid != null)
+            {
+                StringBuilder sbGridData = new StringBuilder();
+                List<string> listColumns = new List<string>();
+
+                List<DataGridColumn> listVisibleDataGridColumns = new List<DataGridColumn>();
+
+                List<string> listHeaders = new List<string>();
+
+                Microsoft.Office.Interop.Excel.Application application = null;
+
+                Microsoft.Office.Interop.Excel.Workbook workbook = null;
+
+                Microsoft.Office.Interop.Excel.Worksheet worksheet = null;
+
+                int rowCount = 1;
+
+                int colCount = 1;
+
+                try
+                {
+                    application = new Microsoft.Office.Interop.Excel.Application();
+                    workbook = application.Workbooks.Add(Type.Missing);
+                    worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Worksheets[1];
+
+                    if (currentGrid.HeadersVisibility == DataGridHeadersVisibility.Column || currentGrid.HeadersVisibility == DataGridHeadersVisibility.All)
+                    {
+                        foreach (DataGridColumn dataGridColumn in currentGrid.Columns.Where(dataGridColumn => dataGridColumn.Visibility == Visibility.Visible))
+                        {
+                            listVisibleDataGridColumns.Add(dataGridColumn);
+                            if (dataGridColumn.Header != null)
+                            {
+                                listHeaders.Add(dataGridColumn.Header.ToString());
+                            }
+                            worksheet.Cells[rowCount, colCount] = dataGridColumn.Header;
+                            colCount++;
+                        }
+
+                        // IEnumerable collection = currentGrid.ItemsSource;
+
+                        foreach (object data in currentGrid.ItemsSource)
+                        {
+                            listColumns.Clear();
+
+                            colCount = 1;
+
+                            rowCount++;
+
+                            foreach (DataGridColumn dataGridColumn in listVisibleDataGridColumns)
+                            {
+                                string strValue = string.Empty;
+                                Binding objBinding = null;
+                                DataGridBoundColumn dataGridBoundColumn = dataGridColumn as DataGridBoundColumn;
+
+                                if (dataGridBoundColumn != null)
+                                {
+                                    objBinding = dataGridBoundColumn.Binding as Binding;
+                                }
+
+                                DataGridTemplateColumn dataGridTemplateColumn = dataGridColumn as DataGridTemplateColumn;
+
+                                if (dataGridTemplateColumn != null)
+                                {
+                                    // This is a template column...let us see the underlying dependency object
+
+                                    DependencyObject dependencyObject = dataGridTemplateColumn.CellTemplate.LoadContent();
+
+                                    FrameworkElement frameworkElement = dependencyObject as FrameworkElement;
+                                    if (frameworkElement != null)
+                                    {
+                                        FieldInfo fieldInfo = frameworkElement.GetType().GetField("ContentProperty", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+                                        if (fieldInfo == null)
+                                        {
+                                            if (frameworkElement is TextBox || frameworkElement is TextBlock || frameworkElement is ComboBox)
+                                            {
+                                                fieldInfo = frameworkElement.GetType().GetField("TextProperty");
+                                            }
+                                            else if (frameworkElement is DatePicker)
+                                            {
+                                                fieldInfo = frameworkElement.GetType().GetField("SelectedDateProperty");
+                                            }
+                                        }
+
+                                        if (fieldInfo != null)
+                                        {
+                                            DependencyProperty dependencyProperty = fieldInfo.GetValue(null) as DependencyProperty;
+                                            if (dependencyProperty != null)
+                                            {
+                                                BindingExpression bindingExpression = frameworkElement.GetBindingExpression(dependencyProperty);
+                                                if (bindingExpression != null)
+                                                {
+                                                    objBinding = bindingExpression.ParentBinding;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (objBinding != null)
+                                {
+
+                                    if (!String.IsNullOrEmpty(objBinding.Path.Path))
+                                    {
+
+                                        PropertyInfo pi = data.GetType().GetProperty(objBinding.Path.Path);
+
+                                        if (pi != null)
+                                        {
+
+                                            object propValue = pi.GetValue(data, null);
+
+                                            if (propValue != null)
+                                            {
+                                                strValue = Convert.ToString(propValue);
+                                            }
+
+                                            else
+                                            {
+                                                strValue = string.Empty;
+                                            }
+                                        }
+                                    }
+
+                                    if (objBinding.Converter != null)
+                                    {
+                                        if (!String.IsNullOrEmpty(strValue))
+                                        {
+                                            strValue = objBinding.Converter.Convert(strValue, typeof(string), objBinding.ConverterParameter, objBinding.ConverterCulture).ToString();
+                                        }
+
+                                        else
+                                        {
+                                            strValue = objBinding.Converter.Convert(data, typeof(string), objBinding.ConverterParameter, objBinding.ConverterCulture).ToString();
+                                        }
+                                    }
+                                }
+
+                                listColumns.Add(strValue);
+
+                                worksheet.Cells[rowCount, colCount] = strValue;
+
+                                colCount++;
+                            }
+                        }
+                    }
+
+                }
+
+                catch (System.Runtime.InteropServices.COMException)
+                {
+                }
+
+                finally
+                {
+                    workbook.Close();
+                    application.Quit();
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(application);
+                }
+
             }
         }
 

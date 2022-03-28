@@ -168,3 +168,6 @@ C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\WpfDemo.csproj.CopyComplete
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\WpfDemo.genruntimeconfig.cache
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\App.baml
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\Interop.Microsoft.Office.Interop.Excel.dll
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\obj\Debug\netcoreapp3.1\WpfDemo.csproj.ResolveComReference.cache
+C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\bin\Debug\netcoreapp3.1\Interop.Microsoft.Office.Interop.Excel.dll

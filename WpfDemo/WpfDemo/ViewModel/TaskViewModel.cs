@@ -169,6 +169,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public string User_Username
+        {
+            get
+            {
+                return _user.Username;
+            }
+        }
+
         public List<User> UserList // Kell h mikor uj letrehozasa utan kivalasztunk egy taskot akkor ne legyen ures a User
         {
             get;

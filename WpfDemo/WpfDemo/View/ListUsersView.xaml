@@ -19,7 +19,7 @@
 
         <Grid Grid.Row="1">
             <DockPanel>
-                <DataGrid x:Name="myDataGrid" x:FieldModifier="public" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedUser}" 
+                <DataGrid x:Name="ListUsersDataGrid" x:FieldModifier="public" ItemsSource="{Binding UserList}" SelectedItem="{Binding SelectedUser}" 
                           Width="900" HorizontalAlignment="Left" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray"
                           ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                           Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="18" BorderBrush="Transparent">

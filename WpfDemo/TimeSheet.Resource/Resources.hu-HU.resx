@@ -231,6 +231,9 @@
   <data name="English" xml:space="preserve">
     <value>ANGOL</value>
   </data>
+  <data name="ExportToExcel" xml:space="preserve">
+    <value>A lista exportálása egy Excel fájlba</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>Keresztnév</value>
   </data>
@@ -389,9 +392,6 @@
   </data>
   <data name="RefreshList" xml:space="preserve">
     <value>Frissíti a listát</value>
-  </data>
-  <data name="RefreshListAndSearchingValues" xml:space="preserve">
-    <value>Frissíti a listát és visszaállítja a kezdeti értékeit a keresési mezőknek</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>REGISZTRÁL</value>

@@ -14,7 +14,8 @@
           "System.Data.SqlClient": "4.8.3",
           "TimeSheet.Logic": "1.0.0",
           "TimeSheet.Model": "1.0.0",
-          "TimeSheet.Resource": "1.0.0"
+          "TimeSheet.Resource": "1.0.0",
+          "Interop.Microsoft.Office.Interop.Excel": "1.8.0.0"
         },
         "runtime": {
           "WpfDemo.dll": {}
@@ -312,6 +313,14 @@
             "locale": "hu-HU"
           }
         }
+      },
+      "Interop.Microsoft.Office.Interop.Excel/1.8.0.0": {
+        "runtime": {
+          "Interop.Microsoft.Office.Interop.Excel.dll": {
+            "assemblyVersion": "1.8.0.0",
+            "fileVersion": "1.8.0.0"
+          }
+        }
       }
     }
   },
@@ -560,6 +569,11 @@
     },
     "TimeSheet.Resource/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Interop.Microsoft.Office.Interop.Excel/1.8.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

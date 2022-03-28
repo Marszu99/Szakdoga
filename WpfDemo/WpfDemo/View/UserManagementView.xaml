@@ -26,16 +26,30 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="NewUserButton" Command="{Binding CreateUserCommand}" Grid.Column="0" Grid.Row="0"
-                    HorizontalAlignment="Left" Margin="10 5 0 5" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand"
-                    Visibility="{Binding UserManagementButtonsVisibility}" ToolTip="{local:ResxStatic l10n:Resources.CreateNewUser}">
-                <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\create-user.png"/>
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="4"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="10 5 0 5">
+                <Button x:Name="NewUserButton" Command="{Binding CreateUserCommand}" HorizontalAlignment="Left"  Padding="6 0" 
+                    BorderThickness="1" BorderBrush="Black" Cursor="Hand" Visibility="{Binding UserManagementButtonsVisibility}" 
+                    ToolTip="{local:ResxStatic l10n:Resources.CreateNewUser}">
+                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\create-user.png"/>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button x:Name="ExportExcelButton" Command="{Binding ExportToExcelCommand}" HorizontalAlignment="Left" Margin="10 0 0 0" Padding="6 0" 
+                    BorderThickness="1" BorderBrush="Black" Cursor="Hand" Visibility="{Binding UserManagementButtonsVisibility}" 
+                    ToolTip="{local:ResxStatic l10n:Resources.ExportToExcel}">
+                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\excel.png"/>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+            
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5 0 5">
                 <TextBox Text="{Binding SearchValue, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource SearchTextBoxWithWaterMarkStyle}" Margin="0" Background="#eee" 

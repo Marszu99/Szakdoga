@@ -120,7 +120,7 @@ namespace WpfDemo.ViewModel
             {
                 try
                 {
-                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);//_record.User_idUser
+                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);//_record.User_idUser??
                 }
                 catch (SqlException)
                 {
@@ -133,6 +133,24 @@ namespace WpfDemo.ViewModel
             {
                 _user = value;
                 OnPropertyChanged(nameof(User));
+            }
+        }
+        public string User_Username // Listazashoz kell(Excel miatt mert kulonben ures lesz a mezeje)
+        {
+            get
+            {
+                string Username = null;
+
+                try
+                {
+                    Username = new UserRepository(new UserLogic()).GetUserByID(_record.User_idUser).Username;//_task.User_idUser??
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
+                return Username;
             }
         }
 
@@ -151,6 +169,14 @@ namespace WpfDemo.ViewModel
                     _isTaskChanged = true;
                 }
                 OnPropertyChanged(nameof(TaskErrorIconVisibility));
+            }
+        }
+
+        public string Task_Title // Listazashoz kell(Excel miatt mert kulonben ures lesz a mezeje)
+        {
+            get
+            {
+                return _task.Title;
             }
         }
 

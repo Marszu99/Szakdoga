@@ -79,7 +79,7 @@
                 <Label Content="{local:ResxStatic l10n:Resources.Tasks}" FontWeight="Bold" FontSize="34" Margin="-7 20 0 0" Height="50" FontFamily="Constantia"/>
             </StackPanel>
 
-            <StackPanel Margin="0 0 815 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal" Height="27">
+            <StackPanel Margin="0 0 807 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal" Height="27">
                 <DatePicker SelectedDate="{Binding DeadlineFrom, UpdateSourceTrigger=PropertyChanged}" Background="#eee"
                             SelectedDateFormat="Short" Width="120" Height="25" FontSize="18" Margin="0" Padding="2 0 0 0" FirstDayOfWeek="Monday">
                     <DatePicker.Resources>
@@ -172,7 +172,7 @@
                     </Button.Resources>
                 </Button>
                 <Button Command="{Binding RefreshingTaskListCommand}" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Margin="5 0 0 1"
-                        ToolTip="{local:ResxStatic l10n:Resources.RefreshListAndSearchingValues}">
+                        ToolTip="{local:ResxStatic l10n:Resources.RefreshList}">
                     <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\refresh.png"/>
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -303,7 +303,7 @@
                     </Button.Resources>
                 </Button>
                 <Button Command="{Binding RefreshingRecordListCommand}" Height="27" VerticalAlignment="Bottom" BorderThickness="1" BorderBrush="Black" Cursor="Hand" 
-                        Margin="5 0 0 1" ToolTip="{local:ResxStatic l10n:Resources.RefreshListAndSearchingValues}">
+                        Margin="5 0 0 1" ToolTip="{local:ResxStatic l10n:Resources.RefreshList}">
                     <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\refresh.png"/>
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
@@ -323,12 +323,12 @@
                 <ColumnDefinition Width="73*"/>
                 <ColumnDefinition Width="730*"/>-->
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="110"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Button x:Name="AddTaskToUserTaskButton" Command="{Binding ShowTaskCommand}" Grid.Row="2" Grid.Column="1"
-                    Margin="7 2.5 0 0" Padding="5 0" Height="32" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"
+                    Margin="9 2.5 0 0" Padding="5 0" Height="32" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"
                     BorderThickness="1" BorderBrush="Black" Cursor="Hand" Visibility="{Binding AddTaskButtonVisibility}"
                     ToolTip="{local:ResxStatic l10n:Resources.CreateNewTask}"><!--FontSize="20"-->
                 <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\create-task.png"/>
@@ -340,7 +340,7 @@
             </Button>
             
             <DataGrid x:Name="UserTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" 
-                      HorizontalAlignment="Left" Width="702" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" BorderBrush="Black"
+                      HorizontalAlignment="Left" Width="710" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" BorderBrush="Black"
                       BorderThickness="1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" 
                       Grid.Column="0" Grid.ColumnSpan="2">
@@ -426,7 +426,7 @@
             <DataGrid x:Name="UserRecordsDataGrid" x:FieldModifier="public" ItemsSource="{Binding RecordList}" AutoGenerateColumns="False" Background="LightGray" 
                       Width="696" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" Grid.Column="2" FontSize="20" 
-                      Grid.ColumnSpan="2" Margin="0 0 0 0" >
+                      Grid.ColumnSpan="2" Margin="5 0 0 0" >
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">

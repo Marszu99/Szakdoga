@@ -403,6 +403,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exports the list to an Excel file.
+        /// </summary>
+        public static string ExportToExcel {
+            get {
+                return ResourceManager.GetString("ExportToExcel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to FirstName.
         /// </summary>
         public static string FirstName {
@@ -876,15 +885,6 @@ namespace TimeSheet.Resource {
         public static string RefreshList {
             get {
                 return ResourceManager.GetString("RefreshList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refreshes the list and resets the default value for the searching values.
-        /// </summary>
-        public static string RefreshListAndSearchingValues {
-            get {
-                return ResourceManager.GetString("RefreshListAndSearchingValues", resourceCulture);
             }
         }
         

@@ -231,6 +231,9 @@
   <data name="English" xml:space="preserve">
     <value>ENGLISH</value>
   </data>
+  <data name="ExportToExcel" xml:space="preserve">
+    <value>Exports the list to an Excel file</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>FirstName</value>
   </data>
@@ -389,9 +392,6 @@
   </data>
   <data name="RefreshList" xml:space="preserve">
     <value>Refreshes the list</value>
-  </data>
-  <data name="RefreshListAndSearchingValues" xml:space="preserve">
-    <value>Refreshes the list and resets the default value for the searching values</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>REGISTER</value>
