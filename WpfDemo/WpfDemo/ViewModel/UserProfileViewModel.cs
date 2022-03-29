@@ -310,9 +310,9 @@ namespace WpfDemo.ViewModel
 
         public RelayCommand ShowTaskCommand { get; private set; }
         public RelayCommand SearchingTaskListCommand { get; private set; }
-        public RelayCommand RefreshingTaskListCommand { get; private set; }
+        public RelayCommand ResetTaskListCommand { get; private set; }
         public RelayCommand SearchingRecordListCommand { get; private set; }
-        public RelayCommand RefreshingRecordListCommand { get; private set; }
+        public RelayCommand ResetRecordListCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
 
         public UserProfileViewModel(int userid)
@@ -322,9 +322,9 @@ namespace WpfDemo.ViewModel
 
             ShowTaskCommand = new RelayCommand(ShowTask, CanShowTask);
             SearchingTaskListCommand = new RelayCommand(SearchTaskList, CanExecuteSearchTaskList);
-            RefreshingTaskListCommand = new RelayCommand(RefreshTaskList, CanExecuteRefreshTaskList);
+            ResetTaskListCommand = new RelayCommand(ResetTaskList, CanExecuteResetTaskList);
             SearchingRecordListCommand = new RelayCommand(SearchRecordList, CanExecuteSearchRecordList);
-            RefreshingRecordListCommand = new RelayCommand(RefreshRecordList, CanExecuteRefreshRecordList);
+            ResetRecordListCommand = new RelayCommand(ResetRecordList, CanExecuteResetRecordList);
             DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
         }
 
@@ -407,11 +407,11 @@ namespace WpfDemo.ViewModel
         }
 
 
-        private bool CanExecuteRefreshTaskList(object arg)
+        private bool CanExecuteResetTaskList(object arg)
         {
             return true;
         }
-        private void RefreshTaskList(object obj) // Lista frissitese es keresesi ertekek visszaallitasa az alapra 
+        private void ResetTaskList(object obj) // Lista frissitese es keresesi ertekek visszaallitasa az alapra 
         {
             if (!String.IsNullOrWhiteSpace(_searchTaskListValue) || _deadlineFromLowest != _deadlineFrom || _deadlineToHighest != _deadlineTo) // Megnezem h valamelyik ertek valtozott-e es ha igen akkor frissitem
             {
@@ -519,11 +519,11 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private bool CanExecuteRefreshRecordList(object arg)
+        private bool CanExecuteResetRecordList(object arg)
         {
             return true;
         }
-        private void RefreshRecordList(object obj) // Lista frissitese es keresesi ertekek visszaallitasa az alapra 
+        private void ResetRecordList(object obj) // Lista frissitese es keresesi ertekek visszaallitasa az alapra 
         {
             if (!String.IsNullOrWhiteSpace(_searchRecordListValue) || _dateFromLowest != _dateFrom || _dateToHighest != _dateTo || _durationFromLowest != _durationFrom 
                 || _durationToHighest != _durationTo) // Megnezem h valamelyik ertek valtozott-e es ha igen akkor frissitem
@@ -612,7 +612,6 @@ namespace WpfDemo.ViewModel
                 try
                 {
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
-                    MessageBox.Show(Resources.TaskDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
                     if (this.CurrentUser.Username != LoginViewModel.LoggedUser.Username) // ha a User nem admin(Miutan erre csak az Admin kepes)
                     {

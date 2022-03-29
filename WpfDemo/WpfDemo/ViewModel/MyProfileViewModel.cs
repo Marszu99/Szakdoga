@@ -367,7 +367,6 @@ namespace WpfDemo.ViewModel
             try
             {
                 new UserRepository(new UserLogic()).UpdateUser(CurrentLoggedUser);
-                MessageBox.Show(Resources.UserUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
                 SendEmail(); // Kuldok emailt ha esetleg elfelejtene a megadott jelszot vagy elirna...
 
                 // Visszaalakitom a TextBox designt es nem modosíthatova teszem oket, illetve Change gombot lathatova teszem a tobbit Hidden-ne

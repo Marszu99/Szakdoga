@@ -157,7 +157,15 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                _currentUser = new UserRepository(new UserLogic()).GetUserByID(User_idUser);
+                try
+                {
+                    _currentUser = new UserRepository(new UserLogic()).GetUserByID(User_idUser);
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
                 return _currentUser;
             }
             set
@@ -351,7 +359,6 @@ namespace WpfDemo.ViewModel
         private void CreateTask() // Letrehozza az uj Feladatot
         {
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._task.User_idUser);
-            MessageBox.Show(Resources.TaskCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             //CreateTaskToList(this._task);
 
@@ -372,7 +379,6 @@ namespace WpfDemo.ViewModel
         private void UpdateTask() // Modositja a Feladatot
         {
             new TaskRepository(new TaskLogic()).UpdateTask(this._task, this._task.IdTask, this._task.User_idUser);
-            MessageBox.Show(Resources.TaskUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             if (this.CurrentUser.Username != LoginViewModel.LoggedUser.Username)
             {

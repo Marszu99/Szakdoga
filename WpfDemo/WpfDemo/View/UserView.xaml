@@ -109,8 +109,8 @@
 
 
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
-            <Button x:Name="SaveUserButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SelectedUser.SaveCommand}" Height="45" 
-                    Margin="10 0 0 0" Padding="6 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Background="#FF7FE468"
+            <Button x:Name="SaveUserButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SelectedUser.SaveCommand}" Height="42" 
+                    Margin="10 0 0 0" Padding="6 3" FontSize="24" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Background="#FF66B2FD"
                     Visibility="{Binding SelectedUser.UserViewSaveButtonVisibility}">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -120,7 +120,7 @@
             </Button>
 
             <Button x:Name="CancelCreateUserButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding SelectedUser.CancelUserViewCommand}"
-                    Height="45" Margin="20 0 0 0" Padding="6 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Background="#FFF77575">
+                    Height="42" Margin="20 0 0 0" Padding="6 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Background="#FF66B2FD">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

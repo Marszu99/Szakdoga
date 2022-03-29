@@ -254,10 +254,10 @@ namespace WpfDemo.ViewModel
 
 
         public RelayCommand CreateTaskCommand { get; private set; }
-        public RelayCommand RefreshTaskListCommand { get; private set; }
         public RelayCommand ExportToExcelCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
         public RelayCommand SearchingCommand { get; private set; }
+        public RelayCommand ResetTaskListCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand HasReadCommand { get; private set; }
         public RelayCommand NotificationsSwitchOnOffCommand { get; private set; }
@@ -267,19 +267,57 @@ namespace WpfDemo.ViewModel
         public TaskManagementViewModel(TaskManagementView view)
         {
             LoadUsers(); // Felhasznalok betoltese(ha esetleg ujat hozna letre)
-            RefreshTaskList(_searchValue); // Feladatok frissitese(Lista frissitese/betoltese)
+            ResetTaskList(_searchValue); // Feladatok frissitese(Lista frissitese/betoltese)
 
             _view = view;
 
             CreateTaskCommand = new RelayCommand(CreateTask, CanExecuteShow);
-            RefreshTaskListCommand = new RelayCommand(RefreshTaskList, CanExecuteRefresh);
             ExportToExcelCommand = new RelayCommand(ExportToExcel, CanExportToExcel);
             SortingByCheckBoxCommand = new RelayCommand(SortingByCheckBox, CanExecuteSort);
             SearchingCommand = new RelayCommand(Search, CanExecuteSearch);
+            ResetTaskListCommand = new RelayCommand(ResetTaskList, CanExecuteReset);
             DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
             HasReadCommand = new RelayCommand(HasRead, CanExecuteReadTaskNotifications);
             NotificationsSwitchOnOffCommand = new RelayCommand(NotificationSwitchOnOff, CanExecuteSwitch);
         }
+
+
+        public void LoadTasks() // Feladatok betoltese
+        {
+            TaskList.Clear();
+
+            try
+            {
+                var tasks = new TaskRepository(new TaskLogic()).GetAllTasks();
+
+                tasks.ForEach(task =>
+                {
+                    var taskViewModel = new TaskViewModel(task, UserList.ToList());
+                    taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
+                    TaskList.Add(taskViewModel);
+                });
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        public void LoadUsers() // Felhasznalok betoltese
+        {
+            UserList.Clear();
+
+            try
+            {
+                var users = new UserRepository(new UserLogic()).GetAllUsers();
+                users.ForEach(user => UserList.Add(user));
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
 
         private bool CanExecuteShow(object arg)
         {
@@ -287,7 +325,7 @@ namespace WpfDemo.ViewModel
         }
         private void CreateTask(object obj)
         {
-            RefreshTaskList(obj);  //KELL?????????????
+            ResetTaskList(obj);  //KELL?????????????
             LoadUsers();
 
             SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
@@ -312,59 +350,6 @@ namespace WpfDemo.ViewModel
             // Uj letrehozasahoz
             SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
             SelectedTask.TaskCreated += OnTaskCreated;
-        }
-
-
-        private bool CanExecuteRefresh(object arg)
-        {
-            return true;
-        }
-        private void RefreshTaskList(object obj)
-        {
-            LoadTasks(); // Feladatok betoltese
-
-            // A keresesi szoveget uresse teszem
-            _searchValue = "";
-            OnPropertyChanged(nameof(SearchValue));
-
-            SortingByCheckBox(obj); // Lista frissitese/szurese
-        }
-
-        public void LoadTasks() // Feladatok betoltese
-        {
-            TaskList.Clear();
-
-            try
-            {
-                var tasks = new TaskRepository(new TaskLogic()).GetAllTasks();
-
-                tasks.ForEach(task =>
-                {
-                    var taskViewModel = new TaskViewModel(task, UserList.ToList());
-                    taskViewModel.User = UserList.First(user => user.IdUser == task.User_idUser);
-                    TaskList.Add(taskViewModel);
-                });
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-
-        public void LoadUsers() // Felhasznalok betoltese
-        {
-            UserList.Clear();
-
-            try
-            {
-                var users = new UserRepository(new UserLogic()).GetAllUsers();
-                users.ForEach(user => UserList.Add(user));
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
         }
 
 
@@ -774,6 +759,23 @@ namespace WpfDemo.ViewModel
             }
         }
 
+
+        private bool CanExecuteReset(object arg)
+        {
+            return true;
+        }
+        private void ResetTaskList(object obj)
+        {
+            LoadTasks(); // Feladatok betoltese
+
+            // A keresesi szoveget uresse teszem
+            _searchValue = "";
+            OnPropertyChanged(nameof(SearchValue));
+
+            SortingByCheckBox(obj); // Lista frissitese/szurese
+        }
+
+
         private bool CanDeleteTask(object arg)
         {
             return _selectedTask != null && LoginViewModel.LoggedUser.Status != 0;
@@ -789,13 +791,12 @@ namespace WpfDemo.ViewModel
                 try
                 {
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
-                    MessageBox.Show(Resources.TaskDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
                     if(this.SelectedTask.User.Username != LoginViewModel.LoggedUser.Username) // ha a User nem admin(Miutan erre csak az Admin kepes)
                     {
                         SendNotificationEmail(SelectedTask.Title); // kuld emailt h toroltek a feladatat
                     }
-                    RefreshTaskList(obj); // Frissiti a listat torles eseten
+                    ResetTaskList(obj); // Frissiti a listat torles eseten
                 }
                 catch (SqlException)
                 {
@@ -829,7 +830,7 @@ namespace WpfDemo.ViewModel
             {
                 new NotificationRepository(new NotificationLogic()).HasReadNotification(SelectedTask.IdTask, LoginViewModel.LoggedUser.Status);
 
-                RefreshTaskList(obj); // frissiti a listat h eltunjon az ertesites
+                ResetTaskList(obj); // frissiti a listat h eltunjon az ertesites
             }
             catch (SqlException)
             {
@@ -846,12 +847,12 @@ namespace WpfDemo.ViewModel
             if (IsNotificationsCheckBoxChecked) // ha ki van pipalva a CheckBox
             {
                 TaskViewModel.IsNotificationsOn = true; // ertesitesek be vannak kapcsolva
-                RefreshTaskList(obj);
+                ResetTaskList(obj);
             }
             else
             {
                 TaskViewModel.IsNotificationsOn = false; // ertesitesek ki vannak kapcsolva
-                RefreshTaskList(obj);
+                ResetTaskList(obj);
             }
         }
 

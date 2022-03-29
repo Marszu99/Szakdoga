@@ -346,7 +346,6 @@ namespace WpfDemo.ViewModel
         {
             string createdUserRandomPassword = RandomPassword(10); // Letrehozz egy random jelszot(ami 10 karakter hosszusagu)
             this._user.IdUser = new UserRepository(new UserLogic()).CreateUser(this._user, createdUserRandomPassword);
-            MessageBox.Show(Resources.UserCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             CreateUserToList(this); // hozzaadja a listahoz
 

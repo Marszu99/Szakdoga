@@ -403,7 +403,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exports the list to an Excel file.
+        ///   Looks up a localized string similar to Export the list to an Excel file.
         /// </summary>
         public static string ExportToExcel {
             get {
@@ -835,24 +835,6 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Record has been created succesfully!.
-        /// </summary>
-        public static string RecordCreatedMessage {
-            get {
-                return ResourceManager.GetString("RecordCreatedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Record has been deleted succesfully!.
-        /// </summary>
-        public static string RecordDeletedMessage {
-            get {
-                return ResourceManager.GetString("RecordDeletedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete this record?.
         /// </summary>
         public static string RecordDeleteQuestion {
@@ -867,24 +849,6 @@ namespace TimeSheet.Resource {
         public static string Records {
             get {
                 return ResourceManager.GetString("Records", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Record has been updated succesfully!.
-        /// </summary>
-        public static string RecordUpdatedMessage {
-            get {
-                return ResourceManager.GetString("RecordUpdatedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Refreshes the list.
-        /// </summary>
-        public static string RefreshList {
-            get {
-                return ResourceManager.GetString("RefreshList", resourceCulture);
             }
         }
         
@@ -907,6 +871,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset the list.
+        /// </summary>
+        public static string ResetList {
+            get {
+                return ResourceManager.GetString("ResetList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SAVE.
         /// </summary>
         public static string Save {
@@ -925,7 +898,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Searches from the list.
+        ///   Looks up a localized string similar to Search from the list.
         /// </summary>
         public static string SearchButtonMessage {
             get {
@@ -997,24 +970,6 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Task has been created succesfully!.
-        /// </summary>
-        public static string TaskCreatedMessage {
-            get {
-                return ResourceManager.GetString("TaskCreatedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Task has been deleted succesfully!.
-        /// </summary>
-        public static string TaskDeletedMessage {
-            get {
-                return ResourceManager.GetString("TaskDeletedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete .
         /// </summary>
         public static string TaskDeleteQuestion1 {
@@ -1038,15 +993,6 @@ namespace TimeSheet.Resource {
         public static string Tasks {
             get {
                 return ResourceManager.GetString("Tasks", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Task has been updated succesfully!.
-        /// </summary>
-        public static string TaskUpdatedMessage {
-            get {
-                return ResourceManager.GetString("TaskUpdatedMessage", resourceCulture);
             }
         }
         
@@ -1128,24 +1074,6 @@ namespace TimeSheet.Resource {
         public static string User {
             get {
                 return ResourceManager.GetString("User", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User has been created succesfully!.
-        /// </summary>
-        public static string UserCreatedMessage {
-            get {
-                return ResourceManager.GetString("UserCreatedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User has been deleted succesfully!.
-        /// </summary>
-        public static string UserDeletedMessage {
-            get {
-                return ResourceManager.GetString("UserDeletedMessage", resourceCulture);
             }
         }
         
@@ -1236,15 +1164,6 @@ namespace TimeSheet.Resource {
         public static string Users {
             get {
                 return ResourceManager.GetString("Users", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User has been updated succesfully!.
-        /// </summary>
-        public static string UserUpdatedMessage {
-            get {
-                return ResourceManager.GetString("UserUpdatedMessage", resourceCulture);
             }
         }
         

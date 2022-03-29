@@ -171,9 +171,9 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Command="{Binding RefreshingTaskListCommand}" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Margin="5 0 0 1"
-                        ToolTip="{local:ResxStatic l10n:Resources.RefreshList}">
-                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\refresh.png"/>
+                <Button Command="{Binding ResetTaskListCommand}" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Margin="5 0 0 1"
+                        ToolTip="{local:ResxStatic l10n:Resources.ResetList}">
+                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\reset.png"/>
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>
@@ -302,9 +302,9 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button Command="{Binding RefreshingRecordListCommand}" Height="27" VerticalAlignment="Bottom" BorderThickness="1" BorderBrush="Black" Cursor="Hand" 
-                        Margin="5 0 0 1" ToolTip="{local:ResxStatic l10n:Resources.RefreshList}">
-                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\refresh.png"/>
+                <Button Command="{Binding ResetRecordListCommand}" Height="27" VerticalAlignment="Bottom" BorderThickness="1" BorderBrush="Black" Cursor="Hand" 
+                        Margin="5 0 0 1" ToolTip="{local:ResxStatic l10n:Resources.ResetList}">
+                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\reset.png"/>
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="4"/>

@@ -185,8 +185,8 @@
 
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
             <Button x:Name="CreateRecordButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SelectedRecord.SaveCommand}"
-                    Height="45" Margin="0" Padding="6 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Background="#FF7FE468"
-                    Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}">
+                    Height="42" Margin="0" Padding="6 3" FontSize="24" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Background="#FF66B2FD"
+                    Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}"><!--FF7FE468-->
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -195,7 +195,7 @@
             </Button>
 
             <Button x:Name="CancelCreateRecordButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding SelectedRecord.CancelRecordViewCommand}"
-                    Height="45" Margin="30 0 0 0" Padding="6 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Background="#FFF77575">
+                    Height="42" Margin="30 0 0 0" Padding="6 3" FontSize="24" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Background="#FF66B2FD"><!--FFF77575-->
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

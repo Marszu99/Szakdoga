@@ -141,7 +141,7 @@
 
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
             <Button x:Name="SaveTaskToUserButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SaveCommand}"  
-                    Height="45" HorizontalAlignment="Left" Margin="0" Padding="4" FontSize="26" BorderThickness="1" BorderBrush="Black" Background="#FF7FE468" Cursor="Hand">
+                    Height="42" HorizontalAlignment="Left" Margin="0" Padding="4" FontSize="24" BorderThickness="1" BorderBrush="Black" Background="#FF66B2FD" Cursor="Hand">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -150,7 +150,7 @@
             </Button>
 
             <Button x:Name="BackToListButton" Content="{local:ResxStatic l10n:Resources.Cancel}" Command="{Binding ExitWindowCommand}"
-                    Height="45" Margin="30 0 0 0" Padding="5 3" FontSize="26" BorderThickness="1" BorderBrush="Black" Background="#FFF77575" Cursor="Hand">
+                    Height="42" Margin="30 0 0 0" Padding="5 3" FontSize="24" BorderThickness="1" BorderBrush="Black" Background="#FF66B2FD" Cursor="Hand">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

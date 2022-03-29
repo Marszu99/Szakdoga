@@ -40,16 +40,6 @@
                     </Button.Resources>
                 </Button>
 
-                <Button x:Name="RefreshListTasksButton" Command="{Binding RefreshTaskListCommand}"  Grid.Column="0" Grid.Row="0" 
-                        Margin="10 0 0 0" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand" ToolTip="{local:ResxStatic l10n:Resources.RefreshList}">
-                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\refresh.png"/>
-                    <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="4"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-
                 <Button x:Name="ExportExcelButton" Command="{Binding ExportToExcelCommand}" Grid.Column="0" Grid.Row="0" 
                         Margin="10 0 0 0" Padding="6 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand" ToolTip="{local:ResxStatic l10n:Resources.ExportToExcel}">
                     <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\excel.png"/>
@@ -198,6 +188,16 @@
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="0 4 4 0"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button x:Name="ResetListTasksButton" Command="{Binding ResetTaskListCommand}" Grid.Column="0" Grid.Row="0" 
+                        Margin="5 0 0 0" BorderThickness="1" BorderBrush="Black" Cursor="Hand" ToolTip="{local:ResxStatic l10n:Resources.ResetList}">
+                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\reset.png"/>
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
                         </Style>
                     </Button.Resources>
                 </Button>

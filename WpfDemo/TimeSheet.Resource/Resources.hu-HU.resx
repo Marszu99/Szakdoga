@@ -136,7 +136,7 @@
     <value>MÓDOSÍT</value>
   </data>
   <data name="Comment" xml:space="preserve">
-    <value>Komment</value>
+    <value>Megjegyzés</value>
   </data>
   <data name="Company" xml:space="preserve">
     <value>Cég</value>
@@ -375,29 +375,20 @@
   <data name="Record" xml:space="preserve">
     <value>Rögzítés</value>
   </data>
-  <data name="RecordCreatedMessage" xml:space="preserve">
-    <value>Sikeres rögzítés!</value>
-  </data>
-  <data name="RecordDeletedMessage" xml:space="preserve">
-    <value>Rögzítés sikeresen törölve!</value>
-  </data>
   <data name="RecordDeleteQuestion" xml:space="preserve">
     <value>Biztos törölni akarja ezt a rögzítés?</value>
   </data>
   <data name="Records" xml:space="preserve">
     <value>RÖGZÍTÉSEK</value>
   </data>
-  <data name="RecordUpdatedMessage" xml:space="preserve">
-    <value>Rögzítés sikeresen módosítva!</value>
-  </data>
-  <data name="RefreshList" xml:space="preserve">
-    <value>Frissíti a listát</value>
-  </data>
   <data name="Register" xml:space="preserve">
     <value>REGISZTRÁL</value>
   </data>
   <data name="Registration" xml:space="preserve">
     <value>Regisztráció</value>
+  </data>
+  <data name="ResetList" xml:space="preserve">
+    <value>Lista visszaállítása</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>MENT</value>
@@ -429,12 +420,6 @@
   <data name="Task" xml:space="preserve">
     <value>Feladat</value>
   </data>
-  <data name="TaskCreatedMessage" xml:space="preserve">
-    <value>Feladat sikeresen létrehozva!</value>
-  </data>
-  <data name="TaskDeletedMessage" xml:space="preserve">
-    <value>Feladat sikeresen törölve!</value>
-  </data>
   <data name="TaskDeleteQuestion1" xml:space="preserve">
     <value>Biztos, hogy törölni akarja </value>
   </data>
@@ -443,9 +428,6 @@
   </data>
   <data name="Tasks" xml:space="preserve">
     <value>FELADATOK</value>
-  </data>
-  <data name="TaskUpdatedMessage" xml:space="preserve">
-    <value>Feladat sikeresn módosítva!</value>
   </data>
   <data name="Telephone" xml:space="preserve">
     <value>Telefonszám</value>
@@ -473,12 +455,6 @@
   </data>
   <data name="User" xml:space="preserve">
     <value>Felhasználó</value>
-  </data>
-  <data name="UserCreatedMessage" xml:space="preserve">
-    <value>Felhasználó sikeresen létrehozva!</value>
-  </data>
-  <data name="UserDeletedMessage" xml:space="preserve">
-    <value>Felhasználó sikeresen törölve!</value>
   </data>
   <data name="UserDeleteQuestion1" xml:space="preserve">
     <value>Biztos, hogy törölni akarja </value>
@@ -509,9 +485,6 @@
   </data>
   <data name="Users" xml:space="preserve">
     <value>FELHASZNÁLÓK</value>
-  </data>
-  <data name="UserUpdatedMessage" xml:space="preserve">
-    <value>Felhasználó sikeresen módosítva!</value>
   </data>
   <data name="UserWithColon" xml:space="preserve">
     <value>Felhasználó:</value>

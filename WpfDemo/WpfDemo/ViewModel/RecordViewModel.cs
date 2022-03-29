@@ -511,7 +511,6 @@ namespace WpfDemo.ViewModel
         private void CreateRecord() // Letrehozza az uj Rogzitest
         {
             this._record.IdRecord = new RecordRepository(new RecordLogic()).CreateRecord(this._record, this._task.User_idUser, this._task.IdTask);
-            MessageBox.Show(Resources.RecordCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             IsChangedRecordValuesToFalse(); // kell h legkozelebb ha "Save" gombra nyomok akkor ne maradjanak bent a True-s bool ertekek
 
@@ -526,7 +525,6 @@ namespace WpfDemo.ViewModel
         private void UpdateRecord() // Modositja a Rogzitest
         {
             new RecordRepository(new RecordLogic()).UpdateRecord(this._record, this._record.IdRecord, this._record.User_idUser, this._task.IdTask);
-            MessageBox.Show(Resources.RecordUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             IsChangedRecordValuesToFalse(); // kell h legkozelebb ha "Save" gombra nyomok akkor ne maradjanak bent a True-s bool ertekek
         }

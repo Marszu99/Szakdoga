@@ -203,9 +203,16 @@ namespace WpfDemo.ViewModel
                 {
                     List<string> notificationList = new List<string>();
 
-                    notificationList = LoginViewModel.LoggedUser.Status == 1 ?
+                    try
+                    {
+                        notificationList = LoginViewModel.LoggedUser.Status == 1 ?
                         new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(this._task.IdTask) :
                         new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(this._task.IdTask);
+                    }
+                    catch (SqlException)
+                    {
+                        MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
 
                     string notifications = string.Join(Environment.NewLine, notificationList.Select(notification => ResourceHandler.GetResourceString(notification)));
 
@@ -222,7 +229,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                if (IsNotificationsOn)
+                if (IsNotificationsOn) // try-catch????
                 {
                     return (LoginViewModel.LoggedUser.Status == 1 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(this._task.IdTask).Count > 0)
                             || (LoginViewModel.LoggedUser.Status == 0 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(this._task.IdTask).Count > 0)
@@ -465,7 +472,6 @@ namespace WpfDemo.ViewModel
         private void CreateTask() // Letrehozza az uj Feladatot
         {
             this._task.IdTask = new TaskRepository(new TaskLogic()).CreateTask(this._task, this._user.IdUser);
-            MessageBox.Show(Resources.TaskCreatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             CreateTaskToList(this); // hozzaadja a listahoz
 
@@ -487,7 +493,6 @@ namespace WpfDemo.ViewModel
         private void UpdateTask() // Modositja a Feladatot
         {
             new TaskRepository(new TaskLogic()).UpdateTask(this._task, this._task.IdTask, this._task.User_idUser);
-            MessageBox.Show(Resources.TaskUpdatedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
             if (this._user.Status != 1) // ha a Feladat nem az Adminhoz tartozik akkor a Feladathoz keszul ertesites
             {

@@ -310,26 +310,62 @@ namespace WpfDemo.ViewModel
 
 
         public RelayCommand CreateRecordCommand { get; private set; }
-        public RelayCommand RefreshRecordListCommand { get; private set; }
         public RelayCommand ExportToExcelCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
         public RelayCommand SearchingCommand { get; private set; }
+        public RelayCommand ResetRecordListCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
 
 
         public RecordManagementViewModel(RecordManagementView view)
         {
             LoadTasks(); // Feladatok betoltese(ha esetleg ujat kapnank)
-            RefreshRecordList(_searchValue); // Rogzitesek frissitese(Lista frissitese/betoltese)
+            ResetRecordList(_searchValue); // Rogzitesek frissitese(Lista frissitese/betoltese)
 
             _view = view;
 
             CreateRecordCommand = new RelayCommand(CreateRecord, CanExecuteShow);
-            RefreshRecordListCommand = new RelayCommand(RefreshRecordList, CanExecuteRefresh);
             ExportToExcelCommand = new RelayCommand(ExportToExcel, CanExportToExcel);
             SortingByCheckBoxCommand = new RelayCommand(SortingByCheckBox, CanExecuteSort);
             SearchingCommand = new RelayCommand(Search, CanExecuteSearch);
+            ResetRecordListCommand = new RelayCommand(ResetRecordList, CanExecuteResetList);
             DeleteCommand = new RelayCommand(DeleteRecord, CanDeleteRecord);
+        }
+
+
+        public void LoadRecords() // Rogzitesek betoltese
+        {
+            RecordList.Clear();
+
+            try
+            {
+                var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser);
+                records.ForEach(record =>
+                {
+                    var recordViewModel = new RecordViewModel(record, TaskList.ToList());
+                    recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
+                    RecordList.Add(recordViewModel);
+                });
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        public void LoadTasks() // Feladatok betoltese
+        {
+            TaskList.Clear();
+
+            try
+            {
+                var tasks = new TaskRepository(new TaskLogic()).GetAllTasks();
+                tasks.ForEach(task => TaskList.Add(task));
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
 
@@ -339,7 +375,7 @@ namespace WpfDemo.ViewModel
         }
         private void CreateRecord(object obj)
         {
-            RefreshRecordList(obj);  //KELL?????????????
+            ResetRecordList(obj);  //KELL?????????????
             LoadTasks();
 
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
@@ -373,58 +409,6 @@ namespace WpfDemo.ViewModel
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
                 TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
             SelectedRecord.RecordCreated += OnRecordCreated;
-        }
-
-
-        private bool CanExecuteRefresh(object arg)
-        {
-            return true;
-        }
-        private void RefreshRecordList(object obj)
-        {
-            LoadRecords(); // Rogzitesek betoltese
-
-            // A keresesi szoveget uresse teszem
-            _searchValue = "";
-            OnPropertyChanged(nameof(SearchValue));
-
-            SortingByCheckBox(obj); // Lista frissitese/szurese
-        }
-
-        public void LoadRecords() // Rogzitesek betoltese
-        {
-            RecordList.Clear();
-
-            try
-            {
-                var records = new RecordRepository(new RecordLogic()).GetUserRecords(LoginViewModel.LoggedUser.IdUser);
-                records.ForEach(record =>
-                {
-                    var recordViewModel = new RecordViewModel(record, TaskList.ToList());
-                    recordViewModel.Task = TaskList.First(task => task.IdTask == record.Task_idTask);
-                    RecordList.Add(recordViewModel);
-                });
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-
-        public void LoadTasks() // Feladatok betoltese
-        {
-            TaskList.Clear();
-
-            try
-            {
-                var tasks = new TaskRepository(new TaskLogic()).GetAllTasks();
-                tasks.ForEach(task => TaskList.Add(task));
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
         }
 
 
@@ -756,6 +740,23 @@ namespace WpfDemo.ViewModel
             }
         }
 
+
+        private bool CanExecuteResetList(object arg)
+        {
+            return true;
+        }
+        private void ResetRecordList(object obj)
+        {
+            LoadRecords(); // Rogzitesek betoltese
+
+            // A keresesi szoveget uresse teszem
+            _searchValue = "";
+            OnPropertyChanged(nameof(SearchValue));
+
+            SortingByCheckBox(obj); // Lista frissitese/szurese
+        }
+
+
         private bool CanDeleteRecord(object arg)
         {
             return _selectedRecord != null && SelectedRecord.User.Username == LoginViewModel.LoggedUser.Username;
@@ -769,9 +770,8 @@ namespace WpfDemo.ViewModel
                 try
                 {
                     new RecordRepository(new RecordLogic()).DeleteRecord(SelectedRecord.IdRecord);
-                    MessageBox.Show(Resources.RecordDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    RefreshRecordList(obj); // Frissiti a listat torles eseten
+                    ResetRecordList(obj); // Frissiti a listat torles eseten
                 }
                 catch (SqlException)
                 {

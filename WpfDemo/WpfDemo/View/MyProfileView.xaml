@@ -156,7 +156,7 @@
 
         <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Save}" x:Name="SaveChangedUserValuesButton" Command="{Binding SaveChangedUserValuesCommand}"
                 Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 425 150" Padding="5" BorderThickness="1" 
-                BorderBrush="Black" Background="#FF7FE468" Cursor="Hand" Visibility="{Binding MyProfileViewSaveAndCancelButtonsVisibility}">
+                BorderBrush="Black" Background="#FF66B2FD" Cursor="Hand" Visibility="{Binding MyProfileViewSaveAndCancelButtonsVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -166,7 +166,7 @@
 
         <Button Grid.Column="0" Content="{local:ResxStatic l10n:Resources.Cancel}" x:Name="CancelChangeUserValuesButton" Command="{Binding CancelChangeUserValuesCommand}"
                 Height="40" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="100 0 200 150" Padding="4" BorderThickness="1" 
-                BorderBrush="Black" Background="#FFF77575" Cursor="Hand" Visibility="{Binding MyProfileViewSaveAndCancelButtonsVisibility}">
+                BorderBrush="Black" Background="#FF66B2FD" Cursor="Hand" Visibility="{Binding MyProfileViewSaveAndCancelButtonsVisibility}">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>

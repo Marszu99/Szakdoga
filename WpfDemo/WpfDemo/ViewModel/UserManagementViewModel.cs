@@ -344,7 +344,6 @@ namespace WpfDemo.ViewModel
                 try
                 {
                     new UserRepository(new UserLogic()).DeleteUser(SelectedUser.IdUser, SelectedUser.Status);
-                    MessageBox.Show(Resources.UserDeletedMessage, Resources.Information, MessageBoxButton.OK, MessageBoxImage.Information);
 
                     LoadUsers();
                 }
