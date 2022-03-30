@@ -67,22 +67,10 @@ namespace WpfDemo.ViewModel
 
         private DateTime _deadlineFrom = DateTime.Today.AddYears(100);
         private DateTime _deadlineFromLowest;
-        private int _deadlineFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkorabbi Hataridot belepeskor
         public DateTime DeadlineFrom
         {
             get
             {
-                if (_deadlineFromHelper < 1) // Belepeskor beallitom a DeadlineFrom datumat a legkorabbira
-                {
-                    foreach (TaskViewModel taskViewModel in TaskList)
-                    {
-                        if (taskViewModel.Task.Deadline < _deadlineFrom)
-                        {
-                            _deadlineFrom = taskViewModel.Task.Deadline;
-                        }
-                    }
-                    _deadlineFromHelper++;
-                }
                 return _deadlineFrom;
             }
             set
@@ -94,22 +82,10 @@ namespace WpfDemo.ViewModel
 
         private DateTime _deadlineTo = DateTime.Parse("0001.01.01");
         private DateTime _deadlineToHighest;
-        private int _deadlineToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkesobbi datumot belepeskor
         public DateTime DeadlineTo
         {
             get
             {
-                if (_deadlineToHelper < 1) // Belepeskor beallitom a DeadlineTo datumat a legkesobbire
-                {
-                    foreach (TaskViewModel taskViewModel in TaskList)
-                    {
-                        if (taskViewModel.Task.Deadline > _deadlineTo)
-                        {
-                            _deadlineTo = taskViewModel.Task.Deadline;
-                        }
-                    }
-                    _deadlineToHelper++;
-                }
                 return _deadlineTo;
             }
             set
@@ -133,22 +109,10 @@ namespace WpfDemo.ViewModel
 
         private DateTime _dateFrom = DateTime.Today;
         private DateTime _dateFromLowest;
-        private int _dateFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkorabbi datumot belepeskor
         public DateTime DateFrom
         {
             get
             {
-                if (_dateFromHelper < 1) // Belepeskor beallitom a DateFrom datumat a legkorabbira
-                {
-                    foreach (RecordViewModel recordViewModel in RecordList)
-                    {
-                        if (recordViewModel.Record.Date < _dateFrom)
-                        {
-                            _dateFrom = recordViewModel.Record.Date;
-                        }
-                    }
-                    _dateFromHelper++;
-                }
                 return _dateFrom;
             }
             set
@@ -160,22 +124,10 @@ namespace WpfDemo.ViewModel
 
         private DateTime _dateTo = DateTime.Parse("0001.01.01");
         private DateTime _dateToHighest;
-        private int _dateToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkesobbi datumot belepeskor
         public DateTime DateTo
         {
             get
             {
-                if (_dateToHelper < 1) // Belepeskor beallitom a DateTo datumat a legkesobbire
-                {
-                    foreach (RecordViewModel recordViewModel in RecordList)
-                    {
-                        if (recordViewModel.Record.Date > _dateTo)
-                        {
-                            _dateTo = recordViewModel.Record.Date;
-                        }
-                    }
-                    _dateToHelper++;
-                }
                 return _dateTo;
             }
             set
@@ -187,22 +139,10 @@ namespace WpfDemo.ViewModel
 
         private int _durationFrom = 720;
         private int _durationFromLowest;
-        private int _durationFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legrovidebb Idotartamat belepeskor
         public int DurationFrom
         {
             get
             {
-                if (_durationFromHelper < 1) // Belepeskor beallitom a DurationFrom-ot a legrovidebbre
-                {
-                    foreach (RecordViewModel recordViewModel in RecordList)
-                    {
-                        if (recordViewModel.Record.Duration < _durationFrom)
-                        {
-                            _durationFrom = recordViewModel.Record.Duration;
-                        }
-                    }
-                    _durationFromHelper++;
-                }
                 return _durationFrom;
             }
             set
@@ -235,22 +175,10 @@ namespace WpfDemo.ViewModel
 
         private int _durationTo = 0;
         private int _durationToHighest;
-        private int _durationToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo leghosszabb Idotartamat belepeskor
         public int DurationTo
         {
             get
             {
-                if (_durationToHelper < 1) // Belepeskor beallitom a DurationTo-t a leghosszabbra
-                {
-                    foreach (RecordViewModel recordViewModel in RecordList)
-                    {
-                        if (recordViewModel.Record.Duration > _durationTo)
-                        {
-                            _durationTo = recordViewModel.Record.Duration;
-                        }
-                    }
-                    _durationToHelper++;
-                }
                 return _durationTo;
             }
             set

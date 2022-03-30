@@ -49,7 +49,7 @@
                     </Button.Resources>
                 </Button>
 
-                <TextBlock Text="{local:ResxStatic l10n:Resources.MyRecords}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                <TextBlock Text="{local:ResxStatic l10n:Resources.My}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
                             FontSize="17" Visibility="{Binding RecordCheckBoxAndTextVisibility}"/>
                 <CheckBox x:Name="ShowingMyRecordsCheckBox" Command="{Binding SortingByCheckBoxCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
                           Width="15" Height="15" IsChecked="{Binding IsMyRecordsCheckBoxChecked}" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" 

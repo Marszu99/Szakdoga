@@ -26,6 +26,7 @@ namespace WpfDemo.ViewModel
         public TaskManagementView _view;
         private int _lastSelectedTaskID = 0; // utoljara valasztott Task ID-ja
         private int _lastSelectedTaskCount = 0; // utoljara valasztott elem indexe a TaskList-bol
+        private bool _isLanguageEnglish = true;
 
 
         private TaskViewModel _selectedTask;
@@ -38,6 +39,8 @@ namespace WpfDemo.ViewModel
 
                 if (_selectedTask != null)
                 {
+                    SelectedTask.TaskUpdated += OnTaskUpdated; // ha tortent modositas a kivalasztott Feladatnal akkor megnezem ezzel h a modositott ertek(ek) kozul az uj Hatarido kicsereli-e a keresesi Hataridot
+
                     if (_lastSelectedTaskID != 0 && _lastSelectedTaskID != _selectedTask.Task.IdTask) // ha nem az utoljara valasztott Task id-ja nem egyezik a mostanival
                     {
                         for (int i = 0; i < TaskList.Count(); i++)
@@ -73,6 +76,10 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(SelectedTaskVisibility));
             }
         }
+        private void OnTaskUpdated(TaskViewModel taskViewModel)
+        {
+            ResetDeadlineSearchingValues(); // kicserelem ha a modositott Task Hatarideje a legkorabbi vagy legkesobbi Hatarido
+        }
 
 
         private string _searchValue;
@@ -83,27 +90,15 @@ namespace WpfDemo.ViewModel
             {
                 _searchValue = value;
                 OnPropertyChanged(nameof(SearchValue));
-                //SortingByCheckBox(_searchValue);
             }
         }
 
         private DateTime _deadlineFrom = DateTime.Today.AddYears(100);
-        private int _deadlineFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkorabbi Hataridot belepeskor
+        private DateTime _deadlineFromLowest;
         public DateTime DeadlineFrom
         {
             get
             {
-                if (_deadlineFromHelper < 1) // Belepeskor beallitom a DeadlineFrom datumat a legkorabbira
-                {
-                    foreach (TaskViewModel taskViewModel in TaskList)
-                    {
-                        if (taskViewModel.Task.Deadline < _deadlineFrom)
-                        {
-                            _deadlineFrom = taskViewModel.Task.Deadline;
-                        }
-                    }
-                    _deadlineFromHelper++;
-                }
                 return _deadlineFrom;
             }
             set
@@ -114,22 +109,11 @@ namespace WpfDemo.ViewModel
         }
 
         private DateTime _deadlineTo = DateTime.Parse("0001.01.01");
-        private int _deadlineToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkesobbi datumot belepeskor
+        private DateTime _deadlineToHighest;
         public DateTime DeadlineTo
         {
             get
             {
-                if (_deadlineToHelper < 1) // Belepeskor beallitom a DeadlineTo datumat a legkesobbire
-                {
-                    foreach (TaskViewModel taskViewModel in TaskList)
-                    {
-                        if (taskViewModel.Task.Deadline > _deadlineTo)
-                        {
-                            _deadlineTo = taskViewModel.Task.Deadline;
-                        }
-                    }
-                    _deadlineToHelper++;
-                }
                 return _deadlineTo;
             }
             set
@@ -325,7 +309,6 @@ namespace WpfDemo.ViewModel
         }
         private void CreateTask(object obj)
         {
-            ResetTaskList(obj);  //KELL?????????????
             LoadUsers();
 
             SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
@@ -333,18 +316,17 @@ namespace WpfDemo.ViewModel
         }
         private void OnTaskCreated(TaskViewModel taskViewModel)
         {
-            TaskList.Add(taskViewModel); // hozzaadja a listahoz
+            /* Kiszedtem mert igy ez a 2 hiba megoldodik: Letrehozas utan nem lehet rakattintani vagy torolni es Create utan nem frissitem a listat es torlom az ujonnan letrehozottat majd a create gombra kattintok
+            TaskList.Add(taskViewModel); // hozzaadja a listahoz*/
 
-            if (taskViewModel.Task.Deadline > _deadlineTo) // Megnezem h az uj Hatarido kesobbi-e mint ami a DeadlineTo-ba van es ha igen akkor kicserelem
+            // Iddeiglenesen iderakom mert nem tudom mashogy megoldani
+            if (!String.IsNullOrWhiteSpace(_searchValue) || _deadlineFromLowest != _deadlineFrom || _deadlineToHighest != _deadlineTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
             {
-                _deadlineTo = taskViewModel.Task.Deadline;
-                OnPropertyChanged(nameof(DeadlineTo)); // megvaltozzon a kiiras
+                Search(taskViewModel);
             }
-
-            if (taskViewModel.Task.Deadline < _deadlineFrom) // Megnezem h az uj Hatarido korabbi-e mint ami a DeadlineFrom-ba van es ha igen akkor kicserelem
+            else
             {
-                _deadlineFrom = taskViewModel.Task.Deadline;
-                OnPropertyChanged(nameof(DeadlineFrom)); // megvaltozzon a kiiras
+                ResetTaskList(taskViewModel); // frissitem a listat es a frissitett listabol kicserelem ha az uj Task Hatarideje a legkorabbi vagy legkesobbi Hatarido
             }
 
             // Uj letrehozasahoz
@@ -585,29 +567,7 @@ namespace WpfDemo.ViewModel
                     });
                 }
 
-                _deadlineFrom = DateTime.Today.AddYears(1);
-                if (TaskList.Count == 0) // ha nincs task akkor a mai datumot kapja meg
-                {
-                    _deadlineTo = DateTime.Today;
-                }
-                else
-                {
-                    _deadlineTo = DateTime.Parse("0001.01.01");
-                }
-                foreach (TaskViewModel taskViewModel in TaskList)
-                {
-                    if (taskViewModel.Task.Deadline < _deadlineFrom)
-                    {
-                        _deadlineFrom = taskViewModel.Task.Deadline;
-                    }
-                    if (taskViewModel.Task.Deadline > _deadlineTo)
-                    {
-                        _deadlineTo = taskViewModel.Task.Deadline;
-                    }
-                }
-
-                OnPropertyChanged(nameof(DeadlineFrom)); // kell h megvaltozzon a DatePickerben a datum
-                OnPropertyChanged(nameof(DeadlineTo));  // kell h megvaltozzon a DatePickerben a datum
+                ResetDeadlineSearchingValues();
             }
             catch (SqlException)
             {
@@ -615,9 +575,132 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public void ResetDeadlineSearchingValues()
+        {
+            _deadlineFrom = DateTime.Today.AddYears(1);
+            if (TaskList.Count == 0) // ha nincs task akkor a mai datumot kapja meg
+            {
+                _deadlineTo = DateTime.Today;
+            }
+            else
+            {
+                _deadlineTo = DateTime.Parse("0001.01.01");
+            }
+            foreach (TaskViewModel taskViewModel in TaskList)
+            {
+                if (taskViewModel.Task.Deadline < _deadlineFrom)
+                {
+                    _deadlineFrom = taskViewModel.Task.Deadline;
+                    _deadlineFromLowest = _deadlineFrom;
+                }
+                if (taskViewModel.Task.Deadline > _deadlineTo)
+                {
+                    _deadlineTo = taskViewModel.Task.Deadline;
+                    _deadlineToHighest = _deadlineTo;
+                }
+            }
+
+            OnPropertyChanged(nameof(DeadlineFrom)); // kell h megvaltozzon a DatePickerben a datum
+            OnPropertyChanged(nameof(DeadlineTo));  // kell h megvaltozzon a DatePickerben a datum
+        }
+
 
         private bool CanExecuteSearch(object arg)
         {
+            // Ezzel vizsgalom azt hogyha nyelvet valtottunk akkor a lista frissuljon es igy megvaltozik a listaban levo Statuszok es Ertesitesek nyelve a megfelelore
+            int SelectedTaskCount = 0;
+            bool IsSelectedTaskNull = true; // Ha volt elotte kivalasztva Feladat akkor ez segit annak a visszatoltesehez
+
+            if (_isLanguageEnglish && _view.ShowingMyTasksTextBlock.Text.ToString() == "Saját") // Ha a nyelv Angol de a kiiras "Sajat" akkor belepek
+            {
+                _isLanguageEnglish = false; // megvaltoztatom a bool-t h a nyelv Magyar
+
+                if (!String.IsNullOrWhiteSpace(_searchValue) || _deadlineFromLowest != _deadlineFrom || _deadlineToHighest != _deadlineTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
+                {
+                    if (SelectedTask != null) // ha van valasztott Feladat akkor belep
+                    {
+                        IsSelectedTaskNull = false;
+
+                        for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
+                        {
+                            if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                            {
+                                SelectedTaskCount = i;
+                            }
+                        }
+                    }
+
+                    Search(arg); // Keresest hajtok vegre
+                }
+                else
+                {
+                    if (SelectedTask != null) // ha van valasztott Feladat akkor belep
+                    {
+                        IsSelectedTaskNull = false;
+
+                        for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
+                        {
+                            if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                            {
+                                SelectedTaskCount = i;
+                            }
+                        }
+                    }
+
+                    ResetTaskList(arg); // Frissitem a listat
+                }
+
+                if (!IsSelectedTaskNull) // ha elotte volt kivalasztott Feladat akkor Visszamentem a kivalasztott Feladatot mert frissiteskor az eltunik(nullozodik)
+                {
+                    SelectedTask = TaskList[SelectedTaskCount];
+                }
+            }
+
+            if (!_isLanguageEnglish && _view.ShowingMyTasksTextBlock.Text.ToString() == "My") // Ha a nyelv Magyar de a kiiras "My" akkor belepek
+            {
+                _isLanguageEnglish = true; // megvaltoztatom a bool-t h a nyelv Angol
+
+                if (!String.IsNullOrWhiteSpace(_searchValue) || _deadlineFromLowest != _deadlineFrom || _deadlineToHighest != _deadlineTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
+                {
+                    if (SelectedTask != null) // ha van valasztott Feladat akkor belep
+                    {
+                        IsSelectedTaskNull = false;
+
+                        for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
+                        {
+                            if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                            {
+                                SelectedTaskCount = i;
+                            }
+                        }
+                    }
+
+                    Search(arg); // Keresest hajtok vegre
+                }
+                else
+                {
+                    if (SelectedTask != null) // ha van valasztott Feladat akkor belep
+                    {
+                        IsSelectedTaskNull = false;
+
+                        for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
+                        {
+                            if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                            {
+                                SelectedTaskCount = i;
+                            }
+                        }
+                    }
+
+                    ResetTaskList(arg); // Frissitem a listat
+                }
+
+                if (!IsSelectedTaskNull) // ha elotte volt kivalasztott Feladat akkor Visszamentem a kivalasztott Feladatot mert frissiteskor az eltunik(nullozodik)
+                {
+                    SelectedTask = TaskList[SelectedTaskCount];
+                }
+            }
+
             return true;
         }
         private void Search(object obj) // Lista szurese/frissitese
@@ -796,7 +879,15 @@ namespace WpfDemo.ViewModel
                     {
                         SendNotificationEmail(SelectedTask.Title); // kuld emailt h toroltek a feladatat
                     }
-                    ResetTaskList(obj); // Frissiti a listat torles eseten
+
+                    if (!String.IsNullOrWhiteSpace(_searchValue) || _deadlineFromLowest != _deadlineFrom || _deadlineToHighest != _deadlineTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
+                    {
+                        Search(obj);
+                    }
+                    else
+                    {
+                        ResetTaskList(obj); // Frissitem a listat
+                    }
                 }
                 catch (SqlException)
                 {

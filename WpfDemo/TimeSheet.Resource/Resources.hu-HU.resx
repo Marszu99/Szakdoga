@@ -291,17 +291,14 @@
   <data name="MissingProfileDatasMessage" xml:space="preserve">
     <value>Töltse ki a hiányzó adatait a profiljánál!</value>
   </data>
+  <data name="My" xml:space="preserve">
+    <value>Saját</value>
+  </data>
   <data name="MyProfile" xml:space="preserve">
     <value>PROFILOM</value>
   </data>
-  <data name="MyRecords" xml:space="preserve">
-    <value>Rögzítéseim</value>
-  </data>
   <data name="MyRecordsCheckBoxMessage" xml:space="preserve">
     <value>Megjeleníti a saját rögzítéseimet</value>
-  </data>
-  <data name="MyTasks" xml:space="preserve">
-    <value>Feladataim</value>
   </data>
   <data name="MyTasksCheckBoxMessage" xml:space="preserve">
     <value>Megjeleníti a saját feladataimat</value>

@@ -72,16 +72,6 @@ namespace WpfDemo.ViewModel
         {
             return true;
         }
-        private bool CanChangeLanguage(object arg)
-        {
-            return true;
-        }
-        private bool CanExecuteLogout(object arg)
-        {
-            return true;
-        }
-
-
         private void ShowMyProfile(object obj)
         {
             try
@@ -96,6 +86,11 @@ namespace WpfDemo.ViewModel
             }
         }
 
+
+        private bool CanChangeLanguage(object arg)
+        {
+            return true;
+        }
         private void ChangeLanguage(object obj)
         {
             if (!_isLanguageEnglish) // ha _isLanguageEnglish erteke false akkor Magyarra valtoztatom ellenkezo esetben pedig vissza Angolra
@@ -109,9 +104,7 @@ namespace WpfDemo.ViewModel
 
                 ResxStaticExtension.OnLanguageChanged(); // Ezzel valtozik meg a szovegek/kiirasok nyelve
 
-                RefreshTaskListForNotificationsLanguageChange(obj);
-
-                //_isLanguageEnglish = false; // false-ra allitom h Angolra vissza tudjam allitani a nyelvet
+                //RefreshTaskListForNotificationsLanguageChange(obj); // MASIK MEGOLDASHOZ??
             }
             else
             {
@@ -124,17 +117,20 @@ namespace WpfDemo.ViewModel
 
                 ResxStaticExtension.OnLanguageChanged(); // Ezzel valtozik meg a szovegek/kiirasok nyelve
 
-                RefreshTaskListForNotificationsLanguageChange(obj);
-
-                //_isLanguageEnglish = true; // true-ra allitom h Magyarra tudjam allitani a nyelvet
+                //RefreshTaskListForNotificationsLanguageChange(obj); // MASIK MEGOLDASHOZ??
             }
         }
-        public event Action<object> RefreshTaskList;
-        public void RefreshTaskListForNotificationsLanguageChange(Object obj)
+        /*public event Action<object> RefreshTaskList; // MASIK MEGOLDASHOZ??
+        public void RefreshTaskListForNotificationsLanguageChange(Object obj) // MASIK MEGOLDASHOZ??
         {
             RefreshTaskList?.Invoke(obj);
-        }
+        }*/
 
+
+        private bool CanExecuteLogout(object arg)
+        {
+            return true;
+        }
         private void Logout(object obj) // Kijelentkezes
         {
             MessageBoxResult messageBoxResult = MessageBox.Show(Resources.LogoutMessage, Resources.Logout, MessageBoxButton.YesNo, MessageBoxImage.Question);

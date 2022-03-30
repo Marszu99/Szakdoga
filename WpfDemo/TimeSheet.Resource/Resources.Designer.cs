@@ -583,6 +583,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My.
+        /// </summary>
+        public static string My {
+            get {
+                return ResourceManager.GetString("My", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MY PROFILE.
         /// </summary>
         public static string MyProfile {
@@ -592,29 +601,11 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My.
-        /// </summary>
-        public static string MyRecords {
-            get {
-                return ResourceManager.GetString("MyRecords", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Shows my own records.
         /// </summary>
         public static string MyRecordsCheckBoxMessage {
             get {
                 return ResourceManager.GetString("MyRecordsCheckBoxMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to My.
-        /// </summary>
-        public static string MyTasks {
-            get {
-                return ResourceManager.GetString("MyTasks", resourceCulture);
             }
         }
         

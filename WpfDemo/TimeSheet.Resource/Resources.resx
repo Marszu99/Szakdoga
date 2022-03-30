@@ -291,17 +291,14 @@
   <data name="MissingProfileDatasMessage" xml:space="preserve">
     <value>Please fill your missing profile datas!</value>
   </data>
+  <data name="My" xml:space="preserve">
+    <value>My</value>
+  </data>
   <data name="MyProfile" xml:space="preserve">
     <value>MY PROFILE</value>
   </data>
-  <data name="MyRecords" xml:space="preserve">
-    <value>My</value>
-  </data>
   <data name="MyRecordsCheckBoxMessage" xml:space="preserve">
     <value>Shows my own records</value>
-  </data>
-  <data name="MyTasks" xml:space="preserve">
-    <value>My</value>
   </data>
   <data name="MyTasksCheckBoxMessage" xml:space="preserve">
     <value>Shows my own tasks</value>

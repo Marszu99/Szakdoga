@@ -120,7 +120,7 @@ namespace WpfDemo.ViewModel
             {
                 try
                 {
-                    _user = new UserRepository(new UserLogic()).GetUserByID(_task.User_idUser);//_record.User_idUser??
+                    _user = new UserRepository(new UserLogic()).GetUserByID(_record.User_idUser);//_task.User_idUser??
                 }
                 catch (SqlException)
                 {
@@ -232,16 +232,9 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                if (_user != null)
+                if (User_Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
                 {
-                    if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return true;
                 }
                 else
                 {
@@ -254,16 +247,9 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                if (_user != null)
+                if (User_Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
                 {
-                    if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
-                    {
-                        return "#FFC7C7C7";
-                    }
-                    else
-                    {
-                        return "#eee";
-                    }
+                    return "#FFC7C7C7";
                 }
                 else
                 {
@@ -292,22 +278,14 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                if (_user != null)
+                if (User_Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
                 {
-                    if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
-                    {
-                        return Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        return Visibility.Visible;
-                    }
+                    return Visibility.Collapsed;
                 }
                 else
                 {
                     return Visibility.Visible;
                 }
-
             }
         }
 
@@ -315,16 +293,9 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                if (_user != null)
+                if (User_Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
                 {
-                    if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
-                    {
-                        return Visibility.Visible;
-                    }
-                    else
-                    {
-                        return Visibility.Collapsed;
-                    }
+                    return Visibility.Visible;
                 }
                 else
                 {
@@ -337,16 +308,9 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                if (_user != null)
+                if (User_Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
                 {
-                    if (_user.Username != LoginViewModel.LoggedUser.Username && _record.IdRecord != 0)
-                    {
-                        return Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        return Visibility.Visible;
-                    }
+                    return Visibility.Collapsed;
                 }
                 else
                 {
@@ -527,7 +491,15 @@ namespace WpfDemo.ViewModel
             new RecordRepository(new RecordLogic()).UpdateRecord(this._record, this._record.IdRecord, this._record.User_idUser, this._task.IdTask);
 
             IsChangedRecordValuesToFalse(); // kell h legkozelebb ha "Save" gombra nyomok akkor ne maradjanak bent a True-s bool ertekek
+
+            UpdateRecordToList(this); // Modositja a keresesi ertekeket ha kell
         }
+        public event Action<RecordViewModel> RecordUpdated;
+        public void UpdateRecordToList(RecordViewModel recordViewModel)
+        {
+            RecordUpdated?.Invoke(recordViewModel);
+        }
+
 
         public void IsChangedRecordValuesToFalse() // "Save" gomb disable-se miatt
         {

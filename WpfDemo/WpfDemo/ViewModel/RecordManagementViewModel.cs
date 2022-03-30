@@ -38,6 +38,8 @@ namespace WpfDemo.ViewModel
 
                 if (_selectedRecord != null)
                 {
+                    SelectedRecord.RecordUpdated += OnRecordUpdated; // ha tortent modositas a kivalasztott Rogzitesnel akkor megnezem ezzel h a modositott ertek(ek) kozul az uj Datum/Idotartam kicsereli-e a keresesi Datumot/Idotartamot
+
                     if (_lastSelectedRecordID != 0 && _lastSelectedRecordID != _selectedRecord.Record.IdRecord) // ha nem az utoljara valasztott Record id-ja nem egyezik a mostanival
                     {
                         //RecordViewModel LastSelectedRecord = (RecordViewModel)RecordList.Where(recordViewModel => recordViewModel.IdRecord == _lastSelectedRecordID);
@@ -67,6 +69,7 @@ namespace WpfDemo.ViewModel
                             }
                         }
                     }
+
                     _lastSelectedRecordID = _selectedRecord.Record.IdRecord;
                 }
 
@@ -74,6 +77,10 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(SelectedRecordVisibility));
                 OnPropertyChanged(nameof(ListRecordsViewContextMenuVisibility));
             }
+        }
+        private void OnRecordUpdated(RecordViewModel recordViewModel)
+        {
+            ResetDateDurationSearchingValues(); // kicserelem ha a modositott Record Idotartama a legrovidebb/ leghosszabb Idotartam vagy a Datuma a legkorabbi vagy legkesobbi Datum
         }
 
 
@@ -89,22 +96,11 @@ namespace WpfDemo.ViewModel
         }
 
         private DateTime _dateFrom = DateTime.Today;
-        private int _dateFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkorabbi datumot belepeskor
+        private DateTime _dateFromLowest;
         public DateTime DateFrom
         {
             get
             {
-                if (_dateFromHelper < 1) // Belepeskor beallitom a DateFrom datumat a legkorabbira
-                {
-                    foreach (RecordViewModel recordViewModel in RecordList)
-                    {
-                        if (recordViewModel.Record.Date < _dateFrom)
-                        {
-                            _dateFrom = recordViewModel.Record.Date;
-                        }
-                    }
-                    _dateFromHelper++;
-                }
                 return _dateFrom;
             }
             set
@@ -115,22 +111,11 @@ namespace WpfDemo.ViewModel
         }
 
         private DateTime _dateTo = DateTime.Parse("0001.01.01");
-        private int _dateToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legkesobbi datumot belepeskor
+        private DateTime _dateToHighest;
         public DateTime DateTo
         {
             get
             {
-                if (_dateToHelper < 1) // Belepeskor beallitom a DateTo datumat a legkesobbire
-                {
-                    foreach (RecordViewModel recordViewModel in RecordList)
-                    {
-                        if (recordViewModel.Record.Date > _dateTo)
-                        {
-                            _dateTo = recordViewModel.Record.Date;
-                        }
-                    }
-                    _dateToHelper++;
-                }
                 return _dateTo;
             }
             set
@@ -141,22 +126,11 @@ namespace WpfDemo.ViewModel
         }
 
         private int _durationFrom = 720;
-        private int _durationFromHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo legrovidebb Idotartamat belepeskor
+        private int _durationFromLowest;
         public int DurationFrom
         {
             get
             {
-                if (_durationFromHelper < 1) // Belepeskor beallitom a DurationFrom-ot a legrovidebbre
-                {
-                    foreach (RecordViewModel recordViewModel in RecordList)
-                    {
-                        if (recordViewModel.Record.Duration < _durationFrom)
-                        {
-                            _durationFrom = recordViewModel.Record.Duration;
-                        }
-                    }
-                    _durationFromHelper++;
-                }
                 return _durationFrom;
             }
             set
@@ -188,22 +162,10 @@ namespace WpfDemo.ViewModel
         }
 
         private int _durationTo = 0;
-        private int _durationToHelper = 0; // hogy 1x fusson le csak a foreach amivel megkapja a listaban levo leghosszabb Idotartamat belepeskor
+        private int _durationToHighest;
         public int DurationTo
         {
-            get
-            {
-                if (_durationToHelper < 1) // Belepeskor beallitom a DurationTo-t a leghosszabbra
-                {
-                    foreach (RecordViewModel recordViewModel in RecordList)
-                    {
-                        if (recordViewModel.Record.Duration > _durationTo)
-                        {
-                            _durationTo = recordViewModel.Record.Duration;
-                        }
-                    }
-                    _durationToHelper++;
-                }
+            get           {
                 return _durationTo;
             }
             set
@@ -375,34 +337,26 @@ namespace WpfDemo.ViewModel
         }
         private void CreateRecord(object obj)
         {
-            ResetRecordList(obj);  //KELL?????????????
             LoadTasks();
 
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
                 TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
             SelectedRecord.RecordCreated += OnRecordCreated; // RecordCreated Event ("Save" gomb megnyomasa) eseten hozzaadodik a listahoz a rogzites es ujat tudsz letrehozni megint
         }
-        private void OnRecordCreated(RecordViewModel recordViewModel)
+        private void OnRecordCreated(RecordViewModel recordViewModel) // igy szedjem-e ki a RecordViewModel atatadst es helyette object legyen-e?
         {
-            RecordList.Add(recordViewModel); // hozzaadja a listahoz
+            /* Kiszedtem mert igy ez a 2 hiba megoldodik: Letrehozas utan nem lehet rakattintani vagy torolni es Create utan nem frissitem a listat es torlom az ujonnan letrehozottat majd a create gombra kattintok
+            RecordList.Add(recordViewModel); // hozzaadja a listahoz*/
 
-            // Megnezem h az uj Datum kesobbi e mint ami a DateTo-ba van es ha igen akkor kicserelem
-            if (recordViewModel.Record.Date > _dateTo)
+            // Iddeiglenesen iderakom mert nem tudom mashogy megoldani
+            if (!String.IsNullOrWhiteSpace(_searchValue) || _dateFromLowest != _dateFrom || _dateToHighest != _dateTo || _durationFromLowest != _durationFrom 
+                || _durationToHighest != _durationTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
             {
-                _dateTo = recordViewModel.Record.Date;
-                OnPropertyChanged(nameof(DateTo));  // kell h megvaltozzon a DatePickerben a datum
+                Search(recordViewModel);
             }
-
-            // ha az uj Idotartam rovidebb vagy hosszabb mint amik ki vannak irva akkora megfelelot kicsreli
-            if (recordViewModel.Record.Duration > _durationTo)
+            else
             {
-                _durationTo = recordViewModel.Record.Duration;
-                OnPropertyChanged(nameof(DurationToFormat)); // kell h a kiiras megvaltozzon
-            }
-            if (recordViewModel.Record.Duration < _durationFrom)
-            {
-                _durationFrom = recordViewModel.Record.Duration;
-                OnPropertyChanged(nameof(DurationFromFormat)); // kell h a kiiras megvaltozzon
+                ResetRecordList(recordViewModel); // frissitem a listat es a frissitett listabol kicserelem ha az uj Record Idotartama a legrovidebb/leghosszabb Idotartam vagy a Datuma a legkorabbi vagy legkesobbi Datum
             }
 
             // Uj letrehozasahoz
@@ -589,7 +543,6 @@ namespace WpfDemo.ViewModel
         }
         private void SortingByCheckBox(object obj) // Lista szurese/frissitese
         {
-
             try
             {
                 if (IsMyRecordsCheckBoxChecked)
@@ -617,46 +570,55 @@ namespace WpfDemo.ViewModel
                     });
                 }
 
-                _durationFrom = 720;
-                _durationTo = 0;
-                _dateFrom = DateTime.Today;
-                if (RecordList.Count == 0) // ha nincs rekord akkor a mai datumot kapja meg
-                {
-                    _dateTo = DateTime.Today;
-                }
-                else
-                {
-                    _dateTo = DateTime.Parse("0001.01.01");
-                }
-                foreach (RecordViewModel recordViewModel in RecordList) // frissitett listabol kicserelem ha van uj legrovidebb,leghosszabb Idotartam es legkorabbi vagy legkesobbi Datum
-                {
-                    if (recordViewModel.Record.Date < _dateFrom)
-                    {
-                        _dateFrom = recordViewModel.Record.Date;
-                    }
-                    if (recordViewModel.Record.Date > _dateTo)
-                    {
-                        _dateTo = recordViewModel.Record.Date;
-                    }
-                    if (recordViewModel.Record.Duration < _durationFrom)
-                    {
-                        _durationFrom = recordViewModel.Record.Duration;
-                    }
-                    if (recordViewModel.Record.Duration > _durationTo)
-                    {
-                        _durationTo = recordViewModel.Record.Duration;
-                    }
-                }
-
-                OnPropertyChanged(nameof(DateFrom)); // kell h megvaltozzon a DatePickerben a datum
-                OnPropertyChanged(nameof(DateTo));  // kell h megvaltozzon a DatePickerben a datum
-                OnPropertyChanged(nameof(DurationFromFormat)); // h megvaltozzon a kiiras
-                OnPropertyChanged(nameof(DurationToFormat)); // h megvaltozzon a kiiras
+                ResetDateDurationSearchingValues();
             }
             catch (SqlException)
             {
                 MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        public void ResetDateDurationSearchingValues()
+        {
+            _durationFrom = 720;
+            _durationTo = 0;
+            _dateFrom = DateTime.Today;
+            if (RecordList.Count == 0) // ha nincs rekord akkor a mai datumot kapja meg
+            {
+                _dateTo = DateTime.Today;
+            }
+            else
+            {
+                _dateTo = DateTime.Parse("0001.01.01");
+            }
+            foreach (RecordViewModel recordViewModel in RecordList) // frissitett listabol kicserelem ha van uj legrovidebb,leghosszabb Idotartam es legkorabbi vagy legkesobbi Datum
+            {
+                if (recordViewModel.Record.Date < _dateFrom)
+                {
+                    _dateFrom = recordViewModel.Record.Date;
+                    _dateFromLowest = _dateFrom;
+                }
+                if (recordViewModel.Record.Date > _dateTo)
+                {
+                    _dateTo = recordViewModel.Record.Date;
+                    _dateToHighest = _dateTo;
+                }
+                if (recordViewModel.Record.Duration < _durationFrom)
+                {
+                    _durationFrom = recordViewModel.Record.Duration;
+                    _durationFromLowest = _durationFrom;
+                }
+                if (recordViewModel.Record.Duration > _durationTo)
+                {
+                    _durationTo = recordViewModel.Record.Duration;
+                    _durationToHighest = _durationTo;
+                }
+            }
+
+            OnPropertyChanged(nameof(DateFrom)); // kell h megvaltozzon a DatePickerben a datum
+            OnPropertyChanged(nameof(DateTo));  // kell h megvaltozzon a DatePickerben a datum
+            OnPropertyChanged(nameof(DurationFromFormat)); // h megvaltozzon a kiiras
+            OnPropertyChanged(nameof(DurationToFormat)); // h megvaltozzon a kiiras
         }
 
 
@@ -771,7 +733,17 @@ namespace WpfDemo.ViewModel
                 {
                     new RecordRepository(new RecordLogic()).DeleteRecord(SelectedRecord.IdRecord);
 
-                    ResetRecordList(obj); // Frissiti a listat torles eseten
+                    _lastSelectedRecordID = 0; // mivel a torolt record mar nem letezik (ne menjen bele az if-be a selectedrecord-os resznel)
+
+                    if (!String.IsNullOrWhiteSpace(_searchValue) || _dateFromLowest != _dateFrom || _dateToHighest != _dateTo || _durationFromLowest != _durationFrom
+                        || _durationToHighest != _durationTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
+                    {
+                        Search(obj);
+                    }
+                    else
+                    {
+                        SortingByCheckBox(obj); // frissitem a listat
+                    }
                 }
                 catch (SqlException)
                 {

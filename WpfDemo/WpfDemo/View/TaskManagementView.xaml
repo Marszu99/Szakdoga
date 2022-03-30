@@ -50,7 +50,7 @@
                     </Button.Resources>
                 </Button>
 
-                <TextBlock Text="{local:ResxStatic l10n:Resources.MyTasks}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"
+                <TextBlock x:Name="ShowingMyTasksTextBlock" Text="{local:ResxStatic l10n:Resources.My}" Margin="15 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"
                            Visibility="{Binding TaskCheckBoxAndTextVisibility}"/>
                 <CheckBox x:Name="ShowingMyTasksCheckBox" Command="{Binding SortingByCheckBoxCommand}" CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
                           Width="15" Height="15" IsChecked="{Binding IsMyTasksCheckBoxChecked}" Margin="2 0 0 0" Padding="0" BorderThickness="0.5" 

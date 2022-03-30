@@ -333,7 +333,21 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _user.Username != LoginViewModel.LoggedUser.Username || _task.IdTask == 0 ? Visibility.Visible : Visibility.Collapsed;
+                if (_user != null)
+                {
+                    if (_user.Username != LoginViewModel.LoggedUser.Username || _task.IdTask == 0)
+                    {
+                        return Visibility.Visible;
+                    }
+                    else
+                    {
+                        return Visibility.Collapsed;
+                    }
+                }
+                else
+                {
+                    return Visibility.Collapsed;
+                }
             }
         }
 
@@ -475,7 +489,6 @@ namespace WpfDemo.ViewModel
 
             CreateTaskToList(this); // hozzaadja a listahoz
 
-
             if (this._user.Status != 1) // ha nem Adminnak adta a feladatot akkor kap emailt
             {
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationNewTask", 0, this._task.IdTask);
@@ -493,6 +506,11 @@ namespace WpfDemo.ViewModel
         private void UpdateTask() // Modositja a Feladatot
         {
             new TaskRepository(new TaskLogic()).UpdateTask(this._task, this._task.IdTask, this._task.User_idUser);
+
+            if (LoginViewModel.LoggedUser.Status != 0) // Csak az admin tudja modositani a Feladat Hataridejet
+            {
+                UpdateTaskToList(this); // Modositja a keresesi ertekeket ha kell
+            }
 
             if (this._user.Status != 1) // ha a Feladat nem az Adminhoz tartozik akkor a Feladathoz keszul ertesites
             {
@@ -544,6 +562,11 @@ namespace WpfDemo.ViewModel
             }
 
             IsChangedTaskValuesToFalse();
+        }
+        public event Action<TaskViewModel> TaskUpdated;
+        public void UpdateTaskToList(TaskViewModel taskViewModel)
+        {
+            TaskUpdated?.Invoke(taskViewModel);
         }
 
         public void IsChangedTaskValuesToFalse()
