@@ -20,9 +20,9 @@
         <Grid Grid.Row="1">
             <DockPanel>
                 <DataGrid x:Name="ListTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}"
-                          Width="900" HorizontalAlignment="Left" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray"
+                          Width="900" HorizontalAlignment="Left" AutoGenerateColumns="False" ColumnWidth="*" RowHeight="30" Background="LightGray"
                           ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                          Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" BorderBrush="Transparent">
+                          Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" BorderBrush="Transparent" Foreground="Black">
 
                     <DataGrid.InputBindings>
                         <KeyBinding Key="Delete" Command="{Binding DeleteCommand}"/>
@@ -47,11 +47,11 @@
                             <Setter Property="ToolTip" Value="{Binding NotificationText}"/>
                             <Setter Property="Background" Value="{Binding ListTasksBackground}"/>
                             <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Background" Value="Gray"/>
-                                    <Setter Property="Foreground" Value="White"/>
-                                </Trigger>
                                 <Trigger Property="IsSelected" Value="true">
+                                    <Setter Property="Background" Value="DarkGray"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
                                     <Setter Property="Background" Value="Gray"/>
                                     <Setter Property="Foreground" Value="White"/>
                                 </Trigger>

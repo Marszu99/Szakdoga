@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Main" Width="1550" Height="870" Background="Gray"
         WindowStartupLocation="Manual" ResizeMode="CanMinimize"
-        Left="-8" Top="0">
+        Left="-8" Top="0"
+        Icon="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\WR.png">
 
     <Frame x:Name="MainWindow" Margin="0 0 0 0" NavigationUIVisibility="Hidden"/>
 

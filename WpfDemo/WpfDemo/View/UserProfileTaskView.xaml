@@ -7,7 +7,8 @@
         xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
         mc:Ignorable="d"
         Title="UserProfileTaskView" Height="600" Width="560" Background="DarkGray"
-        WindowStartupLocation="Manual" Left="652" Top="100" ResizeMode="CanMinimize">
+        WindowStartupLocation="Manual" Left="652" Top="100" ResizeMode="CanMinimize"
+        Icon="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\WR.png">
     
     <Grid>
         <Grid.ColumnDefinitions>

@@ -9,7 +9,8 @@
         mc:Ignorable="d"
         Title="MyProfile" Width="1550" Height="870" Background="DarkGray" 
         WindowStartupLocation="Manual" ResizeMode="CanMinimize" WindowStyle="{Binding MyProfileViewWindowStyle}"
-        Left="-8" Top="0">
+        Left="-8" Top="0"
+        Icon="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\WR.png">
 
     <Grid Margin="5 0 5 0">
         <Grid.ColumnDefinitions>
@@ -201,7 +202,7 @@
             </StackPanel>
 
             <DataGrid x:Name="UserToDoTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyToDoTaskList}" Margin="0 70 0 20" HorizontalAlignment="Left"
-                      Width="700" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" BorderBrush="Black" BorderThickness="1"  
+                      Width="700" AutoGenerateColumns="False" ColumnWidth="*" RowHeight="30" Background="LightGray" BorderBrush="Black" BorderThickness="1"  
                       ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
                       Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1">
 
@@ -209,11 +210,11 @@
                     <Style TargetType="DataGridRow">
                         <Setter Property="Background" Value="#eee"/>
                         <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" Value="Gray"/>
-                                <Setter Property="Foreground" Value="White"/>
-                            </Trigger>
                             <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Background" Value="DarkGray"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" Value="Gray"/>
                                 <Setter Property="Foreground" Value="White"/>
                             </Trigger>
@@ -267,7 +268,7 @@
             </StackPanel>
 
             <DataGrid x:Name="UserDoneTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyDoneTaskList}" Margin="0 50 0 20" HorizontalAlignment="Left"
-                      Width="700" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" BorderBrush="Black" BorderThickness="1"
+                      Width="700" AutoGenerateColumns="False" ColumnWidth="*" RowHeight="30" Background="LightGray" BorderBrush="Black" BorderThickness="1"
                       ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                       Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1" Grid.Row="1">
 
@@ -275,11 +276,11 @@
                     <Style TargetType="DataGridRow">
                         <Setter Property="Background" Value="#eee"/>
                         <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" Value="Gray"/>
-                                <Setter Property="Foreground" Value="White"/>
-                            </Trigger>
                             <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Background" Value="DarkGray"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" Value="Gray"/>
                                 <Setter Property="Foreground" Value="White"/>
                             </Trigger>

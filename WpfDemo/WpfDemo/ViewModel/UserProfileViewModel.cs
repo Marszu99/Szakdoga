@@ -256,6 +256,148 @@ namespace WpfDemo.ViewModel
             DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
         }
 
+
+        private void LoadTasks(int userid)
+        {
+            _taskList.Clear();
+            UserListForTaskList.Clear();
+
+            try
+            {
+                var user = new UserRepository(new UserLogic()).GetUserByID(userid);
+                UserListForTaskList.Add(user);
+                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
+
+                tasks.ForEach(task =>
+                {
+                    var taskViewModel = new TaskViewModel(task, UserListForTaskList.ToList());
+                    taskViewModel.User = UserListForTaskList.First(user => user.IdUser == task.User_idUser);
+                    TaskList.Add(taskViewModel);
+                });
+
+                // Resetelje a Hataridoket a megfelelore
+                _deadlineFrom = DateTime.Today.AddYears(1);
+                if (TaskList.Count == 0) // ha nincs task akkor a mai datumot kapja meg
+                {
+                    _deadlineTo = DateTime.Today;
+                }
+                else
+                {
+                    _deadlineTo = DateTime.Parse("0001.01.01");
+                }
+                foreach (TaskViewModel taskViewModel in TaskList)
+                {
+                    if (taskViewModel.Task.Deadline < _deadlineFrom)
+                    {
+                        _deadlineFrom = taskViewModel.Task.Deadline;
+                        _deadlineFromLowest = _deadlineFrom;
+                    }
+                    if (taskViewModel.Task.Deadline > _deadlineTo)
+                    {
+                        _deadlineTo = taskViewModel.Task.Deadline;
+                        _deadlineToHighest = _deadlineTo;
+                    }
+                }
+
+                OnPropertyChanged(nameof(DeadlineFrom)); // kell h megvaltozzon a DatePickerben a datum
+                OnPropertyChanged(nameof(DeadlineTo));  // kell h megvaltozzon a DatePickerben a datum
+
+                SortTaskListByDeadline(); // Rendezzuk a listat csokkeno sorrendben a Hataridok szerint
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        private void SortTaskListByDeadline() // Rendezzuk a listat csokkeno sorrendben a Hataridok szerint
+        {
+            var sortedTaskListByDeadline = TaskList.OrderByDescending(task => DateTime.Parse(task.Deadline.ToString()));
+
+            sortedTaskListByDeadline.ToList().ForEach(task =>
+            {
+                TaskList.Remove(task);
+                TaskList.Add(task);
+            });
+        }
+
+
+        private void LoadRecords(int userid)
+        {
+            _recordList.Clear();
+            TaskListForRecordList.Clear();
+
+            try
+            {
+                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
+                tasks.ForEach(task => TaskListForRecordList.Add(task));
+
+                var records = new RecordRepository(new RecordLogic()).GetUserRecords(userid);
+                records.ForEach(record =>
+                {
+                    var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                    recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                    _recordList.Add(recordViewModel);
+                });
+
+                _durationFrom = 720;
+                _durationTo = 0;
+                _dateFrom = DateTime.Today;
+                if (RecordList.Count == 0) // ha nincs rekord akkor a mai datumot kapja meg
+                {
+                    _dateTo = DateTime.Today;
+                }
+                else
+                {
+                    _dateTo = DateTime.Parse("0001.01.01");
+                }
+                foreach (RecordViewModel recordViewModel in RecordList) // frissitett listabol kicserelem ha van uj legrovidebb,leghosszabb Idotartam es legkorabbi vagy legkesobbi Datum
+                {
+                    if (recordViewModel.Record.Date < _dateFrom)
+                    {
+                        _dateFrom = recordViewModel.Record.Date;
+                        _dateFromLowest = _dateFrom;
+                    }
+                    if (recordViewModel.Record.Date > _dateTo)
+                    {
+                        _dateTo = recordViewModel.Record.Date;
+                        _dateToHighest = _dateTo;
+                    }
+                    if (recordViewModel.Record.Duration < _durationFrom)
+                    {
+                        _durationFrom = recordViewModel.Record.Duration;
+                        _durationFromLowest = _durationFrom;
+                    }
+                    if (recordViewModel.Record.Duration > _durationTo)
+                    {
+                        _durationTo = recordViewModel.Record.Duration;
+                        _durationToHighest = _durationTo;
+                    }
+                }
+
+                OnPropertyChanged(nameof(DateFrom)); // kell h megvaltozzon a DatePickerben a datum
+                OnPropertyChanged(nameof(DateTo));  // kell h megvaltozzon a DatePickerben a datum
+                OnPropertyChanged(nameof(DurationFromFormat)); // h megvaltozzon a kiiras
+                OnPropertyChanged(nameof(DurationToFormat)); // h megvaltozzon a kiiras
+
+                SortRecordListtByDate(); // Rendezzuk a listat csokkeno sorrendben a Datumok szerint
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        private void SortRecordListtByDate() // Rendezzuk a listat csokkeno sorrendben a Datumok szerint
+        {
+            var sortedRecordListtByDate = RecordList.OrderByDescending(record => DateTime.Parse(record.Date.ToString()));
+
+            sortedRecordListtByDate.ToList().ForEach(record =>
+            {
+                RecordList.Remove(record);
+                RecordList.Add(record);
+            });
+        }
+
+
         private bool CanShowTask(object arg) // Csak Admin lathatja egy masik ablakban a feladatok adatait
         {
             return LoginViewModel.LoggedUser.Status != 0;
@@ -327,6 +469,8 @@ namespace WpfDemo.ViewModel
                         TaskList.Add(taskViewModel);
                     });
                 }
+
+                SortTaskListByDeadline(); // Rendezzuk a listat csokkeno sorrendben a Hataridok szerint
             }
             catch (SqlException)
             {
@@ -346,56 +490,6 @@ namespace WpfDemo.ViewModel
                 SearchTaskListValue = "";
                 OnPropertyChanged(nameof(SearchTaskListValue));
                 LoadTasks(CurrentUser.IdUser);
-            }
-        }
-        private void LoadTasks(int userid)
-        {
-            _taskList.Clear();
-            UserListForTaskList.Clear();
-
-            try
-            {
-                var user = new UserRepository(new UserLogic()).GetUserByID(userid);
-                UserListForTaskList.Add(user);
-                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
-
-                tasks.ForEach(task =>
-                {
-                    var taskViewModel = new TaskViewModel(task, UserListForTaskList.ToList());
-                    taskViewModel.User = UserListForTaskList.First(user => user.IdUser == task.User_idUser);
-                    TaskList.Add(taskViewModel);
-                });
-
-                // Resetelje a Hataridoket a megfelelore
-                _deadlineFrom = DateTime.Today.AddYears(1);
-                if (TaskList.Count == 0) // ha nincs task akkor a mai datumot kapja meg
-                {
-                    _deadlineTo = DateTime.Today;
-                }
-                else
-                {
-                    _deadlineTo = DateTime.Parse("0001.01.01");
-                }
-                foreach (TaskViewModel taskViewModel in TaskList)
-                {
-                    if (taskViewModel.Task.Deadline < _deadlineFrom)
-                    {
-                        _deadlineFrom = taskViewModel.Task.Deadline;
-                        _deadlineFromLowest = _deadlineFrom;
-                    }
-                    if (taskViewModel.Task.Deadline > _deadlineTo)
-                    {
-                        _deadlineTo = taskViewModel.Task.Deadline;
-                        _deadlineToHighest = _deadlineTo;
-                    }
-                }
-
-                OnPropertyChanged(nameof(DeadlineFrom)); // kell h megvaltozzon a DatePickerben a datum
-                OnPropertyChanged(nameof(DeadlineTo));  // kell h megvaltozzon a DatePickerben a datum
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -440,6 +534,8 @@ namespace WpfDemo.ViewModel
                         _recordList.Add(recordViewModel);
                     });
                 }
+
+                SortRecordListtByDate(); // Rendezzuk a listat csokkeno sorrendben a Datumok szerint
             }
             catch (SqlException)
             {
@@ -459,69 +555,6 @@ namespace WpfDemo.ViewModel
                 SearchRecordListValue = "";
                 OnPropertyChanged(nameof(SearchRecordListValue));
                 LoadRecords(CurrentUser.IdUser);
-            }
-        }
-        private void LoadRecords(int userid)
-        {
-            _recordList.Clear();
-            TaskListForRecordList.Clear();
-
-            try
-            {
-                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
-                tasks.ForEach(task => TaskListForRecordList.Add(task));
-
-                var records = new RecordRepository(new RecordLogic()).GetUserRecords(userid);
-                records.ForEach(record =>
-                {
-                    var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
-                    recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
-                    _recordList.Add(recordViewModel);
-                });
-
-                _durationFrom = 720;
-                _durationTo = 0;
-                _dateFrom = DateTime.Today;
-                if (RecordList.Count == 0) // ha nincs rekord akkor a mai datumot kapja meg
-                {
-                    _dateTo = DateTime.Today;
-                }
-                else
-                {
-                    _dateTo = DateTime.Parse("0001.01.01");
-                }
-                foreach (RecordViewModel recordViewModel in RecordList) // frissitett listabol kicserelem ha van uj legrovidebb,leghosszabb Idotartam es legkorabbi vagy legkesobbi Datum
-                {
-                    if (recordViewModel.Record.Date < _dateFrom)
-                    {
-                        _dateFrom = recordViewModel.Record.Date;
-                        _dateFromLowest = _dateFrom;
-                    }
-                    if (recordViewModel.Record.Date > _dateTo)
-                    {
-                        _dateTo = recordViewModel.Record.Date;
-                        _dateToHighest = _dateTo;
-                    }
-                    if (recordViewModel.Record.Duration < _durationFrom)
-                    {
-                        _durationFrom = recordViewModel.Record.Duration;
-                        _durationFromLowest = _durationFrom;
-                    }
-                    if (recordViewModel.Record.Duration > _durationTo)
-                    {
-                        _durationTo = recordViewModel.Record.Duration;
-                        _durationToHighest = _durationTo;
-                    }
-                }
-
-                OnPropertyChanged(nameof(DateFrom)); // kell h megvaltozzon a DatePickerben a datum
-                OnPropertyChanged(nameof(DateTo));  // kell h megvaltozzon a DatePickerben a datum
-                OnPropertyChanged(nameof(DurationFromFormat)); // h megvaltozzon a kiiras
-                OnPropertyChanged(nameof(DurationToFormat)); // h megvaltozzon a kiiras
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

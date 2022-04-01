@@ -567,7 +567,8 @@ namespace WpfDemo.ViewModel
                     });
                 }
 
-                ResetDeadlineSearchingValues();
+                SortTaskListByDeadline(); // Rendezzuk a listat csokkeno sorrendben a Hataridok szerint
+                ResetDeadlineSearchingValues(); // Beallitom a listaban levo legkorabbi es legkesobbi Hataridot a kereseshez
             }
             catch (SqlException)
             {
@@ -575,7 +576,18 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public void ResetDeadlineSearchingValues()
+        private void SortTaskListByDeadline() // Rendezzuk a listat csokkeno sorrendben a Hataridok szerint
+        {
+            var sortedTaskListByDeadline = TaskList.OrderByDescending(task => DateTime.Parse(task.Deadline.ToString()));
+
+            sortedTaskListByDeadline.ToList().ForEach(task =>
+            {
+                TaskList.Remove(task);
+                TaskList.Add(task);
+            });
+        }
+
+        public void ResetDeadlineSearchingValues() // Beallitom a listaban levo legkorabbi es legkesobbi Hataridot a kereseshez
         {
             _deadlineFrom = DateTime.Today.AddYears(1);
             if (TaskList.Count == 0) // ha nincs task akkor a mai datumot kapja meg
@@ -835,6 +847,8 @@ namespace WpfDemo.ViewModel
                         });
                     }
                 }
+
+                SortTaskListByDeadline(); // Rendezzuk a listat csokkeno sorrendben a Hataridok szerint
             }
             catch (SqlException)
             {

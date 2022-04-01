@@ -570,7 +570,8 @@ namespace WpfDemo.ViewModel
                     });
                 }
 
-                ResetDateDurationSearchingValues();
+                SortRecordListtByDate(); // Rendezzuk a listat csokkeno sorrendben a Datumok szerint
+                ResetDateDurationSearchingValues();  // Beallitom a listaban levo legkorabbi es legkesobbi Datumot es a legkisebb es legnagyobb Idotartamot a kereseshez
             }
             catch (SqlException)
             {
@@ -578,7 +579,18 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public void ResetDateDurationSearchingValues()
+        private void SortRecordListtByDate() // Rendezzuk a listat csokkeno sorrendben a Datumok szerint
+        {
+            var sortedRecordListtByDate = RecordList.OrderByDescending(record => DateTime.Parse(record.Date.ToString()));
+
+            sortedRecordListtByDate.ToList().ForEach(record =>
+            {
+                RecordList.Remove(record);
+                RecordList.Add(record);
+            });
+        }
+
+        public void ResetDateDurationSearchingValues() // Beallitom a listaban levo legkorabbi es legkesobbi Datumot es a legkisebb es legnagyobb Idotartamot a kereseshez
         {
             _durationFrom = 720;
             _durationTo = 0;
@@ -695,6 +707,8 @@ namespace WpfDemo.ViewModel
                         });
                     }
                 }
+
+                SortRecordListtByDate(); // Rendezzuk a listat csokkeno sorrendben a Datumok szerint
             }
             catch (SqlException)
             {

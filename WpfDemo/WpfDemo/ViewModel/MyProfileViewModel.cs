@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Windows;
@@ -31,8 +33,24 @@ namespace WpfDemo.ViewModel
         private Visibility _myProfileViewChangeUserValuesButtonVisibility = Visibility.Visible;
         private Visibility _myProfileViewSaveAndCancelButtonsVisibility = Visibility.Hidden;
 
-        //private System.ComponentModel.IEditableObject _IEditableObject;
-        //private System.ComponentModel.IRevertibleChangeTracking _IRevertibleChangeTracking;
+        private ObservableCollection<Task> _myToDoTaskList = new ObservableCollection<Task>();
+        private ObservableCollection<Task> _myDoneTaskList = new ObservableCollection<Task>();
+
+        public ObservableCollection<Task> MyToDoTaskList
+        {
+            get
+            {
+                return _myToDoTaskList;
+            }
+        }
+
+        public ObservableCollection<Task> MyDoneTaskList
+        {
+            get
+            {
+                return _myDoneTaskList;
+            }
+        }
 
 
         public User CurrentLoggedUser // jelenlegi Felhasznalo bindolashoz
@@ -336,6 +354,42 @@ namespace WpfDemo.ViewModel
             CancelChangeUserValuesCommand = new RelayCommand(CancelChangeUserValues, CanExecuteCancel);
         }
 
+
+        private void LoadToDoTasks()
+        {
+            _myToDoTaskList.Clear();
+
+            var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser);
+            tasks.ForEach(task => _myToDoTaskList.Add(task));
+
+            SortTaskListByDeadline(_myToDoTaskList); // Rendezzuk a listat csokkeno sorrendben a Hataridok szerint
+        }
+
+
+        private void LoadDoneTasks()
+        {
+            _myDoneTaskList.Clear();
+
+            var tasks = new TaskRepository(new TaskLogic()).GetAllDoneTasksFromUser(LoginViewModel.LoggedUser.IdUser);
+            tasks.ForEach(task => _myDoneTaskList.Add(task));
+
+            SortTaskListByDeadline(_myDoneTaskList); // Rendezzuk a listat csokkeno sorrendben a Hataridok szerint
+        }
+
+        private ObservableCollection<Task> SortTaskListByDeadline(ObservableCollection<Task> TaskList) // Rendezzuk a listat csokkeno sorrendben a Hataridok szerint
+        {
+            var sortedTaskListByDeadline = TaskList.OrderByDescending(task => DateTime.Parse(task.Deadline.ToString()));
+
+            sortedTaskListByDeadline.ToList().ForEach(task =>
+            {
+                TaskList.Remove(task);
+                TaskList.Add(task);
+            });
+
+            return TaskList;
+        }
+
+
         private bool CanExecuteChange(object arg)
         {
             return true;
@@ -454,42 +508,6 @@ namespace WpfDemo.ViewModel
             MyProfileViewSaveAndCancelButtonsVisibility = Visibility.Hidden;
         }
 
-
-        private ObservableCollection<Task> _myToDoTaskList = new ObservableCollection<Task>();
-        private ObservableCollection<Task> _myDoneTaskList = new ObservableCollection<Task>();
-
-        public ObservableCollection<Task> MyToDoTaskList
-        {
-            get
-            {
-                return _myToDoTaskList;
-            }
-        }
-
-        public void LoadToDoTasks()
-        {
-            _myToDoTaskList.Clear();
-
-            var tasks = new TaskRepository(new TaskLogic()).GetAllActiveTasksFromUser(LoginViewModel.LoggedUser.IdUser);
-            tasks.ForEach(task => _myToDoTaskList.Add(task));
-        }
-
-
-        public ObservableCollection<Task> MyDoneTaskList
-        {
-            get
-            {
-                return _myDoneTaskList;
-            }
-        }
-
-        public void LoadDoneTasks()
-        {
-            _myDoneTaskList.Clear();
-
-            var tasks = new TaskRepository(new TaskLogic()).GetAllDoneTasksFromUser(LoginViewModel.LoggedUser.IdUser);
-            tasks.ForEach(task => _myDoneTaskList.Add(task));
-        }
 
         private void IsChangedUservaluesToFalse()
         {
