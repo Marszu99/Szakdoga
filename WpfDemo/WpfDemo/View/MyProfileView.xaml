@@ -204,11 +204,12 @@
             <DataGrid x:Name="UserToDoTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyToDoTaskList}" Margin="0 70 0 20" HorizontalAlignment="Left"
                       Width="700" AutoGenerateColumns="False" ColumnWidth="*" RowHeight="30" Background="LightGray" BorderBrush="Black" BorderThickness="1"  
                       ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                      Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1">
+                      Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1" Foreground="Black">
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         <Setter Property="Background" Value="#eee"/>
+                        <Setter Property="Foreground" Value="Black"/>
                         <Style.Triggers>
                             <Trigger Property="IsSelected" Value="true">
                                 <Setter Property="Background" Value="DarkGray"/>
@@ -270,11 +271,12 @@
             <DataGrid x:Name="UserDoneTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyDoneTaskList}" Margin="0 50 0 20" HorizontalAlignment="Left"
                       Width="700" AutoGenerateColumns="False" ColumnWidth="*" RowHeight="30" Background="LightGray" BorderBrush="Black" BorderThickness="1"
                       ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                      Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1" Grid.Row="1">
+                      Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1" Grid.Row="1" Foreground="Black">
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         <Setter Property="Background" Value="#eee"/>
+                        <Setter Property="Foreground" Value="Black"/>
                         <Style.Triggers>
                             <Trigger Property="IsSelected" Value="true">
                                 <Setter Property="Background" Value="DarkGray"/>

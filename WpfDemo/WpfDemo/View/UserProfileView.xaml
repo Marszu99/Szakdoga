@@ -367,6 +367,7 @@
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         <Setter Property="Background" Value="#eee"/>
+                        <Setter Property="Foreground" Value="Black"/>
                         <Style.Triggers>
                             <Trigger Property="IsSelected" Value="true">
                                 <Setter Property="Background" Value="DarkGray"/>
@@ -432,6 +433,7 @@
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         <Setter Property="Background" Value="#eee"/>
+                        <Setter Property="Foreground" Value="Black"/>
                         <Style.Triggers>
                             <Trigger Property="IsSelected" Value="true">
                                 <Setter Property="Background" Value="DarkGray"/>

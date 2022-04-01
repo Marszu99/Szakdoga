@@ -46,6 +46,7 @@
                         <Style TargetType="DataGridRow">
                             <Setter Property="ToolTip" Value="{Binding NotificationText}"/>
                             <Setter Property="Background" Value="{Binding ListTasksBackground}"/>
+                            <Setter Property="Foreground" Value="Black"/>
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="true">
                                     <Setter Property="Background" Value="DarkGray"/>
