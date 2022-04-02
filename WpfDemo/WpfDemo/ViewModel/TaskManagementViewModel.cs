@@ -952,12 +952,28 @@ namespace WpfDemo.ViewModel
             if (IsNotificationsCheckBoxChecked) // ha ki van pipalva a CheckBox
             {
                 TaskViewModel.IsNotificationsOn = true; // ertesitesek be vannak kapcsolva
-                ResetTaskList(obj);
+
+                if (!String.IsNullOrWhiteSpace(_searchValue) || _deadlineFromLowest != _deadlineFrom || _deadlineToHighest != _deadlineTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
+                {
+                    Search(obj);
+                }
+                else
+                {
+                    ResetTaskList(obj); // Frissitem a listat
+                }
             }
             else
             {
                 TaskViewModel.IsNotificationsOn = false; // ertesitesek ki vannak kapcsolva
-                ResetTaskList(obj);
+
+                if (!String.IsNullOrWhiteSpace(_searchValue) || _deadlineFromLowest != _deadlineFrom || _deadlineToHighest != _deadlineTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
+                {
+                    Search(obj);
+                }
+                else
+                {
+                    ResetTaskList(obj); // Frissitem a listat
+                }
             }
         }
 
