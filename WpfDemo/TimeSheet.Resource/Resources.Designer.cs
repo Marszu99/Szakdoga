@@ -907,6 +907,33 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Spent time.
+        /// </summary>
+        public static string SpentTime {
+            get {
+                return ResourceManager.GetString("SpentTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spent time on .
+        /// </summary>
+        public static string SpentTimeMessage1 {
+            get {
+                return ResourceManager.GetString("SpentTimeMessage1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  task: .
+        /// </summary>
+        public static string SpentTimeMessage2 {
+            get {
+                return ResourceManager.GetString("SpentTimeMessage2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string Status {

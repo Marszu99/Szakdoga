@@ -228,7 +228,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility ListTasksViewContextMenuVisibility // (Delete Header Visibility) Csak admin eseteben jelenik meg jobb klikkre egy torles lehetoseg
+        public Visibility ListTasksViewDeleteHeaderVisibility // Csak admin eseteben jelenik meg jobb klikkre egy torles lehetoseg
         {
             get
             {
@@ -243,6 +243,7 @@ namespace WpfDemo.ViewModel
         public RelayCommand SearchingCommand { get; private set; }
         public RelayCommand ResetTaskListCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
+        public RelayCommand SpentTimeWithCommand { get; private set; }
         public RelayCommand HasReadCommand { get; private set; }
         public RelayCommand NotificationsSwitchOnOffCommand { get; private set; }
 
@@ -260,7 +261,8 @@ namespace WpfDemo.ViewModel
             SortingByCheckBoxCommand = new RelayCommand(SortingByCheckBox, CanExecuteSort);
             SearchingCommand = new RelayCommand(Search, CanExecuteSearch);
             ResetTaskListCommand = new RelayCommand(ResetTaskList, CanExecuteReset);
-            DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
+            DeleteCommand = new RelayCommand(DeleteTask, CanExecuteDeleteTask);
+            SpentTimeWithCommand = new RelayCommand(CalculateDurationForTask, CanExecuteCalculateDurationForTask);
             HasReadCommand = new RelayCommand(HasRead, CanExecuteReadTaskNotifications);
             NotificationsSwitchOnOffCommand = new RelayCommand(NotificationSwitchOnOff, CanExecuteSwitch);
         }
@@ -514,6 +516,15 @@ namespace WpfDemo.ViewModel
         {
             try
             {
+                int SelectedTaskID = 0;
+                bool IsSelectedTaskNull = true; // Ha volt elotte kivalasztva Feladat akkor ez segit annak a visszatoltesehez
+                if (SelectedTask != null) // ha van valasztott Feladat akkor belep
+                {
+                    IsSelectedTaskNull = false;
+                    SelectedTaskID = SelectedTask.Task.IdTask;
+                }
+
+                // betoltom a helyes listat a CheckBoxnak megfeleloen
                 if (IsMyTasksCheckBoxChecked && !IsActiveTasksCheckBoxChecked)
                 {
                     TaskList.Clear();
@@ -569,6 +580,17 @@ namespace WpfDemo.ViewModel
 
                 SortTaskListByDeadline(); // Rendezzuk a listat csokkeno sorrendben a Hataridok szerint
                 ResetDeadlineSearchingValues(); // Beallitom a listaban levo legkorabbi es legkesobbi Hataridot a kereseshez
+
+                if (!IsSelectedTaskNull) // ha volt valasztott Feladat akkor megkeresem az ID-jat a mostani listaban es ha benne van amostani listaban akkor azt Feladatot visszatoltom
+                {
+                    for (int i = 0; i < TaskList.Count(); i++)
+                    {
+                        if (TaskList[i].IdTask == SelectedTaskID)
+                        {
+                            SelectedTask = TaskList[i];
+                        }
+                    }
+                }
             }
             catch (SqlException)
             {
@@ -873,7 +895,7 @@ namespace WpfDemo.ViewModel
         }
 
 
-        private bool CanDeleteTask(object arg)
+        private bool CanExecuteDeleteTask(object arg)
         {
             return _selectedTask != null && LoginViewModel.LoggedUser.Status != 0;
         }
@@ -910,17 +932,35 @@ namespace WpfDemo.ViewModel
             }
         }
 
+
+        private bool CanExecuteCalculateDurationForTask(object arg)
+        {
+            return _selectedTask != null;
+        }
+        private void CalculateDurationForTask(object obj) // Kiszamitja a feladattal foglalkozott/eltoltott idot
+        {
+            int spentTime = 0;
+
+            foreach(Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask)) // a kivalasztott feladat rogziteseinek az idotartamat osszeadjuk
+            {
+                spentTime += record.Duration;
+            }
+
+            MessageBox.Show(Resources.SpentTimeMessage1 + SelectedTask.Title + Resources.SpentTimeMessage2 + TimeSpan.FromMinutes(spentTime).ToString("hh':'mm"), Resources.Information);
+        }
+
+
         private bool CanExecuteReadTaskNotifications(object arg)
         {
             if (TaskViewModel.IsNotificationsOn) // ha lathatoak az ertesitesek
             {
                 if (LoginViewModel.LoggedUser.Status == 1) // megkapja az Adminhoz tartozo ertesiteseket a megfelelo feladathoz
                 {
-                    return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(SelectedTask.IdTask) != null;
+                    return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(SelectedTask.IdTask).Count > 0;
                 }
                 else // megkapja a sima Userhez tartozo ertesiteseket a megfelelo feladathoz
                 {
-                    return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(SelectedTask.IdTask) != null;
+                    return _selectedTask != null && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(SelectedTask.IdTask).Count > 0;
                 }
             }
             else
@@ -935,7 +975,18 @@ namespace WpfDemo.ViewModel
             {
                 new NotificationRepository(new NotificationLogic()).HasReadNotification(SelectedTask.IdTask, LoginViewModel.LoggedUser.Status);
 
+                int SelectedTaskCount = 0;
+                for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
+                {
+                    if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                    {
+                        SelectedTaskCount = i;
+                    }
+                }
+
                 ResetTaskList(obj); // frissiti a listat h eltunjon az ertesites
+
+                SelectedTask = TaskList[SelectedTaskCount];
             }
             catch (SqlException)
             {
@@ -949,6 +1000,22 @@ namespace WpfDemo.ViewModel
         }
         private void NotificationSwitchOnOff(object obj)
         {
+            int SelectedTaskCount = 0;
+            bool IsSelectedTaskNull = true; // Ha volt elotte kivalasztva Feladat akkor ez segit annak a visszatoltesehez
+
+            if (SelectedTask != null) // ha van valasztott Feladat akkor belep
+            {
+                IsSelectedTaskNull = false;
+
+                for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
+                {
+                    if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                    {
+                        SelectedTaskCount = i;
+                    }
+                }
+            }
+
             if (IsNotificationsCheckBoxChecked) // ha ki van pipalva a CheckBox
             {
                 TaskViewModel.IsNotificationsOn = true; // ertesitesek be vannak kapcsolva
@@ -975,7 +1042,13 @@ namespace WpfDemo.ViewModel
                     ResetTaskList(obj); // Frissitem a listat
                 }
             }
+
+            if (!IsSelectedTaskNull) // ha elotte volt kivalasztott Feladat akkor Visszamentem a kivalasztott Feladatot mert frissiteskor az eltunik(nullozodik)
+            {
+                SelectedTask = TaskList[SelectedTaskCount];
+            }
         }
+
 
         private void SendNotificationEmail(string TaskTitle)
         {

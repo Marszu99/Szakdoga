@@ -242,6 +242,7 @@ namespace WpfDemo.ViewModel
         public RelayCommand SearchingRecordListCommand { get; private set; }
         public RelayCommand ResetRecordListCommand { get; private set; }
         public RelayCommand DeleteCommand { get; private set; }
+        public RelayCommand SpentTimeWithCommand { get; private set; }
 
         public UserProfileViewModel(int userid)
         {
@@ -254,6 +255,7 @@ namespace WpfDemo.ViewModel
             SearchingRecordListCommand = new RelayCommand(SearchRecordList, CanExecuteSearchRecordList);
             ResetRecordListCommand = new RelayCommand(ResetRecordList, CanExecuteResetRecordList);
             DeleteCommand = new RelayCommand(DeleteTask, CanDeleteTask);
+            SpentTimeWithCommand = new RelayCommand(CalculateDurationForTask, CanExecuteCalculateDurationForTask);
         }
 
 
@@ -586,6 +588,24 @@ namespace WpfDemo.ViewModel
                 }
             }
         }
+
+
+        private bool CanExecuteCalculateDurationForTask(object arg)
+        {
+            return _selectedTask != null;
+        }
+        private void CalculateDurationForTask(object obj) // Kiszamitja a feladattal foglalkozott/eltoltott idot
+        {
+            int spentTime = 0;
+
+            foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask)) // a kivalasztott feladat rogziteseinek az idotartamat osszeadjuk
+            {
+                spentTime += record.Duration;
+            }
+
+            MessageBox.Show(Resources.SpentTimeMessage1 + SelectedTask.Title + Resources.SpentTimeMessage2 + TimeSpan.FromMinutes(spentTime).ToString("hh':'mm"), Resources.Information);
+        }
+
 
         private void SendNotificationEmail(string TaskTitle)
         {

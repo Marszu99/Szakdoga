@@ -204,7 +204,7 @@
             <DataGrid x:Name="UserToDoTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyToDoTaskList}" Margin="0 70 0 20" HorizontalAlignment="Left"
                       Width="700" AutoGenerateColumns="False" ColumnWidth="*" RowHeight="30" Background="LightGray" BorderBrush="Black" BorderThickness="1"  
                       ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                      Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1" Foreground="Black">
+                      CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1" Foreground="Black">
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
@@ -226,6 +226,7 @@
                     <Style TargetType="DataGridCell">
                         <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="Cursor" Value="Hand"/>
                     </Style>
                 </DataGrid.CellStyle>
 
@@ -233,21 +234,24 @@
                     <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Title}" Binding="{Binding Title}" Width="175">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Description}" Binding="{Binding Description}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Deadline}" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="105">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                         <DataGridTextColumn.ElementStyle>
@@ -271,7 +275,7 @@
             <DataGrid x:Name="UserDoneTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding MyDoneTaskList}" Margin="0 50 0 20" HorizontalAlignment="Left"
                       Width="700" AutoGenerateColumns="False" ColumnWidth="*" RowHeight="30" Background="LightGray" BorderBrush="Black" BorderThickness="1"
                       ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                      Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1" Grid.Row="1" Foreground="Black">
+                      CanUserAddRows="False" IsReadOnly="True" FontSize="20" Grid.Column="1" Grid.Row="1" Foreground="Black">
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
@@ -293,6 +297,7 @@
                     <Style TargetType="DataGridCell">
                         <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="BorderBrush" Value="Transparent"/>
+                        <Setter Property="Cursor" Value="Hand"/>
                     </Style>
                 </DataGrid.CellStyle>
 
@@ -300,21 +305,24 @@
                     <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Title}" Binding="{Binding Title}" Width="175">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Description}" Binding="{Binding Description}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Deadline}" Binding="{Binding Deadline, StringFormat='yyyy.MM.dd'}" Width="105">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="FontWeight" Value="Medium" />
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
                         <DataGridTextColumn.ElementStyle>

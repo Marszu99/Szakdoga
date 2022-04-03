@@ -399,6 +399,15 @@
   <data name="ServerError" xml:space="preserve">
     <value>Server error!</value>
   </data>
+  <data name="SpentTime" xml:space="preserve">
+    <value>Spent time</value>
+  </data>
+  <data name="SpentTimeMessage1" xml:space="preserve">
+    <value>Spent time on </value>
+  </data>
+  <data name="SpentTimeMessage2" xml:space="preserve">
+    <value> task: </value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>

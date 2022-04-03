@@ -319,7 +319,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-
         public Visibility TaskErrorIconVisibility // Ha a Feladat Exceptiont kap akkor az ErrorIcon megjelenik
         {
             get
@@ -344,6 +343,15 @@ namespace WpfDemo.ViewModel
                 return RecordValidationHelper.ValidateDuration(_record.Duration) == null || !_isDurationChanged ? Visibility.Hidden : Visibility.Visible;
             }
         }
+
+        public Visibility ListRecordsViewContextMenuVisibility // (Delete Header Visibility) Csak sajat Rogzites eseteben jelenik meg jobb klikkre egy torles lehetoseg
+        {
+            get
+            {
+                return User_Username != LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
         public string Error { get { return null; } } // IDataError-hoz kell

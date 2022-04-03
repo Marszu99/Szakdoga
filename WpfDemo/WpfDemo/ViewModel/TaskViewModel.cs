@@ -346,7 +346,7 @@ namespace WpfDemo.ViewModel
                 }
                 else
                 {
-                    return Visibility.Collapsed;
+                    return Visibility.Visible;
                 }
             }
         }

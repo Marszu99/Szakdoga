@@ -75,7 +75,7 @@ namespace WpfDemo.ViewModel
 
                 OnPropertyChanged(nameof(SelectedRecord));
                 OnPropertyChanged(nameof(SelectedRecordVisibility));
-                OnPropertyChanged(nameof(ListRecordsViewContextMenuVisibility));
+                //OnPropertyChanged(nameof(ListRecordsViewContextMenuVisibility));
             }
         }
         private void OnRecordUpdated(RecordViewModel recordViewModel)
@@ -259,14 +259,6 @@ namespace WpfDemo.ViewModel
             get
             {
                 return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
-            }
-        }
-
-        public Visibility ListRecordsViewContextMenuVisibility // (Delete Header Visibility) Csak sajat Rogzites eseteben jelenik meg jobb klikkre egy torles lehetoseg
-        {
-            get
-            {
-                return SelectedRecord.User.Username != LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 
@@ -545,6 +537,16 @@ namespace WpfDemo.ViewModel
         {
             try
             {
+                int SelectedRecordID = 0;
+                bool IsSelectedRecordNull = true; // Ha volt elotte kivalasztva Rogzites akkor ez segit annak a visszatoltesehez
+
+                if (SelectedRecord != null) // ha van valasztott Rogzites akkor belep
+                {
+                    IsSelectedRecordNull = false;
+                    SelectedRecordID = SelectedRecord.Record.IdRecord;
+                }
+
+                // betoltom a helyes listat a CheckBoxnak megfeleloen
                 if (IsMyRecordsCheckBoxChecked)
                 {
                     RecordList.Clear();
@@ -572,6 +574,17 @@ namespace WpfDemo.ViewModel
 
                 SortRecordListtByDate(); // Rendezzuk a listat csokkeno sorrendben a Datumok szerint
                 ResetDateDurationSearchingValues();  // Beallitom a listaban levo legkorabbi es legkesobbi Datumot es a legkisebb es legnagyobb Idotartamot a kereseshez
+
+                if (!IsSelectedRecordNull) // ha volt valasztott Record akkor megkeresem az ID-jat a mostani listaban es ha benne van amostani listaban akkor azt Recordot visszatoltom
+                {
+                    for (int i = 0; i < RecordList.Count(); i++)
+                    {
+                        if (RecordList[i].IdRecord == SelectedRecordID)
+                        {
+                            SelectedRecord = RecordList[i];
+                        }
+                    }
+                }
             }
             catch (SqlException)
             {

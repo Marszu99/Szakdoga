@@ -32,7 +32,7 @@ namespace WpfDemo.ViewModel
                 _selectedUser = value;
                 OnPropertyChanged(nameof(SelectedUser));
                 OnPropertyChanged(nameof(SelectedUserVisibility));
-                OnPropertyChanged(nameof(ListUsersViewContextMenuVisibility));
+                //OnPropertyChanged(nameof(ListUsersViewContextMenuVisibility));
             }
         }
 
@@ -64,14 +64,6 @@ namespace WpfDemo.ViewModel
         private void OnUserCanceled(Object obj)
         {
             SelectedUser = null;
-        }
-
-        public Visibility ListUsersViewContextMenuVisibility // (Delete Header Visibility) Csak Admin eseteben jelenik meg jobb klikkre egy torles lehetoseg
-        {
-            get
-            {
-                return LoginViewModel.LoggedUser.Status == 0 || SelectedUser.Username == LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;
-            }
         }
 
         public Visibility UserManagementButtonsVisibility // Uj Felhasznalo letrehozasa gomb lathatossaga(Admin eseteben lathato)

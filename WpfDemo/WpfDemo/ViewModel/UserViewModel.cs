@@ -270,6 +270,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility ListUsersViewContextMenuVisibility // (Delete Header Visibility) Csak Admin eseteben jelenik meg jobb klikkre egy torles lehetoseg
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 || _user.Username == LoginViewModel.LoggedUser.Username ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
         public string Error { get { return null; } } // IDataErrorInfo-hez kell

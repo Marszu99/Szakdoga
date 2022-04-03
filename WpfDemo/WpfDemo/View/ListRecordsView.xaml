@@ -15,39 +15,35 @@
         </Grid.RowDefinitions>
 
         <FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
-        <!--ListRecordsViewUserVisibility-hez kell-->
+        <!--ListRecordsViewUserVisibility-hez es a ContextMenu bindolasahoz kell-->
         
         <Grid Grid.Row="1">
             <DockPanel>
                 <DataGrid x:Name="ListRecordsDataGrid" x:FieldModifier="public" ItemsSource="{Binding RecordList}" SelectedItem="{Binding SelectedRecord}"
                           Width="900" HorizontalAlignment="Left" AutoGenerateColumns="False" ColumnWidth="*" RowHeight="30" Background="LightGray" 
                           ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                          Cursor="Hand" CanUserAddRows="False" IsReadOnly="True" FontSize="20" BorderBrush="Transparent" Foreground="Black">
+                          CanUserAddRows="False" IsReadOnly="True" FontSize="20" BorderBrush="Transparent" Foreground="Black">
 
                     <DataGrid.InputBindings><!--ehhez kell a IsSynchronizedWithCurrentItem="True"-->
                         <KeyBinding Key="Delete" Command="{Binding DeleteCommand}"/>
                     </DataGrid.InputBindings>
 
-                    <DataGrid.ContextMenu>
-                        <ContextMenu Visibility="{Binding ListRecordsViewContextMenuVisibility}">
-                            <!--<MenuItem Header="{local:ResxStatic l10n:Resources.Delete}" Command="{Binding DeleteCommand}">
-                                <MenuItem.Icon>
-                                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\x.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>-->
-                            <MenuItem Command="{Binding DeleteCommand}" Cursor="Hand" Padding="5 0" Style="{DynamicResource PopupMenuItem}">
-                                <MenuItem.Header>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\delete.png" Width="20" Margin="5 0"/>
-                                        <TextBlock Text="{local:ResxStatic l10n:Resources.Delete}" FontSize="19" Margin="1 0 3 0"/>
-                                    </StackPanel>
-                                </MenuItem.Header>
-                            </MenuItem>
-                        </ContextMenu>
-                    </DataGrid.ContextMenu>
-
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
+                            <Setter Property="ContextMenu">
+                                <Setter.Value><!--frameworkElement-es bindolast hasznalom h ne kelljen atrakni a TaskManagementViewModelbol a TaskViewModelbe a dolgokat-->
+                                    <ContextMenu Visibility="{Binding ListRecordsViewContextMenuVisibility}">
+                                        <MenuItem Command="{Binding DataContext.DeleteCommand, Source={x:Reference frameworkElement}}" Cursor="Hand" Padding="5 0" Style="{DynamicResource PopupMenuItem}">
+                                            <MenuItem.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\delete.png" Width="20" Margin="5 0"/>
+                                                    <TextBlock Text="{local:ResxStatic l10n:Resources.Delete}" FontSize="19" Margin="1 0 3 0"/>
+                                                </StackPanel>
+                                            </MenuItem.Header>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </Setter.Value>
+                            </Setter>
                             <Setter Property="Background" Value="#eee"/>
                             <Setter Property="Foreground" Value="Black"/>
                             <Style.Triggers>
@@ -66,6 +62,7 @@
                         <Style TargetType="DataGridCell">
                             <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="Cursor" Value="Hand"/>
                         </Style>
                     </DataGrid.CellStyle>
 
@@ -74,6 +71,7 @@
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
@@ -82,6 +80,7 @@
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
@@ -90,6 +89,7 @@
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                             <DataGridTextColumn.ElementStyle>
@@ -102,6 +102,7 @@
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                             <DataGridTextColumn.ElementStyle>
@@ -114,6 +115,7 @@
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
