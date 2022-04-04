@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
+using TimeSheet.DataAccess;
+using TimeSheet.Model;
 using TimeSheet.Model.Extension;
 using TimeSheet.Resource;
 
@@ -9,6 +11,24 @@ namespace TimeSheet.Tests
     [TestFixture]
     public class RecordValidationTests
     {
+        [Test]
+        [TestCase(null)]
+        public void ValidateTask_WhenTaskIsNotChosenForRecord_ReturnsErrorsString(Task task)
+        {
+            string result = RecordValidationHelper.ValidateTask(task);
+
+            Assert.That(result, Is.EqualTo(Resources.NeedToChooseTaskForRecord));
+        }
+
+        /*[Test]
+        [TestCase(new TaskLogic().GetTaskByID(1))]
+        public void ValidateTask_WhenTaskIsNotChosenForRecord_ReturnsNull(Task task)
+        {
+            string result = RecordValidationHelper.ValidateTask(task);
+
+            Assert.That(result, Is.EqualTo(null));
+        }*/
+
         [Test]
         [TestCase(null)]
         public void ValidateDate_WhenDateIsNull_ReturnsErrorsString(DateTime? date)

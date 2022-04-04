@@ -196,7 +196,7 @@
     <value>Kész</value>
   </data>
   <data name="DoneTasks" xml:space="preserve">
-    <value>KÉSZ</value>
+    <value>ELVÉGZETT</value>
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Időtartam</value>

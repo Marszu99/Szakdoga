@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
+using TimeSheet.DataAccess;
+using TimeSheet.Model;
 using TimeSheet.Model.Extension;
 using TimeSheet.Resource;
 
@@ -9,6 +11,24 @@ namespace TimeSheet.Tests
     [TestFixture]
     public class TaskValidationTests
     {
+        [Test]
+        [TestCase(null)]
+        public void ValidateUser_WhenUserIsNotChosenForTask_ReturnsErrorsString(User user)
+        {
+            string result = TaskValidationHelper.ValidateUser(user);
+
+            Assert.That(result, Is.EqualTo(Resources.NeedToChooseUserForTask));
+        }
+
+        /*[Test]
+        [TestCase(new UserLogic().GetAdmin())]
+        public void ValidateUser_WhenUserIsChosenForTask_ReturnsNull(User user)
+        {
+            string result = TaskValidationHelper.ValidateUser(user);
+
+            Assert.That(result, Is.EqualTo(null));
+        }*/
+
         [Test]
         [TestCase(null)]
         [TestCase("")]

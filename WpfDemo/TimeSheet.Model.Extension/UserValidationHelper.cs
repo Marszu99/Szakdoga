@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.SqlClient;
+using System.Linq;
 using System.Text.RegularExpressions;
 using TimeSheet.DataAccess;
 using TimeSheet.Resource;
@@ -25,7 +26,7 @@ namespace TimeSheet.Model.Extension
             string result = null;
 
             if (string.IsNullOrWhiteSpace(username))
-            {             
+            {
                 result = Resources.UsernameIsEmpty;
             }
             else if (username.Length < MinimumUsernameLength || username.Length > MaximumUsernameLength)
@@ -36,12 +37,21 @@ namespace TimeSheet.Model.Extension
             {
                 result = Resources.UsernameOneWord;
             }
-
-            foreach (User _user in new UserLogic().GetAllUsers())
+            else
             {
-                if (username == _user.Username)
+                try
                 {
-                    result = username + Resources.UsernameAlreadyExists;
+                    foreach (User user in new UserLogic().GetAllUsers())
+                    {
+                        if (username == user.Username)
+                        {
+                            result = username + Resources.UsernameAlreadyExists;
+                        }
+                    }
+                }
+                catch (SqlException)
+                {
+
                 }
             }
 

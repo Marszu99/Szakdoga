@@ -50,7 +50,7 @@ namespace TimeSheet.Tests
         }
 
         [Test]
-        [TestCase("saddd 23s")]
+        [TestCase("saddd s")]
         public void ValidateUserName_WhenUsernameIsNotOneWord_ReturnsErrorsString(string username)
         {
             string result = UserValidationHelper.ValidateUserName(username);
@@ -59,12 +59,21 @@ namespace TimeSheet.Tests
         }
 
         [Test]
-        [TestCase("Marszu99")]
+        [TestCase("CehMarci")]
         public void ValidateUserName_WhenUsernameIsOneWord_ReturnsNull(string username)
         {
             string result = UserValidationHelper.ValidateUserName(username);
 
             Assert.That(result, Is.EqualTo(null));
+        }
+
+        [Test]
+        [TestCase("CsehMarcell")]
+        public void ValidateUserName_WhenUsernameIsExists_ReturnsErrorsString(string username)
+        {
+            string result = UserValidationHelper.ValidateUserName(username);
+
+            Assert.That(result, Is.EqualTo(username + Resources.UsernameAlreadyExists));
         }
 
         [Test]
@@ -121,6 +130,36 @@ namespace TimeSheet.Tests
         public void ValidatePassword_WhenPasswordIsOneWord_ReturnsNull(string password)
         {
             string result = UserValidationHelper.ValidatePassword(password);
+
+            Assert.That(result, Is.EqualTo(null));
+        }
+
+        [Test]
+        [TestCase("Password", null)]
+        [TestCase("Password", "")]
+        [TestCase("Password", " ")]
+        [TestCase("Password", "    ")]
+        public void ValidatePassword2__WhenPassword2IsNullOrWhiteSpace_ReturnsErrorsString(string password, string password2)
+        {
+            string result = UserValidationHelper.ValidatePassword2(password, password2);
+
+            Assert.That(result, Is.EqualTo(Resources.Password2IsEmpty));
+        }
+
+        [Test]
+        [TestCase("Password", "password")]
+        public void ValidatePassword2__WhenPassword2DoesntMatchWithPassword_ReturnsErrorsString(string password, string password2)
+        {
+            string result = UserValidationHelper.ValidatePassword2(password, password2);
+
+            Assert.That(result, Is.EqualTo(Resources.Password2DoesntMatch));
+        }
+
+        [Test]
+        [TestCase("Password", "Password")]
+        public void ValidatePassword2__WhenPassword2DoesMatchWithPassword_ReturnsNull(string password, string password2)
+        {
+            string result = UserValidationHelper.ValidatePassword2(password, password2);
 
             Assert.That(result, Is.EqualTo(null));
         }
@@ -260,15 +299,6 @@ namespace TimeSheet.Tests
         }
 
         [Test]
-        [TestCase("a@a.com")]
-        public void ValidateEmail_WhenEmailIsLessThan11Characters_ReturnsErrorsString(string email)
-        {
-            string result = UserValidationHelper.ValidateEmail(email);
-
-            Assert.That(result, Is.EqualTo(Resources.EmailWrongLength));
-        }
-
-        [Test]
         [TestCase("jdkajsdakjdkajdksajdlkjaskjdakdjaklsjdakldjasdjsakdjaskjda@kjsdkajdskajdkasjdkasjdkasjdskajdkasjdkasjdkasjdlkasjdklsajldkajsdljasldjaldjasldkajsdlkajldjasld.com")]
         public void ValidateEmail_WhenEmailIsGreaterThan100Characters_ReturnsErrorsString(string email)
         {
@@ -291,12 +321,42 @@ namespace TimeSheet.Tests
         [TestCase("csehmarcellyahoo@.com")]
         [TestCase("csehmarc@ellyahoo")]
         [TestCase("@csehmarcellyahoo.com")]
-
+        [TestCase("a@a.com")]
         public void ValidateEmail_WhenEmailIsInvalid_ReturnsErrorsString(string email)
         {
             string result = UserValidationHelper.ValidateEmail(email);
 
             Assert.That(result, Is.EqualTo(Resources.EmailIsInvalid));
+        }
+
+        [Test]
+        [TestCase("csehmarcell@yahoo.com", null)]
+        [TestCase("csehmarcell@yahoo.com", "")]
+        [TestCase("csehmarcell@yahoo.com", " ")]
+        [TestCase("csehmarcell@yahoo.com", "      ")]
+        public void ValidateEmail2_WhenEmai2lIsNullOrWhiteSpace_ReturnsErrorsString(string email, string email2)
+        {
+            string result = UserValidationHelper.ValidateEmail2(email, email2);
+
+            Assert.That(result, Is.EqualTo(Resources.Email2IsEmpty));
+        }
+
+        [Test]
+        [TestCase("csehmarcell@yahoo.com", "csehlaszlo@yahoo.com")]
+        public void ValidateEmail2_WhenEmai2DoesntMatchWithEmail_ReturnsErrorsString(string email, string email2)
+        {
+            string result = UserValidationHelper.ValidateEmail2(email, email2);
+
+            Assert.That(result, Is.EqualTo(Resources.Email2DoesntMatch));
+        }
+
+        [Test]
+        [TestCase("csehmarcell@yahoo.com", "csehmarcell@yahoo.com")]
+        public void ValidateEmail2_WhenEmai2DoesMatchWithEmail_ReturnsNull(string email, string email2)
+        {
+            string result = UserValidationHelper.ValidateEmail2(email, email2);
+
+            Assert.That(result, Is.EqualTo(null));
         }
 
         [Test]
@@ -343,6 +403,73 @@ namespace TimeSheet.Tests
             Assert.That(result, Is.EqualTo(null));
         }
 
+        [Test]
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase(" ")]
+        [TestCase("      ")]
+        public void ValidateCompanyName_WhenCompanyNameIsNullOrWhiteSpace_ReturnsErrorsString(string companyName)
+        {
+            string result = UserValidationHelper.ValidateCompanyName(companyName);
 
+            Assert.That(result, Is.EqualTo(Resources.CompanyNameIsEmpty));
+        }
+
+        [Test]
+        [TestCase("Company")]
+        public void ValidateCompanyName_WhenCompanyNamesIsLessThan10Characters_ReturnsErrorsString(string companyName)
+        {
+            string result = UserValidationHelper.ValidateCompanyName(companyName);
+
+            Assert.That(result, Is.EqualTo(Resources.CompanyNameWrongLength));
+        }
+
+        [Test]
+        [TestCase("CompanyVeryLoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongName")]
+        public void ValidateCompanyName_WhenCompanyNamesIsGreaterThan60Characters_ReturnsErrorsString(string companyName)
+        {
+            string result = UserValidationHelper.ValidateCompanyName(companyName);
+
+            Assert.That(result, Is.EqualTo(Resources.CompanyNameWrongLength));
+        }
+
+        [Test]
+        [TestCase("CompanyName")]
+        public void ValidateCompanyName_WhenCompanyNamesIsValid_ReturnsNull(string companyName)
+        {
+            string result = UserValidationHelper.ValidateCompanyName(companyName);
+
+            Assert.That(result, Is.EqualTo(null));
+        }
+
+        [Test]
+        [TestCase("CompanyName", null)]
+        [TestCase("CompanyName", "")]
+        [TestCase("CompanyName", " ")]
+        [TestCase("CompanyName", "      ")]
+        public void ValidateCompanyName2_WhenCompanyName2IsNullOrWhiteSpace_ReturnsErrorsString(string companyName, string companyName2)
+        {
+            string result = UserValidationHelper.ValidateCompanyName2(companyName, companyName2);
+
+            Assert.That(result, Is.EqualTo(Resources.CompanyName2IsEmpty));
+        }
+
+        [Test]
+        [TestCase("CompanyName", "CompanyNamee")]
+        public void ValidateCompanyName2_WhenCompanyNames2DoesntMatchWithCompanyName_ReturnsErrorsString(string companyName, string companyName2)
+        {
+            string result = UserValidationHelper.ValidateCompanyName2(companyName, companyName2);
+
+            Assert.That(result, Is.EqualTo(Resources.CompanyName2DoesntMatch));
+        }
+
+        [Test]
+        [TestCase("CompanyName", "CompanyName")]
+        public void ValidateCompanyName2_WhenCompanyNames2DoesMatchWithCompanyName_ReturnsNull(string companyName, string companyName2)
+        {
+            string result = UserValidationHelper.ValidateCompanyName2(companyName, companyName2);
+
+            Assert.That(result, Is.EqualTo(null));
+        }
     }
 }

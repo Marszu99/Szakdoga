@@ -121,6 +121,10 @@
               "version": "[2.0.3, )",
               "autoReferenced": true
             },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
+            },
             "libphonenumber-csharp": {
               "target": "Package",
               "version": "[8.12.38, )"

@@ -911,7 +911,7 @@ namespace WpfDemo.ViewModel
                 {
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
 
-                    if(this.SelectedTask.User.Username != LoginViewModel.LoggedUser.Username) // ha a User nem admin(Miutan erre csak az Admin kepes)
+                    if (this.SelectedTask.User.Username != LoginViewModel.LoggedUser.Username) // ha a User nem admin(Miutan erre csak az Admin kepes)
                     {
                         SendNotificationEmail(SelectedTask.Title); // kuld emailt h toroltek a feladatat
                     }
@@ -941,7 +941,7 @@ namespace WpfDemo.ViewModel
         {
             int spentTime = 0;
 
-            foreach(Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask)) // a kivalasztott feladat rogziteseinek az idotartamat osszeadjuk
+            foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask)) // a kivalasztott feladat rogziteseinek az idotartamat osszeadjuk
             {
                 spentTime += record.Duration;
             }
