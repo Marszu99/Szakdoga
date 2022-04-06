@@ -114,6 +114,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public TimeSpan DurationTimeFormat // Idotartam megfelelo kiirasanak a UserProfileView oszlopdiagramhoz
+        {
+            get
+            {
+                return TimeSpan.FromMinutes(_record.Duration);
+            }
+        }
+
         public User User
         {
             get

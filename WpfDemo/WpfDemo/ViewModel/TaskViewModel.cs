@@ -12,6 +12,7 @@ using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Model.Extension;
 using TimeSheet.Resource;
+using WpfDemo.Components;
 using WpfDemo.ViewModel.Command;
 
 
@@ -239,6 +240,47 @@ namespace WpfDemo.ViewModel
                 {
                     return "#eee";
                 }
+            }
+        }
+
+        public int SumDuration // UserProfileView kordiagramhoz
+        {
+            get
+            {
+                int sumDuration = 0;
+
+                foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(_task.IdTask)) // a kivalasztott feladat rogziteseinek az idotartamat osszeadjuk
+                {
+                    sumDuration += record.Duration;
+                }
+
+                /*foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(_task.IdTask).Where(record =>
+                                        record.Date > DateTime.Today.AddYears(-1)).ToList())
+                {
+                    sumDuration += record.Duration;
+                }
+
+                foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(_task.IdTask).Where(record =>
+                                        record.Date > DateTime.Today.AddMonths(-1)).ToList())
+                {
+                    sumDuration += record.Duration;
+                }
+
+                foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(_task.IdTask).Where(record =>
+                        record.Date > DateTime.Today.AddDays(-7)).ToList())
+                {
+                    sumDuration += record.Duration;
+                }*/
+
+
+                return sumDuration;
+            }
+        }
+        public string SumDurationFormat
+        {
+            get
+            {
+                return TimeSpan.FromMinutes(SumDuration).ToString("hh':'mm");
             }
         }
 

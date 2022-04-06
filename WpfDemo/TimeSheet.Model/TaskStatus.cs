@@ -2,8 +2,8 @@
 {
     public enum TaskStatus
     {
-        Created,    //Resources.Created;
-        InProgress, //Resources.InProgress;
-        Done        //Resources.Done;
+        Created,
+        InProgress,
+        Done
     }
 }

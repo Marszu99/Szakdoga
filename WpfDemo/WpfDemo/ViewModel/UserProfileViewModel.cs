@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
@@ -9,6 +10,7 @@ using TimeSheet.DataAccess;
 using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Resource;
+using WpfDemo.Components;
 using WpfDemo.View;
 using WpfDemo.ViewModel.Command;
 
@@ -21,8 +23,10 @@ namespace WpfDemo.ViewModel
         public ObservableCollection<User> UserListForTaskList { get; } = new ObservableCollection<User>();
 
         private ObservableCollection<TaskViewModel> _taskList = new ObservableCollection<TaskViewModel>();
+        private ObservableCollection<TaskViewModel> _taskListForChart = new ObservableCollection<TaskViewModel>();
         public ObservableCollection<Task> TaskListForRecordList { get; } = new ObservableCollection<Task>();
         private ObservableCollection<RecordViewModel> _recordList = new ObservableCollection<RecordViewModel>();
+        private ObservableCollection<RecordViewModel> _recordListForChart = new ObservableCollection<RecordViewModel>();
 
 
         public ObservableCollection<TaskViewModel> TaskList
@@ -37,6 +41,21 @@ namespace WpfDemo.ViewModel
             get
             {
                 return _recordList;
+            }
+        }
+
+        public ObservableCollection<TaskViewModel> TaskListForChart
+        {
+            get
+            {
+                return _taskListForChart;
+            }
+        }
+        public ObservableCollection<RecordViewModel> RecordListForChart
+        {
+            get
+            {
+                return _recordListForChart;
             }
         }
 
@@ -61,6 +80,12 @@ namespace WpfDemo.ViewModel
             {
                 _selectedTask = value;
                 OnPropertyChanged(nameof(SelectedTask));
+
+                LoadRecords(CurrentUser.IdUser);
+                LoadRecordsForChart(CurrentUser.IdUser);
+
+                _pastWeekMonthYear = PastWeekMonthYear.AllTime;
+                OnPropertyChanged(nameof(PastWeekMonthYearSelected));
             }
         }
 
@@ -220,6 +245,58 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        private PastWeekMonthYear _pastWeekMonthYear;
+        public PastWeekMonthYear PastWeekMonthYearSelected
+        {
+            get
+            {
+                return _pastWeekMonthYear;
+            }
+            set
+            {
+                _pastWeekMonthYear = value;
+                OnPropertyChanged(nameof(PastWeekMonthYearSelected));
+                ReloadRecordsForChartBySelectedItem(CurrentUser.IdUser);
+            }
+        }
+
+        public Dictionary<PastWeekMonthYear, string> PastWeekMonthYearList
+        {
+            get
+            {
+                return Enum.GetValues(typeof(PastWeekMonthYear)).Cast<PastWeekMonthYear>()
+                .ToDictionary<PastWeekMonthYear, PastWeekMonthYear, string>(
+                item => item,
+                item => ResourceHandler.GetResourceString(item.ToString()));
+            }
+        }
+
+        private PastWeekMonthYear _pastWeekMonthYearForPieSeries;
+        public PastWeekMonthYear PastWeekMonthYearSelectedForPieSeries
+        {
+            get
+            {
+                return _pastWeekMonthYearForPieSeries;
+            }
+            set
+            {
+                _pastWeekMonthYearForPieSeries = value;
+                OnPropertyChanged(nameof(PastWeekMonthYearSelectedForPieSeries));
+                LoadTasksForChart(CurrentUser.IdUser);
+            }
+        }
+
+        public Dictionary<PastWeekMonthYear, string> PastWeekMonthYearListForPieSeries
+        {
+            get
+            {
+                return Enum.GetValues(typeof(PastWeekMonthYear)).Cast<PastWeekMonthYear>()
+                .ToDictionary<PastWeekMonthYear, PastWeekMonthYear, string>(
+                item => item,
+                item => ResourceHandler.GetResourceString(item.ToString()));
+            }
+        }
+
         public Visibility AddTaskButtonVisibility // uj Feladat hozzaadas gomb lathatosaga(Admin eseteben lathato)
         {
             get
@@ -248,6 +325,8 @@ namespace WpfDemo.ViewModel
         {
             LoadTasks(userid); // Betolti a Felhasznalo Feladatait
             LoadRecords(userid); // Betolti a Felhasznalo Rogziteseit
+            LoadTasksForChart(userid);
+            LoadRecordsForChart(userid);
 
             ShowTaskCommand = new RelayCommand(ShowTask, CanShowTask);
             SearchingTaskListCommand = new RelayCommand(SearchTaskList, CanExecuteSearchTaskList);
@@ -322,6 +401,29 @@ namespace WpfDemo.ViewModel
             });
         }
 
+        private void LoadTasksForChart(int userid)
+        {
+            _taskListForChart.Clear();
+            UserListForTaskList.Clear();
+
+            try
+            {
+                var user = new UserRepository(new UserLogic()).GetUserByID(userid);
+                UserListForTaskList.Add(user);
+                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
+
+                tasks.ForEach(task =>
+                {
+                    var taskViewModel = new TaskViewModel(task, UserListForTaskList.ToList());
+                    taskViewModel.User = UserListForTaskList.First(user => user.IdUser == task.User_idUser);
+                    TaskListForChart.Add(taskViewModel);
+                });
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
 
         private void LoadRecords(int userid)
         {
@@ -333,13 +435,16 @@ namespace WpfDemo.ViewModel
                 var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
                 tasks.ForEach(task => TaskListForRecordList.Add(task));
 
-                var records = new RecordRepository(new RecordLogic()).GetUserRecords(userid);
-                records.ForEach(record =>
+                if (SelectedTask != null)
                 {
-                    var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
-                    recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
-                    _recordList.Add(recordViewModel);
-                });
+                    var records = new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask);
+                    records.ForEach(record =>
+                    {
+                        var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                        recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                        _recordList.Add(recordViewModel);
+                    });
+                }
 
                 _durationFrom = 720;
                 _durationTo = 0;
@@ -397,6 +502,41 @@ namespace WpfDemo.ViewModel
                 RecordList.Remove(record);
                 RecordList.Add(record);
             });
+        }
+
+        private void LoadRecordsForChart(int userid)
+        {
+            _recordListForChart.Clear();
+            TaskListForRecordList.Clear();
+
+            try
+            {
+                var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
+                tasks.ForEach(task => TaskListForRecordList.Add(task));
+
+                if (SelectedTask != null)
+                {
+                    var records = new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask);
+                    records.ForEach(record =>
+                    {
+                        var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                        recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                        _recordListForChart.Add(recordViewModel);
+
+                        var sortedRecordListtByDate = RecordListForChart.OrderBy(record => DateTime.Parse(record.Date.ToString()));
+
+                        sortedRecordListtByDate.ToList().ForEach(record =>
+                        {
+                            RecordListForChart.Remove(record);
+                            RecordListForChart.Add(record);
+                        });
+                    });
+                }
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
 
@@ -511,7 +651,7 @@ namespace WpfDemo.ViewModel
                     var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CurrentUser.IdUser);
                     tasks.ForEach(task => TaskListForRecordList.Add(task));
 
-                    var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUser.IdUser).Where(record =>
+                    var records = new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask).Where(record =>
                                     (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)).ToList();
 
                     records.ForEach(record =>
@@ -525,9 +665,9 @@ namespace WpfDemo.ViewModel
                 {
                     _recordList.Clear();
 
-                    var records = new RecordRepository(new RecordLogic()).GetUserRecords(CurrentUser.IdUser).Where(record =>
+                    var records = new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask).Where(record =>
                                     (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)
-                                    && (record.Comment.Contains(_searchRecordListValue) || new TaskRepository(new TaskLogic()).GetTaskByID(record.Task_idTask).Title.Contains(_searchRecordListValue))).ToList();
+                                    && (record.Comment.Contains(_searchRecordListValue))).ToList();
 
                     records.ForEach(record =>
                     {
@@ -623,6 +763,120 @@ namespace WpfDemo.ViewModel
             mm.BodyEncoding = UTF8Encoding.UTF8;
             mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             client.Send(mm);
+        }
+
+
+        private void ReloadRecordsForChartBySelectedItem(int userid)
+        {
+            if (_pastWeekMonthYear == PastWeekMonthYear.ThisWeek)
+            {
+                _recordListForChart.Clear();
+                TaskListForRecordList.Clear();
+
+                try
+                {
+                    var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
+                    tasks.ForEach(task => TaskListForRecordList.Add(task));
+
+                    if (SelectedTask != null)
+                    {
+                        var records = new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask).Where(record =>
+                                        record.Date > DateTime.Today.AddDays(-7)).ToList();
+                        records.ForEach(record =>
+                        {
+                            var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                            recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                            _recordListForChart.Add(recordViewModel);
+
+                            var sortedRecordListtByDate = RecordListForChart.OrderBy(record => DateTime.Parse(record.Date.ToString()));
+
+                            sortedRecordListtByDate.ToList().ForEach(record =>
+                            {
+                                RecordListForChart.Remove(record);
+                                RecordListForChart.Add(record);
+                            });
+                        });
+                    }
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else if (_pastWeekMonthYear == PastWeekMonthYear.ThisMonth)
+            {
+                _recordListForChart.Clear();
+                TaskListForRecordList.Clear();
+
+                try
+                {
+                    var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
+                    tasks.ForEach(task => TaskListForRecordList.Add(task));
+
+                    if (SelectedTask != null)
+                    {
+                        var records = new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask).Where(record =>
+                                        record.Date > DateTime.Today.AddMonths(-1)).ToList();
+                        records.ForEach(record =>
+                        {
+                            var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                            recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                            _recordListForChart.Add(recordViewModel);
+
+                            var sortedRecordListtByDate = RecordListForChart.OrderBy(record => DateTime.Parse(record.Date.ToString()));
+
+                            sortedRecordListtByDate.ToList().ForEach(record =>
+                            {
+                                RecordListForChart.Remove(record);
+                                RecordListForChart.Add(record);
+                            });
+                        });
+                    }
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else if (_pastWeekMonthYear == PastWeekMonthYear.ThisYear)
+            {
+                _recordListForChart.Clear();
+                TaskListForRecordList.Clear();
+
+                try
+                {
+                    var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
+                    tasks.ForEach(task => TaskListForRecordList.Add(task));
+
+                    if (SelectedTask != null)
+                    {
+                        var records = new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask).Where(record =>
+                                        record.Date > DateTime.Today.AddYears(-1)).ToList();
+                        records.ForEach(record =>
+                        {
+                            var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                            recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                            _recordListForChart.Add(recordViewModel);
+
+                            var sortedRecordListtByDate = RecordListForChart.OrderBy(record => DateTime.Parse(record.Date.ToString()));
+
+                            sortedRecordListtByDate.ToList().ForEach(record =>
+                            {
+                                RecordListForChart.Remove(record);
+                                RecordListForChart.Add(record);
+                            });
+                        });
+                    }
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                LoadRecordsForChart(userid);
+            }
         }
     }
 }

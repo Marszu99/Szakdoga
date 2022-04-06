@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfDemo"
         xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
         mc:Ignorable="d"
         Title="UserProfile" Width="1550" Height="870" Background="DarkGray"
         WindowStartupLocation="Manual" ResizeMode="CanMinimize"
@@ -13,71 +14,21 @@
 
     <Grid Margin="10 0 10 5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.3*"/>
-            <RowDefinition Height="0.3*"/>
-            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="0.35*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock Grid.Row="0" Grid.Column="1" FontWeight="Bold" FontFamily="Verdana" FontSize="38" HorizontalAlignment="Center" VerticalAlignment="Top" 
+            <TextBlock Grid.Row="0" FontWeight="Bold" FontFamily="Verdana" FontSize="38" HorizontalAlignment="Center" VerticalAlignment="Top" 
                        Margin="0 6 0 0">
                 <Run Text="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}"/>
                 <Run Text="{local:ResxStatic l10n:Resources.UsernameProfile}"/>
             </TextBlock>
-            
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{local:ResxStatic l10n:Resources.UsernameWithColon}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Left" 
-                           VerticalAlignment="Top" Margin="10 80 0 0" FontSize="33"/>
-                <Label x:Name="userNameLabel" Grid.Row="0" Grid.Column="0" FontSize="30" Content="{Binding CurrentUser.Username, UpdateSourceTrigger=PropertyChanged}"
-                       Margin="0 79.5 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
-            </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <!--local:ResxStatic l10n:Resources.FirstNameWithColon,Binding FirstNameString, StringFormat='{}{0}:'-->
-                <TextBlock Text="{local:ResxStatic l10n:Resources.FirstNameWithColon}" Grid.Row="0" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Left" 
-                           VerticalAlignment="Top" Margin="10 80 0 0" FontSize="33"/>
-                <Label x:Name="firstNameLabel" Grid.Row="0" Grid.Column="1" FontSize="30" Content="{Binding CurrentUser.FirstName, UpdateSourceTrigger=PropertyChanged}"
-                       Margin="0 79 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
-            </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="2">
-                <TextBlock Text="{local:ResxStatic l10n:Resources.LastNameWithColon}" Grid.Row="0" Grid.Column="2" FontWeight="Bold" HorizontalAlignment="Left"
-                           VerticalAlignment="Top" Margin="0 80 0 0" FontSize="33"/>
-                <Label x:Name="lastNameLabel" Grid.Row="0" Grid.Column="2" FontSize="28" Content="{Binding CurrentUser.LastName, UpdateSourceTrigger=PropertyChanged}"
-                       Margin="0 81 0 0" HorizontalContentAlignment="Left" VerticalAlignment="Top"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Grid.Column="0">
-                <TextBlock Text="{local:ResxStatic l10n:Resources.EmailWithColon}" Grid.Row="0" Grid.Column="0" FontWeight="Bold" HorizontalAlignment="Left" 
-                           VerticalAlignment="Bottom" Margin="10 0 0 50" FontSize="33"/>
-                <Label x:Name="emailLabel" Grid.Row="0" Grid.Column="0" FontSize="30" Content="{Binding CurrentUser.Email, UpdateSourceTrigger=PropertyChanged}"
-                       Margin="0 0 0 45" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <TextBlock Text="{local:ResxStatic l10n:Resources.TelephoneWithColon}" Grid.Row="0" Grid.Column="1" FontWeight="Bold" HorizontalAlignment="Left"
-                           VerticalAlignment="Bottom" Margin="10 0 0 50" FontSize="33"/>
-                <Label x:Name="telephoneLabel" Grid.Row="0" Grid.Column="1" FontSize="30" Content="{Binding CurrentUser.Telephone, UpdateSourceTrigger=PropertyChanged}"
-                       Margin="0 0 0 45" HorizontalContentAlignment="Left" VerticalAlignment="Bottom"/>
-            </StackPanel>
-        </Grid>
-        
-
-        <Grid Grid.Row="1">
-            <!--
-            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{local:ResxStatic l10n:Resources.Tasks}" Margin="0 0 0 -5" HorizontalAlignment="Left" 
-                   VerticalAlignment="Bottom"/>
-            <Label Grid.Row="1" FontWeight="Bold" FontSize="26" Content="{local:ResxStatic l10n:Resources.Records}" Margin="795 0 0 -5" HorizontalAlignment="Left"
-                   VerticalAlignment="Bottom"/>-->
+        <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" Margin="7 0 0 0">
                 <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\tasks.png" VerticalAlignment="Bottom" Margin="0 0 0 1" Width="39"/>
-                <Label Content="{local:ResxStatic l10n:Resources.Tasks}" FontWeight="Bold" FontSize="34" Margin="-7 20 0 0" Height="50" FontFamily="Constantia"/>
+                <Label Content="{local:ResxStatic l10n:Resources.Tasks}" FontWeight="Bold" FontSize="34" Margin="-7 0 0 -10" Height="50" VerticalAlignment="Bottom" FontFamily="Constantia"/>
             </StackPanel>
 
             <StackPanel Margin="0 0 807 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal" Height="27">
@@ -186,10 +137,10 @@
 
             <StackPanel Orientation="Horizontal" Margin="822 0 0 -5">
                 <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\record.png" VerticalAlignment="Bottom" Margin="0 0 0 4" Width="41"/>
-                <Label Content="{local:ResxStatic l10n:Resources.Records}" FontWeight="Bold" FontSize="34" Margin="-7 20 0 0" FontFamily="Constantia"/>
+                <Label Content="{local:ResxStatic l10n:Resources.Records}" FontWeight="Bold" FontSize="34" Margin="-7 0 0 -5" VerticalAlignment="Bottom" FontFamily="Constantia"/>
             </StackPanel>
 
-            <StackPanel Margin="0 0 3 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+            <StackPanel Margin="0 0 2 1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
                     <DatePicker SelectedDate="{Binding DateFrom, UpdateSourceTrigger=PropertyChanged}" Background="#eee"
                                 SelectedDateFormat="Short" Width="120" Height="25" FontSize="18" Margin="0" Padding="2 0 0 0" FirstDayOfWeek="Monday">
@@ -316,22 +267,21 @@
         </Grid>
 
 
-
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <!--<ColumnDefinition Width="622*"/>
-                <ColumnDefinition Width="107*"/>
-                <ColumnDefinition Width="73*"/>
-                <ColumnDefinition Width="730*"/>-->
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="95"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.2*"/>
+            </Grid.RowDefinitions>
 
-            <Button x:Name="AddTaskToUserTaskButton" Command="{Binding ShowTaskCommand}" Grid.Row="2" Grid.Column="1"
-                    Margin="9 2.5 0 0" Padding="5 0" Height="32" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"
+            <Button x:Name="AddTaskToUserTaskButton" Command="{Binding ShowTaskCommand}" Grid.Row="0" Grid.Column="1"
+                    Margin="8 2.5 0 0" Padding="5 0" Height="32" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"
                     BorderThickness="1" BorderBrush="Black" Cursor="Hand" Visibility="{Binding AddTaskButtonVisibility}"
-                    ToolTip="{local:ResxStatic l10n:Resources.CreateNewTask}"><!--FontSize="20"-->
+                    ToolTip="{local:ResxStatic l10n:Resources.CreateNewTask}">
                 <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\create-task.png"/>
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -342,12 +292,12 @@
 
             <FrameworkElement x:Name="frameworkElement" DataContext="{Binding}"/>
             <!--a ContextMenu bindolasahoz kell-->
-            
+
             <DataGrid x:Name="UserTasksDataGrid" x:FieldModifier="public" ItemsSource="{Binding TaskList}" SelectedItem="{Binding SelectedTask}" 
                       HorizontalAlignment="Left" Width="710" AutoGenerateColumns="False" ColumnWidth="*" Background="LightGray" BorderBrush="Black"
                       BorderThickness="1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                      ScrollViewer.HorizontalScrollBarVisibility="Auto" CanUserAddRows="False" IsReadOnly="True" FontSize="20" 
-                      Grid.Column="0" Grid.ColumnSpan="2" RowHeight="30" Foreground="Black">
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto" CanUserAddRows="False" IsReadOnly="True" FontSize="20" Margin="0 0 0 20" 
+                      Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" RowHeight="30" Foreground="Black">
 
                 <DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding ShowTaskCommand}"/>
@@ -359,7 +309,8 @@
                     <Style TargetType="DataGridRow">
                         <Setter Property="ContextMenu">
                             <Setter.Value>
-                                <ContextMenu><!--frameworkElement-es bindolast hasznalom h ne kelljen atrakni a RecordManagementViewModelbol a RecordViewModelbe a dolgokat-->
+                                <ContextMenu>
+                                    <!--frameworkElement-es bindolast hasznalom h ne kelljen atrakni a RecordManagementViewModelbol a RecordViewModelbe a dolgokat-->
                                     <MenuItem Command="{Binding DataContext.SpentTimeWithCommand, Source={x:Reference frameworkElement}}" Cursor="Hand" Padding="5 0" Style="{DynamicResource PopupMenuItem}">
                                         <MenuItem.Header>
                                             <StackPanel Orientation="Horizontal">
@@ -445,10 +396,39 @@
             </DataGrid>
 
 
+            <syncfusion:SfChart Grid.Row="1" Grid.Column="0" Background="LightGray" Header="{local:ResxStatic l10n:Resources.Tasks}" FontSize="25"
+                                FontWeight="Medium" Margin="0" BorderBrush="Black" BorderThickness="1">
+                <syncfusion:PieSeries ItemsSource="{Binding TaskListForChart}" XBindingPath="Title" YBindingPath="SumDuration" ShowTooltip="True" GroupMode="Value" 
+                                      LabelPosition="Inside"><!--SumDurationFormat-->
+                    <syncfusion:PieSeries.AdornmentsInfo>
+                        <syncfusion:ChartAdornmentInfo FontSize="15" ShowLabel="True" SegmentLabelContent="Percentage"/>
+                    </syncfusion:PieSeries.AdornmentsInfo>
+                </syncfusion:PieSeries>
+                <syncfusion:SfChart.Legend>
+                    <syncfusion:ChartLegend FontSize="18" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" IconHeight="15" IconWidth="15"/>
+                </syncfusion:SfChart.Legend>
+            </syncfusion:SfChart>
+
+            <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding PastWeekMonthYearListForPieSeries, UpdateSourceTrigger=PropertyChanged}" Padding="2 0" 
+                      Margin="1 1 0 0" Background="#FFE5E5E5" Height="30" Width="120" FontSize="16" HorizontalContentAlignment="Left"
+                      VerticalAlignment="Top" HorizontalAlignment="Left" SelectedValue="{Binding PastWeekMonthYearSelectedForPieSeries, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource theComboBox}">
+                <ComboBox.Resources>
+                    <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Resources>
+            </ComboBox>
+
+            
             <DataGrid x:Name="UserRecordsDataGrid" x:FieldModifier="public" ItemsSource="{Binding RecordList}" AutoGenerateColumns="False" Background="LightGray" 
-                      Width="696" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                      ScrollViewer.HorizontalScrollBarVisibility="Auto" CanUserAddRows="False" IsReadOnly="True" Grid.Column="2" FontSize="20" 
-                      Grid.ColumnSpan="2" Margin="5 0 0 0" RowHeight="30" Foreground="Black">
+                      Width="697" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto" CanUserAddRows="False" IsReadOnly="True" FontSize="20"
+                      Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Margin="13 0 0 20" RowHeight="30" Foreground="Black">
 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
@@ -475,14 +455,6 @@
                 </DataGrid.CellStyle>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Task}" Binding="{Binding Task.Title}" Width="160">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="FontWeight" Value="Medium"/>
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                    </DataGridTextColumn>
                     <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Date}" Binding="{Binding Date, StringFormat='yyyy.MM.dd'}" Width="105">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -519,8 +491,47 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </Grid>
 
+
+            <syncfusion:SfChart Name="MyChart" Grid.Row="1" Grid.Column="2" Header="{local:ResxStatic l10n:Resources.Records}" FontSize="25" FontWeight="Medium"
+                                Background="LightGray" Margin="6 0 0 0" BorderBrush="Black" BorderThickness="1">
+                <syncfusion:SfChart.PrimaryAxis>
+                    <syncfusion:CategoryAxis Header="{local:ResxStatic l10n:Resources.Date}" LabelFormat="yyyy.MM.dd" FontSize="15" FontWeight="Normal">
+                        <syncfusion:CategoryAxis.HeaderStyle>
+                            <syncfusion:LabelStyle FontSize="18" Foreground="Black"/>
+                        </syncfusion:CategoryAxis.HeaderStyle>
+                    </syncfusion:CategoryAxis>
+                </syncfusion:SfChart.PrimaryAxis>
+                <syncfusion:SfChart.SecondaryAxis>
+                    <syncfusion:NumericalAxis Header="{local:ResxStatic l10n:Resources.Duration}" FontSize="15" FontWeight="Normal">
+                        <syncfusion:NumericalAxis.HeaderStyle>
+                            <syncfusion:LabelStyle FontSize="18" Foreground="Black"/>
+                        </syncfusion:NumericalAxis.HeaderStyle>
+                    </syncfusion:NumericalAxis>
+                </syncfusion:SfChart.SecondaryAxis>
+                <syncfusion:ColumnSeries ItemsSource="{Binding RecordListForChart}" XBindingPath="Date" YBindingPath="Duration" ShowTooltip="True"><!--DurationTimeFormat-->
+                    <syncfusion:ColumnSeries.AdornmentsInfo>
+                        <syncfusion:ChartAdornmentInfo ShowLabel="true" FontSize="15"/>
+                    </syncfusion:ColumnSeries.AdornmentsInfo>
+                </syncfusion:ColumnSeries>
+            </syncfusion:SfChart>
+
+
+            <ComboBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding PastWeekMonthYearList, UpdateSourceTrigger=PropertyChanged}" Padding="2 0" 
+                      Margin="13 1 0 0" Background="#FFE5E5E5" Height="30" Width="120" FontSize="16" HorizontalContentAlignment="Left"
+                      VerticalAlignment="Top" HorizontalAlignment="Left" SelectedValue="{Binding PastWeekMonthYearSelected, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource theComboBox}">
+                <ComboBox.Resources>
+                    <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ComboBox.Resources>
+            </ComboBox>
+        </Grid>
     </Grid>
 
     <Window.Resources>
@@ -630,6 +641,145 @@
                             </MultiTrigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Foreground" Value="DimGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--https://stackoverflow.com/questions/17727879/how-to-change-the-cornerradius-of-the-combobox-wpf-->
+        <Style x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="32"/>
+                            </Grid.ColumnDefinitions>
+                            <Border
+                            x:Name="Border"
+                            Grid.ColumnSpan="2"
+                            CornerRadius="4 0 4 0"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="Black"
+                            BorderThickness="0 0 1 1" />
+                            <Path
+                            x:Name="Arrow"
+                            Grid.Column="1"    
+                            Fill="{TemplateBinding Foreground}"
+                            Stroke="{TemplateBinding Foreground}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="M 0 0 L 4 4 L 8 0 Z"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <!--A ControlTemplate.Triggers-ben levo dolgok: https://social.msdn.microsoft.com/Forums/vstudio/en-US/dd893f6e-720f-49ef-827d-78b1d20d660a/change-mouseover-effect-of-combobox?forum=wpf-->
+                            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                                <!--<Setter TargetName="Border" Property="Background" Value="#FFBEE6FD"/>-->
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FF3C7FB1"/>
+                                <!--#FF7EB4EA-->
+                                <Setter TargetName="Arrow" Property="Fill" Value="Transparent"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                <!--<Setter TargetName="Border" Property="Background" Value="#FFBEE6FD"/>-->
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FF3C7FB1"/>
+                                <!--#FF7EB4EA-->
+                                <Setter TargetName="Arrow" Property="Fill" Value="Transparent"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="#EEEEEE"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+            <Border x:Name="PART_ContentHost" Focusable="True" />
+        </ControlTemplate>
+
+        <Style x:Key="theComboBox" TargetType="{x:Type ComboBox}">
+            <Setter Property="Foreground" Value="#333" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="MinHeight" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton
+                            Cursor="Hand"
+                            Name="ToggleButton"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Style="{StaticResource ComboBoxToggleButton}"
+                            Grid.Column="2"
+                            Focusable="false"
+                            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press"/>
+
+                            <ContentPresenter
+                                Name="ContentSite"
+                                IsHitTestVisible="False"
+                                Content="{TemplateBinding SelectionBoxItem}"
+                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                Margin="10,3,30,3"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}"
+                            Template="{StaticResource ComboBoxTextBox}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="3,3,23,3"
+                            Focusable="True"                               
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True"
+                            Focusable="False"
+                            PopupAnimation="Slide">
+                                <Grid
+                                Name="DropDown"
+                                SnapsToDevicePixels="True"               
+                                MinWidth="{TemplateBinding ActualWidth}"
+                                MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border
+                                CornerRadius="4"
+                                x:Name="DropDownBorder"
+                                Background="White"
+                                BorderThickness="1"
+                                BorderBrush="#F6F6F6"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable" Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

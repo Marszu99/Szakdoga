@@ -88,6 +88,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Time.
+        /// </summary>
+        public static string AllTime {
+            get {
+                return ResourceManager.GetString("AllTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BACK.
         /// </summary>
         public static string Back {
@@ -1047,6 +1056,33 @@ namespace TimeSheet.Resource {
         public static string TelephoneWithColon {
             get {
                 return ResourceManager.GetString("TelephoneWithColon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This Month.
+        /// </summary>
+        public static string ThisMonth {
+            get {
+                return ResourceManager.GetString("ThisMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This Week.
+        /// </summary>
+        public static string ThisWeek {
+            get {
+                return ResourceManager.GetString("ThisWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This Year.
+        /// </summary>
+        public static string ThisYear {
+            get {
+                return ResourceManager.GetString("ThisYear", resourceCulture);
             }
         }
         

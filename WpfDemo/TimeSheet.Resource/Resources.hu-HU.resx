@@ -126,6 +126,9 @@
   <data name="Add10MinToDuration" xml:space="preserve">
     <value>10 percet hozzáad az időtartamhoz</value>
   </data>
+  <data name="AllTime" xml:space="preserve">
+    <value>Mindig</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>VISSZA</value>
   </data>
@@ -446,6 +449,15 @@
   </data>
   <data name="TelephoneWithColon" xml:space="preserve">
     <value>Telefonszám:</value>
+  </data>
+  <data name="ThisMonth" xml:space="preserve">
+    <value>Hónapban</value>
+  </data>
+  <data name="ThisWeek" xml:space="preserve">
+    <value>Héten</value>
+  </data>
+  <data name="ThisYear" xml:space="preserve">
+    <value>Évben</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Cím</value>

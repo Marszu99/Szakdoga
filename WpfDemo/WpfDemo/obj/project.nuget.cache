@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VpYw4Hc0dDN0GzHuAG+bsy5SmjQopea7c3HEkWvizm49o1B6phMFwht/XWjLNKlnugeb7dCAHh6l5obsXZe4XA==",
+  "dgSpecHash": "jtifucUaWSCZW21bA1c2bw2LGhVfyIciCrWqd8zxHJ5erNRQWqDCKyB6YwhNM1Bjxsroz8gE4AS7NTm5Ho1KpA==",
   "success": true,
   "projectFilePath": "C:\\Marci\\Egyetem\\BLB-Soft\\Szakdoga\\Szakdoga\\WpfDemo\\WpfDemo\\WpfDemo.csproj",
   "expectedPackageFiles": [
@@ -20,6 +20,8 @@
     "C:\\Users\\Marci\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\Marci\\.nuget\\packages\\syncfusion.licensing\\20.1.0.47\\syncfusion.licensing.20.1.0.47.nupkg.sha512",
+    "C:\\Users\\Marci\\.nuget\\packages\\syncfusion.sfchart.wpf\\20.1.0.47\\syncfusion.sfchart.wpf.20.1.0.47.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\system.collections.immutable\\1.7.1\\system.collections.immutable.1.7.1.nupkg.sha512",
     "C:\\Users\\Marci\\.nuget\\packages\\system.configuration.configurationmanager\\4.4.1\\system.configuration.configurationmanager.4.4.1.nupkg.sha512",

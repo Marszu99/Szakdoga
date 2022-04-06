@@ -199,6 +199,25 @@
           }
         }
       },
+      "Syncfusion.Licensing/20.1.0.47": {
+        "runtime": {
+          "lib/netcoreapp3.1/Syncfusion.Licensing.dll": {
+            "assemblyVersion": "20.1.0.47",
+            "fileVersion": "20.1.0.47"
+          }
+        }
+      },
+      "Syncfusion.SfChart.WPF/20.1.0.47": {
+        "dependencies": {
+          "Syncfusion.Licensing": "20.1.0.47"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Syncfusion.SfChart.WPF.dll": {
+            "assemblyVersion": "20.1310.0.47",
+            "fileVersion": "20.1310.0.47"
+          }
+        }
+      },
       "System.Buffers/4.5.1": {},
       "System.Collections.Immutable/1.7.1": {
         "runtime": {
@@ -512,6 +531,20 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "Syncfusion.Licensing/20.1.0.47": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wvtXu+N9seO8rHt18VmOGX9B2/aAzyxKteyDVXJPUBcuLf8PuRppBE9cx3gKeBokvMK03zihC/39xcz4kWdtNA==",
+      "path": "syncfusion.licensing/20.1.0.47",
+      "hashPath": "syncfusion.licensing.20.1.0.47.nupkg.sha512"
+    },
+    "Syncfusion.SfChart.WPF/20.1.0.47": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SkZdfy4usMhDvtgMOr+OvLuscU86Z2mDNvW/5Xw4RiQghXaxp1RFM90RXWu5BM37o+SE/Qy4ze0J4ty+eVB7Rw==",
+      "path": "syncfusion.sfchart.wpf/20.1.0.47",
+      "hashPath": "syncfusion.sfchart.wpf.20.1.0.47.nupkg.sha512"
     },
     "System.Buffers/4.5.1": {
       "type": "package",
