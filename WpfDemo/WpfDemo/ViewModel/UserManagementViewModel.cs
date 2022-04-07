@@ -293,12 +293,15 @@ namespace WpfDemo.ViewModel
         {
             try
             {
-                UserList.Clear();
+                if (!string.IsNullOrWhiteSpace(_searchValue))
+                {
+                    UserList.Clear();
 
-                var users = new UserRepository(new UserLogic()).GetAllUsers().Where(user => user.Username.Contains(_searchValue)
-                            || user.FirstName.Contains(_searchValue) || user.LastName.Contains(_searchValue)).ToList();
+                    var users = new UserRepository(new UserLogic()).GetAllUsers().Where(user => user.Username.Contains(_searchValue)
+                                || user.FirstName.Contains(_searchValue) || user.LastName.Contains(_searchValue)).ToList();
 
-                users.ForEach(user => UserList.Add(new UserViewModel(user)));
+                    users.ForEach(user => UserList.Add(new UserViewModel(user)));
+                }
             }
             catch (SqlException)
             {

@@ -67,7 +67,8 @@
                     </DataGrid.CellStyle>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Task}" Binding="{Binding Task_Title}" Width="175" FontSize="20">
+                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Username}" Binding="{Binding User_Username}" Width="170" FontSize="20" 
+                                            Visibility="{Binding DataContext.ListRecordsViewUserVisibility, Source={x:Reference frameworkElement}}">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium"/>
@@ -75,8 +76,7 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Username}" Binding="{Binding User_Username}" Width="170" FontSize="20" 
-                                            Visibility="{Binding DataContext.ListRecordsViewUserVisibility, Source={x:Reference frameworkElement}}">
+                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Task}" Binding="{Binding Task_Title}" Width="175" FontSize="20">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="FontWeight" Value="Medium"/>

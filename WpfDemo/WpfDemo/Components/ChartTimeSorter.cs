@@ -1,6 +1,6 @@
 ﻿namespace WpfDemo.Components
 {
-    public enum PastWeekMonthYear
+    public enum ChartTimeSorter
     {
         AllTime,
         ThisYear,

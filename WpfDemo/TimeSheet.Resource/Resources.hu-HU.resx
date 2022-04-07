@@ -210,6 +210,9 @@
   <data name="DurationCantBeLowerZero" xml:space="preserve">
     <value>Időtartam nem lehet kevesebb 0-nál!</value>
   </data>
+  <data name="DurationOnTasks" xml:space="preserve">
+    <value>Feladatok időtartama</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -434,6 +437,9 @@
   </data>
   <data name="TaskDeleteQuestion2" xml:space="preserve">
     <value> feladatot?</value>
+  </data>
+  <data name="TaskRecordingDurations" xml:space="preserve">
+    <value>Feladat rögzítéseinek időtartamai</value>
   </data>
   <data name="Tasks" xml:space="preserve">
     <value>FELADATOK</value>

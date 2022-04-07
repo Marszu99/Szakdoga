@@ -90,6 +90,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public double DurationDouble // Idotartam bindaloshoz a UserProfileViewhoz
+        {
+            get
+            {
+                return TimeSpan.FromMinutes(_record.Duration).TotalMilliseconds;
+            }
+        }
+
         public string DurationFormat // Idotartam megfelelo kiirasanak a bindaloshoz
         {
             get
@@ -111,14 +119,6 @@ namespace WpfDemo.ViewModel
                 {
                     //Do Nothing
                 }
-            }
-        }
-
-        public TimeSpan DurationTimeFormat // Idotartam megfelelo kiirasanak a UserProfileView oszlopdiagramhoz
-        {
-            get
-            {
-                return TimeSpan.FromMinutes(_record.Duration);
             }
         }
 
@@ -263,6 +263,22 @@ namespace WpfDemo.ViewModel
                 {
                     return "#eee";
                 }
+            }
+        }
+
+        public string RecordViewUserRowHeight // Admin eseten latszodik ez a sor(User-t mutato sor) egyebkent meg nem
+        {
+            get
+            {
+                return _record != null && _record.IdRecord != 0 && LoginViewModel.LoggedUser.Status == 1 ? "*" : "0";
+            }
+        }
+
+        public Visibility RecordViewUserTextBoxVisibility // letezo feladatra kattintva a User neve TextBoxkent lesz lathato (az Admin eseten)
+        {
+            get
+            {
+                return _record != null && _record.IdRecord != 0 ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 

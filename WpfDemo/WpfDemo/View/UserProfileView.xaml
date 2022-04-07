@@ -279,7 +279,7 @@
             </Grid.RowDefinitions>
 
             <Button x:Name="AddTaskToUserTaskButton" Command="{Binding ShowTaskCommand}" Grid.Row="0" Grid.Column="1"
-                    Margin="8 2.5 0 0" Padding="5 0" Height="32" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"
+                    Margin="6 2.5 0 0" Padding="5 0" Height="32" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"
                     BorderThickness="1" BorderBrush="Black" Cursor="Hand" Visibility="{Binding AddTaskButtonVisibility}"
                     ToolTip="{local:ResxStatic l10n:Resources.CreateNewTask}">
                 <Image Source="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\create-task.png"/>
@@ -396,22 +396,36 @@
             </DataGrid>
 
 
-            <syncfusion:SfChart Grid.Row="1" Grid.Column="0" Background="LightGray" Header="{local:ResxStatic l10n:Resources.Tasks}" FontSize="25"
+            <syncfusion:SfChart Grid.Row="1" Grid.Column="0" Background="LightGray" Header="{local:ResxStatic l10n:Resources.DurationOnTasks}" FontSize="25"
                                 FontWeight="Medium" Margin="0" BorderBrush="Black" BorderThickness="1">
-                <syncfusion:PieSeries ItemsSource="{Binding TaskListForChart}" XBindingPath="Title" YBindingPath="SumDuration" ShowTooltip="True" GroupMode="Value" 
-                                      LabelPosition="Inside"><!--SumDurationFormat-->
+                <syncfusion:PieSeries ItemsSource="{Binding TaskListForChart}" XBindingPath="Title" YBindingPath="Duration" ShowTooltip="True" 
+                                      syncfusion:ChartTooltip.TooltipMargin="15" syncfusion:ChartTooltip.ShowDuration="3000" GroupMode="Value" 
+                                      LabelPosition="Inside">
                     <syncfusion:PieSeries.AdornmentsInfo>
-                        <syncfusion:ChartAdornmentInfo FontSize="15" ShowLabel="True" SegmentLabelContent="Percentage"/>
+                        <syncfusion:ChartAdornmentInfo FontSize="14" ShowLabel="True" SegmentLabelContent="Percentage"/>
                     </syncfusion:PieSeries.AdornmentsInfo>
+                    <syncfusion:PieSeries.TooltipTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Item.Title}" Foreground="White" FontWeight="Medium" FontSize="13" 
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBlock Text=": " Foreground="White" FontWeight="Medium" FontSize="13" HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Item.DurationFormat}" Foreground="White" FontWeight="Medium" FontSize="13" 
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </syncfusion:PieSeries.TooltipTemplate>
                 </syncfusion:PieSeries>
                 <syncfusion:SfChart.Legend>
-                    <syncfusion:ChartLegend FontSize="18" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" IconHeight="15" IconWidth="15"/>
+                    <syncfusion:ChartLegend FontSize="18" LegendPosition="Inside" Orientation="Vertical" HorizontalAlignment="Right" 
+                                            VerticalAlignment="Top" IconHeight="15" IconWidth="15"/>
                 </syncfusion:SfChart.Legend>
             </syncfusion:SfChart>
 
-            <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding PastWeekMonthYearListForPieSeries, UpdateSourceTrigger=PropertyChanged}" Padding="2 0" 
+            <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ChartTimeSorterListForPieSeries, UpdateSourceTrigger=PropertyChanged}" Padding="2 0" 
                       Margin="1 1 0 0" Background="#FFE5E5E5" Height="30" Width="120" FontSize="16" HorizontalContentAlignment="Left"
-                      VerticalAlignment="Top" HorizontalAlignment="Left" SelectedValue="{Binding PastWeekMonthYearSelectedForPieSeries, UpdateSourceTrigger=PropertyChanged}"
+                      VerticalAlignment="Top" HorizontalAlignment="Left" SelectedValue="{Binding ChartTimeSorterForPieSeries, UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource theComboBox}">
                 <ComboBox.Resources>
                     <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
@@ -493,7 +507,7 @@
             </DataGrid>
 
 
-            <syncfusion:SfChart Name="MyChart" Grid.Row="1" Grid.Column="2" Header="{local:ResxStatic l10n:Resources.Records}" FontSize="25" FontWeight="Medium"
+            <syncfusion:SfChart Name="MyChart" Grid.Row="1" Grid.Column="2" Header="{local:ResxStatic l10n:Resources.TaskRecordingDurations}" FontSize="25" FontWeight="Medium"
                                 Background="LightGray" Margin="6 0 0 0" BorderBrush="Black" BorderThickness="1">
                 <syncfusion:SfChart.PrimaryAxis>
                     <syncfusion:CategoryAxis Header="{local:ResxStatic l10n:Resources.Date}" LabelFormat="yyyy.MM.dd" FontSize="15" FontWeight="Normal">
@@ -503,23 +517,37 @@
                     </syncfusion:CategoryAxis>
                 </syncfusion:SfChart.PrimaryAxis>
                 <syncfusion:SfChart.SecondaryAxis>
-                    <syncfusion:NumericalAxis Header="{local:ResxStatic l10n:Resources.Duration}" FontSize="15" FontWeight="Normal">
-                        <syncfusion:NumericalAxis.HeaderStyle>
+                    <syncfusion:TimeSpanAxis Header="{local:ResxStatic l10n:Resources.Duration}" FontSize="15" FontWeight="Normal" LabelCreated="NumericalAxis_LabelCreated" DesiredIntervalsCount="6">
+                        <syncfusion:TimeSpanAxis.HeaderStyle>
                             <syncfusion:LabelStyle FontSize="18" Foreground="Black"/>
-                        </syncfusion:NumericalAxis.HeaderStyle>
-                    </syncfusion:NumericalAxis>
+                        </syncfusion:TimeSpanAxis.HeaderStyle>
+                    </syncfusion:TimeSpanAxis>
                 </syncfusion:SfChart.SecondaryAxis>
-                <syncfusion:ColumnSeries ItemsSource="{Binding RecordListForChart}" XBindingPath="Date" YBindingPath="Duration" ShowTooltip="True"><!--DurationTimeFormat-->
+                <syncfusion:ColumnSeries ItemsSource="{Binding RecordListForChart}" XBindingPath="Date" YBindingPath="DurationDouble" ShowTooltip="True"
+                                         syncfusion:ChartTooltip.TooltipMargin="15" syncfusion:ChartTooltip.ShowDuration="3000" SegmentSpacing="0.7">
                     <syncfusion:ColumnSeries.AdornmentsInfo>
-                        <syncfusion:ChartAdornmentInfo ShowLabel="true" FontSize="15"/>
+                        <syncfusion:ChartAdornmentInfo SegmentLabelContent="LabelContentPath" ShowLabel="true">
+                            <syncfusion:ChartAdornmentInfo.LabelTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Item.DurationFormat}" FontSize="16" FontWeight="Medium" Margin="0 10 0 0">
+                                    </TextBlock>
+                                </DataTemplate>
+                            </syncfusion:ChartAdornmentInfo.LabelTemplate>
+                        </syncfusion:ChartAdornmentInfo>
                     </syncfusion:ColumnSeries.AdornmentsInfo>
+                    <syncfusion:ColumnSeries.TooltipTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Item.DurationFormat}" Foreground="White" FontWeight="Medium" FontSize="13" 
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </syncfusion:ColumnSeries.TooltipTemplate>
                 </syncfusion:ColumnSeries>
             </syncfusion:SfChart>
 
 
-            <ComboBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding PastWeekMonthYearList, UpdateSourceTrigger=PropertyChanged}" Padding="2 0" 
+            <ComboBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding ChartTimeSorterListForColumSeries, UpdateSourceTrigger=PropertyChanged}" Padding="2 0" 
                       Margin="13 1 0 0" Background="#FFE5E5E5" Height="30" Width="120" FontSize="16" HorizontalContentAlignment="Left"
-                      VerticalAlignment="Top" HorizontalAlignment="Left" SelectedValue="{Binding PastWeekMonthYearSelected, UpdateSourceTrigger=PropertyChanged}"
+                      VerticalAlignment="Top" HorizontalAlignment="Left" SelectedValue="{Binding ChartTimeSorterForColumSeries, UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Key" DisplayMemberPath="Value" Style="{DynamicResource theComboBox}">
                 <ComboBox.Resources>
                     <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">

@@ -23,7 +23,7 @@ namespace WpfDemo.ViewModel
         public ObservableCollection<User> UserListForTaskList { get; } = new ObservableCollection<User>();
 
         private ObservableCollection<TaskViewModel> _taskList = new ObservableCollection<TaskViewModel>();
-        private ObservableCollection<TaskViewModel> _taskListForChart = new ObservableCollection<TaskViewModel>();
+        private ObservableCollection<TaskForChartViewModel> _taskListForChart = new ObservableCollection<TaskForChartViewModel>();
         public ObservableCollection<Task> TaskListForRecordList { get; } = new ObservableCollection<Task>();
         private ObservableCollection<RecordViewModel> _recordList = new ObservableCollection<RecordViewModel>();
         private ObservableCollection<RecordViewModel> _recordListForChart = new ObservableCollection<RecordViewModel>();
@@ -44,7 +44,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public ObservableCollection<TaskViewModel> TaskListForChart
+        public ObservableCollection<TaskForChartViewModel> TaskListForChart
         {
             get
             {
@@ -84,8 +84,8 @@ namespace WpfDemo.ViewModel
                 LoadRecords(CurrentUser.IdUser);
                 LoadRecordsForChart(CurrentUser.IdUser);
 
-                _pastWeekMonthYear = PastWeekMonthYear.AllTime;
-                OnPropertyChanged(nameof(PastWeekMonthYearSelected));
+                _chartTimeSorterForColumSeries = ChartTimeSorter.AllTime;
+                OnPropertyChanged(nameof(ChartTimeSorterForColumSeries));
             }
         }
 
@@ -245,53 +245,53 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private PastWeekMonthYear _pastWeekMonthYear;
-        public PastWeekMonthYear PastWeekMonthYearSelected
+        private ChartTimeSorter _chartTimeSorterForColumSeries;
+        public ChartTimeSorter ChartTimeSorterForColumSeries
         {
             get
             {
-                return _pastWeekMonthYear;
+                return _chartTimeSorterForColumSeries;
             }
             set
             {
-                _pastWeekMonthYear = value;
-                OnPropertyChanged(nameof(PastWeekMonthYearSelected));
+                _chartTimeSorterForColumSeries = value;
+                OnPropertyChanged(nameof(ChartTimeSorterForColumSeries));
                 ReloadRecordsForChartBySelectedItem(CurrentUser.IdUser);
             }
         }
 
-        public Dictionary<PastWeekMonthYear, string> PastWeekMonthYearList
+        public Dictionary<ChartTimeSorter, string> ChartTimeSorterListForColumSeries
         {
             get
             {
-                return Enum.GetValues(typeof(PastWeekMonthYear)).Cast<PastWeekMonthYear>()
-                .ToDictionary<PastWeekMonthYear, PastWeekMonthYear, string>(
+                return Enum.GetValues(typeof(ChartTimeSorter)).Cast<ChartTimeSorter>()
+                .ToDictionary<ChartTimeSorter, ChartTimeSorter, string>(
                 item => item,
                 item => ResourceHandler.GetResourceString(item.ToString()));
             }
         }
 
-        private PastWeekMonthYear _pastWeekMonthYearForPieSeries;
-        public PastWeekMonthYear PastWeekMonthYearSelectedForPieSeries
+        private ChartTimeSorter _chartTimeSorterForPieSeries;
+        public ChartTimeSorter ChartTimeSorterForPieSeries
         {
             get
             {
-                return _pastWeekMonthYearForPieSeries;
+                return _chartTimeSorterForPieSeries;
             }
             set
             {
-                _pastWeekMonthYearForPieSeries = value;
-                OnPropertyChanged(nameof(PastWeekMonthYearSelectedForPieSeries));
+                _chartTimeSorterForPieSeries = value;
+                OnPropertyChanged(nameof(ChartTimeSorterForPieSeries));
                 LoadTasksForChart(CurrentUser.IdUser);
             }
         }
 
-        public Dictionary<PastWeekMonthYear, string> PastWeekMonthYearListForPieSeries
+        public Dictionary<ChartTimeSorter, string> ChartTimeSorterListForPieSeries
         {
             get
             {
-                return Enum.GetValues(typeof(PastWeekMonthYear)).Cast<PastWeekMonthYear>()
-                .ToDictionary<PastWeekMonthYear, PastWeekMonthYear, string>(
+                return Enum.GetValues(typeof(ChartTimeSorter)).Cast<ChartTimeSorter>()
+                .ToDictionary<ChartTimeSorter, ChartTimeSorter, string>(
                 item => item,
                 item => ResourceHandler.GetResourceString(item.ToString()));
             }
@@ -401,21 +401,20 @@ namespace WpfDemo.ViewModel
             });
         }
 
+
         private void LoadTasksForChart(int userid)
         {
             _taskListForChart.Clear();
-            UserListForTaskList.Clear();
-
             try
             {
-                var user = new UserRepository(new UserLogic()).GetUserByID(userid);
-                UserListForTaskList.Add(user);
                 var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(userid);
 
                 tasks.ForEach(task =>
                 {
-                    var taskViewModel = new TaskViewModel(task, UserListForTaskList.ToList());
-                    taskViewModel.User = UserListForTaskList.First(user => user.IdUser == task.User_idUser);
+                    var taskViewModel = new TaskForChartViewModel();
+                    taskViewModel.Title = task.Title;
+                    taskViewModel.Duration = CalculateSumDuration(task.IdTask);
+                    taskViewModel.DurationFormat =  TimeSpan.FromMinutes(taskViewModel.Duration).ToString("hh':'mm");
                     TaskListForChart.Add(taskViewModel);
                 });
             }
@@ -424,6 +423,45 @@ namespace WpfDemo.ViewModel
                 MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+        private int CalculateSumDuration(int taskid)
+        {
+            int sumDuration = 0;
+
+            if (_chartTimeSorterForPieSeries == ChartTimeSorter.ThisYear)
+            {
+                foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(taskid).Where(record =>
+                                                    record.Date > DateTime.Today.AddYears(-1)).ToList())
+                {
+                    sumDuration += record.Duration;
+                }
+            }
+            else if (_chartTimeSorterForPieSeries == ChartTimeSorter.ThisMonth)
+            {
+                foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(taskid).Where(record =>
+                                    record.Date > DateTime.Today.AddMonths(-1)).ToList())
+                {
+                    sumDuration += record.Duration;
+                }
+            }
+            else if (_chartTimeSorterForPieSeries == ChartTimeSorter.ThisWeek)
+            {
+                foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(taskid).Where(record =>
+                     record.Date > DateTime.Today.AddDays(-7)).ToList())
+                {
+                    sumDuration += record.Duration;
+                }
+            }
+            else
+            {
+                foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(taskid)) // a kivalasztott feladat rogziteseinek az idotartamat osszeadjuk
+                {
+                    sumDuration += record.Duration;
+                }
+            }
+
+            return sumDuration;
+        }
+
 
         private void LoadRecords(int userid)
         {
@@ -553,8 +591,6 @@ namespace WpfDemo.ViewModel
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.User_idUser = CurrentUser.IdUser;
                 (Ipage.DataContext as UserProfileTaskViewModel).CurrentTask.Deadline = DateTime.Today.AddDays(1);
                 Ipage.ShowDialog();
-
-                //OnTaskCreated(SelectedTask);
             }
             else
             {
@@ -565,12 +601,6 @@ namespace WpfDemo.ViewModel
 
             LoadTasks(CurrentUser.IdUser);
         }
-        /*private void OnTaskCreated(Task task) NEEEEM JOOOO!!!!
-        {
-            TaskList.Add(task);
-            //SelectedTask = new UserProfileTaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) });
-            //SelectedTask.TaskCreated += OnTaskCreated;
-        }*/
 
 
         private bool CanExecuteSearchTaskList(object arg)
@@ -644,40 +674,43 @@ namespace WpfDemo.ViewModel
         {
             try
             {
-                if (String.IsNullOrWhiteSpace(_searchRecordListValue))
+                if (_selectedTask != null)
                 {
-                    _recordList.Clear();
-
-                    var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CurrentUser.IdUser);
-                    tasks.ForEach(task => TaskListForRecordList.Add(task));
-
-                    var records = new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask).Where(record =>
-                                    (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)).ToList();
-
-                    records.ForEach(record =>
+                    if (String.IsNullOrWhiteSpace(_searchRecordListValue))
                     {
-                        var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
-                        recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
-                        _recordList.Add(recordViewModel);
-                    });
-                }
-                else
-                {
-                    _recordList.Clear();
+                        _recordList.Clear();
 
-                    var records = new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask).Where(record =>
-                                    (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)
-                                    && (record.Comment.Contains(_searchRecordListValue))).ToList();
+                        var tasks = new TaskRepository(new TaskLogic()).GetUserTasks(CurrentUser.IdUser);
+                        tasks.ForEach(task => TaskListForRecordList.Add(task));
 
-                    records.ForEach(record =>
+                        var records = new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask).Where(record =>
+                                        (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)).ToList();
+
+                        records.ForEach(record =>
+                        {
+                            var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                            recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                            _recordList.Add(recordViewModel);
+                        });
+                    }
+                    else
                     {
-                        var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
-                        recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
-                        _recordList.Add(recordViewModel);
-                    });
-                }
+                        _recordList.Clear();
 
-                SortRecordListtByDate(); // Rendezzuk a listat csokkeno sorrendben a Datumok szerint
+                        var records = new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask).Where(record =>
+                                        (record.Date >= _dateFrom && record.Date <= _dateTo) && (record.Duration >= _durationFrom && record.Duration <= _durationTo)
+                                        && (record.Comment.Contains(_searchRecordListValue))).ToList();
+
+                        records.ForEach(record =>
+                        {
+                            var recordViewModel = new RecordViewModel(record, TaskListForRecordList.ToList());
+                            recordViewModel.Task = TaskListForRecordList.First(task => task.IdTask == record.Task_idTask);
+                            _recordList.Add(recordViewModel);
+                        });
+                    }
+
+                    SortRecordListtByDate(); // Rendezzuk a listat csokkeno sorrendben a Datumok szerint
+                }
             }
             catch (SqlException)
             {
@@ -768,7 +801,7 @@ namespace WpfDemo.ViewModel
 
         private void ReloadRecordsForChartBySelectedItem(int userid)
         {
-            if (_pastWeekMonthYear == PastWeekMonthYear.ThisWeek)
+            if (_chartTimeSorterForColumSeries == ChartTimeSorter.ThisWeek)
             {
                 _recordListForChart.Clear();
                 TaskListForRecordList.Clear();
@@ -803,7 +836,7 @@ namespace WpfDemo.ViewModel
                     MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            else if (_pastWeekMonthYear == PastWeekMonthYear.ThisMonth)
+            else if (_chartTimeSorterForColumSeries == ChartTimeSorter.ThisMonth)
             {
                 _recordListForChart.Clear();
                 TaskListForRecordList.Clear();
@@ -838,7 +871,7 @@ namespace WpfDemo.ViewModel
                     MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-            else if (_pastWeekMonthYear == PastWeekMonthYear.ThisYear)
+            else if (_chartTimeSorterForColumSeries == ChartTimeSorter.ThisYear)
             {
                 _recordListForChart.Clear();
                 TaskListForRecordList.Clear();

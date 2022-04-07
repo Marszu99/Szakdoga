@@ -15,6 +15,7 @@
             <ColumnDefinition Width="1.7*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding SelectedRecord.RecordViewUserRowHeight}"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -22,16 +23,23 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Task}" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right"
+        <TextBlock Text="{local:ResxStatic l10n:Resources.User}" Grid.Column="0" Grid.Row="0" FontWeight="Bold" HorizontalAlignment="Right"
                    VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Date}" Grid.Column="0" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Right" 
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Task}" Grid.Column="0" Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Right"
+                   VerticalAlignment="Center" Margin="0 0 8 0" FontSize="32"/>
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Date}" Grid.Column="0" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Right" 
                    VerticalAlignment="Center" Margin="0 0 8 20" FontSize="32"/>
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Duration}" Grid.Column="0" Grid.Row="2" FontWeight="Bold" HorizontalAlignment="Right" 
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Duration}" Grid.Column="0" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right" 
                    VerticalAlignment="Center" Margin="0 0 8 40" FontSize="32"/>
-        <TextBlock Text="{local:ResxStatic l10n:Resources.Comment}" Grid.Column="0" Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right" 
+        <TextBlock Text="{local:ResxStatic l10n:Resources.Comment}" Grid.Column="0" Grid.Row="4" FontWeight="Bold" HorizontalAlignment="Right" 
                    VerticalAlignment="Top" Margin="0 0 8 0" FontSize="32"/>
 
-        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+        <TextBox Text="{Binding SelectedRecord.User_Username, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Background="#FFC7C7C7" Height="37" 
+                 FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" IsReadOnly="True" 
+                 BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedRecord.RecordViewUserTextBoxVisibility}" 
+                 Style="{DynamicResource TextBoxReadOnlyStyle}"/>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
             <ComboBox x:Name="CreateRecordTask" ItemsSource="{Binding SelectedRecord.ActiveTasks, UpdateSourceTrigger=PropertyChanged}" Padding="2 0" 
                       Margin="0 2 0 0" Background="#eee" Width="250" Height="40" FontSize="26" HorizontalContentAlignment="Left"
                       SelectedItem="{Binding SelectedRecord.Task, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
@@ -53,7 +61,7 @@
                 </ComboBox.Resources>
             </ComboBox>
 
-            <TextBox Text="{Binding SelectedRecord.Task.Title, UpdateSourceTrigger=PropertyChanged}" Background="#FFC7C7C7" Height="37" FontSize="26"
+            <TextBox Text="{Binding SelectedRecord.Task.Title}" Background="#FFC7C7C7" Height="37" FontSize="26"
                      HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" IsReadOnly="True" BorderThickness="1" 
                      BorderBrush="Black" Visibility="{Binding SelectedRecord.RecordViewTaskTextboxVisibility}" Style="{DynamicResource TextBoxReadOnlyStyle}"/>
 
@@ -62,7 +70,7 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 20">
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="0 0 0 20">
             <DatePicker x:Name="CreateRecordDate" SelectedDate="{Binding SelectedRecord.Date, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                         SelectedDateFormat="Short" Background="#eee" Height="38" Width="165" FontSize="26" Padding="3,2" FirstDayOfWeek="Monday" Margin="0 2 0 0"
                         Visibility="{Binding SelectedRecord.RecordViewDateDatePickerVisibility}" 
@@ -132,7 +140,7 @@
                 </DatePicker.CalendarStyle>-->
             </DatePicker>
 
-            <TextBox Text="{Binding SelectedRecord.Date, StringFormat='yyyy.MM.dd', UpdateSourceTrigger=PropertyChanged}" Background="#FFC7C7C7" Height="36" 
+            <TextBox Text="{Binding SelectedRecord.Date, StringFormat='yyyy.MM.dd'}" Background="#FFC7C7C7" Height="36" 
                      FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" IsReadOnly="True" BorderThickness="1" 
                      BorderBrush="Black" Visibility="{Binding SelectedRecord.RecordViewDateTextBoxVisibility}" Style="{DynamicResource TextBoxReadOnlyStyle}"/>
 
@@ -141,7 +149,7 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="0 0 0 40">
+        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal" Margin="0 0 0 40">
             <TextBox x:Name="CreateRecordDuration" Text="{Binding SelectedRecord.DurationFormat, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}"
                      Background="{Binding SelectedRecord.RecordViewDurationCommentBackground}" Width="75" Height="36" FontSize="26" Margin="0 2 0 0"
                      HorizontalContentAlignment="Center" BorderThickness="1" BorderBrush="Black" IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}"
@@ -171,7 +179,7 @@
         </StackPanel>
 
 
-        <TextBox x:Name="CreateRecordComment" Text="{Binding SelectedRecord.Comment, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3"
+        <TextBox x:Name="CreateRecordComment" Text="{Binding SelectedRecord.Comment, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4"
                  Background="{Binding SelectedRecord.RecordViewDurationCommentBackground}" Margin="0 4 20 0" Padding="2,1" BorderThickness="1" BorderBrush="Black"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="26" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" 
                  IsReadOnly="{Binding SelectedRecord.IsRecordViewValuesReadOnly}" Style="{DynamicResource TextBoxReadOnlyStyle}">
@@ -183,7 +191,7 @@
         </TextBox>
 
 
-        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
+        <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal">
             <Button x:Name="CreateRecordButton" Content="{local:ResxStatic l10n:Resources.Save}" Command="{Binding SelectedRecord.SaveCommand}"
                     Height="42" Margin="0" Padding="6 3" FontSize="24" BorderThickness="1" BorderBrush="Black" Cursor="Hand" Background="#FF66B2FD"
                     Visibility="{Binding SelectedRecord.RecordViewButtonsVisibility}"><!--FF7FE468-->
@@ -356,13 +364,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="Transparent"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="Transparent"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="Transparent"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
         <Style x:Key="Add10MinToDurationButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -371,15 +375,16 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="grid" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="Background" TargetName="grid" Value="Transparent"/>
                                 <Setter TargetName="ArrowUpPath" Property="Fill" Value="DeepSkyBlue"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="grid" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="Background" TargetName="grid" Value="Transparent"/>
                                 <Setter TargetName="ArrowUpPath" Property="Fill" Value="DeepSkyBlue"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="grid" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="Background" TargetName="grid" Value="Transparent"/>
+                                <Setter TargetName="ArrowUpPath" Property="Fill" Value="#FFF4F4F4"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -389,7 +394,7 @@
 
         <Style x:Key="Subtract10MinFromDurationButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -398,15 +403,16 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="grid" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="Background" TargetName="grid" Value="Transparent"/>
                                 <Setter TargetName="ArrowDownPath" Property="Fill" Value="DeepSkyBlue" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="grid" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="Background" TargetName="grid" Value="Transparent"/>
                                 <Setter TargetName="ArrowDownPath" Property="Fill" Value="DeepSkyBlue" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="grid" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="Background" TargetName="grid" Value="Transparent"/>
+                                <Setter TargetName="ArrowDownPath" Property="Fill" Value="#FFF4F4F4"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

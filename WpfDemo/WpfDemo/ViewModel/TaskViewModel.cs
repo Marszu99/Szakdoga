@@ -243,47 +243,6 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public int SumDuration // UserProfileView kordiagramhoz
-        {
-            get
-            {
-                int sumDuration = 0;
-
-                foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(_task.IdTask)) // a kivalasztott feladat rogziteseinek az idotartamat osszeadjuk
-                {
-                    sumDuration += record.Duration;
-                }
-
-                /*foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(_task.IdTask).Where(record =>
-                                        record.Date > DateTime.Today.AddYears(-1)).ToList())
-                {
-                    sumDuration += record.Duration;
-                }
-
-                foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(_task.IdTask).Where(record =>
-                                        record.Date > DateTime.Today.AddMonths(-1)).ToList())
-                {
-                    sumDuration += record.Duration;
-                }
-
-                foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(_task.IdTask).Where(record =>
-                        record.Date > DateTime.Today.AddDays(-7)).ToList())
-                {
-                    sumDuration += record.Duration;
-                }*/
-
-
-                return sumDuration;
-            }
-        }
-        public string SumDurationFormat
-        {
-            get
-            {
-                return TimeSpan.FromMinutes(SumDuration).ToString("hh':'mm");
-            }
-        }
-
         public string TaskViewUserRowHeight // Admin eseten latszodik ez a sor(User-t mutato sor) egyebkent meg nem
         {
             get
@@ -325,7 +284,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public Visibility TaskViewUserTextBoxVisibility // letezo feladatra kattintva a User neve TextBoxkent lesz lathato
+        public Visibility TaskViewUserTextBoxVisibility // letezo feladatra kattintva a User neve TextBoxkent lesz lathato(az Admin eseten)
         {
             get
             {

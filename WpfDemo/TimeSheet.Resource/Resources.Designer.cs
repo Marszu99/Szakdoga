@@ -70,7 +70,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shows the active tasks.
+        ///   Looks up a localized string similar to Show the active tasks.
         /// </summary>
         public static string ActiveTasksCheckBoxMessage {
             get {
@@ -336,6 +336,15 @@ namespace TimeSheet.Resource {
         public static string DurationCantBeLowerZero {
             get {
                 return ResourceManager.GetString("DurationCantBeLowerZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration on tasks.
+        /// </summary>
+        public static string DurationOnTasks {
+            get {
+                return ResourceManager.GetString("DurationOnTasks", resourceCulture);
             }
         }
         
@@ -610,7 +619,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shows my own records.
+        ///   Looks up a localized string similar to Show my own records.
         /// </summary>
         public static string MyRecordsCheckBoxMessage {
             get {
@@ -619,7 +628,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shows my own tasks.
+        ///   Looks up a localized string similar to Show my own tasks.
         /// </summary>
         public static string MyTasksCheckBoxMessage {
             get {
@@ -664,7 +673,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shows the notifications for the tasks.
+        ///   Looks up a localized string similar to Show the notifications for the tasks.
         /// </summary>
         public static string NotificationsCheckBoxMessage {
             get {
@@ -1011,6 +1020,15 @@ namespace TimeSheet.Resource {
         public static string TaskDeleteQuestion2 {
             get {
                 return ResourceManager.GetString("TaskDeleteQuestion2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task recording durations.
+        /// </summary>
+        public static string TaskRecordingDurations {
+            get {
+                return ResourceManager.GetString("TaskRecordingDurations", resourceCulture);
             }
         }
         

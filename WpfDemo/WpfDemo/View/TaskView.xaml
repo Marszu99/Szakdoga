@@ -59,7 +59,7 @@
                     </Style>
                 </ComboBox.Resources>
             </ComboBox>
-            <TextBox Text="{Binding SelectedTask.User.Username, UpdateSourceTrigger=PropertyChanged}" Background="#FFC7C7C7" Height="37" 
+            <TextBox Text="{Binding SelectedTask.User.Username}" Background="#FFC7C7C7" Height="37" 
                      FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" IsReadOnly="True" 
                      BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedTask.TaskViewUserTextBoxVisibility}" 
                      Style="{DynamicResource TextBoxReadOnlyStyle}"/>
@@ -79,7 +79,7 @@
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            <TextBox Text="{Binding SelectedTask.Title, UpdateSourceTrigger=PropertyChanged}" Background="#FFC7C7C7" Height="37"
+            <TextBox Text="{Binding SelectedTask.Title}" Background="#FFC7C7C7" Height="37"
                      FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" IsReadOnly="True" 
                      BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedTask.TaskViewTitleDeadlineTextBoxVisibility}"
                      Style="{DynamicResource TextBoxReadOnlyStyle}"/>
@@ -138,7 +138,7 @@
                     </Style>
                 </DatePicker.Resources>
             </DatePicker>
-            <TextBox Text="{Binding SelectedTask.Deadline, StringFormat='yyyy.MM.dd', UpdateSourceTrigger=PropertyChanged}" Background="#FFC7C7C7" Height="36" 
+            <TextBox Text="{Binding SelectedTask.Deadline, StringFormat='yyyy.MM.dd'}" Background="#FFC7C7C7" Height="36" 
                      FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" IsReadOnly="True" 
                      BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedTask.TaskViewTitleDeadlineTextBoxVisibility}"
                      Style="{DynamicResource TextBoxReadOnlyStyle}"/>
@@ -163,7 +163,7 @@
                     </Style>
                 </ComboBox.Resources>
             </ComboBox>
-            <TextBox Text="{Binding SelectedTask.TaskStatusString, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Background="#FFC7C7C7" Height="37"
+            <TextBox Text="{Binding SelectedTask.TaskStatusString, Mode=OneWay}" Background="#FFC7C7C7" Height="37"
                      FontSize="26" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Margin="0 2 0 0" Padding="2 0" IsReadOnly="True" 
                      BorderThickness="1" BorderBrush="Black" Visibility="{Binding SelectedTask.TaskViewStatusTextBoxVisibility}"
                      Style="{DynamicResource TextBoxReadOnlyStyle}"/>
