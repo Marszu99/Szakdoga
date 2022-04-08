@@ -36,7 +36,7 @@ namespace WpfDemo.ViewModel
         private ObservableCollection<Task> _myToDoTaskList = new ObservableCollection<Task>();
         private ObservableCollection<Task> _myDoneTaskList = new ObservableCollection<Task>();
 
-        public ObservableCollection<Task> MyToDoTaskList
+        public ObservableCollection<Task> MyToDoTaskList // Elvegzendo feladatok listajanak a bindolashoz
         {
             get
             {
@@ -44,7 +44,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public ObservableCollection<Task> MyDoneTaskList
+        public ObservableCollection<Task> MyDoneTaskList // Elvegzett feladatok listajanak a bindolashoz
         {
             get
             {
@@ -289,6 +289,21 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility MyProfileViewToDoTaskListMessageVisibility // Ha nincs elvegzendo feladata a felhasznalonak akkor azt kiirja a listaba
+        {
+            get
+            {
+                return MyToDoTaskList.Count < 1?  Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility MyProfileViewDoneTaskListMessageVisibility // Ha nincs elvegzett feladata a felhasznalonak akkor azt kiirja a listaba
+        {
+            get
+            {
+                return MyDoneTaskList.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
         public string Error { get { return null; } } // IDataError-hoz kell
@@ -463,7 +478,7 @@ namespace WpfDemo.ViewModel
                                   "\n\t\t\t\t\t\t\t\tFirstName: " + this._user.FirstName +
                                   "\n\t\t\t\t\t\t\t\tLastName: " + this._user.LastName +
                                   "\n\t\t\t\t\t\t\t\tEmail: " + this._user.Email +
-                                  "\n\t\t\t\t\t\t\t\tTelephone: " + this._user.Password;
+                                  "\n\t\t\t\t\t\t\t\tTelephone: " + this._user.Telephone;
             MailMessage mm = new MailMessage("wpfszakdoga@gmail.com", this._user.Email, EmailSubject, EmailMessage);
             mm.BodyEncoding = UTF8Encoding.UTF8;
             mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;

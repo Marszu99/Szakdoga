@@ -127,7 +127,7 @@
     <value>10 percet hozzáad az időtartamhoz</value>
   </data>
   <data name="AllTime" xml:space="preserve">
-    <value>Mindig</value>
+    <value>Mindenkor</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>VISSZA</value>
@@ -197,6 +197,9 @@
   </data>
   <data name="Done" xml:space="preserve">
     <value>Kész</value>
+  </data>
+  <data name="DoneTaskListMessage" xml:space="preserve">
+    <value>Nincs elvégzett feladat!</value>
   </data>
   <data name="DoneTasks" xml:space="preserve">
     <value>ELVÉGZETT</value>
@@ -381,6 +384,9 @@
   <data name="RecordDeleteQuestion" xml:space="preserve">
     <value>Biztos törölni akarja ezt a rögzítés?</value>
   </data>
+  <data name="RecordListNoRecordMessage" xml:space="preserve">
+    <value>Felhasználónak nincs rögzítése!</value>
+  </data>
   <data name="Records" xml:space="preserve">
     <value>RÖGZÍTÉSEK</value>
   </data>
@@ -438,6 +444,9 @@
   <data name="TaskDeleteQuestion2" xml:space="preserve">
     <value> feladatot?</value>
   </data>
+  <data name="TaskListUserNoTaskMessage" xml:space="preserve">
+    <value>Felhasználónak nincs feladata!</value>
+  </data>
   <data name="TaskRecordingDurations" xml:space="preserve">
     <value>Feladat rögzítéseinek időtartamai</value>
   </data>
@@ -474,6 +483,9 @@
   <data name="TitleWrongLength" xml:space="preserve">
     <value>Cím nem lehet 45 karakternél hosszabb!</value>
   </data>
+  <data name="ToDoTaskListMessage" xml:space="preserve">
+    <value>Nincs elvégzendő feladat!</value>
+  </data>
   <data name="ToDoTasks" xml:space="preserve">
     <value>ELVÉGZENDŐ</value>
   </data>
@@ -506,6 +518,12 @@
   </data>
   <data name="UsernameWrongLength" xml:space="preserve">
     <value>Felhasználónév legalább 6 és legfeljebb 45 karakter hosszú lehet!</value>
+  </data>
+  <data name="UserProfileRecordListNoRecordsForTaskMessage" xml:space="preserve">
+    <value>Kiválasztott feladathoz nincs rögzítés!</value>
+  </data>
+  <data name="UserProfileRecordListNoTaskSelectedMessage" xml:space="preserve">
+    <value>Nincs kiválasztva feladat!</value>
   </data>
   <data name="Users" xml:space="preserve">
     <value>FELHASZNÁLÓK</value>

@@ -394,6 +394,12 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{local:ResxStatic l10n:Resources.TaskListUserNoTaskMessage}" FontSize="40" Margin="0 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.3" 
+                       Visibility="{Binding UserProfileViewTaskListMessageVisibility}">
+                <TextBlock.LayoutTransform>
+                    <RotateTransform Angle="16"/>
+                </TextBlock.LayoutTransform>
+            </TextBlock>
 
 
             <syncfusion:SfChart Grid.Row="1" Grid.Column="0" Background="LightGray" Header="{local:ResxStatic l10n:Resources.DurationOnTasks}" FontSize="25"
@@ -422,6 +428,12 @@
                                             VerticalAlignment="Top" IconHeight="15" IconWidth="15"/>
                 </syncfusion:SfChart.Legend>
             </syncfusion:SfChart>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{local:ResxStatic l10n:Resources.TaskListUserNoTaskMessage}" FontSize="40" Margin="0 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.3" 
+                       Visibility="{Binding UserProfileViewTaskListMessageVisibility}">
+                <TextBlock.LayoutTransform>
+                    <RotateTransform Angle="24"/>
+                </TextBlock.LayoutTransform>
+            </TextBlock>
 
             <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ChartTimeSorterListForPieSeries, UpdateSourceTrigger=PropertyChanged}" Padding="2 0" 
                       Margin="1 1 0 0" Background="#FFE5E5E5" Height="30" Width="120" FontSize="16" HorizontalContentAlignment="Left"
@@ -438,7 +450,7 @@
                 </ComboBox.Resources>
             </ComboBox>
 
-            
+
             <DataGrid x:Name="UserRecordsDataGrid" x:FieldModifier="public" ItemsSource="{Binding RecordList}" AutoGenerateColumns="False" Background="LightGray" 
                       Width="697" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" 
                       ScrollViewer.HorizontalScrollBarVisibility="Auto" CanUserAddRows="False" IsReadOnly="True" FontSize="20"
@@ -505,6 +517,12 @@
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding UserProfileViewRecordListMessage}" FontSize="40" Margin="0 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.3" 
+                       Visibility="{Binding UserProfileViewRecordListMessageVisibility}">
+                <TextBlock.LayoutTransform>
+                    <RotateTransform Angle="16"/>
+                </TextBlock.LayoutTransform>
+            </TextBlock>
 
 
             <syncfusion:SfChart Name="MyChart" Grid.Row="1" Grid.Column="2" Header="{local:ResxStatic l10n:Resources.TaskRecordingDurations}" FontSize="25" FontWeight="Medium"
@@ -543,6 +561,12 @@
                     </syncfusion:ColumnSeries.TooltipTemplate>
                 </syncfusion:ColumnSeries>
             </syncfusion:SfChart>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding UserProfileViewRecordListMessage}" FontSize="38" Margin="60 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.3" 
+                       Visibility="{Binding UserProfileViewRecordListMessageVisibility}">
+                <TextBlock.LayoutTransform>
+                    <RotateTransform Angle="24"/>
+                </TextBlock.LayoutTransform>
+            </TextBlock>
 
 
             <ComboBox Grid.Row="1" Grid.Column="2" ItemsSource="{Binding ChartTimeSorterListForColumSeries, UpdateSourceTrigger=PropertyChanged}" Padding="2 0" 

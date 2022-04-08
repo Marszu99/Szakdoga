@@ -20,8 +20,8 @@ namespace WpfDemo.ViewModel
 {
     public class TaskManagementViewModel : ViewModelBase
     {
-        public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>();
-        public ObservableCollection<TaskViewModel> TaskList { get; } = new ObservableCollection<TaskViewModel>();
+        public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>(); // felhaszno lista
+        public ObservableCollection<TaskViewModel> TaskList { get; } = new ObservableCollection<TaskViewModel>(); // Feladat listanak bindolashoz
 
         public TaskManagementView _view;
         private int _lastSelectedTaskID = 0; // utoljara valasztott Task ID-ja
@@ -29,8 +29,8 @@ namespace WpfDemo.ViewModel
         private bool _isLanguageEnglish = true;
 
 
-        private TaskViewModel _selectedTask;
-        public TaskViewModel SelectedTask
+        private TaskViewModel _selectedTask; // kivalasztott feladatot tarolja
+        public TaskViewModel SelectedTask // Kivalasztott feladat bindolashoz
         {
             get { return _selectedTask; }
             set
@@ -93,9 +93,9 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private DateTime _deadlineFrom = DateTime.Today.AddYears(100);
-        private DateTime _deadlineFromLowest;
-        public DateTime DeadlineFrom
+        private DateTime _deadlineFrom = DateTime.Today.AddYears(100); // hataridotol tarolashoz (szuresnel/keresesnel)
+        private DateTime _deadlineFromLowest; // legkorabbi hataridot tarolja (szuresnel/keresesnel)
+        public DateTime DeadlineFrom // hataridotol bindolashoz (szuresnel/keresesnel)
         {
             get
             {
@@ -108,9 +108,9 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private DateTime _deadlineTo = DateTime.Parse("0001.01.01");
-        private DateTime _deadlineToHighest;
-        public DateTime DeadlineTo
+        private DateTime _deadlineTo = DateTime.Parse("0001.01.01"); // hataridoig tarolashoz (szuresnel/keresesnel)
+        private DateTime _deadlineToHighest; // legkesobbi hataridot tarolja (szuresnel/keresesnel)
+        public DateTime DeadlineTo // hataridoig bindolashoz (szuresnel/keresesnel)
         {
             get
             {
@@ -236,14 +236,22 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility ListTasksViewTaskListMessageVisibility // Ha nincs feladata a felhasznalonak akkor azt kiija a listaba
+        {
+            get
+            {
+                return TaskList.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
 
         public RelayCommand CreateTaskCommand { get; private set; }
         public RelayCommand ExportToExcelCommand { get; private set; }
         public RelayCommand SortingByCheckBoxCommand { get; private set; }
         public RelayCommand SearchingCommand { get; private set; }
         public RelayCommand ResetTaskListCommand { get; private set; }
-        public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand SpentTimeWithCommand { get; private set; }
+        public RelayCommand DeleteCommand { get; private set; }
         public RelayCommand HasReadCommand { get; private set; }
         public RelayCommand NotificationsSwitchOnOffCommand { get; private set; }
 
@@ -261,8 +269,8 @@ namespace WpfDemo.ViewModel
             SortingByCheckBoxCommand = new RelayCommand(SortingByCheckBox, CanExecuteSort);
             SearchingCommand = new RelayCommand(Search, CanExecuteSearch);
             ResetTaskListCommand = new RelayCommand(ResetTaskList, CanExecuteReset);
-            DeleteCommand = new RelayCommand(DeleteTask, CanExecuteDeleteTask);
             SpentTimeWithCommand = new RelayCommand(CalculateDurationForTask, CanExecuteCalculateDurationForTask);
+            DeleteCommand = new RelayCommand(DeleteTask, CanExecuteDeleteTask);
             HasReadCommand = new RelayCommand(HasRead, CanExecuteReadTaskNotifications);
             NotificationsSwitchOnOffCommand = new RelayCommand(NotificationSwitchOnOff, CanExecuteSwitch);
         }
@@ -895,6 +903,23 @@ namespace WpfDemo.ViewModel
         }
 
 
+        private bool CanExecuteCalculateDurationForTask(object arg)
+        {
+            return _selectedTask != null;
+        }
+        private void CalculateDurationForTask(object obj) // Kiszamitja a feladattal foglalkozott/eltoltott idot
+        {
+            int spentTime = 0;
+
+            foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask)) // a kivalasztott feladat rogziteseinek az idotartamat osszeadjuk
+            {
+                spentTime += record.Duration;
+            }
+
+            MessageBox.Show(Resources.SpentTimeMessage1 + SelectedTask.Title + Resources.SpentTimeMessage2 + TimeSpan.FromMinutes(spentTime).ToString("hh':'mm"), Resources.Information);
+        }
+
+
         private bool CanExecuteDeleteTask(object arg)
         {
             return _selectedTask != null && LoginViewModel.LoggedUser.Status != 0;
@@ -930,23 +955,6 @@ namespace WpfDemo.ViewModel
                     MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
-        }
-
-
-        private bool CanExecuteCalculateDurationForTask(object arg)
-        {
-            return _selectedTask != null;
-        }
-        private void CalculateDurationForTask(object obj) // Kiszamitja a feladattal foglalkozott/eltoltott idot
-        {
-            int spentTime = 0;
-
-            foreach (Record record in new RecordRepository(new RecordLogic()).GetTaskRecords(SelectedTask.IdTask)) // a kivalasztott feladat rogziteseinek az idotartamat osszeadjuk
-            {
-                spentTime += record.Duration;
-            }
-
-            MessageBox.Show(Resources.SpentTimeMessage1 + SelectedTask.Title + Resources.SpentTimeMessage2 + TimeSpan.FromMinutes(spentTime).ToString("hh':'mm"), Resources.Information);
         }
 
 

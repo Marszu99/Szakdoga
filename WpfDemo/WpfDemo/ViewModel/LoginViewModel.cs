@@ -80,7 +80,7 @@ namespace WpfDemo.ViewModel
                         _view.Content = new TabcontrolView(true); // true erteket kuldok h a ToggleButton CheckBox-a True legyen(miutan meg nem lehetett modositani a nyelvet es az alap nyelv az angol)
                         MyProfileView Ipage = new MyProfileView();
                         (Ipage.DataContext as MyProfileViewModel).CurrentLoggedUser = LoggedUser;
-                        MessageBox.Show(Resources.MissingProfileDatasMessage);
+                        MessageBox.Show(Resources.MissingProfileDatasMessage, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
                         Ipage.ShowDialog();
                     }
                     else

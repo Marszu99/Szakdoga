@@ -23,8 +23,8 @@ namespace WpfDemo.ViewModel
         public UserManagementView _view;
 
 
-        private UserViewModel _selectedUser;
-        public UserViewModel SelectedUser
+        private UserViewModel _selectedUser; // kivalasztott felhasznalot tarolja
+        public UserViewModel SelectedUser // kivalasztott felhasznalo bindolashoz
         {
             get { return _selectedUser; }
             set
@@ -32,7 +32,6 @@ namespace WpfDemo.ViewModel
                 _selectedUser = value;
                 OnPropertyChanged(nameof(SelectedUser));
                 OnPropertyChanged(nameof(SelectedUserVisibility));
-                //OnPropertyChanged(nameof(ListUsersViewContextMenuVisibility));
             }
         }
 
@@ -95,6 +94,22 @@ namespace WpfDemo.ViewModel
         }
 
 
+        public void LoadUsers()
+        {
+            try
+            {
+                UserList.Clear();
+
+                var users = new UserRepository(new UserLogic()).GetAllUsers();
+                users.ForEach(user => UserList.Add(new UserViewModel(user)));
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+
         private bool CanExecuteShow(object arg)
         {
             return true;
@@ -106,7 +121,9 @@ namespace WpfDemo.ViewModel
         }
         private void OnUserCreated(UserViewModel userViewModel)
         {
-            UserList.Add(userViewModel);// hozzaadja a listahoz
+            //UserList.Add(userViewModel);// hozzaadja a listahoz
+
+            LoadUsers(); // frissiti a listat
 
             // Uj letrehozasahoz
             SelectedUser = new UserViewModel(new User());
@@ -302,21 +319,6 @@ namespace WpfDemo.ViewModel
 
                     users.ForEach(user => UserList.Add(new UserViewModel(user)));
                 }
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-        }
-
-        public void LoadUsers()
-        {
-            try
-            {
-                UserList.Clear();
-
-                var users = new UserRepository(new UserLogic()).GetAllUsers();
-                users.ForEach(user => UserList.Add(new UserViewModel(user)));
             }
             catch (SqlException)
             {

@@ -122,6 +122,12 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
+            <TextBlock Text="{local:ResxStatic l10n:Resources.RecordListNoRecordMessage}" FontSize="50" Margin="0 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.3" 
+                       Visibility="{Binding ListRecordsViewRecordListMessageVisibility}">
+                <TextBlock.LayoutTransform>
+                    <RotateTransform Angle="32"/>
+                </TextBlock.LayoutTransform>
+            </TextBlock>
         </Grid>
     </Grid>
 

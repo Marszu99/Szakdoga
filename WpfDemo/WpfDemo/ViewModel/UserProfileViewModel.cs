@@ -18,25 +18,25 @@ namespace WpfDemo.ViewModel
 {
     public class UserProfileViewModel : ViewModelBase
     {
-        private User _currentUser;
-        private TaskViewModel _selectedTask;
-        public ObservableCollection<User> UserListForTaskList { get; } = new ObservableCollection<User>();
+        private User _currentUser; // Jelenlegi felhasznalot tarolja
+        private TaskViewModel _selectedTask; // kivalasztott feladatot tarolja
+        public ObservableCollection<User> UserListForTaskList { get; } = new ObservableCollection<User>(); // TaskViewModel miatt kell a feladatok betoltesehez
 
-        private ObservableCollection<TaskViewModel> _taskList = new ObservableCollection<TaskViewModel>();
-        private ObservableCollection<TaskForChartViewModel> _taskListForChart = new ObservableCollection<TaskForChartViewModel>();
-        public ObservableCollection<Task> TaskListForRecordList { get; } = new ObservableCollection<Task>();
-        private ObservableCollection<RecordViewModel> _recordList = new ObservableCollection<RecordViewModel>();
-        private ObservableCollection<RecordViewModel> _recordListForChart = new ObservableCollection<RecordViewModel>();
+        private ObservableCollection<TaskViewModel> _taskList = new ObservableCollection<TaskViewModel>(); // Feladatok listaja
+        private ObservableCollection<TaskForChartViewModel> _taskListForChart = new ObservableCollection<TaskForChartViewModel>(); // Feladatok listaja a kordiagramhoz
+        public ObservableCollection<Task> TaskListForRecordList { get; } = new ObservableCollection<Task>(); // Feladatok listaja a rogzites lista miatt
+        private ObservableCollection<RecordViewModel> _recordList = new ObservableCollection<RecordViewModel>(); // Rogzites listaja
+        private ObservableCollection<RecordViewModel> _recordListForChart = new ObservableCollection<RecordViewModel>(); // Rogzites listaja az oszlopdiagramhoz
 
 
-        public ObservableCollection<TaskViewModel> TaskList
+        public ObservableCollection<TaskViewModel> TaskList // Feladat lista bindolashoz
         {
             get
             {
                 return _taskList;
             }
         }
-        public ObservableCollection<RecordViewModel> RecordList
+        public ObservableCollection<RecordViewModel> RecordList // Rogzites lista bindolashoz
         {
             get
             {
@@ -44,14 +44,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public ObservableCollection<TaskForChartViewModel> TaskListForChart
+        public ObservableCollection<TaskForChartViewModel> TaskListForChart // Feladat lista bindolashoz a kordiagramnak
         {
             get
             {
                 return _taskListForChart;
             }
         }
-        public ObservableCollection<RecordViewModel> RecordListForChart
+        public ObservableCollection<RecordViewModel> RecordListForChart // Rogzites lista bindolashoz az oszlopdiagramnak
         {
             get
             {
@@ -59,7 +59,7 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        public User CurrentUser
+        public User CurrentUser // Jelenlegi felhasznlo
         {
             get
             {
@@ -73,7 +73,7 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public TaskViewModel SelectedTask
+        public TaskViewModel SelectedTask // kivalasztott feladat bindolashoz
         {
             get { return _selectedTask; }
             set
@@ -81,18 +81,23 @@ namespace WpfDemo.ViewModel
                 _selectedTask = value;
                 OnPropertyChanged(nameof(SelectedTask));
 
-                LoadRecords(CurrentUser.IdUser);
-                LoadRecordsForChart(CurrentUser.IdUser);
+                LoadRecords(CurrentUser.IdUser); // Betolti a feladat rogziteseit a listaba
+                LoadRecordsForChart(CurrentUser.IdUser); // Betolti a feladat rogziteseit az oszlopdiagramba
 
+                // Ha a feladatot valt es annak nincs rogzitese akkor kiirja ha van akkor nem irja ki
+                OnPropertyChanged(nameof(UserProfileViewRecordListMessageVisibility));
+                OnPropertyChanged(nameof(UserProfileViewRecordListMessage));
+
+                // Ha feladatot valt akkor ne mentse el az oszlopdiagramnal kivalasztott szurest
                 _chartTimeSorterForColumSeries = ChartTimeSorter.AllTime;
                 OnPropertyChanged(nameof(ChartTimeSorterForColumSeries));
             }
         }
 
 
-        private DateTime _deadlineFrom = DateTime.Today.AddYears(100);
-        private DateTime _deadlineFromLowest;
-        public DateTime DeadlineFrom
+        private DateTime _deadlineFrom = DateTime.Today.AddYears(100); // hataridotol tarolashoz (szuresnel/keresesnel)
+        private DateTime _deadlineFromLowest; // legkorabbi hataridot tarolja (szuresnel/keresesnel)
+        public DateTime DeadlineFrom // hataridotol bindolashoz (szuresnel/keresesnel)
         {
             get
             {
@@ -105,9 +110,9 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private DateTime _deadlineTo = DateTime.Parse("0001.01.01");
-        private DateTime _deadlineToHighest;
-        public DateTime DeadlineTo
+        private DateTime _deadlineTo = DateTime.Parse("0001.01.01"); // hataridoig tarolashoz (szuresnel/keresesnel)
+        private DateTime _deadlineToHighest; // legkesobbi hataridot tarolja (szuresnel/keresesnel)
+        public DateTime DeadlineTo // hataridoig bindolashoz (szuresnel/keresesnel)
         {
             get
             {
@@ -132,9 +137,9 @@ namespace WpfDemo.ViewModel
         }
 
 
-        private DateTime _dateFrom = DateTime.Today;
-        private DateTime _dateFromLowest;
-        public DateTime DateFrom
+        private DateTime _dateFrom = DateTime.Today; // datumtol tarolasahoz (szuresnel/keresesnel)
+        private DateTime _dateFromLowest; // Legkorabbi datum tarolasahoz (szuresnel/keresesnel)
+        public DateTime DateFrom // datumtol bindolashoz (szuresnel/keresesnel)
         {
             get
             {
@@ -147,9 +152,9 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private DateTime _dateTo = DateTime.Parse("0001.01.01");
-        private DateTime _dateToHighest;
-        public DateTime DateTo
+        private DateTime _dateTo = DateTime.Parse("0001.01.01"); // datumig tarolasahoz (szuresnel/keresesnel)
+        private DateTime _dateToHighest; // Legkesobbi datum tarolasahoz (szuresnel/keresesnel)
+        public DateTime DateTo // datumig bindolashoz (szuresnel/keresesnel)
         {
             get
             {
@@ -162,9 +167,9 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private int _durationFrom = 720;
-        private int _durationFromLowest;
-        public int DurationFrom
+        private int _durationFrom = 720; // idotartamtol tarolasahoz (szuresnel/keresesnel)
+        private int _durationFromLowest; // legkisebb idotartam tarolashoz (szuresnel/keresesnel)
+        public int DurationFrom // idotartamtol bindolashoz (szuresnel/keresesnel)
         {
             get
             {
@@ -198,9 +203,9 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private int _durationTo = 0;
-        private int _durationToHighest;
-        public int DurationTo
+        private int _durationTo = 0; // idotartamig tarolashoz (szuresnel/keresesnel)
+        private int _durationToHighest; // legnagyobb idotartam tarolashoz (szuresnel/keresesnel)
+        public int DurationTo // idotartamig bindolashoz (szuresnel/keresesnel)
         {
             get
             {
@@ -245,22 +250,22 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private ChartTimeSorter _chartTimeSorterForColumSeries;
-        public ChartTimeSorter ChartTimeSorterForColumSeries
+        private ChartTimeSorter _chartTimeSorterForPieSeries;
+        public ChartTimeSorter ChartTimeSorterForPieSeries // Kordiagram szureshez a bindolas
         {
             get
             {
-                return _chartTimeSorterForColumSeries;
+                return _chartTimeSorterForPieSeries;
             }
             set
             {
-                _chartTimeSorterForColumSeries = value;
-                OnPropertyChanged(nameof(ChartTimeSorterForColumSeries));
-                ReloadRecordsForChartBySelectedItem(CurrentUser.IdUser);
+                _chartTimeSorterForPieSeries = value;
+                OnPropertyChanged(nameof(ChartTimeSorterForPieSeries));
+                LoadTasksForChart(CurrentUser.IdUser); // ha valtozik akkor betolti ujra a listat a szures alapjan
             }
         }
 
-        public Dictionary<ChartTimeSorter, string> ChartTimeSorterListForColumSeries
+        public Dictionary<ChartTimeSorter, string> ChartTimeSorterListForPieSeries // Kordiagram szureshez(Mindenkor,Évben,Hónapban,Héten)
         {
             get
             {
@@ -271,22 +276,22 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private ChartTimeSorter _chartTimeSorterForPieSeries;
-        public ChartTimeSorter ChartTimeSorterForPieSeries
+        private ChartTimeSorter _chartTimeSorterForColumSeries;
+        public ChartTimeSorter ChartTimeSorterForColumSeries // Oszlopdiagram szureshez a bindolas
         {
             get
             {
-                return _chartTimeSorterForPieSeries;
+                return _chartTimeSorterForColumSeries;
             }
             set
             {
-                _chartTimeSorterForPieSeries = value;
-                OnPropertyChanged(nameof(ChartTimeSorterForPieSeries));
-                LoadTasksForChart(CurrentUser.IdUser);
+                _chartTimeSorterForColumSeries = value;
+                OnPropertyChanged(nameof(ChartTimeSorterForColumSeries));
+                ReloadRecordsForChartBySelectedItem(CurrentUser.IdUser); // ha valtozik akkor betolti ujra a listat a szures alapjan
             }
         }
 
-        public Dictionary<ChartTimeSorter, string> ChartTimeSorterListForPieSeries
+        public Dictionary<ChartTimeSorter, string> ChartTimeSorterListForColumSeries // Oszlopdiagram szureshez(Mindenkor,Évben,Hónapban,Héten)
         {
             get
             {
@@ -313,6 +318,37 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public Visibility UserProfileViewTaskListMessageVisibility // Ha nincs a felhasznalonak feladata akkor az kiirja a listaba/diagramba
+        {
+            get
+            {
+                return TaskList.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public Visibility UserProfileViewRecordListMessageVisibility // Ha nincs kivalasztva feladat vagy a feladathoz rogzites akkor azt kiirja a listaba/diagramba
+        {
+            get
+            {
+                return _selectedTask == null || RecordList.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+
+        public string UserProfileViewRecordListMessage // Az uzenet bindolasa ha nincs kivalasztva feladat vagy a feladathoz rogzites akkor azt kiirja a listaba/diagramba
+        {
+            get
+            {
+                if (_selectedTask == null)
+                {
+                    return Resources.UserProfileRecordListNoTaskSelectedMessage;
+                }
+                else
+                {
+                    return Resources.UserProfileRecordListNoRecordsForTaskMessage;
+                }
+            }
+        }
+
         public RelayCommand ShowTaskCommand { get; private set; }
         public RelayCommand SearchingTaskListCommand { get; private set; }
         public RelayCommand ResetTaskListCommand { get; private set; }
@@ -325,8 +361,8 @@ namespace WpfDemo.ViewModel
         {
             LoadTasks(userid); // Betolti a Felhasznalo Feladatait
             LoadRecords(userid); // Betolti a Felhasznalo Rogziteseit
-            LoadTasksForChart(userid);
-            LoadRecordsForChart(userid);
+            LoadTasksForChart(userid); // Betolti a Felhasznlo Feladatait a kordiagramba
+            LoadRecordsForChart(userid); // Betolti a Felhasznalo feladatanak rogziteseit az oszlopdiagramba
 
             ShowTaskCommand = new RelayCommand(ShowTask, CanShowTask);
             SearchingTaskListCommand = new RelayCommand(SearchTaskList, CanExecuteSearchTaskList);
@@ -414,7 +450,7 @@ namespace WpfDemo.ViewModel
                     var taskViewModel = new TaskForChartViewModel();
                     taskViewModel.Title = task.Title;
                     taskViewModel.Duration = CalculateSumDuration(task.IdTask);
-                    taskViewModel.DurationFormat =  TimeSpan.FromMinutes(taskViewModel.Duration).ToString("hh':'mm");
+                    taskViewModel.DurationFormat =  TimeSpan.FromMinutes(taskViewModel.Duration).ToString("hh':'mm"); // atalakija az idotartam formatumat
                     TaskListForChart.Add(taskViewModel);
                 });
             }
@@ -423,7 +459,7 @@ namespace WpfDemo.ViewModel
                 MessageBox.Show(Resources.ServerError, Resources.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-        private int CalculateSumDuration(int taskid)
+        private int CalculateSumDuration(int taskid) // kiszamitja a megfelelo szures eseten az osszes idotartamat a feladatnak
         {
             int sumDuration = 0;
 
@@ -799,7 +835,7 @@ namespace WpfDemo.ViewModel
         }
 
 
-        private void ReloadRecordsForChartBySelectedItem(int userid)
+        private void ReloadRecordsForChartBySelectedItem(int userid) // a szuresnel megfeleloen betolti a listat
         {
             if (_chartTimeSorterForColumSeries == ChartTimeSorter.ThisWeek)
             {

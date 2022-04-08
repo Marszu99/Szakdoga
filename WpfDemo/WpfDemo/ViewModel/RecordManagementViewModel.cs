@@ -19,17 +19,17 @@ namespace WpfDemo.ViewModel
 {
     public class RecordManagementViewModel : ViewModelBase
     {
-        public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>();
-        public ObservableCollection<Task> TaskList { get; } = new ObservableCollection<Task>();
-        public ObservableCollection<RecordViewModel> RecordList { get; } = new ObservableCollection<RecordViewModel>();
+        //public ObservableCollection<User> UserList { get; } = new ObservableCollection<User>();
+        public ObservableCollection<Task> TaskList { get; } = new ObservableCollection<Task>(); // Feladatok listaja
+        public ObservableCollection<RecordViewModel> RecordList { get; } = new ObservableCollection<RecordViewModel>(); // rogzites listanak a bindolashoz
 
         public RecordManagementView _view;
         private int _lastSelectedRecordID = 0; // utoljara valasztott Record ID-ja
         private int _lastSelectedRecordCount = 0; // utoljara valasztott elem indexe a RecordList-bol
 
 
-        private RecordViewModel _selectedRecord;
-        public RecordViewModel SelectedRecord
+        private RecordViewModel _selectedRecord; // kivalasztott rogzitest tarolja
+        public RecordViewModel SelectedRecord // Kivalasztott rogzites bindaloshoz
         {
             get { return _selectedRecord; }
             set
@@ -95,9 +95,9 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private DateTime _dateFrom = DateTime.Today;
-        private DateTime _dateFromLowest;
-        public DateTime DateFrom
+        private DateTime _dateFrom = DateTime.Today; // datumtol tarolasahoz (szuresnel/keresesnel)
+        private DateTime _dateFromLowest; // Legkorabbi datum tarolasahoz (szuresnel/keresesnel)
+        public DateTime DateFrom // datumtol bindolashoz (szuresnel/keresesnel)
         {
             get
             {
@@ -110,9 +110,9 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private DateTime _dateTo = DateTime.Parse("0001.01.01");
-        private DateTime _dateToHighest;
-        public DateTime DateTo
+        private DateTime _dateTo = DateTime.Parse("0001.01.01"); // datumig tarolasahoz (szuresnel/keresesnel)
+        private DateTime _dateToHighest; // Legkesobbi datum tarolasahoz (szuresnel/keresesnel)
+        public DateTime DateTo // datumig bindolashoz (szuresnel/keresesnel)
         {
             get
             {
@@ -125,9 +125,9 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private int _durationFrom = 720;
-        private int _durationFromLowest;
-        public int DurationFrom
+        private int _durationFrom = 720; // idotartamtol tarolasahoz (szuresnel/keresesnel)
+        private int _durationFromLowest; // legkisebb idotartam tarolashoz (szuresnel/keresesnel)
+        public int DurationFrom // idotartamtol bindolashoz (szuresnel/keresesnel)
         {
             get
             {
@@ -161,11 +161,12 @@ namespace WpfDemo.ViewModel
             }
         }
 
-        private int _durationTo = 0;
-        private int _durationToHighest;
-        public int DurationTo
+        private int _durationTo = 0; // idotartamig tarolashoz (szuresnel/keresesnel)
+        private int _durationToHighest; // legnagyobb idotartam tarolashoz (szuresnel/keresesnel)
+        public int DurationTo // idotartamig bindolashoz (szuresnel/keresesnel)
         {
-            get           {
+            get
+            {
                 return _durationTo;
             }
             set
@@ -259,6 +260,14 @@ namespace WpfDemo.ViewModel
             get
             {
                 return LoginViewModel.LoggedUser.Status == 0 ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
+        public Visibility ListRecordsViewRecordListMessageVisibility // Ha nincs rogzitese a felhasznalonak akkor azt kiirja a listaba
+        {
+            get
+            {
+                return RecordList.Count < 1 ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 

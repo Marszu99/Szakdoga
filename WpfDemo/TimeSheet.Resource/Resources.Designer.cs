@@ -304,6 +304,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no completed task!.
+        /// </summary>
+        public static string DoneTaskListMessage {
+            get {
+                return ResourceManager.GetString("DoneTaskListMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DONE.
         /// </summary>
         public static string DoneTasks {
@@ -853,6 +862,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User doesn&apos;t have record!.
+        /// </summary>
+        public static string RecordListNoRecordMessage {
+            get {
+                return ResourceManager.GetString("RecordListNoRecordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RECORDS.
         /// </summary>
         public static string Records {
@@ -1024,6 +1042,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User doesn&apos;t have task!.
+        /// </summary>
+        public static string TaskListUserNoTaskMessage {
+            get {
+                return ResourceManager.GetString("TaskListUserNoTaskMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task recording durations.
         /// </summary>
         public static string TaskRecordingDurations {
@@ -1132,6 +1159,15 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no task to do!.
+        /// </summary>
+        public static string ToDoTaskListMessage {
+            get {
+                return ResourceManager.GetString("ToDoTaskListMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TO DO.
         /// </summary>
         public static string ToDoTasks {
@@ -1227,6 +1263,24 @@ namespace TimeSheet.Resource {
         public static string UsernameWrongLength {
             get {
                 return ResourceManager.GetString("UsernameWrongLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No record for selected task!.
+        /// </summary>
+        public static string UserProfileRecordListNoRecordsForTaskMessage {
+            get {
+                return ResourceManager.GetString("UserProfileRecordListNoRecordsForTaskMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No task selected!.
+        /// </summary>
+        public static string UserProfileRecordListNoTaskSelectedMessage {
+            get {
+                return ResourceManager.GetString("UserProfileRecordListNoTaskSelectedMessage", resourceCulture);
             }
         }
         
