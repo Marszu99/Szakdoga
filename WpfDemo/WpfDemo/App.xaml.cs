@@ -9,6 +9,12 @@ namespace WpfDemo
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NjExMjE0QDMyMzAyZTMxMmUzMEF6OWRWdXpyeWl4MGR3NzdEbDFQWjVrSmltdTZvZnZMbU95d1NoNWJ6YWM9"); // https://www.serkanseker.com/syncfusion-community-license-key/
+            InitializeComponent();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

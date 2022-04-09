@@ -385,7 +385,7 @@
     <value>Are you sure you want to delete this record?</value>
   </data>
   <data name="RecordListNoRecordMessage" xml:space="preserve">
-    <value>User doesn't have record!</value>
+    <value>There is no record for the tasks!</value>
   </data>
   <data name="Records" xml:space="preserve">
     <value>RECORDS</value>
@@ -443,6 +443,9 @@
   </data>
   <data name="TaskDeleteQuestion2" xml:space="preserve">
     <value> task?</value>
+  </data>
+  <data name="TaskListNoTaskMessage" xml:space="preserve">
+    <value>There is no task assigned to you!</value>
   </data>
   <data name="TaskListUserNoTaskMessage" xml:space="preserve">
     <value>User doesn't have task!</value>
@@ -520,7 +523,7 @@
     <value>Username have to reach minimum 6 characters and also can't be more than 45!</value>
   </data>
   <data name="UserProfileRecordListNoRecordsForTaskMessage" xml:space="preserve">
-    <value>No record for selected task!</value>
+    <value>No record for the selected task!</value>
   </data>
   <data name="UserProfileRecordListNoTaskSelectedMessage" xml:space="preserve">
     <value>No task selected!</value>

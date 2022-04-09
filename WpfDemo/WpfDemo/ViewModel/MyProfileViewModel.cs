@@ -505,6 +505,13 @@ namespace WpfDemo.ViewModel
                     OnPropertyChanged(nameof(Email));
                     OnPropertyChanged(nameof(Telephone));
 
+                    // Ha esetleg lett volna error es feljottek volna az iconok akkor igy visszaallitja oket nomral allapotra(Collapsed-re)
+                    OnPropertyChanged(nameof(PasswordErrorIconVisibility));
+                    OnPropertyChanged(nameof(FirstNameErrorIconVisibility));
+                    OnPropertyChanged(nameof(LastNameErrorIconVisibility));
+                    OnPropertyChanged(nameof(EmailErrorIconVisibility));
+                    OnPropertyChanged(nameof(TelephoneErrorIconVisibility));
+
                     IsChangedUservaluesToFalse(); // kell h legkozelebb ha "Change" gombra nyomok akkor ne maradjanak bent a True-s bool ertekek
                 }
                 catch (SqlException)

@@ -526,7 +526,7 @@
 
 
             <syncfusion:SfChart Name="MyChart" Grid.Row="1" Grid.Column="2" Header="{local:ResxStatic l10n:Resources.TaskRecordingDurations}" FontSize="25" FontWeight="Medium"
-                                Background="LightGray" Margin="6 0 0 0" BorderBrush="Black" BorderThickness="1">
+                                Background="LightGray" Margin="6 0 0 0" BorderBrush="Black" BorderThickness="1"><!--ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto"-->
                 <syncfusion:SfChart.PrimaryAxis>
                     <syncfusion:CategoryAxis Header="{local:ResxStatic l10n:Resources.Date}" LabelFormat="yyyy.MM.dd" FontSize="15" FontWeight="Normal">
                         <syncfusion:CategoryAxis.HeaderStyle>
@@ -535,24 +535,24 @@
                     </syncfusion:CategoryAxis>
                 </syncfusion:SfChart.PrimaryAxis>
                 <syncfusion:SfChart.SecondaryAxis>
-                    <syncfusion:TimeSpanAxis Header="{local:ResxStatic l10n:Resources.Duration}" FontSize="15" FontWeight="Normal" LabelCreated="NumericalAxis_LabelCreated" DesiredIntervalsCount="6">
+                    <syncfusion:TimeSpanAxis Header="{local:ResxStatic l10n:Resources.Duration}" FontSize="15" FontWeight="Normal" LabelCreated="NumericalAxis_LabelCreated" Interval="01:00:00">
                         <syncfusion:TimeSpanAxis.HeaderStyle>
                             <syncfusion:LabelStyle FontSize="18" Foreground="Black"/>
                         </syncfusion:TimeSpanAxis.HeaderStyle>
                     </syncfusion:TimeSpanAxis>
                 </syncfusion:SfChart.SecondaryAxis>
                 <syncfusion:ColumnSeries ItemsSource="{Binding RecordListForChart}" XBindingPath="Date" YBindingPath="DurationDouble" ShowTooltip="True"
-                                         syncfusion:ChartTooltip.TooltipMargin="15" syncfusion:ChartTooltip.ShowDuration="3000" SegmentSpacing="0.7">
-                    <syncfusion:ColumnSeries.AdornmentsInfo>
+                                         syncfusion:ChartTooltip.TooltipMargin="15" syncfusion:ChartTooltip.ShowDuration="3000" SegmentSpacing="0.7" 
+                                         ><!--ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto"-->
+                    <!--<syncfusion:ColumnSeries.AdornmentsInfo>
                         <syncfusion:ChartAdornmentInfo SegmentLabelContent="LabelContentPath" ShowLabel="true">
                             <syncfusion:ChartAdornmentInfo.LabelTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Item.DurationFormat}" FontSize="16" FontWeight="Medium" Margin="0 10 0 0">
-                                    </TextBlock>
+                                    <TextBlock Text="{Binding Item.DurationFormat}" FontSize="16" FontWeight="Medium" Margin="0 10 0 0"/>
                                 </DataTemplate>
                             </syncfusion:ChartAdornmentInfo.LabelTemplate>
                         </syncfusion:ChartAdornmentInfo>
-                    </syncfusion:ColumnSeries.AdornmentsInfo>
+                    </syncfusion:ColumnSeries.AdornmentsInfo>-->
                     <syncfusion:ColumnSeries.TooltipTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Item.DurationFormat}" Foreground="White" FontWeight="Medium" FontSize="13" 

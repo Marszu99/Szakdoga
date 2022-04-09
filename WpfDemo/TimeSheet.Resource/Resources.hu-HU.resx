@@ -385,7 +385,7 @@
     <value>Biztos törölni akarja ezt a rögzítés?</value>
   </data>
   <data name="RecordListNoRecordMessage" xml:space="preserve">
-    <value>Felhasználónak nincs rögzítése!</value>
+    <value>Nincs feladathoz tartozó rögzítésed!</value>
   </data>
   <data name="Records" xml:space="preserve">
     <value>RÖGZÍTÉSEK</value>
@@ -443,6 +443,9 @@
   </data>
   <data name="TaskDeleteQuestion2" xml:space="preserve">
     <value> feladatot?</value>
+  </data>
+  <data name="TaskListNoTaskMessage" xml:space="preserve">
+    <value>Nincs számodra kiadott feladat!</value>
   </data>
   <data name="TaskListUserNoTaskMessage" xml:space="preserve">
     <value>Felhasználónak nincs feladata!</value>

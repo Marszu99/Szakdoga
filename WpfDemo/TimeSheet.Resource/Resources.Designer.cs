@@ -862,7 +862,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User doesn&apos;t have record!.
+        ///   Looks up a localized string similar to There is no record for the tasks!.
         /// </summary>
         public static string RecordListNoRecordMessage {
             get {
@@ -1038,6 +1038,15 @@ namespace TimeSheet.Resource {
         public static string TaskDeleteQuestion2 {
             get {
                 return ResourceManager.GetString("TaskDeleteQuestion2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no task assigned to you!.
+        /// </summary>
+        public static string TaskListNoTaskMessage {
+            get {
+                return ResourceManager.GetString("TaskListNoTaskMessage", resourceCulture);
             }
         }
         
@@ -1267,7 +1276,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No record for selected task!.
+        ///   Looks up a localized string similar to No record for the selected task!.
         /// </summary>
         public static string UserProfileRecordListNoRecordsForTaskMessage {
             get {

@@ -7,10 +7,10 @@ using TimeSheet.Resource;
 
 namespace TimeSheet.Logic
 {
-    public class UserRepository 
+    public class UserRepository
     {
         private IUserLogic _userLogic;
-     
+        
         public UserRepository(IUserLogic userLogic)
         {
             _userLogic = userLogic;
