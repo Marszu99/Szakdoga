@@ -15,7 +15,15 @@ namespace TimeSheet.WebAPI.Controllers
     [ApiController]
     public class NotificationController : ControllerBase
     {
-        // GET api/<NotificationController>/5
+        // GET api/<RecordController>/5
+        [HttpGet("{id}")]
+        public Notification GetNotificationByID(int id)
+        {
+            NotificationLogic notificationLogic = new NotificationLogic();
+            return notificationLogic.GetNotificationByID(id);
+        }
+
+        // GET api/<NotificationController>/Employee/5
         [HttpGet("Employee/{id}")]
         public IEnumerable<string> GetTaskNotificationsForEmployee(int id)
         {
@@ -23,7 +31,7 @@ namespace TimeSheet.WebAPI.Controllers
             return notificationLogic.GetTaskNotificationsForEmployee(id);
         }
 
-        // GET api/<NotificationController>/5
+        // GET api/<NotificationController>/Admin/5
         [HttpGet("Admin/{id}")]
         public IEnumerable<string> GetTaskNotificationsForAdmin(int id)
         {
@@ -31,7 +39,7 @@ namespace TimeSheet.WebAPI.Controllers
             return notificationLogic.GetTaskNotificationsForAdmin(id);
         }
 
-        /*// POST api/<NotificationController>
+        // POST api/<NotificationController>
         [HttpPost]
         public async Task<ActionResult<Notification>> CreateNotificationForTask([FromBody] Notification notification)
         {
@@ -42,28 +50,39 @@ namespace TimeSheet.WebAPI.Controllers
 
                 NotificationLogic notificationLogic = new NotificationLogic();
 
-                int newNotificationID = notificationLogic.CreateNotificationForTask(notification.Message, notification.);
+                int newNotificationID = notificationLogic.CreateNotificationForTask(notification.Message, notification.NotificationFor, notification.Task_idTask);
                 var createdNotification = notificationLogic.GetNotificationByID(newNotificationID);
 
                 return CreatedAtAction(nameof(GetNotificationByID),
-                    new { id = createdNotification.idNotification }, createdNotification);
+                    new { id = createdNotification.IdNotification }, createdNotification);
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error creating new record");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error creating new notification");
             }
-        }*/
-
-        // PUT api/<NotificationController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
         }
 
         // DELETE api/<NotificationController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<Notification>> HasRead(int id)
         {
+            try
+            {
+                NotificationLogic notificationLogic = new NotificationLogic();
+                var notificationToDelete = notificationLogic.GetNotificationByID(id);
+
+                if (notificationToDelete == null)
+                {
+                    return NotFound($"Notification with Id = {id} not found");
+                }
+
+                notificationLogic.HasReadNotification(notificationToDelete.Task_idTask, notificationToDelete.NotificationFor);
+                return StatusCode(StatusCodes.Status200OK, "Succesfully read!");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting data");
+            }
         }
     }
 }

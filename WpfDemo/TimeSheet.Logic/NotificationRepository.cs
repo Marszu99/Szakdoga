@@ -28,6 +28,11 @@ namespace TimeSheet.Logic
             return _notificationlogic.GetTaskNotificationsForAdmin(taskid);
         }*/
 
+        public Notification GetNotificationByID(int id)
+        {
+            return _notificationlogic.GetNotificationByID(id);
+        }
+
         public List<string> GetTaskNotificationsForEmployee(int taskid)
         {
             return _notificationlogic.GetTaskNotificationsForEmployee(taskid);

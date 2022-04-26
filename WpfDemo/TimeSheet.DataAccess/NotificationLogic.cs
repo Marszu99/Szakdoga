@@ -31,84 +31,34 @@ namespace TimeSheet.DataAccess
             }
         }
 
-        /*public string GetTaskNotificationsForEmployee(int taskid)//public List<Notification> GetTaskNotifications(int taskid)
+        public Notification GetNotificationByID(int id)
         {
             using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
             {
-                //List<Notification> notifications = new List<Notification>();
-                string notifcationMessage = null;
+                Notification notification = new Notification();
 
                 DataTable dt = new DataTable();
                 connection.Open();
 
-                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetTaskNotificationsForEmployee", connection);
+                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetNotificationByID", connection);
                 myCmd.CommandType = CommandType.StoredProcedure;
-                myCmd.Parameters.Add(new MySqlParameter("@taskid", MySqlDbType.Int32));
-                myCmd.Parameters["@taskid"].Value = taskid;
-
+                myCmd.Parameters.Add(new MySqlParameter("@id", MySqlDbType.Int32));
+                myCmd.Parameters["@id"].Value = id;
+                myCmd.ExecuteNonQuery();
 
                 MySqlDataReader sdr = myCmd.ExecuteReader();
 
                 dt.Load(sdr);
 
-                int count = 1;
                 foreach (DataRow dr in dt.Rows)
                 {
-                    //Notification notification = new Notification();
-                    //notification.IdNotification = int.Parse(dr["IdNotification"].ToString());
-                    //notification.Message = dr["Message"].ToString();
-
-                    if (count > 1) notifcationMessage += "\n";
-                    notifcationMessage += dr["Message"].ToString();
-                    count++;
-
-                    //notifications.Add(notification);
+                    notification.Message = dr["Message"].ToString();
+                    notification.NotificationFor = int.Parse(dr["NotificationFor"].ToString());
+                    notification.Task_idTask = int.Parse(dr["Task_idTask"].ToString());
                 }
-
-                //return notifications;
-                return notifcationMessage;
+                return notification;
             }
         }
-
-        public string GetTaskNotificationsForAdmin(int taskid)//public List<Notification> GetTaskNotifications(int taskid)
-        {
-            using (MySqlConnection connection = new MySqlConnection(DBHelper.GetConnectionString()))
-            {
-                //List<Notification> notifications = new List<Notification>();
-                string notifcationMessage = null;
-
-                DataTable dt = new DataTable();
-                connection.Open();
-
-                MySqlCommand myCmd = new MySqlCommand("szakdoga.GetTaskNotificationsForAdmin", connection);
-                myCmd.CommandType = CommandType.StoredProcedure;
-                myCmd.Parameters.Add(new MySqlParameter("@taskid", MySqlDbType.Int32));
-                myCmd.Parameters["@taskid"].Value = taskid;
-
-
-                MySqlDataReader sdr = myCmd.ExecuteReader();
-
-                dt.Load(sdr);
-
-                int count = 1;
-                foreach (DataRow dr in dt.Rows)
-                {
-                    //Notification notification = new Notification();
-                    //notification.IdNotification = int.Parse(dr["IdNotification"].ToString());
-                    //notification.Message = dr["Message"].ToString();
-
-                    if (count > 1) notifcationMessage += "\n";
-                    notifcationMessage += dr["Message"].ToString();
-                    count++;
-
-                    //notifications.Add(notification);
-                }
-
-                //return notifications;
-                return notifcationMessage;
-            }
-        }*/
-
 
         public List<string> GetTaskNotificationsForEmployee(int taskid)
         {

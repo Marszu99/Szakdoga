@@ -8,6 +8,7 @@ namespace TimeSheet.DataAccess
         int CreateNotificationForTask(string message, int notificationFor, int taskid);
         //string GetTaskNotificationsForEmployee(int taskid);
         //string GetTaskNotificationsForAdmin(int taskid);
+        Notification GetNotificationByID(int id);
         List<string> GetTaskNotificationsForEmployee(int taskid);
         List<string> GetTaskNotificationsForAdmin(int taskid);
         void HasReadNotification(int id, int notificationFor);
