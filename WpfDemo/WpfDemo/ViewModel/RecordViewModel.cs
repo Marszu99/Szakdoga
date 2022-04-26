@@ -376,6 +376,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public bool IsListRecordsViewContextMenuOpen // (Delete Header Visibility) Csak sajat Rogzites eseteben jelenik meg jobb klikkre egy torles lehetoseg
+        {
+            get
+            {
+                return User_Username != LoginViewModel.LoggedUser.Username ? false : true;
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
         public string Error { get { return null; } } // IDataError-hoz kell

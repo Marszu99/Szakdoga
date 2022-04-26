@@ -41,7 +41,7 @@
 
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
             <ComboBox x:Name="CreateRecordTask" ItemsSource="{Binding SelectedRecord.ActiveTasks, UpdateSourceTrigger=PropertyChanged}" Padding="2 0" 
-                      Margin="0 2 0 0" Background="#eee" Width="250" Height="40" FontSize="26" HorizontalContentAlignment="Left"
+                      Margin="0 2 0 0" Background="#eee" Width="250" Height="40" FontSize="26" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                       SelectedItem="{Binding SelectedRecord.Task, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                       ToolTipService.ToolTip="{Binding SelectedRecord.ErrorCollection[Task]}" Style="{DynamicResource theComboBox}"
                       Visibility="{Binding SelectedRecord.RecordViewTaskComboBoxVisibility}">

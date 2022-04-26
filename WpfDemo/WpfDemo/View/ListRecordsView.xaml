@@ -32,7 +32,7 @@
                         <Style TargetType="DataGridRow">
                             <Setter Property="ContextMenu">
                                 <Setter.Value><!--frameworkElement-es bindolast hasznalom h ne kelljen atrakni a TaskManagementViewModelbol a TaskViewModelbe a dolgokat-->
-                                    <ContextMenu Visibility="{Binding ListRecordsViewContextMenuVisibility}">
+                                    <ContextMenu Visibility="{Binding ListRecordsViewContextMenuVisibility}" IsOpen="{Binding IsListRecordsViewContextMenuOpen, Mode=OneWay}">
                                         <MenuItem Command="{Binding DataContext.DeleteCommand, Source={x:Reference frameworkElement}}" Cursor="Hand" Padding="5 0" Style="{DynamicResource PopupMenuItem}">
                                             <MenuItem.Header>
                                                 <StackPanel Orientation="Horizontal">

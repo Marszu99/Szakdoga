@@ -278,6 +278,14 @@ namespace WpfDemo.ViewModel
             }
         }
 
+        public bool IsListUsersViewContextMenuOpen // (Delete Header Visibility) Csak Admin eseteben jelenik meg jobb klikkre egy torles lehetoseg es sajat magat nem tudja torolni
+        {
+            get
+            {
+                return LoginViewModel.LoggedUser.Status == 0 || _user.Username == LoginViewModel.LoggedUser.Username ? false : true;
+            }
+        }
+
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
         public string Error { get { return null; } } // IDataErrorInfo-hez kell

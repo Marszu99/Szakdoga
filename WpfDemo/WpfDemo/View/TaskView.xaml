@@ -40,7 +40,7 @@
 
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" Margin="0 20 0 0">
             <ComboBox x:Name="CreateTaskUser" ItemsSource="{Binding SelectedTask.UserList, UpdateSourceTrigger=PropertyChanged}" Padding="2 0"  
-                      Margin="0" Background="#eee" Height="40" FontSize="26" Width="250" HorizontalContentAlignment="Left" 
+                      Margin="0" Background="#eee" Height="40" FontSize="26" Width="250" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
                       Visibility="{Binding SelectedTask.TaskViewUserComboBoxVisibility}" 
                       SelectedItem="{Binding SelectedTask.User, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
                       ToolTipService.ToolTip="{Binding SelectedTask.ErrorCollection[User]}" Style="{DynamicResource theComboBox}">

@@ -344,7 +344,7 @@ namespace WpfDemo.ViewModel
                 TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
             SelectedRecord.RecordCreated += OnRecordCreated; // RecordCreated Event ("Save" gomb megnyomasa) eseten hozzaadodik a listahoz a rogzites es ujat tudsz letrehozni megint
         }
-        private void OnRecordCreated(RecordViewModel recordViewModel) // igy szedjem-e ki a RecordViewModel atatadst es helyette object legyen-e?
+        private void OnRecordCreated(RecordViewModel recordViewModel)
         {
             /* Kiszedtem mert igy ez a 2 hiba megoldodik: Letrehozas utan nem lehet rakattintani vagy torolni es Create utan nem frissitem a listat es torlom az ujonnan letrehozottat majd a create gombra kattintok
             RecordList.Add(recordViewModel); // hozzaadja a listahoz*/
@@ -361,6 +361,7 @@ namespace WpfDemo.ViewModel
             }
 
             // Uj letrehozasahoz
+            //LoadTasks();
             SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
                 TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
             SelectedRecord.RecordCreated += OnRecordCreated;
