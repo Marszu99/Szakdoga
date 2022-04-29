@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WpfDemo.ViewModel.LoginViewModel">
+    <Position X="33.75" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAQAAAAAACAAAQAAAAAAAAAAAAACACIwAACCAAA=</HashCode>
+      <FileName>ViewModel\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfDemo.ViewModel.MainViewModel">
+    <Position X="36" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfDemo.ViewModel.MyProfileViewModel">
+    <Position X="27" Y="3.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>QBaBAEgChGgAASCITAgABAIsthVAAJQCAIUCICgAAEg=</HashCode>
+      <FileName>ViewModel\MyProfileViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WpfDemo.ViewModel.RecordManagementViewModel">
+    <Position X="23.75" Y="3.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>EAwAiAQBIIAEYIEAsgAwABIQQCSABjkBgDBlogQ2AAA=</HashCode>
+      <FileName>ViewModel\RecordManagementViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfDemo.ViewModel.RecordViewModel">
+    <Position X="20.5" Y="3.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>cIgDZIAEomwGAahADogCAAICAABQAIzhANBAEggGhBA=</HashCode>
+      <FileName>ViewModel\RecordViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WpfDemo.ViewModel.RegisterViewModel">
+    <Position X="31" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAGBQEAACCgAFQiCSQCAAAIEpgBEIIECAKYAACEAAAg=</HashCode>
+      <FileName>ViewModel\RegisterViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WpfDemo.ViewModel.TabcontrolViewModel">
+    <Position X="38" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAgAQAAAAAAAAgAAAAAAEAIACAAAAAABACAAQGAAAMI=</HashCode>
+      <FileName>ViewModel\TabcontrolViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfDemo.ViewModel.TaskForChartViewModel">
+    <Position X="9.75" Y="13.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAEAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>ViewModel\TaskForChartViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfDemo.ViewModel.TaskManagementViewModel">
+    <Position X="13.75" Y="3.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>ABqAggVBgAQEgAFgEACDEIAAQDWMhTBQgDJkRgEwQEg=</HashCode>
+      <FileName>ViewModel\TaskManagementViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfDemo.ViewModel.TaskViewModel">
+    <Position X="17.25" Y="3.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>cAyBCIBFgBigAVAgDAAAkooCAMWFAIBUIUEEDCAEQgA=</HashCode>
+      <FileName>ViewModel\TaskViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WpfDemo.ViewModel.UserManagementViewModel">
+    <Position X="3.5" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EACAQAQAAUIEAAEEBAACAAAAQAAIBBAAgKJgAAQwAAg=</HashCode>
+      <FileName>ViewModel\UserManagementViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfDemo.ViewModel.UserProfileTaskViewModel">
+    <Position X="9.75" Y="4" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>QAgBAMBEgIgwAVhACEAACIACAMSBAABEACEEBIAEQgA=</HashCode>
+      <FileName>ViewModel\UserProfileTaskViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WpfDemo.ViewModel.UserProfileViewModel">
+    <Position X="6.25" Y="4" Width="3" />
+    <TypeIdentifier>
+      <HashCode>IAaAPKABIIAE4nUAYFGzEJUVABSA5TlYgEAELggkQEo=</HashCode>
+      <FileName>ViewModel\UserProfileViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WpfDemo.ViewModel.UserViewModel">
+    <Position X="0.5" Y="4" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>UgCBYMIESSgAAQABqQBgAIoClgACAIACAIAAAAEEBBo=</HashCode>
+      <FileName>ViewModel\UserViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WpfDemo.ViewModel.ViewModelBase">
+    <Position X="6.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TimeSheet.Model.Extension.RecordValidationHelper">
+    <Position X="5.25" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAEAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RecordValidationHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeSheet.Model.Extension.UserValidationHelper">
+    <Position X="2.5" Y="1.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACFAgIAAQUAJABAAIAEAAAAAAAAgAAJIAIAGAAA=</HashCode>
+      <FileName>UserValidationHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeSheet.Model.Extension.TaskValidationHelper">
+    <Position X="5.25" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAQAAgAAAAAAAACAAAIAAAAAA=</HashCode>
+      <FileName>TaskValidationHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
