@@ -52,7 +52,7 @@ namespace WpfDemo.ViewModel
                             }
                         }
 
-                        if (RecordList[_lastSelectedRecordCount].IsSelectedRecordValuesChanged) // visszatoltom az eredeti adatokat ha tortent valtozas
+                        if (RecordList[_lastSelectedRecordCount].IsSelectedRecordValuesChanged) // visszatoltom az eredeti adatokat ha tortent valtozas (Delete eseten itt errort dobna ezert kell a _deleteHappened)
                         {
                             try
                             {
@@ -784,7 +784,6 @@ namespace WpfDemo.ViewModel
                 try
                 {
                     new RecordRepository(new RecordLogic()).DeleteRecord(SelectedRecord.IdRecord);
-
                     _lastSelectedRecordID = 0; // mivel a torolt record mar nem letezik (ne menjen bele az if-be a selectedrecord-os resznel)
 
                     if (!String.IsNullOrWhiteSpace(_searchValue) || _dateFromLowest != _dateFrom || _dateToHighest != _dateTo || _durationFromLowest != _durationFrom

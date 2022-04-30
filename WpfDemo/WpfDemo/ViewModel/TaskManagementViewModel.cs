@@ -51,7 +51,7 @@ namespace WpfDemo.ViewModel
                             }
                         }
 
-                        if (TaskList[_lastSelectedTaskCount].IsSelectedTaskValuesChanged) // visszatoltom az eredeti adatokat ha tortent valtozas
+                        if (TaskList[_lastSelectedTaskCount].IsSelectedTaskValuesChanged) // visszatoltom az eredeti adatokat ha tortent valtozas (Delete eseten itt errort dobna ezert kell a _deleteHappened)
                         {
                             try
                             {
@@ -69,6 +69,7 @@ namespace WpfDemo.ViewModel
                             }
                         }
                     }
+
                     _lastSelectedTaskID = _selectedTask.Task.IdTask;
                 }
 
@@ -996,6 +997,7 @@ namespace WpfDemo.ViewModel
                 try
                 {
                     new TaskRepository(new TaskLogic()).DeleteTask(SelectedTask.IdTask);
+                    _lastSelectedTaskID = 0; // mivel a torolt record mar nem letezik (ne menjen bele az if-be a selectedrecord-os resznel)
 
                     if (this.SelectedTask.User.Username != LoginViewModel.LoggedUser.Username) // ha a User nem admin(Miutan erre csak az Admin kepes)
                     {

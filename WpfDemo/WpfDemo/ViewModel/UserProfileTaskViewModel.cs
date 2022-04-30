@@ -449,9 +449,6 @@ namespace WpfDemo.ViewModel
         {
             // az error kiiras ne jojjon fel
             _isTitleChanged = false;
-            _isDescriptionChanged = false;
-            _isDeadlineChanged = false;
-            _isStatusChanged = false;
 
             // nullazom az ertekeket
             this.IdTask = 0;
@@ -459,8 +456,11 @@ namespace WpfDemo.ViewModel
             this.Description = "";
             this.Deadline = DateTime.Today.AddDays(1);
 
-            // icon ne jojjon fel
+            // icon ne jojjon fel, plusz miutan megvaltoztattam az ertekeket igy megint false-ra kell allitanom oket
             _isTitleChanged = false;
+            _isDescriptionChanged = false;
+            _isDeadlineChanged = false;
+            _isStatusChanged = false;
             OnPropertyChanged(nameof(TitleErrorIconVisibility));
         }
     }
