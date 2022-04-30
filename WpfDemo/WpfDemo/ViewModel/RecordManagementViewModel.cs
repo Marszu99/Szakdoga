@@ -40,7 +40,7 @@ namespace WpfDemo.ViewModel
                 {
                     SelectedRecord.RecordUpdated += OnRecordUpdated; // ha tortent modositas a kivalasztott Rogzitesnel akkor megnezem ezzel h a modositott ertek(ek) kozul az uj Datum/Idotartam kicsereli-e a keresesi Datumot/Idotartamot
 
-                    if (_lastSelectedRecordID != 0 && _lastSelectedRecordID != _selectedRecord.Record.IdRecord) // ha nem az utoljara valasztott Record id-ja nem egyezik a mostanival
+                    if (_lastSelectedRecordID != 0 && _lastSelectedRecordID != _selectedRecord.Record.IdRecord && RecordList.Count > 0) // ha nem az utoljara valasztott Record id-ja nem egyezik a mostanival
                     {
                         //RecordViewModel LastSelectedRecord = (RecordViewModel)RecordList.Where(recordViewModel => recordViewModel.IdRecord == _lastSelectedRecordID);
 
@@ -81,6 +81,21 @@ namespace WpfDemo.ViewModel
         private void OnRecordUpdated(RecordViewModel recordViewModel)
         {
             ResetDateDurationSearchingValues(); // kicserelem ha a modositott Record Idotartama a legrovidebb/ leghosszabb Idotartam vagy a Datuma a legkorabbi vagy legkesobbi Datum
+
+            if (recordViewModel.IsDateChanged) // ha valtozott akkor frissitem hatha a listaban levo helye megvaltozik igy
+            {
+                if (!String.IsNullOrWhiteSpace(_searchValue) || _dateFromLowest != _dateFrom || _dateToHighest != _dateTo || _durationFromLowest != _durationFrom
+                   || _durationToHighest != _durationTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
+                {
+                    Search(recordViewModel);
+                }
+                else
+                {
+                    ResetRecordList(recordViewModel); // frissitem a listat es a frissitett listabol kicserelem ha az uj Record Idotartama a legrovidebb/leghosszabb Idotartam vagy a Datuma a legkorabbi vagy legkesobbi Datum
+                }
+
+                SelectedRecord = recordViewModel; // lista firssitesi miatt visszaalitom kivalasztott feladatnak(mert egyebkent nullozna)
+            }
         }
 
 
@@ -346,25 +361,25 @@ namespace WpfDemo.ViewModel
         }
         private void OnRecordCreated(RecordViewModel recordViewModel)
         {
-            /* Kiszedtem mert igy ez a 2 hiba megoldodik: Letrehozas utan nem lehet rakattintani vagy torolni es Create utan nem frissitem a listat es torlom az ujonnan letrehozottat majd a create gombra kattintok
-            RecordList.Add(recordViewModel); // hozzaadja a listahoz*/
+            RecordList.Add(recordViewModel); // hozzaadja a listahoz
 
-            // Iddeiglenesen iderakom mert nem tudom mashogy megoldani
-            if (!String.IsNullOrWhiteSpace(_searchValue) || _dateFromLowest != _dateFrom || _dateToHighest != _dateTo || _durationFromLowest != _durationFrom 
-                || _durationToHighest != _durationTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
+            if ((!String.IsNullOrWhiteSpace(_searchValue) || _dateFromLowest != _dateFrom || _dateToHighest != _dateTo || _durationFromLowest != _durationFrom 
+                || _durationToHighest != _durationTo) && RecordList.Count != 1) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
             {
-                Search(recordViewModel);
+                ResetRecordList(recordViewModel); // frissitem a listat es a frissitett listabol kicserelem ha az uj Record Idotartama a legrovidebb/leghosszabb Idotartam vagy a Datuma a legkorabbi vagy legkesobbi Datum
+                Search(recordViewModel); // szurom
             }
             else
             {
                 ResetRecordList(recordViewModel); // frissitem a listat es a frissitett listabol kicserelem ha az uj Record Idotartama a legrovidebb/leghosszabb Idotartam vagy a Datuma a legkorabbi vagy legkesobbi Datum
+
+                if (RecordList.Count == 1)
+                {
+                    OnPropertyChanged(nameof(ListRecordsViewRecordListMessageVisibility)); // h megvaltozzon a kiiras
+                }
             }
 
-            // Uj letrehozasahoz
-            //LoadTasks();
-            SelectedRecord = new RecordViewModel(new Record() { Date = DateTime.Today, Duration = 210 },
-                TaskList.Where(task => task.User_idUser == LoginViewModel.LoggedUser.IdUser && task.Status.ToString() != "Done").ToList());
-            SelectedRecord.RecordCreated += OnRecordCreated;
+            CreateRecord(recordViewModel);// Uj letrehozasahoz
         }
 
 
@@ -780,6 +795,11 @@ namespace WpfDemo.ViewModel
                     else
                     {
                         SortingByCheckBox(obj); // frissitem a listat
+                    }
+
+                    if (RecordList.Count < 1)
+                    {
+                        OnPropertyChanged(nameof(ListRecordsViewRecordListMessageVisibility)); // h megvaltozzon a kiiras
                     }
                 }
                 catch (SqlException)

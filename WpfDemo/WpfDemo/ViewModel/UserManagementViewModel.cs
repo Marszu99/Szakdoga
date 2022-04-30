@@ -121,13 +121,11 @@ namespace WpfDemo.ViewModel
         }
         private void OnUserCreated(UserViewModel userViewModel)
         {
-            //UserList.Add(userViewModel);// hozzaadja a listahoz
+            UserList.Add(userViewModel); // hozzaadja a listahoz
 
             LoadUsers(); // frissiti a listat
 
-            // Uj letrehozasahoz
-            SelectedUser = new UserViewModel(new User());
-            SelectedUser.UserCreated += OnUserCreated;
+            CreateUser(userViewModel); // Uj letrehozasahoz
         }
 
 

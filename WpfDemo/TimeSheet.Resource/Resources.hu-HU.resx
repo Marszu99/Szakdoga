@@ -241,7 +241,7 @@
     <value>ANGOL</value>
   </data>
   <data name="ExportToExcel" xml:space="preserve">
-    <value>A lista exportálása egy Excel fájlba</value>
+    <value>Lista exportálása egy Excel fájlba</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>Keresztnév</value>

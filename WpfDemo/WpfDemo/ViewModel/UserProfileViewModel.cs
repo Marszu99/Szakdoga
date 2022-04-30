@@ -420,6 +420,11 @@ namespace WpfDemo.ViewModel
                 OnPropertyChanged(nameof(DeadlineTo));  // kell h megvaltozzon a DatePickerben a datum
 
                 SortTaskListByDeadline(); // Rendezzuk a listat csokkeno sorrendben a Hataridok szerint
+
+                if (TaskList.Count < 2)
+                {
+                    OnPropertyChanged(nameof(UserProfileViewTaskListMessageVisibility));
+                }
             }
             catch (SqlException)
             {

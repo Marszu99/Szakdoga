@@ -41,7 +41,7 @@ namespace WpfDemo.ViewModel
                 {
                     SelectedTask.TaskUpdated += OnTaskUpdated; // ha tortent modositas a kivalasztott Feladatnal akkor megnezem ezzel h a modositott ertek(ek) kozul az uj Hatarido kicsereli-e a keresesi Hataridot
 
-                    if (_lastSelectedTaskID != 0 && _lastSelectedTaskID != _selectedTask.Task.IdTask) // ha nem az utoljara valasztott Task id-ja nem egyezik a mostanival
+                    if (_lastSelectedTaskID != 0 && _lastSelectedTaskID != _selectedTask.Task.IdTask && TaskList.Count > 0) // ha nem az utoljara valasztott Task id-ja nem egyezik a mostanival
                     {
                         for (int i = 0; i < TaskList.Count(); i++)
                         {
@@ -79,6 +79,20 @@ namespace WpfDemo.ViewModel
         private void OnTaskUpdated(TaskViewModel taskViewModel)
         {
             ResetDeadlineSearchingValues(); // kicserelem ha a modositott Task Hatarideje a legkorabbi vagy legkesobbi Hatarido
+
+            if (taskViewModel.IsDeadlineChanged) // ha valtozott akkor frissitem hatha a listaban levo helye megvaltozik igy
+            {
+                if (!String.IsNullOrWhiteSpace(_searchValue) || _deadlineFromLowest != _deadlineFrom || _deadlineToHighest != _deadlineTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
+                {
+                    Search(taskViewModel);
+                }
+                else
+                {
+                    ResetTaskList(taskViewModel); // frissitem a listat es a frissitett listabol kicserelem ha az uj Task Hatarideje a legkorabbi vagy legkesobbi Hatarido
+                }
+
+                SelectedTask = taskViewModel; // lista firssitesi miatt visszaalitom kivalasztott feladatnak(mert egyebkent nullozna)
+            }
         }
 
 
@@ -326,22 +340,24 @@ namespace WpfDemo.ViewModel
         }
         private void OnTaskCreated(TaskViewModel taskViewModel)
         {
-            /* Kiszedtem mert igy ez a 2 hiba megoldodik: Letrehozas utan nem lehet rakattintani vagy torolni es Create utan nem frissitem a listat es torlom az ujonnan letrehozottat majd a create gombra kattintok
-            TaskList.Add(taskViewModel); // hozzaadja a listahoz*/
+            TaskList.Add(taskViewModel); // hozzaadja a listahoz
 
-            // Iddeiglenesen iderakom mert nem tudom mashogy megoldani
-            if (!String.IsNullOrWhiteSpace(_searchValue) || _deadlineFromLowest != _deadlineFrom || _deadlineToHighest != _deadlineTo) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
+            if ((!String.IsNullOrWhiteSpace(_searchValue) || _deadlineFromLowest != _deadlineFrom || _deadlineToHighest != _deadlineTo) && TaskList.Count != 1) // ha esetleg elotte keresett vmire igy az a kereses/szures megmarad
             {
-                Search(taskViewModel);
+                ResetTaskList(taskViewModel); // frissitem a listat es a frissitett listabol kicserelem ha az uj Task Hatarideje a legkorabbi vagy legkesobbi Hatarido
+                Search(taskViewModel); // szurom
             }
             else
             {
                 ResetTaskList(taskViewModel); // frissitem a listat es a frissitett listabol kicserelem ha az uj Task Hatarideje a legkorabbi vagy legkesobbi Hatarido
+
+                if (TaskList.Count == 1)
+                {
+                    OnPropertyChanged(nameof(ListTasksViewTaskListMessageVisibility)); // h megvaltozzon a kiiras
+                }
             }
 
-            // Uj letrehozasahoz
-            SelectedTask = new TaskViewModel(new Task() { Deadline = DateTime.Today.AddDays(1) }, UserList.ToList());
-            SelectedTask.TaskCreated += OnTaskCreated;
+            CreateTask(taskViewModel); // Uj letrehozasahoz
         }
 
 
@@ -652,6 +668,7 @@ namespace WpfDemo.ViewModel
             // Ezzel vizsgalom azt hogyha nyelvet valtottunk akkor a lista frissuljon es igy megvaltozik a listaban levo Statuszok es Ertesitesek nyelve a megfelelore
             int SelectedTaskCount = 0;
             bool IsSelectedTaskNull = true; // Ha volt elotte kivalasztva Feladat akkor ez segit annak a visszatoltesehez
+            bool IsSelectedTaskNew = false; // Ha a kivalasztott feladat letrehozando feladat volt
 
             if (_isLanguageEnglish && _view.ShowingMyTasksTextBlock.Text.ToString() == "Saját") // Ha a nyelv Angol de a kiiras "Sajat" akkor belepek
             {
@@ -663,11 +680,18 @@ namespace WpfDemo.ViewModel
                     {
                         IsSelectedTaskNull = false;
 
-                        for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
+                        if (SelectedTask.IdTask == 0)
                         {
-                            if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                            IsSelectedTaskNew = true;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
                             {
-                                SelectedTaskCount = i;
+                                if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                                {
+                                    SelectedTaskCount = i;
+                                }
                             }
                         }
                     }
@@ -680,11 +704,18 @@ namespace WpfDemo.ViewModel
                     {
                         IsSelectedTaskNull = false;
 
-                        for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
+                        if (SelectedTask.IdTask == 0)
                         {
-                            if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                            IsSelectedTaskNew = true;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
                             {
-                                SelectedTaskCount = i;
+                                if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                                {
+                                    SelectedTaskCount = i;
+                                }
                             }
                         }
                     }
@@ -694,7 +725,15 @@ namespace WpfDemo.ViewModel
 
                 if (!IsSelectedTaskNull) // ha elotte volt kivalasztott Feladat akkor Visszamentem a kivalasztott Feladatot mert frissiteskor az eltunik(nullozodik)
                 {
-                    SelectedTask = TaskList[SelectedTaskCount];
+                    if (IsSelectedTaskNew) // ha a kivalasztott feladat letrehozando feladat volt
+                    {
+                        CreateTask(arg);
+                    }
+                    else
+                    {
+                        SelectedTask = TaskList[SelectedTaskCount];
+
+                    }
                 }
             }
 
@@ -708,11 +747,18 @@ namespace WpfDemo.ViewModel
                     {
                         IsSelectedTaskNull = false;
 
-                        for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
+                        if (SelectedTask.IdTask == 0)
                         {
-                            if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                            IsSelectedTaskNew = true;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
                             {
-                                SelectedTaskCount = i;
+                                if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                                {
+                                    SelectedTaskCount = i;
+                                }
                             }
                         }
                     }
@@ -725,11 +771,18 @@ namespace WpfDemo.ViewModel
                     {
                         IsSelectedTaskNull = false;
 
-                        for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
+                        if (SelectedTask.IdTask == 0)
                         {
-                            if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                            IsSelectedTaskNew = true;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < TaskList.Count(); i++) // Megkeresem a valasztott Feladat indexet a listaban
                             {
-                                SelectedTaskCount = i;
+                                if (TaskList[i].IdTask == SelectedTask.Task.IdTask) // ha egyezik az utoljara valasztott Task Id-ja a Listaban talalhato i. IdTask-dal es lementem a megfelelo indexet
+                                {
+                                    SelectedTaskCount = i;
+                                }
                             }
                         }
                     }
@@ -739,7 +792,15 @@ namespace WpfDemo.ViewModel
 
                 if (!IsSelectedTaskNull) // ha elotte volt kivalasztott Feladat akkor Visszamentem a kivalasztott Feladatot mert frissiteskor az eltunik(nullozodik)
                 {
-                    SelectedTask = TaskList[SelectedTaskCount];
+                    if (IsSelectedTaskNew) // ha a kivalasztott feladat letrehozando feladat volt
+                    {
+                        CreateTask(arg);
+                    }
+                    else
+                    {
+                        SelectedTask = TaskList[SelectedTaskCount];
+
+                    }
                 }
             }
 
@@ -948,6 +1009,11 @@ namespace WpfDemo.ViewModel
                     else
                     {
                         ResetTaskList(obj); // Frissitem a listat
+                    }
+
+                    if(TaskList.Count < 1)
+                    {
+                        OnPropertyChanged(nameof(ListTasksViewTaskListMessageVisibility)); // h megvaltozzon a kiiras
                     }
                 }
                 catch (SqlException)

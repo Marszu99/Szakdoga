@@ -7,7 +7,7 @@
         xmlns:l10n="clr-namespace:TimeSheet.Resource;assembly=TimeSheet.Resource"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
         mc:Ignorable="d"
-        Title="UserProfile" Width="1550" Height="870" Background="DarkGray"
+        Title="Worktime Registry" Width="1550" Height="870" Background="DarkGray"
         WindowStartupLocation="Manual" ResizeMode="CanMinimize"
         Left="-8" Top="0"
         Icon="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\WR.png">

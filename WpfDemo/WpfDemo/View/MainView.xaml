@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfDemo.View"
         mc:Ignorable="d"
-        Title="Main" Width="1550" Height="870" Background="Gray"
+        Title="Worktime Registry" Width="1550" Height="870" Background="Gray"
         WindowStartupLocation="Manual" ResizeMode="CanMinimize"
         Left="-8" Top="0"
         Icon="C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\WpfDemo\Components\WR.png">

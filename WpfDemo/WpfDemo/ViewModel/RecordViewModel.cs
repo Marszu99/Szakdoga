@@ -19,7 +19,7 @@ namespace WpfDemo.ViewModel
         private Task _task;
         private User _user;
         private bool _isTaskChanged = false;
-        private bool _isDateChanged = false;
+        public bool IsDateChanged = false; // update eseten frissuljon a lista (mert lehet h a listaban levo helye megvaltozna)
         private bool _isCommentChanged = false;
         private bool _isDurationChanged = false;
 
@@ -55,7 +55,7 @@ namespace WpfDemo.ViewModel
             {
                 _record.Date = value;
                 OnPropertyChanged(nameof(Date));
-                _isDateChanged = true;
+                IsDateChanged = true;
                 OnPropertyChanged(nameof(DateErrorIconVisibility));
             }
         }
@@ -223,7 +223,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _isTaskChanged || _isDateChanged || _isCommentChanged || _isDurationChanged ? true : false;
+                return _isTaskChanged || IsDateChanged || _isCommentChanged || _isDurationChanged ? true : false;
             }
         }
 
@@ -355,7 +355,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return RecordValidationHelper.ValidateDate(_record.Date, _task == null ? DateTime.MinValue : _task.CreationDate) == null || !_isDateChanged 
+                return RecordValidationHelper.ValidateDate(_record.Date, _task == null ? DateTime.MinValue : _task.CreationDate) == null || !IsDateChanged 
                        ? Visibility.Hidden : Visibility.Visible;
             }
         }
@@ -394,7 +394,7 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                if (_isTaskChanged || _isDateChanged || _isDurationChanged)
+                if (_isTaskChanged || IsDateChanged || _isDurationChanged)
                 {
                     switch (propertyName)
                     {
@@ -481,7 +481,7 @@ namespace WpfDemo.ViewModel
         private bool CanSave(object arg) // mentheto amig nem nullak az ertekek(kiveve a Koemment az lehet ures) es amig valamelyik ertek megvaltozott
         {
             return Task != null && !string.IsNullOrEmpty(Duration.ToString()) && !string.IsNullOrEmpty(Date.ToString()) &&
-                   (_isTaskChanged || _isDateChanged || _isCommentChanged || _isDurationChanged);
+                   (_isTaskChanged || IsDateChanged || _isCommentChanged || _isDurationChanged);
         }
 
         private void Save(object obj)
@@ -544,7 +544,7 @@ namespace WpfDemo.ViewModel
         public void IsChangedRecordValuesToFalse() // "Save" gomb disable-se miatt
         {
             _isTaskChanged = false;
-            _isDateChanged = false;
+            IsDateChanged = false;
             _isCommentChanged = false;
             _isDurationChanged = false;
         }

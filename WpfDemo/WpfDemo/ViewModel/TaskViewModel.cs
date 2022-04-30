@@ -12,7 +12,6 @@ using TimeSheet.Logic;
 using TimeSheet.Model;
 using TimeSheet.Model.Extension;
 using TimeSheet.Resource;
-using WpfDemo.Components;
 using WpfDemo.ViewModel.Command;
 
 
@@ -25,9 +24,9 @@ namespace WpfDemo.ViewModel
         private bool _isUserChanged = false;
         private bool _isTitleChanged = false;
         private bool _isDescriptionChanged = false;
-        private bool _isDeadlineChanged = false;
+        public bool IsDeadlineChanged = false; // update eseten frissuljon a lista (mert lehet h a listaban levo helye megvaltozna)
         private bool _isStatusChanged = false;
-        public static bool IsNotificationsOn = true;
+        public static bool IsNotificationsOn = true; // ertesitesek megjelenetisebe segit
 
 
         public Task Task
@@ -89,7 +88,7 @@ namespace WpfDemo.ViewModel
             {
                 _task.Deadline = value;
                 OnPropertyChanged(nameof(Deadline));
-                _isDeadlineChanged = true;
+                IsDeadlineChanged = true;
                 OnPropertyChanged(nameof(DeadlineErrorIconVisibility));
             }
         }
@@ -263,7 +262,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return _isTitleChanged || _isDescriptionChanged || _isDeadlineChanged || _isStatusChanged ? true : false;
+                return _isTitleChanged || _isDescriptionChanged || IsDeadlineChanged || _isStatusChanged ? true : false;
             }
         }
 
@@ -372,7 +371,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                return TaskValidationHelper.ValidateDeadline(_task.Deadline) == null || !_isDeadlineChanged ? Visibility.Hidden : Visibility.Visible;
+                return TaskValidationHelper.ValidateDeadline(_task.Deadline) == null || !IsDeadlineChanged ? Visibility.Hidden : Visibility.Visible;
             }
         }
 
@@ -394,7 +393,7 @@ namespace WpfDemo.ViewModel
             {
                 string result = null;
 
-                if (_isUserChanged || _isTitleChanged || _isDeadlineChanged || _isStatusChanged)
+                if (_isUserChanged || _isTitleChanged || IsDeadlineChanged || _isStatusChanged)
                 {
                     switch (propertyName)
                     {
@@ -451,7 +450,7 @@ namespace WpfDemo.ViewModel
         private bool CanSave(object arg) // mentheto amig nem nullak az ertekek(kiveve a Leiras az lehet ures) es amig valamelyik ertek megvaltozott
         {
             return User != null && !string.IsNullOrEmpty(Title) && !string.IsNullOrEmpty(Deadline.ToString()) && 
-                   (_isUserChanged || _isTitleChanged || _isDescriptionChanged || _isDeadlineChanged || _isStatusChanged);
+                   (_isUserChanged || _isTitleChanged || _isDescriptionChanged || IsDeadlineChanged || _isStatusChanged);
         }
 
         private void Save(object obj)
@@ -515,37 +514,37 @@ namespace WpfDemo.ViewModel
 
             if (this._user.Status != 1) // ha a Feladat nem az Adminhoz tartozik akkor a Feladathoz keszul ertesites
             {
-                if (_isTitleChanged && !_isDescriptionChanged && !_isDeadlineChanged)
+                if (_isTitleChanged && !_isDescriptionChanged && !IsDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title has changed!");
                 }
-                else if (!_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
+                else if (!_isTitleChanged && _isDescriptionChanged && !IsDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskDescriptionChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Description has changed!");
                 }
-                else if (!_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
+                else if (!_isTitleChanged && !_isDescriptionChanged && IsDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Deadline has changed!");
                 }
-                else if (_isTitleChanged && _isDescriptionChanged && !_isDeadlineChanged)
+                else if (_isTitleChanged && _isDescriptionChanged && !IsDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleDescriptionChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title and Description has changed!");
                 }
-                else if (!_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
+                else if (!_isTitleChanged && _isDescriptionChanged && IsDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskDescriptionDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Description and Deadline has changed!");
                 }
-                else if (_isTitleChanged && !_isDescriptionChanged && _isDeadlineChanged)
+                else if (_isTitleChanged && !_isDescriptionChanged && IsDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title and Deadline has changed!");
                 }
-                else if (_isTitleChanged && _isDescriptionChanged && _isDeadlineChanged)
+                else if (_isTitleChanged && _isDescriptionChanged && IsDeadlineChanged)
                 {
                     new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationTaskTitleDescriptionDeadlineChanged", 0, this._task.IdTask);
                     SendNotificationEmail(" has been updated! Title and Description and Deadline has changed!");
@@ -575,7 +574,7 @@ namespace WpfDemo.ViewModel
             _isUserChanged = false;
             _isTitleChanged = false;
             _isDescriptionChanged = false;
-            _isDeadlineChanged = false;
+            IsDeadlineChanged = false;
             _isStatusChanged = false;
         }
 

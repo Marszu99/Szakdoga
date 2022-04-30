@@ -119,7 +119,7 @@ namespace WpfDemo.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WpfDemo;V1.0.0.0;component/view/taskmanagementview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WpfDemo;component/view/taskmanagementview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\TaskManagementView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

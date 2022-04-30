@@ -367,6 +367,7 @@ namespace WpfDemo.ViewModel
                 new NotificationRepository(new NotificationLogic()).CreateNotificationForTask("NotificationNewTask", 0, this._task.IdTask);
                 SendNotificationEmail(" has been added to your tasks!");
             }
+
             RefreshValues();
         }
         /*public event Action<Task> TaskCreated; NEM JOOOO!!!!
@@ -446,10 +447,21 @@ namespace WpfDemo.ViewModel
 
         public void RefreshValues()
         {
+            // az error kiiras ne jojjon fel
+            _isTitleChanged = false;
+            _isDescriptionChanged = false;
+            _isDeadlineChanged = false;
+            _isStatusChanged = false;
+
+            // nullazom az ertekeket
             this.IdTask = 0;
             this.Title = "";
             this.Description = "";
             this.Deadline = DateTime.Today.AddDays(1);
+
+            // icon ne jojjon fel
+            _isTitleChanged = false;
+            OnPropertyChanged(nameof(TitleErrorIconVisibility));
         }
     }
 }

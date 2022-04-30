@@ -81,7 +81,7 @@
                     </DataGrid.CellStyle>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.Username}" Binding="{Binding User_Username}" Width="170" FontSize="20"
+                        <DataGridTextColumn Header="{local:ResxStatic l10n:Resources.User}" Binding="{Binding User_Username}" Width="170" FontSize="20"
                                             Visibility="{Binding DataContext.ListTasksViewUserVisibility, Source={x:Reference frameworkElement}}">
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
