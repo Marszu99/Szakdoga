@@ -154,7 +154,7 @@
     <value>Company's name is empty!</value>
   </data>
   <data name="CompanyNameWrongLength" xml:space="preserve">
-    <value>Company's name have to reach minimum 10 characters and also can't be more than 60!</value>
+    <value>Company's name have to reach minimum 5 characters and also can't be more than 60!</value>
   </data>
   <data name="Created" xml:space="preserve">
     <value>Created</value>

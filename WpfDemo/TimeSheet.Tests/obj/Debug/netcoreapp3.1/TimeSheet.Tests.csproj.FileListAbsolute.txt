@@ -259,4 +259,3 @@ C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Tests\bin\Debug\ne
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Tests\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Tests\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Tests\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Marci\Egyetem\BLB-Soft\Szakdoga\Szakdoga\WpfDemo\TimeSheet.Tests\bin\Debug\netcoreapp3.1\TimeSheet.Tests.dll.config

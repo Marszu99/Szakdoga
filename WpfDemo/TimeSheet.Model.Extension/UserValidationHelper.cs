@@ -18,7 +18,7 @@ namespace TimeSheet.Model.Extension
         private const int MaximumLastNameLength = 45;
         //private const int MinimumEmailLength = 11;
         private const int MaximumEmailLength = 100;
-        private const int MinimumCompanyNameLength = 10;
+        private const int MinimumCompanyNameLength = 5;
         private const int MaximumCompanyNameLength = 60;
 
         public static string ValidateUserName(string username)

@@ -27,18 +27,8 @@ CREATE TABLE `company` (
   `CompanyName` varchar(60) NOT NULL,
   `StatusDelete` tinyint DEFAULT '1',
   PRIMARY KEY (`idCompany`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `company`
---
-
-LOCK TABLES `company` WRITE;
-/*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'dd',0),(2,'Mar',0),(3,'BLB-Soft',0),(4,'Tradelda Kft.',0),(5,'trad dddddd',0),(6,'Tradelda Kft.',1);
-/*!40000 ALTER TABLE `company` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Temporary view structure for view `companyview`
@@ -70,18 +60,8 @@ CREATE TABLE `notification` (
   PRIMARY KEY (`idNotification`,`Task_idTask`),
   KEY `fk_Notification_Task1_idx` (`Task_idTask`),
   CONSTRAINT `fk_Notification_Task1` FOREIGN KEY (`Task_idTask`) REFERENCES `task` (`idTask`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `notification`
---
-
-LOCK TABLES `notification` WRITE;
-/*!40000 ALTER TABLE `notification` DISABLE KEYS */;
-INSERT INTO `notification` VALUES (1,'asd',0,0,1,1),(2,'asd',0,0,0,2),(3,'Updated task!',0,0,1,6),(4,'Updated task!',0,0,1,3),(5,'Updated task!',0,0,1,4),(6,'Updated task!',0,0,1,3),(7,'Updated task!',0,0,1,4),(8,'Updated task!',0,0,1,6),(9,'Updated task!',0,0,1,6),(10,'Updated task!',0,0,1,2),(11,'Updated task!',0,0,1,5),(12,'Updated task!',0,0,1,5),(13,'Updated task!',0,0,1,5),(14,'Updated task!',0,0,1,6),(15,'Updated task!',0,0,1,3),(16,'Updated task!',0,0,1,2),(17,'Updated task!',0,0,1,4),(18,'Updated task!',0,0,1,3),(19,'Updated task!',0,0,1,3),(20,'Updated task!',0,0,1,3),(21,'Task has been updated! Description has changed!',0,0,1,6),(22,'Task has been updated! Description has changed!',0,0,1,4),(24,'Task has been updated! Title and Description and Deadline has changed!',0,0,1,6),(25,'Task has been updated! Title and Description and Deadline has changed!',0,0,1,6),(26,'Task has been updated! Description has changed!',0,0,1,6),(29,'asd',0,0,0,10),(30,'asd',0,0,0,10),(31,'NotificationNewTask',0,1,1,14),(32,'Task has been updated! Deadline has changed!',0,0,1,5),(33,'Task has been updated! Deadline has changed!',0,0,1,2),(34,'New task!',0,0,1,15),(35,'Task has been updated! Description has changed!',0,0,1,15),(36,'Task has been updated! Description and Deadline has changed!',0,0,1,15),(37,'NotificationNewTask',0,0,1,16),(38,'Task has been updated! Description has changed!',0,0,1,16),(39,'NotificationTaskInProgress',1,0,1,6),(40,'NotificationTaskDescriptionChanged',0,0,1,6),(41,'NotificationTaskDeadlineChanged',0,0,1,6),(42,'NotificationNewTask',0,0,1,54),(43,'NotificationTaskDescriptionChanged',0,1,1,14),(44,'NotificationTaskDescriptionChanged',0,1,1,14),(45,'NotificationTaskInProgress',1,0,1,6),(46,'NotificationTaskDeadlineChanged',0,0,1,3),(47,'NotificationTaskDone',1,1,1,3),(48,'NotificationTaskInProgress',1,1,1,6),(49,'NotificationNewTask',0,0,1,64),(50,'Updated task!',0,0,1,6),(51,'Updated task!',0,0,1,6);
-/*!40000 ALTER TABLE `notification` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Temporary view structure for view `notificationview`
@@ -119,18 +99,8 @@ CREATE TABLE `record` (
   KEY `fk_Record_User1_idx` (`User_idUser`) /*!80000 INVISIBLE */,
   CONSTRAINT `fk_Record_Task1` FOREIGN KEY (`Task_idTask`) REFERENCES `task` (`idTask`),
   CONSTRAINT `fk_Record_User1` FOREIGN KEY (`User_idUser`) REFERENCES `user` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=194 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `record`
---
-
-LOCK TABLES `record` WRITE;
-/*!40000 ALTER TABLE `record` DISABLE KEYS */;
-INSERT INTO `record` VALUES (4,'2021-12-22','Regisztacio',260,1,9,2),(5,'2021-12-11','Teszt',230,1,10,3),(6,'2021-12-22','Proba',220,1,9,5),(7,'2021-12-11',NULL,210,0,10,3),(8,'2021-12-12','Szép lett!',280,1,10,4),(9,'2021-12-31','Komment',160,1,9,2),(10,'2021-12-21',NULL,210,0,10,6),(11,'2021-12-21',NULL,210,0,10,6),(12,'2021-12-24','Elkezdtem',210,1,9,9),(13,'2021-12-23',NULL,210,0,10,6),(14,'2021-12-23',NULL,210,0,10,6),(15,'2022-02-08','',220,0,10,14),(16,'2022-02-17',NULL,210,0,10,14),(17,'2022-02-21',NULL,210,0,9,38),(18,'2022-02-22','dd',210,0,10,14),(19,'2022-02-22','ads',210,0,10,14),(20,'2022-02-22','d',210,0,9,45),(21,'2022-02-22','ss',210,0,9,5),(22,'2022-02-22','asd',210,0,9,18),(23,'2022-02-22','dd',240,0,9,18),(24,'2022-02-22','a',230,0,9,18),(25,'2022-02-22','d',210,0,9,18),(26,'2022-02-22','aaaaa',210,0,9,18),(27,'2022-02-23','a',230,0,9,18),(28,'2022-02-23','as',180,0,9,18),(29,'2022-02-23','a',210,0,9,18),(30,'2022-02-23','d',210,0,9,18),(31,'2022-02-23','asd',210,0,9,18),(32,'2022-02-23','dd',210,0,9,18),(33,'2022-03-02','d',680,0,10,4),(34,'2022-03-02',NULL,210,0,10,6),(35,'2022-03-02','d',210,0,10,4),(36,'2022-03-03',NULL,210,0,9,2),(37,'2022-03-11','Alakul?!',210,1,10,4),(38,'2022-03-07','Datum',90,1,9,2),(39,'2022-03-11',NULL,210,0,26,54),(40,'2022-03-13','Nagyoooooooooooooooooooooooooooooooooooooooon hosszú kommeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeent',210,1,26,54),(41,'2022-03-15','Dk',270,0,9,5),(42,'2022-03-18','d',210,0,9,2),(43,'2022-03-18','d',210,0,9,2),(44,'2022-03-18','d',210,0,9,2),(45,'2022-03-22','A\r\n',210,0,9,5),(46,'2022-03-19','Enter',230,0,9,2),(47,'2022-03-22',NULL,210,0,9,2),(48,'2022-03-22',NULL,210,0,9,2),(49,'2022-03-22',NULL,210,0,9,2),(50,'2022-03-21',NULL,210,0,9,2),(51,'2022-03-22','',210,0,9,2),(52,'2022-03-22',NULL,320,0,9,2),(53,'2022-03-22',NULL,450,0,9,2),(54,'2022-03-22',NULL,30,0,9,2),(55,'2022-03-28','adatok',330,0,9,5),(56,'2022-03-28','űű',210,0,10,4),(57,'2022-03-30','d',210,0,9,2),(58,'2022-03-30',NULL,210,0,9,2),(59,'2022-03-30',NULL,210,0,9,2),(60,'2022-03-30',NULL,210,0,9,18),(61,'2022-03-30',NULL,210,0,9,2),(62,'2022-03-30',NULL,210,0,9,2),(63,'2022-03-30',NULL,210,0,9,2),(64,'2022-03-30',NULL,210,0,9,2),(65,'2022-03-30',NULL,210,0,9,2),(66,'2022-03-30',NULL,210,0,9,2),(67,'2022-03-30',NULL,210,0,9,2),(68,'2022-03-30',NULL,210,0,9,2),(69,'2022-03-24','d',10,0,9,2),(70,'2022-03-30',NULL,270,0,9,2),(71,'2022-03-30',NULL,210,0,9,2),(72,'2022-03-30',NULL,210,0,9,2),(73,'2022-03-30',NULL,210,0,9,2),(74,'2022-03-30',NULL,210,0,9,2),(75,'2022-03-30',NULL,210,0,9,2),(76,'2022-03-30',NULL,210,0,9,2),(77,'2022-03-22','dk',310,0,9,2),(78,'2022-03-30',NULL,210,0,9,2),(79,'2022-03-30',NULL,210,0,9,2),(80,'2022-03-30',NULL,210,0,9,2),(81,'2022-03-29','',210,0,9,2),(82,'2022-03-30',NULL,210,0,9,5),(83,'2022-03-30',NULL,210,0,9,2),(84,'2022-03-30',NULL,210,0,9,2),(85,'2022-03-17','',210,0,9,2),(86,'2022-03-24','',210,0,9,2),(87,'2022-03-26',NULL,310,0,9,2),(88,'2022-03-23',NULL,210,0,9,2),(89,'2022-03-30',NULL,210,0,9,2),(90,'2022-04-03',NULL,210,0,9,2),(91,'2022-04-05','Oszlopdiagram teszt',360,1,9,2),(92,'2022-04-05','Oszlopdiagram 2 oszlop ugyanazon a datumon teszt',155,0,9,2),(93,'2022-04-07','Adatbazis',210,1,9,5),(94,'2022-04-07','Alakul',140,1,9,9),(95,'2022-04-07',NULL,210,0,10,4),(96,'2022-04-07',NULL,210,0,9,2),(97,'2022-04-07',NULL,210,0,9,2),(98,'2022-04-07',NULL,210,0,9,5),(99,'2022-04-07',NULL,210,0,10,6),(100,'2022-04-07',NULL,210,1,10,6),(101,'2022-04-09',NULL,210,0,9,2),(102,'2022-04-09',NULL,210,0,9,2),(103,'2022-04-09',NULL,210,0,9,2),(104,'2022-04-09',NULL,210,0,9,2),(105,'2022-04-09',NULL,210,0,9,2),(106,'2022-04-09',NULL,210,0,9,2),(107,'2022-04-09',NULL,210,0,9,2),(108,'2022-04-09',NULL,210,0,9,2),(109,'2022-04-09',NULL,210,0,9,2),(110,'2022-04-09',NULL,210,0,9,2),(111,'2022-04-20',NULL,210,0,9,18),(112,'2022-04-20',NULL,210,0,9,18),(113,'2022-04-20',NULL,210,0,9,2),(114,'2022-04-20',NULL,210,0,9,5),(115,'2022-04-20',NULL,210,0,9,5),(116,'2022-04-20',NULL,210,0,9,2),(117,'2022-04-15','comment',260,0,9,2),(118,'2022-02-15','a',1,0,9,2);
-/*!40000 ALTER TABLE `record` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Temporary view structure for view `recordview`
@@ -170,18 +140,8 @@ CREATE TABLE `task` (
   PRIMARY KEY (`idTask`,`User_idUser`),
   KEY `fk_Task_User1_idx` (`User_idUser`),
   CONSTRAINT `fk_Task_User1` FOREIGN KEY (`User_idUser`) REFERENCES `user` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `task`
---
-
-LOCK TABLES `task` WRITE;
-/*!40000 ALTER TABLE `task` DISABLE KEYS */;
-INSERT INTO `task` VALUES (1,'ddd',NULL,'2021-12-10','Created',0,'2021-12-09',1),(2,'Programozas','Mukodjon!','2022-07-24','InProgress',1,'2021-12-11',9),(3,'Teszteles','Unit tesztek','2022-04-03','Done',1,'2021-12-11',10),(4,'Design','Szep legyem!','2022-06-24','InProgress',1,'2021-12-11',10),(5,'DB','SQL','2023-05-27','InProgress',1,'2021-12-11',9),(6,'Git','Nagyooooon hosssszuuuuu leiraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas','2022-07-31','InProgress',1,'2021-12-11',10),(7,'ASD',NULL,'2021-12-23','Created',0,'2021-12-22',10),(8,'ad','a','2020-01-01','Created',0,'2021-12-22',10),(9,'Wiki','','2022-04-20','Done',1,'2021-12-22',9),(10,'asd',NULL,'2021-12-24','Created',0,'2021-12-23',10),(11,'d',NULL,'2021-12-24','Created',0,'2021-12-23',9),(12,'a',NULL,'2021-12-24','Created',0,'2021-12-23',9),(13,'b',NULL,'2021-12-24','Created',0,'2021-12-23',9),(14,'AutomatákPDF','','2022-05-13','Created',1,'2021-12-23',10),(15,'d','dddd','2022-07-07','Created',0,'2022-01-27',10),(16,'ss','as','2022-01-28','Created',0,'2022-01-27',10),(17,'TestRefresh',NULL,'2022-08-26','Created',0,'2022-02-08',9),(18,'TestRefresh','','2022-08-27','Created',1,'2022-02-08',9),(19,'d',NULL,'2022-02-09','Created',0,'2022-02-08',9),(20,'a',NULL,'2022-02-18','Created',0,'2022-02-17',9),(21,'l',NULL,'2022-02-18','Created',0,'2022-02-17',9),(22,'asd',NULL,'2022-03-04','Created',0,'2022-02-17',9),(23,'kk',NULL,'2022-02-18','Created',0,'2022-02-17',9),(24,'ll',NULL,'2022-02-25','Created',0,'2022-02-17',9),(25,'a',NULL,'2022-02-20','Created',0,'2022-02-19',9),(26,'d','','2022-02-20','Created',0,'2022-02-19',9),(27,'d',NULL,'2022-02-26','Created',0,'2022-02-19',9),(28,'a',NULL,'2022-03-04','Created',0,'2022-02-19',9),(29,'k',NULL,'2022-03-02','Created',0,'2022-02-19',9),(30,'l',NULL,'2022-03-02','Created',0,'2022-02-19',9),(31,'ll',NULL,'2022-03-03','Created',0,'2022-02-19',9),(32,'d',NULL,'2022-02-20','Created',0,'2022-02-19',9),(33,'d',NULL,'2022-03-05','Created',0,'2022-02-21',9),(34,'asd',NULL,'2022-03-11','Created',0,'2022-02-21',9),(35,'ddd',NULL,'2022-02-25','Created',0,'2022-02-21',9),(36,'s',NULL,'2022-02-22','Created',0,'2022-02-21',9),(37,'d',NULL,'2022-02-22','Created',0,'2022-02-21',9),(38,'a',NULL,'2022-02-22','Created',0,'2022-02-21',9),(39,'d',NULL,'2022-02-23','Created',0,'2022-02-22',9),(40,'dd',NULL,'2022-02-23','Created',0,'2022-02-22',9),(41,'dddd',NULL,'2022-02-23','Created',0,'2022-02-22',9),(42,'k',NULL,'2022-02-23','Created',0,'2022-02-22',9),(44,'l','k','2022-02-23','Created',0,'2022-02-22',9),(45,'asd',NULL,'2022-02-23','Created',0,'2022-02-22',9),(46,'ss',NULL,'2022-02-24','Created',0,'2022-02-23',9),(47,'asd','dd','2022-02-24','Created',0,'2022-02-23',9),(48,'a','d','2022-03-03','Created',0,'2022-03-02',9),(49,'Ad','d','2022-03-11','InProgress',0,'2022-03-02',9),(50,'Cs',NULL,'2022-03-03','Created',0,'2022-03-02',9),(51,'A',NULL,'2022-03-03','Created',0,'2022-03-02',9),(52,'AS','d','2022-03-04','InProgress',0,'2022-03-02',9),(53,'gy','A','2022-03-07','Created',0,'2022-03-06',9),(54,'ProbaTesztelesek',NULL,'2022-12-30','Created',1,'2022-03-11',26),(55,'d','aaa','2022-03-19','Created',0,'2022-03-18',9),(56,'ASDa','ddd','2022-03-27','InProgress',0,'2022-03-18',9),(57,'a',NULL,'2022-03-23','Created',0,'2022-03-22',9),(58,'a',NULL,'2022-03-23','Created',0,'2022-03-22',9),(59,'s',NULL,'2023-10-13','Created',0,'2022-03-22',9),(60,'A',NULL,'2022-03-23','Created',0,'2022-03-22',9),(61,'A',NULL,'2022-03-23','Created',0,'2022-03-22',9),(62,'d',NULL,'2023-07-14','Created',0,'2022-03-24',9),(63,'D','','2022-04-02','Created',0,'2022-03-30',9),(64,'D',NULL,'2022-04-04','Created',0,'2022-04-03',10),(65,'a',NULL,'2022-04-07','Created',0,'2022-04-06',9),(66,'d',NULL,'2022-04-08','Created',0,'2022-04-07',9),(67,'D',NULL,'2022-04-21','Created',0,'2022-04-20',9),(68,'D',NULL,'2022-04-21','Created',0,'2022-04-20',9),(69,'title','description','2022-12-30','Created',0,'2022-04-26',9),(70,'asd','asd','2024-12-30','Created',0,'2022-04-26',9);
-/*!40000 ALTER TABLE `task` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Temporary view structure for view `taskview`
@@ -224,18 +184,8 @@ CREATE TABLE `user` (
   KEY `fk_User_Company1_idx` (`StatusDelete`),
   KEY `fk_User_Company1_idx1` (`Company_idCompany`),
   CONSTRAINT `fk_User_Company1` FOREIGN KEY (`Company_idCompany`) REFERENCES `company` (`idCompany`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'asd','asd','asd','asd','asd','76876',1,0,1),(2,'Marszi99','Password','Cseh','Marci','csehmarcell@yahoo.com','06898776778',1,0,2),(3,'Marszi','Password','Marci','Cseh','csehmarcell@yahoo.com','06876876378',1,0,3),(4,'Marszu99','Password','Marcell','Cseh','csehmarcell@yahoo.com','06987394827',1,0,4),(5,'CsehHedvig','nfq3XGTxXP',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,4),(6,'CsehMarci','Ht7TpfQDkr',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,4),(7,'csehlaszlo','lacko12','aaaa','aaaa','csehmarcell@yahoo.com','36302988033',1,0,5),(8,'KovacsGeza','ObPZ0BmJoK',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,5),(9,'CsehMarcell','Password','Marcell','Cseh','csehmarcell@yahoo.com','06703070041',1,1,6),(10,'CsehLaszlo','Password','Laszlo','Cseh','csehmarcell@yahoo.com','06704009188',0,1,6),(11,'CsehMarcell','Password','Cseh','Marcell','csehmarcell@yahoo.com','+367088788666',0,0,6),(12,'asdddd','od5575qs1D',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(13,'DeleteTeszt','DeleteTeszt',NULL,NULL,'DeleteTeszt',NULL,0,0,6),(14,'Username1','IdlUkA5G6W',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(15,'Username1','1JiWgX9o5Z',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(16,'Username1','AFaYlJnION','asda','asdd','csehmarcell@yahoo.com','06777878788',0,0,6),(17,'Username1','l5MAGzOgsr','asdasd','asd','csehmarcell@yahoo.com','06789877799',0,0,6),(18,'Username1','bo3JzWWbr2','asdd','asdd','csehmarcell@yahoo.com','0678877997',0,0,6),(19,'Username1','PqcE56V3x4','asdd','asdasd','csehmarcell@yahoo.com','0678778999',0,0,6),(20,'Username1','EhhmAJZAKi','asd','aasd','csehmarcell@yahoo.com','0678799777',0,0,6),(21,'Username1','yOsc4bSvx0','asdd','asdd','csehmarcell@yahoo.com','0670987987',0,0,6),(22,'Username1','rqwWWX0GDg','asdd','asdd','csehmarcell@yahoo.com','06709878979',0,0,6),(23,'Username1','n1Po55bbXH','asd','asd','csehmarcell@yahoo.com','0670876878',0,0,6),(24,'Username1','jDnFJbLRfI',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(25,'asddddd','h6XACndJwz',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(26,'CsehTamás','Password','Tamás','Cseh','csehmarcell@yahoo.com','06703040090',0,1,6),(27,'Franyg','02Qfp1CuJj',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(28,'Username1','XhnTqJZyqx','ASD','ASd','csehmarcell@yahoo.com','06334566789',0,0,6),(29,'CsehLaszlo','Password','Laszlo','Cseh','csehmarcell@yahoo.com','0670950789',0,0,6),(30,'sadafaf','1082sksQ8P',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(31,'CsehTamas','Password',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(32,'CsehTamas','Password',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(33,'CsehTamas','Password',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6),(34,'CsehTamas','Password','firstName','lastName','csehmarcell@yahoo.com','telephone',0,0,6),(35,'CsehTamas','Password',NULL,NULL,'csehmarcell@yahoo.com',NULL,0,0,6);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Temporary view structure for view `userview`
@@ -976,4 +926,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-28 19:22:38
+-- Dump completed on 2022-05-02 17:36:25

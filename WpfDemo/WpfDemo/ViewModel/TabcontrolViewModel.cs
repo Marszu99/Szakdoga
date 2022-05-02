@@ -103,8 +103,6 @@ namespace WpfDemo.ViewModel
                 Thread.CurrentThread.CurrentCulture = cultureInfo;
 
                 ResxStaticExtension.OnLanguageChanged(); // Ezzel valtozik meg a szovegek/kiirasok nyelve
-
-                //RefreshTaskListForNotificationsLanguageChange(obj); // MASIK MEGOLDASHOZ??
             }
             else
             {
@@ -116,15 +114,8 @@ namespace WpfDemo.ViewModel
                 Thread.CurrentThread.CurrentCulture = cultureInfo;
 
                 ResxStaticExtension.OnLanguageChanged(); // Ezzel valtozik meg a szovegek/kiirasok nyelve
-
-                //RefreshTaskListForNotificationsLanguageChange(obj); // MASIK MEGOLDASHOZ??
             }
         }
-        /*public event Action<object> RefreshTaskList; // MASIK MEGOLDASHOZ??
-        public void RefreshTaskListForNotificationsLanguageChange(Object obj) // MASIK MEGOLDASHOZ??
-        {
-            RefreshTaskList?.Invoke(obj);
-        }*/
 
 
         private bool CanExecuteLogout(object arg)

@@ -169,7 +169,7 @@ namespace TimeSheet.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company&apos;s name have to reach minimum 10 characters and also can&apos;t be more than 60!.
+        ///   Looks up a localized string similar to Company&apos;s name have to reach minimum 5 characters and also can&apos;t be more than 60!.
         /// </summary>
         public static string CompanyNameWrongLength {
             get {

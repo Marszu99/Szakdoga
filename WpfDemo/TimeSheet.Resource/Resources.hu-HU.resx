@@ -154,7 +154,7 @@
     <value>Cég nevének mezője üres!</value>
   </data>
   <data name="CompanyNameWrongLength" xml:space="preserve">
-    <value>Cég neve legalább 10 és legfeljebb 60 karakter hosszú lehet!</value>
+    <value>Cég neve legalább 5 és legfeljebb 60 karakter hosszú lehet!</value>
   </data>
   <data name="Created" xml:space="preserve">
     <value>Létrehozva</value>

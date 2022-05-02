@@ -44,8 +44,8 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public RelayCommand LoginCommand { get; private set; } // ICommand vagy RelayCommand??
-        public RelayCommand ShowRegisterCommand { get; private set; } // ICommand vagy RelayCommand??
+        public RelayCommand LoginCommand { get; private set; }
+        public RelayCommand ShowRegisterCommand { get; private set; }
 
         public LoginViewModel(string username, string password, LoginView view)
         {

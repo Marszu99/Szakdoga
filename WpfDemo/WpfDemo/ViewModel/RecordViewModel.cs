@@ -385,10 +385,10 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } } // IDataError-hoz kell
 
-        public string this[string propertyName] // ??
+        public string this[string propertyName]
         {
             get
             {
@@ -410,7 +410,7 @@ namespace WpfDemo.ViewModel
                             result = RecordValidationHelper.ValidateDuration(_record.Duration);
                             break;
 
-                        default: // ez kell???
+                        default:
                             break;
                     }
 

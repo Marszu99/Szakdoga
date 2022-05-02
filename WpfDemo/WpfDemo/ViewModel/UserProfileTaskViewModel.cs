@@ -253,10 +253,10 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } } // IDataErrorInfo-hez kell
 
-        public string this[string propertyName] // ??
+        public string this[string propertyName]
         {
             get
             {
@@ -278,7 +278,7 @@ namespace WpfDemo.ViewModel
                             result = TaskValidationHelper.ValidateStatus(_task.Status, _task.IdTask);
                             break;
 
-                        default: // ez kell???
+                        default:
                             break;
                     }
 

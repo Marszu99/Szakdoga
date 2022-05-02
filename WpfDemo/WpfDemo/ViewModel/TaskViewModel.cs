@@ -229,7 +229,7 @@ namespace WpfDemo.ViewModel
         {
             get
             {
-                if (IsNotificationsOn) // try-catch????
+                if (IsNotificationsOn)
                 {
                     return (LoginViewModel.LoggedUser.Status == 1 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForAdmin(this._task.IdTask).Count > 0)
                             || (LoginViewModel.LoggedUser.Status == 0 && new NotificationRepository(new NotificationLogic()).GetTaskNotificationsForEmployee(this._task.IdTask).Count > 0)
@@ -384,10 +384,10 @@ namespace WpfDemo.ViewModel
         }
 
 
-        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>(); // ??
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public string Error { get { return null; } } // IDataErrorInfo-hez kell
 
-        public string this[string propertyName] // ??
+        public string this[string propertyName]
         {
             get
             {
@@ -413,7 +413,7 @@ namespace WpfDemo.ViewModel
                             result = TaskValidationHelper.ValidateStatus(_task.Status, _task.IdTask);
                             break;
 
-                        default: // ez kell???
+                        default:
                             break;
                     }
 
